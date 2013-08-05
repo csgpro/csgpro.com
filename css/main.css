@@ -4,26 +4,33 @@
 #hero {
 background-position: center;
 background-repeat: no-repeat;
-background-color: rgb(0,0,150); /* TODO: change to proper blue */
+}
+body {
+  background-color: #E6E6E6;
+  font-family: 'Century Gothic';
+}
+#nav-spacer{
+  height: 100px;
 }
 
 
 /******************************************************************************
+ HELPERS
+ ******************************************************************************/
+ .hidden {
+  display: none;
+ }
+
+/******************************************************************************
  NAVIGATION
  ******************************************************************************/
-nav ul li {
-  display:inline;
-}
-
-nav ul li:after {
-  content: "/";
-  padding: 0 1em 0 1em;
-}
-
-
-nav ul li:last-child:after {
-  content: none;
-}
+ .wrapper {
+  margin: 0 auto 0 auto;
+  max-width: 55em;
+ }
+ nav {
+  color: #48ABD5;
+ }
 
 
 /******************************************************************************
@@ -33,10 +40,16 @@ nav ul li:last-child:after {
 /*
  * Phones
  */
-@media only all and (max-width: 48em){
+@media only all and (max-width: 45em){
+  .hide-mobile{
+    display: none;
+  }
   #hero{
     background-image: url('../img/hero-background-large.jpg');
     min-height: 450px;
+  }
+  nav {
+    display: none;
   }
 
 }
@@ -44,10 +57,56 @@ nav ul li:last-child:after {
 /*
  * Desktops / tablets
  */
-@media only all and (min-width: 48em){
+@media only all and (min-width: 45em){
   #hero{
     background-image: url('../img/hero-background-large.jpg');
-    min-height: 768px;
+    min-height: 31em; /* works for my laptop screen */
+  }
+
+  /*
+   * Navigation
+   */
+  nav {
+    height: 4.944em;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+
+    background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
+    background-image: -o-linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
+    background-image: -moz-linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
+    background-image: -webkit-linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
+    background-image: -ms-linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
+
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0.2, rgb(44,44,44)),
+      color-stop(0.78, rgb(29,29,29))
+    );
+  }
+  nav img {
+    margin: 5px 0 0 0;
+  }
+  nav ul {
+    float: right;
+    margin: 1.6em 1em 0 0;
+  }
+  nav ul li {
+    display:inline;
+  }
+  nav ul li:after {
+    content: "/";
+    padding: 0 1em 0 1em;
+  }
+  nav ul li:last-child:after {
+    content: none;
+  }
+  .fixed-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
 }
