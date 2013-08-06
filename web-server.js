@@ -1,3 +1,6 @@
+// This is a simple Node server that dishes out static content. It's used for
+//  development.
+
 #!/usr/bin/env node
 
 var util = require('util'),

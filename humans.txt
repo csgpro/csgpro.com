@@ -9,7 +9,7 @@
 
 # THANKS
 
-    <name>
+    HTML 5 Boilerplate
 
 # TECHNOLOGY COLOPHON
 
