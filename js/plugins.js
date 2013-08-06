@@ -44,3 +44,11 @@
   });
 
 }());
+
+/////////////////////////
+// Page Load Hero Size //
+/////////////////////////
+(function(){
+  // I need to dynamically change the height of the hero page based on screen 
+  // size
+}());
