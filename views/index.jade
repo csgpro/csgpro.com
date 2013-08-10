@@ -1,5 +1,60 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  section#hero
+  nav
+    div.wrapper
+      img(src='http://www.csgpro.com/img/logo.png')
+      ul
+        li work
+        li services
+        li about
+        li updates
+        li contact
+  div#nav-spacer.hidden.hide-mobile
+  div.wrapper
+    section#work.grid
+      aside.grid__item.mobile--one-half.desk--one-third.blue-panel
+        h2 Case study: Web & Mobile
+        h1 Increase Awareness
+        p.subtitle OBRC - know your nickel
+        p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin doner chicken sausage pork filet mignon sirloin, corned beef turkey.
+      article.grid__item.mobile--one-half.desk--two-thirds
+        p Some other content
+    section#services.grid
+      aside.grid__item.desk--two-twelfths.blue-panel
+        ul
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+          li nav
+      article.grid__item.desk--ten-twelfths
+        p Content
+    section#about
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+    section#updates
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+    section#contact
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 
+      p Something 

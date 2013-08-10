@@ -1,2 +1,15 @@
-# Include your project-specific ignores in this file
+# Project-specific ignores
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results

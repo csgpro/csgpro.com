@@ -1,5 +1,6 @@
 {
-  "name": "application-name",
+  "name": "csg-website",
+  "description": "An express app used to serve the CSG public website",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,6 +8,7 @@
   },
   "dependencies": {
     "express": "3.3.3",
-    "jade": "*"
+    "jade": "*",
+    "passport": "~0.1.17"
   }
 }

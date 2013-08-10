@@ -26,12 +26,19 @@ body {
  ******************************************************************************/
  .wrapper {
   margin: 0 auto 0 auto;
-  max-width: 55em;
+  max-width: 56.7em;
  }
  nav {
   color: #48ABD5;
  }
 
+/******************************************************************************
+ PANELS
+ ******************************************************************************/
+.blue-panel {
+  background-color: #09A4E6;
+  color: #fff;
+}
 
 /******************************************************************************
  MEDIA QUERIES
@@ -45,7 +52,7 @@ body {
     display: none;
   }
   #hero{
-    background-image: url('../img/hero-background-large.jpg');
+    background-image: url('/img/hero-background-large.jpg');
     min-height: 450px;
   }
   nav {
@@ -59,7 +66,7 @@ body {
  */
 @media only all and (min-width: 45em){
   #hero{
-    background-image: url('../img/hero-background-large.jpg');
+    background-image: url('/img/hero-background-large.jpg');
     min-height: 31em; /* works for my laptop screen */
   }
 
@@ -70,6 +77,8 @@ body {
     height: 4.944em;
     border-top: 3px solid white;
     border-bottom: 3px solid white;
+
+    box-shadow: 0 5px 15px #666;
 
     background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
     background-image: -o-linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%);
@@ -87,9 +96,7 @@ body {
   }
   nav img {
     margin: 5px 0 0 0;
-/*    margin: -25px 0 0 10px;
-    margin: 5px 0 0 0;
-*/  }
+  }
   nav ul {
     float: right;
     margin: 1.6em 1em 0 0;
