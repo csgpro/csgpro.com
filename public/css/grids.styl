@@ -1,0 +1,262 @@
+/*------------------------------------*\
+  $VARIABLES
+\*------------------------------------*/
+/**
+ * If you are building a non-responsive site but would still like to use
+ * csswizardry-grids, set this to false:
+ */
+responsive := true
+
+
+/**
+ * Is this build mobile first? Setting to true means that all grids will be 100%
+ * width if you do not apply a more specific class to them.
+ */
+mobile-first := true
+
+
+/**
+ * Set the spacing between your grid items.
+ */
+gutter := 24px
+
+/**
+ * Would you like push and pull classes enabled?
+ */
+push := true
+pull := true
+
+/**
+ * Define your breakpoints. The first value is the prefix that shall be used for
+ * your classes (e.g. `.palm--one-half`), the second value is the media query
+ * that the breakpoint fires at.
+ */
+breakpoints := "mobile" "(max-width: 48em)",
+               "desk" "(min-width: 48em)"
+
+
+/*------------------------------------*\
+  $MIXINS
+\*------------------------------------*/
+/**
+ * Mixin to create the different sizes dynamically
+ */
+create-size(namespace, width, sizes = null)
+  if sizes
+    for size, i in sizes
+      plural = i is 0 ? "" : "s"
+      .{namespace}{size}-{width}{(plural)}
+        width: ((i + 1) / (length(sizes) + 1)) * 100%
+      if push
+        .push-{namespace}{size}-{width}{(plural)}
+          left: ((i + 1) / (length(sizes) + 1)) * 100%
+      if pull
+        .pull-{namespace}{size}-{width}{(plural)}
+          right: ((i + 1) / (length(sizes) + 1)) * 100%
+  else
+    .{namespace}one-whole
+      width: 100%
+
+/**
+ * These mixins are for the library to use only, you should not need to modify
+ * them at all.
+ *
+ * Enclose a block of code with a media query as named in `$breakpoints`.
+ */
+grid-media-query(media-query)
+  breakpoint-found = false
+
+  for breakpoint in breakpoints
+    name = unquote(breakpoint)
+    declaration = last(breakpoint)
+    
+    if media-query == name
+      breakpoint-found = true
+      media = unquote("@media ") + declaration
+      {media}
+        device-type(name + "-")
+    
+
+  if breakpoint-found == false
+    warn("Breakpoint ‘#{$media-query}’ does not exist")
+
+
+/*------------------------------------*\
+  $GRID SETUP
+\*------------------------------------*/
+/**
+ * 1. Allow the grid system to be used on lists.
+ * 2. Remove any margins and paddings that might affect the grid system.
+ * 3. Apply a negative `margin-left` to negate the columns’ gutters.
+ */
+.grid
+  list-style: none        /* [1] */
+  margin: 0             /* [2] */
+  padding: 0            /* [2] */
+  margin-left: -(gutter)      /* [3] */
+
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+.grid__item
+  float: left           /* [1] */
+  padding-left: gutter      /* [2] */
+  vertical-align: top       /* [3] */
+  width: 100% if mobile-first   /* [4] */
+  -webkit-box-sizing: border-box  /* [5] */
+  -moz-box-sizing: border-box   /* [5] */
+  box-sizing: border-box      /* [5] */
+  position: relative if pull or push
+
+/**
+ * Reversed grids allow you to structure your source in the opposite order to
+ * how your rendered layout will appear. Extends `.grid`.
+ */
+.grid--rev
+  direction : rtl
+  text-align  : left
+
+  > .grid__item
+    direction : ltr
+    text-align  : left
+
+
+/**
+ * Gutterless grids have all the properties of regular grids, minus any spacing.
+ * Extends `.grid`.
+ */
+.grid--full
+  margin-left: 0
+
+  > .grid__item
+    padding-left: 0
+
+
+/**
+ * Align the entire grid to the right. Extends `.grid`.
+ */
+.grid--right
+  text-align: right
+
+  > .grid__item
+    text-align: left
+
+
+/**
+ * Centered grids align grid items centrally without needing to use push or pull
+ * classes. Extends `.grid`.
+ */
+.grid--center
+  text-align: center
+
+  > .grid__item
+    text-align: left
+
+
+/**
+ * Align grid cells vertically (`.grid--middle` or `.grid--bottom`). Extends
+ * `.grid`.
+ */
+.grid--middle
+
+  > .grid__item
+    vertical-align: middle
+
+
+.grid--bottom
+
+  > .grid__item
+    vertical-align: bottom
+
+
+/**
+ * Create grids with narrower gutters. Extends `.grid`.
+ */
+.grid--narrow
+  margin-left: -(gutter / 2)
+
+  > .grid__item
+    padding-left: gutter / 2
+
+
+/**
+ * Create grids with wider gutters. Extends `.grid`.
+ */
+.grid--wide
+  margin-left: -(gutter * 2)
+
+  > .grid__item
+    padding-left: gutter * 2
+
+
+/*------------------------------------*\
+  $WIDTHS
+\*------------------------------------*/
+device-type(namespace = "")
+  /**
+   * Whole
+   */
+  create-size namespace, whole
+
+  /**
+   * Halves
+   */
+  create-size namespace, half, one
+
+  /**
+   * Thirds
+   */
+  create-size namespace, third, one two
+
+  /**
+   * Quarters
+   */
+  create-size namespace, quarter, one two three
+
+  /**
+   * Fifths
+   */
+  create-size namespace, fifth, one two three four
+
+  /**
+   * Sixths
+   */
+  create-size namespace, sixth, one two three four five
+
+  /**
+   * Eighths
+   */
+  create-size namespace, eighth, one two three four five six seven
+
+  /**
+   * Tenths
+   */
+  create-size namespace, tenth, one two three four five six seven eight nine
+
+  /**
+   * Twelfths
+   */
+  create-size namespace, twelfth, one two three four five six seven eight nine ten eleven
+
+/**
+ * Our breakpoint specific widths classes.
+ */
+
+device-type()
+
+if responsive
+  for breakpoint in breakpoints
+    name = unquote(breakpoint)
+    declaration = last(breakpoint)
+
+    breakpoint-found = true
+    media = declaration
+    @media media
+      device-type(name + "-")
+
+
+

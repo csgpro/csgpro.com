@@ -1,0 +1,1321 @@
+/*------------------------------------*   $VARIABLES
+\*------------------------------------*/
+/**
+ * If you are building a non-responsive site but would still like to use
+ * csswizardry-grids, set this to false:
+ */
+/**
+ * Is this build mobile first? Setting to true means that all grids will be 100%
+ * width if you do not apply a more specific class to them.
+ */
+/**
+ * Set the spacing between your grid items.
+ */
+/**
+ * Would you like push and pull classes enabled?
+ */
+/**
+ * Define your breakpoints. The first value is the prefix that shall be used for
+ * your classes (e.g. `.palm--one-half`), the second value is the media query
+ * that the breakpoint fires at.
+ */
+/*------------------------------------*   $MIXINS
+\*------------------------------------*/
+/**
+ * Mixin to create the different sizes dynamically
+ */
+/**
+ * These mixins are for the library to use only, you should not need to modify
+ * them at all.
+ *
+ * Enclose a block of code with a media query as named in `$breakpoints`.
+ */
+/*------------------------------------*   $GRID SETUP
+\*------------------------------------*/
+/**
+ * 1. Allow the grid system to be used on lists.
+ * 2. Remove any margins and paddings that might affect the grid system.
+ * 3. Apply a negative `margin-left` to negate the columns’ gutters.
+ */
+.grid {
+  list-style: none;
+/* [1] */
+  margin: 0;
+/* [2] */
+  padding: 0;
+/* [2] */
+  margin-left: -24px;
+/* [3] */
+}
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+.grid__item {
+  float: left;
+/* [1] */
+  padding-left: 24px;
+/* [2] */
+  vertical-align: top;
+/* [3] */
+  width: 100%;
+/* [4] */
+  -webkit-box-sizing: border-box;
+/* [5] */
+  -moz-box-sizing: border-box;
+/* [5] */
+  box-sizing: border-box;
+/* [5] */
+  position: relative;
+}
+/**
+ * Reversed grids allow you to structure your source in the opposite order to
+ * how your rendered layout will appear. Extends `.grid`.
+ */
+.grid--rev {
+  direction: rtl;
+  text-align: left;
+}
+.grid--rev > .grid__item {
+  direction: ltr;
+  text-align: left;
+}
+/**
+ * Gutterless grids have all the properties of regular grids, minus any spacing.
+ * Extends `.grid`.
+ */
+.grid--full {
+  margin-left: 0;
+}
+.grid--full > .grid__item {
+  padding-left: 0;
+}
+/**
+ * Align the entire grid to the right. Extends `.grid`.
+ */
+.grid--right {
+  text-align: right;
+}
+.grid--right > .grid__item {
+  text-align: left;
+}
+/**
+ * Centered grids align grid items centrally without needing to use push or pull
+ * classes. Extends `.grid`.
+ */
+.grid--center {
+  text-align: center;
+}
+.grid--center > .grid__item {
+  text-align: left;
+}
+/**
+ * Align grid cells vertically (`.grid--middle` or `.grid--bottom`). Extends
+ * `.grid`.
+ */
+.grid--middle > .grid__item {
+  vertical-align: middle;
+}
+.grid--bottom > .grid__item {
+  vertical-align: bottom;
+}
+/**
+ * Create grids with narrower gutters. Extends `.grid`.
+ */
+.grid--narrow {
+  margin-left: -12px;
+}
+.grid--narrow > .grid__item {
+  padding-left: 24px/2;
+}
+/**
+ * Create grids with wider gutters. Extends `.grid`.
+ */
+.grid--wide {
+  margin-left: -48px;
+}
+.grid--wide > .grid__item {
+  padding-left: 48px;
+}
+/*------------------------------------*   $WIDTHS
+\*------------------------------------*/
+/**
+ * Our breakpoint specific widths classes.
+ */
+/**
+   * Whole
+   */
+.one-whole {
+  width: 100%;
+}
+/**
+   * Halves
+   */
+.one-half {
+  width: 50%;
+}
+.push-one-half {
+  left: 50%;
+}
+.pull-one-half {
+  right: 50%;
+}
+/**
+   * Thirds
+   */
+.one-third {
+  width: 33.33333333333333%;
+}
+.push-one-third {
+  left: 33.33333333333333%;
+}
+.pull-one-third {
+  right: 33.33333333333333%;
+}
+.two-thirds {
+  width: 66.66666666666666%;
+}
+.push-two-thirds {
+  left: 66.66666666666666%;
+}
+.pull-two-thirds {
+  right: 66.66666666666666%;
+}
+/**
+   * Quarters
+   */
+.one-quarter {
+  width: 25%;
+}
+.push-one-quarter {
+  left: 25%;
+}
+.pull-one-quarter {
+  right: 25%;
+}
+.two-quarters {
+  width: 50%;
+}
+.push-two-quarters {
+  left: 50%;
+}
+.pull-two-quarters {
+  right: 50%;
+}
+.three-quarters {
+  width: 75%;
+}
+.push-three-quarters {
+  left: 75%;
+}
+.pull-three-quarters {
+  right: 75%;
+}
+/**
+   * Fifths
+   */
+.one-fifth {
+  width: 20%;
+}
+.push-one-fifth {
+  left: 20%;
+}
+.pull-one-fifth {
+  right: 20%;
+}
+.two-fifths {
+  width: 40%;
+}
+.push-two-fifths {
+  left: 40%;
+}
+.pull-two-fifths {
+  right: 40%;
+}
+.three-fifths {
+  width: 60%;
+}
+.push-three-fifths {
+  left: 60%;
+}
+.pull-three-fifths {
+  right: 60%;
+}
+.four-fifths {
+  width: 80%;
+}
+.push-four-fifths {
+  left: 80%;
+}
+.pull-four-fifths {
+  right: 80%;
+}
+/**
+   * Sixths
+   */
+.one-sixth {
+  width: 16.666666666666664%;
+}
+.push-one-sixth {
+  left: 16.666666666666664%;
+}
+.pull-one-sixth {
+  right: 16.666666666666664%;
+}
+.two-sixths {
+  width: 33.33333333333333%;
+}
+.push-two-sixths {
+  left: 33.33333333333333%;
+}
+.pull-two-sixths {
+  right: 33.33333333333333%;
+}
+.three-sixths {
+  width: 50%;
+}
+.push-three-sixths {
+  left: 50%;
+}
+.pull-three-sixths {
+  right: 50%;
+}
+.four-sixths {
+  width: 66.66666666666666%;
+}
+.push-four-sixths {
+  left: 66.66666666666666%;
+}
+.pull-four-sixths {
+  right: 66.66666666666666%;
+}
+.five-sixths {
+  width: 83.33333333333334%;
+}
+.push-five-sixths {
+  left: 83.33333333333334%;
+}
+.pull-five-sixths {
+  right: 83.33333333333334%;
+}
+/**
+   * Eighths
+   */
+.one-eighth {
+  width: 12.5%;
+}
+.push-one-eighth {
+  left: 12.5%;
+}
+.pull-one-eighth {
+  right: 12.5%;
+}
+.two-eighths {
+  width: 25%;
+}
+.push-two-eighths {
+  left: 25%;
+}
+.pull-two-eighths {
+  right: 25%;
+}
+.three-eighths {
+  width: 37.5%;
+}
+.push-three-eighths {
+  left: 37.5%;
+}
+.pull-three-eighths {
+  right: 37.5%;
+}
+.four-eighths {
+  width: 50%;
+}
+.push-four-eighths {
+  left: 50%;
+}
+.pull-four-eighths {
+  right: 50%;
+}
+.five-eighths {
+  width: 62.5%;
+}
+.push-five-eighths {
+  left: 62.5%;
+}
+.pull-five-eighths {
+  right: 62.5%;
+}
+.six-eighths {
+  width: 75%;
+}
+.push-six-eighths {
+  left: 75%;
+}
+.pull-six-eighths {
+  right: 75%;
+}
+.seven-eighths {
+  width: 87.5%;
+}
+.push-seven-eighths {
+  left: 87.5%;
+}
+.pull-seven-eighths {
+  right: 87.5%;
+}
+/**
+   * Tenths
+   */
+.one-tenth {
+  width: 10%;
+}
+.push-one-tenth {
+  left: 10%;
+}
+.pull-one-tenth {
+  right: 10%;
+}
+.two-tenths {
+  width: 20%;
+}
+.push-two-tenths {
+  left: 20%;
+}
+.pull-two-tenths {
+  right: 20%;
+}
+.three-tenths {
+  width: 30%;
+}
+.push-three-tenths {
+  left: 30%;
+}
+.pull-three-tenths {
+  right: 30%;
+}
+.four-tenths {
+  width: 40%;
+}
+.push-four-tenths {
+  left: 40%;
+}
+.pull-four-tenths {
+  right: 40%;
+}
+.five-tenths {
+  width: 50%;
+}
+.push-five-tenths {
+  left: 50%;
+}
+.pull-five-tenths {
+  right: 50%;
+}
+.six-tenths {
+  width: 60%;
+}
+.push-six-tenths {
+  left: 60%;
+}
+.pull-six-tenths {
+  right: 60%;
+}
+.seven-tenths {
+  width: 70%;
+}
+.push-seven-tenths {
+  left: 70%;
+}
+.pull-seven-tenths {
+  right: 70%;
+}
+.eight-tenths {
+  width: 80%;
+}
+.push-eight-tenths {
+  left: 80%;
+}
+.pull-eight-tenths {
+  right: 80%;
+}
+.nine-tenths {
+  width: 90%;
+}
+.push-nine-tenths {
+  left: 90%;
+}
+.pull-nine-tenths {
+  right: 90%;
+}
+/**
+   * Twelfths
+   */
+.one-twelfth {
+  width: 8.333333333333332%;
+}
+.push-one-twelfth {
+  left: 8.333333333333332%;
+}
+.pull-one-twelfth {
+  right: 8.333333333333332%;
+}
+.two-twelfths {
+  width: 16.666666666666664%;
+}
+.push-two-twelfths {
+  left: 16.666666666666664%;
+}
+.pull-two-twelfths {
+  right: 16.666666666666664%;
+}
+.three-twelfths {
+  width: 25%;
+}
+.push-three-twelfths {
+  left: 25%;
+}
+.pull-three-twelfths {
+  right: 25%;
+}
+.four-twelfths {
+  width: 33.33333333333333%;
+}
+.push-four-twelfths {
+  left: 33.33333333333333%;
+}
+.pull-four-twelfths {
+  right: 33.33333333333333%;
+}
+.five-twelfths {
+  width: 41.66666666666667%;
+}
+.push-five-twelfths {
+  left: 41.66666666666667%;
+}
+.pull-five-twelfths {
+  right: 41.66666666666667%;
+}
+.six-twelfths {
+  width: 50%;
+}
+.push-six-twelfths {
+  left: 50%;
+}
+.pull-six-twelfths {
+  right: 50%;
+}
+.seven-twelfths {
+  width: 58.333333333333336%;
+}
+.push-seven-twelfths {
+  left: 58.333333333333336%;
+}
+.pull-seven-twelfths {
+  right: 58.333333333333336%;
+}
+.eight-twelfths {
+  width: 66.66666666666666%;
+}
+.push-eight-twelfths {
+  left: 66.66666666666666%;
+}
+.pull-eight-twelfths {
+  right: 66.66666666666666%;
+}
+.nine-twelfths {
+  width: 75%;
+}
+.push-nine-twelfths {
+  left: 75%;
+}
+.pull-nine-twelfths {
+  right: 75%;
+}
+.ten-twelfths {
+  width: 83.33333333333334%;
+}
+.push-ten-twelfths {
+  left: 83.33333333333334%;
+}
+.pull-ten-twelfths {
+  right: 83.33333333333334%;
+}
+.eleven-twelfths {
+  width: 91.66666666666666%;
+}
+.push-eleven-twelfths {
+  left: 91.66666666666666%;
+}
+.pull-eleven-twelfths {
+  right: 91.66666666666666%;
+}
+@media (max-width: 48em) {
+  .mobile-one-whole {
+    width: 100%;
+  }
+  .mobile-one-half {
+    width: 50%;
+  }
+  .push-mobile-one-half {
+    left: 50%;
+  }
+  .pull-mobile-one-half {
+    right: 50%;
+  }
+  .mobile-one-third {
+    width: 33.33333333333333%;
+  }
+  .push-mobile-one-third {
+    left: 33.33333333333333%;
+  }
+  .pull-mobile-one-third {
+    right: 33.33333333333333%;
+  }
+  .mobile-two-thirds {
+    width: 66.66666666666666%;
+  }
+  .push-mobile-two-thirds {
+    left: 66.66666666666666%;
+  }
+  .pull-mobile-two-thirds {
+    right: 66.66666666666666%;
+  }
+  .mobile-one-quarter {
+    width: 25%;
+  }
+  .push-mobile-one-quarter {
+    left: 25%;
+  }
+  .pull-mobile-one-quarter {
+    right: 25%;
+  }
+  .mobile-two-quarters {
+    width: 50%;
+  }
+  .push-mobile-two-quarters {
+    left: 50%;
+  }
+  .pull-mobile-two-quarters {
+    right: 50%;
+  }
+  .mobile-three-quarters {
+    width: 75%;
+  }
+  .push-mobile-three-quarters {
+    left: 75%;
+  }
+  .pull-mobile-three-quarters {
+    right: 75%;
+  }
+  .mobile-one-fifth {
+    width: 20%;
+  }
+  .push-mobile-one-fifth {
+    left: 20%;
+  }
+  .pull-mobile-one-fifth {
+    right: 20%;
+  }
+  .mobile-two-fifths {
+    width: 40%;
+  }
+  .push-mobile-two-fifths {
+    left: 40%;
+  }
+  .pull-mobile-two-fifths {
+    right: 40%;
+  }
+  .mobile-three-fifths {
+    width: 60%;
+  }
+  .push-mobile-three-fifths {
+    left: 60%;
+  }
+  .pull-mobile-three-fifths {
+    right: 60%;
+  }
+  .mobile-four-fifths {
+    width: 80%;
+  }
+  .push-mobile-four-fifths {
+    left: 80%;
+  }
+  .pull-mobile-four-fifths {
+    right: 80%;
+  }
+  .mobile-one-sixth {
+    width: 16.666666666666664%;
+  }
+  .push-mobile-one-sixth {
+    left: 16.666666666666664%;
+  }
+  .pull-mobile-one-sixth {
+    right: 16.666666666666664%;
+  }
+  .mobile-two-sixths {
+    width: 33.33333333333333%;
+  }
+  .push-mobile-two-sixths {
+    left: 33.33333333333333%;
+  }
+  .pull-mobile-two-sixths {
+    right: 33.33333333333333%;
+  }
+  .mobile-three-sixths {
+    width: 50%;
+  }
+  .push-mobile-three-sixths {
+    left: 50%;
+  }
+  .pull-mobile-three-sixths {
+    right: 50%;
+  }
+  .mobile-four-sixths {
+    width: 66.66666666666666%;
+  }
+  .push-mobile-four-sixths {
+    left: 66.66666666666666%;
+  }
+  .pull-mobile-four-sixths {
+    right: 66.66666666666666%;
+  }
+  .mobile-five-sixths {
+    width: 83.33333333333334%;
+  }
+  .push-mobile-five-sixths {
+    left: 83.33333333333334%;
+  }
+  .pull-mobile-five-sixths {
+    right: 83.33333333333334%;
+  }
+  .mobile-one-eighth {
+    width: 12.5%;
+  }
+  .push-mobile-one-eighth {
+    left: 12.5%;
+  }
+  .pull-mobile-one-eighth {
+    right: 12.5%;
+  }
+  .mobile-two-eighths {
+    width: 25%;
+  }
+  .push-mobile-two-eighths {
+    left: 25%;
+  }
+  .pull-mobile-two-eighths {
+    right: 25%;
+  }
+  .mobile-three-eighths {
+    width: 37.5%;
+  }
+  .push-mobile-three-eighths {
+    left: 37.5%;
+  }
+  .pull-mobile-three-eighths {
+    right: 37.5%;
+  }
+  .mobile-four-eighths {
+    width: 50%;
+  }
+  .push-mobile-four-eighths {
+    left: 50%;
+  }
+  .pull-mobile-four-eighths {
+    right: 50%;
+  }
+  .mobile-five-eighths {
+    width: 62.5%;
+  }
+  .push-mobile-five-eighths {
+    left: 62.5%;
+  }
+  .pull-mobile-five-eighths {
+    right: 62.5%;
+  }
+  .mobile-six-eighths {
+    width: 75%;
+  }
+  .push-mobile-six-eighths {
+    left: 75%;
+  }
+  .pull-mobile-six-eighths {
+    right: 75%;
+  }
+  .mobile-seven-eighths {
+    width: 87.5%;
+  }
+  .push-mobile-seven-eighths {
+    left: 87.5%;
+  }
+  .pull-mobile-seven-eighths {
+    right: 87.5%;
+  }
+  .mobile-one-tenth {
+    width: 10%;
+  }
+  .push-mobile-one-tenth {
+    left: 10%;
+  }
+  .pull-mobile-one-tenth {
+    right: 10%;
+  }
+  .mobile-two-tenths {
+    width: 20%;
+  }
+  .push-mobile-two-tenths {
+    left: 20%;
+  }
+  .pull-mobile-two-tenths {
+    right: 20%;
+  }
+  .mobile-three-tenths {
+    width: 30%;
+  }
+  .push-mobile-three-tenths {
+    left: 30%;
+  }
+  .pull-mobile-three-tenths {
+    right: 30%;
+  }
+  .mobile-four-tenths {
+    width: 40%;
+  }
+  .push-mobile-four-tenths {
+    left: 40%;
+  }
+  .pull-mobile-four-tenths {
+    right: 40%;
+  }
+  .mobile-five-tenths {
+    width: 50%;
+  }
+  .push-mobile-five-tenths {
+    left: 50%;
+  }
+  .pull-mobile-five-tenths {
+    right: 50%;
+  }
+  .mobile-six-tenths {
+    width: 60%;
+  }
+  .push-mobile-six-tenths {
+    left: 60%;
+  }
+  .pull-mobile-six-tenths {
+    right: 60%;
+  }
+  .mobile-seven-tenths {
+    width: 70%;
+  }
+  .push-mobile-seven-tenths {
+    left: 70%;
+  }
+  .pull-mobile-seven-tenths {
+    right: 70%;
+  }
+  .mobile-eight-tenths {
+    width: 80%;
+  }
+  .push-mobile-eight-tenths {
+    left: 80%;
+  }
+  .pull-mobile-eight-tenths {
+    right: 80%;
+  }
+  .mobile-nine-tenths {
+    width: 90%;
+  }
+  .push-mobile-nine-tenths {
+    left: 90%;
+  }
+  .pull-mobile-nine-tenths {
+    right: 90%;
+  }
+  .mobile-one-twelfth {
+    width: 8.333333333333332%;
+  }
+  .push-mobile-one-twelfth {
+    left: 8.333333333333332%;
+  }
+  .pull-mobile-one-twelfth {
+    right: 8.333333333333332%;
+  }
+  .mobile-two-twelfths {
+    width: 16.666666666666664%;
+  }
+  .push-mobile-two-twelfths {
+    left: 16.666666666666664%;
+  }
+  .pull-mobile-two-twelfths {
+    right: 16.666666666666664%;
+  }
+  .mobile-three-twelfths {
+    width: 25%;
+  }
+  .push-mobile-three-twelfths {
+    left: 25%;
+  }
+  .pull-mobile-three-twelfths {
+    right: 25%;
+  }
+  .mobile-four-twelfths {
+    width: 33.33333333333333%;
+  }
+  .push-mobile-four-twelfths {
+    left: 33.33333333333333%;
+  }
+  .pull-mobile-four-twelfths {
+    right: 33.33333333333333%;
+  }
+  .mobile-five-twelfths {
+    width: 41.66666666666667%;
+  }
+  .push-mobile-five-twelfths {
+    left: 41.66666666666667%;
+  }
+  .pull-mobile-five-twelfths {
+    right: 41.66666666666667%;
+  }
+  .mobile-six-twelfths {
+    width: 50%;
+  }
+  .push-mobile-six-twelfths {
+    left: 50%;
+  }
+  .pull-mobile-six-twelfths {
+    right: 50%;
+  }
+  .mobile-seven-twelfths {
+    width: 58.333333333333336%;
+  }
+  .push-mobile-seven-twelfths {
+    left: 58.333333333333336%;
+  }
+  .pull-mobile-seven-twelfths {
+    right: 58.333333333333336%;
+  }
+  .mobile-eight-twelfths {
+    width: 66.66666666666666%;
+  }
+  .push-mobile-eight-twelfths {
+    left: 66.66666666666666%;
+  }
+  .pull-mobile-eight-twelfths {
+    right: 66.66666666666666%;
+  }
+  .mobile-nine-twelfths {
+    width: 75%;
+  }
+  .push-mobile-nine-twelfths {
+    left: 75%;
+  }
+  .pull-mobile-nine-twelfths {
+    right: 75%;
+  }
+  .mobile-ten-twelfths {
+    width: 83.33333333333334%;
+  }
+  .push-mobile-ten-twelfths {
+    left: 83.33333333333334%;
+  }
+  .pull-mobile-ten-twelfths {
+    right: 83.33333333333334%;
+  }
+  .mobile-eleven-twelfths {
+    width: 91.66666666666666%;
+  }
+  .push-mobile-eleven-twelfths {
+    left: 91.66666666666666%;
+  }
+  .pull-mobile-eleven-twelfths {
+    right: 91.66666666666666%;
+  }
+}
+@media (min-width: 48em) {
+  .desk-one-whole {
+    width: 100%;
+  }
+  .desk-one-half {
+    width: 50%;
+  }
+  .push-desk-one-half {
+    left: 50%;
+  }
+  .pull-desk-one-half {
+    right: 50%;
+  }
+  .desk-one-third {
+    width: 33.33333333333333%;
+  }
+  .push-desk-one-third {
+    left: 33.33333333333333%;
+  }
+  .pull-desk-one-third {
+    right: 33.33333333333333%;
+  }
+  .desk-two-thirds {
+    width: 66.66666666666666%;
+  }
+  .push-desk-two-thirds {
+    left: 66.66666666666666%;
+  }
+  .pull-desk-two-thirds {
+    right: 66.66666666666666%;
+  }
+  .desk-one-quarter {
+    width: 25%;
+  }
+  .push-desk-one-quarter {
+    left: 25%;
+  }
+  .pull-desk-one-quarter {
+    right: 25%;
+  }
+  .desk-two-quarters {
+    width: 50%;
+  }
+  .push-desk-two-quarters {
+    left: 50%;
+  }
+  .pull-desk-two-quarters {
+    right: 50%;
+  }
+  .desk-three-quarters {
+    width: 75%;
+  }
+  .push-desk-three-quarters {
+    left: 75%;
+  }
+  .pull-desk-three-quarters {
+    right: 75%;
+  }
+  .desk-one-fifth {
+    width: 20%;
+  }
+  .push-desk-one-fifth {
+    left: 20%;
+  }
+  .pull-desk-one-fifth {
+    right: 20%;
+  }
+  .desk-two-fifths {
+    width: 40%;
+  }
+  .push-desk-two-fifths {
+    left: 40%;
+  }
+  .pull-desk-two-fifths {
+    right: 40%;
+  }
+  .desk-three-fifths {
+    width: 60%;
+  }
+  .push-desk-three-fifths {
+    left: 60%;
+  }
+  .pull-desk-three-fifths {
+    right: 60%;
+  }
+  .desk-four-fifths {
+    width: 80%;
+  }
+  .push-desk-four-fifths {
+    left: 80%;
+  }
+  .pull-desk-four-fifths {
+    right: 80%;
+  }
+  .desk-one-sixth {
+    width: 16.666666666666664%;
+  }
+  .push-desk-one-sixth {
+    left: 16.666666666666664%;
+  }
+  .pull-desk-one-sixth {
+    right: 16.666666666666664%;
+  }
+  .desk-two-sixths {
+    width: 33.33333333333333%;
+  }
+  .push-desk-two-sixths {
+    left: 33.33333333333333%;
+  }
+  .pull-desk-two-sixths {
+    right: 33.33333333333333%;
+  }
+  .desk-three-sixths {
+    width: 50%;
+  }
+  .push-desk-three-sixths {
+    left: 50%;
+  }
+  .pull-desk-three-sixths {
+    right: 50%;
+  }
+  .desk-four-sixths {
+    width: 66.66666666666666%;
+  }
+  .push-desk-four-sixths {
+    left: 66.66666666666666%;
+  }
+  .pull-desk-four-sixths {
+    right: 66.66666666666666%;
+  }
+  .desk-five-sixths {
+    width: 83.33333333333334%;
+  }
+  .push-desk-five-sixths {
+    left: 83.33333333333334%;
+  }
+  .pull-desk-five-sixths {
+    right: 83.33333333333334%;
+  }
+  .desk-one-eighth {
+    width: 12.5%;
+  }
+  .push-desk-one-eighth {
+    left: 12.5%;
+  }
+  .pull-desk-one-eighth {
+    right: 12.5%;
+  }
+  .desk-two-eighths {
+    width: 25%;
+  }
+  .push-desk-two-eighths {
+    left: 25%;
+  }
+  .pull-desk-two-eighths {
+    right: 25%;
+  }
+  .desk-three-eighths {
+    width: 37.5%;
+  }
+  .push-desk-three-eighths {
+    left: 37.5%;
+  }
+  .pull-desk-three-eighths {
+    right: 37.5%;
+  }
+  .desk-four-eighths {
+    width: 50%;
+  }
+  .push-desk-four-eighths {
+    left: 50%;
+  }
+  .pull-desk-four-eighths {
+    right: 50%;
+  }
+  .desk-five-eighths {
+    width: 62.5%;
+  }
+  .push-desk-five-eighths {
+    left: 62.5%;
+  }
+  .pull-desk-five-eighths {
+    right: 62.5%;
+  }
+  .desk-six-eighths {
+    width: 75%;
+  }
+  .push-desk-six-eighths {
+    left: 75%;
+  }
+  .pull-desk-six-eighths {
+    right: 75%;
+  }
+  .desk-seven-eighths {
+    width: 87.5%;
+  }
+  .push-desk-seven-eighths {
+    left: 87.5%;
+  }
+  .pull-desk-seven-eighths {
+    right: 87.5%;
+  }
+  .desk-one-tenth {
+    width: 10%;
+  }
+  .push-desk-one-tenth {
+    left: 10%;
+  }
+  .pull-desk-one-tenth {
+    right: 10%;
+  }
+  .desk-two-tenths {
+    width: 20%;
+  }
+  .push-desk-two-tenths {
+    left: 20%;
+  }
+  .pull-desk-two-tenths {
+    right: 20%;
+  }
+  .desk-three-tenths {
+    width: 30%;
+  }
+  .push-desk-three-tenths {
+    left: 30%;
+  }
+  .pull-desk-three-tenths {
+    right: 30%;
+  }
+  .desk-four-tenths {
+    width: 40%;
+  }
+  .push-desk-four-tenths {
+    left: 40%;
+  }
+  .pull-desk-four-tenths {
+    right: 40%;
+  }
+  .desk-five-tenths {
+    width: 50%;
+  }
+  .push-desk-five-tenths {
+    left: 50%;
+  }
+  .pull-desk-five-tenths {
+    right: 50%;
+  }
+  .desk-six-tenths {
+    width: 60%;
+  }
+  .push-desk-six-tenths {
+    left: 60%;
+  }
+  .pull-desk-six-tenths {
+    right: 60%;
+  }
+  .desk-seven-tenths {
+    width: 70%;
+  }
+  .push-desk-seven-tenths {
+    left: 70%;
+  }
+  .pull-desk-seven-tenths {
+    right: 70%;
+  }
+  .desk-eight-tenths {
+    width: 80%;
+  }
+  .push-desk-eight-tenths {
+    left: 80%;
+  }
+  .pull-desk-eight-tenths {
+    right: 80%;
+  }
+  .desk-nine-tenths {
+    width: 90%;
+  }
+  .push-desk-nine-tenths {
+    left: 90%;
+  }
+  .pull-desk-nine-tenths {
+    right: 90%;
+  }
+  .desk-one-twelfth {
+    width: 8.333333333333332%;
+  }
+  .push-desk-one-twelfth {
+    left: 8.333333333333332%;
+  }
+  .pull-desk-one-twelfth {
+    right: 8.333333333333332%;
+  }
+  .desk-two-twelfths {
+    width: 16.666666666666664%;
+  }
+  .push-desk-two-twelfths {
+    left: 16.666666666666664%;
+  }
+  .pull-desk-two-twelfths {
+    right: 16.666666666666664%;
+  }
+  .desk-three-twelfths {
+    width: 25%;
+  }
+  .push-desk-three-twelfths {
+    left: 25%;
+  }
+  .pull-desk-three-twelfths {
+    right: 25%;
+  }
+  .desk-four-twelfths {
+    width: 33.33333333333333%;
+  }
+  .push-desk-four-twelfths {
+    left: 33.33333333333333%;
+  }
+  .pull-desk-four-twelfths {
+    right: 33.33333333333333%;
+  }
+  .desk-five-twelfths {
+    width: 41.66666666666667%;
+  }
+  .push-desk-five-twelfths {
+    left: 41.66666666666667%;
+  }
+  .pull-desk-five-twelfths {
+    right: 41.66666666666667%;
+  }
+  .desk-six-twelfths {
+    width: 50%;
+  }
+  .push-desk-six-twelfths {
+    left: 50%;
+  }
+  .pull-desk-six-twelfths {
+    right: 50%;
+  }
+  .desk-seven-twelfths {
+    width: 58.333333333333336%;
+  }
+  .push-desk-seven-twelfths {
+    left: 58.333333333333336%;
+  }
+  .pull-desk-seven-twelfths {
+    right: 58.333333333333336%;
+  }
+  .desk-eight-twelfths {
+    width: 66.66666666666666%;
+  }
+  .push-desk-eight-twelfths {
+    left: 66.66666666666666%;
+  }
+  .pull-desk-eight-twelfths {
+    right: 66.66666666666666%;
+  }
+  .desk-nine-twelfths {
+    width: 75%;
+  }
+  .push-desk-nine-twelfths {
+    left: 75%;
+  }
+  .pull-desk-nine-twelfths {
+    right: 75%;
+  }
+  .desk-ten-twelfths {
+    width: 83.33333333333334%;
+  }
+  .push-desk-ten-twelfths {
+    left: 83.33333333333334%;
+  }
+  .pull-desk-ten-twelfths {
+    right: 83.33333333333334%;
+  }
+  .desk-eleven-twelfths {
+    width: 91.66666666666666%;
+  }
+  .push-desk-eleven-twelfths {
+    left: 91.66666666666666%;
+  }
+  .pull-desk-eleven-twelfths {
+    right: 91.66666666666666%;
+  }
+}

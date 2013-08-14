@@ -1,0 +1,155 @@
+/**
+ * Nib provides a CSS reset
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+/**
+ * Variables
+ */
+#hero {
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#nav-spacer {
+  height: 100px;
+}
+body {
+  background-color: #e6e6e6;
+  font-family: 'Century Gothic';
+}
+/**
+ * Helpers
+ */
+.hidden {
+  display: none;
+}
+/**
+ * Navigation
+ */
+.wrapper {
+  margin: 0 auto 0 auto;
+  max-width: 56.7em;
+}
+nav {
+  color: #48abd5;
+}
+@media all and (min-width: 48em) {
+  nav {
+    color: #fff;
+  }
+}
+/**
+ * Panels
+ */
+.blue-panel {
+  background-color: #09a4e6;
+  color: #fff;
+}
+@media all and (min-width: 48em) {
+  #hero {
+    background-image: url("/img/hero-background-large.jpg");
+    min-height: 31em;
+  }
+  nav {
+    height: 4.944em;
+    border-top: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    -webkit-box-shadow: 0 5px 15px #666;
+    box-shadow: 0 5px 15px #666;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #2c2c2c), color-stop(0.78, #1d1d1d));
+    background-image: -webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
+    background-image: -moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
+    background-image: -o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
+    background-image: -ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
+    background-image: linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
+  }
+}

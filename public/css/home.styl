@@ -1,0 +1,62 @@
+@import 'nib'
+
+/**
+ * Nib provides a CSS reset
+ */
+global-reset()
+
+/**
+ * Variables
+ */
+background-color = #E6E6E6
+main-blue = #09A4E6
+text-blue = #48ABD5
+wrapper-max-width = 56.7em
+mobile = "all and (max-width: 48em)"
+desk = "all and (min-width: 48em)"
+
+#hero
+  background-position center
+  background-repeat no-repeat
+
+
+#nav-spacer // TODO: fix
+  height: 100px
+
+body // TODO: fix fonts
+  background-color background-color
+  font-family 'Century Gothic'
+
+/**
+ * Helpers
+ */
+.hidden
+  display none
+
+/**
+ * Navigation
+ */
+.wrapper
+  margin 0 auto 0 auto
+  max-width wrapper-max-width
+nav
+  color text-blue
+
+/**
+ * Panels
+ */
+.blue-panel
+  background-color main-blue
+  color #fff
+
+@media desk
+  #hero
+    background-image url('/img/hero-background-large.jpg')
+    min-height 31em // TODO: fix
+  nav
+    height 4.944em
+    border-top 3px solid white
+    border-bottom 3px solid white
+    box-shadow 0 5px 15px #666
+
+    background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
