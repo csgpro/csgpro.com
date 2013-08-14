@@ -3,11 +3,11 @@
 /**
  * Nib provides a CSS reset
  */
-global-reset()
+// global-reset()
 
-/**
+/***************************************
  * Variables
- */
+ ***************************************/
 background-color = #E6E6E6
 main-blue = #09A4E6
 text-blue = #48ABD5
@@ -18,7 +18,12 @@ desk = "all and (min-width: 48em)"
 #hero
   background-position center
   background-repeat no-repeat
-
+  @media desk
+    background-image url('/img/hero-background-large.jpg')
+    min-height 31em //TODO: should use javascript to resize
+  @media mobile
+    background-image url('/img/hero-background-large.jpg')
+    min-height 10em //TODO: should use javascript to resize
 
 #nav-spacer // TODO: fix
   height: 100px
@@ -27,36 +32,61 @@ body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic'
 
-/**
+/***************************************
  * Helpers
- */
+ ***************************************/
 .hidden
   display none
 
-/**
+@media mobile
+  .hide-mobile
+    display none
+
+@media desk
+  .hide-desk
+    display none
+
+/***************************************
  * Navigation
- */
+ ***************************************/
 .wrapper
   margin 0 auto 0 auto
   max-width wrapper-max-width
+
+.fixed-menu
+  position fixed
+  top 0
+  left 0 
+  width 100%
+
 nav
   color text-blue
+  @media mobile
+    display none
+  @media desk
+    background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
+    border-bottom 3px solid white
+    border-top 3px solid white
+    box-shadow 0 5px 15px #666
+    height 4.944em
+    img
+      margin -5px 0 0 0
+    ul
+      float right
+      margin 1.6em 1em 0 0
+      li
+        display inline
+      li:after
+        content "/"
+        padding 0 1em 0 1em
+      li:last-child:after
+        content none
 
-/**
+
+/***************************************
  * Panels
- */
+ ***************************************/
 .blue-panel
   background-color main-blue
   color #fff
 
-@media desk
-  #hero
-    background-image url('/img/hero-background-large.jpg')
-    min-height 31em // TODO: fix
-  nav
-    height 4.944em
-    border-top 3px solid white
-    border-bottom 3px solid white
-    box-shadow 0 5px 15px #666
-
-    background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)

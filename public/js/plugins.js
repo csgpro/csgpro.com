@@ -21,9 +21,17 @@
       }
     }());
 
-////////////////////
-// Sticky Nav Bar //
-////////////////////
+/***************************************
+ * Page load hero size
+ ***************************************/
+(function(){
+  // Dynamically change the height of the hero page main screen
+  $('#hero').css('min-height', $(window).height() - 85);
+}());
+
+/***************************************
+ * Sticky Nav Bar 
+ ***************************************/
 (function(){
   var isFixed = false
     , nav = $('nav')
@@ -45,10 +53,3 @@
 
 }());
 
-/////////////////////////
-// Page Load Hero Size //
-/////////////////////////
-(function(){
-  // I need to dynamically change the height of the hero page based on screen 
-  // size
-}());
