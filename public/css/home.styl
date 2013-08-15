@@ -1,4 +1,4 @@
-@import 'nib'
+@import 'nib' // nib does several things including vendor prefixes
 
 /**
  * Nib provides a CSS reset
@@ -64,10 +64,26 @@ body // TODO: fix fonts
     // padding 24px
 
 #updates
+  padding: 100px 30px 0 40px;
   background-color #F3F3F3
+  > div
+    position relative
+  .circle
+    background-image url('http://placekitten.com/80/80')
+    position absolute
+    top -40px
+    left -15px
+    width 80px
+    height 80px
+    background-color #9B9B9B
+    border-radius 40px
+    box-shadow 0 0 5px 0
   article
+    color #fff
+    padding-top 40px
     border-radius border-radii
     background-color main-blue
+
 
 #contact
   background-color #F8F8F8
