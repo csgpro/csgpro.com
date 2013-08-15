@@ -8,12 +8,13 @@
 /***************************************
  * Variables
  ***************************************/
-background-color = #E6E6E6
+background-color = #04040E
 main-blue = #09A4E6
 text-blue = #48ABD5
-wrapper-max-width = 56.7em
+wrapper-max-width = 1060px
 mobile = "all and (max-width: 48em)"
 desk = "all and (min-width: 48em)"
+border-radii = 4px
 
 #hero
   background-position center
@@ -31,6 +32,45 @@ desk = "all and (min-width: 48em)"
 body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic'
+
+/*****************
+ * Sections
+ *****************/
+#work
+  background-color main-blue
+  color #fff
+
+#services
+  background-color #00517E
+  aside
+    color #00A3E4
+    ul
+      margin 0
+      padding 0
+      list-style-type none
+      li
+        padding 15px 0 15px 0
+  article
+    background-color #E6E6E6
+    color #043C57
+
+#about
+  padding-top 25px
+  background-color #545454
+  aside
+    background-color #333333
+    border-radius border-radii
+    // margin 15px 0 0 50px
+    // padding 24px
+
+#updates
+  background-color #F3F3F3
+  article
+    border-radius border-radii
+    background-color main-blue
+
+#contact
+  background-color #F8F8F8
 
 /***************************************
  * Helpers
@@ -54,39 +94,38 @@ body // TODO: fix fonts
   max-width wrapper-max-width
 
 .fixed-menu
+  z-index 1
   position fixed
   top 0
   left 0 
   width 100%
+  img
+    max-width: 50px;
+    margin: 20px 0 0 20px;
 
 nav
   color text-blue
+  position relative
   @media mobile
     display none
   @media desk
     background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
     border-bottom 3px solid white
     border-top 3px solid white
-    box-shadow 0 5px 15px #666
-    height 4.944em
+    box-shadow 0 5px 15px #000
+    height 92px
     img
-      margin -5px 0 0 0
+      // transition width 0.5s // TODO: broken due to making the bar fixed 
+      margin 5px 0 0 0
     ul
       float right
-      margin 1.6em 1em 0 0
+      margin 35px 0 0 0
       li
         display inline
       li:after
         content "/"
-        padding 0 1em 0 1em
+        padding 0 14px 0 14px
       li:last-child:after
         content none
 
-
-/***************************************
- * Panels
- ***************************************/
-.blue-panel
-  background-color main-blue
-  color #fff
 

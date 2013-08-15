@@ -12,49 +12,46 @@ block content
         li updates
         li contact
   div#nav-spacer.hidden.hide-mobile
+
   div.wrapper
+
+    // WORK
     section#work.grid
-      aside.grid__item.mobile-one-half.desk-one-third.blue-panel
+      aside.grid__item.mobile--one-half.desk--one-third
         h2 Case study: Web & Mobile
         h1 Increase Awareness
         p.subtitle OBRC - know your nickel
-        p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin doner chicken sausage pork filet mignon sirloin, corned beef turkey.
-      article.grid__item.mobile-one-half.desk--two-thirds
-        p Some other content
+        p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
+      article.grid__item.mobile--one-half.desk--two-thirds
+        img(src='http://placekitten.com/684/504')
+
+    // SERVICES
     section#services.grid
-      aside.grid__item.desk-two-twelfths.blue-panel
+      aside.grid__item.desk--two-twelfths
+        h3 what we do
         ul
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-          li nav
-      article.grid__item.desk-ten-twelfths
+          li web
+          li apps
+          li cloud
+          li analytics
+          li portals
+      article.grid__item.desk--ten-twelfths(style='min-height: 504px')
         p Content
-    section#about
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-    section#updates
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-    section#contact
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
-      p Something 
+
+    // ABOUT
+    section#about.grid(style='min-height: 504px')
+      div.grid__item.four-twelfths
+        aside.grid__item.push--one-twelfth.eleven-twelfths
+            p(style='min-height: 430px') Content
+      article.grid__item.eight-twelfths
+        p Content
+
+    // UPDATES
+    section#updates.grid(style='min-height: 504px')
+      article.grid__item.one-whole
+        p Content
+
+    // CONTACT
+    section#contact.grid(style='min-height: 670px')
+      article.grid__item.one-whole
+        p Content

@@ -24,8 +24,48 @@
   height: 100px;
 }
 body {
-  background-color: #e6e6e6;
+  background-color: #04040e;
   font-family: 'Century Gothic';
+}
+/*****************
+ * Sections
+ *****************/
+#work {
+  background-color: #09a4e6;
+  color: #fff;
+}
+#services {
+  background-color: #00517e;
+}
+#services aside {
+  color: #00a3e4;
+}
+#services aside ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#services aside ul li {
+  padding: 15px 0 15px 0;
+}
+#services article {
+  background-color: #e6e6e6;
+  color: #043c57;
+}
+#about {
+  padding-top: 25px;
+  background-color: #545454;
+}
+#about aside {
+  background-color: #333;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+#updates {
+  background-color: #f3f3f3;
+}
+#contact {
+  background-color: #f8f8f8;
 }
 /***************************************
  * Helpers
@@ -48,16 +88,22 @@ body {
  ***************************************/
 .wrapper {
   margin: 0 auto 0 auto;
-  max-width: 56.7em;
+  max-width: 1060px;
 }
 .fixed-menu {
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
 }
+.fixed-menu img {
+  max-width: 50px;
+  margin: 20px 0 0 20px;
+}
 nav {
   color: #48abd5;
+  position: relative;
 }
 @media all and (max-width: 48em) {
   nav {
@@ -74,32 +120,25 @@ nav {
     background-image: linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
     border-bottom: 3px solid #fff;
     border-top: 3px solid #fff;
-    -webkit-box-shadow: 0 5px 15px #666;
-    box-shadow: 0 5px 15px #666;
-    height: 4.944em;
+    -webkit-box-shadow: 0 5px 15px #000;
+    box-shadow: 0 5px 15px #000;
+    height: 92px;
   }
   nav img {
-    margin: -5px 0 0 0;
+    margin: 5px 0 0 0;
   }
   nav ul {
     float: right;
-    margin: 1.6em 1em 0 0;
+    margin: 35px 0 0 0;
   }
   nav ul li {
     display: inline;
   }
   nav ul li:after {
     content: "/";
-    padding: 0 1em 0 1em;
+    padding: 0 14px 0 14px;
   }
   nav ul li:last-child:after {
     content: none;
   }
-}
-/***************************************
- * Panels
- ***************************************/
-.blue-panel {
-  background-color: #09a4e6;
-  color: #fff;
 }

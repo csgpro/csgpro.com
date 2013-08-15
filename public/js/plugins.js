@@ -26,7 +26,7 @@
  ***************************************/
 (function(){
   // Dynamically change the height of the hero page main screen
-  $('#hero').css('min-height', $(window).height() - 85);
+  $('#hero').css('min-height', $(window).height() - 98);
 }());
 
 /***************************************
