@@ -71,10 +71,14 @@
  ***************************************/
 (function(){
   var isFixed = false
+    , isSmall = false
     , nav = $('nav')
+    , img = $('#logo')
     , navBottom = nav.length && nav.offset().top
+    , imgTop = img.offset().top
     , w = $(window)
     , spacer = $('#nav-spacer');
+    // 70px different for the logo
 
   $(window).on('scroll', function(){
     if (w.scrollTop() >= navBottom && !isFixed){
@@ -85,6 +89,18 @@
       isFixed = false;
       nav.removeClass('fixed-menu');
       spacer.addClass('hidden');
+    }
+
+    console.log(imgTop, w.scrollTop());
+
+    if (w.scrollTop() >= imgTop && !isSmall) {
+      isSmall = true;
+      img.addClass('small-logo');
+      img.removeClass('big-logo');
+    } else if (w.scrollTop() < imgTop && isSmall) {
+      isSmall = false;
+      img.removeClass('small-logo');
+      img.addClass('big-logo');
     }
   });
 
