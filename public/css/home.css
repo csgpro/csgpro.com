@@ -27,9 +27,12 @@ body {
   background-color: #04040e;
   font-family: 'Century Gothic';
 }
-/*****************
+/***************************************
  * Sections
- *****************/
+ ***************************************/
+#hero {
+  color: #fff;
+}
 #work {
   background-color: #09a4e6;
   color: #fff;
@@ -107,6 +110,9 @@ body {
     display: none;
   }
 }
+.right {
+  text-align: right;
+}
 /***************************************
  * Navigation
  ***************************************/
@@ -122,7 +128,8 @@ body {
   width: 100%;
 }
 .fixed-menu img {
-  max-width: 50px;
+  width: 50px;
+  height: 52px;
   margin: 20px 0 0 20px;
 }
 nav {
@@ -150,6 +157,13 @@ nav {
   }
   nav img {
     margin: 5px 0 0 0;
+    width: 81px;
+    height: 83px;
+    -webkit-transition: width, height, 0.5s;
+    -moz-transition: width, height, 0.5s;
+    -o-transition: width, height, 0.5s;
+    -ms-transition: width, height, 0.5s;
+    transition: width, height, 0.5s;
   }
   nav ul {
     float: right;

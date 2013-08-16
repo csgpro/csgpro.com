@@ -1,7 +1,20 @@
 extends layout
 
 block content
-  section#hero
+  section.grid.grid--center#hero
+    div.grid__item--center.one-whole
+      div.grid__item.right.one-half(style='margin-top: 100px')
+        h1 We've been told we have our head in the clouds, and that's not a bad thing.
+    div.grid__item--center.one-whole
+      div.grid__item.right.one-half learn how could services can make your business soar }
+    div.grid__item--center.one-whole
+      div.grid__item.three-twelfths
+        p content
+      div.grid__item.three-twelfths
+        p content
+      div.grid__item.three-twelfths
+        p content
+
   nav
     div.wrapper
       img(src='http://www.csgpro.com/img/logo.png')
@@ -13,20 +26,20 @@ block content
         li contact
   div#nav-spacer.hidden.hide-mobile
 
-  div.wrapper
+  div.wrapper.grid
 
     // WORK
-    section#work.grid
-      aside.grid__item.mobile--one-half.desk--one-third
+    section#work.grid__item.one-whole
+      aside.grid__item.desk--one-third
         h2 Case study: Web & Mobile
         h1 Increase Awareness
         p.subtitle OBRC - know your nickel
         p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
-      article.grid__item.mobile--one-half.desk--two-thirds
-        img(src='http://placekitten.com/684/504')
+      article.grid__item.desk--two-thirds
+        img(src='http://placekitten.com/620/504')
 
     // SERVICES
-    section#services.grid
+    section#services.grid__item.one-whole
       aside.grid__item.desk--two-twelfths
         h3 what we do
         ul
@@ -39,7 +52,7 @@ block content
         p Content
 
     // ABOUT
-    section#about.grid(style='min-height: 504px')
+    section#about.grid__item.one-whole(style='min-height: 504px')
       div.grid__item.four-twelfths
         aside.grid__item.push--one-twelfth.eleven-twelfths
             p(style='min-height: 430px') Content
@@ -47,7 +60,7 @@ block content
         p Content
 
     // UPDATES
-    section#updates.grid(style='min-height: 504px')
+    section#updates.grid__item.one-whole(style='min-height: 504px')
       div.grid__item.four-twelfths
         div.circle
         article.grid__item.eleven-twelfths
@@ -62,6 +75,6 @@ block content
           p content
 
     // CONTACT
-    section#contact.grid(style='min-height: 670px')
+    section#contact.grid__item.one-whole(style='min-height: 670px')
       article.grid__item.one-whole
         p Content

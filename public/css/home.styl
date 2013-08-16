@@ -33,9 +33,12 @@ body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic'
 
-/*****************
+/***************************************
  * Sections
- *****************/
+ ***************************************/
+#hero
+  color #fff
+
 #work
   background-color main-blue
   color #fff
@@ -102,6 +105,9 @@ body // TODO: fix fonts
   .hide-desk
     display none
 
+.right
+  text-align right
+
 /***************************************
  * Navigation
  ***************************************/
@@ -116,8 +122,9 @@ body // TODO: fix fonts
   left 0 
   width 100%
   img
-    max-width: 50px;
-    margin: 20px 0 0 20px;
+    width 50px
+    height 52px
+    margin 20px 0 0 20px
 
 nav
   color text-blue
@@ -131,8 +138,10 @@ nav
     box-shadow 0 5px 15px #000
     height 92px
     img
-      // transition width 0.5s // TODO: broken due to making the bar fixed 
       margin 5px 0 0 0
+      width 81px
+      height 83px
+      transition width, height, 0.5s
     ul
       float right
       margin 35px 0 0 0
