@@ -14,19 +14,56 @@
   while (length--) {
     method = methods[length];
 
-        // Only stub undefined methods.
-        if (!console[method]) {
-          console[method] = noop;
-        }
-      }
-    }());
+    // Only stub undefined methods.
+    if (!console[method]) {
+      console[method] = noop;
+    }
+  }
+}());
 
 /***************************************
- * Page load hero size
+ * Page load sizing
  ***************************************/
 (function(){
+  var sections = $('#main > section');
+
   // Dynamically change the height of the hero page main screen
-  $('#hero').css('min-height', $(window).height() - 98);
+  $('#hero').css('height', $(window).height() - 98);
+  sections.css('height', $(window).height() - 98);
+}());
+
+/***************************************
+ * Nav Scrolling and Updating
+ ***************************************/
+(function(){
+  'use strict';
+
+  var w = $(window)
+    , items = $('#main section,#hero')
+    , offset = 105
+    , selected;
+
+  $(window).bind('scroll', function(){
+    items.each(function(i, item){
+      if ( (w.scrollTop() + offset) >= item.offsetTop
+        && (w.scrollTop() + offset) <= (item.offsetTop + item.offsetHeight)
+      ) {
+        if (selected) {
+          selected.removeClass('selected');
+        }
+        selected = $("li[data-nav='" + item.id +"']");
+        selected.addClass('selected');
+      }
+
+    });
+  });
+
+  $('nav li').bind('click', function(e){
+    $.smoothScroll({
+      scrollTarget: '#' + this.innerText
+    , offset: -100
+    });
+  });
 }());
 
 /***************************************

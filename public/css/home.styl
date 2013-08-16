@@ -33,6 +33,10 @@ body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic'
 
+img
+  transition-timing-function ease
+  transition-duration 0.5s
+
 /***************************************
  * Sections
  ***************************************/
@@ -54,6 +58,7 @@ body // TODO: fix fonts
       li
         padding 15px 0 15px 0
   article
+    height 100%
     background-color #E6E6E6
     color #043C57
 
@@ -115,6 +120,10 @@ body // TODO: fix fonts
   margin 0 auto 0 auto
   max-width wrapper-max-width
 
+.selected
+  font-size 1.5em
+  color #fff
+
 .fixed-menu
   z-index 1
   position fixed
@@ -141,11 +150,12 @@ nav
       margin 5px 0 0 0
       width 81px
       height 83px
-      transition width, height, 0.5s
+      // transition-property: width, height;
     ul
       float right
       margin 35px 0 0 0
       li
+        cursor pointer
         display inline
       li:after
         content "/"

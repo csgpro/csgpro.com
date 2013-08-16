@@ -19,14 +19,14 @@ block content
     div.wrapper
       img(src='http://www.csgpro.com/img/logo.png')
       ul
-        li work
-        li services
-        li about
-        li updates
-        li contact
+        li(data-nav='work') work
+        li(data-nav='services') services
+        li(data-nav='about') about
+        li(data-nav='updates') updates
+        li(data-nav='contact') contact
   div#nav-spacer.hidden.hide-mobile
 
-  div.wrapper.grid
+  div#main.wrapper.grid
 
     // WORK
     section#work.grid__item.one-whole
@@ -48,7 +48,7 @@ block content
           li cloud
           li analytics
           li portals
-      article.grid__item.desk--ten-twelfths(style='min-height: 504px')
+      article.grid__item.desk--ten-twelfths
         p Content
 
     // ABOUT
