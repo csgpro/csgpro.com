@@ -3,7 +3,7 @@ extends layout
 block content
   section.grid.grid--center#hero
     div.grid__item--center.one-whole
-      div.grid__item.right.one-half(style='margin-top: 100px')
+      div.grid__item.right.one-half(style='margin-top: 350px')
         h1 We've been told we have our head in the clouds, and that's not a bad thing.
     div.grid__item--center.one-whole
       div.grid__item.right.one-half learn how could services can make your business soar }
@@ -17,7 +17,7 @@ block content
 
   nav
     div.wrapper
-      img(src='/img/logo.svg')
+      img(src='img/logo.svg')
       ul
         li(data-nav='work') work
         li(data-nav='services') services
@@ -39,6 +39,7 @@ block content
         img(src='http://placekitten.com/620/504')
 
     // SERVICES
+    div.spacer
     section#services.grid__item.one-whole
       aside.grid__item.desk--two-twelfths
         h3 what we do
@@ -52,7 +53,8 @@ block content
         p Content
 
     // ABOUT
-    section#about.grid__item.one-whole(style='min-height: 504px')
+    div.spacer
+    section#about.grid__item.one-whole
       div.grid__item.four-twelfths
         aside.grid__item.push--one-twelfth.eleven-twelfths
             p(style='min-height: 430px') Content
@@ -60,7 +62,8 @@ block content
         p Content
 
     // UPDATES
-    section#updates.grid__item.one-whole(style='min-height: 504px')
+    div.spacer
+    section#updates.grid__item.one-whole
       div.grid__item.four-twelfths
         div.circle
         article.grid__item.eleven-twelfths
@@ -75,6 +78,7 @@ block content
           p content
 
     // CONTACT
-    section#contact.grid__item.one-whole(style='min-height: 670px')
+    div.spacer
+    section#contact.grid__item.one-whole
       article.grid__item.one-whole
         p Content

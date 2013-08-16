@@ -25,11 +25,11 @@
  * Page load sizing
  ***************************************/
 (function(){
-  var sections = $('#main > section');
+  // var sections = $('#main > section');
 
   // Dynamically change the height of the hero page main screen
-  $('#hero').css('height', $(window).height() - 98);
-  sections.css('height', $(window).height() - 98);
+  $('#hero').css('height', $(window).height() - 95);
+  // sections.css('height', $(window).height() - 98);
 }());
 
 /***************************************

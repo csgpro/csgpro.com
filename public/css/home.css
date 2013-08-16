@@ -24,7 +24,7 @@
   height: 100px;
 }
 body {
-  background-color: #04040e;
+  background-color: #353535;
   font-family: 'Century Gothic';
 }
 img {
@@ -39,9 +39,17 @@ img {
   -ms-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
+.spacer {
+  height: 90px;
+  background-color: #fff;
+  width: 100%;
+}
 /***************************************
  * Sections
  ***************************************/
+#main > section {
+  min-height: 700px;
+}
 #hero {
   color: #fff;
 }
