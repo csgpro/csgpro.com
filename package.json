@@ -11,6 +11,8 @@
     "jade": "*",
     "stylus": "*",
     "nib": "*",
-    "passport": "~0.1.17"
+    "passport": "~0.1.17",
+    "nconf": "~0.6.7",
+    "passport-twitter": "~1.0.0"
   }
 }

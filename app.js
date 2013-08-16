@@ -4,12 +4,21 @@
  */
 
 var express = require('express')
+  , fs = require('fs')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , stylus = require('stylus')
   , nib = require('nib')
-  , path = require('path');
+  , path = require('path')
+  , passport = require('passport')
+  , TwitterStrategy  = require('passport-twitter').Strategy
+  , c = require('nconf');
+
+// Load the configuration file with our keys in it
+c.file({ file: 'config.json'});
+
+var TWITTER_CONSUMER_KEY = c.get('TWITTER_CONSUMER_KEY ') 
+  , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET ');
 
 var app = express();
 
