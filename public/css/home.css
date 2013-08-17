@@ -7,11 +7,13 @@
 #hero {
   background-position: center;
   background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
 }
 @media all and (min-width: 48em) {
   #hero {
-    background-image: url("/img/hero-background-large.jpg");
-    min-height: 31em;
+    background-image: url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");
   }
 }
 @media all and (max-width: 48em) {
@@ -52,6 +54,20 @@ img {
 }
 #hero {
   color: #fff;
+}
+#hero #headline {
+  font-size: 60px;
+  font-family: 'Roboto';
+  color: #fff;
+  font-style: italic;
+  line-height: 0.814;
+}
+#hero #subline {
+  font-size: 51px;
+  font-family: 'Roboto';
+  color: #fff;
+  font-style: italic;
+  line-height: 1.014;
 }
 #work {
   background-color: #09a4e6;
@@ -155,18 +171,19 @@ img {
   max-width: 1060px;
 }
 .selected {
-  font-size: 1.5em;
+  font-size: 29px;
   color: #fff;
 }
 .fixed-menu {
   z-index: 1;
   position: fixed;
-  top: 0;
+  top: -3px;
   left: 0;
   width: 100%;
 }
 nav {
-  color: #48abd5;
+  color: #4aaad4;
+  line-height: 1.444;
   position: relative;
 }
 @media all and (max-width: 48em) {

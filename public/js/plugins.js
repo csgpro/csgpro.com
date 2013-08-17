@@ -40,7 +40,7 @@
 
   var w = $(window)
     , items = $('#main section,#hero')
-    , offset = 105
+    , offset = 108
     , selected;
 
   $(window).bind('scroll', function(){
@@ -61,7 +61,7 @@
   $('nav li').bind('click', function(e){
     $.smoothScroll({
       scrollTarget: '#' + this.innerText
-    , offset: -100
+    , offset: -97
     });
   });
 }());

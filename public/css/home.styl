@@ -19,9 +19,9 @@ border-radii = 4px
 #hero
   background-position center
   background-repeat no-repeat
+  background-size cover
   @media desk
-    background-image url('/img/hero-background-large.jpg')
-    min-height 31em //TODO: should use javascript to resize
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg')
   @media mobile
     background-image url('/img/hero-background-large.jpg')
     min-height 10em //TODO: should use javascript to resize
@@ -51,6 +51,20 @@ img
 
 #hero
   color #fff
+  #headline
+    font-size 60px
+    font-family 'Roboto'
+    color #fff
+    font-style italic
+    line-height 0.814
+  #subline
+    font-size 51px
+    font-family 'Roboto'
+    color #fff
+    font-style italic
+    line-height 1.214
+
+
 
 #work
   background-color main-blue
@@ -142,19 +156,20 @@ img
   max-width wrapper-max-width
 
 .selected
-  font-size 1.5em
+  font-size 29px
   color #fff
 
 .fixed-menu
   z-index 1
   position fixed
-  top 0
+  top -3px
   left 0
   width 100%
 
 
 nav
-  color text-blue
+  color rgb(74, 170, 212)
+  line-height 1.444
   position relative
   @media mobile
     display none
