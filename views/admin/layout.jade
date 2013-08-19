@@ -19,6 +19,17 @@ html.no-js
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
     script(src='js/vendor/modernizr-2.6.2.min.js')
   body
+    nav.navbar
+      div.navbar-header
+        a(href='/admin').navbar-brand Administration
+      if user
+        ul.nav.navbar-nav
+          li: a(href='/account') Account Management
+          li: a(href='/posts') Posts
+          li: a(href='/events') Events
+          li: a(href='/jobs') Jobs
+
+
     //if lt IE 7
       p.browsehappy
         | You are using an <strong>outdated</strong> browser.
@@ -26,7 +37,8 @@ html.no-js
         | to improve your experience.
 
     //- Add your site or application content here
-    block content
+    div.container
+      block content
 
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script.

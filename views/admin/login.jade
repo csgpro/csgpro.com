@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div.row.text-center
+    if !user
+      h1 Login with
+      br
+      a.btn.btn-primary(href='/auth/twitter') Twitter
+    else
+      p You are already logged in as #{user.username}

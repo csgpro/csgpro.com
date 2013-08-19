@@ -3,6 +3,6 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
+exports.homepage = function(req, res){
   res.render('index', { title: 'CSG' });
 };

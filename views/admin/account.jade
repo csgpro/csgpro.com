@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  div.row
+    h1 #{user.username}
+    each val in Object.keys(user)
+      p #{val} : #{user[val]}

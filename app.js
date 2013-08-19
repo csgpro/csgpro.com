@@ -5,7 +5,7 @@
 
 var express = require('express')
   , fs = require('fs')
-  , routes = require('./routes')
+  , index = require('./routes/index')
   , http = require('http')
   , stylus = require('stylus')
   , nib = require('nib')
@@ -14,14 +14,17 @@ var express = require('express')
   , TwitterStrategy  = require('passport-twitter').Strategy
   , c = require('nconf');
 
-// Load the configuration file with our keys in it
-c.file({ file: 'config.json'});
+// Load the configuration file with our keys in it, first from the env variables
+// then from the config.json file
+c.env()
+  .file({ file: 'config.json'});
 
 /**********************************
  * PASSPORT AUTHENTICATION
  **********************************/
 var TWITTER_CONSUMER_KEY = c.get('TWITTER_CONSUMER_KEY') 
-  , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET');
+  , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
+  , TWITTER_CALLBACK_URL = c.get('TWITTER_CALLBACK_URL');
 
 // TODO: Should make sure a user is an admin or author here
 passport.serializeUser(function(user, done) {
@@ -33,20 +36,21 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new TwitterStrategy({
-    consumerKey: TWITTER_CONSUMER_KEY,
-    consumerSecret: TWITTER_CONSUMER_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+    consumerKey: TWITTER_CONSUMER_KEY
+  , consumerSecret: TWITTER_CONSUMER_SECRET
+  , callbackURL: TWITTER_CALLBACK_URL
   },
   function(token, tokenSecret, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's Twitter profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Twitter account with a user record in your database,
-      // and return that user instead.
+    // To keep the example simple, the user's Twitter profile is returned to
+    // represent the logged-in user.  In a typical application, you would want
+    // to associate the Twitter account with a user record in your database,
+    // and return that user instead.
+
+    if (profile && profile.username === 'jondelamotte') { // TODO: fix
       return done(null, profile);
-    });
+    } else {
+      return done(new Error('User not authorized'), null);
+    }
   }
 ));
 
@@ -89,27 +93,34 @@ if ('development' == app.get('env')) {
 /**********************************
  * ROUTES
  **********************************/
-app.get('/', routes.index);
+app.get('/', index.homepage);
+
+/*****************
+ * ADMIN
+ ****************/
+app.get('/admin', ensureAuthenticated, function(req, res){
+  res.render('admin/index', { user: req.user });
+});
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
+  res.render('admin/account', { user: req.user });
 });
 
 app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
+  res.render('admin/login', { user: req.user });
 });
 
 app.get('/auth/twitter',
   passport.authenticate('twitter'),
   function(req, res){
-    //should not be called
-  });
+    //should not be called, passport takes over before this
+});
 
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
-  });
+    res.redirect('/admin');
+});
 
 
 // Start server
