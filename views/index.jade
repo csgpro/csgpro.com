@@ -3,27 +3,38 @@ extends layout
 block content
   section.grid.grid--center#hero
     div.grid__item--center.one-whole
-      div.grid__item.right.one-half(style='margin-top: 350px')
+      div.grid__item.right.one-half
         div#headline We've been told we have our head
         div#subline in the clouds, and that's not a bad thing.
     div.grid__item--center.one-whole
-      div.grid__item.right.one-half learn how could services can make your business soar }
-    div.grid__item--center.one-whole
-      div.grid__item.three-twelfths
-        p content
-      div.grid__item.three-twelfths
-        p content
-      div.grid__item.three-twelfths
-        p content
+      div.grid__item.right.one-half
+        span#tagline learn how could services can make your business soar
+        span }
+    div#blocks.grid__item--center.one-whole
+      div.grid__item.right(style='width:9.333%')
+        p Our real-time analytics engine makes managing your critical data easy.
+      div.grid__item.one-twelfth(style='width:7.633%')
+        img(src='/img/line.svg')
+      div.grid__item.right(style='width:10.333%')
+        p CSG's mobile dev & MS Azure hosting boost awareness about Oregon's container redemption.
+      div.grid__item.one-twelfth(style='width:7.633%')
+        img(src='/img/line.svg')
+      div.grid__item.right(style='width:9.333%')
+        p CSG is turning 20 and we're having an open-house at our Pearl district offices XX/XX
 
   nav
     div.wrapper
-      img#logo.big-logo(src='/img/logo.svg')
+      a(href='#')
+        img#logo.big-logo(src='/img/logo.svg')
       ul
         li(data-nav='work') work
+        li /
         li(data-nav='services') services
+        li /
         li(data-nav='about') about
+        li /
         li(data-nav='updates') updates
+        li /
         li(data-nav='contact') contact
   div#nav-spacer.hidden.hide-mobile
 
@@ -80,6 +91,6 @@ block content
 
     // CONTACT
     div.spacer
-    section#contact.grid__item.one-whole
+    section#contact.grid__item.one-whole(style='min-height: 900px;')
       article.grid__item.one-whole
         p Content

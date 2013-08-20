@@ -25,21 +25,17 @@
  * Page load sizing
  ***************************************/
 (function(){
-  // var sections = $('#main > section');
+  var w = $(window);
 
   // Dynamically change the height of the hero page main screen
-  $('#hero').css('height', $(window).height() - 95);
-  // sections.css('height', $(window).height() - 98);
-}());
+  $('#hero').css('height', w.height() - 95);
+  // Change the height of the hero text
+  $('#headline').css('margin-top', w.height() / 3);
 
 /***************************************
  * Nav Scrolling and Updating
  ***************************************/
-(function(){
-  'use strict';
-
-  var w = $(window)
-    , items = $('#main section,#hero')
+  var items = $('#main section,#hero')
     , offset = 108
     , selected;
 
@@ -64,23 +60,20 @@
     , offset: -97
     });
   });
-}());
 
 /***************************************
  * Sticky Nav Bar 
  ***************************************/
-(function(){
   var isFixed = false
     , isSmall = false
     , nav = $('nav')
     , img = $('#logo')
     , navBottom = nav.length && nav.offset().top
     , imgTop = img.offset().top
-    , w = $(window)
     , spacer = $('#nav-spacer');
     // 70px different for the logo
 
-  $(window).on('scroll', function(){
+  w.on('scroll', function(){
     if (w.scrollTop() >= navBottom && !isFixed){
       isFixed = true;
       nav.addClass('fixed-menu');
@@ -90,8 +83,6 @@
       nav.removeClass('fixed-menu');
       spacer.addClass('hidden');
     }
-
-    console.log(imgTop, w.scrollTop());
 
     if (w.scrollTop() >= imgTop && !isSmall) {
       isSmall = true;
@@ -105,4 +96,51 @@
   });
 
 }());
+
+/*!
+* FitText.js 1.1
+*
+* Copyright 2011, Dave Rupert http://daverupert.com
+* Released under the WTFPL license
+* http://sam.zoy.org/wtfpl/
+*
+* Date: Thu May 05 14:23:00 2011 -0600
+*/
+
+(function( $ ){
+
+  $.fn.fitText = function( kompressor, options ) {
+
+    // Setup options
+    var compressor = kompressor || 1,
+        settings = $.extend({
+          'minFontSize' : Number.NEGATIVE_INFINITY,
+          'maxFontSize' : Number.POSITIVE_INFINITY
+        }, options);
+
+    return this.each(function(){
+
+      // Store the object
+      var $this = $(this);
+
+      // Resizer() resizes items based on the object width divided by the compressor * 10
+      var resizer = function () {
+        $this.css('font-size', Math.max(Math.min($this.width() / (compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)));
+      };
+
+      // Call once to set.
+      resizer();
+
+      // Call on resize. Opera debounces their resize by default.
+      $(window).on('resize.fittext orientationchange.fittext', resizer);
+
+    });
+
+  };
+
+})( jQuery );
+
+/***************************************
+ * Headline Sizing
+ ***************************************/
 

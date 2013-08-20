@@ -29,6 +29,10 @@ body {
   background-color: #353535;
   font-family: 'Century Gothic';
 }
+p {
+  font-family: 'Roboto';
+  font-size: 12px;
+}
 img {
   -webkit-transition-timing-function: ease;
   -moz-transition-timing-function: ease;
@@ -56,10 +60,13 @@ img {
   color: #fff;
 }
 #hero #headline {
+  min-width: 335px;
+  margin-top: 17.5%;
   font-size: 60px;
   font-family: 'Roboto';
   color: #fff;
   font-style: italic;
+  font-weight: 100;
   line-height: 0.814;
 }
 #hero #subline {
@@ -68,6 +75,25 @@ img {
   color: #fff;
   font-style: italic;
   line-height: 1.214;
+}
+#hero #tagline {
+  font-size: 30px;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 100;
+  line-height: 1.941;
+  color: rgba(82,189,236,0.36);
+}
+#hero #tagline + span {
+  font-size: 35px;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 100;
+  padding: 0 10px 0 10px;
+  color: #52bdec;
+}
+#hero #blocks {
+  margin-top: 50px;
 }
 #work {
   background-color: #09a4e6;
@@ -212,12 +238,6 @@ nav {
   nav ul li {
     cursor: pointer;
     display: inline;
-  }
-  nav ul li:after {
-    content: "/";
-    padding: 0 14px 0 14px;
-  }
-  nav ul li:last-child:after {
-    content: none;
+    padding: 0 15px 0 15px;
   }
 }

@@ -5,6 +5,7 @@
  */
 // global-reset()
 
+
 /***************************************
  * Variables
  ***************************************/
@@ -33,6 +34,10 @@ body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic'
 
+p
+  font-family 'Roboto'
+  font-size 12px
+
 img
   transition-timing-function ease
   transition-duration 0.5s
@@ -49,13 +54,17 @@ img
 #main > section
   min-height 504px
 
+// HERO
 #hero
   color #fff
   #headline
+    min-width 335px
+    margin-top 17.5% // Should center when used in conjunction with the JS
     font-size 60px
     font-family 'Roboto'
     color #fff
     font-style italic
+    font-weight 100
     line-height 0.814
   #subline
     font-size 51px
@@ -63,13 +72,31 @@ img
     color #fff
     font-style italic
     line-height 1.214
+  #tagline
+    font-size 30px
+    font-family 'Roboto'
+    font-style italic
+    font-weight 100
+    line-height 1.941
+    color rgba(82, 189, 236, 0.36)
+  #tagline + span
+    font-size 35px
+    font-family Roboto
+    font-style italic
+    font-weight 100
+    padding 0 10px 0 10px
+    color rgb( 82, 189, 236 )
+  #blocks
+    margin-top 50px
 
 
 
+// WORK
 #work
   background-color main-blue
   color #fff
 
+// SERVICES
 #services
   background-color #00517E
   aside
@@ -85,6 +112,7 @@ img
     background-color #E6E6E6
     color #043C57
 
+// ABOUT
 #about
   padding-top 25px
   background-color #545454
@@ -94,6 +122,7 @@ img
     // margin 15px 0 0 50px
     // padding 24px
 
+// UPDATES
 #updates
   padding: 100px 30px 0 40px;
   background-color #F3F3F3
@@ -115,7 +144,7 @@ img
     border-radius border-radii
     background-color main-blue
 
-
+// CONTACT
 #contact
   background-color #F8F8F8
 
@@ -185,10 +214,11 @@ nav
       li
         cursor pointer
         display inline
-      li:after
-        content "/"
-        padding 0 14px 0 14px
-      li:last-child:after
-        content none
+        padding 0 15px 0 15px
+      // li:after
+      //   content "/"
+      //   padding 0 14px 0 14px
+      // li:last-child:after
+      //   content none
 
 
