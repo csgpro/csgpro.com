@@ -7,7 +7,7 @@ var npmVersionSetting=null;
 var util = require('util');
 var path=require('path');
 var fs = require('fs');
-var sitePath = process.env.DEPLOYMENT_TARGET
+var sitePath = process.env.DEPLOYMENT_TARGET;
 
 var packageJson;
 var packageJsonPath = process.env.DEPLOYMENT_TARGET + '\\package.json';
@@ -51,6 +51,9 @@ var template="<?xml version=\"1.0\" encoding=\"utf-8\"?> \r\n \
     <handlers> \r\n \
       <add name=\"iisnode\" path=\"{NodeStartFile}\" verb=\"*\" modules=\"iisnode\"/> \r\n \
     </handlers> \r\n \
+    <staticContent> \r\n \
+      <mimeMap fileExtension=\".svg\" mimeType=\"image/svg+xml\" /> \r\n \
+    </staticContent> \r\n \
     <rewrite> \r\n \
       <rules> \r\n \
         <rule name=\"StaticContent\"> \r\n \
@@ -104,6 +107,7 @@ function getNodeStartFile(sitePath) {
 
 writeVersions();
 createIisNodeWebConfigIfNeeded(sitePath);
+
 
 
 
