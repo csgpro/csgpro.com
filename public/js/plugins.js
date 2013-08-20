@@ -39,7 +39,10 @@
     , offset = 108
     , selected;
 
-  $(window).bind('scroll', function(){
+  w.on('scroll', each);
+  w.on('touchmove', each);
+
+  function each(){
     items.each(function(i, item){
       if ( (w.scrollTop() + offset) >= item.offsetTop
         && (w.scrollTop() + offset) <= (item.offsetTop + item.offsetHeight)
@@ -50,9 +53,8 @@
         selected = $("li[data-nav='" + item.id +"']");
         selected.addClass('selected');
       }
-
     });
-  });
+  }
 
   $('nav li').bind('click', function(e){
     $.smoothScroll({
@@ -73,7 +75,10 @@
     , spacer = $('#nav-spacer');
     // 70px different for the logo
 
-  w.on('scroll', function(){
+  w.on('scroll',sticky);
+  w.on('touchmove', sticky);
+
+  function sticky(){
     if (w.scrollTop() >= navBottom && !isFixed){
       isFixed = true;
       nav.addClass('fixed-menu');
@@ -93,7 +98,7 @@
       img.removeClass('small-logo');
       img.addClass('big-logo');
     }
-  });
+  }
 
 }());
 
