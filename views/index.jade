@@ -1,26 +1,28 @@
 extends layout
 
 block content
-  section.grid.grid--center#hero
-    div.grid__item--center.one-whole
-      div.grid__item.right.one-half
+  section#hero
+    div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
+      div.grid__item.one-whole.right
         div#headline We've been told we have our head
         div#subline in the clouds, and that's not a bad thing.
-    div.grid__item--center.one-whole
-      div.grid__item.right.one-half
-        span#tagline learn how could services can make your business soar
+      div.grid__item.one-whole.right
+        span#tagline learn how cloud services can make your business soar
         span }
-    div#blocks.grid__item--center.one-whole
-      div.grid__item.right(style='width:9.333%')
-        p Our real-time analytics engine makes managing your critical data easy.
-      div.grid__item.one-twelfth(style='width:7.633%')
-        img(src='/img/line.svg')
-      div.grid__item.right(style='width:10.333%')
-        p CSG's mobile dev & MS Azure hosting boost awareness about Oregon's container redemption.
-      div.grid__item.one-twelfth(style='width:7.633%')
-        img(src='/img/line.svg')
-      div.grid__item.right(style='width:9.333%')
-        p CSG is turning 20 and we're having an open-house at our Pearl district offices XX/XX
+      div#blocks.grid__item.one-whole.left
+        div.grid__item.three-twelfths.right
+          p Our real-time analytics<br>engine makes managing<br>your critical data easy.
+          p: a(href='#') put it to work for you }
+        div.grid__item.one-twelfth
+          img(src='/img/line.svg')
+        div.grid__item.right.three-twelfths
+          p CSG's mobile dev & MS Azure<br>hosting boost awareness about<br>Oregon's container redemption.
+          p: a(href='#') put it to work for you }
+        div.grid__item.one-twelfth
+          img(src='/img/line.svg')
+        div.grid__item.right.three-twelfths
+          p CSG is turning 20 and we're<br>having an open-house at our<br>Pearl district offices XX/XX
+          p: a(href='#') put it to work for you }
 
   nav
     div.wrapper

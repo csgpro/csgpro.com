@@ -45,6 +45,10 @@ img {
   -ms-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
+a {
+  color: #429ec7;
+  text-decoration: none;
+}
 .spacer {
   height: 90px;
   background-color: #fff;
@@ -176,6 +180,12 @@ img {
 .right {
   text-align: right;
 }
+.center {
+  text-align: center;
+}
+.left {
+  text-align: left;
+}
 /***************************************
  * Logo
  ***************************************/
@@ -209,7 +219,7 @@ img {
 }
 nav {
   color: #4aaad4;
-  line-height: 1.444;
+  font-size: 18px;
   position: relative;
 }
 @media all and (max-width: 48em) {

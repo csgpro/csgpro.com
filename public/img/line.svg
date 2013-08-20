@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="130"
+   width="65"
    height="100"
    id="svg2"
    version="1.1"
@@ -53,8 +53,8 @@
      id="layer1"
      transform="translate(0,-952.36218)">
     <path
-       style="fill:none;stroke:#ffffff;stroke-width:0.22015556999999999px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.86243385"
-       d="m 44.24248,1051.4254 41.51504,-98.12646 0,0"
+       style="fill:none;stroke:#ffffff;stroke-width:0.22015557px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.86243388"
+       d="m 21.74248,1051.4254 41.51504,-98.12646 0,0"
        id="path2985"
        inkscape:connector-curvature="0" />
   </g>
