@@ -40,35 +40,49 @@ block content
         li(data-nav='contact') contact
   div#nav-spacer.hidden.hide-mobile
 
-  div#main.wrapper.grid
+  div#main
 
     // WORK
-    section#work.grid__item.one-whole
+    section#work.grid.wrapper
       aside.grid__item.desk--one-third
         h2 Case study: Web & Mobile
         h1 Increase Awareness
         p.subtitle OBRC - know your nickel
         p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
       article.grid__item.desk--two-thirds
-        img(src='http://placekitten.com/620/504')
 
     // SERVICES
     div.spacer
-    section#services.grid__item.one-whole
+    section#services.grid.wrapper
       aside.grid__item.desk--two-twelfths
-        h3 what we do
+        div.space-top WHAT WE DO:
         ul
-          li web
-          li apps
-          li cloud
-          li analytics
-          li portals
+          li
+            img(src='/img/web_icon.svg')
+            span web
+            hr
+          li
+            img(src='/img/appdev_icon.svg')
+            span apps
+            hr
+          li
+            img(src='/img/cloud_icon.svg')
+            span cloud
+            hr
+          li
+            img(src='/img/analytics_icon.svg')
+            span analytics
+            hr
+          li
+            img(src='/img/portals_icon.svg')
+            span portals
+            hr
       article.grid__item.desk--ten-twelfths
-        p Content
+        p.space-top Content
 
     // ABOUT
     div.spacer
-    section#about.grid__item.one-whole
+    section#about.grid.wrapper
       div.grid__item.four-twelfths
         aside.grid__item.push--one-twelfth.eleven-twelfths
             p(style='min-height: 430px') Content
@@ -77,22 +91,23 @@ block content
 
     // UPDATES
     div.spacer
-    section#updates.grid__item.one-whole
-      div.grid__item.four-twelfths
-        div.circle
-        article.grid__item.eleven-twelfths
-          p content
-      div.grid__item.four-twelfths
-        div.circle
-        article.grid__item.eleven-twelfths
-          p content
-      div.grid__item.four-twelfths
-        div.circle
-        article.grid__item.eleven-twelfths
-          p content
+    section#updates.grid.wrapper
+      div
+        div.grid__item.four-twelfths
+          div.circle
+          article.grid__item.eleven-twelfths
+            p content
+        div.grid__item.four-twelfths
+          div.circle
+          article.grid__item.eleven-twelfths
+            p content
+        div.grid__item.four-twelfths
+          div.circle
+          article.grid__item.eleven-twelfths
+            p content
 
     // CONTACT
     div.spacer
-    section#contact.grid__item.one-whole(style='min-height: 900px;')
+    section#contact.grid.wrapper(style='min-height: 900px;')
       article.grid__item.one-whole
         p Content

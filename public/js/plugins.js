@@ -21,20 +21,29 @@
   }
 }());
 
+// Main anonymous function
+(function(){
 /***************************************
  * Page load sizing
  ***************************************/
-(function(){
   var w = $(window);
 
-  // Dynamically change the height of the hero page main screen
-  $('#hero').css('height', w.height() - 95);
-  // Change the height of the hero text
-  $('#headline').css('margin-top', w.height() / 3);
+  doResize();
+  w.on('onorientationchange', doResize);
+
+  function doResize(){
+    // Dynamically change the height of the hero page main screen
+    $('#hero').css('height', w.height() - 95);
+    // Change the height of the hero text
+    $('#headline').css('margin-top', w.height() / 3);
+  }
 
 /***************************************
  * Nav Scrolling and Updating
  ***************************************/
+  // Grab all the nav sections, loop through them when the user scrolls, and set
+  // the appropriate nav item to have a class of "selected". There may be a 
+  // better way to do this, but I couldn't think of one.
   var items = $('#main section,#hero')
     , offset = 108
     , selected;
@@ -56,6 +65,8 @@
     });
   }
 
+  // When a user clicks on a nav item, scroll to that section. Should probably
+  // be using anchors instead of this klugy method, but it works for now
   $('nav li').bind('click', function(e){
     $.smoothScroll({
       scrollTarget: '#' + this.innerText
@@ -102,6 +113,10 @@
 
 }());
 
+/***************************************
+ * Currently Not Using
+ ***************************************/
+
 /*!
 * FitText.js 1.1
 *
@@ -112,40 +127,35 @@
 * Date: Thu May 05 14:23:00 2011 -0600
 */
 
-(function( $ ){
+// (function( $ ){
 
-  $.fn.fitText = function( kompressor, options ) {
+//   $.fn.fitText = function( kompressor, options ) {
 
-    // Setup options
-    var compressor = kompressor || 1,
-        settings = $.extend({
-          'minFontSize' : Number.NEGATIVE_INFINITY,
-          'maxFontSize' : Number.POSITIVE_INFINITY
-        }, options);
+//     // Setup options
+//     var compressor = kompressor || 1,
+//         settings = $.extend({
+//           'minFontSize' : Number.NEGATIVE_INFINITY,
+//           'maxFontSize' : Number.POSITIVE_INFINITY
+//         }, options);
 
-    return this.each(function(){
+//     return this.each(function(){
 
-      // Store the object
-      var $this = $(this);
+//       // Store the object
+//       var $this = $(this);
 
-      // Resizer() resizes items based on the object width divided by the compressor * 10
-      var resizer = function () {
-        $this.css('font-size', Math.max(Math.min($this.width() / (compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)));
-      };
+//       // Resizer() resizes items based on the object width divided by the compressor * 10
+//       var resizer = function () {
+//         $this.css('font-size', Math.max(Math.min($this.width() / (compressor*10), parseFloat(settings.maxFontSize)), parseFloat(settings.minFontSize)));
+//       };
 
-      // Call once to set.
-      resizer();
+//       // Call once to set.
+//       resizer();
 
-      // Call on resize. Opera debounces their resize by default.
-      $(window).on('resize.fittext orientationchange.fittext', resizer);
+//       // Call on resize. Opera debounces their resize by default.
+//       $(window).on('resize.fittext orientationchange.fittext', resizer);
 
-    });
+//     });
 
-  };
+//   };
 
-})( jQuery );
-
-/***************************************
- * Headline Sizing
- ***************************************/
-
+// })( jQuery );

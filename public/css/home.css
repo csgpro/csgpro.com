@@ -27,7 +27,7 @@
 }
 body {
   background-color: #353535;
-  font-family: 'Century Gothic';
+  font-family: 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif;
 }
 p {
   font-family: 'Roboto';
@@ -53,6 +53,14 @@ a {
   height: 90px;
   background-color: #fff;
   width: 100%;
+}
+.title {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: lighter;
+}
+.space-top {
+  margin-top: 40px;
 }
 /***************************************
  * Sections
@@ -103,6 +111,11 @@ a {
   background-color: #09a4e6;
   color: #fff;
 }
+#work > article {
+  background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg");
+  background-repeat: no-repeat;
+  height: 504px;
+}
 #services {
   background-color: #00517e;
 }
@@ -115,7 +128,16 @@ a {
   list-style-type: none;
 }
 #services aside ul li {
-  padding: 15px 0 15px 0;
+  padding: 20px 0 5px 0;
+}
+#services aside ul li > img {
+  vertical-align: middle;
+  max-width: 35px;
+}
+#services hr {
+  border: none;
+  border-bottom: 1px solid #00a3e4;
+  margin: 5px 0 0 0;
 }
 #services article {
   height: 100%;
@@ -132,10 +154,13 @@ a {
   border-radius: 4px;
 }
 #updates {
-  padding: 100px 30px 0 40px;
   background-color: #f3f3f3;
 }
 #updates > div {
+  padding-top: 100px;
+  margin: 0 30px 0 40px;
+}
+#updates > div > div {
   position: relative;
 }
 #updates .circle {
