@@ -23,6 +23,7 @@
 
 // Main anonymous function
 (function(){
+  'use strict';
 /***************************************
  * Page load sizing
  ***************************************/
@@ -32,17 +33,23 @@
   w.on('onorientationchange', doResize);
 
   function doResize(){
-    // Dynamically change the height of the hero page main screen
-    $('#hero').css('height', w.height() - 95);
-    // Change the height of the hero text
-    $('#headline').css('margin-top', w.height() / 3);
+
+    var heroHeight = w.height() - 95
+      , topMargin = (heroHeight - $('#hero > div').height()) / 2;
+
+    // Dynamically change the height of the hero section to match the user's
+    // screen height
+    $('#hero').css('height', heroHeight);
+
+    // Vertically center the hero content
+    $('#headline').css('margin-top', topMargin);
   }
 
 /***************************************
  * Nav Scrolling and Updating
  ***************************************/
   // Grab all the nav sections, loop through them when the user scrolls, and set
-  // the appropriate nav item to have a class of "selected". There may be a 
+  // the appropriate nav item to have a class of "selected". There may be a
   // better way to do this, but I couldn't think of one.
   var items = $('#main section,#hero')
     , offset = 108
@@ -75,7 +82,7 @@
   });
 
 /***************************************
- * Sticky Nav Bar 
+ * Sticky Nav Bar
  ***************************************/
   var isFixed = false
     , isSmall = false
@@ -110,6 +117,24 @@
       img.addClass('big-logo');
     }
   }
+
+/***************************************
+ * Swipeshow
+ ***************************************/
+ $(".swipeshow").swipeshow({
+  autostart: false,    /* Set to `false` to keep it steady */
+  interval: 3000,     /* Time between switching slides (ms) */
+  initial: 0,         /* First slide's index */
+  speed: 700,         /* Animation speed (ms) */
+  friction: 0.3,      /* Bounce-back behavior; use `0` to disable */
+  mouse: true,        /* enable mouse dragging controls */
+  keys: true,         /* enable left/right keyboard keys */
+
+  onactivate: function(){},
+  onpause: function(){},
+});
+
+
 
 }());
 

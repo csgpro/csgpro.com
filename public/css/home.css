@@ -23,7 +23,7 @@
   }
 }
 #nav-spacer {
-  height: 100px;
+  height: 96px;
 }
 body {
   background-color: #353535;
@@ -54,10 +54,11 @@ a {
   background-color: #fff;
   width: 100%;
 }
-.title {
+.caps-title {
   font-family: Roboto, sans-serif;
   font-size: 16px;
   font-weight: lighter;
+  text-transform: uppercase;
 }
 .space-top {
   margin-top: 40px;
@@ -73,7 +74,6 @@ a {
 }
 #hero #headline {
   min-width: 335px;
-  margin-top: 17.5%;
   font-size: 60px;
   font-family: 'Roboto';
   color: #fff;
@@ -111,11 +111,6 @@ a {
   background-color: #09a4e6;
   color: #fff;
 }
-#work > article {
-  background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg");
-  background-repeat: no-repeat;
-  height: 504px;
-}
 #services {
   background-color: #00517e;
 }
@@ -130,9 +125,16 @@ a {
 #services aside ul li {
   padding: 20px 0 5px 0;
 }
-#services aside ul li > img {
+#services aside ul li > svg {
   vertical-align: middle;
-  max-width: 35px;
+  width: 35px;
+  height: 35px;
+}
+#services aside ul li > svg:hover path {
+  fill: #fff;
+}
+#services aside ul li > svg:hover polygon {
+  fill: #fff;
 }
 #services hr {
   border: none;
@@ -241,6 +243,8 @@ a {
   top: -3px;
   left: 0;
   width: 100%;
+  -webkit-box-shadow: 0 5px 15px #000;
+  box-shadow: 0 5px 15px #000;
 }
 nav {
   color: #4aaad4;
@@ -254,6 +258,7 @@ nav {
 }
 @media all and (min-width: 48em) {
   nav {
+    background-color: #000;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #2c2c2c), color-stop(0.78, #1d1d1d));
     background-image: -webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
     background-image: -moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
@@ -262,8 +267,6 @@ nav {
     background-image: linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);
     border-bottom: 3px solid #fff;
     border-top: 3px solid #fff;
-    -webkit-box-shadow: 0 5px 15px #000;
-    box-shadow: 0 5px 15px #000;
     height: 92px;
   }
   nav ul {

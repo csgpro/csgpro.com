@@ -28,7 +28,7 @@ border-radii = 4px
     min-height 10em //TODO: should use javascript to resize
 
 #nav-spacer // TODO: fix
-  height: 100px
+  height: 96px
 
 body // TODO: fix fonts
   background-color background-color
@@ -51,10 +51,11 @@ a
   background-color #fff
   width 100%
 
-.title
+.caps-title
   font-family Roboto, sans-serif
   font-size 16px
   font-weight lighter
+  text-transform uppercase
 
 .space-top
   margin-top 40px
@@ -72,7 +73,6 @@ a
   color #fff
   #headline
     min-width 335px
-    margin-top 17.5% // Should center when used in conjunction with the JS
     font-size 60px
     font-family 'Roboto'
     color #fff
@@ -108,10 +108,10 @@ a
 #work
   background-color main-blue
   color #fff
-  > article
-    background-image url('https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
-    background-repeat no-repeat
-    height 504px
+  // > article
+  //   background-image url('https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
+  //   background-repeat no-repeat
+  //   height 504px
 
 // SERVICES
 #services
@@ -124,9 +124,15 @@ a
       list-style-type none
       li
         padding 20px 0 5px 0
-        > img // these are the icons in the services section
+        > svg // these are the icons in the services section
           vertical-align middle
-          max-width 35px
+          width 35px
+          height 35px
+        > svg:hover
+          path
+            fill #fff
+          polygon
+            fill #fff
   hr
     border none
     border-bottom 1px solid #00A3E4
@@ -226,6 +232,7 @@ a
   top -3px
   left 0
   width 100%
+  box-shadow 0 5px 15px #000
 
 
 nav
@@ -235,10 +242,10 @@ nav
   @media mobile
     display none
   @media desk
-    background-image: linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
+    background-color #000
+    background-image linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
     border-bottom 3px solid white
     border-top 3px solid white
-    box-shadow 0 5px 15px #000
     height 92px
     ul
       float right
