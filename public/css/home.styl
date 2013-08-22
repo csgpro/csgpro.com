@@ -47,7 +47,7 @@ a
   text-decoration none
 
 .spacer
-  height 90px
+  height 2px
   background-color #fff
   width 100%
 
@@ -120,23 +120,37 @@ a
 #services
   background-color #00517E
   article
-    ul
-      list-style none
-      li
-        transition-duration 1s
-        transition-timing-function ease
+    background-color #E6E6E6
+    color #043C57
+    > div
+      padding-right 40px
+    hr
+      width 97.5%
+      border none
+      border-bottom 2px solid #ccc
+      margin 5px 0 0 0
     .gone
       display none
-    .there
-      text-indent none
+    .title
+      font-size 25px
+    section
+      height 504px
+      svg
+        margin -15px 20px 0 0
   aside
     color #00A3E4
+    hr
+      width 85%
+      border none
+      border-bottom 1px solid #00A3E4
+      margin 5px 0 0 0
     ul
       margin 0
       padding 0
       list-style-type none
       li
-        cursor pointer
+        @media desk
+          cursor pointer
         padding 20px 0 5px 0
         > svg // these are the icons in the services section
           vertical-align middle
@@ -147,23 +161,14 @@ a
             fill #00A3E4
           polygon
             fill #00A3E4
-      li:hover
-        color #fff
-        > svg
-          path
-            fill #fff
-          polygon
-            fill #fff
-
-  hr
-    width 85%
-    border none
-    border-bottom 1px solid #00A3E4
-    margin 5px 0 0 0
-  article
-    height 100%
-    background-color #E6E6E6
-    color #043C57
+      @media desk
+        li:hover
+          color #fff
+          > svg
+            path
+              fill #fff
+            polygon
+              fill #fff
 
 // ABOUT
 #about
@@ -172,8 +177,9 @@ a
   aside
     background-color #333333
     border-radius border-radii
-    // margin 15px 0 0 50px
-    // padding 24px
+    color #fff
+    img
+      margin-top 20px
 
 // UPDATES
 #updates
@@ -224,6 +230,10 @@ a
   text-align center
 .left
   text-align left
+.fl
+  float: left
+.fr
+  float: right
 
 /***************************************
  * Logo

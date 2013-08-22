@@ -119,6 +119,24 @@
   }
 
 /***************************************
+ * Services Swapping
+ ***************************************/
+// $('.swappable > li').each(function(i, e){
+//   e.on('click', function(i, e){
+//     debugger;
+//   });
+// });
+$('.swapper > li').click(function(){
+  var me = $(this)
+    , text = me.data('service')
+    , target = $('.swappable section[data-service="' + text + '"]');
+  console.log(me, text, target);
+  $('.swappable section').addClass('gone');
+  target.removeClass('gone');
+});
+
+
+/***************************************
  * Swipeshow
  ***************************************/
  $(".swipeshow").swipeshow({
