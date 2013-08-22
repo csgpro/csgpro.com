@@ -11,12 +11,12 @@
   -moz-background-size: cover;
   background-size: cover;
 }
-@media all and (min-width: 48em) {
+@media all and (min-width: 45em) {
   #hero {
     background-image: url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");
   }
 }
-@media all and (max-width: 48em) {
+@media all and (max-width: 45em) {
   #hero {
     background-image: url("/img/hero-background-large.jpg");
     min-height: 10em;
@@ -111,8 +111,33 @@ a {
   background-color: #09a4e6;
   color: #fff;
 }
+#work aside {
+  background-color: #09a4e6;
+  height: 100%;
+}
 #services {
   background-color: #00517e;
+}
+#services article ul {
+  list-style: none;
+}
+#services article ul li {
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  -ms-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+#services article .gone {
+  display: none;
+}
+#services article .there {
+  text-indent: none;
 }
 #services aside {
   color: #00a3e4;
@@ -123,20 +148,32 @@ a {
   list-style-type: none;
 }
 #services aside ul li {
+  cursor: pointer;
   padding: 20px 0 5px 0;
 }
 #services aside ul li > svg {
   vertical-align: middle;
   width: 35px;
   height: 35px;
+  margin-right: 10px;
 }
-#services aside ul li > svg:hover path {
+#services aside ul li > svg path {
+  fill: #00a3e4;
+}
+#services aside ul li > svg polygon {
+  fill: #00a3e4;
+}
+#services aside ul li:hover {
+  color: #fff;
+}
+#services aside ul li:hover > svg path {
   fill: #fff;
 }
-#services aside ul li > svg:hover polygon {
+#services aside ul li:hover > svg polygon {
   fill: #fff;
 }
 #services hr {
+  width: 85%;
   border: none;
   border-bottom: 1px solid #00a3e4;
   margin: 5px 0 0 0;
@@ -194,12 +231,12 @@ a {
 .hidden {
   display: none;
 }
-@media all and (max-width: 48em) {
+@media all and (max-width: 45em) {
   .hide-mobile {
     display: none;
   }
 }
-@media all and (min-width: 48em) {
+@media all and (min-width: 45em) {
   .hide-desk {
     display: none;
   }
@@ -251,12 +288,12 @@ nav {
   font-size: 18px;
   position: relative;
 }
-@media all and (max-width: 48em) {
+@media all and (max-width: 45em) {
   nav {
     display: none;
   }
 }
-@media all and (min-width: 48em) {
+@media all and (min-width: 45em) {
   nav {
     background-color: #000;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.2, #2c2c2c), color-stop(0.78, #1d1d1d));

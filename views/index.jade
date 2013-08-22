@@ -42,23 +42,38 @@ block content
 
   div#main
 
+    /////////////////////////////////
     // WORK
+    /////////////////////////////////
     section#work.grid.wrapper
-      aside.grid__item.desk--one-third
-        div.space-top
-          span.caps-title Case Study:
-          span  Web & Mobile
-        h1 Increase Awareness
-        p.subtitle OBRC - know your nickel
-        p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
-      article.grid__item.desk--two-thirds
-        div.swipeshow
-          ul.slides
-            li.slide: img(src='https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
-            li.slide: img(src='http://placekitten.com/650/504')
-            li.slide: img(src='http://placekitten.com/650/504')
+      div.swipeshow
+        ul.slides
+          li.slide
+            aside.grid__item.desk--one-third
+              div.space-top
+                span.caps-title Case Study:
+                span  Web & Mobile
+              h1 Increase Awareness
+              p.subtitle OBRC - know your nickel
+              p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
+            article.grid__item.desk--two-thirds
+                  img(src='https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
+                  //- li.slide: img(src='http://placekitten.com/650/504')
+                  //- li.slide: img(src='http://placekitten.com/650/504')
+          li.slide
+            aside.grid__item.desk--one-third
+              div.space-top
+                span.caps-title Case Study:
+                span  Web & Mobile
+              h1 Increase Kittens
+              p.subtitle OBRC - know your nickel
+              p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
+            article.grid__item.desk--two-thirds
+                  img(src='http://placekitten.com/650/504')
 
+    /////////////////////////////////
     // SERVICES
+    /////////////////////////////////
     div.spacer
     section#services.grid.wrapper
       aside.grid__item.desk--two-twelfths
@@ -90,9 +105,21 @@ block content
             span portals
             hr
       article.grid__item.desk--ten-twelfths
-        p.space-top Content
+        ul.swappable
+          li.there(data-service='web')
+            p.space-top web
+          li.gone(data-service='apps')
+            p.space-top apps
+          li.gone(data-service='cloud')
+            p.space-top cloud
+          li.gone(data-service='analytics')
+            p.space-top analytics
+          li.gone(data-service='portals')
+            p.space-top portals
 
+    /////////////////////////////////
     // ABOUT
+    /////////////////////////////////
     div.spacer
     section#about.grid.wrapper
       div.grid__item.four-twelfths
@@ -101,7 +128,9 @@ block content
       article.grid__item.eight-twelfths
         p Content
 
+    /////////////////////////////////
     // UPDATES
+    /////////////////////////////////
     div.spacer
     section#updates.grid.wrapper
       div
@@ -118,7 +147,9 @@ block content
           article.grid__item.eleven-twelfths
             p content
 
+    /////////////////////////////////
     // CONTACT
+    /////////////////////////////////
     div.spacer
     section#contact.grid.wrapper(style='min-height: 900px;')
       article.grid__item.one-whole

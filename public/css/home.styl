@@ -13,8 +13,8 @@ background-color = #353535
 main-blue = #09A4E6
 text-blue = #48ABD5
 wrapper-max-width = 1060px
-mobile = "all and (max-width: 48em)"
-desk = "all and (min-width: 48em)"
+mobile = "all and (max-width: 45em)"
+desk = "all and (min-width: 45em)"
 border-radii = 4px
 
 #hero
@@ -108,6 +108,9 @@ a
 #work
   background-color main-blue
   color #fff
+  aside
+    background-color main-blue
+    height 100%
   // > article
   //   background-image url('https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
   //   background-repeat no-repeat
@@ -116,6 +119,16 @@ a
 // SERVICES
 #services
   background-color #00517E
+  article
+    ul
+      list-style none
+      li
+        transition-duration 1s
+        transition-timing-function ease
+    .gone
+      display none
+    .there
+      text-indent none
   aside
     color #00A3E4
     ul
@@ -123,17 +136,27 @@ a
       padding 0
       list-style-type none
       li
+        cursor pointer
         padding 20px 0 5px 0
         > svg // these are the icons in the services section
           vertical-align middle
           width 35px
           height 35px
-        > svg:hover
+          margin-right 10px
+          path
+            fill #00A3E4
+          polygon
+            fill #00A3E4
+      li:hover
+        color #fff
+        > svg
           path
             fill #fff
           polygon
             fill #fff
+
   hr
+    width 85%
     border none
     border-bottom 1px solid #00A3E4
     margin 5px 0 0 0
@@ -254,10 +277,4 @@ nav
         cursor pointer
         display inline
         padding 0 15px 0 15px
-      // li:after
-      //   content "/"
-      //   padding 0 14px 0 14px
-      // li:last-child:after
-      //   content none
-
 
