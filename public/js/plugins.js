@@ -51,22 +51,33 @@
   // Grab all the nav sections, loop through them when the user scrolls, and set
   // the appropriate nav item to have a class of "selected". There may be a
   // better way to do this, but I couldn't think of one.
-  var items = $('#main section,#hero')
-    , offset = 108
-    , selected;
+  var items = $('#main > section,#hero')
+    , offset = 92 // height of the nav
+    , selected
+    , arr = []
+    , navItems = $('li[data-nav]');
+
+  items.each(function(i, e){
+    arr.push({
+        element: e
+      , name: e.id
+      , top: e.offsetTop
+      , bottom: e.offsetTop + e.offsetHeight
+    });
+  });
 
   w.on('scroll', each);
   w.on('touchmove', each);
 
   function each(){
-    items.each(function(i, item){
-      if ( (w.scrollTop() + offset) >= item.offsetTop
-        && (w.scrollTop() + offset) <= (item.offsetTop + item.offsetHeight)
-      ) {
+    var at = w.scrollTop() + offset + 2;
+
+    arr.forEach(function(item){
+      if ( at >= item.top && at <= item.bottom ) {
         if (selected) {
           selected.removeClass('selected');
         }
-        selected = $("li[data-nav='" + item.id +"']");
+        selected = $("li[data-nav='" + item.name +"']");
         selected.addClass('selected');
       }
     });
@@ -74,10 +85,17 @@
 
   // When a user clicks on a nav item, scroll to that section. Should probably
   // be using anchors instead of this klugy method, but it works for now
-  $('nav li').bind('click', function(e){
-    $.smoothScroll({
-      scrollTarget: '#' + this.innerText
-    , offset: -97
+  $('nav li').on('click', function(e){
+    var element = $('#' + e.currentTarget.innerHTML);
+
+    $('html, body').animate({
+      scrollTop: element.offset().top - offset
+    });
+  });
+
+  $('#logo').on('click', function(e){
+    $('html, body').animate({
+      scrollTop: 0
     });
   });
 
@@ -121,11 +139,6 @@
 /***************************************
  * Services Swapping
  ***************************************/
-// $('.swappable > li').each(function(i, e){
-//   e.on('click', function(i, e){
-//     debugger;
-//   });
-// });
 $('.swapper > li').click(function(){
   var me = $(this)
     , text = me.data('service')

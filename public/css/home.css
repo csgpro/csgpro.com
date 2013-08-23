@@ -272,6 +272,7 @@ a {
   width: 60px;
   height: 60px;
   margin: 15px 0 0 20px;
+  cursor: pointer;
 }
 .big-logo {
   margin: -65px 0 0 0;
@@ -297,6 +298,9 @@ a {
   width: 100%;
   -webkit-box-shadow: 0 5px 15px #000;
   box-shadow: 0 5px 15px #000;
+}
+.fixed-menu ul {
+  margin: 25px 0 0 0;
 }
 nav {
   color: #4aaad4;
