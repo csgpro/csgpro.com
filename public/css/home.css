@@ -4,23 +4,17 @@
 /***************************************
  * Variables
  ***************************************/
-#hero {
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-}
-@media all and (min-width: 45em) {
-  #hero {
-    background-image: url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");
-  }
-}
-@media all and (max-width: 45em) {
-  #hero {
-    background-image: url("/img/hero-background-large.jpg");
-    min-height: 10em;
-  }
+/***************************************
+ * General Styles
+ ***************************************/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif;
+  font-weight: lighter;
 }
 #nav-spacer {
   height: 96px;
@@ -63,14 +57,59 @@ a {
 .space-top {
   margin-top: 40px;
 }
+.text-column {
+  padding-right: 20px;
+}
+/***************************************
+ * Swappable styling
+ ***************************************/
+.gone {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transform: translate(-50px, 0);
+  -moz-transform: translate(-50px, 0);
+  -o-transform: translate(-50px, 0);
+  -ms-transform: translate(-50px, 0);
+  transform: translate(-50px, 0);
+}
+.swappable {
+  position: relative;
+}
+.swappable section {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  position: absolute;
+}
 /***************************************
  * Sections
  ***************************************/
 #main > section {
   min-height: 504px;
+  max-height: 504px;
+  overflow: hidden;
 }
 #hero {
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
   color: #fff;
+}
+@media all and (min-width: 45em) {
+  #hero {
+    background-image: url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");
+  }
+}
+@media all and (max-width: 45em) {
+  #hero {
+    background-image: url("/img/hero-background-large.jpg");
+    min-height: 10em;
+  }
 }
 #hero #headline {
   min-width: 335px;
@@ -120,6 +159,8 @@ a {
 }
 #services article {
   background-color: #e6e6e6;
+  position: relative;
+  height: 504px;
   color: #043c57;
 }
 #services article > div {
@@ -131,14 +172,11 @@ a {
   border-bottom: 2px solid #ccc;
   margin: 5px 0 0 0;
 }
-#services article .gone {
-  display: none;
-}
 #services article .title {
   font-size: 25px;
 }
 #services article section {
-  height: 504px;
+  width: 780px;
 }
 #services article section svg {
   margin: -15px 20px 0 0;
@@ -199,7 +237,71 @@ a {
   color: #fff;
 }
 #about aside img {
-  margin-top: 20px;
+  margin: 20px 10px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+#about aside #jerry {
+  vertical-align: middle;
+  display: inline-block;
+  margin-top: 15px;
+}
+#about aside #jerry > span {
+  font-size: 120%;
+}
+#about section {
+  color: #fff;
+  padding: 0 36px 0 36px;
+}
+#about .swapper {
+  margin: 225px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+  position: relative;
+}
+#about .swapper .active {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  z-index: 6 !important;
+}
+#about .swapper li {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0.4;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+  filter: alpha(opacity=40);
+  position: absolute;
+  display: inline;
+}
+#about .swapper li:nth-child(2) {
+  left: 128px;
+  z-index: 4;
+}
+#about .swapper li:nth-child(3) {
+  left: 256px;
+  z-index: 5;
+}
+#about .swapper li:nth-child(4) {
+  left: 384px;
+  z-index: 4;
+}
+#about .swapper li:nth-child(5) {
+  left: 512px;
+  z-index: 3;
+}
+#about .swapper li:hover:not(.active) {
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
 }
 #updates {
   background-color: #f3f3f3;
@@ -212,7 +314,7 @@ a {
   position: relative;
 }
 #updates .circle {
-  background-image: url("http://placekitten.com/80/80");
+  background-position: -3px -3px;
   position: absolute;
   top: -40px;
   left: -15px;
@@ -223,6 +325,15 @@ a {
   border-radius: 40px;
   -webkit-box-shadow: 0 0 5px 0;
   box-shadow: 0 0 5px 0;
+}
+#updates .icon-blog {
+  background-image: url("https://csgsitestorage.blob.core.windows.net/img/postIcon_blog.png");
+}
+#updates .icon-career {
+  background-image: url("https://csgsitestorage.blob.core.windows.net/img/postIcon_careers.png");
+}
+#updates .icon-news {
+  background-image: url("https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png");
 }
 #updates article {
   color: #fff;

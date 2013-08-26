@@ -17,15 +17,12 @@ mobile = "all and (max-width: 45em)"
 desk = "all and (min-width: 45em)"
 border-radii = 4px
 
-#hero
-  background-position center
-  background-repeat no-repeat
-  background-size cover
-  @media desk
-    background-image url('https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg')
-  @media mobile
-    background-image url('/img/hero-background-large.jpg')
-    min-height 10em //TODO: should use javascript to resize
+/***************************************
+ * General Styles
+ ***************************************/
+h1,h2,h3,h4,h5,h6
+  font-family 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
+  font-weight lighter
 
 #nav-spacer // TODO: fix
   height: 96px
@@ -60,17 +57,50 @@ a
 .space-top
   margin-top 40px
 
+.text-column
+  padding-right 20px
+
+
+/***************************************
+ * Swappable styling
+ ***************************************/
+.gone
+  opacity 0
+  transform translate(-50px, 0)
+  // display none
+
+.swappable
+  position relative
+
+.swappable section
+  transition all 0.3s ease
+  position absolute
 
 /***************************************
  * Sections
  ***************************************/
-// DEBUG
+
+// DEBUG: here to keep the sections at the proper size until they have content
+// I might end up leaving this as the sections have a static size on the desktop
+// version
 #main > section
   min-height 504px
+  max-height 504px
+  overflow hidden
 
+/////////////////////////////////
 // HERO
+/////////////////////////////////
 #hero
+  background-position center
+  background-repeat no-repeat
+  background-size cover
   color #fff
+  @media desk
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg')
+  @media mobile
+    background-image url('/img/hero-background-large.jpg')
+    min-height 10em //TODO: should use javascript to resize
   #headline
     min-width 335px
     font-size 60px
@@ -104,7 +134,9 @@ a
 
 
 
+/////////////////////////////////
 // WORK
+/////////////////////////////////
 #work
   background-color main-blue
   color #fff
@@ -116,11 +148,15 @@ a
   //   background-repeat no-repeat
   //   height 504px
 
+/////////////////////////////////
 // SERVICES
+/////////////////////////////////
 #services
   background-color #00517E
   article
     background-color #E6E6E6
+    position relative
+    height 504px
     color #043C57
     > div
       padding-right 40px
@@ -129,12 +165,10 @@ a
       border none
       border-bottom 2px solid #ccc
       margin 5px 0 0 0
-    .gone
-      display none
     .title
       font-size 25px
     section
-      height 504px
+      width 780px
       svg
         margin -15px 20px 0 0
   aside
@@ -170,7 +204,11 @@ a
             polygon
               fill #fff
 
+/////////////////////////////////
 // ABOUT
+/////////////////////////////////
+picture-spacing = 128px
+
 #about
   padding-top 25px
   background-color #545454
@@ -179,9 +217,51 @@ a
     border-radius border-radii
     color #fff
     img
-      margin-top 20px
+      margin 20px 10px 0 0
+      display inline-block
+      vertical-align middle
+    #jerry
+      vertical-align middle
+      display inline-block
+      margin-top 15px
+      > span
+        font-size 120%
+  section
+    color #fff
+    padding 0 36px 0 36px
+  .swapper
+    margin 225px 0 0 0
+    padding 0
+    list-style-type none
+    position relative
+    .active
+      opacity 1
+      transform scale(1.1)
+      z-index 6 !important
+    li
+      transition all 0.3s ease
+      opacity 0.4
+      position absolute
+      display inline
+    li:nth-child(2)
+      left picture-spacing * 1
+      z-index 4
+    li:nth-child(3)
+      left picture-spacing * 2
+      z-index 5
+    li:nth-child(4)
+      left picture-spacing * 3
+      z-index 4
+    li:nth-child(5)
+      left picture-spacing * 4
+      z-index 3
+    li:hover:not(.active)
+      opacity 0.8
 
+
+/////////////////////////////////
 // UPDATES
+/////////////////////////////////
 #updates
   background-color #F3F3F3
   > div
@@ -191,7 +271,7 @@ a
   // padding: 100px 30px 0 40px;
     position relative
   .circle
-    background-image url('http://placekitten.com/80/80')
+    background-position -3px -3px
     position absolute
     top -40px
     left -15px
@@ -200,13 +280,21 @@ a
     background-color #9B9B9B
     border-radius 40px
     box-shadow 0 0 5px 0
+  .icon-blog
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_blog.png')
+  .icon-career
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_careers.png')
+  .icon-news
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png')
   article
     color #fff
     padding-top 40px
     border-radius border-radii
     background-color main-blue
 
+/////////////////////////////////
 // CONTACT
+/////////////////////////////////
 #contact
   background-color #F8F8F8
 
