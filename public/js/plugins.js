@@ -51,7 +51,7 @@
   // Grab all the nav sections, loop through them when the user scrolls, and set
   // the appropriate nav item to have a class of "selected". There may be a
   // better way to do this, but I couldn't think of one.
-  var items = $('#main > section,#hero')
+  var items = $('#main > div > section,#hero')
     , offset = 92 // height of the nav
     , selected
     , arr = []

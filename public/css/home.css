@@ -55,10 +55,10 @@ a {
   text-transform: uppercase;
 }
 .space-top {
-  margin-top: 40px;
+  margin-top: 48px;
 }
 .text-column {
-  padding-right: 20px;
+  padding-right: 24px;
 }
 /***************************************
  * Swappable styling
@@ -87,7 +87,7 @@ a {
 /***************************************
  * Sections
  ***************************************/
-#main > section {
+#main > div > section {
   min-height: 504px;
   max-height: 504px;
   overflow: hidden;
@@ -146,6 +146,11 @@ a {
 #hero #blocks {
   margin-top: 50px;
 }
+#work-container {
+  background-image: url("/img/work_bg.png");
+  background-position: center;
+  background-repeat: repeat-y;
+}
 #work {
   background-color: #09a4e6;
   color: #fff;
@@ -154,11 +159,12 @@ a {
   background-color: #09a4e6;
   height: 100%;
 }
-#services {
-  background-color: #00517e;
+#services-container {
+  background-image: url("/img/services_bg.png");
+  background-position: center;
+  background-repeat: repeat-y;
 }
 #services article {
-  background-color: #e6e6e6;
   position: relative;
   height: 504px;
   color: #043c57;
@@ -226,11 +232,15 @@ a {
     fill: #fff;
   }
 }
+#about-container {
+  background-image: url("/img/about_bg.png");
+  background-repeat: repeat-x;
+}
 #about {
-  padding-top: 25px;
   background-color: #545454;
 }
 #about aside {
+  margin-top: 25px;
   background-color: #333;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -308,14 +318,28 @@ a {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=80);
 }
+#updates-container {
+  background-image: url("/img/posts_bg.png");
+  background-repeat: repeat-x;
+}
 #updates {
   background-color: #f3f3f3;
 }
 #updates > div {
-  padding-top: 100px;
   margin: 0 30px 0 40px;
 }
-#updates > div > div {
+#updates .container {
+  padding: 20px 0 60px 0;
+}
+#updates h1,
+#updates h2,
+#updates h3,
+#updates h4,
+#updates h5,
+#updates h6 {
+  margin: 0;
+}
+#updates div {
   position: relative;
 }
 #updates .circle {
@@ -347,8 +371,66 @@ a {
   border-radius: 4px;
   background-color: #09a4e6;
 }
-#contact {
-  background-color: #f8f8f8;
+.search input {
+  border: solid #d3d3d3 2px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font-family: 'Roboto';
+  font-style: italic;
+  padding: 3px 3px 3px 12px;
+}
+#contact-container {
+  background-image: url("/img/contact_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+}
+#contact h1 {
+  font-size: 1.6em;
+}
+#contact p {
+  margin-top: 0;
+}
+#contact input,
+#contact textarea {
+  background-color: #e5e5e5;
+  width: 100%;
+  max-width: 100%;
+  max-height: 150px;
+  padding: 0;
+  border: none;
+  margin-bottom: 12px;
+}
+#contact article {
+  margin-top: 48px;
+}
+#contact small {
+  font-size: 60%;
+}
+#contact .panel {
+  padding-right: 24px;
+  padding-bottom: 24px;
+  background-color: #fcfcfc;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+#contact .panel div:first-child {
+  margin-top: 24px;
+}
+#contact label {
+  color: #0aa3e7;
+  font-size: 12px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-family: 'Century Gothic', CenturyGothic, Helvetica, sans-serif;
+}
+#contact button {
+  border: none;
+  background-color: #0aa3e7;
+  padding: 6px;
+  color: #fff;
+  font-family: Roboto;
+  font-style: italic;
+  font-size: 12px;
 }
 /***************************************
  * Helpers
@@ -380,6 +462,12 @@ a {
 }
 .fr {
   float: right;
+}
+.right-gutter {
+  padding-right: 24px;
+}
+.full {
+  padding-left: 0;
 }
 /***************************************
  * Logo

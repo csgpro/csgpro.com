@@ -16,6 +16,7 @@ wrapper-max-width = 1060px
 mobile = "all and (max-width: 45em)"
 desk = "all and (min-width: 45em)"
 border-radii = 4px
+gutter = 24px
 
 /***************************************
  * General Styles
@@ -55,10 +56,10 @@ a
   text-transform uppercase
 
 .space-top
-  margin-top 40px
+  margin-top gutter*2
 
 .text-column
-  padding-right 20px
+  padding-right gutter
 
 
 /***************************************
@@ -83,7 +84,7 @@ a
 // DEBUG: here to keep the sections at the proper size until they have content
 // I might end up leaving this as the sections have a static size on the desktop
 // version
-#main > section
+#main > div > section
   min-height 504px
   max-height 504px
   overflow hidden
@@ -137,24 +138,26 @@ a
 /////////////////////////////////
 // WORK
 /////////////////////////////////
+#work-container
+  background-image url('/img/work_bg.png')
+  background-position center
+  background-repeat repeat-y
 #work
   background-color main-blue
   color #fff
   aside
     background-color main-blue
     height 100%
-  // > article
-  //   background-image url('https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
-  //   background-repeat no-repeat
-  //   height 504px
 
 /////////////////////////////////
 // SERVICES
 /////////////////////////////////
+#services-container
+  background-image url('/img/services_bg.png')
+  background-position center
+  background-repeat repeat-y
 #services
-  background-color #00517E
   article
-    background-color #E6E6E6
     position relative
     height 504px
     color #043C57
@@ -209,10 +212,13 @@ a
 /////////////////////////////////
 picture-spacing = 128px
 
+#about-container
+  background-image url('/img/about_bg.png')
+  background-repeat repeat-x
 #about
-  padding-top 25px
   background-color #545454
   aside
+    margin-top 25px
     background-color #333333
     border-radius border-radii
     color #fff
@@ -263,12 +269,18 @@ picture-spacing = 128px
 /////////////////////////////////
 // UPDATES
 /////////////////////////////////
+#updates-container
+  background-image url('/img/posts_bg.png')
+  background-repeat repeat-x
 #updates
   background-color #F3F3F3
   > div
-    padding-top: 100px;
     margin: 0 30px 0 40px;
-  > div > div
+  .container
+    padding: 20px 0 60px 0;
+  h1,h2,h3,h4,h5,h6
+    margin 0
+  div
   // padding: 100px 30px 0 40px;
     position relative
   .circle
@@ -289,15 +301,66 @@ picture-spacing = 128px
     background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png')
   article
     color #fff
-    padding 10px 10px 10px 48px
+    padding 10px 10px 10px gutter*2
     border-radius border-radii
     background-color main-blue
+.search input
+  border solid #D3D3D3 2px
+  border-radius 4px
+  font-family 'Roboto'
+  font-style italic
+  padding 3px 3px 3px 12px
 
 /////////////////////////////////
 // CONTACT
 /////////////////////////////////
+#contact-container
+  background-image url('/img/contact_bg.jpg')
+  background-repeat no-repeat
+  background-position top
 #contact
-  background-color #F8F8F8
+  h1
+    font-size 1.6em
+  p
+    margin-top 0
+  input,textarea
+    background-color #E5E5E5
+    width 100%
+    max-width 100%
+    max-height 150px
+    padding 0
+    border none
+    margin-bottom gutter*0.5
+  article
+    margin-top gutter*2
+  small 
+    font-size 60%
+  .panel
+    padding-right gutter
+    padding-bottom gutter
+    background-color #FCFCFC
+    border-radius border-radii
+  .panel div:first-child
+    margin-top gutter
+  label
+    color #0AA3E7
+    font-size 12px
+    font-weight bolder
+    text-transform uppercase
+    font-family 'Century Gothic', CenturyGothic, Helvetica, sans-serif
+  button
+    border none
+    border-radius border-radii-1px
+    background-color #0AA3E7
+    padding 6px
+    color white
+    font-family Roboto
+    font-style italic
+    font-size 12px
+
+
+
+
 
 /***************************************
  * Helpers
@@ -320,9 +383,13 @@ picture-spacing = 128px
 .left
   text-align left
 .fl
-  float: left
+  float left
 .fr
-  float: right
+  float right
+.right-gutter
+  padding-right 24px
+.full
+  padding-left 0
 
 /***************************************
  * Logo
