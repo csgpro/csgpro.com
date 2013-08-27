@@ -122,6 +122,10 @@ app.get('/auth/twitter/callback',
     res.redirect('/admin');
 });
 
+app.get('/account/json', ensureAuthenticated, function(req, res){
+  res.send(req.user);
+});
+
 
 // Start server
 http.createServer(app).listen(app.get('port'), function(){
