@@ -230,17 +230,18 @@ picture-spacing = 128px
     color #fff
     padding 0 36px 0 36px
   .swapper
-    margin 225px 0 0 0
+    margin 238px 0 0 0
     padding 0
     list-style-type none
     position relative
     .active
       opacity 1
-      transform scale(1.1)
+      transform scale(1)
       z-index 6 !important
     li
       transition all 0.3s ease
       opacity 0.4
+      transform scale(0.9)
       position absolute
       display inline
     li:nth-child(2)
@@ -288,7 +289,7 @@ picture-spacing = 128px
     background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png')
   article
     color #fff
-    padding-top 40px
+    padding 10px 10px 10px 48px
     border-radius border-radii
     background-color main-blue
 
@@ -349,7 +350,7 @@ picture-spacing = 128px
   color #fff
 
 .fixed-menu
-  z-index 1
+  z-index 10
   position fixed
   top -3px
   left 0
