@@ -152,7 +152,6 @@ a {
   background-repeat: repeat-y;
 }
 #work {
-  background-color: #09a4e6;
   color: #fff;
 }
 #work aside {
@@ -235,9 +234,6 @@ a {
 #about-container {
   background-image: url("/img/about_bg.png");
   background-repeat: repeat-x;
-}
-#about {
-  background-color: #545454;
 }
 #about aside {
   margin-top: 25px;
@@ -493,6 +489,7 @@ a {
 .selected {
   font-size: 29px;
   color: #fff;
+  line-height: 0;
 }
 .fixed-menu {
   z-index: 10;
@@ -504,7 +501,7 @@ a {
   box-shadow: 0 5px 15px #000;
 }
 .fixed-menu ul {
-  margin: 25px 0 0 0;
+  margin: 35px 0 0 0;
 }
 nav {
   color: #4aaad4;

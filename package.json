@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "grunt"
   },
   "engines": {
     "node": "0.10.5",
@@ -18,5 +19,11 @@
     "passport": "~0.1.17",
     "nconf": "0.6.7",
     "passport-twitter": "~1.0.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-browserify": "~1.2.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-cssmin": "~0.6.1"
   }
 }
