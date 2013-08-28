@@ -28,6 +28,16 @@ module.exports = function(grunt) {
       , dest: 'public/css/bundle.min.css'
     }
   }
+  , stylus: {
+      compile: {
+        options: {
+          use: [require('nib')]
+        }
+      , files: {
+          'public/css/home.css': 'public/css/home.styl'
+        }
+      }
+    }
   , uglify: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
@@ -52,9 +62,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
 
   // Run browserify then uglify to bundle all my Common JS modules and then the
   // non common JS ones, also minify them
-  grunt.registerTask('default', ['browserify', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['browserify', 'uglify', 'stylus','cssmin']);
 
 };
