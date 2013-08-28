@@ -3,9 +3,12 @@ extends layout
 block content
   section#hero
     div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
-      div.grid__item.one-whole.right
+      div.grid__item.one-whole.right.hide-desk
+        div Hello!
+      div.grid__item.one-whole.right.hide-mobile
         div#headline We've been told we have our head
-        div#subline in the clouds, and that's not a bad thing.
+        br
+        span#subline in the clouds, and that's not a bad thing.
       div.grid__item.one-whole.right
         span#tagline learn how cloud services can make your business soar
         span }
