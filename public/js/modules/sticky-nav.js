@@ -10,10 +10,12 @@ var isFixed = false
   , w = $(window)
   , nav = $('nav')
   , img = $('#logo')
-  , spacer = $('#nav-spacer');
+  , spacer = $('#nav-spacer')
+  , o; //options
   // 70px different for the logo
 
-function init() {
+function init(options) {
+  o = options;
   // Only store these variables when the page is first loaded
   var navBottom = nav.length && nav.offset().top
     , imgTop = img.offset().top;

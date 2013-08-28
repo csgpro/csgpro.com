@@ -9,10 +9,13 @@ var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
   , stickyNav       = require('./modules/sticky-nav')
   , sectionSwapping = require('./modules/section-swapping')
-  , carousel        = require('./modules/carousel');
+  , carousel        = require('./modules/carousel')
+  , options = {
+      breakpoint: 768
+    };
 
 // Fire the modules, order is important
-pageSizing();
+pageSizing(options);
 navScrolling();
 stickyNav();
 sectionSwapping();

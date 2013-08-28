@@ -6,25 +6,33 @@
 
 'use strict';
 
-var w = $(window);
+var w = $(window)
+  , o; // options
 
-function init() {
-  doResize();
+function init(options) {
+  o = options;
+  var pageWidth = document.documentElement.clientWidth;
+
+  if (pageWidth >= o.breakpoint)
+    doResize();
+
   w.on('onorientationchange', doResize);
 }
 
 function doResize(){
+  var pageWidth = document.documentElement.clientWidth;
 
-  var heroHeight = w.height() - 95
-    , topMargin = (heroHeight - $('#hero > div').height()) / 2;
+  if (pageWidth >= o.breakpoint) {
+    var heroHeight = w.height() - 95
+      , topMargin = (heroHeight - $('#hero > div').height()) / 2;
 
-  // Dynamically change the height of the hero section to match the user's
-  // screen height
-  $('#hero').css('height', heroHeight);
+    // Dynamically change the height of the hero section to match the user's
+    // screen height
+    $('#hero').css('height', heroHeight);
 
-  // Vertically center the hero content
-  $('#headline').css('margin-top', topMargin);
-
+    // Vertically center the hero content
+    $('#headline').css('margin-top', topMargin);
+  }
 }
 
 ///////////////////

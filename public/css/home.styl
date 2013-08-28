@@ -13,8 +13,8 @@ background-color = #353535
 main-blue = #09A4E6
 text-blue = #48ABD5
 wrapper-max-width = 1060px
-mobile = "all and (max-width: 45em)"
-desk = "all and (min-width: 45em)"
+mobile = "all and (max-width: 767px)"
+desk = "all and (min-width: 768px)"
 border-radii = 4px
 gutter = 24px
 
@@ -26,7 +26,7 @@ h1,h2,h3,h4,h5,h6
   font-weight lighter
 
 #nav-spacer // TODO: fix
-  height: 96px
+  height 96px
 
 body // TODO: fix fonts
   background-color background-color
@@ -92,6 +92,20 @@ a
 /////////////////////////////////
 // HERO
 /////////////////////////////////
+
+header
+  img
+    max-width 80px
+  background-color #000
+  background-image linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
+  border-bottom 3px solid white
+  height 80px
+  position fixed
+  z-index 10
+  border-top 1px solid black
+  width 100%
+
+
 #hero
   background-position center
   background-repeat no-repeat
@@ -100,8 +114,14 @@ a
   @media desk
     background-image url('https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg')
   @media mobile
-    background-image url('/img/hero-background-large.jpg')
-    min-height 10em //TODO: should use javascript to resize
+    background-image url('https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg')
+    min-height 500px //TODO: should use javascript to resize
+  #mobile-title
+    font-family Roboto
+    font-style italic
+    font-size 25px
+    margin gutter*6 10% 0 10%
+    text-align left
   #headline
     min-width 335px
     font-size 60px
@@ -117,13 +137,22 @@ a
     font-style italic
     line-height 0.3
   #tagline
-    font-size 30px
     font-family 'Roboto'
     font-style italic
     font-weight 100
-    line-height 1.941
-    color rgba(82, 189, 236, 0.36)
-  #tagline + span
+    @media desk
+      font-size 30px
+      line-height 1.941
+      color rgba(82, 189, 236, 0.5)
+    @media mobile
+      font-size 15px
+      line-height 0
+      color rgb(82, 189, 236)
+  #tagline + div
+    @media mobile
+      display none
+    @media desk
+      display inline
     font-size 35px
     font-family Roboto
     font-style italic
@@ -274,9 +303,9 @@ picture-spacing = 128px
 #updates
   background-color #F3F3F3
   > div
-    margin: 0 30px 0 40px;
+    margin 0 30px 0 40px
   .container
-    padding: 20px 0 60px 0;
+    padding 20px 0 60px 0
   h1,h2,h3,h4,h5,h6
     margin 0
   div

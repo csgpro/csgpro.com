@@ -10,10 +10,13 @@ var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
   , stickyNav       = require('./modules/sticky-nav')
   , sectionSwapping = require('./modules/section-swapping')
-  , carousel        = require('./modules/carousel');
+  , carousel        = require('./modules/carousel')
+  , options = {
+      breakpoint: 768
+    };
 
 // Fire the modules, order is important
-pageSizing();
+pageSizing(options);
 navScrolling();
 stickyNav();
 sectionSwapping();
@@ -123,25 +126,33 @@ module.exports = init;
 
 'use strict';
 
-var w = $(window);
+var w = $(window)
+  , o; // options
 
-function init() {
-  doResize();
+function init(options) {
+  o = options;
+  var pageWidth = document.documentElement.clientWidth;
+
+  if (pageWidth >= o.breakpoint)
+    doResize();
+
   w.on('onorientationchange', doResize);
 }
 
 function doResize(){
+  var pageWidth = document.documentElement.clientWidth;
 
-  var heroHeight = w.height() - 95
-    , topMargin = (heroHeight - $('#hero > div').height()) / 2;
+  if (pageWidth >= o.breakpoint) {
+    var heroHeight = w.height() - 95
+      , topMargin = (heroHeight - $('#hero > div').height()) / 2;
 
-  // Dynamically change the height of the hero section to match the user's
-  // screen height
-  $('#hero').css('height', heroHeight);
+    // Dynamically change the height of the hero section to match the user's
+    // screen height
+    $('#hero').css('height', heroHeight);
 
-  // Vertically center the hero content
-  $('#headline').css('margin-top', topMargin);
-
+    // Vertically center the hero content
+    $('#headline').css('margin-top', topMargin);
+  }
 }
 
 ///////////////////
@@ -188,10 +199,12 @@ var isFixed = false
   , w = $(window)
   , nav = $('nav')
   , img = $('#logo')
-  , spacer = $('#nav-spacer');
+  , spacer = $('#nav-spacer')
+  , o; //options
   // 70px different for the logo
 
-function init() {
+function init(options) {
+  o = options;
   // Only store these variables when the page is first loaded
   var navBottom = nav.length && nav.offset().top
     , imgTop = img.offset().top;

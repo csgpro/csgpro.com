@@ -1,17 +1,22 @@
 extends layout
 
 block content
+  header.grid--full.hide-desk
+    div.grid__item.eight-twelfths
+    div.grid__item.four-twelfths.right
+      img(src='/img/logo.svg')
+
   section#hero
     div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
       div.grid__item.one-whole.right.hide-desk
-        div We've been told we have our head in the clouds, and that's not a bad thing.
+        div#mobile-title We've been told we have our head in the clouds, and that's not a bad thing.
       div.grid__item.one-whole.right.hide-mobile
         div#headline We've been told we have our head
         br
         span#subline in the clouds, and that's not a bad thing.
       div.grid__item.one-whole.right
         span#tagline learn how cloud services can make your business soar
-        span }
+        div }
       div#blocks.grid__item.one-whole.left.hide-mobile
         div.grid__item.three-twelfths.right
           p Our real-time analytics<br>engine makes managing<br>your critical data easy.
