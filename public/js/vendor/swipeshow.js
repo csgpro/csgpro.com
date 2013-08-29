@@ -370,7 +370,7 @@
         if ($(e.target).is('button, a, [data-tappable]')) {
           minDelta = 100;
         } else {
-          minDelta = 0;
+          minDelta = 45;
         }
 
         // Add classes.

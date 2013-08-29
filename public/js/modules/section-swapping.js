@@ -6,11 +6,12 @@
 
 'use strict';
 
-function init(){
+function init(options){
   $('.swapper > li').click(function(){
     var me = $(this)
       , text = me.data('swap')
-      , target = $('.swappable section[data-swap="' + text + '"]');
+      , target = $('.swappable section[data-swap="' + text + '"]')
+      , brk = options.breakpoint;
     me.addClass('active');
     me.siblings().removeClass('active');
     target.siblings().addClass('gone');

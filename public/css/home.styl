@@ -202,15 +202,33 @@ header
       margin 0
       padding 0
       list-style-type none
+      li.active
+        color #fff
+        .chevron
+          transform none
+          polyline
+            stroke #fff
+        > svg
+          path
+            fill #fff
+          polygon
+            fill #fff
       li
         @media desk
           cursor pointer
           padding 20px 0 5px 0
         @media mobile
+          position relative
           font-size 36px
           padding gutter
           border-bottom 1px solid #2CA3E5
-
+          .chevron
+            position absolute
+            right 5%
+            top 35%
+            transform rotate(180deg) translateY(25px)
+            polyline
+              stroke #00A3E4
         > svg // these are the icons in the services section
           vertical-align middle
           @media desk
@@ -362,6 +380,7 @@ picture-spacing = 128px
   font-family 'Roboto'
   font-style italic
   padding 3px 3px 3px 12px
+  width 100%
 
 /////////////////////////////////
 // CONTACT

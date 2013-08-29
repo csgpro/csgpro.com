@@ -19,7 +19,7 @@ var pageSizing      = require('./modules/page-sizing')
 pageSizing(options);
 navScrolling();
 stickyNav();
-sectionSwapping();
+sectionSwapping(options);
 carousel();
 },{"./modules/carousel":2,"./modules/nav-scrolling":3,"./modules/page-sizing":4,"./modules/section-swapping":5,"./modules/sticky-nav":6}],2:[function(require,module,exports){
 /**
@@ -169,11 +169,12 @@ module.exports = init;
 
 'use strict';
 
-function init(){
+function init(options){
   $('.swapper > li').click(function(){
     var me = $(this)
       , text = me.data('swap')
-      , target = $('.swappable section[data-swap="' + text + '"]');
+      , target = $('.swappable section[data-swap="' + text + '"]')
+      , brk = options.breakpoint;
     me.addClass('active');
     me.siblings().removeClass('active');
     target.siblings().addClass('gone');

@@ -18,5 +18,5 @@ var pageSizing      = require('./modules/page-sizing')
 pageSizing(options);
 navScrolling();
 stickyNav();
-sectionSwapping();
+sectionSwapping(options);
 carousel();
