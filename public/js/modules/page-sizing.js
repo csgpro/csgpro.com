@@ -17,6 +17,7 @@ function init(options) {
     doResize();
 
   w.on('onorientationchange', doResize);
+  w.on('resize', doResize);
 }
 
 function doResize(){

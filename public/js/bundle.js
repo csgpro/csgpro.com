@@ -137,6 +137,7 @@ function init(options) {
     doResize();
 
   w.on('onorientationchange', doResize);
+  w.on('resize', doResize);
 }
 
 function doResize(){
@@ -173,12 +174,19 @@ function init(options){
   $('.swapper > li').click(function(){
     var me = $(this)
       , text = me.data('swap')
-      , target = $('.swappable section[data-swap="' + text + '"]')
-      , brk = options.breakpoint;
+      // TODO: replace the data-swipe selector with an ID selector. Much faster
+      , target = $('.swappable section[data-swap="' + text + '"]') // slow?
+      , brk = options.breakpoint
+      , pageWidth = document.documentElement.clientWidth;
+
     me.addClass('active');
     me.siblings().removeClass('active');
-    target.siblings().addClass('gone');
-    target.removeClass('gone');
+    if (pageWidth < brk) { // mobile
+      // something mobile
+    } else {               // desktop
+      target.siblings().addClass('gone');
+      target.removeClass('gone');
+    }
   });
 }
 
