@@ -7,13 +7,13 @@
 'use strict';
 
 var w = $(window)
-  , o; // options
+  , brk; // options
 
 function init(options) {
-  o = options;
   var pageWidth = document.documentElement.clientWidth;
+  brk = options.breakpoint;
 
-  if (pageWidth >= o.breakpoint)
+  if (pageWidth >= brk)
     doResize();
 
   w.on('onorientationchange', doResize);
@@ -22,7 +22,7 @@ function init(options) {
 function doResize(){
   var pageWidth = document.documentElement.clientWidth;
 
-  if (pageWidth >= o.breakpoint) {
+  if (pageWidth >= brk) {
     var heroHeight = w.height() - 95
       , topMargin = (heroHeight - $('#hero > div').height()) / 2;
 

@@ -84,10 +84,11 @@ a
 // DEBUG: here to keep the sections at the proper size until they have content
 // I might end up leaving this as the sections have a static size on the desktop
 // version
-#main > div > section
-  min-height 504px
-  max-height 504px
-  overflow hidden
+@media desk
+  #main > div > section
+    min-height 504px
+    max-height 504px
+    overflow hidden
 
 /////////////////////////////////
 // HERO
@@ -182,10 +183,55 @@ header
 // SERVICES
 /////////////////////////////////
 #services-container
-  background-image url('/img/services_bg.png')
-  background-position center
-  background-repeat repeat-y
+  @media desk
+    background-image url('/img/services_bg.png')
+    background-position center
+    background-repeat repeat-y
+  @media mobile
+    background-color #11517D
 #services
+  aside
+    color #00A3E4
+    hr
+      @media desk
+        width 85%
+      border none
+      border-bottom 1px solid #00A3E4
+      margin 5px 0 0 0
+    ul
+      margin 0
+      padding 0
+      list-style-type none
+      li
+        @media desk
+          cursor pointer
+          padding 20px 0 5px 0
+        @media mobile
+          font-size 36px
+          padding gutter
+          border-bottom 1px solid #2CA3E5
+
+        > svg // these are the icons in the services section
+          vertical-align middle
+          @media desk
+            width 35px
+            height 35px
+          @media mobile
+            width 50px
+            height 50px
+          margin-right 10px
+          path
+            fill #00A3E4
+          polygon
+            fill #00A3E4
+      @media desk
+        li:hover
+          color #fff
+          > svg
+            path
+              fill #fff
+            polygon
+              fill #fff
   article
     position relative
     height 504px
@@ -203,38 +249,6 @@ header
       width 780px
       svg
         margin -15px 20px 0 0
-  aside
-    color #00A3E4
-    hr
-      width 85%
-      border none
-      border-bottom 1px solid #00A3E4
-      margin 5px 0 0 0
-    ul
-      margin 0
-      padding 0
-      list-style-type none
-      li
-        @media desk
-          cursor pointer
-        padding 20px 0 5px 0
-        > svg // these are the icons in the services section
-          vertical-align middle
-          width 35px
-          height 35px
-          margin-right 10px
-          path
-            fill #00A3E4
-          polygon
-            fill #00A3E4
-      @media desk
-        li:hover
-          color #fff
-          > svg
-            path
-              fill #fff
-            polygon
-              fill #fff
 
 /////////////////////////////////
 // ABOUT
@@ -312,15 +326,25 @@ picture-spacing = 128px
   // padding: 100px 30px 0 40px;
     position relative
   .circle
+    @media desk
+      top -40px
+      left -15px
+      width 80px
+      height 80px
+    @media mobile
+      top -30px
+      left -5px
+      width 60px
+      height 60px
+      background-size 70px
     background-position -3px -3px
     position absolute
-    top -40px
-    left -15px
-    width 80px
-    height 80px
     background-color #9B9B9B
     border-radius 40px
     box-shadow 0 0 5px 0
+  .post
+    @media mobile
+      margin gutter 0
   .icon-blog
     background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_blog.png')
   .icon-career
@@ -424,6 +448,9 @@ footer
   padding-right 24px
 .full
   padding-left 0
+.mobile-full
+  @media mobile
+    padding-left 0
 
 /***************************************
  * Logo
