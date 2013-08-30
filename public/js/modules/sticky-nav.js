@@ -32,7 +32,6 @@ function init(options) {
 function sticky() {
   pageWidth = document.documentElement.clientWidth;
 
-
   if (pageWidth >= brk){
     if (w.scrollTop() >= navTop && !isFixed) {
       isFixed = true;
@@ -59,10 +58,15 @@ function sticky() {
 function recalc() {
   pageWidth = document.documentElement.clientWidth;
 
-  if (pageWidth >= brk && isFixed) {
-    navTop = spacer.offset().top;
-    imgTop = navTop - 50;
-    sticky();
+  if (pageWidth >= brk) {
+    if (isFixed) {
+      navTop = spacer.offset().top;
+      imgTop = navTop - 50;
+      sticky();
+    } else {
+      navTop = nav.offset().top;
+      imgTop = img.offset().top;
+    }
   }
 }
 
