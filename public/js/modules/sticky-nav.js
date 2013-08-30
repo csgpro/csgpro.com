@@ -32,6 +32,7 @@ function init(options) {
 function sticky() {
   pageWidth = document.documentElement.clientWidth;
 
+
   if (pageWidth >= brk){
     if (w.scrollTop() >= navTop && !isFixed) {
       isFixed = true;
@@ -57,6 +58,7 @@ function sticky() {
 
 function recalc() {
   pageWidth = document.documentElement.clientWidth;
+
   if (pageWidth >= brk && isFixed) {
     navTop = spacer.offset().top;
     imgTop = navTop - 50;

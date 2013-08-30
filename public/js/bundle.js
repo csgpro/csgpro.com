@@ -4,7 +4,7 @@
  * off. I am using Browserify and Common JS style modules to load them in.
  */
 
-'use strict';
+'use strict'; 
 
 var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
@@ -237,6 +237,7 @@ function init(options) {
 function sticky() {
   pageWidth = document.documentElement.clientWidth;
 
+
   if (pageWidth >= brk){
     if (w.scrollTop() >= navTop && !isFixed) {
       isFixed = true;
@@ -262,6 +263,7 @@ function sticky() {
 
 function recalc() {
   pageWidth = document.documentElement.clientWidth;
+
   if (pageWidth >= brk && isFixed) {
     navTop = spacer.offset().top;
     imgTop = navTop - 50;

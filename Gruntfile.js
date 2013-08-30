@@ -56,6 +56,16 @@ module.exports = function(grunt) {
         }
       }
     }
+  , watch: {
+      all: {
+        files: ['public/css/**/*.styl', 'public/js/**/*.js']
+      , tasks: ['browserify', 'uglify', 'stylus','cssmin']
+      , options: {
+          spawn: false
+        , livereload: true
+        }
+      }
+    }
   });
 
 
@@ -63,6 +73,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Run browserify then uglify to bundle all my Common JS modules and then the
   // non common JS ones, also minify them

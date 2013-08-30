@@ -3,7 +3,7 @@
  * off. I am using Browserify and Common JS style modules to load them in.
  */
 
-'use strict';
+'use strict'; 
 
 var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
