@@ -11,14 +11,14 @@ var pageSizing      = require('./modules/page-sizing')
   , stickyNav       = require('./modules/sticky-nav')
   , sectionSwapping = require('./modules/section-swapping')
   , carousel        = require('./modules/carousel')
-  , options = {
+  , options = { // global options for the site
       breakpoint: 768
     };
 
 // Fire the modules, order is important
 pageSizing(options);
 navScrolling();
-stickyNav();
+stickyNav(options);
 sectionSwapping(options);
 carousel();
 },{"./modules/carousel":2,"./modules/nav-scrolling":3,"./modules/page-sizing":4,"./modules/section-swapping":5,"./modules/sticky-nav":6}],2:[function(require,module,exports){
@@ -128,10 +128,11 @@ module.exports = init;
 
 var w = $(window)
   , brk // options
-  , headlineHeight = 0;
+  , headlineHeight = 0
+  , pageWidth;
 
 function init(options) {
-  var pageWidth = document.documentElement.clientWidth;
+  pageWidth = document.documentElement.clientWidth;
 
   brk = options.breakpoint;
   headlineHeight = $('#hero > div').height();
@@ -144,7 +145,7 @@ function init(options) {
 }
 
 function doResize(){
-  var pageWidth = document.documentElement.clientWidth;
+  pageWidth = document.documentElement.clientWidth;
 
   if (pageWidth >= brk) {
     var heroHeight = w.height() - 95
@@ -212,13 +213,14 @@ var isFixed = false
   , nav = $('nav')
   , img = $('#logo')
   , spacer = $('#nav-spacer')
-  , o //options
+  , brk //options
+  , pageWidth
   , navTop
   , imgTop;
   // 70px different for the logo
 
 function init(options) {
-  o = options;
+  brk = options.breakpoint;
 
   navTop = nav.offset().top;
   imgTop = img.offset().top;
@@ -230,32 +232,38 @@ function init(options) {
 }
 
 function sticky() {
+  pageWidth = document.documentElement.clientWidth;
 
-  if (w.scrollTop() >= navTop && !isFixed) {
-    isFixed = true;
-    nav.addClass('fixed-menu');
-    spacer.removeClass('hidden');
-  } else if (w.scrollTop() < navTop && isFixed) {
-    isFixed = false;
-    nav.removeClass('fixed-menu');
-    spacer.addClass('hidden');
-  }
+  if (pageWidth >= brk){
+    if (w.scrollTop() >= navTop && !isFixed) {
+      isFixed = true;
+      nav.addClass('fixed-menu');
+      spacer.removeClass('hidden');
+    } else if (w.scrollTop() < navTop && isFixed) {
+      isFixed = false;
+      nav.removeClass('fixed-menu');
+      spacer.addClass('hidden');
+    }
 
-  if (w.scrollTop() >= imgTop && !isSmall) {
-    isSmall = true;
-    img.addClass('small-logo');
-    img.removeClass('big-logo');
-  } else if (w.scrollTop() < imgTop && isSmall) {
-    isSmall = false;
-    img.removeClass('small-logo');
-    img.addClass('big-logo');
+    if (w.scrollTop() >= imgTop && !isSmall) {
+      isSmall = true;
+      img.addClass('small-logo');
+      img.removeClass('big-logo');
+    } else if (w.scrollTop() < imgTop && isSmall) {
+      isSmall = false;
+      img.removeClass('small-logo');
+      img.addClass('big-logo');
+    }
   }
 }
 
 function recalc() {
-  navTop = spacer.offset().top;
-  imgTop = navTop - 50;
-  sticky();
+  pageWidth = document.documentElement.clientWidth;
+  if (pageWidth >= brk) {
+    navTop = spacer.offset().top;
+    imgTop = navTop - 50;
+    sticky();
+  }
 }
 
 ///////////////////

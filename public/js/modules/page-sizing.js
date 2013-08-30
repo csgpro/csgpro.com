@@ -8,10 +8,11 @@
 
 var w = $(window)
   , brk // options
-  , headlineHeight = 0;
+  , headlineHeight = 0
+  , pageWidth;
 
 function init(options) {
-  var pageWidth = document.documentElement.clientWidth;
+  pageWidth = document.documentElement.clientWidth;
 
   brk = options.breakpoint;
   headlineHeight = $('#hero > div').height();
@@ -24,7 +25,7 @@ function init(options) {
 }
 
 function doResize(){
-  var pageWidth = document.documentElement.clientWidth;
+  pageWidth = document.documentElement.clientWidth;
 
   if (pageWidth >= brk) {
     var heroHeight = w.height() - 95
