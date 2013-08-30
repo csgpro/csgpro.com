@@ -236,32 +236,32 @@ block content
                   span Founder &amp; CEO
         div.grid__item.eight-twelfths.hide-mobile
           article.swappable
-            section.gone(data-swap='chuckb')
+            section#swappable-chuckb.gone(data-swap='chuckb')
               h2 Chuck:
               p Chuck is a manager.
               p Like the other employees at CSG, Chuck is stuck in black and white. And that makes us timeless.
-            section.gone(data-swap='roneg')
+            section#swappable-roneg.gone(data-swap='roneg')
               h2 Ron:
               p Ron is a manager.
               p Like the other employees at CSG, Ron is stuck in black and white. And that makes us timeless.
-            section(data-swap='kevinm')
+            section#swappable-kevinm(data-swap='kevinm')
               h2 Kevin McVicker, President:
               p Kevin joined CSG in February 2010, with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
               p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, and IT services company in the application devlopment and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland.
-            section.gone(data-swap='jamesc')
+            section#swappable-jamesc.gone(data-swap='jamesc')
               h2 James:
               p James is a manager.
               p Like the other employees at CSG, James is stuck in black and white. And that makes us timeless.
-            section.gone(data-swap='dianec')
+            section#swappable-dianec.gone(data-swap='dianec')
               h2 Diane:
               p Diane is a manager.
               p Like the other employees at CSG, Diane is stuck in black and white. And that makes us timeless.
           ul.swapper
-            li(data-swap='chuckb'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
-            li(data-swap='roneg'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
-            li.active(data-swap='kevinm'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_kevin.png')
-            li(data-swap='jamesc'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_james.png')
-            li(data-swap='dianec'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_diane.png')
+            li#swapper-chuckb(data-swap='chuckb'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
+            li#swapper-roneg(data-swap='roneg'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
+            li#swapper-kevinm.active(data-swap='kevinm'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_kevin.png')
+            li#swapper-jamesc(data-swap='jamesc'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_james.png')
+            li#swapper-dianec(data-swap='dianec'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_diane.png')
 
     /////////////////////////////////
     // UPDATES
