@@ -168,7 +168,10 @@ module.exports = init;
 },{}],5:[function(require,module,exports){
 /**
  * This module finds all the specially marked up sections in the html and makes
- * them swap their content based on associated navigation elements. Assumes:
+ * them swap their content based on associated navigation elements. It also
+ * handles the accordion when visitors are past the mobile breakpoint.
+ * 
+ * Assumes:
  * - jQuery 1.10.2
  */
 
@@ -259,7 +262,7 @@ function sticky() {
 
 function recalc() {
   pageWidth = document.documentElement.clientWidth;
-  if (pageWidth >= brk) {
+  if (pageWidth >= brk && isFixed) {
     navTop = spacer.offset().top;
     imgTop = navTop - 50;
     sticky();

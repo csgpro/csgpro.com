@@ -13,7 +13,7 @@ a{color:#429ec7;text-decoration:none}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 @media all and (min-width: 768px){#main > div > section{min-height:504px;max-height:504px;overflow:hidden}
 }header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:80px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
-header img{max-width:80px}
+header img{max-width:80px;max-height:80px}
 #hero{background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
 @media all and (min-width: 768px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg")}
 }@media all and (max-width: 767px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");min-height:500px}

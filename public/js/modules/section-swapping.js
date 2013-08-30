@@ -1,6 +1,9 @@
 /**
  * This module finds all the specially marked up sections in the html and makes
- * them swap their content based on associated navigation elements. Assumes:
+ * them swap their content based on associated navigation elements. It also
+ * handles the accordion when visitors are past the mobile breakpoint.
+ * 
+ * Assumes:
  * - jQuery 1.10.2
  */
 
