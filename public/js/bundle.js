@@ -180,12 +180,13 @@ module.exports = init;
 function init(options){
   $('.swapper > li').click(function(){
     var me = $(this)
-      , text = me.data('swap')
+      , text = me.attr('id').match(/swapper-(\w+)/)[1]
       // TODO: replace the data-swipe selector with an ID selector. Much faster
       , target = $('.swappable section[data-swap="' + text + '"]') // slow?
       , brk = options.breakpoint
       , pageWidth = document.documentElement.clientWidth;
 
+    document.greer = me;
     me.addClass('active');
     me.siblings().removeClass('active');
     if (pageWidth < brk) { // mobile

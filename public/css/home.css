@@ -11,8 +11,8 @@ a{color:#429ec7;text-decoration:none}
 .gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
-@media all and (min-width: 768px){#main > div > section{min-height:504px;max-height:504px;overflow-x:hidden}
-}@media all and (max-width: 767px){#main > div > section{overflow-x:hidden}
+@media all and (min-width: 768px){#main > div > section{min-height:504px;max-height:504px;overflow:hidden}
+}@media all and (max-width: 767px){#main > div > section{overflow:hidden}
 }header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:80px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
 header img{max-width:80px;max-height:80px}
 #hero{background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
@@ -38,13 +38,13 @@ header img{max-width:80px;max-height:80px}
 @media all and (min-width: 768px){#services aside hr{width:85%}
 }#services aside ul{margin:0;padding:0;list-style-type:none;}
 #services aside ul li.active{color:#fff;}
-#services aside ul li.active .chevron{-webkit-transform:none;-moz-transform:none;-o-transform:none;-ms-transform:none;transform:none;}
+#services aside ul li.active .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
 #services aside ul li.active .chevron polyline{stroke:#fff}
 #services aside ul li.active > svg path{fill:#fff}
 #services aside ul li.active > svg polygon{fill:#fff}
 @media all and (min-width: 768px){#services aside ul li{cursor:pointer;padding:20px 0 5px 0}
 }@media all and (max-width: 767px){#services aside ul li{position:relative;font-size:36px;padding:24px;border-bottom:1px solid #2ca3e5}
-#services aside ul li .chevron{position:absolute;right:5%;top:35%;-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
+#services aside ul li .chevron{position:absolute;right:5%;top:35%;}
 #services aside ul li .chevron polyline{stroke:#00a3e4}
 }#services aside ul li > svg{vertical-align:middle;margin-right:10px;}
 @media all and (min-width: 768px){#services aside ul li > svg{width:35px;height:35px}
