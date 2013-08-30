@@ -7,11 +7,14 @@
 'use strict';
 
 var w = $(window)
-  , brk; // options
+  , brk // options
+  , headlineHeight = 0;
 
 function init(options) {
   var pageWidth = document.documentElement.clientWidth;
+
   brk = options.breakpoint;
+  headlineHeight = $('#hero > div').height();
 
   if (pageWidth >= brk)
     doResize();
@@ -25,7 +28,7 @@ function doResize(){
 
   if (pageWidth >= brk) {
     var heroHeight = w.height() - 95
-      , topMargin = (heroHeight - $('#hero > div').height()) / 2;
+      , topMargin = (heroHeight - headlineHeight) / 2;
 
     // Dynamically change the height of the hero section to match the user's
     // screen height

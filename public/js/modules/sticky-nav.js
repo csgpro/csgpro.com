@@ -11,31 +11,30 @@ var isFixed = false
   , nav = $('nav')
   , img = $('#logo')
   , spacer = $('#nav-spacer')
-  , o; //options
+  , o //options
+  , navTop
+  , imgTop;
   // 70px different for the logo
 
 function init(options) {
   o = options;
-  // Only store these variables when the page is first loaded
-  var navBottom = nav.length && nav.offset().top
-    , imgTop = img.offset().top;
 
-  sticky(navBottom, imgTop);
+  navTop = nav.offset().top;
+  imgTop = img.offset().top;
 
-  w.on('scroll', function(){
-    sticky(navBottom, imgTop);
-  });
-  w.on('touchmove', function(){
-    sticky(navBottom, imgTop);
-  });
+  sticky();
+  w.on('scroll', sticky);
+  w.on('touchmove', sticky);
+  w.on('resize', recalc);
 }
 
-function sticky(navBottom, imgTop){
-  if (w.scrollTop() >= navBottom && !isFixed){
+function sticky() {
+
+  if (w.scrollTop() >= navTop && !isFixed) {
     isFixed = true;
     nav.addClass('fixed-menu');
     spacer.removeClass('hidden');
-  } else if (w.scrollTop() < navBottom && isFixed) {
+  } else if (w.scrollTop() < navTop && isFixed) {
     isFixed = false;
     nav.removeClass('fixed-menu');
     spacer.addClass('hidden');
@@ -50,6 +49,12 @@ function sticky(navBottom, imgTop){
     img.removeClass('small-logo');
     img.addClass('big-logo');
   }
+}
+
+function recalc() {
+  navTop = spacer.offset().top;
+  imgTop = navTop - 50;
+  sticky();
 }
 
 ///////////////////
