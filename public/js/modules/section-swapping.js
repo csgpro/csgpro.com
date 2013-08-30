@@ -21,6 +21,18 @@ function init(options){
     me.addClass('active');
     me.siblings().removeClass('active');
     if (pageWidth < brk) { // mobile
+      var isAccordion = /accordion/.test(me.parent()[0].className);
+      if (isAccordion) {
+        var contentElements = $('.swappable section[data-swap="' + text + '"] p')
+          , titleElement = $('.swappable section[data-swap="' + text + '"] .title')
+          , title = titleElement[0].innerText
+          , body = $('li[data-swap="'+ text +'"] section');
+
+        console.log(contentElements, title, body);
+        contentElements.each(function(i,e){
+          console.log(e);
+        })
+      }
       // something mobile
     } else {               // desktop
       target.siblings().addClass('gone');
