@@ -1,23 +1,24 @@
+'use strict';
 
 /**
  * Module dependencies.
  */
 
-var express = require('express')
-  , fs = require('fs')
-  , index = require('./routes/index')
-  , http = require('http')
-  , stylus = require('stylus')
-  , nib = require('nib')
-  , path = require('path')
-  , passport = require('passport')
+var express          = require('express')
+  , fs               = require('fs')
+  , index            = require('./routes/index')
+  , http             = require('http')
+  , stylus           = require('stylus')
+  , nib              = require('nib')
+  , path             = require('path')
+  , passport         = require('passport')
   , TwitterStrategy  = require('passport-twitter').Strategy
-  , c = require('nconf');
+  , c                = require('nconf')
+  , db               = require('./modules/db.js');
 
 // Load the configuration file with our keys in it, first from the env variables
 // then from the config.json file
-c.env()
-  .file({ file: 'config.json'});
+c.env().file({ file: 'config.json'});
 
 /**********************************
  * PASSPORT AUTHENTICATION
@@ -26,14 +27,13 @@ var TWITTER_CONSUMER_KEY = c.get('TWITTER_CONSUMER_KEY')
   , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
   , TWITTER_CALLBACK_URL = c.get('TWITTER_CALLBACK_URL');
 
-// TODO: Should make sure a user is an admin or author here
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+// TODO: Should make sure a user is valid here
+passport.serializeUser(db.serializeUser);
+passport.deserializeUser(db.deserializeUser);
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
+// passport.deserializeUser(function(obj, done) {
+//   done(null, obj);
+// });
 
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY
