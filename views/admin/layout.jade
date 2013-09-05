@@ -15,19 +15,21 @@ html.no-js
     meta(name='description', content='CSG Pro, a professional services consulting company based in Portland, OR.')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(rel='stylesheet', href='css/normalize.css')
+    link(rel='stylesheet', href='/css/normalize.css')
+    link(rel='stylesheet', href='/css/admin.css')
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
-    script(src='js/vendor/modernizr-2.6.2.min.js')
+
+    script(src='/js/vendor/modernizr-2.6.2.min.js')
   body
     nav.navbar
       div.navbar-header
         a(href='/admin').navbar-brand Administration
       if user
         ul.nav.navbar-nav
-          li: a(href='/account') Account Management
-          li: a(href='/posts') Posts
-          li: a(href='/events') Events
-          li: a(href='/jobs') Jobs
+          if user.IsAdmin
+            li: a(href='/account') Account Management
+          li: a(href='/post') Posts
+          li: a(href='/post/new') New Post
 
 
     //if lt IE 7
@@ -43,3 +45,4 @@ html.no-js
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script.
       window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')
+    block js

@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  table.table
+    thead
+      th
+      th ID
+      th Author
+      th Title
+      th Published
+      th Topics
+      th Category
+      th Created
+      th Updated
+      th Published
+    tbody
+      each post in posts
+        tr
+          td
+            div.btn-group-vertical
+              a.btn.btn-xs.btn-primary(href='/post/#{post.id}') Preview
+              if !post.IsPublished
+                a.btn.btn-xs.btn-success(href='/post/#{post.id}/publish') Publish
+          td= post.id
+          td TODO
+          td= post.Title
+          td= post.IsPublished ? 'Yes' : 'No'
+          td
+            each topic in post.Topics.split(',')
+              code= topic
+              br
+          td= post.Category
+          td= filters.formatDate(post.CreateDate)
+          td= filters.formatDate(post.UpdateDate)
+          td= filters.formatDate(post.PublishDate)
+

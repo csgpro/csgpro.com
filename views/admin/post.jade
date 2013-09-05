@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  if post.error
+    h1.text-warning= post.error
+  h1= post.Title
+  p= post.Markdown

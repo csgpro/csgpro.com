@@ -14,7 +14,8 @@ var express          = require('express')
   , passport         = require('passport')
   , TwitterStrategy  = require('passport-twitter').Strategy
   , c                = require('nconf')
-  , db               = require('./modules/db.js');
+  , db               = require('./modules/db.js')
+  , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
 // then from the config.json file
@@ -23,12 +24,18 @@ c.env().file({ file: 'config.json'});
 /**********************************
  * PASSPORT AUTHENTICATION
  **********************************/
-var TWITTER_CONSUMER_KEY = c.get('TWITTER_CONSUMER_KEY') 
+var TWITTER_CONSUMER_KEY    = c.get('TWITTER_CONSUMER_KEY') 
   , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
-  , TWITTER_CALLBACK_URL = c.get('TWITTER_CALLBACK_URL');
+  , TWITTER_CALLBACK_URL    = c.get('TWITTER_CALLBACK_URL');
 
-// TODO: Should make sure a user is valid here
-passport.serializeUser(db.serializeUser);
+// Serialize users into sessions with just their user id
+passport.serializeUser(function(user, cb){
+  if (user) {
+    cb(null, user.id);
+  } else {
+    cb(new Error('Couldnt serialize user'), null);
+  }
+});
 passport.deserializeUser(db.deserializeUser);
 
 // passport.deserializeUser(function(obj, done) {
@@ -41,16 +48,15 @@ passport.use(new TwitterStrategy({
   , callbackURL: TWITTER_CALLBACK_URL
   },
   function(token, tokenSecret, profile, done) {
-    // To keep the example simple, the user's Twitter profile is returned to
-    // represent the logged-in user.  In a typical application, you would want
-    // to associate the Twitter account with a user record in your database,
-    // and return that user instead.
 
-    if (profile && profile.username === 'jondelamotte') { // TODO: fix
-      return done(null, profile);
-    } else {
-      return done(new Error('User not authorized'), null);
-    }
+    db.getUserFromProfile(profile, function(err, user){
+
+      if (user && user.IsAdmin === true && !err) { // TODO: allow non-admins access into the system
+        return done(null, user);
+      } else {
+        return err ? done(err, null) : done(new Error('User not authorized'), null);
+      }
+    });
   }
 ));
 
@@ -112,15 +118,20 @@ app.get('/login', function(req, res){
 
 app.get('/auth/twitter',
   passport.authenticate('twitter'),
-  function(req, res){
-    //should not be called, passport takes over before this
-});
+  function(req, res){/* isnt called */}
+);
 
 app.get('/auth/twitter/callback', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/admin');
 });
+
+app.get('/post', post.index);
+app.get('/post/new', post.entry);
+app.post('/post', post.create);
+app.get('/post/:id', post.get);
+app.get('/posts', post.all);
 
 app.get('/account/json', ensureAuthenticated, function(req, res){
   res.send(req.user);
