@@ -92,9 +92,9 @@ function compile(str, path){
 }
 
 // Development only
-if ('development' == app.get('env')) {
+// if ('development' == app.get('env')) { // TODO: turn this back on
   app.use(express.errorHandler());
-}
+// }
 
 
 /**********************************
