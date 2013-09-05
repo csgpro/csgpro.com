@@ -19,11 +19,10 @@ html.no-js
 
     //- Bundle and minify our CSS
     link(rel='stylesheet', href='css/bundle.min.css')
-    link(rel='stylesheet', href='css/inner.min.css')
 
     script(src='//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js')
 
-  body
+  body.body-white
     //if lt IE 7
       p.browsehappy
         | You are using an <strong>outdated</strong> browser.
@@ -37,17 +36,17 @@ html.no-js
   block content
   nav.fixed-menu
     div.wrapper
-      img#logo.big-logo(src='/img/logo.svg')
+      img#logo.small-logo(src='/img/logo.svg')
       ul
-        li(data-nav='work') work
+        li: a(href='/#work') work
         li /
-        li(data-nav='services') services
+        li: a(href='/#services') services
         li /
-        li(data-nav='about') about
+        li: a(href='/#about') about
         li /
-        li.active(data-nav='updates') updates
+        li: a.selected(href='/#updates') updates
         li /
-        li(data-nav='contact') contact
+        li: a(href='/#contact') contact
 
     //- We CDN load jQuery because everybody loves Raymond, err jQuery.
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')

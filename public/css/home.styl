@@ -12,6 +12,7 @@
 background-color = #353535
 main-blue = #09A4E6
 text-blue = #48ABD5
+base-font-size = 13px
 wrapper-max-width = 1060px
 mobile = "all and (max-width: 767px)"
 desk = "all and (min-width: 768px)"
@@ -31,10 +32,12 @@ h1,h2,h3,h4,h5,h6
 body // TODO: fix fonts
   background-color background-color
   font-family 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
+body.body-white
+  background-color #fff
 
 p
-  font-family 'Roboto'
-  font-size 12px
+  font-family 'Tahoma', Helvetica, sans-serif
+  font-size 13px
 
 img
   transition-timing-function ease
@@ -44,6 +47,26 @@ a
   color rgb( 66, 158, 199 )
   text-decoration none
 
+.serif
+  font-family "Palatino Linotype", "Book Antiqua", Palatino, serif
+  font-style italic
+
+.grey
+  color #888
+
+.text-size-base
+  font-size base-font-size*1
+
+.text-size-sm
+  font-size base-font-size*1.4
+
+.text-size-md
+  font-size base-font-size*1.75
+
+.text-size-lg
+  font-size base-font-size*2.5
+.no-wrap
+  text-wrap no-wrap
 .spacer
   height 2px
   background-color #fff
@@ -55,8 +78,16 @@ a
   font-weight lighter
   text-transform uppercase
 
+.caps
+  text-transform uppercase
+
 .space-top
   margin-top gutter*2
+
+.space-top-sm
+  margin-top gutter
+.space-top-xs
+  margin-top gutter*0.5
 
 .text-column
   padding-right gutter
@@ -106,6 +137,7 @@ header
   border-bottom 3px solid white
   height 80px
   position fixed
+  top 0
   z-index 10
   border-top 1px solid black
   width 100%
@@ -531,3 +563,12 @@ nav
         display inline
         padding 0 15px 0 15px
 
+/***************************************
+ * Inner Blog Pages
+ ***************************************/
+
+.blog-content
+  @media desk
+    margin-top 95px
+  @media mobile
+    margin-top 84px

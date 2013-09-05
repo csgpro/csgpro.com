@@ -1,19 +1,30 @@
 h1,h2,h3,h4,h5,h6{font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif;font-weight:lighter}
 #nav-spacer{height:96px}
 body{background-color:#353535;font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif}
-p{font-family:'Roboto';font-size:12px}
+body.body-white{background-color:#fff}
+p{font-family:'Tahoma',Helvetica,sans-serif;font-size:13px}
 img{-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;-webkit-transition-duration:.5s;-moz-transition-duration:.5s;-o-transition-duration:.5s;-ms-transition-duration:.5s;transition-duration:.5s}
 a{color:#429ec7;text-decoration:none}
+.serif{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif;font-style:italic}
+.grey{color:#888}
+.text-size-base{font-size:13px}
+.text-size-sm{font-size:18.2px}
+.text-size-md{font-size:22.75px}
+.text-size-lg{font-size:32.5px}
+.no-wrap{text-wrap:nowrap}
 .spacer{height:2px;background-color:#fff;width:100%}
 .caps-title{font-family:Roboto,sans-serif;font-size:16px;font-weight:lighter;text-transform:uppercase}
+.caps{text-transform:uppercase}
 .space-top{margin-top:48px}
+.space-top-sm{margin-top:24px}
+.space-top-xs{margin-top:12px}
 .text-column{padding-right:24px}
 .gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 @media all and (min-width: 768px){#main > div > section{min-height:504px;max-height:504px;overflow:hidden}
 }@media all and (max-width: 767px){#main > div > section{overflow:hidden}
-}header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:80px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
+}header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:80px;position:fixed;top:0;z-index:10;border-top:1px solid #000;width:100%}
 header img{max-width:80px;max-height:80px}
 #hero{background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
 @media all and (min-width: 768px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg")}
@@ -122,4 +133,6 @@ nav{color:#4aaad4;font-size:18px;position:relative;}
 }@media all and (min-width: 768px){nav{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;border-top:3px solid #fff;height:92px}
 nav ul{float:right;margin:35px 0 0 0;}
 nav ul li{cursor:pointer;display:inline;padding:0 15px 0 15px}
+}@media all and (min-width: 768px){.blog-content{margin-top:95px}
+}@media all and (max-width: 767px){.blog-content{margin-top:84px}
 }

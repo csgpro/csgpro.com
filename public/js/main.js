@@ -15,8 +15,10 @@ var pageSizing      = require('./modules/page-sizing')
     };
 
 // Fire the modules, order is important
-pageSizing(options);
-navScrolling();
-stickyNav(options);
-sectionSwapping(options);
-carousel();
+if (window.location.pathname === '/') { // only do all this javascript in root
+  pageSizing(options);
+  navScrolling();
+  stickyNav(options);
+  sectionSwapping(options);
+  carousel();
+}

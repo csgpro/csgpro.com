@@ -16,11 +16,14 @@ var pageSizing      = require('./modules/page-sizing')
     };
 
 // Fire the modules, order is important
-pageSizing(options);
-navScrolling();
-stickyNav(options);
-sectionSwapping(options);
-carousel();
+if (window.location.pathname === '/') { // only do all this javascript in root
+  pageSizing(options);
+  navScrolling();
+  stickyNav(options);
+  sectionSwapping(options);
+  carousel();
+}
+
 },{"./modules/carousel":2,"./modules/nav-scrolling":3,"./modules/page-sizing":4,"./modules/section-swapping":5,"./modules/sticky-nav":6}],2:[function(require,module,exports){
 /**
  * This module sets up the homepage carousel. Assumes:
