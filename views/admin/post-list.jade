@@ -32,7 +32,7 @@ block content
               code= topic
               br
           td= post.Category
-          td(title='#{post.CreateDate ? new Date(post.CreateDate) : ''}') #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
-          td(title='#{post.UpdateDate ? new Date(post.UpdateDate) : ''}') #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}
-          td(title='#{post.PublishDate ? new Date(post.PublishDate) : ''}') #{post.PublishDate ? moment(post.PublishDate).fromNow() : ''}
+          td(title="#{post.CreateDate ? new Date(post.CreateDate) : ''}") #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
+          td(title="#{post.UpdateDate ? new Date(post.UpdateDate) : ''}") #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}
+          td(title="#{post.PublishDate ? new Date(post.PublishDate) : ''}") #{post.PublishDate ? moment(post.PublishDate).fromNow() : ''}
 
