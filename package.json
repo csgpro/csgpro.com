@@ -18,7 +18,9 @@
     "nib": "*",
     "passport": "~0.1.17",
     "nconf": "0.6.7",
-    "passport-twitter": "~1.0.0"
+    "passport-twitter": "~1.0.0",
+    "moment": "~2.1.0",
+    "marked": "~0.2.9"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

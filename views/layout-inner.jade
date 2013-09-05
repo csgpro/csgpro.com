@@ -1,0 +1,70 @@
+doctype
+//if lt IE 7
+  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+  <html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+  <html class="no-js lt-ie9">
+//[if gt IE 8]><!
+html.no-js
+  //<![endif]
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title #{title}
+    meta(name='description', content='CSG Pro, a professional services consulting company based in Portland, OR.')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no')
+
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto:100italic, 100', type='text/css')
+
+    //- Bundle and minify our CSS
+    link(rel='stylesheet', href='css/bundle.min.css')
+    link(rel='stylesheet', href='css/inner.min.css')
+
+    script(src='//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js')
+
+  body
+    //if lt IE 7
+      p.browsehappy
+        | You are using an <strong>outdated</strong> browser.
+        | Please <a href="http://browsehappy.com/">upgrade your browser</a>
+        | to improve your experience.
+
+  header.grid--full.hide-desk
+    div.grid__item.eight-twelfths
+    div.grid__item.four-twelfths.right
+      img(src='/img/logo.svg')
+  block content
+  nav.fixed-menu
+    div.wrapper
+      img#logo.big-logo(src='/img/logo.svg')
+      ul
+        li(data-nav='work') work
+        li /
+        li(data-nav='services') services
+        li /
+        li(data-nav='about') about
+        li /
+        li.active(data-nav='updates') updates
+        li /
+        li(data-nav='contact') contact
+
+    //- We CDN load jQuery because everybody loves Raymond, err jQuery.
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    //- Fall back to the local copy of jquery if it isn't loaded by the CDN
+    script.
+      window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')
+
+    //- Contains all the JavaScript for the page
+    //- Content notes can be found at the top of the bundle
+    script(src='js/bundle.min.js')
+
+    //- Google Analytics: change UA-XXXXX-X to be your site's ID.
+    //-
+      //- script.
+      //-   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      //-   function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      //-   e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      //-   e.src='//www.google-analytics.com/analytics.js';
+      //-   r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      //-   ga('create','UA-XXXXX-X');ga('send','pageview');

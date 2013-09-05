@@ -37,7 +37,6 @@ module.exports.getUserFromProfile = function (profile, callback) {
       if (isJSON(chunk))
         var r = JSON.parse(chunk);
 
-      debugger;
       if (r && r.length === 0) { // no such profile
         callback(new Error('No such profile'));
       } else if (r && r[0]){ // profile found
@@ -112,6 +111,11 @@ exports.getPosts = function (opts, callback) {
   })
 };
 
+/**
+ * Retrieve a single post from AMS
+ * @param  {int}      postId   The int id for the post
+ * @param  {Function} callback Calls back with the single post
+ */
 exports.getPost = function (postId, callback) {
 
   options.path = '/tables/posts/' + postId;
@@ -133,10 +137,15 @@ exports.getPost = function (postId, callback) {
         callback(new Error('Error retrieving post from Azure Mobile Services'));
       }
     });
-  })
+  });
 };
 
 
+/**
+ * Creates a new post and puts it into the database over AMS
+ * @param  {object}   post     An object containing all the necessary post fields
+ * @param  {Function} callback Calls back with new posts's ID or an error
+ */
 exports.createPost = function(post, callback) {
 
   var json = JSON.stringify(post);
@@ -149,22 +158,24 @@ exports.createPost = function(post, callback) {
   var req = https.request(options, function(res){
     // console.log('STATUS: ' + res.statusCode);
     // console.log('HEADERS: ' + JSON.stringify(res.headers));
-
-    if (res.statusCode === 201 || res.statusCode === 202) {
-      callback(null, true);
-    } else {
-      callback(new Error('Problem creating the new post.'));
-    }
+    var data = '';
 
     res.setEncoding('utf8');
 
-    // res.on('data', function (chunk) {
-    //   console.log('BODY: ' + chunk);
-    // });
-  });
+    res.on('data', function(chunk) {
+      data += chunk;
+    });
 
-  req.on('error', function(error) {
-    callback(new Error('Problem creating the new post.'));
+    res.on('end', function () {
+      var newPost = JSON.parse(data);
+      console.dir(newPost);
+
+      if (newPost.id) {
+        callback(null, newPost.id);
+      } else {
+        callback(new Error('Problem creating the new post.'));
+      }
+    });
   });
 
   req.write(json);
@@ -193,9 +204,15 @@ function isJSON(str) {
 
 
 // Test
-// module.exports.serializeUser({username: 'jondelamotte'}, function(err, something){
-//   console.log(err, something);
-// });
-// module.exports.deserializeUser(1, function(err, something){
-//   console.log(err, something);
-// });
+
+// module.exports.createPost({
+//     Title: "Manually Injected Post"
+//   , AuthorId: 1
+//   , IsPublished: false
+//   , Topics: "Application Development"
+//   , Category: "Blog"
+//   , Markdown: "# Header"
+//   }, function(error, success){
+//     console.log(error, success);
+
+//   });

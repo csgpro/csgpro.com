@@ -18,6 +18,8 @@ marked.setOptions({
 var md = document.getElementById('markdown');
 var target = document.getElementById('render');
 
+render.innerHTML = marked(md.value);
+
 md.addEventListener('keyup', function(e){
   // working
   render.innerHTML = marked(md.value);

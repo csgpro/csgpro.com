@@ -15,6 +15,7 @@ var express          = require('express')
   , TwitterStrategy  = require('passport-twitter').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
+  , adminPost        = require('./routes/admin-post')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -104,11 +105,11 @@ app.get('/', index.homepage);
 /*****************
  * ADMIN
  ****************/
-app.get('/admin', ensureAuthenticated, function(req, res){
+app.get('/admin', auth, function(req, res){
   res.render('admin/index', { user: req.user });
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
+app.get('/account', auth, function(req, res){
   res.render('admin/account', { user: req.user });
 });
 
@@ -127,13 +128,17 @@ app.get('/auth/twitter/callback',
     res.redirect('/admin');
 });
 
-app.get('/post', post.index);
-app.get('/post/new', post.entry);
-app.post('/post', post.create);
-app.get('/post/:id', post.get);
-app.get('/posts', post.all);
+// TODO: add authentication to each of these
+app.get('/admin/post', adminPost.index);
+app.get('/admin/post/new', adminPost.entry);
+app.get('/admin/post/:id/update', adminPost.update);
+app.post('/admin/post', adminPost.create);
+app.get('/admin/post/:id', adminPost.get);
+app.get('/admin/posts', adminPost.all);
 
-app.get('/account/json', ensureAuthenticated, function(req, res){
+app.get('/posts', post.index);
+
+app.get('/account/json', auth, function(req, res){
   res.send(req.user);
 });
 
@@ -147,7 +152,7 @@ http.createServer(app).listen(app.get('port'), function(){
 /**********************************
  * MIDDLEWARE
  **********************************/
-function ensureAuthenticated(req, res, next) {
+function auth(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
