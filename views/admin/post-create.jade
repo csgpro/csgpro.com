@@ -7,15 +7,22 @@ block js
 block content
   form(role='form', action='/admin/post', method="#{post ? 'PUT' : 'POST'}")
     div.row
-      div.col-md-3.form-group
-        label(for='form-title') Title:
-        input#form-title.form-control(type='text', name='Title', value="#{post ? post.Title : ''}")
-      div.col-md-3.form-group
-        label(for='form-category') Category:
-        select#form-category.form-control(type='text', name='Category')
-          option(value='Blog') Blog
-          option(value='News') News
-          option(value='Career') Career
+      div.col-md-6
+        div.row
+          div.col-md-6.form-group
+            label(for='form-title') Title:
+            input#form-title.form-control(type='text', name='Title', value="#{post ? post.Title : ''}")
+          div.col-md-6.form-group
+            label(for='form-category') Category:
+            select#form-category.form-control(type='text', name='Category')
+              option(value='Blog') Blog
+              option(value='News') News
+              option(value='Career') Career
+        div.row
+          div.col-md-12
+            label(for='form-abstract') Abstract: 
+            textarea#form-abstract.form-control(name='Abstract')
+            br
       div.col-md-3.form-group
         label(for='form-topics') Topics:
         select#form-topics.form-control(type='text', name='Topics', multiple)

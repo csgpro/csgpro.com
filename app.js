@@ -135,6 +135,8 @@ app.get('/admin/post/:id/update', adminPost.update);
 app.post('/admin/post', adminPost.create);
 app.get('/admin/post/:id', adminPost.get);
 app.get('/admin/posts', adminPost.all);
+app.get('/admin/post/:id/publish', adminPost.publish);
+app.get('/admin/post/:id/unpublish', adminPost.unpublish);
 
 app.get('/post', post.index);
 

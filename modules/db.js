@@ -104,7 +104,9 @@ exports.getPosts = function (opts, callback) {
     res.on('end', function(){
       if (isJSON(chunk)) {
         r = JSON.parse(chunk);
-        r = _.sortBy(r, 'PublishDate');
+        r = r.sort(function(a, b) {
+          return a.PublishDate <= b.PublishDate ? -1 : 1; // ascending
+        });
       }
 
       if (r !== undefined) { // posts found
@@ -165,6 +167,52 @@ exports.getPost = function (postId, callback) {
 };
 
 
+exports.publish = function(postId, callback) {
+
+  var o = {
+    uri: url + '/tables/posts/' + postId
+  , headers: {
+      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+  }
+  , json: {
+      PublishDate: new Date().getTime()
+    }
+  };
+
+  request.patch(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error creating post.'));
+    }
+  });
+};
+
+exports.unpublish = function(postId, callback) {
+
+  var o = {
+    uri: url + '/tables/posts/' + postId
+  , headers: {
+      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+  }
+  , json: {
+      PublishDate: ''
+    }
+  };
+
+  request.patch(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error creating post.'));
+    }
+  });
+};
+
 /**
  * Creates a new post and puts it into the database over AMS
  * @param  {object}   post     An object containing all the necessary post fields
@@ -186,10 +234,14 @@ exports.createPost = function(post, callback) {
     } else if (response !== null && response.hasOwnProperty('id')) {
       callback(null, response.id);
     } else {
-      callback(new Error('Error creating post.' + options.headers['X-ZUMO-APPLICATION']));
+      callback(new Error('Error creating post.'));
     }
   });
 
+
+  // This old code wasn't working correctly, it would send the post data
+  // correctly, but it wouldn't end the connection. I switched to using
+  // request instead, and it seems to be working fine.
 
   // options.path = '/tables/posts';
   // options.method = 'POST';
@@ -246,18 +298,3 @@ function pluck(arr, property) {
 
 }
 
-
-
-// Test
-
-// module.exports.createPost({
-//     Title: "Manually Injected Post"
-//   , AuthorId: 1
-//   , IsPublished: false
-//   , Topics: "Application Development"
-//   , Category: "Blog"
-//   , Markdown: "# Header"
-//   }, function(error, success){
-//     console.log(error, success);
-
-//   });

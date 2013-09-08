@@ -19,7 +19,7 @@ block content
           td
             div.btn-group-vertical
               a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}') Preview
-              if !post.IsPublished
+              if !post.PublishDate
                 a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/publish') Publish
               else
                 a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/unpublish') Unpublish

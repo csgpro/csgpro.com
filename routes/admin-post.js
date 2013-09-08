@@ -15,6 +15,26 @@ exports.index = function(req, res) {
   });
 };
 
+exports.publish = function(req, res) {
+  db.publish(req.params.id, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else if (result){
+      res.redirect('/admin/post');
+    }
+  });
+};
+
+exports.unpublish = function(req, res) {
+  db.unpublish(req.params.id, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else if (result){
+      res.redirect('/admin/post');
+    }
+  });
+};
+
 exports.all = function (req, res) {
   db.getPosts(null, function(err, posts){
     res.send(posts);
@@ -47,11 +67,13 @@ exports.create = function (req, res) {
   , Topics: typeof b.Topics === 'string' ? b.Topics : b.Topics.join(',')
   , Category: b.Category
   , Markdown: b.Markdown
+  , Abstract: b.Abstract
   };
 
   db.createPost(post, function(err, newPostId) {
     if (newPostId) {
-      res.send('Post added! id: ' + newPostId);
+      res.redirect('/admin/post/' + newPostId);
+      // res.send('Post added! id: ' + newPostId);
     } else {
       res.send(err);
     }
