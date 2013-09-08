@@ -136,7 +136,7 @@ app.post('/admin/post', adminPost.create);
 app.get('/admin/post/:id', adminPost.get);
 app.get('/admin/posts', adminPost.all);
 
-app.get('/posts', post.index);
+app.get('/post', post.index);
 
 app.get('/account/json', auth, function(req, res){
   res.send(req.user);

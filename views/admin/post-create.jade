@@ -5,7 +5,7 @@ block js
   script(src='/js/admin.js')
 
 block content
-  form(role='form', action='/post', method="#{post ? 'PUT' : 'POST'}")
+  form(role='form', action='/admin/post', method="#{post ? 'PUT' : 'POST'}")
     div.row
       div.col-md-3.form-group
         label(for='form-title') Title:

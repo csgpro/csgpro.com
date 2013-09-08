@@ -1,7 +1,9 @@
 'use strict';
 
 var https = require('https')
-  , c = require('nconf');
+  , c = require('nconf')
+  , _ = require('lodash')
+  , request = require('request'); // mixing here
 
 // Load config files
 c.env().file({ file: 'config.json'});
@@ -13,7 +15,7 @@ var options = {
     'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
   }
 };
-
+var url = 'https://csgblogs.azure-mobile.net';
 
 /**
  * Calls back once the user has been looked up from the azure mobile service.
@@ -89,7 +91,8 @@ module.exports.deserializeUser = function (userId, callback){
  */
 exports.getPosts = function (opts, callback) {
 
-  options.path = '/tables/posts';
+  options.path = '/api/allposts';
+  var r;
 
   https.get(options, function(res){
     var chunk = '';
@@ -99,11 +102,32 @@ exports.getPosts = function (opts, callback) {
     });
 
     res.on('end', function(){
-      if (isJSON(chunk))
-        var r = JSON.parse(chunk);
+      if (isJSON(chunk)) {
+        r = JSON.parse(chunk);
+        r = _.sortBy(r, 'PublishDate');
+      }
 
-      if (r) { // posts found
-        callback(null, r);
+      if (r !== undefined) { // posts found
+        if (opts !== null && opts.hasOwnProperty('top3')) { // only grab the first of each category
+          var top = [];
+
+          r = _.sortBy(r, 'PublishDate');
+          var blog = _.where(r, {Category: 'Blog'})[0]
+            , news = _.where(r, {Category: 'News'})[0]
+            , career = _.where(r, {Category: 'Career'})[0];
+
+          if (blog)
+            top.push(blog);
+          if (news)
+            top.push(news);
+          if (career)
+            top.push(career);
+
+          callback(null, top);
+
+        } else {
+          callback(null, r);
+        }
       } else {
         callback(new Error('Error querying posts from Azure Mobile Services'));
       }
@@ -148,38 +172,55 @@ exports.getPost = function (postId, callback) {
  */
 exports.createPost = function(post, callback) {
 
-  var json = JSON.stringify(post);
+  var o = {
+    uri: url + '/tables/posts'
+  , headers: {
+      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+  }
+  , json: post
+  };
 
-  options.path = '/tables/posts';
-  options.method = 'POST';
-  options.headers['Content-Type'] = 'application/json';
-  options.headers['Content-Length'] = json.length;
-
-  var req = https.request(options, function(res){
-    // console.log('STATUS: ' + res.statusCode);
-    // console.log('HEADERS: ' + JSON.stringify(res.headers));
-    var data = '';
-
-    res.setEncoding('utf8');
-
-    res.on('data', function(chunk) {
-      data += chunk;
-    });
-
-    res.on('end', function () {
-      var newPost = JSON.parse(data);
-      console.dir(newPost);
-
-      if (newPost.id) {
-        callback(null, newPost.id);
-      } else {
-        callback(new Error('Problem creating the new post.'));
-      }
-    });
+  request.post(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && response.hasOwnProperty('id')) {
+      callback(null, response.id);
+    } else {
+      callback(new Error('Error creating post.' + options.headers['X-ZUMO-APPLICATION']));
+    }
   });
 
-  req.write(json);
-  req.end();
+
+  // options.path = '/tables/posts';
+  // options.method = 'POST';
+  // options.headers['Content-Type'] = 'application/json';
+  // options.headers['Content-Length'] = json.length;
+
+  // var req = https.request(options, function(res){
+  //   // console.log('STATUS: ' + res.statusCode);
+  //   // console.log('HEADERS: ' + JSON.stringify(res.headers));
+  //   var data = '';
+
+  //   res.setEncoding('utf8');
+
+  //   res.on('data', function(chunk) {
+  //     data += chunk;
+  //   });
+
+  //   res.on('end', function () {
+  //     var newPost = JSON.parse(data);
+  //     console.dir(newPost);
+
+  //     if (newPost.id) {
+  //       callback(null, newPost.id);
+  //     } else {
+  //       callback(new Error('Problem creating the new post.'));
+  //     }
+  //   });
+  // });
+
+  // req.write(json);
+  // req.end();
 
 };
 
@@ -199,6 +240,10 @@ function isJSON(str) {
         return false;
     }
     return true;
+}
+
+function pluck(arr, property) {
+
 }
 
 
