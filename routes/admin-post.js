@@ -89,6 +89,7 @@ exports.create = function (req, res) {
   , Category: b.Category
   , Markdown: b.Markdown
   , Abstract: b.Abstract
+  , PublishDate: moment(b.PublishDate, 'MM-DD-YYYY')._d.getTime()
   };
 
   db.createPost(post, function(err, newPostId) {
