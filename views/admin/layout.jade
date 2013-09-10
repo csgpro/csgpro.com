@@ -21,15 +21,26 @@ html.no-js
 
     script(src='/js/vendor/modernizr-2.6.2.min.js')
   body
-    nav.navbar
+    nav.navbar.navbar-default
       div.navbar-header
         a(href='/admin').navbar-brand Administration
       if user
         ul.nav.navbar-nav
           if user.IsAdmin
-            li: a(href='/account') Account Management
-          li: a(href='/admin/post') Posts
-          li: a(href='/admin/post/new') New Post
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                | Accounts
+                b.caret
+              ul.dropdown-menu
+                li: a(href='/admin/account') All accounts
+                li: a(href='/admin/account/new') New account
+          li.dropdown
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              | Posts
+              b.caret
+            ul.dropdown-menu
+              li: a(href='/admin/post') All posts
+              li: a(href='/admin/post/new') New post
 
 
     //if lt IE 7
@@ -45,4 +56,5 @@ html.no-js
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script.
       window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js')
     block js

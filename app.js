@@ -15,7 +15,9 @@ var express          = require('express')
   , TwitterStrategy  = require('passport-twitter').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
-  , adminPost        = require('./routes/admin-post')
+  , admin            = require('./routes/admin-post')
+  , adminMain        = require('./routes/admin')
+  , account          = require('./routes/account')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -102,20 +104,39 @@ if ('development' == app.get('env')) { // TODO: turn this back on
  **********************************/
 app.get('/', index.homepage);
 
+app.get('/post', post.index);
+app.get('/post/category/:category', post.category);
+app.get('/post/:id', post.get);
+
+app.get('/admin', auth, adminMain.index);
+
 /*****************
  * ADMIN
  ****************/
-app.get('/admin', auth, function(req, res){
-  res.render('admin/index', { user: req.user });
+app.get('/admin/login', adminMain.login);
+
+app.get('/admin/account', authAdmin, account.index);
+
+app.get('/admin/post', auth, admin.index);
+app.get('/admin/post/new', auth, admin.entry);
+app.get('/admin/post/:id/update', auth, admin.update);
+app.post('/admin/post', auth, admin.create);
+app.get('/admin/post/:id', auth, admin.get);
+app.get('/admin/posts', auth, admin.all);
+app.get('/admin/post/:id/publish', authAdmin, admin.publish);
+app.get('/admin/post/:id/unpublish', authAdmin, admin.unpublish);
+app.get('/admin/post/:id/delete', authAdmin, admin.del);
+
+app.get('/admin/notadmin', function(req, res) {
+  res.send('You must be an admin to do the thing you were trying to do.');
 });
 
-app.get('/account', auth, admin, function(req, res){
-  res.render('admin/account', { user: req.user });
-});
 
-app.get('/login', function(req, res){
-  res.render('admin/login', { user: req.user });
-});
+/*****************
+ * TWITTER
+ ****************/
+var error = 'Unable to authenticate with Twitter, ' + 
+            'or you are not authorized to use this system.';
 
 app.get('/auth/twitter',
   passport.authenticate('twitter'),
@@ -123,35 +144,17 @@ app.get('/auth/twitter',
 );
 
 app.get('/auth/twitter/callback', 
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  passport.authenticate('twitter', {
+    failureRedirect: '/login?error=' + escape(error)
+  }),
   function(req, res) {
     res.redirect('/admin');
 });
 
-// TODO: add authentication to each of these
-app.get('/admin/post', auth, adminPost.index);
-app.get('/admin/post/new', auth, adminPost.entry);
-app.get('/admin/post/:id/update', auth, adminPost.update);
-app.post('/admin/post', auth, adminPost.create);
-app.get('/admin/post/:id', auth, adminPost.get);
-app.get('/admin/posts', auth, adminPost.all);
-app.get('/admin/post/:id/publish', auth, adminPost.publish);
-app.get('/admin/post/:id/unpublish', auth, adminPost.unpublish);
-app.get('/admin/post/:id/delete', auth, adminPost.del);
-app.get('/admin/notadmin', function(req, res) {
-  res.send('You must be an admin to visit this page.');
-});
 
-app.get('/post', post.index);
-app.get('/post/category/:category', post.category);
-app.get('/post/:id', post.get);
-
-app.get('/account/json', auth, function(req, res){
-  res.send(req.user);
-});
-
-
-// Start server
+/**********************************
+ * START THE SERVER, SCOTTY!
+ **********************************/
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
@@ -162,10 +165,10 @@ http.createServer(app).listen(app.get('port'), function(){
  **********************************/
 function auth(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  res.redirect('/admin/login');
 }
 
-function admin(req, res, next) {
-  if (req.user.IsAdmin === true) { return next(); }
+function authAdmin(req, res, next) { // They are authenticated and authorized
+  if (req.isAuthenticated() && req.user.IsAdmin === true) { return next(); }
   res.redirect('/admin/notadmin');
 }

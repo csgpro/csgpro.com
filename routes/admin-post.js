@@ -6,11 +6,20 @@ var db = require('../modules/db')
 exports.index = function(req, res) {
 
   db.getPosts(null, function(err, posts){
+    posts = posts.sort(function(a,b) {
+      return a.id < b.id ? -1 : 1; // descending
+    });
+
+    if (!req.user.IsAdmin) { // if they are not an admin, show only their posts
+      posts = posts.filter(function(item) {
+        return item.AuthorUserId === req.user.id ? true : false;
+      });
+    }
+
     res.render('admin/post-list', {
-      user: req.user
-    , posts: posts
-    , filters: filters
-    , moment: moment
+      user: req.user,
+      posts: posts,
+      moment: moment
     });
   });
 };
@@ -84,8 +93,7 @@ exports.create = function (req, res) {
 
   db.createPost(post, function(err, newPostId) {
     if (newPostId) {
-      res.redirect('/admin/post/' + newPostId);
-      // res.send('Post added! id: ' + newPostId);
+      res.redirect('/post/' + newPostId);
     } else {
       res.send(err);
     }

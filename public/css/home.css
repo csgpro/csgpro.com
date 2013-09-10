@@ -26,6 +26,8 @@ a{color:#429ec7;text-decoration:none}
 .pad-right-2{padding-right:48px}
 .text-column{padding-right:24px}
 .hidden{display:none}
+.alert{padding:12px;margin-bottom:12px;margin-top:12px;border:1px solid transparent;-webkit-border-radius:4px;border-radius:4px}
+.alert-info{color:#3a87ad;background-color:#d9edf7;border-color:#bce8f1}
 @media all and (max-width: 767px){.hide-mobile{display:none}
 }@media all and (min-width: 768px){.hide-desk{display:none}
 }.right{text-align:right}
@@ -36,7 +38,9 @@ a{color:#429ec7;text-decoration:none}
 .right-gutter{padding-right:24px}
 .full{padding-left:0}
 @media all and (max-width: 767px){.mobile-full{padding-left:0}
-}.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
+}.btn{font-family:Roboto;font-style:italic;font-size:12px;border:none;-webkit-border-radius:2px;border-radius:2px}
+.btn-blue{background-color:#0aa3e7;padding:6px;color:#fff}
+.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 @media all and (min-width: 768px){#main > div > section{min-height:504px;max-height:504px;overflow:hidden}
@@ -127,7 +131,6 @@ header img{max-width:80px;max-height:80px}
 #contact .panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
 #contact .panel div:first-child{margin-top:24px}
 #contact label{color:#0aa3e7;font-size:12px;font-weight:bolder;text-transform:uppercase;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
-#contact button{border:none;background-color:#0aa3e7;padding:6px;color:#fff;font-family:Roboto;font-style:italic;font-size:12px}
 footer{min-height:400px;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 .small-logo{width:60px;height:60px;margin:15px 0 0 20px;cursor:pointer}
 .big-logo{margin:-65px 0 0 0;height:160px;width:160px}

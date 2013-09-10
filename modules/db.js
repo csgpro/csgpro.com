@@ -8,14 +8,83 @@ var https = require('https')
 // Load config files
 c.env().file({ file: 'config.json'});
 
+var appKey = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY');
+
 var options = {
   hostname: 'csgblogs.azure-mobile.net'
 , port: 443
 , headers: {
-    'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+    'X-ZUMO-APPLICATION': appKey
   }
 };
 var url = 'https://csgblogs.azure-mobile.net';
+
+/**
+ * Gets all the users, should only be run by admins, this is validated in app.js
+ * @param  {Function} callback Calls back with either an `error` or the `users`
+ */
+module.exports.getUsers = function (callback) {
+
+  var o = {
+    uri: url + '/tables/users'
+  , headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+  var r;
+
+  request.get(o, function(err, httpObj, response) {
+
+    if (err) {
+      callback(err);
+    } else if (response !== null) {
+      if (isJSON(response)) {
+        r = JSON.parse(response);
+        r = r.map(function(item) {
+          item.CreateDate = parseInt(item.CreateDate, 10);
+          item.UpdateDate = parseInt(item.UpdateDate, 10);
+          return item;
+        });
+        callback(null, r); // good to go!
+      } else {
+        callback(new Error('Invalid response when getting users.'));
+      }
+    } else {
+      callback(new Error('Error getting users.'));
+    }
+  });
+
+};
+
+/**
+ * Updates a user account
+ * @param  {object}   user     This object must have an `id` property that
+ *                             matches the database. Any properties on this
+ *                             object will be pushed to the database.
+ * @param  {Function} callback Calls back with `(error, success)`, success can
+ *                             be `true`, otherwise you'll get an error
+ */
+module.exports.updateUser = function(user, callback) {
+
+  var o = {
+    uri: url + '/tables/users/' + user.id,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: user
+  };
+
+  request.patch(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error creating post.'));
+    }
+  });
+
+};
 
 /**
  * Calls back once the user has been looked up from the azure mobile service.
@@ -42,7 +111,11 @@ module.exports.getUserFromProfile = function (profile, callback) {
       if (r && r.length === 0) { // no such profile
         callback(new Error('No such profile'));
       } else if (r && r[0]){ // profile found
-        callback(null, r[0]);
+        var user = r[0];
+        user.CreateDate = parseInt(user.CreateDate);
+        user.UpdateDate = parseInt(user.UpdateDate);
+
+        callback(null, user);
       } else {
         callback(new Error('Error querying Azure Mobile Services'));
       }
@@ -82,6 +155,7 @@ module.exports.deserializeUser = function (userId, callback){
     });
   });
 };
+
 
 /**
  * Returns an array of the various posts that we get from the AMS (azure mobile
@@ -203,11 +277,11 @@ exports.getPost = function (postId, callback) {
 exports.publish = function(postId, callback) {
 
   var o = {
-    uri: url + '/tables/posts/' + postId
-  , headers: {
-      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
-  }
-  , json: {
+    uri: url + '/tables/posts/' + postId,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: {
       PublishDate: new Date().getTime()
     }
   };
@@ -228,7 +302,7 @@ exports.unpublish = function(postId, callback) {
   var o = {
     uri: url + '/tables/posts/' + postId
   , headers: {
-      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+      'X-ZUMO-APPLICATION': appKey
   }
   , json: {
       PublishDate: ''
@@ -251,7 +325,7 @@ exports.del = function(postId, callback) {
   var o = {
     uri: url + '/tables/posts/' + postId,
     headers: {
-      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+      'X-ZUMO-APPLICATION': appKey
     }
   };
 
@@ -277,7 +351,7 @@ exports.createPost = function(post, callback) {
   var o = {
     uri: url + '/tables/posts'
   , headers: {
-      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+      'X-ZUMO-APPLICATION': appKey
   }
   , json: post
   };

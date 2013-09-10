@@ -45,20 +45,33 @@ test('Integration test ~ Real Azure Mobile Services READ web calls', function(t)
     });
   });
 
-  t.test('createPost', function(t) {
-    var post = {
-      Title: 'Unit Test Created Post'
-    , AuthorUserId: 1
-    , ApproverUserId: 1
-    , Topics: 'SharePoint,Web,Mobile'
-    , Category: 'News'
-    , Markdown: '# Sample post\r\nCreated by your neighborhood friendly **unit test**.'
-    , Abstract: 'A sample post created by your neighborhood friendly unit test'
-    };
+  // t.test('createPost', function(t) {
+  //   var post = {
+  //     Title: 'Unit Test Created Post'
+  //   , AuthorUserId: 1
+  //   , ApproverUserId: 1
+  //   , Topics: 'SharePoint,Web,Mobile'
+  //   , Category: 'News'
+  //   , Markdown: '# Sample post\r\nCreated by your neighborhood friendly **unit test**.'
+  //   , Abstract: 'A sample post created by your neighborhood friendly unit test'
+  //   };
 
-    db.createPost(post, function(err, newPostId) {
-      t.notOk(err, 'check for an error');
-      t.type(newPostId, 'number', 'function returned the new post id');
+  //   db.createPost(post, function(err, newPostId) {
+  //     t.notOk(err, 'check for an error');
+  //     t.type(newPostId, 'number', 'function returned the new post id');
+
+  //     t.end();
+  //   });
+  // });
+
+  t.test('getUsers', function(t) {
+    db.getUsers(function(err, result) {
+      t.notOk(err, 'look for an error');
+      debugger;
+      t.ok(result.length > 0, 'result has a length'); // assume there are some users
+      t.ok(toString.call(result) === '[object Array]', 'result is an array');
+      t.ok(result[0].hasOwnProperty('id'), 'result has an id field');
+      t.ok(result[0].hasOwnProperty('Username'), 'result has a Username field');
 
       t.end();
     });

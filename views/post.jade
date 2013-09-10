@@ -8,9 +8,16 @@ block content
   div#main.blog-content.grid.wrapper
     if (!post)
       div.grid__item.one-whole
-        h1 Post not found...
+        div.alert.alert-danger Post not found.
     else
       div.grid__item.one-whole
+        if (!post.PublishDate)
+          div.alert.alert-info.row
+            div.grid__item.one-half.full
+              span This post is <b>unpublished.</b>
+            div.grid__item.one-half.right
+              a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
+
         div.grid__item.desk--nine-twelfths
           h1= post.Title
           p!= marked(post.Markdown)

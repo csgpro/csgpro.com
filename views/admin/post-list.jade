@@ -8,6 +8,7 @@ block content
       br
       table.table
         thead
+          th
           th ID
           th Author
           th Title
@@ -16,10 +17,21 @@ block content
           th Created
           th Updated
           th Published
-          th
         tbody
           each post in posts
             tr
+              td
+                div.btn-group
+                  button.btn.btn-default.btn-xs.dropdown-toggle(data-toggle='dropdown')
+                    | Actions
+                    span.caret
+                  ul.dropdown-menu(role='menu')
+                    li: a(href='/post/#{post.id}') View
+                    if !post.PublishDate
+                      li: a(href='/admin/post/#{post.id}/publish') Publish
+                    else
+                      li: a(href='/admin/post/#{post.id}/unpublish') Unpublish
+                    li: a.btn-danger(href='/admin/post/#{post.id}/delete') Delete
               td= post.id
               td= post.AuthorUsername
               td= post.Title
@@ -31,12 +43,11 @@ block content
               td(title="#{post.CreateDate ? moment(post.CreateDate).format('LLL') : ''}") #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
               td(title="#{post.UpdateDate ? moment(post.UpdateDate).format('LLL') : ''}") #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}
               td(title="#{post.PublishDate ? moment(post.PublishDate).format('LLL') : ''}") #{post.PublishDate ? moment(post.PublishDate).fromNow() : ''}
-              td
+              //- td
                 div.btn-group-vertical
-                  a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}') Preview
-                  if !post.PublishDate
-                    a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/publish') Publish
+                  a.btn.btn-default.btn-xs(href='') Preview
+                    a.btn.btn-default.btn-xs(href='') Publish
                   else
-                    a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/unpublish') Unpublish
-                  a.btn.btn-danger.btn-xs(href='/admin/post/#{post.id}/delete') Delete
+                    a.btn.btn-default.btn-xs(href='') Unpublish
+                  a.btn.btn-danger.btn-xs(href='') Delete
 
