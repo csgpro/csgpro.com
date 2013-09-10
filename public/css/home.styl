@@ -27,7 +27,10 @@ h1,h2,h3,h4,h5,h6
   font-weight lighter
 
 #nav-spacer // TODO: fix
-  height 96px
+  @media desk
+    height 96px
+  @media mobile
+    height 84px
 
 body // TODO: fix fonts
   background-color background-color
@@ -47,6 +50,9 @@ a
   color rgb( 66, 158, 199 )
   text-decoration none
 
+/***************************************
+ * Helpers
+ ***************************************/
 .serif
   font-family "Palatino Linotype", "Book Antiqua", Palatino, serif
   font-style italic
@@ -81,16 +87,57 @@ a
 .caps
   text-transform uppercase
 
+.space-left
+  margin-left gutter*2
+.space-left-sm
+  margin-left gutter
+
+.space-right-sm
+  margin-right gutter
+
 .space-top
   margin-top gutter*2
-
 .space-top-sm
   margin-top gutter
 .space-top-xs
   margin-top gutter*0.5
 
+.pad-right-1
+  padding-right gutter
+.pad-right-2
+  padding-right gutter*2
+
 .text-column
   padding-right gutter
+
+.hidden
+  display none
+
+@media mobile
+  .hide-mobile
+    display none
+
+@media desk
+  .hide-desk
+    display none
+
+.right
+  text-align right
+.center
+  text-align center
+.left
+  text-align left
+.fl
+  float left
+.fr
+  float right
+.right-gutter
+  padding-right gutter
+.full
+  padding-left 0
+.mobile-full
+  @media mobile
+    padding-left 0
 
 
 /***************************************
@@ -369,10 +416,11 @@ picture-spacing = 128px
   background-repeat repeat-x
 #updates
   background-color #F3F3F3
-  > div
-    margin 0 30px 0 40px
+  // > div
+  //   margin 0 30px 0 40px
   .container
-    padding 20px 0 60px 0
+    padding gutter 0 gutter 0
+    line-height 28px
   h1,h2,h3,h4,h5,h6
     margin 0
   div
@@ -404,18 +452,22 @@ picture-spacing = 128px
     background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_careers.png')
   .icon-news
     background-image url('https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png')
+  .abstract
+    min-height 270px
+    max-height 270px
+    text-overflow ellipsis
   article
     color #fff
     padding 10px 15px 10px gutter*2
     border-radius border-radii
     background-color main-blue
+    a
+      color #fff
 .search input
+  width 90%
   border solid #D3D3D3 2px
   border-radius 4px
-  font-family 'Roboto'
-  font-style italic
   padding 3px 3px 3px 12px
-  width 100%
 
 /////////////////////////////////
 // CONTACT
@@ -474,37 +526,7 @@ footer
 
 
 
-/***************************************
- * Helpers
- ***************************************/
-.hidden
-  display none
 
-@media mobile
-  .hide-mobile
-    display none
-
-@media desk
-  .hide-desk
-    display none
-
-.right
-  text-align right
-.center
-  text-align center
-.left
-  text-align left
-.fl
-  float left
-.fr
-  float right
-.right-gutter
-  padding-right 24px
-.full
-  padding-left 0
-.mobile-full
-  @media mobile
-    padding-left 0
 
 /***************************************
  * Logo
@@ -567,8 +589,3 @@ nav
  * Inner Blog Pages
  ***************************************/
 
-.blog-content
-  @media desk
-    margin-top 95px
-  @media mobile
-    margin-top 84px

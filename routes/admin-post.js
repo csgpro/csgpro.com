@@ -58,12 +58,24 @@ exports.update = function(req, res) {
   });
 };
 
+exports.del = function(req, res) {
+  var postId = req.params.id;
+
+  db.del(postId, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else if (result){
+      res.redirect('/admin/post');
+    }
+  });
+
+};
+
 exports.create = function (req, res) {
   var b = req.body;
   var post = {
     Title: b.Title
   , AuthorUserId: req.user.id
-  , IsPublished: false
   , Topics: typeof b.Topics === 'string' ? b.Topics : b.Topics.join(',')
   , Category: b.Category
   , Markdown: b.Markdown

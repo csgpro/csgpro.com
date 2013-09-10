@@ -266,62 +266,31 @@ block content
     /////////////////////////////////
     // UPDATES
     /////////////////////////////////
-    //- div.spacer
     div#updates-container
       section#updates.grid.wrapper
-        div
-          div.container
-            div.grid__item.one-half
-              span.serif.grey.text-size-sm filter posts by:&nbsp;&nbsp;&nbsp;
-              span: a.font-size-base(href='#') Blog
-              span.grey | 
-              span: a.font-size-base(href='#') News
-              span.grey | 
-              span: a.font-size-base(href='#') Careers
-            div.grid__item.one-half.right.right-gutter
-              form.search(name='search')
-                input(type='search', placeholder='search')
+        include partials/updates-header
 
-          //- Working on blog posts.
-          for post in posts
+        //- Working on blog posts.
+        div.grid_item.one-whole.space-top.space-left-sm
+          each post in posts
             div.post.grid__item.one-whole.desk--four-twelfths
               div(class="circle icon-#{post.Category.toLowerCase()}")
               article.grid__item.eleven-twelfths
                 div.grid__item.one-whole.right
-                  small(title="#{moment(post.CreateDate).format('MMM Do YY')}")= moment(post.CreateDate).fromNow()
-                h2= post.Title
-                h3.serif by #{post.AuthorFullName}
-                p= post.Abstract
+                  small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
+                div.right-gutter.abstract
+                  h2= post.Title
+                  h3.serif by #{post.AuthorFullName}
+                  p= post.Abstract
+                div.grid__item.one-whole.right
+                  small 
+                    a(href="/post/#{post.id}")
+                      b Read more }
 
-          //- div.post.grid__item.one-whole.desk--four-twelfths
-          //-   div.circle.icon-blog
-          //-   article.grid__item.eleven-twelfths
-          //-     div.grid__item.one-whole.right
-          //-       small 01/01/2013
-          //-     h2 Blog Post
-          //-     h3.serif by Harlan Edlin
-          //-     p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
-          //- div.post.grid__item.one-whole.desk--four-twelfths
-          //-   div.circle.icon-news
-          //-   article.grid__item.eleven-twelfths
-          //-     div.grid__item.one-whole.right
-          //-       small 01/01/2013
-          //-     h2 Blog Post
-          //-     h3.serif by Harlan Edlin
-          //-     p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
-          //- div.post.grid__item.one-whole.desk--four-twelfths
-          //-   div.circle.icon-career
-          //-   article.grid__item.eleven-twelfths
-          //-     div.grid__item.one-whole.right
-          //-       small 01/01/2013
-          //-     h2 Blog Post
-          //-     h3.serif by Harlan Edlin
-          //-     p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage boudin biltong, salami beef sirloin shankle turducken pig jowl andouille spare ribs. Tri-tip bacon bresaola biltong turkey. Shoulder short loin tail pork, beef ribs rump turducken doner pig hamburger. Chicken venison salami chuck ball tip prosciutto spare ribs flank. T-bone rump venison pastrami boudin.
 
     /////////////////////////////////
     // CONTACT
     /////////////////////////////////
-    //- div.spacer
     div#contact-container
       section#contact.grid.wrapper
         article.grid__item.one-whole

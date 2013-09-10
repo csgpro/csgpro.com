@@ -1,0 +1,17 @@
+div
+  div.container
+    div.grid__item.one-half
+      span.serif.grey.text-size-sm filter posts by:&nbsp;&nbsp;&nbsp;
+      span: a.font-size-base(href='/post/category/Blog') Blog
+      span.grey |
+      span: a.font-size-base(href='/post/category/News') News
+      span.grey |
+      span: a.font-size-base(href='/post/category/Career') Careers
+    div.grid__item.one-half.right
+      div.grid__item.one-half
+        a(href='/post') view all posts&nbsp;&nbsp;&nbsp;
+        span.grey |
+      div.grid__item.one-half
+        form.search(name='search')
+          input.italic.serif(type='search', placeholder='search posts')
+

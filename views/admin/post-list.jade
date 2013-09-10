@@ -1,38 +1,42 @@
 extends layout
 
 block content
-  table.table
-    thead
-      th
-      th ID
-      th Author
-      th Title
-      th Published
-      th Topics
-      th Category
-      th Created
-      th Updated
-      th Published
-    tbody
-      each post in posts
-        tr
-          td
-            div.btn-group-vertical
-              a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}') Preview
-              if !post.PublishDate
-                a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/publish') Publish
-              else
-                a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/unpublish') Unpublish
-          td= post.id
-          td TODO
-          td= post.Title
-          td= post.IsPublished ? 'Yes' : 'No'
-          td
-            each topic in post.Topics.split(',')
-              code= topic
-              br
-          td= post.Category
-          td(title="#{post.CreateDate ? new Date(post.CreateDate) : ''}") #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
-          td(title="#{post.UpdateDate ? new Date(post.UpdateDate) : ''}") #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}
-          td(title="#{post.PublishDate ? new Date(post.PublishDate) : ''}") #{post.PublishDate ? moment(post.PublishDate).fromNow() : ''}
+  div.row
+    div.col-md-12
+      h1 All posts
+      p From this page you can manage all your posts.
+      br
+      table.table
+        thead
+          th ID
+          th Author
+          th Title
+          th Topics
+          th Category
+          th Created
+          th Updated
+          th Published
+          th
+        tbody
+          each post in posts
+            tr
+              td= post.id
+              td= post.AuthorUsername
+              td= post.Title
+              td
+                each topic in post.Topics.split(',')
+                  code= topic
+                  br
+              td= post.Category
+              td(title="#{post.CreateDate ? moment(post.CreateDate).format('LLL') : ''}") #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
+              td(title="#{post.UpdateDate ? moment(post.UpdateDate).format('LLL') : ''}") #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}
+              td(title="#{post.PublishDate ? moment(post.PublishDate).format('LLL') : ''}") #{post.PublishDate ? moment(post.PublishDate).fromNow() : ''}
+              td
+                div.btn-group-vertical
+                  a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}') Preview
+                  if !post.PublishDate
+                    a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/publish') Publish
+                  else
+                    a.btn.btn-default.btn-xs(href='/admin/post/#{post.id}/unpublish') Unpublish
+                  a.btn.btn-danger.btn-xs(href='/admin/post/#{post.id}/delete') Delete
 

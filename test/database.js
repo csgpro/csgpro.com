@@ -16,7 +16,7 @@ test('Integration test ~ Real Azure Mobile Services READ web calls', function(t)
     });
   });
 
-  t.test('getPosts with options', function(t) {
+  t.test('getPosts with top3 option', function(t) {
     var options = { top3: true };
     db.getPosts(options, function(err, result){
       t.notOk(err, 'look for an error');
@@ -29,12 +29,27 @@ test('Integration test ~ Real Azure Mobile Services READ web calls', function(t)
     });
   });
 
+  t.test('getPosts with categorizedTop6 option', function(t) {
+    var options = { categorizedTop6: true };
+    db.getPosts(options, function(err, result){
+      t.notOk(err, 'look for an error');
+      t.ok(result.length > 0, 'result has a length');
+      t.ok(toString.call(result) === '[object Array]', 'result is an array');
+      t.ok(result[0].hasOwnProperty('name'), 'result has name field');
+      t.ok(result.length <= 3, 'result has at most three categories');
+      result.forEach(function(item){
+        t.ok(item.posts.length <= 6, 'each category has at most six posts');
+      });
+      
+      t.end();
+    });
+  });
+
   t.test('createPost', function(t) {
     var post = {
       Title: 'Unit Test Created Post'
     , AuthorUserId: 1
     , ApproverUserId: 1
-    , IsPublished: false
     , Topics: 'SharePoint,Web,Mobile'
     , Category: 'News'
     , Markdown: '# Sample post\r\nCreated by your neighborhood friendly **unit test**.'
@@ -42,7 +57,7 @@ test('Integration test ~ Real Azure Mobile Services READ web calls', function(t)
     };
 
     db.createPost(post, function(err, newPostId) {
-      t.notOk(err, 'check for an error' + err);
+      t.notOk(err, 'check for an error');
       t.type(newPostId, 'number', 'function returned the new post id');
 
       t.end();

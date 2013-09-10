@@ -1,5 +1,6 @@
 var db = require('../modules/db')
-  , marked = require('marked');
+  , marked = require('marked')
+  , moment = require('moment');
 
 marked.setOptions({
   gfm: true,
@@ -12,6 +13,48 @@ marked.setOptions({
   langPrefix: 'lang-'
 });
 
+
+module.exports.category = function(req, res) {
+  var category = req.params.category;
+
+  db.getPosts({ category: category}, function(err, posts) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('post-list', {
+        title: category,
+        moment: moment,
+        category: category,
+        posts: posts
+      });
+    }
+  });
+
+};
+
+module.exports.get = function(req, res) {
+  var postId = req.params.id;
+
+  db.getPost(postId, function(err, post){
+    res.render('post', {
+      post: post,
+      marked: marked
+    });
+  });
+};
+
 module.exports.index = function(req, res) {
-  res.render('post');
-}
+
+  db.getPosts({ categorizedTop6: true }, function(err, categories) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('post-list', {
+        title: 'All Posts',
+        moment: moment,
+        categories: categories
+      });
+    }
+  });
+
+};

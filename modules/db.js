@@ -48,7 +48,7 @@ module.exports.getUserFromProfile = function (profile, callback) {
       }
     });
   });
-}
+};
 
 /**
  * Takes a user ID, looks it up on the azure mobile service API, and returns
@@ -86,7 +86,10 @@ module.exports.deserializeUser = function (userId, callback){
 /**
  * Returns an array of the various posts that we get from the AMS (azure mobile
  *   service)
- * @param  {object}   opts     Contains TBD options
+ * @param  {object}   opts     Should either have a `top3` or `categorizedTop6`
+ *                             property. These will respectively return
+ *                             different results. Leave opts = `null` if you
+ *                             want all the posts returned.
  * @param  {Function} callback Callback with the array of posts
  */
 exports.getPosts = function (opts, callback) {
@@ -105,28 +108,58 @@ exports.getPosts = function (opts, callback) {
       if (isJSON(chunk)) {
         r = JSON.parse(chunk);
         r = r.sort(function(a, b) {
-          return a.PublishDate <= b.PublishDate ? -1 : 1; // ascending
+          return a.PublishDate <= b.PublishDate ? 1 : -1; // descending
         });
       }
 
       if (r !== undefined) { // posts found
-        if (opts !== null && opts.hasOwnProperty('top3')) { // only grab the first of each category
-          var top = [];
+        if (opts !== null) { // only 1st of each
+                                                            // category 
+          var posts = [];
 
-          r = _.sortBy(r, 'PublishDate');
-          var blog = _.where(r, {Category: 'Blog'})[0]
-            , news = _.where(r, {Category: 'News'})[0]
-            , career = _.where(r, {Category: 'Career'})[0];
+          r = r.filter(function(item) {
+            return item.PublishDate;
+          });
 
-          if (blog)
-            top.push(blog);
-          if (news)
-            top.push(news);
-          if (career)
-            top.push(career);
+          var blog = _.where(r, {Category: 'Blog'})
+            , news = _.where(r, {Category: 'News'})
+            , career = _.where(r, {Category: 'Career'});
 
-          callback(null, top);
+          if (opts.hasOwnProperty('top3')) {
 
+            if (blog[0])
+              posts.push(blog[0]);
+            if (news[0])
+              posts.push(news[0]);
+            if (career[0])
+              posts.push(career[0]);
+
+          } else if (opts.hasOwnProperty('categorizedTop6')) {
+
+            blog = _.first(blog, 6);
+            news = _.first(news, 6);
+            career = _.first(career, 6);
+
+            if (blog)
+              posts.push({ name: 'Blog', posts: blog });
+            if (news)
+              posts.push({ name: 'News', posts: news });
+            if (career)
+              posts.push({ name: 'Careers', posts: career });
+
+          } else if (opts.hasOwnProperty('category')) {
+
+            var cat = {
+              blog: blog,
+              news: news,
+              career: career
+            };
+            var lowered = opts.category.toLowerCase();
+
+            posts = cat[lowered];
+          }
+
+          callback(null, posts);
         } else {
           callback(null, r);
         }
@@ -134,7 +167,7 @@ exports.getPosts = function (opts, callback) {
         callback(new Error('Error querying posts from Azure Mobile Services'));
       }
     });
-  })
+  });
 };
 
 /**
@@ -211,6 +244,27 @@ exports.unpublish = function(postId, callback) {
       callback(new Error('Error creating post.'));
     }
   });
+
+};
+
+exports.del = function(postId, callback) {
+  var o = {
+    uri: url + '/tables/posts/' + postId,
+    headers: {
+      'X-ZUMO-APPLICATION': c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY')
+    }
+  };
+
+  request.del(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error deleting post.'));
+    }
+  });
+
 };
 
 /**
@@ -238,42 +292,6 @@ exports.createPost = function(post, callback) {
     }
   });
 
-
-  // This old code wasn't working correctly, it would send the post data
-  // correctly, but it wouldn't end the connection. I switched to using
-  // request instead, and it seems to be working fine.
-
-  // options.path = '/tables/posts';
-  // options.method = 'POST';
-  // options.headers['Content-Type'] = 'application/json';
-  // options.headers['Content-Length'] = json.length;
-
-  // var req = https.request(options, function(res){
-  //   // console.log('STATUS: ' + res.statusCode);
-  //   // console.log('HEADERS: ' + JSON.stringify(res.headers));
-  //   var data = '';
-
-  //   res.setEncoding('utf8');
-
-  //   res.on('data', function(chunk) {
-  //     data += chunk;
-  //   });
-
-  //   res.on('end', function () {
-  //     var newPost = JSON.parse(data);
-  //     console.dir(newPost);
-
-  //     if (newPost.id) {
-  //       callback(null, newPost.id);
-  //     } else {
-  //       callback(new Error('Problem creating the new post.'));
-  //     }
-  //   });
-  // });
-
-  // req.write(json);
-  // req.end();
-
 };
 
 
@@ -294,7 +312,4 @@ function isJSON(str) {
     return true;
 }
 
-function pluck(arr, property) {
-
-}
 

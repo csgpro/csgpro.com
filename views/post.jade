@@ -1,5 +1,21 @@
 extends layout-inner
 
 block content
+  div#nav-spacer
+  div#updates-container
+    section#updates.grid.wrapper
+      include partials/updates-header
   div#main.blog-content.grid.wrapper
-    h1 hello
+    if (!post)
+      div.grid__item.one-whole
+        h1 Post not found...
+    else
+      div.grid__item.one-whole
+        div.grid__item.desk--nine-twelfths
+          h1= post.Title
+          p!= marked(post.Markdown)
+        div.grid__item.desk--three-twelfths.space-top
+          small Related Topics:
+          div.panel
+            p Is this working?
+

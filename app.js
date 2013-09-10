@@ -109,7 +109,7 @@ app.get('/admin', auth, function(req, res){
   res.render('admin/index', { user: req.user });
 });
 
-app.get('/account', auth, function(req, res){
+app.get('/account', auth, admin, function(req, res){
   res.render('admin/account', { user: req.user });
 });
 
@@ -129,16 +129,22 @@ app.get('/auth/twitter/callback',
 });
 
 // TODO: add authentication to each of these
-app.get('/admin/post', adminPost.index);
-app.get('/admin/post/new', adminPost.entry);
-app.get('/admin/post/:id/update', adminPost.update);
-app.post('/admin/post', adminPost.create);
-app.get('/admin/post/:id', adminPost.get);
-app.get('/admin/posts', adminPost.all);
-app.get('/admin/post/:id/publish', adminPost.publish);
-app.get('/admin/post/:id/unpublish', adminPost.unpublish);
+app.get('/admin/post', auth, adminPost.index);
+app.get('/admin/post/new', auth, adminPost.entry);
+app.get('/admin/post/:id/update', auth, adminPost.update);
+app.post('/admin/post', auth, adminPost.create);
+app.get('/admin/post/:id', auth, adminPost.get);
+app.get('/admin/posts', auth, adminPost.all);
+app.get('/admin/post/:id/publish', auth, adminPost.publish);
+app.get('/admin/post/:id/unpublish', auth, adminPost.unpublish);
+app.get('/admin/post/:id/delete', auth, adminPost.del);
+app.get('/admin/notadmin', function(req, res) {
+  res.send('You must be an admin to visit this page.');
+});
 
 app.get('/post', post.index);
+app.get('/post/category/:category', post.category);
+app.get('/post/:id', post.get);
 
 app.get('/account/json', auth, function(req, res){
   res.send(req.user);
@@ -157,4 +163,9 @@ http.createServer(app).listen(app.get('port'), function(){
 function auth(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
+}
+
+function admin(req, res, next) {
+  if (req.user.IsAdmin === true) { return next(); }
+  res.redirect('/admin/notadmin');
 }
