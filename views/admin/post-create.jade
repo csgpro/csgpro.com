@@ -24,11 +24,17 @@ block content
             textarea#form-abstract.form-control(name='Abstract')
             br
       div.col-md-3.form-group
-        label(for='form-topics') Topics:
+        label(for='form-topics') Topics (multi-select):
         select#form-topics.form-control(type='text', name='Topics', multiple)
-          option(value='SharePoint') SharePoint
+          option(value='Analytics') Analytics
           option(value='Application Development') Application Development
-          option(value='Event') Event
+          option(value='B2B') B2B
+          option(value='Branding') Branding
+          option(value='Business Intelligence') Business Intelligence
+          option(value='Mobile') Mobile
+          option(value='Portals') Portals
+          option(value='SharePoint') SharePoint
+          option(value='Web') Web
     div.row
       div.col-md-6
         div.panel.panel-default
