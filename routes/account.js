@@ -19,10 +19,19 @@ exports.index = function(req, res) {
 
 };
 
+exports.get = function(req, res) {
+  // TODO: get a single user, not really necessary right now
+};
+
+exports.entry = function(req, res) {
+  var userId = req.params.id;
+
+  res.render('admin/account-create');
+};
 
 exports.create = function(req, res) {
   var user = req.body;
-  var message = user.FullName + ' successfully updated.';
+  var message = user.FullName + ' successfully updated.;'
   var type = 'success';
 
   db.createUser(user, function(err, result) {

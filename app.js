@@ -116,8 +116,10 @@ app.get('/admin', auth, adminMain.index);
 app.get('/admin/login', adminMain.login);
 
 app.get('/admin/account', authAdmin, account.index);
-app.get('/admin/account/new', authAdmin, account.create);
-app.post('/admin/account/:id', authAdmin, account.patch);
+app.post('/admin/account', authAdmin, account.create);
+app.get('/admin/account/new',  account.entry); // TODO: make for admin only
+app.get('/admin/account/:id', authAdmin, account.get);
+app.post('/admin/account/:id/update', authAdmin, account.patch);
 
 app.get('/admin/post', auth, admin.index);
 app.get('/admin/post/new', auth, admin.entry);
