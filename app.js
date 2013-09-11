@@ -121,8 +121,8 @@ app.get('/admin/post', auth, admin.index);
 app.get('/admin/post/new', auth, admin.entry);
 app.get('/admin/post/:id/update', auth, admin.update);
 app.post('/admin/post/:id/update', auth, admin.create);
+app.post('/admin/post', auth, admin.create);
 
-// app.post('/admin/post', auth, admin.create);
 // app.patch('/admin/post', auth, admin.patch); // removing
 
 app.get('/admin/post/:id', auth, admin.get);
