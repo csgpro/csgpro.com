@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  form(role='form', action="#{account ? '/admin/account/'+account.id+'/update' : '/admin/account'}", method="POST")
+    div.row
+      div.col-md-8
+        div.row
+          div.col-md-6
+            label(for='form-fullname') Full Name:
+            input#form-fullname.form-control(type='text', name='FullName', value="#{account ? account.FullName : ''}")
+        div.row
+          div.col-md-6
+            label(for='form-username') Username:
+            input#form-username.form-control(type='text', name='Username', value="#{account ? account.Username : ''}")
+        div.row
+          div.col-md-6
+            label(for='form-twitterhandle') Username:
+            input#form-twitterhandle.form-control(type='text', name='TwitterHandle', value="#{account ? account.TwitterHandle : ''}")
+        div.row
+          div.col-md-12
+            label(for='form-profileurl') Profile Image URL:
+            input#form-profileurl.form-control(type='text', name='ProfileUrl', value="#{account ? account.ProfileUrl : ''}")
+      div.col-md-4
+        img(src='http://placekitten.com/300')
+    div.row.text-right
+      if account
+        input.btn.btn-primary.btn-medium(type='submit', value='Save')
+      else
+        input.btn.btn-primary.btn-medium(type='submit', value='Create')
+
+
+
