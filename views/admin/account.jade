@@ -2,34 +2,37 @@ extends layout
 
 block content
   div.row
-    h1 All accounts
-    p From here you can manage all accounts.
-    table.table.table-condensed
-      thead
-        tr
-          th
-          th Full Name
-          th User Id
-          th Username
-          th Twitter Handle
-          th Admin
-          th Create Date
-      tbody
-        each person in users
-          tr(class="#{person.id === user.id ? 'active' : ''}")
-            td
-              div.btn-group
-                button.btn.btn-default.btn-xs.dropdown-toggle(data-toggle='dropdown')
-                  | Actions
-                  span.caret
-                ul.dropdown-menu(role='menu')
-                  li: a(href='#') Edit
-                  li: a(href='#') Delete
-            td= person.FullName
-            td= person.id
-            td= person.Username
-            td= person.TwitterHandle
-            td= person.IsAdmin ? 'Yes' : 'No'
-            td(title="#{moment(person.CreateDate).format('LLL')}")= moment(person.CreateDate).fromNow()
-        
+    div.col-md-12
+      if (message)
+        div(class="alert alert-#{type}")= message
+      h1 All accounts
+      p From here you can manage all accounts.
+      table.table.table-condensed
+        thead
+          tr
+            th
+            th Full Name
+            th User Id
+            th Username
+            th Twitter Handle
+            th Admin
+            th Create Date
+        tbody
+          each person in users
+            tr(class="#{person.id === user.id ? 'active' : ''}")
+              td
+                div.btn-group
+                  button.btn.btn-default.btn-xs.dropdown-toggle(data-toggle='dropdown')
+                    | Actions
+                    span.caret
+                  ul.dropdown-menu(role='menu')
+                    li: a(href='#') Edit
+                    li: a(href='#') Delete
+              td= person.FullName
+              td= person.id
+              td= person.Username
+              td= person.TwitterHandle
+              td= person.IsAdmin ? 'Yes' : 'No'
+              td(title="#{moment(person.CreateDate).format('LLL')}")= moment(person.CreateDate).fromNow()
+          
 

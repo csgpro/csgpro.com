@@ -56,14 +56,6 @@ module.exports.getUsers = function (callback) {
 
 };
 
-/**
- * Updates a user account
- * @param  {object}   user     This object must have an `id` property that
- *                             matches the database. Any properties on this
- *                             object will be pushed to the database.
- * @param  {Function} callback Calls back with `(error, success)`, success can
- *                             be `true`, otherwise you'll get an error
- */
 module.exports.updateUser = function(user, callback) {
 
   var o = {
@@ -77,10 +69,33 @@ module.exports.updateUser = function(user, callback) {
   request.patch(o, function(err, httpObj, response) {
     if (err) {
       callback(err);
-    } else if (response !== null) {
+    } else if (response !== null && !response.error) {
       callback(null, true);
     } else {
-      callback(new Error('Error creating post.'));
+      callback(new Error('Error updating user: ' + response.error));
+    }
+  });
+
+};
+
+
+module.exports.createUser = function(user, callback) {
+
+  var o = {
+    uri: url + '/tables/users',
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: user
+  };
+
+  request.post(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error updating user: ' + response.error));
     }
   });
 
@@ -289,7 +304,7 @@ exports.patchPost = function (post, callback) {
   request.patch(o, function(err, httpObj, response) {
 
     console.dir(response);
-    
+
     if (err || response['error']) {
       callback(err);
     } else if (response !== null && response.hasOwnProperty('id')) {

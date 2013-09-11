@@ -150,19 +150,17 @@ exports.create = function (req, res) {
   }
 
   var post = {
-    Title: b.Title
-  , AuthorUserId: b.AuthorUserId || req.user.id
-  , Topics: topics
-  , Category: b.Category
-  , Markdown: b.Markdown
-  , Abstract: b.Abstract
-  , PublishDate: publishDate
+    Title: b.Title,
+    AuthorUserId: b.AuthorUserId || req.user.id,
+    Topics: topics,
+    Category: b.Category,
+    Markdown: b.Markdown,
+    Abstract: b.Abstract,
+    PublishDate: publishDate
   };
 
   if (req.params.id) {
-    post.id = parseInt(req.params.id);
-
-    console.dir(post);
+    post.id = parseInt(req.params.id, 10);
 
     db.patchPost(post, function(err, newPostId) {
       if (err) {
