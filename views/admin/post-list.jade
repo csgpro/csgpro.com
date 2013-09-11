@@ -36,9 +36,10 @@ block content
               td= post.AuthorUsername
               td= post.Title
               td
-                each topic in post.Topics.split(',')
-                  code= topic
-                  br
+                if (post.Topics)
+                  each topic in post.Topics.split(',')
+                    code= topic
+                    br
               td= post.Category
               td(title="#{post.CreateDate ? moment(post.CreateDate).format('LLL') : ''}") #{post.CreateDate ? moment(post.CreateDate).fromNow() : ''}
               td(title="#{post.UpdateDate ? moment(post.UpdateDate).format('LLL') : ''}") #{post.UpdateDate ? moment(post.UpdateDate).fromNow() : ''}

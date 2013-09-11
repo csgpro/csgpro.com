@@ -148,7 +148,7 @@ app.get('/auth/twitter/callback',
     failureRedirect: '/login?error=' + escape(error)
   }),
   function(req, res) {
-    res.redirect('/admin');
+    res.redirect('/admin/post');
 });
 
 
