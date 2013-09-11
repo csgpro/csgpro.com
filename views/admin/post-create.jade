@@ -5,7 +5,7 @@ block js
   script(src='/js/admin.js')
 
 block content
-  form(role='form', action='/admin/post', method="#{post ? 'PUT' : 'POST'}")
+  form(role='form', action="#{post ? '/admin/post/'+post.id+'/update' : '/admin/post'}", method="POST")
     div.row
       div.col-md-6
         div.row
@@ -15,39 +15,50 @@ block content
           div.col-md-6.form-group
             label(for='form-category') Category:
             select#form-category.form-control(type='text', name='Category')
-              option(value='Blog') Blog
-              option(value='News') News
-              option(value='Career') Career
+              if (post)
+                option(value='Blog', selected=post['Category']==='Blow') Blog
+                option(value='News', selected=post['Category']==='News') News
+                option(value='Career', selected=post['Category']==='Career') Career
+              else
+                option(value='Blog') Blog
+                option(value='News') News
+                option(value='Career') Career
+
         div.row
           div.col-md-12.form-group
-            label(for='form-abstract') Abstract: 
-            textarea#form-abstract.form-control(name='Abstract')
-            br
+            label(for='form-abstract') Abstract (max 400 char.): 
+            if (post && post.Abstract)
+              textarea#form-abstract.form-control(name='Abstract', maxlength='400', rows='5')= post.Abstract
+            else
+              textarea#form-abstract.form-control(name='Abstract', maxlength='400', rows='5')
       div.col-md-3.form-group
-        label(for='form-topics') Topics (multi-select):
+        div.row
+          div.col-xs-8
+            label(for='form-topics') Topics (multi-select):
+          div.col-xs-4.text-right
+            small: a(href='#', onclick="$('#form-topics option:selected').removeAttr('selected'); return false; ") reset
         select#form-topics.form-control(type='text', name='Topics', multiple)
-          option(value='Analytics') Analytics
-          option(value='Application Development') Application Development
-          option(value='B2B') B2B
-          option(value='Branding') Branding
-          option(value='Business Intelligence') Business Intelligence
-          option(value='Mobile') Mobile
-          option(value='Portals') Portals
-          option(value='SharePoint') SharePoint
-          option(value='Web') Web
+          each topic in topics
+            option(value='#{topic}')= topic
       if (user.IsAdmin)
         div.col-md-3
           div.row
             div.col-md-12.form-group
               label(for='form-publish-date') Publish Date (mm/dd/yyyy):
-              input#form-publish-date.form-control(type='text', name='PublishDate')
+              if (post && post.PublishDate)
+                input#form-publish-date.form-control(type='text', name='PublishDate', value=moment(post.PublishDate).format('MM/DD/YYYY'))
+              else
+                input#form-publish-date.form-control(type='text', name='PublishDate')
           div.row
             div.col-md-12.form-group
               label(for='form-author') Author:
               select#form-author.form-control(type='text', name='AuthorUserId')
-                each person in users
-                  option(value='#{person.id}')= person.FullName
-
+                if (post && post.AuthorUserId)
+                  each person in users
+                    option(value='#{person.id}', selected=post.AuthorUserId===person.id)= person.FullName
+                else
+                  each person in users
+                    option(value='#{person.id}')= person.FullName
 
     div.row
       div.col-md-6

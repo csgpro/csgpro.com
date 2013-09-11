@@ -3,6 +3,8 @@ extends layout
 block content
   div.row
     div.col-md-12
+      if (message)
+        div(class="alert alert-#{type}")= message
       h1 All posts
       p From this page you can manage all your posts.
       br
@@ -26,6 +28,7 @@ block content
                     | Actions
                     span.caret
                   ul.dropdown-menu(role='menu')
+                    li: a(href='/admin/post/#{post.id}/update') Edit
                     li: a(href='/post/#{post.id}') View
                     if !post.PublishDate
                       li: a(href='/admin/post/#{post.id}/publish') Publish

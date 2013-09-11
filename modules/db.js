@@ -121,6 +121,7 @@ module.exports.getUserFromProfile = function (profile, callback) {
       }
     });
   });
+
 };
 
 /**
@@ -129,7 +130,7 @@ module.exports.getUserFromProfile = function (profile, callback) {
  * @param  {int}   userId   A user ID that is stored in the Azure mobile service
  * @param  {Function} callback Calls back with an error or the user object
  */
-module.exports.deserializeUser = function (userId, callback){
+module.exports.deserializeUser = function (userId, callback) {
   // console.log('Deserializing userId: ', userId); // DEBUG
 
   options.path = '/tables/users/' + userId;
@@ -154,8 +155,8 @@ module.exports.deserializeUser = function (userId, callback){
       }
     });
   });
-};
 
+};
 
 /**
  * Returns an array of the various posts that we get from the AMS (azure mobile
@@ -242,6 +243,7 @@ exports.getPosts = function (opts, callback) {
       }
     });
   });
+
 };
 
 /**
@@ -271,8 +273,33 @@ exports.getPost = function (postId, callback) {
       }
     });
   });
+
 };
 
+exports.patchPost = function (post, callback) {
+
+  var o = {
+    uri: url + '/tables/posts/' + post.id,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: post 
+  };
+
+  request.patch(o, function(err, httpObj, response) {
+
+    console.dir(response);
+    
+    if (err || response['error']) {
+      callback(err);
+    } else if (response !== null && response.hasOwnProperty('id')) {
+      callback(null, response.id);
+    } else {
+      callback(new Error('Error patching post.'));
+    }
+  });
+
+};
 
 exports.publish = function(postId, callback) {
 
@@ -295,6 +322,7 @@ exports.publish = function(postId, callback) {
       callback(new Error('Error creating post.'));
     }
   });
+
 };
 
 exports.unpublish = function(postId, callback) {
@@ -368,11 +396,10 @@ exports.createPost = function(post, callback) {
 
 };
 
-
 /**********************************
  * HELPERS
  **********************************/
-function twitterize(str){
+function twitterize(str) {
   return "'@" + str + "'";
 }
 
