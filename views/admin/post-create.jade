@@ -53,6 +53,7 @@ block content
             div.col-md-12.form-group
               label(for='form-author') Author:
               select#form-author.form-control(type='text', name='AuthorUserId')
+                - users.sort(function(a,b){return a.FullName < b.FullName ? -1 : 1 });
                 if (post && post.AuthorUserId)
                   each person in users
                     option(value='#{person.id}', selected=post.AuthorUserId===person.id)= person.FullName
