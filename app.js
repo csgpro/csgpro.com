@@ -27,7 +27,7 @@ c.env().file({ file: 'config.json'});
 /**********************************
  * PASSPORT AUTHENTICATION
  **********************************/
-var TWITTER_CONSUMER_KEY    = c.get('TWITTER_CONSUMER_KEY') 
+var TWITTER_CONSUMER_KEY    = c.get('TWITTER_CONSUMER_KEY')
   , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
   , TWITTER_CALLBACK_URL    = c.get('TWITTER_CALLBACK_URL');
 
@@ -115,22 +115,24 @@ app.get('/admin', auth, adminMain.index);
  ****************/
 app.get('/admin/login', adminMain.login);
 
-app.get('/admin/account', authAdmin, account.index);
-app.post('/admin/account', authAdmin, account.create);
-app.get('/admin/account/new',  account.entry); // TODO: make for admin only
-app.get('/admin/account/:id', authAdmin, account.get);
-app.post('/admin/account/:id/update', authAdmin, account.patch);
+app.get('/admin/account'             , authAdmin , account.index);
+app.post('/admin/account'            , authAdmin , account.create);
+app.get('/admin/account/new'         , authAdmin , account.entry);
+app.get('/admin/account/:id'         , authAdmin , account.get);
+app.get('/admin/account/:id/update'  , authAdmin , account.update);
+app.post('/admin/account/:id/update' , authAdmin , account.patch);
+app.get('/admin/account/:id/delete'  , authAdmin , account.del);
 
-app.get('/admin/post', auth, admin.index);
-app.get('/admin/post/new', auth, admin.entry);
-app.get('/admin/post/:id/update', auth, admin.update);
-app.post('/admin/post/:id/update', auth, admin.create);
-app.post('/admin/post', auth, admin.create);
-app.get('/admin/post/:id', auth, admin.get);
-app.get('/admin/posts', auth, admin.all);
-app.get('/admin/post/:id/publish', authAdmin, admin.publish);
-app.get('/admin/post/:id/unpublish', authAdmin, admin.unpublish);
-app.get('/admin/post/:id/delete', authAdmin, admin.del);
+app.get('/admin/post'               , auth      , admin.index);
+app.get('/admin/post/new'           , auth      , admin.entry);
+app.get('/admin/post/:id/update'    , auth      , admin.update);
+app.post('/admin/post/:id/update'   , auth      , admin.create);
+app.post('/admin/post'              , auth      , admin.create);
+app.get('/admin/post/:id'           , auth      , admin.get);
+app.get('/admin/posts'              , auth      , admin.all);
+app.get('/admin/post/:id/publish'   , authAdmin , admin.publish);
+app.get('/admin/post/:id/unpublish' , authAdmin , admin.unpublish);
+app.get('/admin/post/:id/delete'    , authAdmin , admin.del);
 
 app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
@@ -140,7 +142,7 @@ app.get('/admin/notadmin', function(req, res) {
 /*****************
  * TWITTER
  ****************/
-var error = 'Unable to authenticate with Twitter, ' + 
+var error = 'Unable to authenticate with Twitter, ' +
             'or you are not authorized to use this system.';
 
 app.get('/auth/twitter',
@@ -148,7 +150,7 @@ app.get('/auth/twitter',
   function(req, res){/* isnt called */}
 );
 
-app.get('/auth/twitter/callback', 
+app.get('/auth/twitter/callback',
   passport.authenticate('twitter', {
     failureRedirect: '/login?error=' + escape(error)
   }),

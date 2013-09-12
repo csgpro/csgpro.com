@@ -56,6 +56,30 @@ module.exports.getUsers = function (callback) {
 
 };
 
+
+module.exports.getUser = function(userId, callback) {
+
+  var o = {
+    uri: url + '/tables/users/' + userId,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+
+  request.get(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null
+               && !response.error
+               && isJSON(response)) {
+      callback(null, JSON.parse(response));
+    } else {
+      callback(new Error('Error getting user: ' + response.error));
+    }
+  });
+
+};
+
 module.exports.updateUser = function(user, callback) {
 
   var o = {
@@ -67,6 +91,7 @@ module.exports.updateUser = function(user, callback) {
   };
 
   request.patch(o, function(err, httpObj, response) {
+    console.log(err, '|', response);
     if (err) {
       callback(err);
     } else if (response !== null && !response.error) {
@@ -96,6 +121,27 @@ module.exports.createUser = function(user, callback) {
       callback(null, true);
     } else {
       callback(new Error('Error updating user: ' + response.error));
+    }
+  });
+
+};
+
+module.exports.deleteUser = function(userId, callback){
+
+  var o = {
+    uri: url + '/tables/users/' + userId,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+
+  request.del(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error deleting user: ' + response.error));
     }
   });
 

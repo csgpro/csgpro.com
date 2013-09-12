@@ -5,8 +5,9 @@ block content
     div.col-md-12
       if (message)
         div(class="alert alert-#{type}")= message
-      h1 All accounts
-      p From here you can manage all accounts.
+      div.page-header: h1 All Accounts
+  div.row
+    div.col-md-12
       table.table.table-condensed
         thead
           tr
@@ -16,9 +17,25 @@ block content
             th Username
             th Twitter Handle
             th Admin
-            th Create Date
+            th Created
+            th Updated
         tbody
           each person in users
+            //- Not the most efficient method of injecting modals, but it works
+            //- One for each person...
+            div.modal.fade(id='modal-confirm-#{person.id}', tabindex='-1')
+              div.modal-dialog
+                div.modal-content
+                  div.modal-header
+                    button.close(type='button', data-dismiss='modal')
+                    h4.modal-title Confirm Delete
+                  div.modal-body
+                    p Are you sure you want to delete
+                      strong  #{person.FullName}
+                      | ?
+                  div.modal-footer
+                    button.btn.btn-default(data-dismiss='modal') Close
+                    a.btn.btn-danger(href='/admin/account/#{person.id}/delete') Delete
             tr(class="#{person.id === user.id ? 'active' : ''}")
               td
                 div.btn-group
@@ -26,13 +43,14 @@ block content
                     | Actions
                     span.caret
                   ul.dropdown-menu(role='menu')
-                    li: a(href='#') Edit
-                    li: a(href='#') Delete
+                    li: a(href='/admin/account/#{person.id}/update') Edit
+                    li: a(href='#modal-confirm-#{person.id}', data-toggle='modal') Delete
               td= person.FullName
               td= person.id
               td= person.Username
               td= person.TwitterHandle
               td= person.IsAdmin ? 'Yes' : 'No'
               td(title="#{moment(person.CreateDate).format('LLL')}")= moment(person.CreateDate).fromNow()
+              td(title="#{moment(person.UpdateDate).format('LLL')}")= moment(person.UpdateDate).fromNow()
           
 
