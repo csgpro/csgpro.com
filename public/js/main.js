@@ -3,7 +3,7 @@
  * off. I am using Browserify and Common JS style modules to load them in.
  */
 
-'use strict'; 
+'use strict';
 
 var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
@@ -11,7 +11,9 @@ var pageSizing      = require('./modules/page-sizing')
   , sectionSwapping = require('./modules/section-swapping')
   , carousel        = require('./modules/carousel')
   , options = { // global options for the site
-      breakpoint: 768
+      breakpoint: 768, // px
+      maxHeight: 990, // px
+      minHeight: 504 // px
     };
 
 // Fire the modules, order is important

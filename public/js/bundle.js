@@ -4,7 +4,7 @@
  * off. I am using Browserify and Common JS style modules to load them in.
  */
 
-'use strict'; 
+'use strict';
 
 var pageSizing      = require('./modules/page-sizing')
   , navScrolling    = require('./modules/nav-scrolling')
@@ -12,7 +12,9 @@ var pageSizing      = require('./modules/page-sizing')
   , sectionSwapping = require('./modules/section-swapping')
   , carousel        = require('./modules/carousel')
   , options = { // global options for the site
-      breakpoint: 768
+      breakpoint: 768, // px
+      maxHeight: 990, // px
+      minHeight: 504 // px
     };
 
 // Fire the modules, order is important
@@ -84,21 +86,59 @@ function init() {
   w.on('scroll', each);
   w.on('touchmove', each);
 
+  // When the user changes screen size, we have to re calculate the tops of each
+  // of the sections
+  w.on('orientationchange', recalcTops);
+  w.on('resize', recalcTops);
+
+  // Check if the user has a hash in their address bar, if so, try to nav there
+  if (window.location.hash !== '') {
+    var element = $(window.location.hash);
+
+    scrollTo(element);
+  }
+
+
   // When a user clicks on a nav item, scroll to that section. Should probably
   // be using anchors instead of this klugy method, but it works for now
   $('nav li').on('click', function(e){
     var element = $('#' + e.currentTarget.innerHTML);
 
-    $('html, body').animate({
-      scrollTop: element.offset().top - offset
-    });
+    scrollTo(element);
   });
 
+  // Scroll to the top of the page
   $('#logo').on('click', function(e){
     $('html, body').animate({
       scrollTop: 0
     });
   });
+}
+
+function scrollTo(element) {
+  $('html, body').animate({
+    scrollTop: element.offset().top - offset
+  });
+}
+
+function recalcTops(){
+  arr = [];
+
+  w.off('scroll', each);
+  w.off('touchmove', each);
+
+  items.each(function(i, e){
+    arr.push({
+        element: e
+      , name: e.id
+      , top: e.offsetTop
+      , bottom: e.offsetTop + e.offsetHeight
+    });
+  });
+
+  w.on('scroll', each);
+  w.on('touchmove', each);
+
 }
 
 function each(){
@@ -131,13 +171,19 @@ module.exports = init;
 
 var w = $(window)
   , brk // options
+  , maxHeight
+  , minHeight
   , headlineHeight = 0
   , pageWidth;
 
 function init(options) {
   pageWidth = document.documentElement.clientWidth;
 
+  // Get necessary options
   brk = options.breakpoint;
+  maxHeight = options.maxHeight;
+  minHeight = options.minHeight;
+
   headlineHeight = $('#hero > div').height();
 
   if (pageWidth >= brk)
@@ -151,12 +197,20 @@ function doResize(){
   pageWidth = document.documentElement.clientWidth;
 
   if (pageWidth >= brk) {
-    var heroHeight = w.height() - 95
+    var wHeight = w.height()
+      , heroHeight = wHeight - 90
       , topMargin = (heroHeight - headlineHeight) / 2;
 
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
+    if (wHeight <= maxHeight && wHeight >= minHeight) {
+      $('#work').css('height', heroHeight);
+      $('#services').css('height', heroHeight);
+      $('#about').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
+      // $('#contact').css('height', heroHeight); // don't resize this section
+    }
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);

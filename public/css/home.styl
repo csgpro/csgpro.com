@@ -43,6 +43,7 @@ p
   font-size 13px
 
 img
+  transition-property width,height
   transition-timing-function ease
   transition-duration 0.5s
 
@@ -193,7 +194,7 @@ a
 @media desk
   #main > div > section
     min-height 504px
-    max-height 504px
+    max-height 1000px
     overflow hidden
 @media mobile
   #main > div > section
@@ -384,8 +385,10 @@ header
 picture-spacing = 128px
 
 #about-container
-  background-image url('/img/about_bg.png')
+  // background-image url('/img/about_bg.png')
+  background-image linear-gradient(to bottom, #595959 0%, #3B3B3B 100%)
   background-repeat repeat-x
+  position relative
 #about
   aside
     margin-top 25px
@@ -406,18 +409,20 @@ picture-spacing = 128px
     color #fff
     padding 0 36px 0 36px
   .swapper
-    margin 238px 0 0 0
     padding 0
     list-style-type none
-    position relative
+    position absolute
+    bottom 263px
     .active
       opacity 1
-      transform scale(1)
+      // transform scale(1)
       z-index 6 !important
     li
-      transition all 0.3s ease
-      opacity 0.4
-      transform scale(0.9)
+      transition-property transform
+      transition-duration 0.3s
+      transition-timing-function ease
+      opacity 0.5
+      // transform scale(0.9)
       position absolute
       display inline
     li:nth-child(2)
@@ -440,10 +445,10 @@ picture-spacing = 128px
 // UPDATES
 /////////////////////////////////
 #updates-container
-  background-image url('/img/posts_bg.png')
+  // background-image url('/img/posts_bg.png')
+  background-color #f3f3f3
   background-repeat repeat-x
 #updates
-  background-color #F3F3F3
   // > div
   //   margin 0 30px 0 40px
   .container

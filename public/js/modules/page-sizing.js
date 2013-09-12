@@ -8,13 +8,19 @@
 
 var w = $(window)
   , brk // options
+  , maxHeight
+  , minHeight
   , headlineHeight = 0
   , pageWidth;
 
 function init(options) {
   pageWidth = document.documentElement.clientWidth;
 
+  // Get necessary options
   brk = options.breakpoint;
+  maxHeight = options.maxHeight;
+  minHeight = options.minHeight;
+
   headlineHeight = $('#hero > div').height();
 
   if (pageWidth >= brk)
@@ -28,12 +34,20 @@ function doResize(){
   pageWidth = document.documentElement.clientWidth;
 
   if (pageWidth >= brk) {
-    var heroHeight = w.height() - 95
+    var wHeight = w.height()
+      , heroHeight = wHeight - 90
       , topMargin = (heroHeight - headlineHeight) / 2;
 
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
+    if (wHeight <= maxHeight && wHeight >= minHeight) {
+      $('#work').css('height', heroHeight);
+      $('#services').css('height', heroHeight);
+      $('#about').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
+      // $('#contact').css('height', heroHeight); // don't resize this section
+    }
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
