@@ -279,8 +279,8 @@ block content
                 div.grid__item.one-whole.right
                   small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
                 div.right-gutter.abstract
-                  h2= post.Title
-                  h3.serif by #{post.AuthorFullName}
+                  h3= post.Title
+                  h4.serif by #{post.AuthorFullName}
                   p= post.Abstract
                 div.grid__item.one-whole.right
                   small 

@@ -337,6 +337,31 @@ exports.getPost = function (postId, callback) {
 
 };
 
+exports.getFlatPost = function(postId, callback) {
+
+  options.path = '/api/allposts/?id=' + postId ;
+
+  https.get(options, function(res){
+    var chunk = '';
+
+    res.on('data', function(data){
+      chunk += data;
+    });
+
+    res.on('end', function(){
+      if (isJSON(chunk))
+        var r = JSON.parse(chunk);
+
+      if (r) { // post found
+        callback(null, r[0]);
+      } else {
+        callback(new Error('Error retrieving post from Azure Mobile Services'));
+      }
+    });
+  });
+
+};
+
 exports.patchPost = function (post, callback) {
 
   var o = {

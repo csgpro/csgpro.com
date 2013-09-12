@@ -6,8 +6,10 @@ body.body-white{background-color:#fff}
 p{font-family:'Tahoma',Helvetica,sans-serif;font-size:13px}
 img{-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;-webkit-transition-duration:.5s;-moz-transition-duration:.5s;-o-transition-duration:.5s;-ms-transition-duration:.5s;transition-duration:.5s}
 a{color:#429ec7;text-decoration:none}
+.article h1,.article h2,.article h3,.article h4,.article h5,.article h6{color:#09a4e6}
+.article h1{margin-bottom:0}
 .serif{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif;font-style:italic}
-.grey{color:#888}
+.grey{color:#888 !important}
 .text-size-base{font-size:13px}
 .text-size-sm{font-size:18.2px}
 .text-size-md{font-size:22.75px}

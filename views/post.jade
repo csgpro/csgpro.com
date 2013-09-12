@@ -6,21 +6,31 @@ block content
     section#updates.grid.wrapper
       include partials/updates-header
   div#main.blog-content.grid.wrapper
-    if (!post)
+    if (post.error)
       div.grid__item.one-whole
-        div.alert.alert-danger Post not found.
+        h1 Post not found.
     else
-      div.grid__item.one-whole
+      div.grid__item.one-whole.full
         if (!post.PublishDate)
           div.alert.alert-info.row
             div.grid__item.one-half.full
-              span This post is <b>unpublished.</b>
+              span This post is
+                string  unpublished.
             div.grid__item.one-half.right
               a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
 
-        div.grid__item.desk--nine-twelfths
+        article.grid__item.desk--nine-twelfths.article.pad-right-1
           h1= post.Title
-          p!= marked(post.Markdown)
+          div.grid__item.one-half.full
+            if (post.Category === 'Blog')
+              h3.serif a blog post by #{post.AuthorFullName}
+          div.grid__item.one-half.full.right
+            h4.grey posted 
+              | #{post.PublishDate ? moment(post.PublishDate).format('L') : ''}
+          if (post.Markdown)
+            p!= marked(post.Markdown)
+          else
+            p This blog post is empty.
         div.grid__item.desk--three-twelfths.space-top
           small Related Topics:
           div.panel

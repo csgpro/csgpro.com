@@ -35,10 +35,11 @@ module.exports.category = function(req, res) {
 module.exports.get = function(req, res) {
   var postId = req.params.id;
 
-  db.getPost(postId, function(err, post){
+  db.getFlatPost(postId, function(err, post){
     res.render('post', {
       post: post,
-      marked: marked
+      marked: marked,
+      moment: moment
     });
   });
 };
