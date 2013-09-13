@@ -1,10 +1,2 @@
-.markdown-entry {
-  font-family: consolas;
-  font-size: 14px;
-}
-.tall {
-  min-height: 400px !important;
-  max-height: 400px !important;
-  overflow-y: scroll;
-  resize: none;
-}
+.markdown-entry{font-family:consolas;font-size:14px}
+.tall{min-height:400px !important;max-height:400px !important;overflow-y:scroll;resize:none}

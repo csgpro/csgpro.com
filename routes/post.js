@@ -36,11 +36,17 @@ module.exports.get = function(req, res) {
   var postId = req.params.id;
 
   db.getFlatPost(postId, function(err, post){
-    res.render('post', {
-      post: post,
-      marked: marked,
-      moment: moment
-    });
+    if (post) {
+      post.Topics = post.Topics.split(',');
+
+      res.render('post', {
+        post: post,
+        marked: marked,
+        moment: moment
+      });
+    } else {
+      res.send(404);
+    }
   });
 };
 

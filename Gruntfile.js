@@ -20,6 +20,7 @@ module.exports = function(grunt) {
           , 'public/css/grid.css'
           , 'public/css/home.css'
           , 'public/css/swipeshow.css'
+          , 'public/css/typography.css'
           ]
         }
     }
@@ -36,6 +37,7 @@ module.exports = function(grunt) {
       , files: {
           'public/css/home.css': 'public/css/home.styl'
         , 'public/css/admin.css': 'public/css/admin.styl'
+        , 'public/css/typography.css': 'public/css/typography.styl'
         }
       }
     }

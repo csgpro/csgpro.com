@@ -16,16 +16,17 @@ html.no-js
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     link(rel='stylesheet', href='/css/normalize.css')
-    link(rel='stylesheet', href='/css/admin.css')
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bundle.min.css')
+    link(rel='stylesheet', href='/css/admin.css')
 
     script(src='/js/vendor/modernizr-2.6.2.min.js')
   body
-    nav.navbar.navbar-default
+    nav.navbar.navbar-inverse
       div.navbar-header
         a(href='/admin').navbar-brand Administration
       if user
-        ul.nav.navbar-nav
+        ul.nav.navbar-nav.nav-right
           if user.IsAdmin
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown')

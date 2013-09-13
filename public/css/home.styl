@@ -22,9 +22,6 @@ gutter = 24px
 /***************************************
  * General Styles
  ***************************************/
-h1,h2,h3,h4,h5,h6
-  font-family 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
-  font-weight lighter
 
 #nav-spacer // TODO: fix
   @media desk
@@ -32,31 +29,21 @@ h1,h2,h3,h4,h5,h6
   @media mobile
     height 84px
 
-body // TODO: fix fonts
-  background-color background-color
-  font-family 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
-body.body-white
-  background-color #fff
-
-p
-  font-family 'Tahoma', Helvetica, sans-serif
-  font-size 13px
-
 img
   transition-property width,height
   transition-timing-function ease
   transition-duration 0.5s
 
-a
-  color rgb( 66, 158, 199 )
-  text-decoration none
-
-.article // this is a blog post article
-  h1,h2,h3,h4,h5,h6
-    color main-blue
-  h1
-    margin-bottom 0
-  
+/***************************************
+ * Posts
+ ***************************************/
+.topic-list
+  list-style-type none
+  padding gutter*0.5 !important
+.topic-list li
+  margin 5px 0 5px 0
+  font-size base-font-size
+  text-transform uppercase
 
 /***************************************
  * Helpers
@@ -67,6 +54,9 @@ a
 
 .grey
   color #888 !important
+
+.blue
+  color main-blue
 
 .text-size-base
   font-size base-font-size*1
@@ -91,6 +81,14 @@ a
   font-size 16px
   font-weight lighter
   text-transform uppercase
+
+.panel
+  border-radius border-radii
+
+.panel.panel-blue
+  background-color main-blue
+  color #fff
+
 
 .caps
   text-transform uppercase
@@ -449,11 +447,9 @@ picture-spacing = 128px
   background-color #f3f3f3
   background-repeat repeat-x
 #updates
-  // > div
-  //   margin 0 30px 0 40px
   .container
     padding gutter 0 gutter 0
-    line-height 28px
+    line-height 33px
   h1,h2,h3,h4,h5,h6
     margin 0
   div
