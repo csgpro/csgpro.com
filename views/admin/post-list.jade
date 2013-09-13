@@ -28,11 +28,12 @@ block content
                   ul.dropdown-menu(role='menu')
                     li: a(href='/admin/post/#{post.id}/update') Edit
                     li: a(href='/post/#{post.id}') View
-                    if !post.PublishDate
-                      li: a(href='/admin/post/#{post.id}/publish') Publish
-                    else
-                      li: a(href='/admin/post/#{post.id}/unpublish') Unpublish
-                    li: a.btn-danger(href='/admin/post/#{post.id}/delete') Delete
+                    if (user && user.IsAdmin)
+                      if !post.PublishDate
+                        li: a(href='/admin/post/#{post.id}/publish') Publish
+                      else
+                        li: a(href='/admin/post/#{post.id}/unpublish') Unpublish
+                      li: a.btn-danger(href='/admin/post/#{post.id}/delete') Delete
               td= post.id
               td= post.AuthorUsername
               td= post.Title

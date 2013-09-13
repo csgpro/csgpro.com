@@ -8,7 +8,7 @@ var express          = require('express')
   , fs               = require('fs')
   , index            = require('./routes/index')
   , http             = require('http')
-  , stylus           = require('stylus')
+  // , stylus           = require('stylus')
   , nib              = require('nib')
   , path             = require('path')
   , passport         = require('passport')
@@ -54,7 +54,7 @@ passport.use(new TwitterStrategy({
 
     db.getUserFromProfile(profile, function(err, user){
 
-      if (user && user.IsAdmin === true && !err) { // TODO: allow non-admins access into the system
+      if (user && !err) { 
         return done(null, user);
       } else {
         return err ? done(err, null) : done(new Error('User not authorized'), null);
@@ -73,10 +73,10 @@ app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
-app.use(stylus.middleware({ // stylus CSS preprocessor
-  src: __dirname + '/public'
-, compile: compile
-}));
+// app.use(stylus.middleware({ // stylus CSS preprocessor
+//   src: __dirname + '/public'
+// , compile: compile
+// }));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -87,11 +87,11 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Compile function for stylus
-function compile(str, path){
-  return stylus(str)
-    .set('filename', path)
-    .use(nib()); // Use nib for vendor-prefixing
-}
+// function compile(str, path){
+//   return stylus(str)
+//     .set('filename', path)
+//     .use(nib()); // Use nib for vendor-prefixing
+// }
 
 // Development only
 if ('development' == app.get('env')) { // TODO: turn this back on

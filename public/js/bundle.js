@@ -206,8 +206,8 @@ function doResize(){
     $('#hero').css('height', heroHeight);
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
-      $('#services').css('height', heroHeight);
-      $('#about').css('height', heroHeight);
+      // $('#services').css('height', heroHeight);
+      // $('#about').css('height', heroHeight);
       $('#updates').css('height', heroHeight);
       // $('#contact').css('height', heroHeight); // don't resize this section
     }

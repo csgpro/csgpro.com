@@ -17,7 +17,8 @@ block content
               span This post is
                 string  unpublished.
             div.grid__item.one-half.right
-              a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
+              if (user && user.IdAdmin)
+                a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
 
         article.grid__item.desk--nine-twelfths.article.pad-right-1
           h1= post.Title
@@ -25,8 +26,9 @@ block content
             if (post.Category === 'Blog')
               h3.serif a blog post by #{post.AuthorFullName}
           div.grid__item.one-half.full.right
-            h4.grey posted 
-              | #{post.PublishDate ? moment(post.PublishDate).format('L') : ''}
+            if (post.PublishDate)
+              h4.grey posted 
+                | #{moment(post.PublishDate).format('L')}
           if (post.Markdown)
             p!= marked(post.Markdown)
           else
