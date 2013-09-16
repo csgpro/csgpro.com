@@ -190,11 +190,17 @@ function each(){
 module.exports = init;
 
 },{}],5:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
 /**
  * This module is used to resize certain parts of the page based on the user
  * screen size. It assumes:
  * - jQuery 1.10.2
  */
+
 
 'use strict';
 
@@ -225,7 +231,7 @@ function init(options) {
 function doResize(){
   pageWidth = document.documentElement.clientWidth;
 
-  if (pageWidth >= brk) {
+  if (pageWidth >= brk) { //desktop
     var wHeight = w.height()
       , heroHeight = wHeight - 90
       , topMargin = (heroHeight - headlineHeight) / 2
@@ -248,7 +254,12 @@ function doResize(){
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
+  }else { // mobile
+    // undo the page sizing
+    $('#work').removeAttr('style');
+    $('#updates').removeAttr('style');
   }
+
 }
 
 ///////////////////
