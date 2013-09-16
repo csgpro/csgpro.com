@@ -5,16 +5,17 @@
 
 'use strict';
 
-var pageSizing      = require('./modules/page-sizing')
-  , navScrolling    = require('./modules/nav-scrolling')
-  , stickyNav       = require('./modules/sticky-nav')
-  , sectionSwapping = require('./modules/section-swapping')
-  , carousel        = require('./modules/carousel')
-  , options = { // global options for the site
-      breakpoint: 768, // px
-      maxHeight: 990, // px
-      minHeight: 504 // px
-    };
+var pageSizing      = require('./modules/page-sizing');
+var navScrolling    = require('./modules/nav-scrolling');
+var stickyNav       = require('./modules/sticky-nav');
+var sectionSwapping = require('./modules/section-swapping');
+var carousel        = require('./modules/carousel');
+var mobileNav       = require('./modules/mobile-nav');
+var options = {    // global options for the site
+  breakpoint : 768,  // px
+  maxHeight  : 990,  // px
+  minHeight  : 595   // px - approx. adjusted for nav bar height
+};
 
 // Fire the modules, order is important
 if (window.location.pathname === '/') { // only do all this javascript in root
@@ -23,4 +24,5 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   stickyNav(options);
   sectionSwapping(options);
   carousel();
+  mobileNav(options);
 }

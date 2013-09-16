@@ -6,16 +6,17 @@
 
 'use strict';
 
-var pageSizing      = require('./modules/page-sizing')
-  , navScrolling    = require('./modules/nav-scrolling')
-  , stickyNav       = require('./modules/sticky-nav')
-  , sectionSwapping = require('./modules/section-swapping')
-  , carousel        = require('./modules/carousel')
-  , options = { // global options for the site
-      breakpoint: 768, // px
-      maxHeight: 990, // px
-      minHeight: 504 // px
-    };
+var pageSizing      = require('./modules/page-sizing');
+var navScrolling    = require('./modules/nav-scrolling');
+var stickyNav       = require('./modules/sticky-nav');
+var sectionSwapping = require('./modules/section-swapping');
+var carousel        = require('./modules/carousel');
+var mobileNav       = require('./modules/mobile-nav');
+var options = {    // global options for the site
+  breakpoint : 768,  // px
+  maxHeight  : 990,  // px
+  minHeight  : 595   // px - approx. adjusted for nav bar height
+};
 
 // Fire the modules, order is important
 if (window.location.pathname === '/') { // only do all this javascript in root
@@ -24,9 +25,10 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   stickyNav(options);
   sectionSwapping(options);
   carousel();
+  mobileNav(options);
 }
 
-},{"./modules/carousel":2,"./modules/nav-scrolling":3,"./modules/page-sizing":4,"./modules/section-swapping":5,"./modules/sticky-nav":6}],2:[function(require,module,exports){
+},{"./modules/carousel":2,"./modules/mobile-nav":3,"./modules/nav-scrolling":4,"./modules/page-sizing":5,"./modules/section-swapping":6,"./modules/sticky-nav":7}],2:[function(require,module,exports){
 /**
  * This module sets up the homepage carousel. Assumes:
  * - jQuery 1.10.2
@@ -55,6 +57,33 @@ function init(){
 module.exports = init;
 
 },{}],3:[function(require,module,exports){
+'use strict';
+
+function init(options) {
+  var toggle = $('.toggle-nav');
+  var bdy = $('body');
+  var brk = options.breakpoint;
+  var links = $('.mobile-nav a');
+  var mainBody = $('.main-body');
+
+  toggle.on('click',function(){
+    var pageWidth = document.documentElement.clientWidth;
+
+    if (pageWidth <= brk) { // on a mobile
+      bdy.toggleClass('nav-open');
+    }
+    
+  });
+
+  links.on('click', function(){
+    bdy.removeClass('nav-open');
+  });
+
+}
+
+module.exports = init;
+
+},{}],4:[function(require,module,exports){
 /**
  * This module sets up the events necessary to allow the user to scroll around
  * the page and have the nav update appropriately. It assumes:
@@ -160,7 +189,7 @@ function each(){
 ///////////////////
 module.exports = init;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * This module is used to resize certain parts of the page based on the user
  * screen size. It assumes:
@@ -199,17 +228,22 @@ function doResize(){
   if (pageWidth >= brk) {
     var wHeight = w.height()
       , heroHeight = wHeight - 90
-      , topMargin = (heroHeight - headlineHeight) / 2;
+      , topMargin = (heroHeight - headlineHeight) / 2
+      , body = $(body);
+
+    // Make sure the mobile nav is hidden
+    body.removeClass('nav-open');
 
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
+
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
-      // $('#services').css('height', heroHeight);
-      // $('#about').css('height', heroHeight);
+      // $('#services').css('height', heroHeight); // don't resize this section
+      // $('#about').css('height', heroHeight);    // don't resize this section
       $('#updates').css('height', heroHeight);
-      // $('#contact').css('height', heroHeight); // don't resize this section
+      // $('#contact').css('height', heroHeight);  // don't resize this section
     }
 
     // Vertically center the hero content
@@ -222,7 +256,7 @@ function doResize(){
 ///////////////////
 module.exports = init;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * This module finds all the specially marked up sections in the html and makes
  * them swap their content based on associated navigation elements. It also
@@ -274,7 +308,7 @@ function init(options){
 ////////////////////
 module.exports = init;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * This module is used to make the navigations fixed when the user hits a
  * certain spot on their scrolling. It assumes:

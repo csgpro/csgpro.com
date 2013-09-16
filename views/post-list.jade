@@ -12,7 +12,7 @@ block content
       p Sharing stuff
     if (categories)
       each category in categories
-        div.grid__item.one-whole
+        div.grid__item.one-whole.desk--full
           h2 Category:&nbsp;
             b "#{category.name}"
           hr
@@ -24,11 +24,11 @@ block content
               p #{post.Abstract}
                 b: a(href='/post/#{post.id}')  MORE
         div.grid__item.one-whole.right.space-top-sm
-          a(href='#') more blog posts this way }
+          a(href='/post/category/#{category.name}') more blog posts this way }
     else if (topic)
       //- something
     else if (category && posts)
-      div.grid__item.one-whole
+      div.grid__item.one-whole.full
         each post in posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
             div: a.text-size-sm(href='/post/#{post.id}')= post.Title

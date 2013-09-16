@@ -36,17 +36,22 @@ function doResize(){
   if (pageWidth >= brk) {
     var wHeight = w.height()
       , heroHeight = wHeight - 90
-      , topMargin = (heroHeight - headlineHeight) / 2;
+      , topMargin = (heroHeight - headlineHeight) / 2
+      , body = $(body);
+
+    // Make sure the mobile nav is hidden
+    body.removeClass('nav-open');
 
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
+
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
-      // $('#services').css('height', heroHeight);
-      // $('#about').css('height', heroHeight);
+      // $('#services').css('height', heroHeight); // don't resize this section
+      // $('#about').css('height', heroHeight);    // don't resize this section
       $('#updates').css('height', heroHeight);
-      // $('#contact').css('height', heroHeight); // don't resize this section
+      // $('#contact').css('height', heroHeight);  // don't resize this section
     }
 
     // Vertically center the hero content
