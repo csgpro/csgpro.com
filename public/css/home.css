@@ -12,7 +12,7 @@ body{overflow-x:hidden}
 .toggle-nav{margin:24px 0 0 24px}
 .icon-bar{width:38px;height:6px;border-top:solid #227db4 2px;margin-top:2px;background-color:#2ca1ee}
 .topic-list{list-style-type:none;padding:12px !important}
-.topic-list li{margin:5px 0 5px 0;font-size:13px;text-transform:uppercase}
+.topic-list a{margin:5px 0 5px 0;color:#fff;font-size:13px;text-transform:uppercase}
 .serif{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif;font-style:italic}
 .grey{color:#888 !important}
 .blue{color:#09a4e6}

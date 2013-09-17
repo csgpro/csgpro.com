@@ -33,11 +33,12 @@ block content
             p!= marked(post.Markdown)
           else
             p This blog post is empty.
-        div.grid__item.desk--three-twelfths.space-top
-          h4.blue Related Topics:
-          - console.dir(post);
-          div.panel.panel-blue
-            ul.topic-list
-              each topic in post.Topics
-                li= topic
+        if (post.Topics != '')
+          - console.log(post)
+          div.grid__item.desk--three-twelfths.space-top
+            h4.blue Related Topics:
+            div.panel.panel-blue
+              ul.topic-list
+                each topic in post.Topics
+                  li: a(href='/post/topic/#{topic}')= topic
 

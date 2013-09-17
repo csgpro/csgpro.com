@@ -307,6 +307,27 @@ exports.getPosts = function (opts, callback) {
 
 };
 
+exports.getPostsByTopic = function(topic, callback) {
+
+  var o = {
+    uri: url + "/tables/posts/?$filter=indexof(Topics, '" + topic + "') gt -1",
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+
+  request.get(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && response.length && isJSON(response)) {
+      callback(null, JSON.parse(response));
+    } else {
+      callback(new Error('Error getting posts by topic.'));
+    }
+  });
+
+};
+
 /**
  * Retrieve a single post from AMS
  * @param  {int}      postId   The int id for the post

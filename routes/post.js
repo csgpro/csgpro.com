@@ -1,6 +1,7 @@
 var db = require('../modules/db')
   , marked = require('marked')
-  , moment = require('moment');
+  , moment = require('moment')
+  , sanitize = require('validator').sanitize;
 
 marked.setOptions({
   gfm: true,
@@ -32,6 +33,25 @@ module.exports.category = function(req, res) {
 
 };
 
+module.exports.topic = function(req, res) {
+  var topic = req.params.topic;
+  topic = sanitize(topic).xss().trim();
+
+  db.getPostsByTopic(topic, function(err, posts){
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('post-list', {
+        title: 'Topics',
+        moment: moment,
+        topic: topic,
+        posts: posts
+      });
+    }
+  });
+
+};
+
 module.exports.get = function(req, res) {
   var postId = req.params.id;
 
@@ -51,17 +71,41 @@ module.exports.get = function(req, res) {
 };
 
 module.exports.index = function(req, res) {
+  if (req.query.q) {
+    var searchInput = sanitize(req.query.q).xss().trim();
+    var regex = new RegExp(searchInput, 'gi');
 
-  db.getPosts({ categorizedTop6: true }, function(err, categories) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.render('post-list', {
-        title: 'All Posts',
-        moment: moment,
-        categories: categories
-      });
-    }
-  });
+    db.getPosts(null, function(err, posts){
+      if (err) {
+        res.send(err);
+      } else {
+        posts = posts.filter(function(i){
+
+          return regex.test(i.Markdown)
+              || regex.test(JSON.stringify(i.Categories || ''));
+        });
+        res.render('post-list', {
+          title: 'Search',
+          moment: moment,
+          searchResult: posts,
+          searchInput: searchInput
+        });
+      }
+    });
+
+  } else {
+    db.getPosts({ categorizedTop6: true }, function(err, categories) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.render('post-list', {
+          title: 'All Posts',
+          moment: moment,
+          categories: categories
+        });
+      }
+    });
+  }
+
 
 };
