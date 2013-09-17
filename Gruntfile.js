@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   , cssmin: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
-              + '<%= grunt.template.today("yyyy-mm-dd") %> CSS bundle*/'
+              + '<%= grunt.template.today("yyyy-mm-dd") %> CSS bundle */\r\n'
       }
     , combine: {
         files: {
@@ -21,6 +21,7 @@ module.exports = function(grunt) {
           , 'public/css/home.css'
           , 'public/css/swipeshow.css'
           , 'public/css/typography.css'
+          , 'public/css/lightbox.css'
           ]
         }
     }
@@ -47,6 +48,7 @@ module.exports = function(grunt) {
               + '<%= grunt.template.today("yyyy-mm-dd") %>'
               + '\r\n *  Third party libraries:'
               + '\r\n *  - Swipeshow: http://ricostacruz.com/swipeshow/'
+              + '\r\n *  - Magnific: http://dimsemenov.com/plugins/magnific-popup/'
               + '\r\n *'
               + '\r\n */'
       }
@@ -54,6 +56,7 @@ module.exports = function(grunt) {
         files: {
           'public/js/bundle.min.js': [
             'public/js/vendor/swipeshow.js'
+          , 'public/js/vendor/magnific.js'
           , 'public/js/bundle.js'
           ]
         }

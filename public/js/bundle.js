@@ -1,4 +1,9 @@
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
 /**
  * This is the main JavaScript file that loads the other modules and firest them
  * off. I am using Browserify and Common JS style modules to load them in.
@@ -12,6 +17,7 @@ var stickyNav       = require('./modules/sticky-nav');
 var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
+var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
   maxHeight  : 990,  // px
@@ -26,9 +32,12 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+  lightbox();
 }
 
-},{"./modules/carousel":2,"./modules/mobile-nav":3,"./modules/nav-scrolling":4,"./modules/page-sizing":5,"./modules/section-swapping":6,"./modules/sticky-nav":7}],2:[function(require,module,exports){
+
+},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/nav-scrolling":5,"./modules/page-sizing":6,"./modules/section-swapping":7,"./modules/sticky-nav":8}],2:[function(require,module,exports){
 /**
  * This module sets up the homepage carousel. Assumes:
  * - jQuery 1.10.2
@@ -57,6 +66,27 @@ function init(){
 module.exports = init;
 
 },{}],3:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
+'use strict';
+
+function init() {
+  $('.article a').magnificPopup({
+    type:'image',
+    gallery: {
+      enabled: true,
+      navigateByImageClick: true
+    }
+  });
+
+}
+
+
+module.exports = init;
+},{}],4:[function(require,module,exports){
 'use strict';
 
 function init(options) {
@@ -83,7 +113,7 @@ function init(options) {
 
 module.exports = init;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * This module sets up the events necessary to allow the user to scroll around
  * the page and have the nav update appropriately. It assumes:
@@ -189,7 +219,7 @@ function each(){
 ///////////////////
 module.exports = init;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */
@@ -267,7 +297,7 @@ function doResize(){
 ///////////////////
 module.exports = init;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * This module finds all the specially marked up sections in the html and makes
  * them swap their content based on associated navigation elements. It also
@@ -319,7 +349,7 @@ function init(options){
 ////////////////////
 module.exports = init;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * This module is used to make the navigations fixed when the user hits a
  * certain spot on their scrolling. It assumes:
