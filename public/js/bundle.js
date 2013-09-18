@@ -32,7 +32,8 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
-} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+} else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
+  mobileNav(options);
   lightbox();
 }
 
@@ -348,22 +349,19 @@ function init(options){
       , brk = options.breakpoint
       , pageWidth = document.documentElement.clientWidth;
 
-    document.greer = me;
+    document.greer = me; // DEBUG
+
     me.addClass('active');
     me.siblings().removeClass('active');
+
     if (pageWidth < brk) { // mobile
       var isAccordion = /accordion/.test(me.parent()[0].className);
       if (isAccordion) {
         // WIP
-        var contentElements = $('.swappable section[data-swap="' + text + '"] p')
-          , titleElement = $('.swappable section[data-swap="' + text + '"] .title')
-          , title = titleElement[0].innerText
-          , body = $('li[data-swap="'+ text +'"] section');
+        var content = $('#swappable-' + text);
+        var contentTarget = $('#swapper-' + text + ' section');
 
-        console.log(contentElements, title, body);
-        contentElements.each(function(i,e){
-          console.log(e);
-        });
+        contentTarget.html(content.children());
       }
       // something mobile
     } else {               // desktop

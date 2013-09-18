@@ -382,7 +382,14 @@ header
       margin 0
       padding 0
       list-style-type none
-      li.active
+      section
+        padding-top gutter*0.5
+        color #000
+        background-color #f3f3f3
+        .title
+          font-size base-font-size*2
+          font-family 'Century Gothic', CenturyGothic, Helvetica, sans-serif
+      li.active .services-menu
         color #fff
         .chevron
           transform rotate(180deg) translateY(25px)
@@ -393,7 +400,7 @@ header
             fill #fff
           polygon
             fill #fff
-      li
+      .services-menu
         @media desk
           cursor pointer
           padding 20px 0 5px 0
@@ -422,7 +429,7 @@ header
           polygon
             fill #00A3E4
       @media desk
-        li:hover
+        .services-menu:hover
           color #fff
           > svg
             path

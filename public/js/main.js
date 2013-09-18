@@ -31,7 +31,8 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
-} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+} else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
+  mobileNav(options);
   lightbox();
 }
 

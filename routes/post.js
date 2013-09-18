@@ -79,11 +79,16 @@ module.exports.index = function(req, res) {
       if (err) {
         res.send(err);
       } else {
+        // make sure posts are published, and match a query
         posts = posts.filter(function(i){
+          var a = parseInt(i.PublishDate, 10) > 0;
+          var b = regex.test(i.Markdown);
+          var c = regex.test(JSON.stringify(i.Categories || ''));
+          var d = regex.test(i.Title);
 
-          return regex.test(i.Markdown)
-              || regex.test(JSON.stringify(i.Categories || ''));
+          return a && ( b || c || d );
         });
+
         res.render('post-list', {
           title: 'Search',
           moment: moment,
