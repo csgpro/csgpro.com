@@ -6,7 +6,19 @@
 'use strict';
 
 function init() {
-  $('.article a').magnificPopup({
+  // Fix the images so they are contained by links to the image
+  $('.article img').each(function(index, element) {
+    var newElement = document.createElement('a');
+    var parent = element.parentNode;
+    var link = element.attributes['src'].value;
+
+    newElement.setAttribute('href', link);
+    newElement.setAttribute('class', 'lightboxed');
+    newElement.appendChild(element.cloneNode(true));
+    parent.replaceChild(newElement, element);
+  });
+
+  $('.article .lightboxed').magnificPopup({
     type:'image',
     gallery: {
       enabled: true,
