@@ -2,6 +2,8 @@
 
 var db = require('../modules/db')
   , moment = require('moment')
+  , _ = require('lodash')
+  , email = require('../modules/email')
   , toString = Object.prototype.toString;
 
 var topics = ['Analytics', // TODO: replace with database function
@@ -130,6 +132,7 @@ exports.del = function(req, res) {
 
 };
 
+// Create and update
 exports.create = function (req, res) {
   var b = req.body;
   var topics = '';
@@ -173,6 +176,38 @@ exports.create = function (req, res) {
     db.createPost(post, function(err, newPostId) {
       if (newPostId) {
         res.redirect('/post/' + newPostId);
+        // email admins
+        db.getUsers(function(err, users) {
+          var emails;
+
+          if (err) {
+            console.log('Error getting users when trying to send admin emails.');
+          } else {
+            users = users.filter(function(user){
+              return user.IsAdmin; // send email to all admins
+            });
+            emails = _.pluck(users, 'Username');
+            emails = emails.map(function(i) { return i + '@csgpro.com'; });
+            emails = emails.join(',');
+
+            email.sendEmail(
+              emails, // to
+              'New blog post submitted', // subject
+              'A new post was submitted by ' // body
+              + req.user.FullName + ' at ' + moment().format('LLL') + '.\r\n\r\n'
+              + 'Click <a href="http://csgpro.com/post/' + newPostId  
+              + '">here</a> to review the post.',
+              true,
+              function(err, success){
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('Emails successfully sent to ' + emails);
+                }
+              }
+            );
+          }
+        });
       } else {
         res.send(err);
       }
