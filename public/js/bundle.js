@@ -20,7 +20,7 @@ var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 990,  // px
+  maxHeight  : 1000,  // px
   minHeight  : 595   // px - approx. adjusted for nav bar height
 };
 
@@ -210,7 +210,7 @@ function recalcTops(){
 }
 
 function each(){
-  var at = w.scrollTop() + offset + 2;
+  var at = w.scrollTop() + (w.height() / 2);
 
   arr.forEach(function(item){
     if ( at >= item.top && at <= item.bottom ) {
@@ -265,7 +265,7 @@ var w = $(window)
   , pageWidth;
 
 function init(options) {
-  pageWidth = document.documentElement.clientWidth;
+  pageWidth = w.width();
 
   // Get necessary options
   brk = options.breakpoint;
@@ -282,7 +282,9 @@ function init(options) {
 }
 
 function doResize(){
-  pageWidth = document.documentElement.clientWidth;
+
+  // pageWidth = document.documentElement.clientWidth;
+  pageWidth = w.width();
 
   if (pageWidth >= brk) { //desktop
     var wHeight = w.height()
@@ -296,7 +298,7 @@ function doResize(){
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
-
+    
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
       // $('#services').css('height', heroHeight); // don't resize this section
@@ -307,7 +309,7 @@ function doResize(){
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
-  }else { // mobile
+  } else { // mobile
     // undo the page sizing
     $('#work').removeAttr('style');
     $('#updates').removeAttr('style');

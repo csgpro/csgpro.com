@@ -82,7 +82,7 @@ function recalcTops(){
 }
 
 function each(){
-  var at = w.scrollTop() + offset + 2;
+  var at = w.scrollTop() + (w.height() / 2);
 
   arr.forEach(function(item){
     if ( at >= item.top && at <= item.bottom ) {

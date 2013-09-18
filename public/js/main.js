@@ -19,7 +19,7 @@ var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 990,  // px
+  maxHeight  : 1000,  // px
   minHeight  : 595   // px - approx. adjusted for nav bar height
 };
 
