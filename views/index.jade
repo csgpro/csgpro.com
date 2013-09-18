@@ -46,7 +46,7 @@ block content
             p CSG is turning 20 and we're<br>having an open-house at our<br>Pearl district offices XX/XX
             p: a(href='#') get all the details }
 
-    nav
+    nav.hide-mobile
       div.wrapper
         img#logo.big-logo(src='/img/logo.svg')
         ul
@@ -279,20 +279,23 @@ block content
 
           //- Working on blog posts.
           div.grid_item.one-whole.space-left-sm.desk--space-top
-            each post in posts
-              div.post.grid__item.one-whole.desk--four-twelfths
-                div(class="circle icon-#{post.Category.toLowerCase()}")
-                article.grid__item.eleven-twelfths
-                  div.grid__item.one-whole.right
-                    small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
-                  div.right-gutter.abstract
-                    h3= post.Title
-                    h4.serif by #{post.AuthorFullName}
-                    p= post.Abstract
-                  div.grid__item.one-whole.right
-                    small 
-                      a(href="/post/#{post.id}")
-                        b Read more }
+            if (posts)
+              each post in posts
+                div.post.grid__item.one-whole.desk--four-twelfths
+                  div(class="circle icon-#{post.Category.toLowerCase()}")
+                  article.grid__item.eleven-twelfths
+                    div.grid__item.one-whole.right
+                      small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
+                    div.right-gutter.abstract
+                      h3= post.Title
+                      h4.serif by #{post.AuthorFullName}
+                      p= post.Abstract
+                    div.grid__item.one-whole.right.full
+                      small 
+                        a(href="/post/#{post.id}")
+                          b Read more }
+            else
+              h1 We're having trouble loading out blog posts at this moment.
 
 
       /////////////////////////////////
@@ -301,21 +304,28 @@ block content
       div#contact-container
         section#contact.grid.wrapper
           article.grid__item.one-whole.desk--space-top
-            div.grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
+            form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
               div.grid__item.one-whole
-                label Got a quick question?
-                p Greer greerson
+                if (contacted === 'true')
+                  label Message recieved loud and clear, thanks!
+                  p We'll be getting back to you soon. Want to send another? Go for it!
+                else if (contacted === 'false')
+                  label Oops! Error error *lasers shooting out of robot eyes*
+                  p We had an issue sending the email. Try again?
+                else
+                  label Got a quick question?
+                  p We'd love to get to back to you with an answer. Or maybe a hamburger.
               div.grid__item.six-twelfths
                 label What's your name?
-                input(type='text')
+                input.serif(name='name', type='text')
               div.grid__item.six-twelfths
                 label How can we reach you?
-                input(type='text')
+                input.serif(name='contactInfo', type='text')
               div.grid__item.one-whole
                 label So, what's on your mind?
-                textarea(type='text')
+                textarea.serif(name='comments', type='text')
               div.grid__item.one-whole.right
-                button.btn.btn-blue Make it so
+                input.serif(type='submit').btn.btn-blue Make it so
             div.grid__item.desk--seven-twelfths.one-whole.full
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 734 NW 14th Avenue <br>Portland, OR 97209
