@@ -92,6 +92,8 @@ body
   padding gutter*0.5 !important
 .topic-list li
   margin 5px 0 5px 0
+.topic-list a
+  color white
   font-size base-font-size
   text-transform uppercase
 
@@ -216,6 +218,9 @@ body
   padding-left 0
 .mobile--full
   @media mobile
+    padding-left 0
+.desk--full
+  @media desk
     padding-left 0
 .mobile--img-sm
   @media mobile
@@ -478,15 +483,11 @@ picture-spacing = 128px
     list-style-type none
     position relative
     .active
-      opacity 1
-      // transform scale(1)
       z-index 6 !important
     li
       transition-property transform
       transition-duration 0.3s
       transition-timing-function ease
-      opacity 0.5
-      // transform scale(0.9)
       position absolute
       display inline
     li:nth-child(2)
@@ -501,8 +502,8 @@ picture-spacing = 128px
     li:nth-child(5)
       left picture-spacing * 4
       z-index 3
-    li:hover:not(.active)
-      opacity 0.8
+    // li:hover:not(.active)
+
 
 
 /////////////////////////////////
@@ -577,7 +578,7 @@ picture-spacing = 128px
     font-size 1.6em
   p
     margin-top 0
-  input,textarea
+  input[type='text'],textarea
     background-color #E5E5E5
     width 100%
     max-width 100%
@@ -655,8 +656,6 @@ nav
   color rgb(74, 170, 212)
   font-size 18px
   position relative
-  @media mobile
-    display none
   @media desk
     background-color #000
     background-image linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)

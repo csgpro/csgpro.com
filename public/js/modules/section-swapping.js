@@ -1,3 +1,7 @@
+/*jslint
+  browser: true,
+  node: true */ /* globals $ */
+
 /**
  * This module finds all the specially marked up sections in the html and makes
  * them swap their content based on associated navigation elements. It also
@@ -34,7 +38,7 @@ function init(options){
         console.log(contentElements, title, body);
         contentElements.each(function(i,e){
           console.log(e);
-        })
+        });
       }
       // something mobile
     } else {               // desktop

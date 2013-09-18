@@ -1,4 +1,9 @@
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
 /**
  * This is the main JavaScript file that loads the other modules and firest them
  * off. I am using Browserify and Common JS style modules to load them in.
@@ -12,9 +17,10 @@ var stickyNav       = require('./modules/sticky-nav');
 var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
+var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 990,  // px
+  maxHeight  : 1000,  // px
   minHeight  : 595   // px - approx. adjusted for nav bar height
 };
 
@@ -26,9 +32,12 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+  lightbox();
 }
 
-},{"./modules/carousel":2,"./modules/mobile-nav":3,"./modules/nav-scrolling":4,"./modules/page-sizing":5,"./modules/section-swapping":6,"./modules/sticky-nav":7}],2:[function(require,module,exports){
+
+},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/nav-scrolling":5,"./modules/page-sizing":6,"./modules/section-swapping":7,"./modules/sticky-nav":8}],2:[function(require,module,exports){
 /**
  * This module sets up the homepage carousel. Assumes:
  * - jQuery 1.10.2
@@ -57,6 +66,39 @@ function init(){
 module.exports = init;
 
 },{}],3:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
+'use strict';
+
+function init() {
+  // Fix the images so they are contained by links to the image
+  $('.article img').each(function(index, element) {
+    var newElement = document.createElement('a');
+    var parent = element.parentNode;
+    var link = element.attributes['src'].value;
+
+    newElement.setAttribute('href', link);
+    newElement.setAttribute('class', 'lightboxed');
+    newElement.appendChild(element.cloneNode(true));
+    parent.replaceChild(newElement, element);
+  });
+
+  $('.article .lightboxed').magnificPopup({
+    type:'image',
+    gallery: {
+      enabled: true,
+      navigateByImageClick: true
+    }
+  });
+
+}
+
+
+module.exports = init;
+},{}],4:[function(require,module,exports){
 'use strict';
 
 function init(options) {
@@ -83,7 +125,10 @@ function init(options) {
 
 module.exports = init;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+/*jslint
+  node: true,
+  browser: true */ /*globals $*/
 /**
  * This module sets up the events necessary to allow the user to scroll around
  * the page and have the nav update appropriately. It assumes:
@@ -95,7 +140,7 @@ module.exports = init;
 // Grab all the nav sections, loop through them when the user scrolls, and set
 // the appropriate nav item to have a class of "selected". There may be a
 // better way to do this, but I couldn't think of one.
-var items = $('#main > div > section,#hero')
+var items = $('#hero,#work,#services,#about,#updates,#contact')
   , offset = 92 // height of the nav
   , w = $(window)
   , selected
@@ -103,14 +148,8 @@ var items = $('#main > div > section,#hero')
   , navItems = $('li[data-nav]');
 
 function init() {
-  items.each(function(i, e){
-    arr.push({
-        element: e
-      , name: e.id
-      , top: e.offsetTop
-      , bottom: e.offsetTop + e.offsetHeight
-    });
-  });
+  
+  recalcTops();
 
   w.on('scroll', each);
   w.on('touchmove', each);
@@ -160,8 +199,8 @@ function recalcTops(){
     arr.push({
         element: e
       , name: e.id
-      , top: e.offsetTop
-      , bottom: e.offsetTop + e.offsetHeight
+      , top: $(e).offset().top
+      , bottom: $(e).offset().top + e.offsetHeight
     });
   });
 
@@ -171,7 +210,7 @@ function recalcTops(){
 }
 
 function each(){
-  var at = w.scrollTop() + offset + 2;
+  var at = w.scrollTop() + (w.height() / 2);
 
   arr.forEach(function(item){
     if ( at >= item.top && at <= item.bottom ) {
@@ -189,7 +228,21 @@ function each(){
 ///////////////////
 module.exports = init;
 
-},{}],5:[function(require,module,exports){
+////////////
+// Helper //
+////////////
+function log() {
+  var toLog = '';
+  Array.prototype.forEach.call(arguments, function(item) {
+    toLog += item + ' - ';
+  });
+
+  console.log(toLog);
+}
+
+
+
+},{}],6:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */
@@ -212,7 +265,7 @@ var w = $(window)
   , pageWidth;
 
 function init(options) {
-  pageWidth = document.documentElement.clientWidth;
+  pageWidth = w.width();
 
   // Get necessary options
   brk = options.breakpoint;
@@ -229,7 +282,9 @@ function init(options) {
 }
 
 function doResize(){
-  pageWidth = document.documentElement.clientWidth;
+
+  // pageWidth = document.documentElement.clientWidth;
+  pageWidth = w.width();
 
   if (pageWidth >= brk) { //desktop
     var wHeight = w.height()
@@ -243,7 +298,7 @@ function doResize(){
     // Dynamically change the height of the hero section to match the user's
     // screen height
     $('#hero').css('height', heroHeight);
-
+    
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
       // $('#services').css('height', heroHeight); // don't resize this section
@@ -254,7 +309,7 @@ function doResize(){
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
-  }else { // mobile
+  } else { // mobile
     // undo the page sizing
     $('#work').removeAttr('style');
     $('#updates').removeAttr('style');
@@ -267,7 +322,11 @@ function doResize(){
 ///////////////////
 module.exports = init;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */ /* globals $ */
+
 /**
  * This module finds all the specially marked up sections in the html and makes
  * them swap their content based on associated navigation elements. It also
@@ -304,7 +363,7 @@ function init(options){
         console.log(contentElements, title, body);
         contentElements.each(function(i,e){
           console.log(e);
-        })
+        });
       }
       // something mobile
     } else {               // desktop
@@ -319,7 +378,7 @@ function init(options){
 ////////////////////
 module.exports = init;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * This module is used to make the navigations fixed when the user hits a
  * certain spot on their scrolling. It assumes:

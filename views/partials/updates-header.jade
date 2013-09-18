@@ -10,7 +10,7 @@ div
     div.grid__item.desk--one-half.desk--right.mobile--space-top-xs
       a(href='/post') view all posts&nbsp;&nbsp;
       span.grey |&nbsp;
-      form.search(name='search')
-        input.italic.serif(type='search', placeholder='search posts')
+      form.search(name='search', method='get', action='/post')
+        input.italic.serif(name='q', type='search', placeholder='search posts')
       //- div.grid__item.one-half.full
 

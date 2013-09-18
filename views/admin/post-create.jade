@@ -28,9 +28,9 @@ block content
           div.col-md-12.form-group
             label(for='form-abstract') Abstract (max 400 char.): 
             if (post && post.Abstract)
-              textarea#form-abstract.form-control(name='Abstract', maxlength='400', rows='5')= post.Abstract
+              textarea#form-abstract.no-expand.form-control(name='Abstract', maxlength='400', rows='5')= post.Abstract
             else
-              textarea#form-abstract.form-control(name='Abstract', maxlength='400', rows='5')
+              textarea#form-abstract.no-expand.form-control(name='Abstract', maxlength='400', rows='5')
       div.col-md-3.form-group
         div.row
           div.col-xs-8
@@ -69,7 +69,7 @@ block content
       div.col-md-6
         div.panel.panel-default
           div.panel-heading Rendered output
-          div#render.panel-body.tall
+          div#render.article.panel-body.tall
             p Enter markdown to the left
     div.row
       div.col-md-12.text-right

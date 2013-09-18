@@ -1,3 +1,8 @@
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
 /**
  * This is the main JavaScript file that loads the other modules and firest them
  * off. I am using Browserify and Common JS style modules to load them in.
@@ -11,9 +16,10 @@ var stickyNav       = require('./modules/sticky-nav');
 var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
+var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 990,  // px
+  maxHeight  : 1000,  // px
   minHeight  : 595   // px - approx. adjusted for nav bar height
 };
 
@@ -25,4 +31,7 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+  lightbox();
 }
+

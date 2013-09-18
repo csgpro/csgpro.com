@@ -9,7 +9,7 @@ block content
     div.grid__item.one-half.grey
       h1= title
     div.grid__item.one-half.right
-      p Sharing stuff
+      //- p Sharing stuff
     if (categories)
       each category in categories
         div.grid__item.one-whole.desk--full
@@ -25,8 +25,24 @@ block content
                 b: a(href='/post/#{post.id}')  MORE
         div.grid__item.one-whole.right.space-top-sm
           a(href='/post/category/#{category.name}') more blog posts this way }
-    else if (topic)
-      //- something
+    else if (topic && posts)
+      div.grid__item.one-whole.desk--full
+        h2 Topic:&nbsp;
+          b "#{topic}"
+        hr
+      div.grid__item.one-whole.full
+      if (posts.length > 0)
+        each post in posts
+          div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
+            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
+            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+            div
+              p #{post.Abstract}
+                b: a(href='/post/#{post.id}')  MORE
+      else
+        div.grid__item.one-whole
+          h3 No results found for topic "#{topic}", try something else.
+
     else if (category && posts)
       div.grid__item.one-whole.full
         each post in posts
@@ -36,6 +52,22 @@ block content
             div
               p #{post.Abstract}
                 b: a(href='/post/#{post.id}')  MORE
+    else if (searchResult && searchInput)
+      div.grid__item.one-whole.desk--full
+        h2 Search results:&nbsp;
+          b "#{searchInput}"
+        hr
+      div.grid__item.one-whole.full
+      if (searchResult.length > 0)
+        each post in searchResult
+          div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
+            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
+            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+            div
+              p #{post.Abstract}
+                b: a(href='/post/#{post.id}')  MORE
+      else
+        div.grid__item.one-whole
+          h3 No results found for "#{searchInput}", try something else.
 
-      //- something
 

@@ -1,3 +1,6 @@
+/*jslint
+  node: true,
+  browser: true */ /*globals $*/
 /**
  * This module sets up the events necessary to allow the user to scroll around
  * the page and have the nav update appropriately. It assumes:
@@ -9,7 +12,7 @@
 // Grab all the nav sections, loop through them when the user scrolls, and set
 // the appropriate nav item to have a class of "selected". There may be a
 // better way to do this, but I couldn't think of one.
-var items = $('#main > div > section,#hero')
+var items = $('#hero,#work,#services,#about,#updates,#contact')
   , offset = 92 // height of the nav
   , w = $(window)
   , selected
@@ -17,14 +20,8 @@ var items = $('#main > div > section,#hero')
   , navItems = $('li[data-nav]');
 
 function init() {
-  items.each(function(i, e){
-    arr.push({
-        element: e
-      , name: e.id
-      , top: e.offsetTop
-      , bottom: e.offsetTop + e.offsetHeight
-    });
-  });
+  
+  recalcTops();
 
   w.on('scroll', each);
   w.on('touchmove', each);
@@ -74,8 +71,8 @@ function recalcTops(){
     arr.push({
         element: e
       , name: e.id
-      , top: e.offsetTop
-      , bottom: e.offsetTop + e.offsetHeight
+      , top: $(e).offset().top
+      , bottom: $(e).offset().top + e.offsetHeight
     });
   });
 
@@ -85,7 +82,7 @@ function recalcTops(){
 }
 
 function each(){
-  var at = w.scrollTop() + offset + 2;
+  var at = w.scrollTop() + (w.height() / 2);
 
   arr.forEach(function(item){
     if ( at >= item.top && at <= item.bottom ) {
@@ -102,3 +99,17 @@ function each(){
 // MODULE EXPORT //
 ///////////////////
 module.exports = init;
+
+////////////
+// Helper //
+////////////
+function log() {
+  var toLog = '';
+  Array.prototype.forEach.call(arguments, function(item) {
+    toLog += item + ' - ';
+  });
+
+  console.log(toLog);
+}
+
+

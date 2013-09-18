@@ -1,3 +1,6 @@
+/*jslint
+  node: true*/
+
 'use strict';
 
 /**
@@ -8,8 +11,6 @@ var express          = require('express')
   , fs               = require('fs')
   , index            = require('./routes/index')
   , http             = require('http')
-  // , stylus           = require('stylus')
-  , nib              = require('nib')
   , path             = require('path')
   , passport         = require('passport')
   , TwitterStrategy  = require('passport-twitter').Strategy
@@ -18,6 +19,7 @@ var express          = require('express')
   , admin            = require('./routes/admin-post')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
+  , contact          = require('./routes/contact')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -73,10 +75,6 @@ app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
-// app.use(stylus.middleware({ // stylus CSS preprocessor
-//   src: __dirname + '/public'
-// , compile: compile
-// }));
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -85,13 +83,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Compile function for stylus
-// function compile(str, path){
-//   return stylus(str)
-//     .set('filename', path)
-//     .use(nib()); // Use nib for vendor-prefixing
-// }
 
 // Development only
 if ('development' == app.get('env')) { // TODO: turn this back on
@@ -106,7 +97,10 @@ app.get('/', index.homepage);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
+app.get('/post/topic/:topic', post.topic);
 app.get('/post/:id', post.get);
+
+app.post('/contact', contact.index);
 
 app.get('/admin', auth, adminMain.index);
 

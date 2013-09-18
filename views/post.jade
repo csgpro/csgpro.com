@@ -24,7 +24,7 @@ block content
           h1= post.Title
           div.grid__item.one-half.full
             if (post.Category === 'Blog')
-              h3.serif a blog post by #{post.AuthorFullName}
+              h3.serif a blog post by #{post.AuthorFullName || 'CSG Pro'}
           div.grid__item.one-half.full.right
             if (post.PublishDate)
               h4.grey posted 
@@ -33,11 +33,11 @@ block content
             p!= marked(post.Markdown)
           else
             p This blog post is empty.
-        div.grid__item.desk--three-twelfths.space-top
-          h4.blue Related Topics:
-          - console.dir(post);
-          div.panel.panel-blue
-            ul.topic-list
-              each topic in post.Topics
-                li= topic
+        if (post.Topics != '')
+          div.grid__item.desk--three-twelfths.space-top
+            h4.blue Related Topics:
+            div.panel.panel-blue
+              ul.topic-list
+                each topic in post.Topics
+                  li: a(href='/post/topic/#{topic}')= topic
 
