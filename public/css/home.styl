@@ -561,7 +561,10 @@ picture-spacing = 128px
     text-overflow ellipsis
   article
     color #fff
-    padding 10px 15px 10px gutter*2
+    @media desk
+      padding 10px 15px 10px gutter*2
+    @media mobile
+      padding 10px 10px 10px gutter
     border-radius border-radii
     background-color main-blue
     a

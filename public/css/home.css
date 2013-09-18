@@ -137,8 +137,10 @@ header img{max-width:80px;max-height:80px}
 #updates .icon-career{background-image:url("https://csgsitestorage.blob.core.windows.net/img/postIcon_careers.png")}
 #updates .icon-news{background-image:url("https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png")}
 #updates .abstract{min-height:270px;max-height:270px;-o-text-overflow:ellipsis;text-overflow:ellipsis}
-#updates article{color:#fff;padding:10px 15px 10px 48px;-webkit-border-radius:4px;border-radius:4px;background-color:#09a4e6;}
-#updates article a{color:#fff}
+#updates article{color:#fff;-webkit-border-radius:4px;border-radius:4px;background-color:#09a4e6;}
+@media all and (min-width: 768px){#updates article{padding:10px 15px 10px 48px}
+}@media all and (max-width: 767px){#updates article{padding:10px 10px 10px 24px}
+}#updates article a{color:#fff}
 .search{display:inline-block}
 .search input{border:solid #d3d3d3 2px;-webkit-border-radius:4px;border-radius:4px;padding:3px 3px 3px 12px}
 #contact-container{background-image:url("/img/contact_bg.jpg");background-repeat:no-repeat;background-position:top}
