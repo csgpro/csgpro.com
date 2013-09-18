@@ -219,6 +219,9 @@ body
 .mobile--full
   @media mobile
     padding-left 0
+.desk--full
+  @media desk
+    padding-left 0
 .mobile--img-sm
   @media mobile
     max-width 30%
@@ -480,15 +483,11 @@ picture-spacing = 128px
     list-style-type none
     position relative
     .active
-      opacity 1
-      // transform scale(1)
       z-index 6 !important
     li
       transition-property transform
       transition-duration 0.3s
       transition-timing-function ease
-      opacity 0.5
-      // transform scale(0.9)
       position absolute
       display inline
     li:nth-child(2)
@@ -503,8 +502,8 @@ picture-spacing = 128px
     li:nth-child(5)
       left picture-spacing * 4
       z-index 3
-    li:hover:not(.active)
-      opacity 0.8
+    // li:hover:not(.active)
+      
 
 
 /////////////////////////////////
