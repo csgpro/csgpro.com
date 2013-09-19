@@ -14,6 +14,7 @@ var express          = require('express')
   , path             = require('path')
   , passport         = require('passport')
   , TwitterStrategy  = require('passport-twitter').Strategy
+  , LiveStrategy     = require('passport-windowslive').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
   , admin            = require('./routes/admin-post')
@@ -29,9 +30,12 @@ c.env().file({ file: 'config.json'});
 /**********************************
  * PASSPORT AUTHENTICATION
  **********************************/
-var TWITTER_CONSUMER_KEY    = c.get('TWITTER_CONSUMER_KEY')
-  , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
-  , TWITTER_CALLBACK_URL    = c.get('TWITTER_CALLBACK_URL');
+var TWITTER_CONSUMER_KEY       = c.get('TWITTER_CONSUMER_KEY')
+  , TWITTER_CONSUMER_SECRET    = c.get('TWITTER_CONSUMER_SECRET')
+  , TWITTER_CALLBACK_URL       = c.get('TWITTER_CALLBACK_URL')
+  , WINDOWS_LIVE_CLIENT_ID     = c.get('WINDOWS_LIVE_CLIENT_ID')
+  , WINDOWS_LIVE_CLIENT_SECRET = c.get('WINDOWS_LIVE_CLIENT_SECRET')
+  , WINDOWS_LIVE_CALLBACK_URL  = c.get('WINDOWS_LIVE_CALLBACK_URL');
 
 // Serialize users into sessions with just their user id
 passport.serializeUser(function(user, cb){
@@ -43,9 +47,6 @@ passport.serializeUser(function(user, cb){
 });
 passport.deserializeUser(db.deserializeUser);
 
-// passport.deserializeUser(function(obj, done) {
-//   done(null, obj);
-// });
 
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY
@@ -54,14 +55,42 @@ passport.use(new TwitterStrategy({
   },
   function(token, tokenSecret, profile, done) {
 
-    db.getUserFromProfile(profile, function(err, user){
+    db.getUserFromTwitterProfile(profile, function(err, user){
 
       if (user && !err) { 
         return done(null, user);
       } else {
         return err ? done(err, null) : done(new Error('User not authorized'), null);
       }
+      
     });
+  }
+));
+
+passport.use(new LiveStrategy({
+    clientID: WINDOWS_LIVE_CLIENT_ID,
+    clientSecret: WINDOWS_LIVE_CLIENT_SECRET,
+    callbackURL: WINDOWS_LIVE_CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, done) {
+
+    console.dir(profile);
+
+
+
+    db.getUserFromLiveProfile(profile, function(err, user) {
+
+      if (user && !err) { 
+        return done(null, user);
+      } else {
+        return err ? done(err, null) : done(new Error('User not authorized'), null);
+      }
+
+    });
+
+    // User.findOrCreate({ windowsliveId: profile.id }, function (err, user) {
+    //   return done(err, user);
+    // });
   }
 ));
 
@@ -149,9 +178,27 @@ app.get('/auth/twitter/callback',
     failureRedirect: '/login?error=' + escape(error)
   }),
   function(req, res) {
+    // Successful authentication, redirect home.
     res.redirect('/admin/post');
 });
 
+/*****************
+ * WINDOWS LIVE
+ ****************/
+error = 'Unable to authenticate with Twitter, ' +
+            'or you are not authorized to use this system.';
+
+app.get('/auth/live',
+  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic'] }));
+
+app.get('/auth/live/callback', 
+  passport.authenticate('windowslive', { 
+    failureRedirect: '/login?error=' + escape(error)
+   }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/admin/post');
+  });
 
 /**********************************
  * START THE SERVER, SCOTTY!
