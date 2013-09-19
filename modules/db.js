@@ -152,7 +152,7 @@ module.exports.deleteUser = function(userId, callback){
  * @param  {object}   profile  The twitter profile returned by the Twitter API
  * @param  {Function} callback The callback function once we are done
  */
-module.exports.getUserFromProfile = function (profile, callback) {
+module.exports.getUserFromTwitterProfile = function (profile, callback) {
   // console.log('Getting user: ', profile, options); // DEBUG
 
   options.path = escape('/tables/users/?$filter=TwitterHandle eq ' + twitterize(profile.username));
@@ -503,11 +503,52 @@ exports.createPost = function(post, callback) {
 
 };
 
+/**
+ * Calls back once the user has been looked up from the azure mobile service.
+ * @param  {object}   profile  The live profile returned by the win live API
+ * @param  {Function} callback The callback function once we are done
+ */
+module.exports.getUserFromLiveProfile = function (profile, callback) {
+  // console.log('Getting user: ', profile, options); // DEBUG
+
+  options.path = escape('/tables/users/?$filter=FullName eq ' + quotize(profile._json.name));
+
+  var req = https.get(options, function(res){
+    var chunk = '';
+
+    res.on('data', function(data){
+      chunk += data;
+    });
+
+    res.on('end', function(){
+
+      if (isJSON(chunk))
+        var r = JSON.parse(chunk);
+
+      if (r && r.length === 0) { // no such profile
+        callback(new Error('No such profile'));
+      } else if (r && r[0]){ // profile found
+        var user = r[0];
+        user.CreateDate = parseInt(user.CreateDate);
+        user.UpdateDate = parseInt(user.UpdateDate);
+
+        callback(null, user);
+      } else {
+        callback(new Error('Error querying Azure Mobile Services'));
+      }
+    });
+  });
+
+};
 /**********************************
  * HELPERS
  **********************************/
 function twitterize(str) {
   return "'@" + str + "'";
+}
+
+function quotize(str) {
+  return "'" + str + "'";
 }
 
 
