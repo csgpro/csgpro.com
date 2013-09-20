@@ -27,10 +27,10 @@ function init(options) {
   maxHeight = options.maxHeight;
   minHeight = options.minHeight;
 
+
   headlineHeight = $('#hero > div').height();
 
-  if (pageWidth >= brk)
-    doResize();
+  doResize();
 
   w.on('onorientationchange', doResize);
   w.on('resize', doResize);
@@ -56,9 +56,9 @@ function doResize(){
     
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
       // $('#services').css('height', heroHeight); // don't resize this section
       // $('#about').css('height', heroHeight);    // don't resize this section
-      $('#updates').css('height', heroHeight);
       // $('#contact').css('height', heroHeight);  // don't resize this section
     }
 
@@ -66,6 +66,7 @@ function doResize(){
     $('#headline').css('margin-top', topMargin);
   } else { // mobile
     // undo the page sizing
+    $('#hero').removeAttr('style');
     $('#work').removeAttr('style');
     $('#updates').removeAttr('style');
   }

@@ -3,12 +3,11 @@
 }img{-webkit-transition-property:width, height;-moz-transition-property:width, height;-o-transition-property:width, height;-ms-transition-property:width, height;transition-property:width, height;-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;-webkit-transition-duration:.5s;-moz-transition-duration:.5s;-o-transition-duration:.5s;-ms-transition-duration:.5s;transition-duration:.5s}
 body{overflow-x:hidden}
 .mobile-nav,.main-body{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;-ms-transition:all ease 0.4s;transition:all ease 0.4s}
-.mobile-nav{width:75%;background-color:#343434;float:left;margin-left:-80%;}
+.mobile-nav{width:75%;background-color:#343434;float:left;margin-left:-80%;height:1000px;z-index:20;position:fixed;top:0;left:0;}
 .mobile-nav ul{font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif;font-size:30px;list-style-type:none;margin:0;padding:0 0 0 24px;}
 .mobile-nav ul li{padding:12px 0;border-bottom:solid #4c4c4c 2px}
 .main-body{min-width:100%;position:relative}
-.nav-open .mobile-nav{margin-left:0;position:fixed;top:0}
-.nav-open .main-body{margin-left:80%}
+.nav-open .mobile-nav{margin-left:0;padding-right:12px}
 .toggle-nav{margin:24px 0 0 24px}
 .icon-bar{width:38px;height:6px;border-top:solid #227db4 2px;margin-top:2px;background-color:#2ca1ee}
 .topic-list{list-style-type:none;padding:12px !important}
@@ -82,29 +81,30 @@ header img{max-width:80px;max-height:80px}
 #work aside{background-color:#09a4e6;height:100%}
 @media all and (min-width: 768px){#services-container{background-image:url("/img/services_bg.png");background-position:center;background-repeat:repeat-y}
 }@media all and (max-width: 767px){#services-container{background-color:#11517d}
-}#services aside{color:#00a3e4;}
+}#services .active section{padding-top:12px}
+#services aside{color:#00a3e4;}
 #services aside hr{border:none;border-bottom:1px solid #00a3e4;margin:5px 0 0 0}
 @media all and (min-width: 768px){#services aside hr{width:85%}
-}#services aside ul{margin:0;padding:0;list-style-type:none;}
-#services aside ul section{padding-top:12px;color:#000;background-color:#f3f3f3;}
-#services aside ul section .title{font-size:26px;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
-#services aside ul li.active .services-menu{color:#fff;}
-#services aside ul li.active .services-menu .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
-#services aside ul li.active .services-menu .chevron polyline{stroke:#fff}
-#services aside ul li.active .services-menu > svg path{fill:#fff}
-#services aside ul li.active .services-menu > svg polygon{fill:#fff}
-@media all and (min-width: 768px){#services aside ul .services-menu{cursor:pointer;padding:20px 0 5px 0}
-}@media all and (max-width: 767px){#services aside ul .services-menu{position:relative;font-size:36px;padding:24px;border-bottom:1px solid #2ca3e5}
-#services aside ul .services-menu .chevron{position:absolute;right:5%;top:35%;}
-#services aside ul .services-menu .chevron polyline{stroke:#00a3e4}
-}#services aside ul .services-menu > svg{vertical-align:middle;margin-right:10px;}
-@media all and (min-width: 768px){#services aside ul .services-menu > svg{width:35px;height:35px}
-}@media all and (max-width: 767px){#services aside ul .services-menu > svg{width:50px;height:50px}
-}#services aside ul .services-menu > svg path{fill:#00a3e4}
-#services aside ul .services-menu > svg polygon{fill:#00a3e4}
-@media all and (min-width: 768px){#services aside ul .services-menu:hover{color:#fff;}
-#services aside ul .services-menu:hover > svg path{fill:#fff}
-#services aside ul .services-menu:hover > svg polygon{fill:#fff}
+}#services aside > ul{margin:0;padding:0;list-style-type:none;}
+#services aside > ul section{color:#000;background-color:#f3f3f3;}
+#services aside > ul section .title{font-size:26px;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
+#services aside > ul li.active .services-menu{color:#fff;}
+#services aside > ul li.active .services-menu .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
+#services aside > ul li.active .services-menu .chevron polyline{stroke:#fff}
+#services aside > ul li.active .services-menu > svg path{fill:#fff}
+#services aside > ul li.active .services-menu > svg polygon{fill:#fff}
+@media all and (min-width: 768px){#services aside > ul .services-menu{cursor:pointer;padding:20px 0 5px 0}
+}@media all and (max-width: 767px){#services aside > ul .services-menu{position:relative;font-size:36px;padding:24px;border-bottom:1px solid #2ca3e5}
+#services aside > ul .services-menu .chevron{position:absolute;right:5%;top:35%;}
+#services aside > ul .services-menu .chevron polyline{stroke:#00a3e4}
+}#services aside > ul .services-menu > svg{vertical-align:middle;margin-right:10px;}
+@media all and (min-width: 768px){#services aside > ul .services-menu > svg{width:35px;height:35px}
+}@media all and (max-width: 767px){#services aside > ul .services-menu > svg{width:50px;height:50px}
+}#services aside > ul .services-menu > svg path{fill:#00a3e4}
+#services aside > ul .services-menu > svg polygon{fill:#00a3e4}
+@media all and (min-width: 768px){#services aside > ul .services-menu:hover{color:#fff;}
+#services aside > ul .services-menu:hover > svg path{fill:#fff}
+#services aside > ul .services-menu:hover > svg polygon{fill:#fff}
 }#services article{position:relative;height:504px;color:#043c57;}
 #services article > div{padding-right:40px}
 #services article hr{width:97.5%;border:none;border-bottom:2px solid #ccc;margin:5px 0 0 0}

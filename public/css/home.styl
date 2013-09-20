@@ -49,6 +49,11 @@ body
   background-color #343434
   float left
   margin-left -80%
+  height 1000px
+  z-index 20
+  position fixed
+  top 0
+  left 0
   ul
     font-family 'Century Gothic', CenturyGothic, Helvetica, sans-serif
     font-size 30px
@@ -66,11 +71,10 @@ body
 
 .nav-open .mobile-nav 
   margin-left 0
-  position fixed
-  top 0
+  padding-right gutter*0.5
 
-.nav-open .main-body
-  margin-left 80%
+// .nav-open .main-body
+//   margin-left 80%
 
 .toggle-nav
   margin gutter 0 0 gutter
@@ -370,6 +374,8 @@ header
   @media mobile
     background-color #11517D
 #services
+  .active section
+    padding-top gutter*0.5
   aside
     color #00A3E4
     hr
@@ -378,12 +384,11 @@ header
       border none
       border-bottom 1px solid #00A3E4
       margin 5px 0 0 0
-    ul
+    > ul
       margin 0
       padding 0
       list-style-type none
       section
-        padding-top gutter*0.5
         color #000
         background-color #f3f3f3
         .title

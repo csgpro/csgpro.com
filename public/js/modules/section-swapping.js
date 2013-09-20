@@ -21,24 +21,30 @@ function init(options){
       // , target = $('.swappable section[data-swap="' + text + '"]') // slow?
       , target = $('#swappable-' + text)
       , brk = options.breakpoint
-      , pageWidth = document.documentElement.clientWidth;
+      , pageWidth = document.documentElement.clientWidth
+      , isAccordion = /accordion/.test(me.parent()[0].className);
 
     document.greer = me; // DEBUG
 
-    me.addClass('active');
-    me.siblings().removeClass('active');
 
     if (pageWidth < brk) { // mobile
-      var isAccordion = /accordion/.test(me.parent()[0].className);
       if (isAccordion) {
-        // WIP
         var content = $('#swappable-' + text);
         var contentTarget = $('#swapper-' + text + ' section');
 
-        contentTarget.html(content.children());
+        if (me.hasClass('active')) {
+          me.removeClass('active');
+          contentTarget.html('');
+        } else {
+          me.addClass('active');
+          contentTarget.html(content.children().clone());
+        }
+
       }
       // something mobile
     } else {               // desktop
+      me.addClass('active');
+      me.siblings().removeClass('active');
       target.siblings().addClass('gone');
       target.removeClass('gone');
     }

@@ -29,32 +29,32 @@ html.no-js
         | Please <a href="http://browsehappy.com/">upgrade your browser</a>
         | to improve your experience.
 
-  header#mobile-header.grid--full.hide-desk
-    div.grid__item.eight-twelfths
-      div.toggle-nav
-        div.icon-bar
-        div.icon-bar
-        div.icon-bar
-    div.grid__item.four-twelfths.right
-      a(href='/')
-        img(src='/img/logo.svg')
-          
-  div.main-body
-    block content
+    header#mobile-header.grid--full.hide-desk
+      div.grid__item.eight-twelfths
+        div.toggle-nav
+          div.icon-bar
+          div.icon-bar
+          div.icon-bar
+      div.grid__item.four-twelfths.right
+        a(href='/')
+          img(src='/img/logo.svg')
+            
+    div.main-body
+      block content
 
-  nav.fixed-menu.hide-mobile
-    div.wrapper
-      a(href='/'): img#logo.small-logo(src='/img/logo.svg')
-      ul
-        li: a(href='/#work') work
-        li /
-        li: a(href='/#services') services
-        li /
-        li: a(href='/#about') about
-        li /
-        li: a.selected(href='/#updates') updates
-        li /
-        li: a(href='/#contact') contact
+    nav.fixed-menu.hide-mobile
+      div.wrapper
+        a(href='/'): img#logo.small-logo(src='/img/logo.svg')
+        ul
+          li: a(href='/#work') work
+          li /
+          li: a(href='/#services') services
+          li /
+          li: a(href='/#about') about
+          li /
+          li: a.selected(href='/#updates') updates
+          li /
+          li: a(href='/#contact') contact
 
     //- We CDN load jQuery because everybody loves Raymond, err jQuery.
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')

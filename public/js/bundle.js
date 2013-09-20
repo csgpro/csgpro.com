@@ -100,6 +100,11 @@ function init() {
 
 module.exports = init;
 },{}],4:[function(require,module,exports){
+/*jslint
+  node: true,
+  browser: true */
+  /* globals $*/
+
 'use strict';
 
 function init(options) {
@@ -114,14 +119,25 @@ function init(options) {
 
     if (pageWidth <= brk) { // on a mobile
       bdy.toggleClass('nav-open');
+      window.setTimeout(function(){
+        bdy.on('click', clear);
+      }, 0);
     }
     
   });
 
   links.on('click', function(){
     bdy.removeClass('nav-open');
+    bdy.off('click', clear);
   });
 
+}
+
+function clear() {
+  var body = $('body');
+
+  body.removeClass('nav-open');
+  body.off('click', clear);
 }
 
 module.exports = init;
@@ -273,10 +289,10 @@ function init(options) {
   maxHeight = options.maxHeight;
   minHeight = options.minHeight;
 
+
   headlineHeight = $('#hero > div').height();
 
-  if (pageWidth >= brk)
-    doResize();
+  doResize();
 
   w.on('onorientationchange', doResize);
   w.on('resize', doResize);
@@ -302,9 +318,9 @@ function doResize(){
     
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       $('#work').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
       // $('#services').css('height', heroHeight); // don't resize this section
       // $('#about').css('height', heroHeight);    // don't resize this section
-      $('#updates').css('height', heroHeight);
       // $('#contact').css('height', heroHeight);  // don't resize this section
     }
 
@@ -312,6 +328,7 @@ function doResize(){
     $('#headline').css('margin-top', topMargin);
   } else { // mobile
     // undo the page sizing
+    $('#hero').removeAttr('style');
     $('#work').removeAttr('style');
     $('#updates').removeAttr('style');
   }
@@ -347,24 +364,30 @@ function init(options){
       // , target = $('.swappable section[data-swap="' + text + '"]') // slow?
       , target = $('#swappable-' + text)
       , brk = options.breakpoint
-      , pageWidth = document.documentElement.clientWidth;
+      , pageWidth = document.documentElement.clientWidth
+      , isAccordion = /accordion/.test(me.parent()[0].className);
 
     document.greer = me; // DEBUG
 
-    me.addClass('active');
-    me.siblings().removeClass('active');
 
     if (pageWidth < brk) { // mobile
-      var isAccordion = /accordion/.test(me.parent()[0].className);
       if (isAccordion) {
-        // WIP
         var content = $('#swappable-' + text);
         var contentTarget = $('#swapper-' + text + ' section');
 
-        contentTarget.html(content.children());
+        if (me.hasClass('active')) {
+          me.removeClass('active');
+          contentTarget.html('');
+        } else {
+          me.addClass('active');
+          contentTarget.html(content.children().clone());
+        }
+
       }
       // something mobile
     } else {               // desktop
+      me.addClass('active');
+      me.siblings().removeClass('active');
       target.siblings().addClass('gone');
       target.removeClass('gone');
     }
