@@ -3,7 +3,7 @@ var tap = require('tap')
   , db = require('../modules/db.js')
   , toString = Object.prototype.toString;
 
-test('Integration test ~ Real Azure Mobile Services READ web calls', function(t) {
+test('Integration test ~ Real Azure Mobile Services REAL web calls', function(t) {
 
   t.test('getPosts with no options', function(t) {
     db.getPosts(null, function(err, result) {
@@ -67,11 +67,23 @@ test('Integration test ~ Real Azure Mobile Services READ web calls', function(t)
   t.test('getUsers', function(t) {
     db.getUsers(function(err, result) {
       t.notOk(err, 'look for an error');
-      debugger;
       t.ok(result.length > 0, 'result has a length'); // assume there are some users
       t.ok(toString.call(result) === '[object Array]', 'result is an array');
       t.ok(result[0].hasOwnProperty('id'), 'result has an id field');
       t.ok(result[0].hasOwnProperty('Username'), 'result has a Username field');
+
+      t.end();
+    });
+  });
+
+  t.test('getTopics', function(t) {
+    db.getTopics(function(err, result) {
+      t.notOk(err, 'look for an error');
+      debugger;
+      t.ok(result.length > 0, 'result has a length'); // assume there are some users
+      t.ok(toString.call(result) === '[object Array]', 'result is an array');
+      t.ok(result[0].hasOwnProperty('id'), 'result has an id field');
+      t.ok(result[0].hasOwnProperty('Name'), 'result has a Name field');
 
       t.end();
     });

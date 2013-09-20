@@ -1,3 +1,6 @@
+/*jslint
+  node: true */
+
 'use strict';
 
 var https = require('https')
@@ -91,7 +94,6 @@ module.exports.updateUser = function(user, callback) {
   };
 
   request.patch(o, function(err, httpObj, response) {
-    console.log(err, '|', response);
     if (err) {
       callback(err);
     } else if (response !== null && !response.error) {
@@ -153,7 +155,6 @@ module.exports.deleteUser = function(userId, callback){
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromTwitterProfile = function (profile, callback) {
-  // console.log('Getting user: ', profile, options); // DEBUG
 
   options.path = escape('/tables/users/?$filter=TwitterHandle eq ' + twitterize(profile.username));
 
@@ -192,7 +193,6 @@ module.exports.getUserFromTwitterProfile = function (profile, callback) {
  * @param  {Function} callback Calls back with an error or the user object
  */
 module.exports.deserializeUser = function (userId, callback) {
-  // console.log('Deserializing userId: ', userId); // DEBUG
 
   options.path = '/tables/users/' + userId;
 
@@ -395,7 +395,6 @@ exports.patchPost = function (post, callback) {
 
   request.patch(o, function(err, httpObj, response) {
 
-    console.dir(response);
 
     if (err || response['error']) {
       callback(err);
@@ -509,7 +508,6 @@ exports.createPost = function(post, callback) {
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromLiveProfile = function (profile, callback) {
-  // console.log('Getting user: ', profile, options); // DEBUG
 
   options.path = escape('/tables/users/?$filter=FullName eq ' + quotize(profile._json.name));
 
@@ -540,6 +538,102 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
   });
 
 };
+
+module.exports.createTopic = function(topicName, callback) {
+
+  var o = {
+    uri: url + '/tables/topics',
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: {Name: topicName}
+  };
+
+  request.post(o, function(err, httpObj, response) {
+    console.dir(response);
+    console.dir(err);
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error) {
+      var obj = response;
+
+      callback(null, obj.id);
+    } else {
+      callback(new Error('Error creating user: ' + response.error));
+    }
+  });
+
+};
+
+module.exports.deleteTopic = function(topicId, callback){
+
+  var o = {
+    uri: url + '/tables/topics/' + topicId,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+
+  request.del(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error deleting topic: ' + response.error));
+    }
+  });
+
+};
+
+module.exports.updateTopic = function(topicId, newName, callback) {
+
+  var o = {
+    uri: url + '/tables/topics/' + topicId,
+    headers: {
+      'X-ZUMO-APPLICATION': appKey
+    },
+    json: {
+      Name: newName
+    }
+  };
+
+  request.patch(o, function(err, httpObj, response) {
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error) {
+      callback(null, true);
+    } else {
+      callback(new Error('Error updating topic: ' + response.error));
+    }
+  });
+
+};
+
+module.exports.getTopics = function (callback) {
+
+  var o = {
+    uri: url + '/tables/topics'
+  , headers: {
+      'X-ZUMO-APPLICATION': appKey
+    }
+  };
+
+  request.get(o, function(err, httpObj, response) {
+
+    if (err) {
+      callback(err);
+    } else if (response !== null && !response.error && isJSON(response)) {
+      callback(null, JSON.parse(response));
+    } else {
+      callback(new Error('Error getting topics.'));
+    }
+  });
+
+};
+
+
+
 /**********************************
  * HELPERS
  **********************************/

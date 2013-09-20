@@ -1,3 +1,6 @@
+/*jslint
+  node: true */
+
 'use strict';
 
 var moment = require('moment');
@@ -19,10 +22,6 @@ exports.index = function(req, res) {
     }
   });
 
-};
-
-exports.get = function(req, res) {
-  // TODO: get a single user, not really necessary right now
 };
 
 exports.del = function(req, res) {

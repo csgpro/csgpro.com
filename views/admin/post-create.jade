@@ -50,8 +50,12 @@ block content
           div.col-xs-4.text-right
             small: a(href='#', onclick="$('#form-topics option:selected').removeAttr('selected'); return false; ") reset
         select#form-topics.form-control(type='text', name='Topics', multiple)
-          each topic in topics
-            option(value='#{topic}')= topic
+          if (postTopics)
+            each topic in topics
+              option(value='#{topic}', selected=postTopics.hasOwnProperty(topic))= topic
+          else 
+            each topic in topics
+              option(value='#{topic}')= topic
       if (user.IsAdmin)
         div.col-md-3
           div.row

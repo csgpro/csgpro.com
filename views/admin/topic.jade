@@ -5,52 +5,47 @@ block content
     div.col-md-12
       if (message)
         div(class="alert alert-#{type}")= message
-      div.page-header: h1 Accounts
+      div.page-header: h1 Topics
   div.row
     div.col-md-12
       table.table.table-condensed
         thead
           tr
             th
-            th Full Name
-            th User Id
-            th Username
-            th Twitter Handle
-            th Admin
+            th Topic Id
+            th Topic Name
             th Created
             th Updated
         tbody
-          each person in users
+          each topic in topics
             //- Not the most efficient method of injecting modals, but it works
             //- One for each person...
-            div.modal.fade(id='modal-confirm-#{person.id}', tabindex='-1')
+            div.modal.fade(id='modal-confirm-#{topic.id}', tabindex='-1')
               div.modal-dialog
                 div.modal-content
                   div.modal-header
                     button(type='button', class='close', data-dismiss='modal', aria-hidden='true')&times;
+                    button.close(type='button', data-dismiss='modal')
                     h4.modal-title Confirm Delete
                   div.modal-body
                     p Are you sure you want to delete
-                      strong  #{person.FullName}
+                      strong  #{topic.Name}
                       | ?
                   div.modal-footer
                     button.btn.btn-default(data-dismiss='modal') Close
-                    a.btn.btn-danger(href='/admin/account/#{person.id}/delete') Delete
-            tr(class="#{person.id === user.id ? 'active' : ''}")
+                    a.btn.btn-danger(href='/admin/topic/#{topic.id}/delete') Delete
+            tr
               td
                 div.btn-group
                   button.btn.btn-default.btn-xs.dropdown-toggle(data-toggle='dropdown')
                     | Actions
                     span.caret
                   ul.dropdown-menu(role='menu')
-                    li: a(href='/admin/account/#{person.id}/update') Edit
-                    li: a(href='#modal-confirm-#{person.id}', data-toggle='modal') Delete
-              td= person.FullName
-              td= person.id
-              td= person.Username
-              td= person.TwitterHandle
-              td= person.IsAdmin ? 'Yes' : 'No'
-              td(title="#{moment(person.CreateDate).format('LLL')}")= moment(person.CreateDate).fromNow()
-              td(title="#{moment(person.UpdateDate).format('LLL')}")= moment(person.UpdateDate).fromNow()
+                    li: a(href='/admin/topic/#{topic.id}/update') Edit
+                    li: a(href='#modal-confirm-#{topic.id}', data-toggle='modal') Delete
+              td= topic.id
+              td= topic.Name
+              td(title="#{moment(topic.CreateDate).format('LLL')}")= moment(topic.CreateDate).fromNow()
+              td(title="#{moment(topic.UpdateDate).format('LLL')}")= moment(topic.UpdateDate).fromNow()
           
 

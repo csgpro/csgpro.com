@@ -21,6 +21,7 @@ var express          = require('express')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
+  , adminTopic       = require('./routes/admin-topic')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -114,9 +115,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Development only
-if ('development' == app.get('env')) { // TODO: turn this back on
+// if ('development' == app.get('env')) { // TODO: turn this back off
   app.use(express.errorHandler());
-}
+// }
 
 
 /**********************************
@@ -141,21 +142,27 @@ app.get('/admin/login', adminMain.login);
 app.get('/admin/account'             , authAdmin , account.index);
 app.post('/admin/account'            , authAdmin , account.create);
 app.get('/admin/account/new'         , authAdmin , account.entry);
-app.get('/admin/account/:id'         , authAdmin , account.get);
 app.get('/admin/account/:id/update'  , authAdmin , account.update);
 app.post('/admin/account/:id/update' , authAdmin , account.patch);
 app.get('/admin/account/:id/delete'  , authAdmin , account.del);
 
-app.get('/admin/post'               , auth      , admin.index);
-app.get('/admin/post/new'           , auth      , admin.entry);
-app.get('/admin/post/:id/update'    , auth      , admin.update);
-app.post('/admin/post/:id/update'   , auth      , admin.create);
-app.post('/admin/post'              , auth      , admin.create);
-app.get('/admin/post/:id'           , auth      , admin.get);
-app.get('/admin/posts'              , auth      , admin.all);
-app.get('/admin/post/:id/publish'   , authAdmin , admin.publish);
-app.get('/admin/post/:id/unpublish' , authAdmin , admin.unpublish);
-app.get('/admin/post/:id/delete'    , authAdmin , admin.del);
+app.get('/admin/topic'               , authAdmin , adminTopic.index);
+app.post('/admin/topic'              , authAdmin , adminTopic.create);
+app.get('/admin/topic/new'           , authAdmin , adminTopic.entry);
+app.get('/admin/topic/:id/update'    , authAdmin , adminTopic.update);
+app.post('/admin/topic/:id/update'   , authAdmin , adminTopic.patch);
+app.get('/admin/topic/:id/delete'    , authAdmin , adminTopic.del);
+
+app.get('/admin/post'                , auth      , admin.index);
+app.get('/admin/post/new'            , auth      , admin.entry);
+app.get('/admin/post/:id/update'     , auth      , admin.update);
+app.post('/admin/post/:id/update'    , auth      , admin.create);
+app.post('/admin/post'               , auth      , admin.create);
+app.get('/admin/post/:id'            , auth      , admin.get);
+app.get('/admin/posts'               , auth      , admin.all);
+app.get('/admin/post/:id/publish'    , authAdmin , admin.publish);
+app.get('/admin/post/:id/unpublish'  , authAdmin , admin.unpublish);
+app.get('/admin/post/:id/delete'     , authAdmin , admin.del);
 
 app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
