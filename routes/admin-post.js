@@ -1,6 +1,11 @@
+/*jslint
+  node: true*/
+
 'use strict';
 
 var db = require('../modules/db')
+  , fs = require('fs')
+  , marked = require('marked')
   , moment = require('moment')
   , _ = require('lodash')
   , email = require('../modules/email')
@@ -15,6 +20,16 @@ var topics = ['Analytics', // TODO: replace with database function
               'Portals',
               'SharePoint',
               'Web'];
+
+var markdownHelpHtml;
+
+fs.readFile('views/admin/docs/markdown-help.md', function(err, data){
+  if (!err) {
+    markdownHelpHtml = marked(data.toString());
+  } else {
+    console.error('Problem reading the markdown help file.');
+  }
+});
 
 exports.index = function(req, res) {
   var message, type;
@@ -54,9 +69,11 @@ exports.publish = function(req, res) {
       res.redirect('/admin/post');
     }
   });
+
 };
 
 exports.unpublish = function(req, res) {
+
   db.unpublish(req.params.id, function(err, result) {
     if (err) {
       res.send(err);
@@ -64,12 +81,15 @@ exports.unpublish = function(req, res) {
       res.redirect('/admin/post');
     }
   });
+
 };
 
 exports.all = function (req, res) {
+
   db.getPosts(null, function(err, posts){
     res.send(posts);
   });
+
 };
 
 exports.entry = function (req, res) {
@@ -79,15 +99,18 @@ exports.entry = function (req, res) {
       res.render('admin/post-create', {
         user: req.user,
         users: users,
-        topics: topics
+        topics: topics,
+        markdownHelpHtml: markdownHelpHtml
       });
     });
   } else {
     res.render('admin/post-create', {
       user: req.user,
+      markdownHelpHtml: markdownHelpHtml,
       topics: topics
     });
   }
+
 };
 
 exports.update = function(req, res) {
@@ -98,6 +121,7 @@ exports.update = function(req, res) {
       res.render('admin/post-create', {
         user: req.user,
         users: users,
+        markdownHelpHtml: markdownHelpHtml,
         topics: topics,
         moment: moment,
         post: post
@@ -105,13 +129,6 @@ exports.update = function(req, res) {
     });
   });
 
-  // db.getPost(postId, function(err, post){
-  //   res.render('admin/post-create', {
-  //     user: req.user,
-  //     post: post,
-  //     topics: topics
-  //   });
-  // });
 };
 
 exports.patch = function(req, res) {
