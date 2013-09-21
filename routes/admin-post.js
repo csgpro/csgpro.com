@@ -113,7 +113,12 @@ exports.update = function(req, res) {
     db.getPost(postId, function(err, post){
       db.getTopics(function(err, topics){
         var dbTopics = _.pluck(topics, 'Name');
-        var postTopics = post.Topics.split(',');
+        var postTopics;
+
+        console.dir(post); // DEBUG
+
+        if (post.Topics)
+          postTopics = post.Topics.split(',');
 
         var topicsUnion = _.union(dbTopics, postTopics);
         topicsUnion = topicsUnion.sort(function(a,b) {
@@ -255,8 +260,10 @@ function isArray(input) {
 function objectify(array) {
   var obj = {};
 
-  for (var i = array.length - 1; i >= 0; i--) {
-    obj[array[i]] = true;
+  if (array) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      obj[array[i]] = true;
+    }
   }
 
   return obj;

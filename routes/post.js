@@ -61,7 +61,8 @@ module.exports.get = function(req, res) {
 
   db.getFlatPost(postId, function(err, post){
     if (post) {
-      post.Topics = post.Topics.split(',');
+      if (post.Topics)
+        post.Topics = post.Topics.split(',');
 
       res.render('post', {
         post: post,

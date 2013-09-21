@@ -45,7 +45,7 @@ block content
                     li: a(href='#modal-confirm-#{topic.id}', data-toggle='modal') Delete
               td= topic.id
               td= topic.Name
-              td(title="#{moment(topic.CreateDate).format('LLL')}")= moment(topic.CreateDate).fromNow()
-              td(title="#{moment(topic.UpdateDate).format('LLL')}")= moment(topic.UpdateDate).fromNow()
+              td(title="#{moment(topic.Created).format('LLL')}")= moment(topic.Created).fromNow()
+              td(title="#{moment(topic.Updated).format('LLL')}")= moment(topic.Updated).fromNow()
           
 

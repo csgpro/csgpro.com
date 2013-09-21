@@ -79,10 +79,10 @@ block content
                   div.text-size-lg.space-top-xs Increase Awareness
                   span.serif.text-size-md "OBRC - know your nickel"
                   p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
-                    | boudin biltong, salami beef sirloin shankle turducken pig 
-                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong 
-                    | turkey. Shoulder short loin tail pork, beef ribs rump 
-                    | turducken doner pig hamburger. Chicken venison salami chuck 
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
                 article.grid__item.desk--two-thirds
@@ -97,11 +97,11 @@ block content
                   h1 Increase Kittens
                   p.subtitle OBRC - know your nickel
                   p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
-                    | boudin biltong, salami beef sirloin shankle turducken pig 
-                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong 
-                    | turkey. Shoulder short loin tail pork, beef ribs rump 
-                    | turducken doner pig hamburger. Chicken venison salami chuck 
-                    | ball tip prosciutto spare ribs flank. T-bone rump venison 
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
+                    | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
                 article.grid__item.desk--two-thirds
                       img(src='http://placekitten.com/686/504')
@@ -239,7 +239,7 @@ block content
             article.swappable
               section#swappable-chuckb.gone(data-swap='chuckb')
                 h2 Chuck Britton, Sales and Marketing Director
-                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro. 
+                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro.
                 p Chuck and his wife have been married for #{moment().diff('1986-01-01', 'years')} years. They are the proud parents of two tremendous sons. Faith and family are the greatest priorities in the Britton’s lives. Chuck enjoys the beauty of the Pacific Northwest – its high desert, forests, oceans and mountains. He cycles, skis, runs, and golfs – all in moderation. Traeger Grilling and autumn Saturdays at Autzen Stadium are added passions.
               section#swappable-roneg.gone(data-swap='roneg')
                 h2 Ron Ellis Gaut, Director of Consulting
@@ -252,7 +252,7 @@ block content
               section#swappable-jamesc.gone(data-swap='jamesc')
                 h2 James Churchill, Practice Manager: Application Development
                 p James manages the development of custom applications for CSG clients. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
-                p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.              
+                p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.
               section#swappable-dianec.gone(data-swap='dianec')
                 h2 Diane Carpenter, Practice Manager: Business Intelligence and Portals & Collaboration
                 p Diane manages our practice for Business Intelligence and Portals & Collaboration. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
@@ -285,7 +285,7 @@ block content
                       h4.serif by #{post.AuthorFullName}
                       p= post.Abstract
                     div.grid__item.one-whole.right.full
-                      small 
+                      small
                         a(href="/post/#{post.id}")
                           b Read more }
             else
@@ -301,14 +301,14 @@ block content
             form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
               div.grid__item.one-whole
                 if (contacted === 'true')
-                  label Message recieved loud and clear, thanks!
+                  label Message received loud and clear, thanks!
                   p We'll be getting back to you soon. Want to send another? Go for it!
                 else if (contacted === 'false')
                   label Oops! Error error *lasers shooting out of robot eyes*
                   p We had an issue sending the email. Try again?
                 else
                   label Got a quick question?
-                  p We'd love to get to back to you with an answer. Or maybe a hamburger.
+                  p We'd love to get to back to you with an answer, or maybe a hamburger.
               div.grid__item.six-twelfths
                 label What's your name?
                 input.serif(name='name', type='text')
@@ -328,5 +328,17 @@ block content
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com
       footer
+        div.wrapper.grid
+          div.grid__item.desk--one-half
+            img(src='/img/Azure_circle_logo.svg')
+            img(src='/img/MS_partner_goldBI_logo.svg')
+          div.grid__item.desk--one-half.right
+            img(src='/img/CSG20_round_footer.svg')
+            img(src='/img/Crafted_in_PDX.svg')
+
+
+
+
+
 
 

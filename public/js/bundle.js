@@ -312,20 +312,17 @@ function doResize(){
     // Make sure the mobile nav is hidden
     body.removeClass('nav-open');
 
-    // Dynamically change the height of the hero section to match the user's
-    // screen height
-    $('#hero').css('height', heroHeight);
-    
     if (wHeight <= maxHeight && wHeight >= minHeight) {
+      // Dynamically change the height of the various sections to match the user's
+      // screen height
+      $('#hero').css('height', heroHeight);
       $('#work').css('height', heroHeight);
       $('#updates').css('height', heroHeight);
-      // $('#services').css('height', heroHeight); // don't resize this section
-      // $('#about').css('height', heroHeight);    // don't resize this section
-      // $('#contact').css('height', heroHeight);  // don't resize this section
+
+      // Vertically center the hero content
+      $('#headline').css('margin-top', topMargin);
     }
 
-    // Vertically center the hero content
-    $('#headline').css('margin-top', topMargin);
   } else { // mobile
     // undo the page sizing
     $('#hero').removeAttr('style');
