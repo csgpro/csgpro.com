@@ -153,33 +153,80 @@ body
   margin-left gutter*2
 .space-left-sm
   margin-left gutter
-
 .space-right-sm
   margin-right gutter
 
+.center-images
+  img
+    display inline-block
+    height 100%
+    vertical-align middle
+    padding-right gutter
+.inline-block
+  display inline-block
+
+.space-top-xs
+  margin-top gutter*0.5
+.space-top-xxs
+  margin-top gutter*0.25
+.space-top-sm
+  margin-top gutter
 .space-top
   margin-top gutter*2
+.space-top-lg
+  margin-top gutter*3
+.space-top-xl
+  margin-top gutter*4
 .desk--space-top
   @media desk
     margin-top gutter*2
-.space-top-sm
-  margin-top gutter
-.space-top-xs
-  margin-top gutter*0.5
 .mobile--space-top-xs
   @media mobile
     margin-top gutter*0.5
+.mobile--space-top
+  @media mobile
+    margin-top gutter*2
+
+.pad-bottom-xs
+  padding-bottom gutter*0.5
+.pad-bottom-sm
+  padding-bottom gutter
+.pad-bottom
+  padding-bottom gutter*2
+.pad-bottom-lg
+  padding-bottom gutter*3
+.pad-bottom-xl
+  padding-bottom gutter*4
 
 .pad-right-1
   padding-right gutter
 .pad-right-2
   padding-right gutter*2
 
+.mobile--pad-right-1
+  @media mobile
+    padding-right gutter
+.mobile--pad-right-2
+  @media mobile
+    padding-right gutter*2
+.mobile--pad-top-1
+  @media mobile
+    padding-top gutter
+.mobile--pad-top-2
+  @media mobile
+    padding-top gutter*2
+
 .text-column
   padding-right gutter
 
 .hidden
   display none
+
+.icon-vertical-bar
+  border-right 1px solid #fff
+  margin-right 12px
+  margin-top 8px
+  height 40px
 
 .alert
   padding gutter*0.5
@@ -207,6 +254,9 @@ body
     text-align right
 .center
   text-align center
+.mobile--center
+  @media mobile
+    text-align center
 .desk--center
   @media desk
     text-align center
@@ -216,6 +266,9 @@ body
   float left
 .fr
   float right
+.desk--fr
+  @media desk
+    float right
 .right-gutter
   padding-right gutter
 .full
@@ -226,10 +279,11 @@ body
 .desk--full
   @media desk
     padding-left 0
+
 .mobile--img-sm
   @media mobile
     max-width 30%
-
+    
 .btn
   font-family Roboto
   font-style italic
@@ -305,7 +359,7 @@ header
     font-family Roboto
     font-style italic
     font-size 25px
-    margin gutter*6 10% 0 10%
+    margin gutter*9 10% 0 10%
     text-align left
   #headline
     min-width 335px
@@ -321,19 +375,19 @@ header
     color #fff
     font-style italic
     line-height 0.3
-  #tagline
+  .tagline
     font-family 'Roboto'
     font-style italic
     font-weight 100
     @media desk
       font-size 30px
       line-height 1.941
-      color rgba(82, 189, 236, 0.5)
+      color rgb(82, 189, 236)
     @media mobile
-      font-size 15px
+      font-size 20px
       line-height 0
       color rgb(82, 189, 236)
-  #tagline + div
+  .tagline + div
     @media mobile
       display none
     @media desk
@@ -353,15 +407,15 @@ header
 // WORK
 /////////////////////////////////
 #work-container
-  background-image url('/img/work_bg.png')
-  background-position center
-  background-repeat repeat-y
+  background-color main-blue
 #work
   // background-color main-blue
   color #fff
   aside
-    background-color main-blue
     height 100%
+  article
+    img
+      max-width 675px
 
 /////////////////////////////////
 // SERVICES
@@ -617,7 +671,7 @@ picture-spacing = 128px
     text-transform uppercase
     font-family 'Century Gothic', CenturyGothic, Helvetica, sans-serif
 
-footer
+.scene-footer
   min-height 400px
   background-color #353535
   background-image url('/img/footer_bg.png')

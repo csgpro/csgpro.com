@@ -3,6 +3,8 @@ extends layout
 block content
   div.row.text-center
     if !user
+      if (message)
+        div(class="alert alert-danger")= message
       h1 Login with
       br
       a.btn.btn-primary(href='/auth/twitter') Twitter

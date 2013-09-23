@@ -75,10 +75,6 @@ passport.use(new LiveStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
 
-    console.dir(profile);
-
-
-
     db.getUserFromLiveProfile(profile, function(err, user) {
 
       if (user && !err) { 
@@ -88,10 +84,6 @@ passport.use(new LiveStrategy({
       }
 
     });
-
-    // User.findOrCreate({ windowsliveId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
   }
 ));
 
@@ -172,7 +164,7 @@ app.get('/admin/notadmin', function(req, res) {
 /*****************
  * TWITTER
  ****************/
-var error = 'Unable to authenticate with Twitter, ' +
+var message = 'Unable to authenticate, ' +
             'or you are not authorized to use this system.';
 
 app.get('/auth/twitter',
@@ -182,7 +174,7 @@ app.get('/auth/twitter',
 
 app.get('/auth/twitter/callback',
   passport.authenticate('twitter', {
-    failureRedirect: '/login?error=' + escape(error)
+    failureRedirect: '/admin/login?message=' + message
   }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -192,15 +184,13 @@ app.get('/auth/twitter/callback',
 /*****************
  * WINDOWS LIVE
  ****************/
-error = 'Unable to authenticate with Twitter, ' +
-            'or you are not authorized to use this system.';
 
 app.get('/auth/live',
   passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic'] }));
 
 app.get('/auth/live/callback', 
   passport.authenticate('windowslive', { 
-    failureRedirect: '/login?error=' + escape(error)
+    failureRedirect: '/admin/login?message=' + message
    }),
   function(req, res) {
     // Successful authentication, redirect home.
