@@ -69,7 +69,7 @@ block content
       // WORK
       /////////////////////////////////
       div#work-container
-        section#work.grid.wrapper
+        section#work.grid.wrapper(style='height: 514px')
           div.swipeshow
             ul.slides
               li.slide
@@ -86,8 +86,9 @@ block content
                     | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
-                article.grid__item.desk--two-thirds
-                      img(src='https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
+                article.grid__item.desk--two-thirds(style='background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg")')
+                  span.serif.white(href='#') see more work this way }
+                      //- img(src='https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
                       //- li.slide: img(src='http://placekitten.com/650/504')
                       //- li.slide: img(src='http://placekitten.com/650/504')
               li.slide
@@ -225,11 +226,11 @@ block content
       //- div.spacer
       div#about-container
         section#about.grid.wrapper
-          div.grid__item.four-twelfths.mobile--eleven-twelfths.desk--full
+          div.grid__item.four-twelfths.mobile--one-whole.full
             aside.one-whole(style='min-height: 430px')
                 div.grid__item.one-whole.desk--center
                   img.space-top.mobile--img-sm(src='img/CSG20_icon.svg')
-                div.grid__item.one-whole.text-column
+                div.grid__item.one-whole.text-column.space-bottom
                   p "We first opened our doors on July 6, 1993. The first thing we did that day was define our core values - integrity, excellence and teamwork. We felt it was the most important thing to do because it set the foundation for everything that came after. We started CSG to fulfill a need we saw in the industry for unquestioned integrity and excellent customer service. A need for someone to build custom business software that mattered. And we wanted to make sure we were that company."
                   img(src='https://csgsitestorage.blob.core.windows.net/img/about_jerry_thumb.png')
                   div#jerry
@@ -276,12 +277,12 @@ block content
           include partials/updates-header
 
           //- Working on blog posts.
-          div.grid_item.one-whole.space-left-sm.desk--space-top
+          div.grid_item.one-whole.space-left-sm.desk--space-top.pad-bottom-lg
             if (posts)
               each post in posts
                 div.post.grid__item.eleven-twelfths.desk--four-twelfths
                   div(class="circle icon-#{post.Category.toLowerCase()}")
-                  article.grid__item.eleven-twelfths.space-bottom-lg
+                  article.grid__item.eleven-twelfths
                     div.grid__item.one-whole.right
                       small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
                     div.right-gutter.abstract
@@ -301,7 +302,7 @@ block content
       /////////////////////////////////
       div#contact-container
         section#contact.grid.wrapper
-          article.grid__item.one-whole.desk--space-top
+          article.grid__item.one-whole.desk--space-top.space-bottom-lg
             form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
               div.grid__item.one-whole
                 if (contacted === 'true')
@@ -331,13 +332,13 @@ block content
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com
-            div.grid__item.one-whole
-              span.serif.text-size-sm connect with us: 
-                a: img(href='twitter')
-                a: img(href='linkedin')
+              div.grid__item.one-whole
+                span.serif.text-size-sm connect with us: 
+                  a: img(href='twitter')
+                  a: img(href='linkedin')
       footer.scene-footer
         div.wrapper.grid.center-images
-          div.grid__item.one-whole.full(style='margin-top: 87px').mobile--center
+          div.grid__item.one-whole.full.mobile--center.pad-bottom-lg(style='margin-top: 87px')
             div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
               img(src='/img/Azure_circle_logo.svg', width='100px', height= '49px')
               img(src='/img/MS_partner_goldBI_logo.svg',width='150px',height='30px')
