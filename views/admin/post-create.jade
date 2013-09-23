@@ -5,6 +5,18 @@ block js
   script(src='/js/admin.js')
 
 block content
+  //- A hidden modal for info about markdown
+  div.modal.fade(id='markdown-help', tabindex='-1')
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true')&times;
+          h4.modal-title Markdown Help
+        div.modal-body
+          div!= markdownHelpHtml
+        div.modal-footer
+          button.btn.btn-default(data-dismiss='modal') Close
+
   form(role='form', action="#{post ? '/admin/post/'+post.id+'/update' : '/admin/post'}", method="POST")
     div.row
       div.col-md-6
@@ -37,9 +49,13 @@ block content
             label(for='form-topics') Topics (multi-select):
           div.col-xs-4.text-right
             small: a(href='#', onclick="$('#form-topics option:selected').removeAttr('selected'); return false; ") reset
-        select#form-topics.form-control(type='text', name='Topics', multiple)
-          each topic in topics
-            option(value='#{topic}')= topic
+        select#form-topics.form-control(type='text', name='Topics', multiple, style='min-height: 180px')
+          if (postTopics)
+            each topic in topics
+              option(value='#{topic}', selected=postTopics.hasOwnProperty(topic))= topic
+          else 
+            each topic in topics
+              option(value='#{topic}')= topic
       if (user.IsAdmin)
         div.col-md-3
           div.row
@@ -65,6 +81,7 @@ block content
       div.col-md-6
         div.panel.panel-default
           div.panel-heading Markdown input
+            a(href='#markdown-help', data-toggle='modal', style='float:right;') help
           textarea#markdown.markdown-entry.form-control.tall.panel-body(rows='12', name='Markdown') #{post ? post.Markdown : ''}
       div.col-md-6
         div.panel.panel-default

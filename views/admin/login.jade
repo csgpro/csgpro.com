@@ -3,8 +3,13 @@ extends layout
 block content
   div.row.text-center
     if !user
+      if (message)
+        div(class="alert alert-danger")= message
       h1 Login with
       br
       a.btn.btn-primary(href='/auth/twitter') Twitter
+      br
+      br
+      a.btn.btn-primary(href='/auth/live') Microsoft Live
     else
       p You are already logged in as #{user.username}

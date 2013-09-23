@@ -31,9 +31,23 @@ block content
                 | #{moment(post.PublishDate).format('L')}
           if (post.Markdown)
             p!= marked(post.Markdown)
+            if (post.Category === 'Blog')
+              // Disqus Comments
+              div#disqus_thread
+              script(type='text/javascript')
+                var disqus_shortname = 'csgpro';
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+              noscript
+                | Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+              a.dsq-brlink(href='http://disqus.com') comments powered by 
+                span.logo-disqus Disqus
           else
             p This blog post is empty.
-        if (post.Topics != '')
+        if (post.Topics && post.Topics != '')
           div.grid__item.desk--three-twelfths.space-top
             h4.blue Related Topics:
             div.panel.panel-blue

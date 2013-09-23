@@ -20,7 +20,7 @@ var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 1000,  // px
+  maxHeight  : 750,  // px
   minHeight  : 595   // px - approx. adjusted for nav bar height
 };
 
@@ -32,7 +32,8 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
-} else if (/post/i.test(window.location.pathname)){ // do on "post" pages
+} else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
+  mobileNav(options);
   lightbox();
 }
 
@@ -99,6 +100,11 @@ function init() {
 
 module.exports = init;
 },{}],4:[function(require,module,exports){
+/*jslint
+  node: true,
+  browser: true */
+  /* globals $*/
+
 'use strict';
 
 function init(options) {
@@ -113,14 +119,25 @@ function init(options) {
 
     if (pageWidth <= brk) { // on a mobile
       bdy.toggleClass('nav-open');
+      window.setTimeout(function(){
+        bdy.on('click', clear);
+      }, 0);
     }
     
   });
 
   links.on('click', function(){
     bdy.removeClass('nav-open');
+    bdy.off('click', clear);
   });
 
+}
+
+function clear() {
+  var body = $('body');
+
+  body.removeClass('nav-open');
+  body.off('click', clear);
 }
 
 module.exports = init;
@@ -272,10 +289,10 @@ function init(options) {
   maxHeight = options.maxHeight;
   minHeight = options.minHeight;
 
+
   headlineHeight = $('#hero > div').height();
 
-  if (pageWidth >= brk)
-    doResize();
+  doResize();
 
   w.on('onorientationchange', doResize);
   w.on('resize', doResize);
@@ -295,23 +312,27 @@ function doResize(){
     // Make sure the mobile nav is hidden
     body.removeClass('nav-open');
 
-    // Dynamically change the height of the hero section to match the user's
-    // screen height
     $('#hero').css('height', heroHeight);
-    
-    if (wHeight <= maxHeight && wHeight >= minHeight) {
-      $('#work').css('height', heroHeight);
-      // $('#services').css('height', heroHeight); // don't resize this section
-      // $('#about').css('height', heroHeight);    // don't resize this section
-      $('#updates').css('height', heroHeight);
-      // $('#contact').css('height', heroHeight);  // don't resize this section
-    }
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
+
+    if (wHeight <= maxHeight && wHeight >= minHeight) {
+      // Dynamically change the height of the various sections to match the user's
+      // screen height
+      $('#work').css('height', heroHeight);
+      $('#services').css('height', heroHeight);
+      $('#about').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
+
+    }
+
   } else { // mobile
     // undo the page sizing
+    $('#hero').removeAttr('style');
     $('#work').removeAttr('style');
+    $('#services').removeAttr('style');
+    $('#about').removeAttr('style');
     $('#updates').removeAttr('style');
   }
 
@@ -346,27 +367,30 @@ function init(options){
       // , target = $('.swappable section[data-swap="' + text + '"]') // slow?
       , target = $('#swappable-' + text)
       , brk = options.breakpoint
-      , pageWidth = document.documentElement.clientWidth;
+      , pageWidth = document.documentElement.clientWidth
+      , isAccordion = /accordion/.test(me.parent()[0].className);
 
-    document.greer = me;
-    me.addClass('active');
-    me.siblings().removeClass('active');
+    document.greer = me; // DEBUG
+
+
     if (pageWidth < brk) { // mobile
-      var isAccordion = /accordion/.test(me.parent()[0].className);
       if (isAccordion) {
-        // WIP
-        var contentElements = $('.swappable section[data-swap="' + text + '"] p')
-          , titleElement = $('.swappable section[data-swap="' + text + '"] .title')
-          , title = titleElement[0].innerText
-          , body = $('li[data-swap="'+ text +'"] section');
+        var content = $('#swappable-' + text);
+        var contentTarget = $('#swapper-' + text + ' section');
 
-        console.log(contentElements, title, body);
-        contentElements.each(function(i,e){
-          console.log(e);
-        });
+        if (me.hasClass('active')) {
+          me.removeClass('active');
+          contentTarget.html('');
+        } else {
+          me.addClass('active');
+          contentTarget.html(content.children().clone());
+        }
+
       }
       // something mobile
     } else {               // desktop
+      me.addClass('active');
+      me.siblings().removeClass('active');
       target.siblings().addClass('gone');
       target.removeClass('gone');
     }

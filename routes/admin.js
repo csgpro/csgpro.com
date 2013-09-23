@@ -5,5 +5,10 @@ exports.index = function(req, res) {
 };
 
 exports.login = function(req, res) {
-  res.render('admin/login', { user: req.user });
+  var message = req.query.message;
+
+  res.render('admin/login', {
+    user: req.user,
+    message: message
+  });
 };

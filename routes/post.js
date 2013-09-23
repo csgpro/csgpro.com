@@ -41,6 +41,10 @@ module.exports.topic = function(req, res) {
     if (err) {
       res.send(err);
     } else {
+      posts = posts.filter(function(i) {
+        return parseInt(i.PublishDate, 10) > 0;
+      });
+
       res.render('post-list', {
         title: 'Topics',
         moment: moment,
@@ -57,7 +61,8 @@ module.exports.get = function(req, res) {
 
   db.getFlatPost(postId, function(err, post){
     if (post) {
-      post.Topics = post.Topics.split(',');
+      if (post.Topics)
+        post.Topics = post.Topics.split(',');
 
       res.render('post', {
         post: post,
@@ -79,11 +84,16 @@ module.exports.index = function(req, res) {
       if (err) {
         res.send(err);
       } else {
+        // make sure posts are published, and match a query
         posts = posts.filter(function(i){
+          var a = parseInt(i.PublishDate, 10) > 0;
+          var b = regex.test(i.Markdown);
+          var c = regex.test(JSON.stringify(i.Categories || ''));
+          var d = regex.test(i.Title);
 
-          return regex.test(i.Markdown)
-              || regex.test(JSON.stringify(i.Categories || ''));
+          return a && ( b || c || d );
         });
+
         res.render('post-list', {
           title: 'Search',
           moment: moment,

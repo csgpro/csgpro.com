@@ -27,10 +27,10 @@ function init(options) {
   maxHeight = options.maxHeight;
   minHeight = options.minHeight;
 
+
   headlineHeight = $('#hero > div').height();
 
-  if (pageWidth >= brk)
-    doResize();
+  doResize();
 
   w.on('onorientationchange', doResize);
   w.on('resize', doResize);
@@ -50,23 +50,27 @@ function doResize(){
     // Make sure the mobile nav is hidden
     body.removeClass('nav-open');
 
-    // Dynamically change the height of the hero section to match the user's
-    // screen height
     $('#hero').css('height', heroHeight);
-    
-    if (wHeight <= maxHeight && wHeight >= minHeight) {
-      $('#work').css('height', heroHeight);
-      // $('#services').css('height', heroHeight); // don't resize this section
-      // $('#about').css('height', heroHeight);    // don't resize this section
-      $('#updates').css('height', heroHeight);
-      // $('#contact').css('height', heroHeight);  // don't resize this section
-    }
 
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
+
+    if (wHeight <= maxHeight && wHeight >= minHeight) {
+      // Dynamically change the height of the various sections to match the user's
+      // screen height
+      $('#work').css('height', heroHeight);
+      $('#services').css('height', heroHeight);
+      $('#about').css('height', heroHeight);
+      $('#updates').css('height', heroHeight);
+
+    }
+
   } else { // mobile
     // undo the page sizing
+    $('#hero').removeAttr('style');
     $('#work').removeAttr('style');
+    $('#services').removeAttr('style');
+    $('#about').removeAttr('style');
     $('#updates').removeAttr('style');
   }
 

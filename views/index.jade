@@ -7,7 +7,7 @@ block content
       li: a(href='#services') services /
       li: a(href='#about') about /
       li: a(href='#updates') updates /
-      li: a(href='#contact') contacts /
+      li: a(href='#contact') contact /
 
   div.main-body
 
@@ -18,7 +18,8 @@ block content
           div.icon-bar
           div.icon-bar
       div.grid__item.four-twelfths.right
-        img(src='/img/logo.svg')
+        a(href='/')
+          img(src='/img/logo.svg')
 
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
@@ -28,8 +29,9 @@ block content
           div#headline We've been told we have our head
           br
           span#subline in the clouds, and that's not a bad thing.
-        div.grid__item.one-whole.right
-          span#tagline learn how cloud services can make your business soar
+        div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
+          span.tagline.hide-mobile learn how cloud services can make your business soar
+          span.tagline.hide-desk learn how cloud services can <br> make your business soar
           div }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
@@ -78,10 +80,10 @@ block content
                   div.text-size-lg.space-top-xs Increase Awareness
                   span.serif.text-size-md "OBRC - know your nickel"
                   p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
-                    | boudin biltong, salami beef sirloin shankle turducken pig 
-                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong 
-                    | turkey. Shoulder short loin tail pork, beef ribs rump 
-                    | turducken doner pig hamburger. Chicken venison salami chuck 
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
                 article.grid__item.desk--two-thirds
@@ -96,11 +98,11 @@ block content
                   h1 Increase Kittens
                   p.subtitle OBRC - know your nickel
                   p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
-                    | boudin biltong, salami beef sirloin shankle turducken pig 
-                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong 
-                    | turkey. Shoulder short loin tail pork, beef ribs rump 
-                    | turducken doner pig hamburger. Chicken venison salami chuck 
-                    | ball tip prosciutto spare ribs flank. T-bone rump venison 
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
+                    | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
                 article.grid__item.desk--two-thirds
                       img(src='http://placekitten.com/686/504')
@@ -113,43 +115,48 @@ block content
         section#services.grid.wrapper
           aside.grid__item.desk--two-twelfths.mobile--one-whole.mobile--full.no-wrap
             div.space-top.hide-mobile WHAT WE DO:
-            ul.swapper
+            ul.swapper.accordion
               li#swapper-web(data-swap='web')
-                | <svg viewBox="0 0 90 90" width="90" height="90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g> <title>Layer 1</title> <g id="svg_1"> <path fill="none" d="m68.871,24.058l-51,0c-0.552,0 -1,0.448 -1,1l0,27.442c0,0.552 0.448,1 1,1l51,0c0.55199,0 1,-0.448 1,-1l0,-27.442c0,-0.553 -0.44801,-1 -1,-1zm-1.00401,26.522c0,0.531 -0.439,0.962 -0.981,0.962l-46.83001,0c-0.542,0 -0.981,-0.431 -0.981,-0.962l0,-23.868c0,-0.531 0.439,-0.962 0.981,-0.962l46.83001,0c0.54201,0 0.981,0.431 0.981,0.962l0,23.868z" id="svg_2"/> <path fill="#003C56" d="m69.871,21.058l-53,0c-0.552,0 -3,2.448 -3,3l0,29.442c0,0.552 2.448,3 3,3l23.167,0l0,7.345l-7.691,0c-0.552,0 -1,0.448 -1,1l0,1.093c0,0.55199 0.448,1 1,1l22.049,0c0.552,0 1,-0.44801 1,-1l0,-1.093c0,-0.552 -0.448,-1 -1,-1l-7.691,0l0,-7.345l23.167,0c0.552,0 3,-2.448 3,-3l0,-29.442c-0.001,-0.553 -2.44901,-3 -3.001,-3z" id="svg_4"/> </g> </g> </svg>
-                span.serif.text-size-md web
-                | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
-                hr.hide-mobile
+                div.services-menu
+                  | <svg viewBox="0 0 90 90" width="90" height="90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g> <title>Layer 1</title> <g id="svg_1"> <path fill="none" d="m68.871,24.058l-51,0c-0.552,0 -1,0.448 -1,1l0,27.442c0,0.552 0.448,1 1,1l51,0c0.55199,0 1,-0.448 1,-1l0,-27.442c0,-0.553 -0.44801,-1 -1,-1zm-1.00401,26.522c0,0.531 -0.439,0.962 -0.981,0.962l-46.83001,0c-0.542,0 -0.981,-0.431 -0.981,-0.962l0,-23.868c0,-0.531 0.439,-0.962 0.981,-0.962l46.83001,0c0.54201,0 0.981,0.431 0.981,0.962l0,23.868z" id="svg_2"/> <path fill="#003C56" d="m69.871,21.058l-53,0c-0.552,0 -3,2.448 -3,3l0,29.442c0,0.552 2.448,3 3,3l23.167,0l0,7.345l-7.691,0c-0.552,0 -1,0.448 -1,1l0,1.093c0,0.55199 0.448,1 1,1l22.049,0c0.552,0 1,-0.44801 1,-1l0,-1.093c0,-0.552 -0.448,-1 -1,-1l-7.691,0l0,-7.345l23.167,0c0.552,0 3,-2.448 3,-3l0,-29.442c-0.001,-0.553 -2.44901,-3 -3.001,-3z" id="svg_4"/> </g> </g> </svg>
+                  span.serif.text-size-md web
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
+                  hr.hide-mobile
                 section.hide-desk
               li#swapper-apps(data-swap='apps')
-                | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="90px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve"><g><g><path fill-rule="evenodd" clip-rule="evenodd" fill="#003C56" d="M39.829 30.247c-0.057-0.056 0.052-0.568 0.06-0.661 0.144-1.655 0.219-3.195-0.204-4.817 -0.223-0.856-0.478-1.711-0.77-2.546 -0.249-0.712-0.565-1.421-0.939-2.076 -1.352-2.366-3.594-4.096-6.118-5.058 -2.292-0.873-5.984-1.255-8.671-0.616l-2.084 0.635c1.173 1.232 3.284 3.357 3.284 3.357l4.131 4.06c0 0 1.394 1.69 1.228 2.691 -0.156 0.942-0.486 1.832-1.013 2.63 -0.928 1.404-2.444 2.953-4.035 3.58 -0.506 0.199-1.063 0.194-1.597 0.143 -0.319-0.031-1.139-0.006-1.378-0.246 -2.808-2.808-5.617-5.617-8.425-8.425 -3.317 9.062 4.749 21.303 14.7 18.464 9.739 9.799 19.481 19.601 29.22 29.399 3.181 2.507 8.667 2.834 11.652-0.179 2.635-2.66 2.659-8.112 0.359-11.114C59.43 49.728 49.628 39.986 39.829 30.247zM64.21 69.147c-5.504 1.439-7.469-6.215-1.793-8.097C68.153 60.572 68.89 67.923 64.21 69.147zM68.263 15.276c-0.832-0.536-1.741-0.906-2.709-1.116 -0.842-0.182-1.712-0.189-2.558-0.041 -1.245 0.217-2.437 0.766-3.401 1.579 -1.349 1.137-2.487 2.525-3.72 3.782 -1.262 1.285-2.564 2.531-3.826 3.817 -0.623 0.635-7.556 7.669-7.558 7.667 0.777 0.777 1.554 1.554 2.33 2.33 -0.005-0.005 3.369-3.403 3.676-3.714 2.2-2.23 4.395-4.466 6.601-6.691 1.096-1.106 2.171-2.241 3.299-3.315 0.693-0.66 1.279-1.568 2.102-2.072 0.608-0.372 1.438-0.005 1.446 0.757 0.007 0.642-0.541 1.096-0.997 1.461 -0.59 0.471-1.082 0.997-1.607 1.54 -2.156 2.229-4.42 4.367-6.624 6.549 -2.211 2.189-4.428 4.373-6.641 6.56 0.836 0.896 1.673 1.793 2.51 2.689 -0.019-0.02 3.373-3.371 3.681-3.681 2.196-2.21 4.425-4.387 6.612-6.606 1.095-1.111 2.183-2.234 3.301-3.321 0.671-0.652 1.284-1.424 2.003-2.018 0.514-0.425 1.129-0.413 1.433 0.252 0.452 0.987-0.723 1.757-1.326 2.359 -0.594 0.594-1.188 1.187-1.781 1.781 -2.112 2.112-4.224 4.224-6.336 6.336 -2.111 2.111-4.221 4.221-6.332 6.332 0.777 0.717 1.554 1.434 2.33 2.151 0.015 0.013 3.85-3.933 4.196-4.285 2.512-2.554 5.043-5.095 7.517-7.685 1.232-1.29 2.532-2.514 3.764-3.804 1.029-1.078 1.571-2.202 1.732-3.684C71.639 18.786 70.232 16.544 68.263 15.276zM23.516 58.391c-1.434 0.299-2.868 0.598-4.302 0.896 -2.33 3.645-4.661 7.291-6.991 10.935 0.896 0.896 1.793 1.793 2.689 2.689 3.645-2.33 7.291-4.661 10.935-6.991 0.299-1.434 0.598-2.868 0.896-4.302 2.987-2.987 5.976-5.976 8.963-8.963 -1.135-1.075-2.271-2.151-3.406-3.227C29.373 52.415 26.444 55.404 23.516 58.391z"></path></g></g></svg>
-                span.serif.text-size-md apps
-                | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
-                hr.hide-mobile
+                div.services-menu
+                  | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="90px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve"><g><g><path fill-rule="evenodd" clip-rule="evenodd" fill="#003C56" d="M39.829 30.247c-0.057-0.056 0.052-0.568 0.06-0.661 0.144-1.655 0.219-3.195-0.204-4.817 -0.223-0.856-0.478-1.711-0.77-2.546 -0.249-0.712-0.565-1.421-0.939-2.076 -1.352-2.366-3.594-4.096-6.118-5.058 -2.292-0.873-5.984-1.255-8.671-0.616l-2.084 0.635c1.173 1.232 3.284 3.357 3.284 3.357l4.131 4.06c0 0 1.394 1.69 1.228 2.691 -0.156 0.942-0.486 1.832-1.013 2.63 -0.928 1.404-2.444 2.953-4.035 3.58 -0.506 0.199-1.063 0.194-1.597 0.143 -0.319-0.031-1.139-0.006-1.378-0.246 -2.808-2.808-5.617-5.617-8.425-8.425 -3.317 9.062 4.749 21.303 14.7 18.464 9.739 9.799 19.481 19.601 29.22 29.399 3.181 2.507 8.667 2.834 11.652-0.179 2.635-2.66 2.659-8.112 0.359-11.114C59.43 49.728 49.628 39.986 39.829 30.247zM64.21 69.147c-5.504 1.439-7.469-6.215-1.793-8.097C68.153 60.572 68.89 67.923 64.21 69.147zM68.263 15.276c-0.832-0.536-1.741-0.906-2.709-1.116 -0.842-0.182-1.712-0.189-2.558-0.041 -1.245 0.217-2.437 0.766-3.401 1.579 -1.349 1.137-2.487 2.525-3.72 3.782 -1.262 1.285-2.564 2.531-3.826 3.817 -0.623 0.635-7.556 7.669-7.558 7.667 0.777 0.777 1.554 1.554 2.33 2.33 -0.005-0.005 3.369-3.403 3.676-3.714 2.2-2.23 4.395-4.466 6.601-6.691 1.096-1.106 2.171-2.241 3.299-3.315 0.693-0.66 1.279-1.568 2.102-2.072 0.608-0.372 1.438-0.005 1.446 0.757 0.007 0.642-0.541 1.096-0.997 1.461 -0.59 0.471-1.082 0.997-1.607 1.54 -2.156 2.229-4.42 4.367-6.624 6.549 -2.211 2.189-4.428 4.373-6.641 6.56 0.836 0.896 1.673 1.793 2.51 2.689 -0.019-0.02 3.373-3.371 3.681-3.681 2.196-2.21 4.425-4.387 6.612-6.606 1.095-1.111 2.183-2.234 3.301-3.321 0.671-0.652 1.284-1.424 2.003-2.018 0.514-0.425 1.129-0.413 1.433 0.252 0.452 0.987-0.723 1.757-1.326 2.359 -0.594 0.594-1.188 1.187-1.781 1.781 -2.112 2.112-4.224 4.224-6.336 6.336 -2.111 2.111-4.221 4.221-6.332 6.332 0.777 0.717 1.554 1.434 2.33 2.151 0.015 0.013 3.85-3.933 4.196-4.285 2.512-2.554 5.043-5.095 7.517-7.685 1.232-1.29 2.532-2.514 3.764-3.804 1.029-1.078 1.571-2.202 1.732-3.684C71.639 18.786 70.232 16.544 68.263 15.276zM23.516 58.391c-1.434 0.299-2.868 0.598-4.302 0.896 -2.33 3.645-4.661 7.291-6.991 10.935 0.896 0.896 1.793 1.793 2.689 2.689 3.645-2.33 7.291-4.661 10.935-6.991 0.299-1.434 0.598-2.868 0.896-4.302 2.987-2.987 5.976-5.976 8.963-8.963 -1.135-1.075-2.271-2.151-3.406-3.227C29.373 52.415 26.444 55.404 23.516 58.391z"></path></g></g></svg>
+                  span.serif.text-size-md apps
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
+                  hr.hide-mobile
                 section.hide-desk
               li#swapper-cloud(data-swap='cloud')
-                | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><path fill="#003C56" d="M77.911 39.232c0-5.147-4.173-9.32-9.32-9.32 -0.194 0-0.375 0.045-0.566 0.057 0.13-0.745 0.228-1.503 0.228-2.286 0-7.236-5.805-13.102-12.967-13.102 -2.951 0-5.64 1.035-7.82 2.713 -2.184-4.624-6.853-7.845-12.306-7.845 -7.534 0-13.642 6.108-13.642 13.642 0 1.071 0.153 2.1 0.386 3.099 -0.633-0.11-1.275-0.195-1.939-0.195 -6.229 0-11.278 5.049-11.278 11.278 0 5.865 4.493 10.628 10.216 11.171 0.065 0.004 0.121 0.038 0.187 0.038h0.188c0.232 0.014 0.452 0.069 0.687 0.069s0.455-0.055 0.687-0.069h47.251c0.231 0.017 0.452 0.069 0.687 0.069 0.235 0 0.456-0.052 0.687-0.069h0.12c0.043 0 0.078-0.023 0.12-0.024C74.223 47.986 77.911 44.061 77.911 39.232z"></path></svg>
-                span.serif.text-size-md cloud
-                | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
-                hr.hide-mobile
+                div.services-menu
+                  | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><path fill="#003C56" d="M77.911 39.232c0-5.147-4.173-9.32-9.32-9.32 -0.194 0-0.375 0.045-0.566 0.057 0.13-0.745 0.228-1.503 0.228-2.286 0-7.236-5.805-13.102-12.967-13.102 -2.951 0-5.64 1.035-7.82 2.713 -2.184-4.624-6.853-7.845-12.306-7.845 -7.534 0-13.642 6.108-13.642 13.642 0 1.071 0.153 2.1 0.386 3.099 -0.633-0.11-1.275-0.195-1.939-0.195 -6.229 0-11.278 5.049-11.278 11.278 0 5.865 4.493 10.628 10.216 11.171 0.065 0.004 0.121 0.038 0.187 0.038h0.188c0.232 0.014 0.452 0.069 0.687 0.069s0.455-0.055 0.687-0.069h47.251c0.231 0.017 0.452 0.069 0.687 0.069 0.235 0 0.456-0.052 0.687-0.069h0.12c0.043 0 0.078-0.023 0.12-0.024C74.223 47.986 77.911 44.061 77.911 39.232z"></path></svg>
+                  span.serif.text-size-md cloud
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
+                  hr.hide-mobile
                 section.hide-desk
               li#swapper-analytics(data-swap='analytics')
-                | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><polygon fill="#003C56" points="63.005,51.059 63.005,22.454 51.652,22.454 51.652,51.059 48.613,51.059 48.613,33.896   37.26,33.896 37.26,51.059 34.399,51.059 34.399,39.528 23.046,39.528 23.046,51.059 20.007,51.059 20.007,16.733 14.465,16.733   14.465,51.059 14.465,56.602 20.007,56.602 65.865,56.602 65.865,51.059 "></polygon></svg>
-                span.serif.text-size-md analytics
-                | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
-                hr.hide-mobile
+                div.services-menu
+                  | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><polygon fill="#003C56" points="63.005,51.059 63.005,22.454 51.652,22.454 51.652,51.059 48.613,51.059 48.613,33.896   37.26,33.896 37.26,51.059 34.399,51.059 34.399,39.528 23.046,39.528 23.046,51.059 20.007,51.059 20.007,16.733 14.465,16.733   14.465,51.059 14.465,56.602 20.007,56.602 65.865,56.602 65.865,51.059 "></polygon></svg>
+                  span.serif.text-size-md analytics
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
+                  hr.hide-mobile
                 section.hide-desk
               li#swapper-portals(data-swap='portals')
-                | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><path fill="#003C56" d="M67.813 12.465h-48.98c-1.942 0-4.516 2.416-4.516 4.162v29.622c0 1.746 2.574 4.162 4.516 4.162h12.891v14.032l12.501-14.032h23.587c1.942 0 4.516-2.416 4.516-4.162V16.627C72.328 14.88 69.754 12.465 67.813 12.465zM26.397 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.968-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C33.025 34.821 30.057 37.564 26.397 37.564zM43.323 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127s6.628 2.743 6.628 6.127C49.951 34.821 46.983 37.564 43.323 37.564zM60.249 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C66.876 34.821 63.909 37.564 60.249 37.564z"></path></svg>
-                span.serif.text-size-md portals
-                | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
-                hr.hide-mobile
+                div.services-menu
+                  | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" width="90px" height="72px" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><path fill="#003C56" d="M67.813 12.465h-48.98c-1.942 0-4.516 2.416-4.516 4.162v29.622c0 1.746 2.574 4.162 4.516 4.162h12.891v14.032l12.501-14.032h23.587c1.942 0 4.516-2.416 4.516-4.162V16.627C72.328 14.88 69.754 12.465 67.813 12.465zM26.397 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.968-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C33.025 34.821 30.057 37.564 26.397 37.564zM43.323 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127s6.628 2.743 6.628 6.127C49.951 34.821 46.983 37.564 43.323 37.564zM60.249 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C66.876 34.821 63.909 37.564 60.249 37.564z"></path></svg>
+                  span.serif.text-size-md portals
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " id="svg_1"/> </g> </svg>
+                  hr.hide-mobile
                 section.hide-desk
           article.grid__item.desk--ten-twelfths.hide-mobile
             div.swappable.space-top.grid__item.one-whole
               section#swappable-web(data-swap='web')
                 div.grid__item.one-whole
                   span.title Web Development for Desktop &amp; Mobile
-                  div.fr
+                  div.fr.hide-mobile
                     | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <path id="svg_2" d="m55.371,3.558l-51,0c-0.552,0 -1,0.448 -1,1l0,27.442c0,0.552 0.448,1 1,1l51,0c0.55199,0 1,-0.448 1,-1l0,-27.442c0,-0.553 -0.44801,-1 -1,-1zm-1.00401,26.522c0,0.531 -0.439,0.962 -0.981,0.962l-46.83001,0c-0.542,0 -0.981,-0.431 -0.981,-0.962l0,-23.868c0,-0.531 0.439,-0.962 0.981,-0.962l46.83001,0c0.542,0 0.981,0.431 0.981,0.962l0,23.868z" fill="none"/> <path id="svg_3" d="m53.286,5.25l-46.83,0c-0.542,0 -0.981,0.431 -0.981,0.962l0,23.868c0,0.531 0.439,0.962 0.981,0.962l46.83,0c0.542,0 0.981,-0.431 0.981,-0.962l0,-23.868c-0.001,-0.531 -0.43999,-0.962 -0.981,-0.962z" fill="#003C56"/> <path id="svg_4" d="m56.371,0.558l-53,0c-0.552,0 -3,2.448 -3,3l0,29.442c0,0.552 2.448,3 3,3l23.167,0l0,7.345l-7.691,0c-0.552,0 -1,0.448 -1,1l0,1.093c0,0.55199 0.448,1 1,1l22.049,0c0.552,0 1,-0.44801 1,-1l0,-1.093c0,-0.552 -0.448,-1 -1,-1l-7.691,0l0,-7.345l23.167,0c0.552,0 3,-2.448 3,-3l0,-29.442c-0.001,-0.553 -2.44901,-3 -3.001,-3zm0,31.442c0,0.552 -0.44801,1 -1,1l-51,0c-0.552,0 -1,-0.448 -1,-1l0,-27.442c0,-0.552 0.448,-1 1,-1l51,0c0.55199,0 1,0.448 1,1l0,27.442z" fill="#003C56"/> </g> </g> </svg>
                   hr
                 div.one-whole
@@ -157,22 +164,10 @@ block content
                     p The monopoly of the deskbound PC is over. Desktop and laptop computers are being replaced by tablets and smart phones and people want to be connected, whenever, wherever using their device of choice. At CSG Pro, we build websites based on that premise.
                     p When we work with you to design, construct, deploy and manage your website, we are creating a visual and interactive representation of your company and brand. Our process is designed to be creative, engaging and goal-driven. The end result is a product that is architecturally sound, intuitive, functional and beautiful.
                     p Our code is hand crafted in Portland, Oregon using high quality software construction. With CSG Pro you can expect comprehensive service including UX / UI design, business analysis, system design, construction, testing and deployment. We understand how to blend high level company goals, intuitive user interface, technological architecture and visually stunning design to create a unique and compelling solution for your business. Once built, we provide a managed service for the care and hosting of your website while making ongoing improvements. By custom building solutions that meet and exceed our clients’ needs, we make long term management of websites and web for mobile easy.
-                  //- div.grid__item.one-half.text-column
-                  //-   p When the needs of the average consumer are changing by the 
-                  //-     | minute, choosing the web means using the platform designed 
-                  //-     | to feed the need to be in the now. Our code is hand 
-                  //-     | crafted in Portland, Oregon using high quality coftware 
-                  //-     | construction. With CSG you can expect comprehensive 
-                  //-     | service including UI / UX design, system design, 
-                  //-     | constructure, testing and deployment. Once built, we 
-                  //-     | provide a managed service for the care and hosting of you 
-                  //-     | website. By custom building solutions that meet and exceed 
-                  //-     | our clients' needs, we make long term management of 
-                  //-     | websites and web for mobile easy.
               section#swappable-apps.gone(data-swap='apps')
                 div.grid__item.one-whole
                   span.title Application Development
-                  div.fr
+                  div.fr.hide-mobile
                     | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <g id="svg_2"> <path id="svg_3" d="m28.591518,15.597149c-0.041744,-0.041014 0.038086,-0.415998 0.043945,-0.484112c0.105465,-1.212114 0.160397,-2.34 -0.149406,-3.527946c-0.163322,-0.62693 -0.350086,-1.253126 -0.563946,-1.864677c-0.182365,-0.521465 -0.413803,-1.040731 -0.687717,-1.520451c-0.990196,-1.732846 -2.632227,-2.999889 -4.480793,-3.704453c-1.678648,-0.63938 -4.382648,-0.919156 -6.350594,-0.451156l-1.526312,0.465071c0.8591,0.902311 2.405184,2.458651 2.405184,2.458651l3.025524,2.973522c0,0 1.020958,1.237747 0.89938,1.970875c-0.114252,0.689917 -0.355944,1.341747 -0.741915,1.926199c-0.679663,1.028282 -1.789974,2.162762 -2.955214,2.621973c-0.370592,0.145746 -0.778536,0.142084 -1.169634,0.104733c-0.233635,-0.022705 -0.834198,-0.004395 -1.009241,-0.18017c-2.056564,-2.056564 -4.113861,-4.113861 -6.170425,-6.170425c-2.429354,6.636961 3.478144,15.602205 10.766203,13.522938c7.132792,7.176737 14.267782,14.355673 21.400576,21.531675c2.329746,1.836113 6.347668,2.075607 8.533867,-0.1311c1.929855,-1.948174 1.947437,-5.941185 0.262924,-8.139835c-7.176731,-7.133526 -14.355667,-14.268517 -21.532406,-21.40131zm17.856522,28.490162c-4.031101,1.053913 -5.470257,-4.551838 -1.313187,-5.930202c4.201019,-0.350086 4.740791,5.033745 1.313187,5.930202zm2.968395,-39.454844c-0.609352,-0.392564 -1.275097,-0.663549 -1.984058,-0.817353c-0.616676,-0.133296 -1.25386,-0.138422 -1.873466,-0.030027c-0.911831,0.15893 -1.784847,0.561014 -2.490871,1.156451c-0.988003,0.832732 -1.821468,1.849297 -2.72451,2.769917c-0.924282,0.941128 -1.877861,1.853691 -2.802143,2.795553c-0.456284,0.465069 -5.533974,5.616734 -5.535439,5.615271c0.569069,0.569069 1.138138,1.138142 1.706478,1.706478c-0.003662,-0.00366 2.467438,-2.492338 2.692284,-2.720114c1.611267,-1.63324 3.218872,-3.270874 4.834538,-4.900454c0.802704,-0.810028 1.590031,-1.641296 2.416172,-2.42789c0.507549,-0.48338 0.936729,-1.148394 1.539494,-1.517521c0.445293,-0.272451 1.053185,-0.003662 1.059044,0.554423c0.005123,0.470198 -0.396229,0.802704 -0.730198,1.070027c-0.432114,0.344958 -0.79245,0.730197 -1.17696,1.127889c-1.579041,1.632509 -3.237183,3.198368 -4.851383,4.796453c-1.619324,1.603212 -3.243042,3.202763 -4.863834,4.80451c0.612282,0.656225 1.225296,1.313183 1.83831,1.969408c-0.013912,-0.014647 2.470367,-2.468901 2.695946,-2.695944c1.608341,-1.618593 3.240849,-3.213017 4.842598,-4.8382c0.801968,-0.81369 1.598816,-1.636169 2.417633,-2.432283c0.491436,-0.477522 0.940392,-1.042931 1.466984,-1.477974c0.376453,-0.311266 0.826874,-0.302479 1.049522,0.184565c0.331043,0.722874 -0.529522,1.286818 -0.971153,1.727718c-0.435043,0.435045 -0.870087,0.869354 -1.304394,1.304396c-1.546822,1.54682 -3.093636,3.093637 -4.640453,4.640453c-1.546085,1.546085 -3.091442,3.09144 -4.637527,4.637526c0.569073,0.525126 1.138145,1.050253 1.706482,1.575382c0.010986,0.009518 2.819721,-2.880512 3.073128,-3.138313c1.839779,-1.870537 3.693466,-3.731552 5.505413,-5.628454c0.902309,-0.94479 1.854424,-1.84124 2.756737,-2.78603c0.753632,-0.789522 1.150589,-1.612734 1.268501,-2.698143c0.189693,-1.757015 -0.840786,-3.399044 -2.282871,-4.327721zm-32.77247,31.5772c-1.050255,0.218987 -2.100508,0.437973 -3.150763,0.656227c-1.70648,2.669579 -3.413692,5.339893 -5.120173,8.008739c0.656226,0.656223 1.313183,1.313183 1.96941,1.96941c2.669579,-1.706482 5.33989,-3.413692 8.008738,-5.120174c0.218985,-1.050255 0.437971,-2.10051 0.656225,-3.150761c2.187662,-2.187664 4.376793,-4.376793 6.564455,-6.564457c-0.831268,-0.787323 -1.663267,-1.575378 -2.494537,-2.363438c-2.143721,2.187664 -4.288904,4.376793 -6.433355,6.564453z" fill="#003C56" clip-rule="evenodd" fill-rule="evenodd"/> </g> </g> </g> </svg>
                   hr
                 div.one-whole
@@ -189,7 +184,7 @@ block content
               section#swappable-cloud.gone(data-swap='cloud')
                 div.grid__item.one-whole
                   span.title Cloud Services
-                  div.fr
+                  div.fr.hide-mobile
                     | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <path fill="#003C56" d="m58.661003,37.211548c0,-4.236176 -3.434532,-7.670717 -7.670715,-7.670717c-0.159668,0 -0.30864,0.037037 -0.465843,0.046913c0.107002,-0.613163 0.18766,-1.237026 0.18766,-1.881466c0,-5.955505 -4.77774,-10.783445 -10.672344,-10.783445c-2.428783,0 -4.641933,0.851843 -6.436157,2.232901c-1.797516,-3.80573 -5.640282,-6.456738 -10.128311,-6.456738c-6.200768,0 -11.227888,5.027119 -11.227888,11.22789c0,0.881475 0.125925,1.728378 0.317692,2.550596c-0.520981,-0.090536 -1.049374,-0.160492 -1.595869,-0.160492c-5.126707,0 -9.282225,4.155519 -9.282225,9.282227c0,4.827118 3.69791,8.74725 8.408159,9.194157c0.053495,0.003296 0.099585,0.031277 0.153904,0.031277l0.154736,0c0.190941,0.011524 0.372013,0.056789 0.565426,0.056789s0.374483,-0.045265 0.565426,-0.056789l38.889381,0c0.190125,0.013992 0.372017,0.056789 0.56543,0.056789c0.193413,0 0.375305,-0.042797 0.565422,-0.056789l0.09877,0c0.035393,0 0.064201,-0.018929 0.098763,-0.019753c3.873215,-0.388474 6.908585,-3.618896 6.908585,-7.593349z" id="svg_1"/> </g> </svg>
                   hr
                 div.one-whole
@@ -200,7 +195,7 @@ block content
               section#swappable-analytics.gone(data-swap='analytics')
                 div.grid__item.one-whole
                   span.title Analytics
-                  div.fr
+                  div.fr.hide-mobile
                     | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <polygon fill="#003C56" points="52.755 41.059 52.755 12.454 41.402 12.454 41.402 41.059 38.363 41.059 38.363 23.896 27.01 23.896 27.01 41.059 24.149 41.059 24.149 29.528 12.796 29.528 12.796 41.059 9.757 41.059 9.757 6.733 4.215 6.733 4.215 41.059 4.215 46.602 9.757 46.602 55.615 46.602 55.615 41.059" id="svg_1"/> </g> </svg>
                   hr
                 div.one-whole
@@ -217,7 +212,7 @@ block content
               section#swappable-portals.gone(data-swap='portals')
                 div.grid__item.one-whole
                   span.title Portals
-                  div.fr
+                  div.fr.hide-mobile
                     | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <path fill="#003C56" d="m51.742538,3.215l-42.964195,0c-1.703482,0 -3.961339,2.119262 -3.961339,3.650817l0,25.983777c0,1.531555 2.257857,3.650822 3.961339,3.650822l11.307707,0l0,12.308567l10.965605,-12.308567l20.69001,0c1.703484,0 3.961338,-2.119267 3.961338,-3.650822l0,-25.983777c0,-1.532431 -2.257862,-3.650817 -3.960464,-3.650817zm-36.329222,22.016302c-3.210474,0 -5.81394,-2.406101 -5.81394,-5.374475c0,-2.96837 2.603466,-5.37447 5.81394,-5.37447c3.210472,0 5.81394,2.406099 5.81394,5.37447c0,2.968374 -2.603468,5.374475 -5.81394,5.374475zm14.847126,0c-3.210476,0 -5.81394,-2.406101 -5.81394,-5.374475c0,-2.96837 2.602589,-5.37447 5.81394,-5.37447s5.813936,2.406099 5.813936,5.37447c0,2.968374 -2.603462,5.374475 -5.813936,5.374475zm14.84712,0c-3.210472,0 -5.813942,-2.406101 -5.813942,-5.374475c0,-2.96837 2.602589,-5.37447 5.813942,-5.37447c3.210472,0 5.813934,2.406099 5.813934,5.37447c-0.000874,2.968374 -2.603462,5.374475 -5.813934,5.374475z" id="svg_1"/> </g> </svg>
                   hr
                 div.one-whole
@@ -243,22 +238,25 @@ block content
                     span Founder &amp; CEO
           div.grid__item.eight-twelfths.hide-mobile
             article.swappable
+              section#swappable-about(data-swap='about')
+                h2 Something
+                p Some text about CSG
               section#swappable-chuckb.gone(data-swap='chuckb')
                 h2 Chuck Britton, Sales and Marketing Director
-                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro. 
+                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro.
                 p Chuck and his wife have been married for #{moment().diff('1986-01-01', 'years')} years. They are the proud parents of two tremendous sons. Faith and family are the greatest priorities in the Britton’s lives. Chuck enjoys the beauty of the Pacific Northwest – its high desert, forests, oceans and mountains. He cycles, skis, runs, and golfs – all in moderation. Traeger Grilling and autumn Saturdays at Autzen Stadium are added passions.
               section#swappable-roneg.gone(data-swap='roneg')
                 h2 Ron Ellis Gaut, Director of Consulting
                 p As a founding member of the CSG team, Ron has had the unique opportunity to contribute to growth and success of the company since the beginning. With over 30 years of experience of working in IT, Ron brings a broad base of experience to his role as Director of Consulting.
                 p Before he joined CSG, Ron worked as a software developer and IT professional for Sequent Computer Systems, Mentor Graphics and Concept Technologies. When not engaged with the clients and staff of CSG, look for Ron chasing steelhead on a wild Oregon river or playing guitar in the local Portland music scene.
-              section#swappable-kevinm(data-swap='kevinm')
+              section#swappable-kevinm.gone(data-swap='kevinm')
                 h2 Kevin McVicker, President:
                 p Kevin joined CSG in February 2010, with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
                 p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, an IT services company in the application development and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland. Outside of work Kevin’s enjoys running and camping, but his first priority is being a better husband to his wife, a better father to his four daughters, and a better friend to an incredible God.
               section#swappable-jamesc.gone(data-swap='jamesc')
                 h2 James Churchill, Practice Manager: Application Development
                 p James manages the development of custom applications for CSG clients. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
-                p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.              
+                p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.
               section#swappable-dianec.gone(data-swap='dianec')
                 h2 Diane Carpenter, Practice Manager: Business Intelligence and Portals & Collaboration
                 p Diane manages our practice for Business Intelligence and Portals & Collaboration. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
@@ -281,9 +279,9 @@ block content
           div.grid_item.one-whole.space-left-sm.desk--space-top
             if (posts)
               each post in posts
-                div.post.grid__item.one-whole.desk--four-twelfths
+                div.post.grid__item.eleven-twelfths.desk--four-twelfths
                   div(class="circle icon-#{post.Category.toLowerCase()}")
-                  article.grid__item.eleven-twelfths
+                  article.grid__item.eleven-twelfths.space-bottom-lg
                     div.grid__item.one-whole.right
                       small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
                     div.right-gutter.abstract
@@ -291,7 +289,7 @@ block content
                       h4.serif by #{post.AuthorFullName}
                       p= post.Abstract
                     div.grid__item.one-whole.right.full
-                      small 
+                      small
                         a(href="/post/#{post.id}")
                           b Read more }
             else
@@ -307,14 +305,14 @@ block content
             form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
               div.grid__item.one-whole
                 if (contacted === 'true')
-                  label Message recieved loud and clear, thanks!
+                  label Message received loud and clear, thanks!
                   p We'll be getting back to you soon. Want to send another? Go for it!
                 else if (contacted === 'false')
                   label Oops! Error error *lasers shooting out of robot eyes*
                   p We had an issue sending the email. Try again?
                 else
                   label Got a quick question?
-                  p We'd love to get to back to you with an answer. Or maybe a hamburger.
+                  p We'd love to get to back to you with an answer, or maybe a hamburger.
               div.grid__item.six-twelfths
                 label What's your name?
                 input.serif(name='name', type='text')
@@ -325,7 +323,7 @@ block content
                 label So, what's on your mind?
                 textarea.serif(name='comments', type='text')
               div.grid__item.one-whole.right
-                input.serif(type='submit').btn.btn-blue Make it so
+                input.serif(type='submit', value='Make it so').btn.btn-blue
             div.grid__item.desk--seven-twelfths.one-whole.full
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 734 NW 14th Avenue <br>Portland, OR 97209
@@ -333,6 +331,24 @@ block content
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com
-      footer
+            div.grid__item.one-whole
+              span.serif.text-size-sm connect with us: 
+                a: img(href='twitter')
+                a: img(href='linkedin')
+      footer.scene-footer
+        div.wrapper.grid.center-images
+          div.grid__item.one-whole.full(style='margin-top: 87px').mobile--center
+            div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
+              img(src='/img/Azure_circle_logo.svg', width='100px', height= '49px')
+              img(src='/img/MS_partner_goldBI_logo.svg',width='150px',height='30px')
+            div.grid__item.desk--one-half.inline-block.mobile--center
+              img.desk--fr(src='/img/Crafted_in_PDX.svg',width='125px',height='51px')
+              span.desk--fr.icon-vertical-bar
+              img.desk--fr(src='/img/CSG20_round_footer.svg',width='60px',height='60px')
+
+
+
+
+
 
 

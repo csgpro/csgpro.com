@@ -21,27 +21,30 @@ function init(options){
       // , target = $('.swappable section[data-swap="' + text + '"]') // slow?
       , target = $('#swappable-' + text)
       , brk = options.breakpoint
-      , pageWidth = document.documentElement.clientWidth;
+      , pageWidth = document.documentElement.clientWidth
+      , isAccordion = /accordion/.test(me.parent()[0].className);
 
-    document.greer = me;
-    me.addClass('active');
-    me.siblings().removeClass('active');
+    document.greer = me; // DEBUG
+
+
     if (pageWidth < brk) { // mobile
-      var isAccordion = /accordion/.test(me.parent()[0].className);
       if (isAccordion) {
-        // WIP
-        var contentElements = $('.swappable section[data-swap="' + text + '"] p')
-          , titleElement = $('.swappable section[data-swap="' + text + '"] .title')
-          , title = titleElement[0].innerText
-          , body = $('li[data-swap="'+ text +'"] section');
+        var content = $('#swappable-' + text);
+        var contentTarget = $('#swapper-' + text + ' section');
 
-        console.log(contentElements, title, body);
-        contentElements.each(function(i,e){
-          console.log(e);
-        });
+        if (me.hasClass('active')) {
+          me.removeClass('active');
+          contentTarget.html('');
+        } else {
+          me.addClass('active');
+          contentTarget.html(content.children().clone());
+        }
+
       }
       // something mobile
     } else {               // desktop
+      me.addClass('active');
+      me.siblings().removeClass('active');
       target.siblings().addClass('gone');
       target.removeClass('gone');
     }

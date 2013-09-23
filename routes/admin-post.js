@@ -1,20 +1,25 @@
+/*jslint
+  node: true*/
+
 'use strict';
 
 var db = require('../modules/db')
+  , fs = require('fs')
+  , marked = require('marked')
   , moment = require('moment')
   , _ = require('lodash')
   , email = require('../modules/email')
   , toString = Object.prototype.toString;
 
-var topics = ['Analytics', // TODO: replace with database function
-              'Application Development',
-              'B2B',
-              'Branding',
-              'Business Intelligence',
-              'Mobile',
-              'Portals',
-              'SharePoint',
-              'Web'];
+var markdownHelpHtml;
+
+fs.readFile('views/admin/docs/markdown-help.md', function(err, data){
+  if (!err) {
+    markdownHelpHtml = marked(data.toString());
+  } else {
+    console.error('Problem reading the markdown help file.');
+  }
+});
 
 exports.index = function(req, res) {
   var message, type;
@@ -54,9 +59,11 @@ exports.publish = function(req, res) {
       res.redirect('/admin/post');
     }
   });
+
 };
 
 exports.unpublish = function(req, res) {
+
   db.unpublish(req.params.id, function(err, result) {
     if (err) {
       res.send(err);
@@ -64,28 +71,37 @@ exports.unpublish = function(req, res) {
       res.redirect('/admin/post');
     }
   });
+
 };
 
 exports.all = function (req, res) {
+
   db.getPosts(null, function(err, posts){
     res.send(posts);
   });
+
 };
 
 exports.entry = function (req, res) {
 
   if (req.user.IsAdmin) {
     db.getUsers(function(err, users) {
-      res.render('admin/post-create', {
-        user: req.user,
-        users: users,
-        topics: topics
+      db.getTopics(function(err, topics){
+        res.render('admin/post-create', {
+          user: req.user,
+          users: users,
+          topics: _.pluck(topics, 'Name'),
+          markdownHelpHtml: markdownHelpHtml
+        });
       });
     });
   } else {
-    res.render('admin/post-create', {
-      user: req.user,
-      topics: topics
+    db.getTopics(function(err, topics) {
+      res.render('admin/post-create', {
+        user: req.user,
+        markdownHelpHtml: markdownHelpHtml,
+        topics: _.pluck(topics, 'Name')
+      });
     });
   }
 };
@@ -95,23 +111,33 @@ exports.update = function(req, res) {
 
   db.getUsers(function(err, users) {
     db.getPost(postId, function(err, post){
-      res.render('admin/post-create', {
-        user: req.user,
-        users: users,
-        topics: topics,
-        moment: moment,
-        post: post
+      db.getTopics(function(err, topics){
+        var dbTopics = _.pluck(topics, 'Name');
+        var postTopics;
+
+        console.dir(post); // DEBUG
+
+        if (post.Topics)
+          postTopics = post.Topics.split(',');
+
+        var topicsUnion = _.union(dbTopics, postTopics);
+        topicsUnion = topicsUnion.sort(function(a,b) {
+          return a <= b ? -1 : 1;
+        });
+
+        res.render('admin/post-create', {
+          user: req.user,
+          users: users,
+          markdownHelpHtml: markdownHelpHtml,
+          topics: topicsUnion,
+          postTopics: objectify(postTopics),
+          moment: moment,
+          post: post
+        });
       });
     });
   });
 
-  // db.getPost(postId, function(err, post){
-  //   res.render('admin/post-create', {
-  //     user: req.user,
-  //     post: post,
-  //     topics: topics
-  //   });
-  // });
 };
 
 exports.patch = function(req, res) {
@@ -195,7 +221,7 @@ exports.create = function (req, res) {
               'New blog post submitted', // subject
               'A new post was submitted by ' // body
               + req.user.FullName + ' at ' + moment().format('LLL') + '.\r\n\r\n'
-              + 'Click <a href="http://csgpro.com/post/' + newPostId  
+              + 'Click <a href="http://csgpro.com/post/' + newPostId
               + '">here</a> to review the post.',
               true,
               function(err, success){
@@ -229,4 +255,16 @@ exports.get = function (req, res) {
 
 function isArray(input) {
   return Object.prototype.toString.call(input) === '[object Array]' ? true : false;
+}
+
+function objectify(array) {
+  var obj = {};
+
+  if (array) {
+    for (var i = array.length - 1; i >= 0; i--) {
+      obj[array[i]] = true;
+    }
+  }
+
+  return obj;
 }

@@ -14,12 +14,14 @@ var express          = require('express')
   , path             = require('path')
   , passport         = require('passport')
   , TwitterStrategy  = require('passport-twitter').Strategy
+  , LiveStrategy     = require('passport-windowslive').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
   , admin            = require('./routes/admin-post')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
+  , adminTopic       = require('./routes/admin-topic')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -29,9 +31,12 @@ c.env().file({ file: 'config.json'});
 /**********************************
  * PASSPORT AUTHENTICATION
  **********************************/
-var TWITTER_CONSUMER_KEY    = c.get('TWITTER_CONSUMER_KEY')
-  , TWITTER_CONSUMER_SECRET = c.get('TWITTER_CONSUMER_SECRET')
-  , TWITTER_CALLBACK_URL    = c.get('TWITTER_CALLBACK_URL');
+var TWITTER_CONSUMER_KEY       = c.get('TWITTER_CONSUMER_KEY')
+  , TWITTER_CONSUMER_SECRET    = c.get('TWITTER_CONSUMER_SECRET')
+  , TWITTER_CALLBACK_URL       = c.get('TWITTER_CALLBACK_URL')
+  , WINDOWS_LIVE_CLIENT_ID     = c.get('WINDOWS_LIVE_CLIENT_ID')
+  , WINDOWS_LIVE_CLIENT_SECRET = c.get('WINDOWS_LIVE_CLIENT_SECRET')
+  , WINDOWS_LIVE_CALLBACK_URL  = c.get('WINDOWS_LIVE_CALLBACK_URL');
 
 // Serialize users into sessions with just their user id
 passport.serializeUser(function(user, cb){
@@ -43,9 +48,6 @@ passport.serializeUser(function(user, cb){
 });
 passport.deserializeUser(db.deserializeUser);
 
-// passport.deserializeUser(function(obj, done) {
-//   done(null, obj);
-// });
 
 passport.use(new TwitterStrategy({
     consumerKey: TWITTER_CONSUMER_KEY
@@ -54,13 +56,33 @@ passport.use(new TwitterStrategy({
   },
   function(token, tokenSecret, profile, done) {
 
-    db.getUserFromProfile(profile, function(err, user){
+    db.getUserFromTwitterProfile(profile, function(err, user){
 
       if (user && !err) { 
         return done(null, user);
       } else {
         return err ? done(err, null) : done(new Error('User not authorized'), null);
       }
+      
+    });
+  }
+));
+
+passport.use(new LiveStrategy({
+    clientID: WINDOWS_LIVE_CLIENT_ID,
+    clientSecret: WINDOWS_LIVE_CLIENT_SECRET,
+    callbackURL: WINDOWS_LIVE_CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, done) {
+
+    db.getUserFromLiveProfile(profile, function(err, user) {
+
+      if (user && !err) { 
+        return done(null, user);
+      } else {
+        return err ? done(err, null) : done(new Error('User not authorized'), null);
+      }
+
     });
   }
 ));
@@ -85,9 +107,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Development only
-if ('development' == app.get('env')) { // TODO: turn this back on
+// if ('development' == app.get('env')) { // TODO: turn this back off
   app.use(express.errorHandler());
-}
+// }
 
 
 /**********************************
@@ -112,21 +134,27 @@ app.get('/admin/login', adminMain.login);
 app.get('/admin/account'             , authAdmin , account.index);
 app.post('/admin/account'            , authAdmin , account.create);
 app.get('/admin/account/new'         , authAdmin , account.entry);
-app.get('/admin/account/:id'         , authAdmin , account.get);
 app.get('/admin/account/:id/update'  , authAdmin , account.update);
 app.post('/admin/account/:id/update' , authAdmin , account.patch);
 app.get('/admin/account/:id/delete'  , authAdmin , account.del);
 
-app.get('/admin/post'               , auth      , admin.index);
-app.get('/admin/post/new'           , auth      , admin.entry);
-app.get('/admin/post/:id/update'    , auth      , admin.update);
-app.post('/admin/post/:id/update'   , auth      , admin.create);
-app.post('/admin/post'              , auth      , admin.create);
-app.get('/admin/post/:id'           , auth      , admin.get);
-app.get('/admin/posts'              , auth      , admin.all);
-app.get('/admin/post/:id/publish'   , authAdmin , admin.publish);
-app.get('/admin/post/:id/unpublish' , authAdmin , admin.unpublish);
-app.get('/admin/post/:id/delete'    , authAdmin , admin.del);
+app.get('/admin/topic'               , authAdmin , adminTopic.index);
+app.post('/admin/topic'              , authAdmin , adminTopic.create);
+app.get('/admin/topic/new'           , authAdmin , adminTopic.entry);
+app.get('/admin/topic/:id/update'    , authAdmin , adminTopic.update);
+app.post('/admin/topic/:id/update'   , authAdmin , adminTopic.patch);
+app.get('/admin/topic/:id/delete'    , authAdmin , adminTopic.del);
+
+app.get('/admin/post'                , auth      , admin.index);
+app.get('/admin/post/new'            , auth      , admin.entry);
+app.get('/admin/post/:id/update'     , auth      , admin.update);
+app.post('/admin/post/:id/update'    , auth      , admin.create);
+app.post('/admin/post'               , auth      , admin.create);
+app.get('/admin/post/:id'            , auth      , admin.get);
+app.get('/admin/posts'               , auth      , admin.all);
+app.get('/admin/post/:id/publish'    , authAdmin , admin.publish);
+app.get('/admin/post/:id/unpublish'  , authAdmin , admin.unpublish);
+app.get('/admin/post/:id/delete'     , authAdmin , admin.del);
 
 app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
@@ -136,7 +164,7 @@ app.get('/admin/notadmin', function(req, res) {
 /*****************
  * TWITTER
  ****************/
-var error = 'Unable to authenticate with Twitter, ' +
+var message = 'Unable to authenticate, ' +
             'or you are not authorized to use this system.';
 
 app.get('/auth/twitter',
@@ -146,12 +174,28 @@ app.get('/auth/twitter',
 
 app.get('/auth/twitter/callback',
   passport.authenticate('twitter', {
-    failureRedirect: '/login?error=' + escape(error)
+    failureRedirect: '/admin/login?message=' + message
   }),
   function(req, res) {
+    // Successful authentication, redirect home.
     res.redirect('/admin/post');
 });
 
+/*****************
+ * WINDOWS LIVE
+ ****************/
+
+app.get('/auth/live',
+  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic'] }));
+
+app.get('/auth/live/callback', 
+  passport.authenticate('windowslive', { 
+    failureRedirect: '/admin/login?message=' + message
+   }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/admin/post');
+  });
 
 /**********************************
  * START THE SERVER, SCOTTY!

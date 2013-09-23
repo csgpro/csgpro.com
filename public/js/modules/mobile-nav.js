@@ -1,3 +1,8 @@
+/*jslint
+  node: true,
+  browser: true */
+  /* globals $*/
+
 'use strict';
 
 function init(options) {
@@ -12,14 +17,25 @@ function init(options) {
 
     if (pageWidth <= brk) { // on a mobile
       bdy.toggleClass('nav-open');
+      window.setTimeout(function(){
+        bdy.on('click', clear);
+      }, 0);
     }
     
   });
 
   links.on('click', function(){
     bdy.removeClass('nav-open');
+    bdy.off('click', clear);
   });
 
+}
+
+function clear() {
+  var body = $('body');
+
+  body.removeClass('nav-open');
+  body.off('click', clear);
 }
 
 module.exports = init;
