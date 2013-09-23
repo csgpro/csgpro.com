@@ -50,21 +50,27 @@ function doResize(){
     // Make sure the mobile nav is hidden
     body.removeClass('nav-open');
 
+    $('#hero').css('height', heroHeight);
+
+    // Vertically center the hero content
+    $('#headline').css('margin-top', topMargin);
+
     if (wHeight <= maxHeight && wHeight >= minHeight) {
       // Dynamically change the height of the various sections to match the user's
       // screen height
-      $('#hero').css('height', heroHeight);
       $('#work').css('height', heroHeight);
+      $('#services').css('height', heroHeight);
+      $('#about').css('height', heroHeight);
       $('#updates').css('height', heroHeight);
 
-      // Vertically center the hero content
-      $('#headline').css('margin-top', topMargin);
     }
 
   } else { // mobile
     // undo the page sizing
     $('#hero').removeAttr('style');
     $('#work').removeAttr('style');
+    $('#services').removeAttr('style');
+    $('#about').removeAttr('style');
     $('#updates').removeAttr('style');
   }
 

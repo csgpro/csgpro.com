@@ -238,6 +238,9 @@ block content
                     span Founder &amp; CEO
           div.grid__item.eight-twelfths.hide-mobile
             article.swappable
+              section#swappable-about(data-swap='about')
+                h2 Something
+                p Some text about CSG
               section#swappable-chuckb.gone(data-swap='chuckb')
                 h2 Chuck Britton, Sales and Marketing Director
                 p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro.
@@ -246,7 +249,7 @@ block content
                 h2 Ron Ellis Gaut, Director of Consulting
                 p As a founding member of the CSG team, Ron has had the unique opportunity to contribute to growth and success of the company since the beginning. With over 30 years of experience of working in IT, Ron brings a broad base of experience to his role as Director of Consulting.
                 p Before he joined CSG, Ron worked as a software developer and IT professional for Sequent Computer Systems, Mentor Graphics and Concept Technologies. When not engaged with the clients and staff of CSG, look for Ron chasing steelhead on a wild Oregon river or playing guitar in the local Portland music scene.
-              section#swappable-kevinm(data-swap='kevinm')
+              section#swappable-kevinm.gone(data-swap='kevinm')
                 h2 Kevin McVicker, President:
                 p Kevin joined CSG in February 2010, with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
                 p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, an IT services company in the application development and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland. Outside of work Kevin’s enjoys running and camping, but his first priority is being a better husband to his wife, a better father to his four daughters, and a better friend to an incredible God.
@@ -278,7 +281,7 @@ block content
               each post in posts
                 div.post.grid__item.eleven-twelfths.desk--four-twelfths
                   div(class="circle icon-#{post.Category.toLowerCase()}")
-                  article.grid__item.eleven-twelfths
+                  article.grid__item.eleven-twelfths.space-bottom-lg
                     div.grid__item.one-whole.right
                       small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
                     div.right-gutter.abstract

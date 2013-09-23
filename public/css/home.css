@@ -40,7 +40,9 @@ body{overflow-x:hidden}
 @media all and (min-width: 768px){.desk--space-top{margin-top:48px}
 }@media all and (max-width: 767px){.mobile--space-top-xs{margin-top:12px}
 }@media all and (max-width: 767px){.mobile--space-top{margin-top:48px}
-}.pad-bottom-xs{padding-bottom:12px}
+}.space-bottom{margin-bottom:24px}
+.space-bottom-lg{margin-bottom:48px}
+.pad-bottom-xs{padding-bottom:12px}
 .pad-bottom-sm{padding-bottom:24px}
 .pad-bottom{padding-bottom:48px}
 .pad-bottom-lg{padding-bottom:72px}
@@ -170,7 +172,7 @@ header img{max-width:80px;max-height:80px}
 #contact .panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
 #contact .panel div:first-child{margin-top:24px}
 #contact label{color:#0aa3e7;font-size:12px;font-weight:bolder;text-transform:uppercase;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
-.scene-footer{min-height:400px;background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
+.scene-footer{min-height:200px;background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 .small-logo{width:60px;height:60px;margin:15px 0 0 20px;cursor:pointer}
 .big-logo{margin:-65px 0 0 0;height:160px;width:160px}
 .wrapper{margin:0 auto 0 auto;max-width:1060px}

@@ -49,7 +49,7 @@ block content
             label(for='form-topics') Topics (multi-select):
           div.col-xs-4.text-right
             small: a(href='#', onclick="$('#form-topics option:selected').removeAttr('selected'); return false; ") reset
-        select#form-topics.form-control(type='text', name='Topics', multiple)
+        select#form-topics.form-control(type='text', name='Topics', multiple, style='min-height: 180px')
           if (postTopics)
             each topic in topics
               option(value='#{topic}', selected=postTopics.hasOwnProperty(topic))= topic
