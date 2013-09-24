@@ -4,7 +4,7 @@
 body{overflow-x:hidden}
 .mobile-nav,.main-body{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;-ms-transition:all ease 0.4s;transition:all ease 0.4s}
 .mobile-nav{width:75%;background-color:#343434;float:left;margin-left:-80%;height:1000px;z-index:20;position:fixed;top:0;left:0;}
-.mobile-nav ul{font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif;font-size:30px;list-style-type:none;margin:0;padding:0 0 0 24px;}
+.mobile-nav ul{font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:30px;list-style-type:none;margin:0;padding:0 0 0 24px;}
 .mobile-nav ul li{padding:12px 0;border-bottom:solid #4c4c4c 2px}
 .main-body{min-width:100%;position:relative}
 .nav-open .mobile-nav{margin-left:0;padding-right:12px}
@@ -13,7 +13,6 @@ body{overflow-x:hidden}
 .topic-list{list-style-type:none;padding:12px !important}
 .topic-list li{margin:5px 0 5px 0}
 .topic-list a{color:#fff;font-size:13px;text-transform:uppercase}
-.serif{font-family:"Palatino Linotype","Book Antiqua",Palatino,serif;font-style:italic}
 .grey{color:#888 !important}
 .white{color:#fff !important}
 .blue{color:#09a4e6}
@@ -116,7 +115,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 @media all and (min-width: 768px){#services aside hr{width:85%}
 }#services aside > ul{margin:0;padding:0;list-style-type:none;}
 #services aside > ul section{color:#000;background-color:#f3f3f3;}
-#services aside > ul section .title{font-size:26px;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
+#services aside > ul section .title{font-size:26px;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 #services aside > ul li.active .services-menu{color:#fff;}
 #services aside > ul li.active .services-menu .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
 #services aside > ul li.active .services-menu .chevron polyline{stroke:#fff}
@@ -181,7 +180,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #contact small{font-size:60%}
 #contact .panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
 #contact .panel div:first-child{margin-top:24px}
-#contact label{color:#0aa3e7;font-size:12px;font-weight:bolder;text-transform:uppercase;font-family:'Century Gothic',CenturyGothic,Helvetica,sans-serif}
+#contact label{color:#0aa3e7;font-size:12px;font-weight:bolder;text-transform:uppercase;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 @media all and (min-width: 768px){.scene-footer{min-height:200px;background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 }@media all and (max-width: 767px){.scene-footer{background-color:#252525}
 }.side-margins{margin-left:6px;margin-right:6px}
@@ -196,7 +195,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 .fixed-menu ul{margin:35px 0 0 0}
 nav{color:#4aaad4;font-size:18px;position:relative;}
 @media all and (min-width: 768px){nav{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;border-top:3px solid #fff;height:92px}
-nav ul{font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:19.5px;float:right;margin:35px 0 0 0;padding-left:0 !important;}
+nav ul{font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:19.5px;float:right;margin:35px 0 0 0;padding-left:0 !important;}
 nav ul li{cursor:pointer;display:inline;padding:0 15px 0 15px}
 }#mobile-header ul{margin:25px 0 0 25px;list-style-type:none}
 #mobile-header ul li{display:none}
