@@ -103,8 +103,8 @@ app.use(express.methodOverride());
 app.use(express.session({ secret: "asd~~~kj~jKjjj~JJJJk123" }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
 
 // Development only
 // if ('development' == app.get('env')) { // TODO: turn this back off
@@ -158,6 +158,10 @@ app.get('/admin/post/:id/delete'     , authAdmin , admin.del);
 
 app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
+});
+
+app.get('/*', function(req, res) {
+  res.redirect('/404.html');
 });
 
 

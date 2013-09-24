@@ -17,6 +17,12 @@ block content
           div.icon-bar
           div.icon-bar
           div.icon-bar
+        ul.gothic
+          li(data-nav='work') work /
+          li(data-nav='services') services /
+          li(data-nav='about') about /
+          li(data-nav='updates') updates /
+          li(data-nav='contact') contact /
       div.grid__item.four-twelfths.right
         a(href='/')
           img(src='/img/logo.svg')
@@ -36,17 +42,17 @@ block content
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
             p Our real-time analytics<br>engine makes managing<br>your critical data easy.
-            p: a(href='#') put it to work for you }
+            p: a(href='javascript:void(0)', onclick='scrollToId("services");') put it to work for you }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p CSG's mobile dev & MS Azure<br>hosting boost awareness about<br>Oregon's container redemption.
-            p: a(href='#') read the case study }
+            p CSG's mobile dev & MS Azure hosting boost awareness about Oregon's container redemption.
+            p: a(href='javascript:void(0)', onclick='scrollToId("work");') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
             p CSG is turning 20 and we're<br>having an open-house at our<br>Pearl district offices XX/XX
-            p: a(href='#') get all the details }
+            p: a(href='/post/24') get all the details }
 
     nav.hide-mobile
       div.wrapper
@@ -69,11 +75,13 @@ block content
       // WORK
       /////////////////////////////////
       div#work-container
-        section#work.grid.wrapper(style='height: 514px')
+        section#work.grid.wrapper
           div.swipeshow
             ul.slides
               li.slide
-                aside.grid__item.desk--one-third
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg")')
+                  span.serif.white.next.text-size-md.hide-mobile(href='javascript:void(0)') see more work this way }
+                aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top-sm
                     span.caps Case Study:
                     span.text-size-md  Web & Mobile
@@ -86,13 +94,19 @@ block content
                     | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
-                article.grid__item.desk--two-thirds(style='background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg")')
-                  span.serif.white(href='#') see more work this way }
-                      //- img(src='https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg')
-                      //- li.slide: img(src='http://placekitten.com/650/504')
-                      //- li.slide: img(src='http://placekitten.com/650/504')
+                  p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
+                    | ball tip prosciutto spare ribs flank. T-bone rump venison
+                    | pastrami boudin.
+                  div.right.next
+                    span.serif.white.text-size-md.hide-desk(href='javascript:void(0)') see more work this way }
               li.slide
-                aside.grid__item.desk--one-third
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("http://placekitten.com/900/800")')
+                  span.serif.white.next.text-size-md.hide-mobile(href='#') see more work this way }
+                aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top
                     span.caps-title Case Study:
                     span  Web & Mobile
@@ -105,8 +119,15 @@ block content
                     | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
-                article.grid__item.desk--two-thirds
-                      img(src='http://placekitten.com/686/504')
+                  p Bacon ipsum dolor sit amet tenderloin tail strip steak sausage
+                    | boudin biltong, salami beef sirloin shankle turducken pig
+                    | jowl andouille spare ribs. Tri-tip bacon bresaola biltong
+                    | turkey. Shoulder short loin tail pork, beef ribs rump
+                    | turducken doner pig hamburger. Chicken venison salami chuck
+                    | ball tip prosciutto spare ribs flank. T-bone rump venison
+                    | pastrami boudin.
+                  div.right.next
+                    span.serif.white.text-size-md.hide-desk(href='javascript:void(0)') see more work this way }
 
       /////////////////////////////////
       // SERVICES
@@ -228,9 +249,9 @@ block content
         section#about.grid.wrapper
           div.grid__item.four-twelfths.mobile--one-whole.full
             aside.one-whole(style='min-height: 430px')
-                div.grid__item.one-whole.desk--center
-                  img.space-top.mobile--img-sm(src='img/CSG20_icon.svg')
-                div.grid__item.one-whole.text-column.space-bottom
+                div.grid__item.one-whole.center
+                  img.space-top(src='img/CSG20_icon.svg')
+                div.grid__item.one-whole.text-column.space-bottom(style='color: #ccc;')
                   p "We first opened our doors on July 6, 1993. The first thing we did that day was define our core values - integrity, excellence and teamwork. We felt it was the most important thing to do because it set the foundation for everything that came after. We started CSG to fulfill a need we saw in the industry for unquestioned integrity and excellent customer service. A need for someone to build custom business software that mattered. And we wanted to make sure we were that company."
                   img(src='https://csgsitestorage.blob.core.windows.net/img/about_jerry_thumb.png')
                   div#jerry
@@ -245,23 +266,23 @@ block content
               section#swappable-chuckb.gone(data-swap='chuckb')
                 h2 Chuck Britton, Sales and Marketing Director
                 p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro.
-                p Chuck and his wife have been married for #{moment().diff('1986-01-01', 'years')} years. They are the proud parents of two tremendous sons. Faith and family are the greatest priorities in the Britton’s lives. Chuck enjoys the beauty of the Pacific Northwest – its high desert, forests, oceans and mountains. He cycles, skis, runs, and golfs – all in moderation. Traeger Grilling and autumn Saturdays at Autzen Stadium are added passions.
+                //- p Chuck and his wife have been married for #{moment().diff('1986-01-01', 'years')} years. They are the proud parents of two tremendous sons. Faith and family are the greatest priorities in the Britton’s lives. Chuck enjoys the beauty of the Pacific Northwest – its high desert, forests, oceans and mountains. He cycles, skis, runs, and golfs – all in moderation. Traeger Grilling and autumn Saturdays at Autzen Stadium are added passions.
               section#swappable-roneg.gone(data-swap='roneg')
                 h2 Ron Ellis Gaut, Director of Consulting
                 p As a founding member of the CSG team, Ron has had the unique opportunity to contribute to growth and success of the company since the beginning. With over 30 years of experience of working in IT, Ron brings a broad base of experience to his role as Director of Consulting.
-                p Before he joined CSG, Ron worked as a software developer and IT professional for Sequent Computer Systems, Mentor Graphics and Concept Technologies. When not engaged with the clients and staff of CSG, look for Ron chasing steelhead on a wild Oregon river or playing guitar in the local Portland music scene.
+                //- p Before he joined CSG, Ron worked as a software developer and IT professional for Sequent Computer Systems, Mentor Graphics and Concept Technologies. When not engaged with the clients and staff of CSG, look for Ron chasing steelhead on a wild Oregon river or playing guitar in the local Portland music scene.
               section#swappable-kevinm.gone(data-swap='kevinm')
                 h2 Kevin McVicker, President:
                 p Kevin joined CSG in February 2010, with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
-                p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, an IT services company in the application development and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland. Outside of work Kevin’s enjoys running and camping, but his first priority is being a better husband to his wife, a better father to his four daughters, and a better friend to an incredible God.
+                //- p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, an IT services company in the application development and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland. Outside of work Kevin’s enjoys running and camping, but his first priority is being a better husband to his wife, a better father to his four daughters, and a better friend to an incredible God.
               section#swappable-jamesc.gone(data-swap='jamesc')
                 h2 James Churchill, Practice Manager: Application Development
                 p James manages the development of custom applications for CSG clients. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
-                p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.
+                //- p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.
               section#swappable-dianec.gone(data-swap='dianec')
                 h2 Diane Carpenter, Practice Manager: Business Intelligence and Portals & Collaboration
                 p Diane manages our practice for Business Intelligence and Portals & Collaboration. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
-                p Prior to joining CSG, Diane was a Senior Project Manager at Holiday Retirement, an industry leader in Retirement Living, directing multiple large-scale enterprise application implementations, CRM, website redesign, accounting and IT projects. The previous 10 years were spent as a Senior Consultant with Ascentium, Centerlogic and CTR consulting companies. When not engaged with the clients, you will most likely find Diane tasting wine in the Willamette Valley or camping in central Oregon.
+                //- p Prior to joining CSG, Diane was a Senior Project Manager at Holiday Retirement, an industry leader in Retirement Living, directing multiple large-scale enterprise application implementations, CRM, website redesign, accounting and IT projects. The previous 10 years were spent as a Senior Consultant with Ascentium, Centerlogic and CTR consulting companies. When not engaged with the clients, you will most likely find Diane tasting wine in the Willamette Valley or camping in central Oregon.
             ul.swapper
               li#swapper-chuckb(data-swap='chuckb'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
               li#swapper-roneg(data-swap='roneg'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
@@ -333,12 +354,12 @@ block content
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com
               div.grid__item.one-whole
-                span.serif.text-size-sm connect with us: 
-                  a: img(href='twitter')
-                  a: img(href='linkedin')
+                span.serif.text-size-md connect with us: 
+                  a(href='http://twitter.com/csgpro'): img.side-margins(src='/img/twitter_icon.svg', style='width: 30px; height: 30px')
+                  a(href='http://www.linkedin.com/company/csg-pro'): img.side-margins(src='/img/linkedin_icon.svg', style='width: 30px; height: 30px')
       footer.scene-footer
         div.wrapper.grid.center-images
-          div.grid__item.one-whole.full.mobile--center.pad-bottom-lg(style='margin-top: 87px')
+          div.grid__item.one-whole.full.mobile--center.spaced
             div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
               img(src='/img/Azure_circle_logo.svg', width='100px', height= '49px')
               img(src='/img/MS_partner_goldBI_logo.svg',width='150px',height='30px')

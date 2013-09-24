@@ -23,8 +23,8 @@ block content
         article.grid__item.desk--nine-twelfths.article.pad-right-1
           h1= post.Title
           div.grid__item.one-half.full
-            if (post.Category === 'Blog')
-              h3.serif a blog post by #{post.AuthorFullName || 'CSG Pro'}
+            if (post.Category)
+              h3.serif a #{post.Category.toLowerCase()} post by #{post.AuthorFullName || 'CSG Pro'}
           div.grid__item.one-half.full.right
             if (post.PublishDate)
               h4.grey posted 
@@ -32,6 +32,12 @@ block content
           if (post.Markdown)
             p!= marked(post.Markdown)
             if (post.Category === 'Blog')
+              div.space-top.hide-desk
+                h4.blue Related Topics:
+                div.panel.panel-blue
+                  ul.topic-list
+                    each topic in post.Topics
+                      li: a(href='/post/topic/#{topic}')= topic
               // Disqus Comments
               div#disqus_thread
               script(type='text/javascript')
@@ -48,7 +54,7 @@ block content
           else
             p This blog post is empty.
         if (post.Topics && post.Topics != '')
-          div.grid__item.desk--three-twelfths.space-top
+          div.grid__item.desk--three-twelfths.space-top.hide-mobile
             h4.blue Related Topics:
             div.panel.panel-blue
               ul.topic-list

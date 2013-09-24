@@ -32,12 +32,13 @@ function init() {
   w.on('resize', recalcTops);
 
   // Check if the user has a hash in their address bar, if so, try to nav there
-  if (window.location.hash !== '') {
+  // There was a bug here when the user navigated to "/#", but it's fixed now
+  if (/#\w+/.test(window.location.hash)) {
     var element = $(window.location.hash);
 
-    scrollTo(element);
+    if (element)
+      scrollTo(element);
   }
-
 
   // When a user clicks on a nav item, scroll to that section. Should probably
   // be using anchors instead of this klugy method, but it works for now
@@ -60,6 +61,14 @@ function scrollTo(element) {
     scrollTop: element.offset().top - offset
   });
 }
+
+// global scope creep here... DANGER DANGER
+window.scrollToId = function (id) {
+  var element = $('#' + id);
+
+  if (element)
+    scrollTo(element);
+};
 
 function recalcTops(){
   arr = [];

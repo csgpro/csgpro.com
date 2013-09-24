@@ -1,3 +1,5 @@
+/*jslint
+  node: true*/ /*globals $*/
 /**
  * This module sets up the homepage carousel. Assumes:
  * - jQuery 1.10.2
@@ -14,10 +16,9 @@ function init(){
     friction: 0.3,      /* Bounce-back behavior; use `0` to disable */
     mouse: true,        /* enable mouse dragging controls */
     keys: true,         /* enable left/right keyboard keys */
-
-    onactivate: function(){},
-    onpause: function(){},
+    $next: $('.swipeshow .next')
   });
+
 }
 
 ////////////////////

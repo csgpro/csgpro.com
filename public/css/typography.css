@@ -1,6 +1,6 @@
 body{background-color:background-color;font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif}
 body.body-white{background-color:#fff}
-h1,h2,h3,h4,h5,h6{font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif;font-weight:lighter}
+h1,h2,h3,h4,h5,h6,.gothic{font-family:'Century Gothic','CenturyGothic',Helvetica,sans-serif;font-weight:lighter}
 a{color:#429ec7;text-decoration:none}
 p{line-height:19px}
 p,ul,ol{font-family:'Tahoma',Helvetica,sans-serif;font-size:15px}
