@@ -52,6 +52,7 @@ function doResize(){
 
     $('#hero').css('height', heroHeight);
 
+
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
 
@@ -63,6 +64,16 @@ function doResize(){
       $('#about').css('height', heroHeight);
       $('#updates').css('height', heroHeight);
 
+    } else if (wHeight >= maxHeight) { // still desktop, but above the bounds
+      $('#work').css('height', maxHeight + 'px');
+      $('#services').css('height', maxHeight + 'px');
+      $('#about').css('height', maxHeight + 'px');
+      $('#updates').css('height', maxHeight + 'px');
+    } else if (wHeight <= minHeight) { // still desktop, but below the bounds
+      $('#work').css('height', minHeight + 'px');
+      $('#services').css('height', minHeight + 'px');
+      $('#about').css('height', minHeight + 'px');
+      $('#updates').css('height', minHeight + 'px');
     }
 
   } else { // mobile

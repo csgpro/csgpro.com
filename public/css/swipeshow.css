@@ -80,8 +80,5 @@ html.swipeshow-grabbed * {
   visibility: visible;
 }
 
-/* SIZING */
-.swipeshow {
-  width: 99%;
-  height: 504px;
-}
+
+

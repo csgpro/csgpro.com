@@ -20,8 +20,8 @@ var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
-  maxHeight  : 750,  // px
-  minHeight  : 595   // px - approx. adjusted for nav bar height
+  maxHeight : 750,  // px
+  minHeight : 625    // px - approx. adjusted for nav bar height
 };
 
 // Fire the modules, order is important
@@ -39,6 +39,8 @@ if (window.location.pathname === '/') { // only do all this javascript in root
 
 
 },{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/nav-scrolling":5,"./modules/page-sizing":6,"./modules/section-swapping":7,"./modules/sticky-nav":8}],2:[function(require,module,exports){
+/*jslint
+  node: true*/ /*globals $*/
 /**
  * This module sets up the homepage carousel. Assumes:
  * - jQuery 1.10.2
@@ -55,10 +57,9 @@ function init(){
     friction: 0.3,      /* Bounce-back behavior; use `0` to disable */
     mouse: true,        /* enable mouse dragging controls */
     keys: true,         /* enable left/right keyboard keys */
-
-    onactivate: function(){},
-    onpause: function(){},
+    $next: $('.swipeshow .next')
   });
+
 }
 
 ////////////////////
@@ -177,12 +178,13 @@ function init() {
   w.on('resize', recalcTops);
 
   // Check if the user has a hash in their address bar, if so, try to nav there
-  if (window.location.hash !== '') {
+  // There was a bug here when the user navigated to "/#", but it's fixed now
+  if (/#\w+/.test(window.location.hash)) {
     var element = $(window.location.hash);
 
-    scrollTo(element);
+    if (element)
+      scrollTo(element);
   }
-
 
   // When a user clicks on a nav item, scroll to that section. Should probably
   // be using anchors instead of this klugy method, but it works for now
@@ -205,6 +207,14 @@ function scrollTo(element) {
     scrollTop: element.offset().top - offset
   });
 }
+
+// global scope creep here... DANGER DANGER
+window.scrollToId = function (id) {
+  var element = $('#' + id);
+
+  if (element)
+    scrollTo(element);
+};
 
 function recalcTops(){
   arr = [];
@@ -314,6 +324,7 @@ function doResize(){
 
     $('#hero').css('height', heroHeight);
 
+
     // Vertically center the hero content
     $('#headline').css('margin-top', topMargin);
 
@@ -325,6 +336,16 @@ function doResize(){
       $('#about').css('height', heroHeight);
       $('#updates').css('height', heroHeight);
 
+    } else if (wHeight >= maxHeight) { // still desktop, but above the bounds
+      $('#work').css('height', maxHeight + 'px');
+      $('#services').css('height', maxHeight + 'px');
+      $('#about').css('height', maxHeight + 'px');
+      $('#updates').css('height', maxHeight + 'px');
+    } else if (wHeight <= minHeight) { // still desktop, but below the bounds
+      $('#work').css('height', minHeight + 'px');
+      $('#services').css('height', minHeight + 'px');
+      $('#about').css('height', minHeight + 'px');
+      $('#updates').css('height', minHeight + 'px');
     }
 
   } else { // mobile
