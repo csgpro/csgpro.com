@@ -160,9 +160,6 @@ app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
 });
 
-app.get('/*', function(req, res) {
-  res.redirect('/404.html');
-});
 
 
 /*****************
@@ -200,6 +197,10 @@ app.get('/auth/live/callback',
     // Successful authentication, redirect home.
     res.redirect('/admin/post');
   });
+
+app.get('/*', function(req, res) {
+  res.redirect('/404.html');
+});
 
 /**********************************
  * START THE SERVER, SCOTTY!
