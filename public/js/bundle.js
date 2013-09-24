@@ -21,7 +21,7 @@ var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
   breakpoint : 768,  // px
   maxHeight : 750,  // px
-  minHeight : 595    // px - approx. adjusted for nav bar height
+  minHeight : 625    // px - approx. adjusted for nav bar height
 };
 
 // Fire the modules, order is important

@@ -79,7 +79,7 @@ block content
           div.swipeshow
             ul.slides
               li.slide
-                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("https://csgsitestorage.blob.core.windows.net/img/casestudy_img_01.jpg")')
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_01.jpg")')
                   span.serif.white.next.text-size-md.hide-mobile(href='javascript:void(0)') see more work this way }
                 aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top-sm
@@ -105,7 +105,7 @@ block content
                     span.serif.white.text-size-md.hide-desk(href='javascript:void(0)') see more work this way }
               li.slide
                 article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("http://placekitten.com/900/800")')
-                  span.serif.white.next.text-size-md.hide-mobile(href='#') see more work this way }
+                  //- span.serif.white.next.text-size-md.hide-mobile(href='#') see more work this way }
                 aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top
                     span.caps-title Case Study:
@@ -126,8 +126,8 @@ block content
                     | turducken doner pig hamburger. Chicken venison salami chuck
                     | ball tip prosciutto spare ribs flank. T-bone rump venison
                     | pastrami boudin.
-                  div.right.next
-                    span.serif.white.text-size-md.hide-desk(href='javascript:void(0)') see more work this way }
+                  //- div.right.next
+                  //-   span.serif.white.text-size-md.hide-desk(href='javascript:void(0)') see more work this way }
 
       /////////////////////////////////
       // SERVICES
@@ -357,20 +357,16 @@ block content
                 span.serif.text-size-md connect with us: 
                   a(href='http://twitter.com/csgpro'): img.side-margins(src='/img/twitter_icon.svg', style='width: 30px; height: 30px')
                   a(href='http://www.linkedin.com/company/csg-pro'): img.side-margins(src='/img/linkedin_icon.svg', style='width: 30px; height: 30px')
-      footer.scene-footer
-        div.wrapper.grid.center-images
-          div.grid__item.one-whole.full.mobile--center.spaced
-            div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
-              img(src='/img/Azure_circle_logo.svg', width='100px', height= '49px')
-              img(src='/img/MS_partner_goldBI_logo.svg',width='150px',height='30px')
-            div.grid__item.desk--one-half.inline-block.mobile--center
-              img.desk--fr(src='/img/Crafted_in_PDX.svg',width='125px',height='51px')
-              span.desk--fr.icon-vertical-bar
-              img.desk--fr(src='/img/CSG20_round_footer.svg',width='60px',height='60px')
-
-
-
-
-
+      include partials/footer
+      //- footer.scene-footer
+      //-   div.wrapper.grid.center-images
+      //-     div.grid__item.one-whole.full.mobile--center.spaced
+      //-       div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
+      //-         img(src='/img/Azure_circle_logo.svg', width='85px')
+      //-         img(src='/img/MS_partner_goldBI_logo.svg',width='120px')
+      //-       div.grid__item.desk--one-half.inline-block.mobile--center
+      //-         img.desk--fr(src='/img/Crafted_in_PDX.svg',width='125px')
+      //-         span.desk--fr.icon-vertical-bar
+      //-         img.desk--fr(src='/img/CSG20_round_footer.svg',width='60px')
 
 

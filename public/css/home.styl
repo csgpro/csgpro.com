@@ -346,7 +346,7 @@ body
 // version
 @media desk
   #work,#services,#updates,#about
-    max-height 800px
+    max-height 650px
     overflow hidden
 @media mobile
   #work,#services,#about,#updates,#contact
@@ -723,11 +723,18 @@ picture-spacing = 128px
   margin-left: gutter*0.25
   margin-right: gutter*0.25
 
-footer
+.scene-footer
   .spaced
     @media desk
       margin-top 87px
       padding-bottom 90px
+.inner-footer footer
+  background-image none
+  background-color #252525
+  .spaced
+    @media desk
+      margin-top gutter
+      padding-bottom gutter
 
 
 
@@ -755,13 +762,6 @@ footer
 .wrapper
   margin 0 auto 0 auto
   max-width wrapper-max-width
-
-.special-wrapper
-  margin 0 auto 0 auto
-  @media all and (min-width: 1000px)
-    max-width 1200px
-  @media all and (min-width: 1200px)
-    max-width 1400px
 
 .selected
   font-size 29px
