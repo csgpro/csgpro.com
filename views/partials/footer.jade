@@ -1,11 +1,19 @@
-footer.scene-footer
-  div.wrapper.grid.center-images
-    div.grid__item.one-whole.full.mobile--center.spaced
-      div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
-        img(src='/img/Azure_circle_logo_inner.svg', width='85px')
-        img(src='/img/MS_partner_goldBI_logo_inner.svg',width='120px')
-      div.grid__item.desk--one-half.inline-block.mobile--center
-        img.desk--fr(src='/img/Crafted_in_PDX_inner.svg',width='125px')
-        span.desk--fr.icon-vertical-bar
-        img.desk--fr(src='/img/CSG20_round_footer.svg',width='60px')
+mixin footer(isDark)
+  footer.scene-footer
+    div.wrapper.grid.center-images
+      div.grid__item.one-whole.full.mobile--center.spaced
+        div.grid__item.desk--one-half.inline-block.space-top-xxs.mobile--center
+          if isDark
+            img(src='/img/azure_circle_logo_inner.svg', width='85px')
+            img(src='/img/ms_partner_goldbi_logo_inner.svg',width='120px')
+          else
+            img(src='/img/azure_circle_logo.svg', width='85px')
+            img(src='/img/ms_partner_goldbi_logo.svg',width='120px')
+        div.grid__item.desk--one-half.inline-block.mobile--center
+          if isDark
+            img.desk--fr(src='/img/Crafted_in_PDX_inner.svg',width='125px')
+          else
+            img.desk--fr(src='/img/Crafted_in_PDX.svg',width='125px')
+          span.desk--fr.icon-vertical-bar
+          img.desk--fr(src='/img/CSG20_round_footer.svg',width='60px')
 

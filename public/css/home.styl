@@ -44,6 +44,22 @@ td, th
   padding 3px 24px 3px 0
 
 /***************************************
+ * Sticky Footer CSS
+ ***************************************/
+
+html,body
+  height: 100%
+
+.sticky-footer-wrapper
+  min-height 100%
+  height auto !important
+  height 100%
+  margin 0 auto -108px
+
+.sticky-footer, .sticky-footer-push
+  height 108px
+
+/***************************************
  * Off canvas nav
  ***************************************/
 .mobile-nav,.main-body
@@ -821,7 +837,7 @@ nav
 
 .mobile-header
   ul
-    margin 25px 0 0 25px
+    margin 27px 0 0 25px
     list-style-type none
   ul li:not(.selected)
     display none

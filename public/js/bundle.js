@@ -205,18 +205,18 @@ function init() {
   });
 }
 
-function scrollTo(element) {
+function scrollTo(element, customOffset) {
   $('html, body').animate({
-    scrollTop: element.offset().top - offset
+    scrollTop: element.offset().top - (customOffset || offset)
   });
 }
 
 // global scope creep here... DANGER DANGER
-window.scrollToId = function (id) {
+window.scrollToId = function (id, customOffset) {
   var element = $('#' + id);
 
   if (element)
-    scrollTo(element);
+    scrollTo(element, customOffset);
 };
 
 function recalcTops(){

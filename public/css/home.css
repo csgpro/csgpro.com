@@ -4,6 +4,9 @@
 body{overflow-x:hidden}
 thead tr{border-bottom:1px solid #ccc}
 td,th{padding:3px 24px 3px 0}
+html,body{height:100%}
+.sticky-footer-wrapper{min-height:100%;height:auto !important;height:100%;margin:0 auto -108px}
+.sticky-footer,.sticky-footer-push{height:108px}
 .mobile-nav,.main-body{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;-ms-transition:all ease 0.4s;transition:all ease 0.4s}
 .mobile-nav{width:75%;background-color:#343434;float:left;margin-left:-80%;height:1000px;z-index:20;position:fixed;top:0;left:0;}
 .mobile-nav ul{font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:30px;list-style-type:none;margin:0;padding:0 0 0 24px;}
@@ -203,5 +206,5 @@ nav{color:#4aaad4;font-size:18px;position:relative;}
 @media all and (min-width: 768px){nav{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;border-top:3px solid #fff;height:92px}
 nav ul{font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:19.5px;float:right;margin:35px 0 0 0;padding-left:0 !important;}
 nav ul li{cursor:pointer;display:inline;padding:0 11px 0 11px}
-}.mobile-header ul{margin:25px 0 0 25px;list-style-type:none}
+}.mobile-header ul{margin:27px 0 0 25px;list-style-type:none}
 .mobile-header ul li:not(.selected){display:none}

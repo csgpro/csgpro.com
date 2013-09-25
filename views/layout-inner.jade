@@ -36,25 +36,42 @@ html.no-js
         | Please <a href="http://browsehappy.com/">upgrade your browser</a>
         | to improve your experience.
 
-    header.mobile-header.grid--full.hide-desk
-      div.grid__item.eight-twelfths
-        div.toggle-nav
-          div.icon-bar
-          div.icon-bar
-          div.icon-bar
-        ul.gothic
-          li(data-nav='work') work /
-          li(data-nav='services') services /
-          li(data-nav='about') about /
-          li(data-nav='updates') updates /
-          li(data-nav='contact') contact /
-      div.grid__item.four-twelfths.right
-        a(href='/')
-          img(src='/img/logo.svg')
             
-    div.main-body
-      block content
+    div.sticky-footer-wrapper
+      div.mobile-nav.hide-desk(role='navigation')
+        ul
+          li: a(href='/#work') work /
+          li: a(href='/#services') services /
+          li: a(href='/#about') about /
+          li: a(href='/#updates') updates /
+          li: a(href='/#contact') contact /
+        div.bottom
+          a(href='/post/24'): img(src='/img/CSG20_round_footer.svg', style='width: 80px; height: 80px; margin: 0 24px -20px 0')
+          a(href='http://twitter.com/csgpro'): img.side-margins(src='/img/twitter_icon.svg', style='width: 30px; height: 30px')
+          a(href='http://www.linkedin.com/company/csg-pro'): img.side-margins(src='/img/linkedin_icon.svg', style='width: 30px; height: 30px')
 
+      div.main-body
+
+        header.mobile-header.grid--full.hide-desk
+          div.grid__item.eight-twelfths
+            div.toggle-nav
+              div.icon-bar
+              div.icon-bar
+              div.icon-bar
+            ul.gothic
+              li(data-nav='work') work /
+              li(data-nav='services') services /
+              li(data-nav='about') about /
+              li(data-nav='updates') updates /
+              li(data-nav='contact') contact /
+          div.grid__item.four-twelfths.right
+            a(href='/')
+              img(src='/img/logo.svg')
+
+        block content
+
+        div.sticky-footer-push
+          
     nav.fixed-menu.hide-mobile
       div.wrapper
         a(href='/'): img#logo.small-logo(src='/img/logo.svg')
@@ -68,8 +85,10 @@ html.no-js
           li: a.selected(href='/#updates') updates
           li /
           li: a(href='/#contact') contact
-    div.inner-footer
+
+    div.inner-footer.sticky-footer
       include partials/footer
+      mixin footer(true)
 
     //- We CDN load jQuery because everybody loves Raymond, err jQuery.
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
