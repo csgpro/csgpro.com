@@ -19,7 +19,7 @@ var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var options = {    // global options for the site
-  breakpoint : 768,  // px
+  breakpoint : 915,  // px
   maxHeight : 750,  // px
   minHeight : 625    // px - approx. adjusted for nav bar height
 };
