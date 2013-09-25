@@ -92,6 +92,9 @@ html,body{height:100%}
 }.swipeshow .next{cursor:pointer;}
 @media all and (min-width: 915px){.swipeshow .next{position:absolute;right:5%;bottom:5%}
 }@media all and (max-width: 914px){.swipeshow .next{margin-top:12px;border-top:1px solid #fff}
+}.swipeshow .previous{cursor:pointer;}
+@media all and (min-width: 915px){.swipeshow .previous{position:absolute;left:5%;bottom:5%}
+}@media all and (max-width: 914px){.swipeshow .previous{margin-top:12px;border-top:1px solid #fff}
 }@media all and (min-width: 915px){#work,#services,#updates,#about{max-height:650px;overflow:hidden}
 }@media all and (max-width: 914px){#work,#services,#about,#updates,#contact{overflow:hidden}
 }header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:60px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
