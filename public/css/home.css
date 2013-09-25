@@ -36,7 +36,7 @@ html,body{height:100%}
 .space-left{margin-left:48px}
 .space-left-sm{margin-left:24px}
 .space-right-sm{margin-right:24px}
-.center-images img{display:inline-block;height:100%;vertical-align:middle;padding-right:24px}
+.center-images img{display:inline-block;vertical-align:middle;padding-right:24px}
 .inline-block{display:inline-block}
 .space-top-xs{margin-top:12px}
 .space-top-xxs{margin-top:6px}

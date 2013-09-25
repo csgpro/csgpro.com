@@ -310,12 +310,12 @@ block content
             if (posts)
               each post in posts
                 div.post.grid__item.eleven-twelfths.desk--four-twelfths
-                  div(class="circle icon-#{post.Category.toLowerCase()}")
+                  a(href='/post/category/#{post.Category}'): div(class="circle icon-#{post.Category.toLowerCase()}")
                   article.grid__item.eleven-twelfths
                     div.grid__item.one-whole.right
                       small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
                     div.right-gutter.abstract
-                      h3= post.Title
+                      h3: a(href='/post/#{post.id}')= post.Title
                       h4.serif by #{post.AuthorFullName}
                       p= post.Abstract
                     div.grid__item.one-whole.right.full
@@ -345,15 +345,15 @@ block content
                   p We'd love to get to back to you with an answer, or maybe a hamburger.
               div.grid__item.six-twelfths
                 label What's your name?
-                input.serif(name='name', type='text')
+                input(name='name', type='text')
               div.grid__item.six-twelfths
                 label How can we reach you?
-                input.serif(name='contactInfo', type='text')
+                input(name='contactInfo', type='text')
               div.grid__item.one-whole
                 label So, what's on your mind?
-                textarea.serif(name='comments', type='text')
+                textarea(name='comments', type='text')
               div.grid__item.one-whole.right
-                input.serif(type='submit', value='Make it so').btn.btn-blue
+                button.serif(type='submit').btn.btn-blue Make it so
             div.grid__item.desk--seven-twelfths.one-whole.full
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 734 NW 14th Avenue <br>Portland, OR 97209
