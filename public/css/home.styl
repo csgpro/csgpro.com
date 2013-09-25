@@ -136,9 +136,11 @@ td, th
   font-size base-font-size*2.5
 
 .mobile--text-size-sm
-  font-size base-font-size*1.4
+  @media mobile
+    font-size base-font-size*1.4
 .mobile--text-size-xs
-  font-size base-font-size*0.9
+  @media mobile
+    font-size base-font-size*0.9
 
 
 .spacer
@@ -423,7 +425,7 @@ header
       line-height 1.941
       color rgb(82, 189, 236)
     @media mobile
-      font-size 20px
+      font-size 16px
       line-height 0
       color rgb(82, 189, 236)
   .tagline + div

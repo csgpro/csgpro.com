@@ -122,6 +122,7 @@ function init(options) {
       bdy.toggleClass('nav-open');
       window.setTimeout(function(){
         bdy.on('click', clear);
+        bdy.on('touch', clear);
       }, 0);
     }
     
@@ -130,6 +131,7 @@ function init(options) {
   links.on('click', function(){
     bdy.removeClass('nav-open');
     bdy.off('click', clear);
+    bdy.off('touch', clear);
   });
 
 }
@@ -139,6 +141,7 @@ function clear() {
 
   body.removeClass('nav-open');
   body.off('click', clear);
+  bdy.off('touch', clear);
 }
 
 module.exports = init;

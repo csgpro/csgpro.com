@@ -23,9 +23,9 @@ td,th{padding:3px 24px 3px 0}
 .text-size-sm{font-size:18.2px}
 .text-size-md{font-size:22.75px}
 .text-size-lg{font-size:32.5px}
-.mobile--text-size-sm{font-size:18.2px}
-.mobile--text-size-xs{font-size:11.700000000000001px}
-.spacer{height:2px;background-color:#fff;width:100%}
+@media all and (max-width: 767px){.mobile--text-size-sm{font-size:18.2px}
+}@media all and (max-width: 767px){.mobile--text-size-xs{font-size:11.700000000000001px}
+}.spacer{height:2px;background-color:#fff;width:100%}
 .caps-title{font-family:Roboto,sans-serif;font-size:16px;font-weight:lighter;text-transform:uppercase}
 .panel{-webkit-border-radius:4px;border-radius:4px}
 .panel.panel-blue{background-color:#09a4e6;color:#fff}
@@ -101,7 +101,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #hero #subline{font-size:51px;font-family:'Roboto';color:#fff;font-style:italic;line-height:.3}
 #hero .tagline{font-family:'Roboto';font-style:italic;font-weight:100;}
 @media all and (min-width: 768px){#hero .tagline{font-size:30px;line-height:1.941;color:#52bdec}
-}@media all and (max-width: 767px){#hero .tagline{font-size:20px;line-height:0;color:#52bdec}
+}@media all and (max-width: 767px){#hero .tagline{font-size:16px;line-height:0;color:#52bdec}
 }#hero .tagline + div{font-size:35px;font-family:Roboto;font-style:italic;font-weight:100;padding:0 10px 0 10px;color:#52bdec}
 @media all and (max-width: 767px){#hero .tagline + div{display:none}
 }@media all and (min-width: 768px){#hero .tagline + div{display:inline}
