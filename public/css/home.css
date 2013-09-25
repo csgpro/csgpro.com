@@ -191,7 +191,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }@media all and (max-width: 767px){.scene-footer{background-color:#252525}
 }.side-margins{margin-left:6px;margin-right:6px}
 @media all and (min-width: 768px){.scene-footer .spaced{margin-top:87px;padding-bottom:90px}
-}.inner-footer footer{background-image:none;background-color:#252525;}
+}.inner-footer footer{background-image:none;background-color:#f3f3f3;}
 @media all and (min-width: 768px){.inner-footer footer .spaced{margin-top:24px;padding-bottom:24px}
 }.small-logo{width:60px;height:60px;margin:15px 0 0 20px;cursor:pointer}
 .big-logo{margin:-65px 0 0 0;height:160px;width:160px}
