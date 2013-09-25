@@ -37,6 +37,12 @@ img
 body
   overflow-x hidden
 
+thead tr
+  border-bottom 1px solid #ccc
+
+td, th
+  padding 3px 24px 3px 0
+
 /***************************************
  * Off canvas nav
  ***************************************/
@@ -63,6 +69,11 @@ body
     li
       padding 12px 0
       border-bottom solid #4C4C4C 2px
+  .bottom
+    text-align center
+    position absolute
+    top 45%
+    left 25%
 
 
 .main-body
@@ -287,8 +298,7 @@ body
     
 .btn
   font-family Roboto
-  font-style italic
-  font-size 12px
+  font-size 14px
   border none
   border-radius border-radii*0.5
 .btn-blue
@@ -463,9 +473,11 @@ header
     padding-top gutter*0.5
   aside
     color #00A3E4
+    height 100%
+    background-color #00517E
     hr
       @media desk
-        width 85%
+        width 100%
       border none
       border-bottom 1px solid #00A3E4
       margin 5px 0 0 0
@@ -540,7 +552,7 @@ header
     .title
       font-size 25px
     section
-      width 780px
+      max-width 780px
       svg
         margin -15px 20px 0 0
 
@@ -553,8 +565,8 @@ picture-spacing = 128px
   // background-image url('/img/about_bg.png')
   background-image linear-gradient(to bottom, #595959 0%, #3B3B3B 100%)
   background-repeat repeat-x
-  position relative
 #about
+  position relative
   aside
     margin-top 25px
     @media desk
@@ -578,6 +590,7 @@ picture-spacing = 128px
     list-style-type none
     position absolute
     bottom 264px
+    right 625px
     .active
       z-index 6 !important
     li
@@ -701,14 +714,14 @@ picture-spacing = 128px
     margin-top gutter
   label
     color #0AA3E7
-    font-size 12px
+    font-size 11px
     font-weight bolder
     text-transform uppercase
     font-family 'CenturyGothicStd', 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
 
 .scene-footer
   @media desk
-    min-height 200px
+    // min-height 200px
     background-color #353535
     background-image url('/img/footer_bg.png')
     background-repeat no-repeat
@@ -764,6 +777,7 @@ picture-spacing = 128px
   font-size 29px
   color #fff
   line-height 0
+  display initial
 
 .fixed-menu
   z-index 10
@@ -795,15 +809,13 @@ nav
       li
         cursor pointer
         display inline
-        padding 0 15px 0 15px
+        padding 0 11px 0 11px
 
-#mobile-header
+.mobile-header
   ul
     margin 25px 0 0 25px
     list-style-type none
-  ul li
+  ul li:not(.selected)
     display none
-  li.selected
-    display initial
 
 

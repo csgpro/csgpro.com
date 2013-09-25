@@ -36,12 +36,18 @@ html.no-js
         | Please <a href="http://browsehappy.com/">upgrade your browser</a>
         | to improve your experience.
 
-    header#mobile-header.grid--full.hide-desk
+    header.mobile-header.grid--full.hide-desk
       div.grid__item.eight-twelfths
         div.toggle-nav
           div.icon-bar
           div.icon-bar
           div.icon-bar
+        ul.gothic
+          li(data-nav='work') work /
+          li(data-nav='services') services /
+          li(data-nav='about') about /
+          li(data-nav='updates') updates /
+          li(data-nav='contact') contact /
       div.grid__item.four-twelfths.right
         a(href='/')
           img(src='/img/logo.svg')
