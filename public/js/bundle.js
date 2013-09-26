@@ -18,6 +18,7 @@ var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
+var modal           = require('./modules/modal');
 var options = {    // global options for the site
   breakpoint : 915,  // px
   maxHeight : 750,  // px
@@ -32,13 +33,14 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+  modal();
 } else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
   mobileNav(options);
   lightbox();
 }
 
 
-},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/nav-scrolling":5,"./modules/page-sizing":6,"./modules/section-swapping":7,"./modules/sticky-nav":8}],2:[function(require,module,exports){
+},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/modal":5,"./modules/nav-scrolling":6,"./modules/page-sizing":7,"./modules/section-swapping":8,"./modules/sticky-nav":9}],2:[function(require,module,exports){
 /*jslint
   node: true*/ /*globals $*/
 /**
@@ -148,6 +150,34 @@ function clear() {
 module.exports = init;
 
 },{}],5:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
+'use strict';
+
+function init() {
+  $('.modal-toggle').on('click', function(){
+    var modalName = $(this).data('modal');
+    var modalElement = $('#modal-' + modalName);
+
+    if (modalElement)
+      modalElement.modal();
+
+  });
+
+  $('.ajaxSubmit').on('click', function(event){
+    event.preventDefault();
+    //pooperz
+
+  });
+}
+
+module.exports = init;
+
+
+},{}],6:[function(require,module,exports){
 /*jslint
   node: true,
   browser: true */ /*globals $*/
@@ -273,7 +303,7 @@ function log() {
 
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */
@@ -368,7 +398,7 @@ function doResize(){
 ///////////////////
 module.exports = init;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */ /* globals $ */
@@ -427,7 +457,7 @@ function init(options){
 ////////////////////
 module.exports = init;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * This module is used to make the navigations fixed when the user hits a
  * certain spot on their scrolling. It assumes:

@@ -130,6 +130,31 @@ html,body
   text-transform uppercase
 
 /***************************************
+ * Modals
+ ***************************************/
+
+.modal
+  display none
+
+#simplemodal-overlay
+  background-color #000
+
+#simplemodal-container
+  height 450px
+  width 600px
+
+#simplemodal-container a.modalCloseImg
+  background url('/img/icon_x.png') no-repeat
+  cursor pointer
+  display inline
+  height 29px
+  position absolute
+  right -16px
+  top -15px
+  width 25px
+  z-index 3200
+
+/***************************************
  * Helpers
  ***************************************/
 
@@ -147,7 +172,7 @@ html,body
 .text-size-sm
   font-size base-font-size*1.4
 .text-size-md
-  font-size base-font-size*1.75
+  font-size 22px
 .text-size-lg
   font-size base-font-size*2.5
 
@@ -221,6 +246,8 @@ html,body
   margin-bottom gutter
 .space-bottom-lg
   margin-bottom gutter*2
+.desk--space-top-sm
+  margin-top gutter*0.5
 
 .pad-bottom-xs
   padding-bottom gutter*0.5
@@ -282,6 +309,9 @@ html,body
   .hide-desk
     display none
 
+.hide
+  display none
+
 .right
   text-align right
 .desk--right
@@ -334,6 +364,7 @@ html,body
  ***************************************/
 .gone
   opacity 0
+  visibility hidden
   transform translate(-50px, 0)
   // display none
 
@@ -728,29 +759,28 @@ picture-spacing = 128px
     font-size 1.6em
   p
     margin-top 0
-  input[type='text'],textarea
-    background-color #E5E5E5
-    width 100%
-    max-width 100%
-    max-height 150px
-    padding 0
-    border none
-    margin-bottom gutter*0.5
-  small 
-    font-size 60%
-  .panel
-    padding-right gutter
-    padding-bottom gutter
-    background-color #FCFCFC
-    border-radius border-radii
-  .panel div:first-child
-    margin-top gutter
-  label
-    color #0AA3E7
-    font-size 11px
-    font-weight bolder
-    text-transform uppercase
-    font-family 'CenturyGothicStd', 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
+
+.input-grey
+  background-color #E5E5E5
+  width 100%
+  max-width 100%
+  max-height 150px
+  padding 0
+  border none
+  margin-bottom gutter*0.5
+.panel
+  padding-right gutter
+  padding-bottom gutter
+  background-color #FCFCFC
+  border-radius border-radii
+.panel div:first-child
+  margin-top gutter
+.lbl
+  color #0AA3E7
+  font-size 11px
+  font-weight bolder
+  text-transform uppercase
+  font-family 'CenturyGothicStd', 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
 
 .scene-footer
   @media desk

@@ -508,6 +508,9 @@ exports.createPost = function(post, callback) {
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromLiveProfile = function (profile, callback) {
+  console.log('Attempt to get Live account with username: ' + profile._json.name);
+  console.log('Full live profile: ');
+  console.dir(profile);
 
   options.path = escape('/tables/users/?$filter=FullName eq ' + quotize(profile._json.name));
 

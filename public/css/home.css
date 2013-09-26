@@ -19,12 +19,16 @@ html,body{height:100%}
 .topic-list{list-style-type:none;padding:12px !important}
 .topic-list li{margin:5px 0 5px 0}
 .topic-list a{color:#fff;font-size:13px;text-transform:uppercase}
+.modal{display:none}
+#simplemodal-overlay{background-color:#000}
+#simplemodal-container{height:450px;width:600px}
+#simplemodal-container a.modalCloseImg{background:url("/img/icon_x.png") no-repeat;cursor:pointer;display:inline;height:29px;position:absolute;right:-16px;top:-15px;width:25px;z-index:3200}
 .grey{color:#888 !important}
 .white{color:#fff !important}
 .blue{color:#09a4e6}
 .text-size-base{font-size:13px}
 .text-size-sm{font-size:18.2px}
-.text-size-md{font-size:22.75px}
+.text-size-md{font-size:22px}
 .text-size-lg{font-size:32.5px}
 @media all and (max-width: 914px){.mobile--text-size-sm{font-size:18.2px}
 }@media all and (max-width: 914px){.mobile--text-size-xs{font-size:11.700000000000001px}
@@ -49,6 +53,7 @@ html,body{height:100%}
 }@media all and (max-width: 914px){.mobile--space-top{margin-top:48px}
 }.space-bottom{margin-bottom:24px}
 .space-bottom-lg{margin-bottom:48px}
+.desk--space-top-sm{margin-top:12px}
 .pad-bottom-xs{padding-bottom:12px}
 .pad-bottom-sm{padding-bottom:24px}
 .pad-bottom{padding-bottom:48px}
@@ -67,7 +72,8 @@ html,body{height:100%}
 .alert-info{color:#3a87ad;background-color:#d9edf7;border-color:#bce8f1}
 @media all and (max-width: 914px){.hide-mobile{display:none}
 }@media all and (min-width: 915px){.hide-desk{display:none}
-}.right{text-align:right}
+}.hide{display:none}
+.right{text-align:right}
 @media all and (min-width: 915px){.desk--right{text-align:right}
 }.center{text-align:center}
 @media all and (max-width: 914px){.mobile--center{text-align:center}
@@ -83,7 +89,7 @@ html,body{height:100%}
 }@media all and (max-width: 914px){.mobile--img-sm{max-width:30%}
 }.btn{font-family:Roboto;font-size:14px;border:none;-webkit-border-radius:2px;border-radius:2px}
 .btn-blue{background-color:#0aa3e7;padding:6px;color:#fff}
-.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
+.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);visibility:hidden;-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 .swipeshow{width:100%;}
@@ -188,11 +194,10 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }#contact{height:506px;}
 #contact h1{font-size:1.6em}
 #contact p{margin-top:0}
-#contact input[type='text'],#contact textarea{background-color:#e5e5e5;width:100%;max-width:100%;max-height:150px;padding:0;border:none;margin-bottom:12px}
-#contact small{font-size:60%}
-#contact .panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
-#contact .panel div:first-child{margin-top:24px}
-#contact label{color:#0aa3e7;font-size:11px;font-weight:bolder;text-transform:uppercase;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
+.input-grey{background-color:#e5e5e5;width:100%;max-width:100%;max-height:150px;padding:0;border:none;margin-bottom:12px}
+.panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
+.panel div:first-child{margin-top:24px}
+.lbl{color:#0aa3e7;font-size:11px;font-weight:bolder;text-transform:uppercase;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 @media all and (min-width: 915px){.scene-footer{background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 }@media all and (max-width: 914px){.scene-footer{background-color:#252525}
 }.side-margins{margin-left:6px;margin-right:6px}

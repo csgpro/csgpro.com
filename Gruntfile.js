@@ -49,6 +49,7 @@ module.exports = function(grunt) {
               + '\r\n *  Third party libraries:'
               + '\r\n *  - Swipeshow: http://ricostacruz.com/swipeshow/'
               + '\r\n *  - Magnific: http://dimsemenov.com/plugins/magnific-popup/'
+              + '\r\n *  - Simplemodal: http://www.ericmmartin.com/projects/simplemodal/'
               + '\r\n *'
               + '\r\n */'
       }
@@ -57,6 +58,7 @@ module.exports = function(grunt) {
           'public/js/bundle.min.js': [
             'public/js/vendor/swipeshow.js'
           , 'public/js/vendor/magnific.js'
+          , 'public/js/vendor/jquery.simplemodal.1.4.4.min.js'
           , 'public/js/bundle.js'
           ]
         }
