@@ -277,11 +277,11 @@ exports.getPosts = function (opts, callback) {
             career = _.first(career, 6);
 
             if (blog)
-              posts.push({ name: 'Blog', posts: blog });
+              posts.push({ name: 'Blog', id: 'Blog', posts: blog });
             if (news)
-              posts.push({ name: 'News', posts: news });
+              posts.push({ name: 'News', id: 'News',  posts: news });
             if (career)
-              posts.push({ name: 'Careers', posts: career });
+              posts.push({ name: 'Careers', id: 'Career', posts: career });
 
           } else if (opts.hasOwnProperty('category')) {
 

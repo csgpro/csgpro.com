@@ -38,7 +38,11 @@ exports.index = function(req, res) {
           res.redirect('/?contacted=true#contact');
         }
       } else {
-        res.html('<h3>We got it, thanks!</h3>');
+        if (err) {
+          res.json({success: false});
+        } else {
+          res.json({success: true});
+        }
       }
     }
   );

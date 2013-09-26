@@ -389,15 +389,16 @@ html,body
     min-height 1000px
 
 
+.swipeshow .container
+  margin-top gutter*0.5
+  border-top 1px solid #fff
+
 .swipeshow .next
   cursor pointer
   @media desk
     position absolute
     right 5%
     bottom 5%
-  @media mobile
-    margin-top gutter*0.5
-    border-top 1px solid #fff
 
 .swipeshow .previous
   cursor pointer
@@ -405,9 +406,6 @@ html,body
     position absolute
     left 5%
     bottom 5%
-  @media mobile
-    margin-top gutter*0.5
-    border-top 1px solid #fff
 
 /***************************************
  * Sections
@@ -550,7 +548,7 @@ header
       margin 0
       padding 0
       list-style-type none
-      section
+      section,.section
         color #000
         background-color #f3f3f3
         .title
@@ -664,6 +662,8 @@ picture-spacing = 128px
       transition-timing-function ease
       position absolute
       display inline
+    li:first-child
+      left 0
     li:nth-child(2)
       left picture-spacing * 1
       z-index 4

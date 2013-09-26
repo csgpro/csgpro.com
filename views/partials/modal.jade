@@ -1,7 +1,7 @@
 mixin contactForm(type)
   form(role='form', action='/contact', method='POST').panel
     div.grid__item.one-whole
-      h3 Contact us about #{type}
+      h3 Contact us about #{type.toLowerCase()}
     div.grid__item.six-twelfths
       label.lbl What's your name?
       input.input-grey(name='name', type='text')
@@ -11,6 +11,7 @@ mixin contactForm(type)
     div.grid__item.one-whole.space-bottom
       label.lbl How can we help you?
       textarea.input-grey(name='comments', type='text', style='height: 177px;')
+      input.hide(name='type', type='text', value='#{type}')
     div.grid__item.one-whole.right
       button.serif(type='submit').btn.btn-blue.ajaxSubmit submit
 

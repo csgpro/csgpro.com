@@ -162,14 +162,34 @@ function init() {
     var modalName = $(this).data('modal');
     var modalElement = $('#modal-' + modalName);
 
-    if (modalElement)
+    if (modalElement) {
       modalElement.modal();
+    }
 
   });
 
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
     //pooperz
+    console.dir(this);
+    var name = this.form.name.value;
+    var contactInfo = this.form.contactInfo.value;
+    var comments = this.form.comments.value;
+    var type = this.form.type.value;
+
+
+    var dataString = 'name='+ name + '&contactInfo=' + contactInfo + '&comments=' + comments + '&type=' + type;  
+    //alert (dataString);return false;  
+    $.ajax({  
+      type: "POST",  
+      url: "/contact",  
+      data: dataString,  
+      success: function() {  
+        // do something cool!
+        console.log('DONE!');
+      }  
+    });  
+    return false;     
 
   });
 }
@@ -431,7 +451,7 @@ function init(options){
     if (pageWidth < brk) { // mobile
       if (isAccordion) {
         var content = $('#swappable-' + text);
-        var contentTarget = $('#swapper-' + text + ' section');
+        var contentTarget = $('#swapper-target-' + text );
 
         if (me.hasClass('active')) {
           me.removeClass('active');
@@ -439,6 +459,7 @@ function init(options){
         } else {
           me.addClass('active');
           contentTarget.html(content.children().clone());
+          contentTarget.children()[0].style['padding-top'] = '12px';
         }
 
       }

@@ -95,12 +95,11 @@ html,body{height:100%}
 .swipeshow{width:100%;}
 @media all and (min-width: 915px){.swipeshow{height:100%}
 }@media all and (max-width: 914px){.swipeshow{min-height:1000px}
-}.swipeshow .next{cursor:pointer;}
+}.swipeshow .container{margin-top:12px;border-top:1px solid #fff}
+.swipeshow .next{cursor:pointer;}
 @media all and (min-width: 915px){.swipeshow .next{position:absolute;right:5%;bottom:5%}
-}@media all and (max-width: 914px){.swipeshow .next{margin-top:12px;border-top:1px solid #fff}
 }.swipeshow .previous{cursor:pointer;}
 @media all and (min-width: 915px){.swipeshow .previous{position:absolute;left:5%;bottom:5%}
-}@media all and (max-width: 914px){.swipeshow .previous{margin-top:12px;border-top:1px solid #fff}
 }@media all and (min-width: 915px){#work,#services,#updates,#about{max-height:650px;overflow:hidden}
 }@media all and (max-width: 914px){#work,#services,#about,#updates,#contact{overflow:hidden}
 }header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:60px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
@@ -131,8 +130,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #services aside hr{border:none;border-bottom:1px solid #00a3e4;margin:5px 0 0 0}
 @media all and (min-width: 915px){#services aside hr{width:100%}
 }#services aside > ul{margin:0;padding:0;list-style-type:none;}
-#services aside > ul section{color:#000;background-color:#f3f3f3;}
-#services aside > ul section .title{font-size:26px;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
+#services aside > ul section,#services aside > ul .section{color:#000;background-color:#f3f3f3;}
+#services aside > ul section .title,#services aside > ul .section .title{font-size:26px;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 #services aside > ul li.active .services-menu{color:#fff;}
 #services aside > ul li.active .services-menu .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
 #services aside > ul li.active .services-menu .chevron polyline{stroke:#fff}
@@ -167,6 +166,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #about .swapper{list-style-type:none;position:absolute;bottom:264px;right:625px;}
 #about .swapper .active{z-index:6 !important}
 #about .swapper li{-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;-ms-transition-property:-ms-transform;transition-property:transform;-webkit-transition-duration:.3s;-moz-transition-duration:.3s;-o-transition-duration:.3s;-ms-transition-duration:.3s;transition-duration:.3s;-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;position:absolute;display:inline}
+#about .swapper li:first-child{left:0}
 #about .swapper li:nth-child(2){left:128px;z-index:4}
 #about .swapper li:nth-child(3){left:256px;z-index:5}
 #about .swapper li:nth-child(4){left:384px;z-index:4}
