@@ -53,8 +53,8 @@ html,body{height:100%}
 }@media all and (max-width: 914px){.mobile--space-top{margin-top:48px}
 }.space-bottom{margin-bottom:24px}
 .space-bottom-lg{margin-bottom:48px}
-.desk--space-top-sm{margin-top:12px}
-.pad-bottom-xs{padding-bottom:12px}
+@media all and (min-width: 915px){.desk--space-top-sm{margin-top:12px}
+}.pad-bottom-xs{padding-bottom:12px}
 .pad-bottom-sm{padding-bottom:24px}
 .pad-bottom{padding-bottom:48px}
 .pad-bottom-lg{padding-bottom:72px}

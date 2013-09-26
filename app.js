@@ -74,6 +74,7 @@ passport.use(new LiveStrategy({
     callbackURL: WINDOWS_LIVE_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
+    console.log('access token: ' + accessToken);
 
     db.getUserFromLiveProfile(profile, function(err, user) {
 

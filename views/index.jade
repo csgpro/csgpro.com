@@ -250,13 +250,13 @@ block content
               div#modal-web.modal
                 mixin contactForm('Web development')
               div#modal-apps.modal
-                p test
+                mixin contactForm('Application development')
               div#modal-cloud.modal
-                p test
+                mixin contactForm('Cloud services')
               div#modal-analytics.modal
-                p test
+                mixin contactForm('Analytics')
               div#modal-portals.modal
-                p test
+                mixin contactForm('Portals')
 
       /////////////////////////////////
       // ABOUT
@@ -349,7 +349,7 @@ block content
       /////////////////////////////////
       div#contact-container
         section#contact.grid.wrapper
-          article.grid__item.one-whole.desk--space-top.space-bottom-lg
+          article.grid__item.one-whole.desk--space-top-sm.space-bottom-lg
             form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
               div.grid__item.one-whole
                 if (contacted === 'true')
@@ -369,7 +369,7 @@ block content
                 input.input-grey(name='contactInfo', type='text')
               div.grid__item.one-whole
                 label.lbl So, what's on your mind?
-                textarea.input-grey(name='comments', type='text')
+                textarea.input-grey(name='comments', type='text', style='height: 100px')
               div.grid__item.one-whole.right
                 button.serif(type='submit').btn.btn-blue make it so
             div.grid__item.desk--seven-twelfths.one-whole.full
