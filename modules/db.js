@@ -512,13 +512,15 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
   console.log('Full live profile: ' + JSON.stringify(profile));
 
   var email = profile._json.emails.account;
+  var username;
   if (email)
-    email = email.match(/(\w+)@/)[1];
+    username = email.match(/(\w+)@/)[1];
 
-  options.path = escape('/tables/users/?$filter=Username eq ' + quotize(email));
+  options.path = escape('/tables/users/?$filter=Username eq ' + quotize(username));
 
   var req = https.get(options, function(res){
     var chunk = '';
+    var r;
 
     res.on('data', function(data){
       chunk += data;
@@ -527,7 +529,7 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
     res.on('end', function(){
 
       if (isJSON(chunk))
-        var r = JSON.parse(chunk);
+        r = JSON.parse(chunk);
 
       if (r && r.length === 0) { // no such profile
         callback(new Error('No such profile'));
