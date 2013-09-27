@@ -198,8 +198,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #contact h1{font-size:1.6em}
 #contact p{margin-top:0}
 .input-grey{background-color:#e5e5e5;width:100%;max-width:100%;max-height:150px;padding:0;border:none;margin-bottom:12px}
-.panel{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
-.panel div:first-child{margin-top:24px}
+.panel-white{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
+.panel-white div:first-child{margin-top:24px}
 .lbl{color:#0aa3e7;font-size:11px;font-weight:bolder;text-transform:uppercase;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 @media all and (min-width: 915px){.scene-footer{background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 }@media all and (max-width: 914px){.scene-footer{background-color:#252525}
