@@ -81,7 +81,7 @@ passport.use(new LiveStrategy({
       if (user && !err) { 
         return done(null, user);
       } else {
-        return err ? done(err, null) : done(new Error('User not authorized'), null);
+        done('User not authorized', null);
       }
 
     });

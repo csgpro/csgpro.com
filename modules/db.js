@@ -508,11 +508,14 @@ exports.createPost = function(post, callback) {
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromLiveProfile = function (profile, callback) {
-  console.log('Attempt to get Live account with username: ' + profile._json.name);
-  console.log('Full live profile: ');
-  console.dir(profile);
+  console.log('Attempt to get Live account with email: ' + profile._json.emails.account);
+  console.log('Full live profile: ' + JSON.stringify(profile));
 
-  options.path = escape('/tables/users/?$filter=FullName eq ' + quotize(profile._json.name));
+  var email = profile._json.emails.account;
+  if (email)
+    email = email.match(/(\w+)@/)[1];
+
+  options.path = escape('/tables/users/?$filter=Username eq ' + quotize(email));
 
   var req = https.get(options, function(res){
     var chunk = '';
@@ -528,7 +531,8 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
 
       if (r && r.length === 0) { // no such profile
         callback(new Error('No such profile'));
-      } else if (r && r[0]){ // profile found
+      } else if (r && r[0] && /@csgpro.com/gi.test(email) ){ // profile found
+
         var user = r[0];
         user.CreateDate = parseInt(user.CreateDate);
         user.UpdateDate = parseInt(user.UpdateDate);
