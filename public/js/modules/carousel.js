@@ -16,7 +16,8 @@ function init(){
     friction: 0.3,      /* Bounce-back behavior; use `0` to disable */
     mouse: true,        /* enable mouse dragging controls */
     keys: true,         /* enable left/right keyboard keys */
-    $next: $('.swipeshow .next')
+    $next: $('.swipeshow .next'),
+    $previous: $('.swipeshow .previous')
   });
 
 }

@@ -17,8 +17,9 @@ var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
+var modal           = require('./modules/modal');
 var options = {    // global options for the site
-  breakpoint : 768,  // px
+  breakpoint : 915,  // px
   maxHeight : 750,  // px
   minHeight : 625    // px - approx. adjusted for nav bar height
 };
@@ -31,6 +32,7 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+  modal();
 } else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
   mobileNav(options);
   lightbox();

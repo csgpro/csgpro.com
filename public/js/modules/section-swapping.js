@@ -30,7 +30,7 @@ function init(options){
     if (pageWidth < brk) { // mobile
       if (isAccordion) {
         var content = $('#swappable-' + text);
-        var contentTarget = $('#swapper-' + text + ' section');
+        var contentTarget = $('#swapper-target-' + text );
 
         if (me.hasClass('active')) {
           me.removeClass('active');
@@ -38,6 +38,7 @@ function init(options){
         } else {
           me.addClass('active');
           contentTarget.html(content.children().clone());
+          contentTarget.children()[0].style['padding-top'] = '12px';
         }
 
       }

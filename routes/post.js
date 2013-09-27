@@ -22,6 +22,10 @@ module.exports.category = function(req, res) {
     if (err) {
       res.send(err);
     } else {
+      // The pluralization of the career should be changed in this context
+      if (category && category.toLowerCase() === 'career')
+        category = 'Careers'
+
       res.render('post-list', {
         title: category,
         moment: moment,

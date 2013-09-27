@@ -1,16 +1,17 @@
 div
   div.container
     div.grid__item.desk--one-half
-      span.serif.grey.text-size-sm filter posts by:&nbsp;&nbsp;&nbsp;
-      span: a.font-size-base(href='/post/category/Blog') Blog
+      span.serif.grey.text-size-sm filter posts by:&nbsp;&nbsp;
+      span: a.mobile--text-size-xs(href='/post/category/Blog') Blog
       span.grey &nbsp;|&nbsp;
-      span: a.font-size-base(href='/post/category/News') News 
+      span: a.mobile--text-size-xs(href='/post/category/News') News 
       span.grey &nbsp;|&nbsp;
-      span: a.font-size-base(href='/post/category/Career') Careers
+      span: a.mobile--text-size-xs(href='/post/category/Career') Careers
     div.grid__item.desk--one-half.desk--right.mobile--space-top-xs
-      a(href='/post') view all posts&nbsp;&nbsp;
-      span.grey |&nbsp;&nbsp;
+      a.mobile--text-size-xs(href='/post') view all posts&nbsp;
+      span.hide-mobile &nbsp;
+      span.grey |&nbsp;
+      span.hide-mobile &nbsp;
       form.search(name='search', method='get', action='/post')
         input.italic.serif(name='q', type='search', placeholder='search posts')
-      //- div.grid__item.one-half.full
 

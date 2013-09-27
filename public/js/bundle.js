@@ -18,8 +18,9 @@ var sectionSwapping = require('./modules/section-swapping');
 var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
+var modal           = require('./modules/modal');
 var options = {    // global options for the site
-  breakpoint : 768,  // px
+  breakpoint : 915,  // px
   maxHeight : 750,  // px
   minHeight : 625    // px - approx. adjusted for nav bar height
 };
@@ -32,13 +33,14 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   sectionSwapping(options);
   carousel();
   mobileNav(options);
+  modal();
 } else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
   mobileNav(options);
   lightbox();
 }
 
 
-},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/nav-scrolling":5,"./modules/page-sizing":6,"./modules/section-swapping":7,"./modules/sticky-nav":8}],2:[function(require,module,exports){
+},{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/modal":5,"./modules/nav-scrolling":6,"./modules/page-sizing":7,"./modules/section-swapping":8,"./modules/sticky-nav":9}],2:[function(require,module,exports){
 /*jslint
   node: true*/ /*globals $*/
 /**
@@ -57,7 +59,8 @@ function init(){
     friction: 0.3,      /* Bounce-back behavior; use `0` to disable */
     mouse: true,        /* enable mouse dragging controls */
     keys: true,         /* enable left/right keyboard keys */
-    $next: $('.swipeshow .next')
+    $next: $('.swipeshow .next'),
+    $previous: $('.swipeshow .previous')
   });
 
 }
@@ -122,6 +125,7 @@ function init(options) {
       bdy.toggleClass('nav-open');
       window.setTimeout(function(){
         bdy.on('click', clear);
+        bdy.on('touch', clear);
       }, 0);
     }
     
@@ -130,6 +134,7 @@ function init(options) {
   links.on('click', function(){
     bdy.removeClass('nav-open');
     bdy.off('click', clear);
+    bdy.off('touch', clear);
   });
 
 }
@@ -139,11 +144,60 @@ function clear() {
 
   body.removeClass('nav-open');
   body.off('click', clear);
+  bdy.off('touch', clear);
 }
 
 module.exports = init;
 
 },{}],5:[function(require,module,exports){
+/*jslint
+  browser: true,
+  node: true */
+/*global $ */
+
+'use strict';
+
+function init() {
+  $('.modal-toggle').on('click', function(){
+    var modalName = $(this).data('modal');
+    var modalElement = $('#modal-' + modalName);
+
+    if (modalElement) {
+      modalElement.modal();
+    }
+
+  });
+
+  $('.ajaxSubmit').on('click', function(event){
+    event.preventDefault();
+    //pooperz
+    console.dir(this);
+    var name = this.form.name.value;
+    var contactInfo = this.form.contactInfo.value;
+    var comments = this.form.comments.value;
+    var type = this.form.type.value;
+
+
+    var dataString = 'name='+ name + '&contactInfo=' + contactInfo + '&comments=' + comments + '&type=' + type;  
+    //alert (dataString);return false;  
+    $.ajax({  
+      type: "POST",  
+      url: "/contact",  
+      data: dataString,  
+      success: function() {  
+        // do something cool!
+        console.log('DONE!');
+      }  
+    });  
+    return false;     
+
+  });
+}
+
+module.exports = init;
+
+
+},{}],6:[function(require,module,exports){
 /*jslint
   node: true,
   browser: true */ /*globals $*/
@@ -202,18 +256,18 @@ function init() {
   });
 }
 
-function scrollTo(element) {
+function scrollTo(element, customOffset) {
   $('html, body').animate({
-    scrollTop: element.offset().top - offset
+    scrollTop: element.offset().top - (customOffset || offset)
   });
 }
 
 // global scope creep here... DANGER DANGER
-window.scrollToId = function (id) {
+window.scrollToId = function (id, customOffset) {
   var element = $('#' + id);
 
   if (element)
-    scrollTo(element);
+    scrollTo(element, customOffset);
 };
 
 function recalcTops(){
@@ -269,7 +323,7 @@ function log() {
 
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */
@@ -364,7 +418,7 @@ function doResize(){
 ///////////////////
 module.exports = init;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*jslint
   browser: true,
   node: true */ /* globals $ */
@@ -397,7 +451,7 @@ function init(options){
     if (pageWidth < brk) { // mobile
       if (isAccordion) {
         var content = $('#swappable-' + text);
-        var contentTarget = $('#swapper-' + text + ' section');
+        var contentTarget = $('#swapper-target-' + text );
 
         if (me.hasClass('active')) {
           me.removeClass('active');
@@ -405,6 +459,7 @@ function init(options){
         } else {
           me.addClass('active');
           contentTarget.html(content.children().clone());
+          contentTarget.children()[0].style['padding-top'] = '12px';
         }
 
       }
@@ -423,7 +478,7 @@ function init(options){
 ////////////////////
 module.exports = init;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /**
  * This module is used to make the navigations fixed when the user hits a
  * certain spot on their scrolling. It assumes:

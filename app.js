@@ -74,13 +74,14 @@ passport.use(new LiveStrategy({
     callbackURL: WINDOWS_LIVE_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
+    console.log('access token: ' + accessToken);
 
     db.getUserFromLiveProfile(profile, function(err, user) {
 
       if (user && !err) { 
         return done(null, user);
       } else {
-        return err ? done(err, null) : done(new Error('User not authorized'), null);
+        done('User not authorized', null);
       }
 
     });
@@ -97,6 +98,7 @@ app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
+app.use(express.compress());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -187,7 +189,7 @@ app.get('/auth/twitter/callback',
  ****************/
 
 app.get('/auth/live',
-  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic'] }));
+  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
 
 app.get('/auth/live/callback', 
   passport.authenticate('windowslive', { 
