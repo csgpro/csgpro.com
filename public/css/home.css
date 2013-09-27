@@ -182,8 +182,9 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }#updates .icon-blog{background-image:url("https://csgsitestorage.blob.core.windows.net/img/postIcon_blog.png")}
 #updates .icon-career{background-image:url("https://csgsitestorage.blob.core.windows.net/img/postIcon_careers.png")}
 #updates .icon-news{background-image:url("https://csgsitestorage.blob.core.windows.net/img/postIcon_news.png")}
-#updates .abstract{min-height:316px;-o-text-overflow:ellipsis;text-overflow:ellipsis}
-#updates article{color:#fff;-webkit-border-radius:4px;border-radius:4px;background-color:#09a4e6;}
+#updates .abstract{-o-text-overflow:ellipsis;text-overflow:ellipsis}
+@media all and (min-width: 915px){#updates .abstract{min-height:316px}
+}#updates article{color:#fff;-webkit-border-radius:4px;border-radius:4px;background-color:#09a4e6;}
 @media all and (min-width: 915px){#updates article{padding:10px 15px 10px 48px}
 }@media all and (max-width: 914px){#updates article{padding:10px 10px 10px 24px}
 }#updates article a{color:#fff}

@@ -188,7 +188,7 @@ app.get('/auth/twitter/callback',
  ****************/
 
 app.get('/auth/live',
-  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic'] }));
+  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
 
 app.get('/auth/live/callback', 
   passport.authenticate('windowslive', { 

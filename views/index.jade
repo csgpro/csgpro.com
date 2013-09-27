@@ -149,6 +149,8 @@ block content
         mixin contactForm('Analytics')
       div#modal-portals.modal
         mixin contactForm('Portals')
+      div#modal-windows8.modal
+        mixin contactForm('Windows 8')
 
       div#services-container
         section#services.grid.wrapper
@@ -190,6 +192,13 @@ block content
                   | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
                   hr.hide-mobile
               div#swapper-target-portals.hide-desk.section
+              li#swapper-windows8(data-swap='windows8')
+                div.services-menu
+                  | <svg width="60" height="50" viewBox="0 0 70 72" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <path id="svg_2" d="m56.20145,15.464183l-44.824055,0c-1.707499,0 -3.091434,1.245015 -3.091434,2.780181l0,27.803576c0,1.53516 1.383937,2.780178 3.091434,2.780178l12.213629,0l10.99148,0l21.618065,0c1.7075,0 3.091438,-1.245018 3.091438,-2.780178l0,-27.803576c0.000877,-1.535166 -1.38306,-2.780181 -3.090557,-2.780181zm-22.412029,27.239972c-5.831171,0 -10.558006,-4.72683 -10.558006,-10.558002c0,-5.831173 4.726835,-10.558012 10.558006,-10.558012s10.55801,4.726839 10.55801,10.558012c0,5.831173 -4.726837,10.558002 -10.55801,10.558002z" fill="#003C56"/> <polygon id="svg_3" points="32.9348 27.4975 35.7748 31.0242 28.1473 31.0242 28.1473 33.0755 35.7704 33.0755 32.9348 36.6021 35.8416 36.6021 39.8589 32.0504 35.8416 27.4975" fill="#003C56"/> </g> </g> </svg>
+                  span.serif.text-size-md windows 8
+                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
+                  hr.hide-mobile
+              div#swapper-target-windows8.hide-desk.section
           article.grid__item.desk--ten-twelfths.hide-mobile
             div.swappable.space-top.grid__item.one-whole
               section#swappable-web(data-swap='web')
@@ -203,7 +212,7 @@ block content
                     p The monopoly of the deskbound PC is over. Desktop and laptop computers are being replaced by tablets and smart phones and people want to be connected, whenever, wherever using their device of choice. At CSG Pro, we build websites based on that premise.
                     p When we work with you to design, construct, deploy and manage your website, we are creating a visual and interactive representation of your company and brand. Our process is designed to be creative, engaging and goal-driven. The end result is a product that is architecturally sound, intuitive, functional and beautiful.
                     p Our code is hand crafted in Portland, Oregon using high quality software construction. With CSG Pro you can expect comprehensive service including UX / UI design, business analysis, system design, construction, testing and deployment. We understand how to blend high level company goals, intuitive user interface, technological architecture and visually stunning design to create a unique and compelling solution for your business. Once built, we provide a managed service for the care and hosting of your website while making ongoing improvements. By custom building solutions that meet and exceed our clients’ needs, we make long term management of websites and web for mobile easy.
-                    h3: a.modal-toggle(data-modal='web', href='javascript:void(0)').text-size-md contact us about web development }
+                    h3.right: a.modal-toggle(data-modal='web', href='javascript:void(0)').text-size-md contact us about web development }
               section#swappable-apps.gone(data-swap='apps')
                 div.grid__item.one-whole
                   span.title Application Development
@@ -221,7 +230,7 @@ block content
                       li Server-side data management and process automation for cloud deployment and on-premise environments
                       li Custom Software as a Solution (CSaaS) – custom software solutions tailored to client-specific requirements and deployed in the cloud
                       li Post-implementation managed services and application support
-                    h3: a.modal-toggle(data-modal='apps', href='javascript:void(0)').text-size-md contact us about application development }
+                    h3.right: a.modal-toggle(data-modal='apps', href='javascript:void(0)').text-size-md contact us about application development }
               section#swappable-cloud.gone(data-swap='cloud')
                 div.grid__item.one-whole
                   span.title Cloud Services
@@ -233,7 +242,7 @@ block content
                     p Cloud computing is by far the most disruptive technology to emerge in the information age. It has leveled the playing field of the technological competitive landscape by enabling individuals and organizations with the capabilities to create infinitely scalable, fault tolerant, secure compute environments, that here to fore, was impossible to do without tremendous up front capital investment. As a result, a wave of innovation is building that dwarfs all of the major information technology trends of the past. The on-demand availability of cloud services means that competitiveness has a lot less to do with the size of the organization. In the classic David vs. Goliath scenario innovation is the sling. In this new reality, innovation trumps size every time.
                     p The first question we tend to hear from clients is, “How secure is it?” Generally speaking, the cloud is actually more secure than most all of the on-premise infrastructures we see. This is because the focus and investment from Microsoft on the security of its cloud platform goes far beyond what most organizations are capable of. Similar concerns are raised by clients about reliability, and here again, the resiliency of the cloud tends to go far beyond what organizations can provide in their on-premise environments. So at CSG, the question we always ask is…why not the cloud?
                     p When designing cloud solutions for our clients our approach is holistic. We give full consideration for how cloud services can be blended to provide optimal benefit. Intelligent architecture is the key ingredient for a great solution and whether you are using Platform as a Service (PaaS), Infrastructure as a service (IaaS), or software as a service (SaaS), we’ll work with you to apply our knowledge and experience to achieve the results you are striving for.
-                    h3: a.modal-toggle(data-modal='cloud', href='javascript:void(0)').text-size-md contact us about cloud services }
+                    h3.right: a.modal-toggle(data-modal='cloud', href='javascript:void(0)').text-size-md contact us about cloud services }
               section#swappable-analytics.gone(data-swap='analytics')
                 div.grid__item.one-whole
                   span.title Analytics
@@ -251,7 +260,7 @@ block content
                       li Data Presentation — Web-based dashboards
                       li Business Data Architecture and Analytics
                     p CSG professionals understand unique business models and approach each project with an eye to how it can benefit your entire business. We then develop solutions that are in-line with your core organization goals, using our extensive technical expertise to create a product specifically for you. Sometimes a solution built in the cloud best aligns with your organization goals, other times it must be on premise. Good news: we can do either one or a hybrid of the two.
-                    h3: a.modal-toggle(data-modal='analytics', href='javascript:void(0)').text-size-md contact us about analytics }
+                    h3.right: a.modal-toggle(data-modal='analytics', href='javascript:void(0)').text-size-md contact us about analytics }
               section#swappable-portals.gone(data-swap='portals')
                 div.grid__item.one-whole
                   span.title Portals
@@ -261,7 +270,17 @@ block content
                 div.one-whole
                   div.grid__item.one-whole.text-column
                     p Looking for information on the game Portals? Then you're in the wrong place.
-                    h3: a.modal-toggle(data-modal='portals', href='javascript:void(0)').text-size-md contact us about portals }
+                    h3.right: a.modal-toggle(data-modal='portals', href='javascript:void(0)').text-size-md contact us about portals }
+              section#swappable-windows8.gone(data-swap='windows8')
+                div.grid__item.one-whole
+                  span.title Windows 8
+                  div.fr.hide-mobile
+                    | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <path fill="#003C56" d="m52.648151,8.154538l-44.824056,0c-1.707499,0 -3.091435,1.245015 -3.091435,2.780181l0,27.803574c0,1.535164 1.383936,2.780182 3.091435,2.780182l12.21363,0l10.991478,0l21.618067,0c1.7075,0 3.091438,-1.245018 3.091438,-2.780182l0,-27.803574c0.000877,-1.535166 -1.38306,-2.780181 -3.090557,-2.780181zm-22.412029,27.239974c-5.831171,0 -10.558006,-4.726833 -10.558006,-10.558004c0,-5.831173 4.726835,-10.558009 10.558006,-10.558009s10.55801,4.726836 10.55801,10.558009c0,5.831171 -4.726837,10.558004 -10.55801,10.558004z" id="svg_2"/> <polygon fill="#003C56" points="29.3815 20.1879 32.2215 23.7145 24.594 23.7145 24.594 25.7658 32.2171 25.7658 29.3815 29.2925 32.2883 29.2925 36.3056 24.7407 32.2883 20.1879" id="svg_3"/> </g> </g> </svg>
+                  hr
+                div.one-whole
+                  div.grid__item.one-whole.text-column
+                    p Windows 8, tiles are the new square.
+                    h3.right: a.modal-toggle(data-modal='windows8', href='javascript:void(0)').text-size-md contact us about windows 8 }
 
 
       /////////////////////////////////
