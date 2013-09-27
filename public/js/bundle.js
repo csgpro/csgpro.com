@@ -186,7 +186,9 @@ function init() {
       data: dataString,  
       success: function() {  
         // do something cool!
-        console.log('DONE!');
+        $('#simplemodal-container .modal-header').text('Message received. Thanks!');
+
+        setTimeout(function(){ $.modal.close(); },2000);
       }  
     });  
     return false;     
