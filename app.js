@@ -108,9 +108,12 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
+app.use(function(err, req, res, next) {
+  res.render('error', { message : err });
+});
 // Development only
 // if ('development' == app.get('env')) { // TODO: turn this back off
-  app.use(express.errorHandler());
+  // app.use(express.errorHandler());
 // }
 
 
