@@ -22,22 +22,23 @@ function init(o){
     swap($(this));
   });
 
+  $('.about-us').click(function(){
+    $('#about .swappable section').addClass('gone');
+    $('#swappable-about').removeClass('gone');
+  });
+
   $('.swapper.accordion > li').each(function(index, item) {
     var text = $(item).attr('id').match(/swapper-(\w+)/)[1];
     var content = $('#swappable-' + text);
     var contentTarget = $('#swapper-target-' + text );
 
     contentTarget.html(content.children().clone());
-    // contentTarget.children()[0].style['padding-top'] = '12px';
   });
 }
 
 function swap(element) {
   var me = element
     , text = me.attr('id').match(/swapper-(\w+)/)[1]
-
-    // TODO: replace the data-swipe selector with an ID selector. Much faster
-    // , target = $('.swappable section[data-swap="' + text + '"]') // slow?
     , target = $('#swappable-' + text)
     , brk = options.breakpoint
     , pageWidth = document.documentElement.clientWidth
@@ -51,12 +52,9 @@ function swap(element) {
       if (me.hasClass('active')) {
         me.removeClass('active');
         contentTarget.removeClass('active');
-        // contentTarget.html('');
       } else {
         me.addClass('active');
         contentTarget.addClass('active');
-        // contentTarget.html(content.children().clone());
-        // contentTarget.children()[0].style['padding-top'] = '12px';
       }
     }
   } else {               // desktop
