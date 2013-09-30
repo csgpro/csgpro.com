@@ -125,14 +125,15 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }#work article{position:relative;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;background-repeat:no-repeat;}
 @media all and (min-width: 915px){#work article{height:101%}
 }@media all and (max-width: 914px){#work article{height:300px}
-}.section.active{display:block !important;padding-top:12px}
+}.section{display:none}
+.section.active{display:block;padding-top:12px}
 @media all and (min-width: 915px){#services-container{background-image:url("/img/services_bg.png");background-position:center;background-repeat:repeat-y}
 }@media all and (max-width: 914px){#services-container{background-color:#11517d}
 }#services aside{color:#00a3e4;height:100%;background-color:#00517e;}
 #services aside hr{border:none;border-bottom:1px solid #00a3e4;margin:5px 0 0 0}
 @media all and (min-width: 915px){#services aside hr{width:100%}
 }#services aside > ul{margin:0;padding:0;list-style-type:none;}
-#services aside > ul section,#services aside > ul .section{display:none;color:#000;background-color:#f3f3f3;}
+#services aside > ul section,#services aside > ul .section{color:#000;background-color:#f3f3f3;}
 #services aside > ul section .title,#services aside > ul .section .title{font-size:26px;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 #services aside > ul li.active .services-menu{color:#fff;}
 #services aside > ul li.active .services-menu .chevron{-webkit-transform:rotate(180deg) translateY(25px);-moz-transform:rotate(180deg) translateY(25px);-o-transform:rotate(180deg) translateY(25px);-ms-transform:rotate(180deg) translateY(25px);transform:rotate(180deg) translateY(25px);}
