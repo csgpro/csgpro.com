@@ -92,7 +92,7 @@ html,body{height:100%}
 }@media all and (max-width: 914px){.mobile--img-sm{max-width:30%}
 }.btn{font-family:Roboto;font-size:14px;border:none;-webkit-border-radius:2px;border-radius:2px}
 .btn-blue{background-color:#0aa3e7;padding:6px;color:#fff}
-.gone{visibility:hidden;-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
+.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);visibility:hidden;-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 .swipeshow{width:100%;}
