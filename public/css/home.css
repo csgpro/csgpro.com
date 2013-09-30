@@ -97,7 +97,7 @@ html,body{height:100%}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 .swipeshow{width:100%;}
 @media all and (min-width: 915px){.swipeshow{height:100%}
-}@media all and (max-width: 914px){.swipeshow{min-height:1000px}
+}@media all and (max-width: 914px){.swipeshow{min-height:1200px}
 }.swipeshow .container{margin-top:12px;border-top:1px solid #fff}
 .swipeshow .next{cursor:pointer;}
 @media all and (min-width: 915px){.swipeshow .next{position:absolute;right:5%;bottom:5%}

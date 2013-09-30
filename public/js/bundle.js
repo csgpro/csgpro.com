@@ -115,7 +115,7 @@ function init(options) {
   var toggle = $('.toggle-nav');
   var bdy = $('body');
   var brk = options.breakpoint;
-  var links = $('.mobile-nav a');
+  var links = $('.mobile-nav a,#mobile-csg-logo');
   var mainBody = $('.main-body');
 
   toggle.on('click',function(){
