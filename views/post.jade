@@ -25,7 +25,8 @@ block content
             h1= post.Title
             div.grid__item.one-half.full
               if (post.Category)
-                h3.serif a #{post.Category.toLowerCase()} post by #{post.AuthorFullName || 'CSG Pro'}
+                h3.serif a #{post.Category.toLowerCase()} post by
+                  a(href='/post?q=' + post.AuthorFullName )  #{post.AuthorFullName || 'CSG Pro'}
             div.grid__item.one-half.full.right
               if (post.PublishDate)
                 h4.grey posted 
