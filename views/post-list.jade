@@ -18,7 +18,9 @@ block content
           hr
         each post in category.posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
-            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
+            div
+              img(src='/img/update_icon_news.svg')
+              a.text-size-sm(href='/post/#{post.id}')= post.Title
             div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
             div
               p #{post.Abstract}

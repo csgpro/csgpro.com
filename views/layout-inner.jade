@@ -19,6 +19,15 @@ html.no-js
     meta(property='og:title', content='CSG Pro Consulting')
     meta(property='og:image', content='http://csgpro.com/apple-touch-icon-precomposed.png')
     meta(property='og:url', content='http://csgpro.com')
+      
+    //- Google Analytics
+    script.
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-29382747-1');ga('send','pageview');
 
     link(rel='stylesheet', href='/css/MyFontsWebfontsKit.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto:100italic, 100', type='text/css')

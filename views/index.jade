@@ -34,43 +34,44 @@ block content
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
         div.grid__item.one-whole.right.hide-desk
-          div#mobile-title We've been told we have our head in the clouds, and that's not a bad thing.
+          div#mobile-title We've been told we have our head in the clouds, and that's not a bad thing&nbsp;
         div.grid__item.one-whole.right.hide-mobile
           div#headline We've been told we have our head
           br
-          span#subline in the clouds, and that's not a bad thing.
+          span#subline in the clouds, and that's not a bad thing&nbsp;
         div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          span.tagline.hide-mobile learn how cloud services can make your business soar
-          span.tagline.hide-desk learn how cloud services can <br> make your business soar
+          a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-mobile learn how cloud services can make your business soar
+          a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-desk learn how cloud services can <br> make your business soar
           div }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
-            p Our real-time analytics<br>engine makes managing<br>your critical data easy.
-            p: a(href='javascript:void(0)', onclick='scrollToId("services");') put it to work for you }
+            p "Know Your Nickel" builds<br>awareness with a new<br>website and mobile app
+            p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(0);') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p CSG's mobile dev & MS Azure hosting boost awareness about Oregon's container redemption.
-            p: a(href='javascript:void(0)', onclick='scrollToId("work");') read the case study }
+            p CSG expertise in Windows Azure outlines seamless integration with TFS
+            p: a(href='/post/10062') read the blog }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p CSG is turning 20 and we're<br>having an open-house at our<br>Pearl district offices 10/03
-            p: a(href='/post/24') get all the details }
+            p Celebrating 20 years in<br>business with an open<br>house in the Pearl
+            p: a(href='/post/24') join us }
 
-    nav.hide-mobile
-      div.wrapper
-        img#logo.big-logo(src='/img/logo.svg')
-        ul
-          li(data-nav='work') work
-          li /
-          li(data-nav='services') services
-          li /
-          li(data-nav='about') about
-          li /
-          li(data-nav='updates') updates
-          li /
-          li(data-nav='contact') contact
+    div.test
+      nav.hide-mobile
+        div.wrapper
+          img#logo.big-logo(src='/img/logo.svg')
+          ul
+            li(data-nav='work') work
+            li /
+            li(data-nav='services') services
+            li /
+            li(data-nav='about') about
+            li /
+            li(data-nav='updates') updates
+            li /
+            li(data-nav='contact') contact
     div#nav-spacer.hidden.hide-mobile
 
     div#main
@@ -90,10 +91,10 @@ block content
                     span.caps Case Study:
                     span.text-size-md  Web & Mobile
                   div.space-top-xs.gothic(style='font-size: 27px') Increase Awareness
-                  span.serif.text-size-sm "OBRC - know your nickel"
-                  p Oregon Beverage Recycling Cooperative (OBRC) processes virtually 100% of recyclable containers redeemed throughout Oregon. Know Your Nickel, a campaign by OBRC and their branding agency, was created to educate the public on the impact of recycling.
-                  p CSG expanded the campaign message through web and mobile by creating a development strategy that included: cloud hosting, mobile design, responsive development and localization. CSG used HTML5, CSS3 and Windows Azure was selected as the hosting platform.
-                  p The flexibility of Azure’s cloud hosting ensured the website stayed online no matter how many users hit the site at once. Featured on NPR, Oregon Live and on billboards across the Portland Metro area, the web campaign launched successfully, on time and continues to deliver this important message.                  
+                  span.serif.text-size-sm "OBRC - Know Your Nickel"
+                  p Oregon Beverage Recycling Cooperative (OBRC) processes virtually 100% of recyclable containers redeemed throughout Oregon. Know Your Nickel, a campaign by OBRC and their branding agency, was created to educate the public on the impact this recycling.
+                  p CSG expanded the campaign message through web and mobile by creating a development strategy that included: cloud hosting, mobile design, responsive development, and localization. CSG used HTML5, CSS3 and Windows Azure was selected as the hosting platform.
+                  p The flexibility of Azure’s cloud hosting ensured website availability regardless of high usage spikes. Featured on NPR, Oregon Live and billboards across the Portland Metro area, the web campaign launched successfully and continues to deliver this important message.
                   div.right.container.hide-desk
                     a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.next see more work this way }
               li.slide
@@ -104,13 +105,11 @@ block content
                   div.space-top-sm.gothic
                     span.caps Case Study:
                     span.text-size-md  Portals
-                  h1
                   div.text-size-lg.space-top-xs.gothic(style='font-size: 28px') Business Connectivity
-                  span.serif.text-size-sm "McMenamins – SP 2013 Migration and Cash Flow Solution"
-                  p McMenamins Pubs & Breweries operates a portfolio of more than fifty pubs, bars, microbreweries, restaurants along with eight historic hotels, eight movie theaters and several live music venues.
-                  p With their SharePoint 2007 environment, McMenamins dealt with some unnecessary complexity with an existing cash deposit solution that used an InfoPath form to collect data from pubs and submit to a web service that populated a SQL Server database. In addition to user complaints around performance and functionality, a long term vision that included solutions for Labor Reporting, Food Specials Approvals and Wine Order reporting prompted McMenamins to upgrade to SharePoint 2013 Enterprise.
-                  p CSG worked with McMenamins to design and build a SharePoint 2013 solution that would meet their current and future needs. An architecture using SharePoint 2013’s Business Connectivity Services to connect the cash deposits table in the data warehouse directly to a SharePoint External List. This greatly reduced the complexity in the existing environment and (created this happy result).
-                  p The cash deposit process is performed by each of the McMenamins pub locations daily and is critical for their financial reporting. With the re-architected cash deposit solution and migration to SharePoint 2013 in place, McMenamins was able to immediately pursue additional solutions to improve overall business connectivity.
+                  span.serif.text-size-sm "McMenamins – SharePoint 2013 Migration and Cash Flow Solution"
+                  p McMenamins Pubs & Breweries operates a portfolio of more than fifty pubs, hotels, microbreweries, and music venues.
+                  p An existing SharePoint 2007 cash deposit solution that populated a SQL Server database with an InfoPath form caused unnecessary complexity and user complaints for McMenamins. A long-term vision that included solutions for Labor Reporting, Food Specials Approvals and Wine Order reporting prompted McMenamins to upgrade to SharePoint 2013 Enterprise.
+                  p CSG worked with McMenamins to architect a cash flow despoit solution that used SharePoint 2013’s Business Connectivity Services to connect the cash deposits table in the data warehouse directly to a SharePoint External List. This reduced the complexity and provided McMenamins with a SharePoint 2013 solution that supported their long-term vision.
                   div.hide-desk.container
                     a(href='javascript:void(0)').previous.serif.white.text-size-md.hide-desk.fl { previous
                     a(href='javascript:void(0)').next.serif.white.text-size-md.hide-desk.fr next }
@@ -121,15 +120,13 @@ block content
                   div.space-top-sm.gothic
                     span.caps Case Study:
                     span.text-size-md  Portals
-                  h1
                   div.text-size-lg.space-top-xs.gothic(style='font-size: 28px') Business Intelligence
                   span.serif.text-size-sm "OIA - Packaging Financial Dashboard"
-                  p Oregon International Air Freight (OIA) is a leading third-party logistics provider that offers air and ocean freight forwarding, warehousing, distribution, customs brokering, global sourcing and creative packaging solutions.
-                  p To maintain a leadership position within the highly competitive world of logistics, OIA implemented a broad range of software and database systems to satisfy continuously evolving requirements. Using these systems, daily operations questions were taking weeks and considerable amounts of manual effort to answer, which prompted OIA to reach out to CSG for a solution.
-                  p CSG Pro first implemented a dashboard for the freight division using PowerPivot and SharePoint from the Microsoft BI suite. Similar processes and techniques were then applied to build a financial dashboard for the packaging division. The solution effort required several critical tasks including: requirements analysis, backend data modeling, new SharePoint lists and new ETL processes. CSG Pro used Microsoft SQL Server, Excel, PowerPivot, SQL Server Integration Services (SSIS) and SharePoint to design and develop highly functional dashboards.
-                  p The result was a presentation of actionable information, metrics and measurements displayed in a simple, compressed dashboard. Users were able to view current information without the excessive time delays and manipulation previously required. The solutions built by CSG Pro provided the essential information required for managing the logistics and packaging service operations into time saving, user-friendly displays.
+                  p Oregon International Air Freight (OIA) is a leading third-party logistics provider that offers freight forwarding, warehousing, distribution, customs brokering, global sourcing, and creative packaging solutions.
+                  p As a leader in logistics, OIA sought creative ways to efficiently utilize all software and database systems that were helping them lead the industry yet required considerable amounts of manual effort to maintain. CSG tasks included: requirements analysis, backend data modeling, new SharePoint lists, and new ETL processes.
+                  p CSG built a highly functional, time-saving, and user-friendly dashboard that leveraged Microsoft SQL Server, Excel, PowerPivot, SQL Server Integration Services (SSIS), and SharePoint. It delivered essential information required for managing the logistics and packaging divisions.
                   div.hide-desk.container
-                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk { previous
+                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.previous { previous
 
       /////////////////////////////////
       // SERVICES
@@ -162,7 +159,7 @@ block content
                   span.serif.text-size-md web
                   | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
                   hr.hide-mobile
-              div#swapper-target-web.hide-desk.section
+              div#swapper-target-web.hide-desk.section.active
               li#swapper-apps(data-swap='apps')
                 div.services-menu
                   | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="90" height="90" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve"><g><g><path fill-rule="evenodd" clip-rule="evenodd" fill="#003C56" d="M39.829 30.247c-0.057-0.056 0.052-0.568 0.06-0.661 0.144-1.655 0.219-3.195-0.204-4.817 -0.223-0.856-0.478-1.711-0.77-2.546 -0.249-0.712-0.565-1.421-0.939-2.076 -1.352-2.366-3.594-4.096-6.118-5.058 -2.292-0.873-5.984-1.255-8.671-0.616l-2.084 0.635c1.173 1.232 3.284 3.357 3.284 3.357l4.131 4.06c0 0 1.394 1.69 1.228 2.691 -0.156 0.942-0.486 1.832-1.013 2.63 -0.928 1.404-2.444 2.953-4.035 3.58 -0.506 0.199-1.063 0.194-1.597 0.143 -0.319-0.031-1.139-0.006-1.378-0.246 -2.808-2.808-5.617-5.617-8.425-8.425 -3.317 9.062 4.749 21.303 14.7 18.464 9.739 9.799 19.481 19.601 29.22 29.399 3.181 2.507 8.667 2.834 11.652-0.179 2.635-2.66 2.659-8.112 0.359-11.114C59.43 49.728 49.628 39.986 39.829 30.247zM64.21 69.147c-5.504 1.439-7.469-6.215-1.793-8.097C68.153 60.572 68.89 67.923 64.21 69.147zM68.263 15.276c-0.832-0.536-1.741-0.906-2.709-1.116 -0.842-0.182-1.712-0.189-2.558-0.041 -1.245 0.217-2.437 0.766-3.401 1.579 -1.349 1.137-2.487 2.525-3.72 3.782 -1.262 1.285-2.564 2.531-3.826 3.817 -0.623 0.635-7.556 7.669-7.558 7.667 0.777 0.777 1.554 1.554 2.33 2.33 -0.005-0.005 3.369-3.403 3.676-3.714 2.2-2.23 4.395-4.466 6.601-6.691 1.096-1.106 2.171-2.241 3.299-3.315 0.693-0.66 1.279-1.568 2.102-2.072 0.608-0.372 1.438-0.005 1.446 0.757 0.007 0.642-0.541 1.096-0.997 1.461 -0.59 0.471-1.082 0.997-1.607 1.54 -2.156 2.229-4.42 4.367-6.624 6.549 -2.211 2.189-4.428 4.373-6.641 6.56 0.836 0.896 1.673 1.793 2.51 2.689 -0.019-0.02 3.373-3.371 3.681-3.681 2.196-2.21 4.425-4.387 6.612-6.606 1.095-1.111 2.183-2.234 3.301-3.321 0.671-0.652 1.284-1.424 2.003-2.018 0.514-0.425 1.129-0.413 1.433 0.252 0.452 0.987-0.723 1.757-1.326 2.359 -0.594 0.594-1.188 1.187-1.781 1.781 -2.112 2.112-4.224 4.224-6.336 6.336 -2.111 2.111-4.221 4.221-6.332 6.332 0.777 0.717 1.554 1.434 2.33 2.151 0.015 0.013 3.85-3.933 4.196-4.285 2.512-2.554 5.043-5.095 7.517-7.685 1.232-1.29 2.532-2.514 3.764-3.804 1.029-1.078 1.571-2.202 1.732-3.684C71.639 18.786 70.232 16.544 68.263 15.276zM23.516 58.391c-1.434 0.299-2.868 0.598-4.302 0.896 -2.33 3.645-4.661 7.291-6.991 10.935 0.896 0.896 1.793 1.793 2.689 2.689 3.645-2.33 7.291-4.661 10.935-6.991 0.299-1.434 0.598-2.868 0.896-4.302 2.987-2.987 5.976-5.976 8.963-8.963 -1.135-1.075-2.271-2.151-3.406-3.227C29.373 52.415 26.444 55.404 23.516 58.391z"></path></g></g></svg>
@@ -208,9 +205,9 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p The monopoly of the deskbound PC is over. Desktop and laptop computers are being replaced by tablets and smart phones and people want to be connected, whenever, wherever using their device of choice. At CSG Pro, we build websites based on that premise.
-                    p When we work with you to design, construct, deploy and manage your website, we are creating a visual and interactive representation of your company and brand. Our process is designed to be creative, engaging and goal-driven. The end result is a product that is architecturally sound, intuitive, functional and beautiful.
-                    p Our code is hand crafted in Portland, Oregon using high quality software construction. With CSG Pro you can expect comprehensive service including UX / UI design, business analysis, system design, construction, testing and deployment. We understand how to blend high level company goals, intuitive user interface, technological architecture and visually stunning design to create a unique and compelling solution for your business. Once built, we provide a managed service for the care and hosting of your website while making ongoing improvements. By custom building solutions that meet and exceed our clients’ needs, we make long term management of websites and web for mobile easy.
+                    p The monopoly of the deskbound PC is over. Desktop and laptop computers are being replaced by tablets and smart phones. People want to be connected whenever and wherever using their device of choice. At CSG, we build websites based on that premise.
+                    p When we work with you to design, construct, deploy, and manage your website, we are creating a visual and interactive representation of your company and brand. Our process is designed to be creative, engaging and goal-driven. The end result is a product that is architecturally sound, intuitive, functional, and beautiful.
+                    p Our code is handcrafted in Portland, Oregon using high quality software construction. With CSG you can expect comprehensive services including: UX / UI design, business analysis, system design, construction, testing, and deployment. We understand how to blend high level company goals, intuitive user interface, technological architecture and visually stunning design to create a unique and compelling solution for your business. Once built, we provide a managed service for the care and hosting of your website while making ongoing improvements. By custom building solutions that meet and exceed our clients' needs, we make long-term management of websites and web for mobile easy.
                     h3.right: a.modal-toggle(data-modal='web', href='javascript:void(0)').text-size-md contact us about web development }
               section#swappable-apps.gone(data-swap='apps')
                 div.grid__item.one-whole
@@ -220,15 +217,14 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p The dramatic acceleration of technology innovation is transforming how people consume information, socially engage and transact business. These behavioral changes affect everything and there is no going back to old ways. The implications for businesses are significant and survival in this new reality depends on both adapting to these fundamental changes, but also anticipating what’s coming next.
-                    p Software is the connective tissue that enables people to productively interact with a plethora of hardware devices. Software applications connect users with a proliferation of information and data sources residing all over the globe. Traditional desktop and web apps are making way for the next generation mobile apps which are dramatically changing user behaviors and expectations.
-                    p CSG was founded upon the idea that the most valuable software solutions are not always available “off the shelf” and organizations often require custom software in order to realize the full potential of their unique business opportunities.
-                    p Success in the age of mobility requires that businesses provide users with mobile apps that are visually appealing, intuitive to use, device responsive and socially enabled. When we think apps, we think mobile first. CSG’s custom application development solutions are uniquely designed to address our clients’ specific customer, market and organizational challenges. Supported by world-class infrastructure and mature processes, CSG provides the following comprehensive services in application development:
+                    p “There’s an app for that”. That simple phrase really encapsulates the dramatic changes in development over the last few years. But what if there’s not an app for that? CSG was founded upon the idea that the most valuable software solutions are not always available “off the shelf” and organizations often require custom software in order to realize the full potential of their unique business opportunities. The dramatic transition to a world of mobile apps has made this truer than ever.
+                    p Success in this age of mobility requires that businesses provide users with mobile apps that are visually appealing, intuitive to use, device responsive, and socially enabled. When we think apps, we think mobile first. CSG’s custom application development solutions are uniquely designed to address our clients’ specific customer, market and organizational challenges. Supported by world-class infrastructure and mature processes, CSG provides the following comprehensive services in application development:
                     ul
-                      li Custom application design and development for Mobile, Web and the Desktop platforms
+                      li Custom application design and development for mobile, web and desktop platforms
                       li Server-side data management and process automation for cloud deployment and on-premise environments
-                      li Custom Software as a Solution (CSaaS) – custom software solutions tailored to client-specific requirements and deployed in the cloud
+                      li Software as a Service (SaaS) – custom software solutions tailored to client-specific requirements and deployed in the cloud
                       li Post-implementation managed services and application support
+                    p Whether you require solutions for desktops or handheld devices, web or mobile, custom applications are meeting the needs of countless businesses. Let CSG put our design and development team to work building your next app.
                     h3.right: a.modal-toggle(data-modal='apps', href='javascript:void(0)').text-size-md contact us about application development }
               section#swappable-cloud.gone(data-swap='cloud')
                 div.grid__item.one-whole
@@ -238,9 +234,9 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p Cloud computing is by far the most disruptive technology to emerge in the information age. It has leveled the playing field of the technological competitive landscape by enabling individuals and organizations with the capabilities to create infinitely scalable, fault tolerant, secure compute environments, that here to fore, was impossible to do without tremendous up front capital investment. As a result, a wave of innovation is building that dwarfs all of the major information technology trends of the past. The on-demand availability of cloud services means that competitiveness has a lot less to do with the size of the organization. In the classic David vs. Goliath scenario innovation is the sling. In this new reality, innovation trumps size every time.
-                    p The first question we tend to hear from clients is, “How secure is it?” Generally speaking, the cloud is actually more secure than most all of the on-premise infrastructures we see. This is because the focus and investment from Microsoft on the security of its cloud platform goes far beyond what most organizations are capable of. Similar concerns are raised by clients about reliability, and here again, the resiliency of the cloud tends to go far beyond what organizations can provide in their on-premise environments. So at CSG, the question we always ask is…why not the cloud?
-                    p When designing cloud solutions for our clients our approach is holistic. We give full consideration for how cloud services can be blended to provide optimal benefit. Intelligent architecture is the key ingredient for a great solution and whether you are using Platform as a Service (PaaS), Infrastructure as a service (IaaS), or software as a service (SaaS), we’ll work with you to apply our knowledge and experience to achieve the results you are striving for.
+                    p Cloud computing is the most disruptive technology to emerge in the information age. It has leveled the playing field of the technological competitive landscape by enabling organizations to create infinitely scalable, fault tolerant, and secure compute environments with little to no capital investment. As a result, a wave of innovation is building that dwarfs all of the major information technology trends of the past. The on-demand availability of cloud services means that competitiveness has a lot less to do with the size of the organization and more to do with the quality and creativity of the solution.
+                    p We have leveraged the cloud to build highly functional websites, scalable data-marts for real time analytics, and robust line of business applications. In every case there are specific business requirements, demand for high security, scalability and a need for long-term support. Because the infrastructure already exists, the time to build and launch a production solution is often greatly reduced.
+                    p So at CSG, the question we always ask is … why not the cloud? When designing solutions for our clients our approach is certainly holistic; leverage current on-premises investments while giving full consideration for how cloud services can provide optimal benefit. Intelligent architecture and creativity are the key ingredients for a great solution. Whether you are well versed in cloud technologies or unsure of the difference between PaaS and SaaS, we’ll work with you to apply our knowledge and experience to achieve the results you are striving for.
                     h3.right: a.modal-toggle(data-modal='cloud', href='javascript:void(0)').text-size-md contact us about cloud services }
               section#swappable-analytics.gone(data-swap='analytics')
                 div.grid__item.one-whole
@@ -250,15 +246,14 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p Companies are interested in big data not so much because of what that data represents in terms of volume, variety and velocity, but what the analysis of that data can do for their business. As business decision makers begin to recognize the potential of big data, they realize that the biggest insights and hidden gems of knowledge are found when big data actually becomes quite small. Our Business Intelligence solutions are designed to deliver data to you in real-time as actionable information, helping you to make more informed business decisions faster.
-                    p Exploring the world of big data takes business leaders beyond the data found in their organization’s traditional databases. Researchers, data scientists, and marketers are analyzing very large volumes of unstructured data from previously untapped sources such as e-mails, customer service records, sensor data, and security logs. Now that companies have the ability to deal with so much more data, they are free to incorporate a greater variety of data into the mix. They are incorporating social media, mobile phone location, traffic, and weather data into more traditional analysis. But what is the goal? Add more data, more elements and better analysis so that clear patterns emerge.
-                    p CSG provides services in:
+                    p Companies can gain more value from their business data by using it to empower people to make well-informed decisions. Traditionally this has meant a business analyst exposing historical data through spreadsheets and reports. Today, rapidly emerging cloud and mobile technologies are transforming the way information is used.
+                    p Researchers, data scientists, and marketers are analyzing very large volumes of unstructured data from previously untapped sources such as e-mails, customer service records, sensor data, and security logs. Now that companies have the ability to deal with so much more data, they are free to incorporate a greater variety of data into the mix. For example, social media, demographics, census, mobile phone, traffic, and weather data can be incorporated with more traditional sources to give context to business intelligence. The goal is to use more data, more elements and better analysis until clear patterns emerge.
+                    p As business leaders begin to recognize the potential of big data, they realize that the biggest insights and hidden gems of knowledge are found when big data actually becomes quite small. CSG’s Analytics and BI solutions are designed to deliver data to you in real-time as actionable information, helping you to make those informed business decisions faster. We have expertise in:
                     ul
                       li Customer/Production Data Hub — Data consolidation and cleansing
                       li Data Mining Solutions — Business analytics applications
-                      li Data Presentation — Web-based dashboards
+                      li Data Presentation — Web-based or SharePoint dashboards
                       li Business Data Architecture and Analytics
-                    p CSG professionals understand unique business models and approach each project with an eye to how it can benefit your entire business. We then develop solutions that are in-line with your core organization goals, using our extensive technical expertise to create a product specifically for you. Sometimes a solution built in the cloud best aligns with your organization goals, other times it must be on premise. Good news: we can do either one or a hybrid of the two.
                     h3.right: a.modal-toggle(data-modal='analytics', href='javascript:void(0)').text-size-md contact us about analytics }
               section#swappable-portals.gone(data-swap='portals')
                 div.grid__item.one-whole
@@ -268,7 +263,9 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p Looking for information on the game Portals? Then you're in the wrong place.
+                    p A portal should serve as an inviting and effective window into valuable information that is enjoyable for all users. At CSG, we design and develop highly functional and collaborative, cloud or hybrid SharePoint solutions firmly rooted in business strategy. We believe that business requirements, architecture, user interface design, information architecture, and governance are not just “nice to have” but are key elements to any successful implementation.
+                    p Using technologies like Office 365 with SharePoint Online, we build powerful enterprise content management and collaboration tools without the need to support on-premises infrastructure. For clients who require customized on-premises solutions, we have a wealth of experience in infrastructure architecture and a legacy of application development knowledge that gives us unique capabilities to develop collaboration and portal solutions that help connect people, processes and information across an organization.
+                    p The output is a portal functioning as a core business tool with high user adoption and satisfaction.
                     h3.right: a.modal-toggle(data-modal='portals', href='javascript:void(0)').text-size-md contact us about portals }
               section#swappable-windows8.gone(data-swap='windows8')
                 div.grid__item.one-whole
@@ -278,8 +275,10 @@ block content
                   hr
                 div.one-whole
                   div.grid__item.one-whole.text-column
-                    p Windows 8, tiles are the new square.
-                    h3.right: a.modal-toggle(data-modal='windows8', href='javascript:void(0)').text-size-md contact us about windows 8 }
+                    p Tablet devices have outsold the desktop PC and are expected to outsell laptops in the next 3 years. This dramatic trend has driven change in operating systems and apps. Microsoft’s release of Windows 8 adds fuel to that fire. CNET says, "Microsoft makes an aggressive, forward-thinking, and bold statement for the future of PCs with Windows 8." The world of possibilities is wide open for building great apps that take advantage of things like touch, video and proximity sharing.
+                    p Great apps are defined by the quality of the user experience and the seamless blending of mobile, web and cloud capabilities that enable users to connect, share and interact in rich and meaningful ways. Our passion is building great apps on Windows 8.
+                    p Whether you need a world-class consumer app in the Windows Store or a line of business application using Windows 8, we have the team and experience you need. CSG has worked closely with Microsoft through the Application Fast Track (AFT) program, the Microsoft Application Acceleration Program (MAAP) and is a Windows Design Agency Network partner. We have built Windows 8 applications for some of today's biggest brands.
+                    h3.right: a.modal-toggle(data-modal='windows8', href='javascript:void(0)').text-size-md contact us about Windows 8 }
 
 
       /////////////////////////////////
@@ -291,8 +290,8 @@ block content
             aside.one-whole(style='min-height: 430px')
                 div.grid__item.one-whole.text-column.hide-desk.space-bottom
                   div.text-size-md.space-top-sm About Us
-                  p Headquartered in Portland Oregon, CSG Pro does whatever it takes to help organizations get the most value out of their information technology. We deliver highly customized systems that improve business decision-making and efficiency throughout an organization.
-                  p It starts with the understanding that every information technology project is interconnected with the current and future state of the business. CSG ensures each project complements our clients’ enterprise architecture strategy and anticipates future requirements. We develop custom solutions in three primary practice areas; Application Development, Business Intelligence, and Portals & Collaboration, using leading Microsoft technologies. CSG helps our clients tap into their data – wherever it lies – to create maximum value for the business.
+                  p Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale, and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their system. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture and anticipates future needs.
+                  p Headquartered in Portland Oregon, CSG is deeply committed to our values; Do What’s Right, Team Over Self, Deliver Excellence, and Create Value. We hope we have the opportunity to live these out while building something amazing for your business.
                 div.grid__item.one-whole.center
                   img.space-top(src='img/CSG20_icon.svg')
                 div.grid__item.one-whole.text-column.space-bottom(style='color: #ccc;')
@@ -301,38 +300,38 @@ block content
                   div#jerry
                     span Jerry Frank,
                     br
-                    span Founder &amp; CEO
+                    span.serif Founder &amp; Chairman
           div.grid__item.eight-twelfths.hide-mobile
             article.swappable
               section#swappable-about(data-swap='about')
                 div.text-size-md.space-top-sm About Us
-                p Headquartered in Portland Oregon, CSG Pro does whatever it takes to help organizations get the most value out of their information technology. We deliver highly customized systems that improve business decision-making and efficiency throughout an organization.
-                p It starts with the understanding that every information technology project is interconnected with the current and future state of the business. CSG ensures each project complements our clients’ enterprise architecture strategy and anticipates future requirements. We develop custom solutions in three primary practice areas; Application Development, Business Intelligence, and Portals & Collaboration, using leading Microsoft technologies. CSG helps our clients tap into their data – wherever it lies – to create maximum value for the business.
+                p Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their systems. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture, and anticipate future needs.
+                p Headquartered in Portland Oregon, CSG is deeply committed to our values: Do What’s Right, Team Over Self, Deliver Excellence, and Create Value. We hope we have the opportunity to live these out while building something amazing for your business.
               section#swappable-chuckb.gone(data-swap='chuckb')
                 div.text-size-md.space-top-sm Chuck Britton
                 span.text-size-sm.serif Sales and Marketing Director
-                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG Pro.
-                //- p Chuck and his wife have been married for #{moment().diff('1986-01-01', 'years')} years. They are the proud parents of two tremendous sons. Faith and family are the greatest priorities in the Britton’s lives. Chuck enjoys the beauty of the Pacific Northwest – its high desert, forests, oceans and mountains. He cycles, skis, runs, and golfs – all in moderation. Traeger Grilling and autumn Saturdays at Autzen Stadium are added passions.
+                p In April 2013, Chuck made the decision to join CSG, recognizing that integrity, excellence, and teamwork were core to serving the firm’s clients. The combination of CSG’s 20 year reputation, plus the entrepreneurial spirit behind their growth plans, made it the ideal place to land his 25 years of technology solution sales and general management experience. Chuck spent 14 years at Microsoft Corporation just prior to CSG.
+                h3: a.about-us(href='javascript:void(0);') { about us
               section#swappable-roneg.gone(data-swap='roneg')
                 div.text-size-md.space-top-sm Ron Ellis Gaut
                 span.text-size-sm.serif Director of Consulting
-                p As a founding member of the CSG team, Ron has had the unique opportunity to contribute to growth and success of the company since the beginning. With over 30 years of experience of working in IT, Ron brings a broad base of experience to his role as Director of Consulting.
-                //- p Before he joined CSG, Ron worked as a software developer and IT professional for Sequent Computer Systems, Mentor Graphics and Concept Technologies. When not engaged with the clients and staff of CSG, look for Ron chasing steelhead on a wild Oregon river or playing guitar in the local Portland music scene.
+                p As a founding member of the CSG team, Ron has had the unique opportunity to contribute to the growth and success of the company since the beginning. With over 30 years of experience of working in IT, Ron brings a broad base of expertise to his role as Director of Consulting.
+                h3: a.about-us(href='javascript:void(0);') { about us
               section#swappable-kevinm.gone(data-swap='kevinm')
                 div.text-size-md.space-top-sm Kevin McVicker
                 span.text-size-sm.serif President
-                p Kevin joined CSG in February 2010, with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
-                //- p Prior to joining CSG Pro, Kevin was the founder and President of Centerlogic, an IT services company in the application development and infrastructure business. After 10 years, Centerlogic merged with Ascentium where Kevin served as the Managing Director of Portland. Outside of work Kevin’s enjoys running and camping, but his first priority is being a better husband to his wife, a better father to his four daughters, and a better friend to an incredible God.
+                p Kevin joined CSG in February 2010 with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
+                h3: a.about-us(href='javascript:void(0);') { about us
               section#swappable-jamesc.gone(data-swap='jamesc')
                 div.text-size-md.space-top-sm James Churchill
                 span.text-size-sm.serif Practice Manager: Application Development
-                p James manages the development of custom applications for CSG clients. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
-                //- p James began his career working as a pharmacy technician while attending the music program at Mt. Hood Community College. After an unsuccessful attempt at becoming a rock star drummer, he found himself designing and developing web sites, interactive CD-ROMs, and DVDs during the internet explosion of the late 1990s. When he’s not working, he can be found skiing, working on the house, playing video games, walking the dog, playing music, or hanging out in the yard with his chickens.
+                p James manages the development of custom applications for CSG. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server, and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
+                h3: a.about-us(href='javascript:void(0);') { about us
               section#swappable-dianec.gone(data-swap='dianec')
                 div.text-size-md.space-top-sm Diane Carpenter
                 span.text-size-sm.serif Practice Manager: Business Intelligence and Portals & Collaboration
-                p Diane manages our practice for Business Intelligence and Portals & Collaboration. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
-                //- p Prior to joining CSG, Diane was a Senior Project Manager at Holiday Retirement, an industry leader in Retirement Living, directing multiple large-scale enterprise application implementations, CRM, website redesign, accounting and IT projects. The previous 10 years were spent as a Senior Consultant with Ascentium, Centerlogic and CTR consulting companies. When not engaged with the clients, you will most likely find Diane tasting wine in the Willamette Valley or camping in central Oregon.
+                p Diane manages the Business Intelligence and Portals & Collaboration practices. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
+                h3: a.about-us(href='javascript:void(0);') { about us
             ul.swapper
               li#swapper-chuckb(data-swap='chuckb'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
               li#swapper-roneg(data-swap='roneg'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
@@ -363,7 +362,7 @@ block content
                     div.grid__item.one-whole.right.full
                       small
                         a(href="/post/#{post.id}")
-                          b Read more }
+                          b read more }
             else
               h1 We're having trouble loading out blog posts at this moment.
 
@@ -374,7 +373,7 @@ block content
       div#contact-container
         section#contact.grid.wrapper
           article.grid__item.one-whole.desk--space-top-sm.space-bottom-lg
-            form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel.full.right-gutter.hide-mobile
+            form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
               div.grid__item.one-whole
                 if (contacted === 'true')
                   label.lbl Message received loud and clear, thanks!
@@ -399,7 +398,7 @@ block content
             div.grid__item.desk--seven-twelfths.one-whole.full
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 734 NW 14th Avenue <br>Portland, OR 97209
-                h1: a(href='http://www.bing.com/maps/default.aspx?ss=734%20Nw%2014th%20Ave,%20Portland,%20OR', target='_blank') get directions
+                h1: a(href='http://www.bing.com/maps/default.aspx?ss=734%20Nw%2014th%20Ave,%20Portland,%20OR') get directions
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com

@@ -94,8 +94,9 @@ module.exports.index = function(req, res) {
           var b = regex.test(i.Markdown);
           var c = regex.test(JSON.stringify(i.Categories || ''));
           var d = regex.test(i.Title);
+          var e = regex.test(i.AuthorFullName);
 
-          return a && ( b || c || d );
+          return a && ( b || c || d  || e);
         });
 
         res.render('post-list', {

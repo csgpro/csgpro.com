@@ -63,8 +63,10 @@ html,body
  * Off canvas nav
  ***************************************/
 .mobile-nav,.main-body
-  backface-visibility: hidden;
   transition all ease 0.4s
+
+#work
+  backface-visibility: hidden;
 
 .mobile-nav
   width 75%
@@ -100,8 +102,6 @@ html,body
   margin-left 0
   padding-right gutter*0.5
 
-// .nav-open .main-body
-//   margin-left 80%
 
 .toggle-nav
   margin 16px 0 0 16px
@@ -307,11 +307,11 @@ html,body
 
 @media mobile
   .hide-mobile
-    display none
+    display none !important
 
 @media desk
   .hide-desk
-    display none
+    display none !important
 
 .hide
   display none
@@ -370,7 +370,6 @@ html,body
   opacity 0
   visibility hidden
   transform translate(-50px, 0)
-  // display none
 
 .swappable
   position relative
@@ -508,7 +507,6 @@ header
 #work-container
   background-color main-blue
 #work
-  // background-color main-blue
   color #fff
   aside
     @media desk
@@ -521,12 +519,16 @@ header
       height 101%
     @media mobile
       height 300px
-    // img
-    //   max-width 675px
 
 /////////////////////////////////
 // SERVICES
 /////////////////////////////////
+.section
+  display none
+.section.active
+  display block
+  padding-top gutter*0.5
+
 #services-container
   @media desk
     background-image url('/img/services_bg.png')
@@ -535,8 +537,6 @@ header
   @media mobile
     background-color #11517D
 #services
-  .active section
-    padding-top gutter*0.5
   aside
     color #00A3E4
     height 100%
@@ -773,12 +773,12 @@ picture-spacing = 128px
   padding 0
   border none
   margin-bottom gutter*0.5
-.panel
+.panel-white
   padding-right gutter
   padding-bottom gutter
   background-color #FCFCFC
   border-radius border-radii
-.panel div:first-child
+.panel-white div:first-child
   margin-top gutter
 .lbl
   color #0AA3E7

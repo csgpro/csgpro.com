@@ -9,11 +9,11 @@ module.exports = function(grunt) {
     }
   }
   , cssmin: {
-      options: {
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
-              + '<%= grunt.template.today("yyyy-mm-dd") %> CSS bundle */\r\n'
-      }
-    , combine: {
+      // options: {
+      //   banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
+      //         + '<%= grunt.template.today("yyyy-mm-dd") %> CSS bundle */\r\n'
+      // }
+      combine: {
         files: {
           'public/css/bundle.css': [
             'public/css/normalize.css'

@@ -3,9 +3,9 @@
 
 'use strict';
 
-/**
- * Module dependencies.
- */
+/**********************************
+ * MODULE DEPENDENCIES
+ **********************************/
 
 var express          = require('express')
   , fs               = require('fs')
@@ -22,6 +22,7 @@ var express          = require('express')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
   , adminTopic       = require('./routes/admin-topic')
+  , redirects        = require('./routes/redirects')
   , post             = require('./routes/post');
 
 // Load the configuration file with our keys in it, first from the env variables
@@ -102,16 +103,15 @@ app.use(express.compress());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.session({ secret: "asd~~~kj~jKjjj~JJJJk123" }));
+app.use(express.session({ secret: c.get('SESSION_SECRET') }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
-// Development only
-// if ('development' == app.get('env')) { // TODO: turn this back off
-  app.use(express.errorHandler());
-// }
+app.use(function(err, req, res, next) {
+  res.render('error', { message : err });
+});
 
 
 /**********************************
@@ -200,9 +200,18 @@ app.get('/auth/live/callback',
     res.redirect('/admin/post');
   });
 
-app.get('/*', function(req, res) {
-  res.redirect('/404.html');
-});
+
+/*****************
+ * Old Site Redirects
+ ****************/
+
+app.get('/Blogs/post/*', redirects);
+
+/*****************
+ * 404 Redirect
+ ****************/
+app.get('/*', function(req, res) { res.redirect('/404.html'); });
+
 
 /**********************************
  * START THE SERVER, SCOTTY!
