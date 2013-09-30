@@ -527,6 +527,10 @@ header
 /////////////////////////////////
 // SERVICES
 /////////////////////////////////
+.section.active
+  display block !important
+  padding-top gutter*0.5
+
 #services-container
   @media desk
     background-image url('/img/services_bg.png')
@@ -535,8 +539,6 @@ header
   @media mobile
     background-color #11517D
 #services
-  .active section
-    padding-top gutter*0.5
   aside
     color #00A3E4
     height 100%
@@ -552,6 +554,7 @@ header
       padding 0
       list-style-type none
       section,.section
+        display none
         color #000
         background-color #f3f3f3
         .title

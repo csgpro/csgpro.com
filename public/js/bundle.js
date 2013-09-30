@@ -444,6 +444,15 @@ function init(o){
   $('.swapper > li').click(function(){
     swap($(this));
   });
+
+  $('.swapper.accordion > li').each(function(index, item) {
+    var text = $(item).attr('id').match(/swapper-(\w+)/)[1];
+    var content = $('#swappable-' + text);
+    var contentTarget = $('#swapper-target-' + text );
+
+    contentTarget.html(content.children().clone());
+    // contentTarget.children()[0].style['padding-top'] = '12px';
+  });
 }
 
 function swap(element) {
@@ -464,11 +473,13 @@ function swap(element) {
 
       if (me.hasClass('active')) {
         me.removeClass('active');
-        contentTarget.html('');
+        contentTarget.removeClass('active');
+        // contentTarget.html('');
       } else {
         me.addClass('active');
-        contentTarget.html(content.children().clone());
-        contentTarget.children()[0].style['padding-top'] = '12px';
+        contentTarget.addClass('active');
+        // contentTarget.html(content.children().clone());
+        // contentTarget.children()[0].style['padding-top'] = '12px';
       }
     }
   } else {               // desktop
