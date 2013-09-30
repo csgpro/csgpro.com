@@ -123,7 +123,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #work-container{background-color:#09a4e6}
 #work{color:#fff;}
 @media all and (min-width: 915px){#work aside{height:100%}
-}#work article{position:relative;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;background-repeat:no-repeat;}
+}#work aside p{font-size:13px}
+#work article{position:relative;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;background-repeat:no-repeat;}
 @media all and (min-width: 915px){#work article{height:101%}
 }@media all and (max-width: 914px){#work article{height:300px}
 }.section{display:none}
