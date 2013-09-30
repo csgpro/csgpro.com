@@ -1,7 +1,8 @@
 mixin contactForm(type)
   form(role='form', action='/contact', method='POST').panel-white
     div.grid__item.one-whole
-      h3.modal-header Contact us about #{type.toLowerCase()}
+      - if (type !== 'Windows 8') type = type.toLowerCase();
+      h3.modal-header Contact us about #{type}
     div.grid__item.six-twelfths
       label.lbl What's your name?
       input.input-grey(name='name', type='text')
