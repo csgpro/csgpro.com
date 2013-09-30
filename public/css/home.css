@@ -7,7 +7,8 @@ td,th{padding:3px 24px 3px 0}
 html,body{height:100%}
 .sticky-footer-wrapper{min-height:100%;height:auto !important;height:100%;margin:0 auto -108px}
 .sticky-footer,.sticky-footer-push{height:108px}
-.mobile-nav,.main-body{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;-ms-transition:all ease 0.4s;transition:all ease 0.4s}
+.mobile-nav,.main-body{-webkit-transition:all ease 0.4s;-moz-transition:all ease 0.4s;-o-transition:all ease 0.4s;-ms-transition:all ease 0.4s;transition:all ease 0.4s}
+#work{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden}
 .mobile-nav{width:75%;background-color:#343434;float:left;margin-left:-80%;height:1000px;z-index:20;position:fixed;top:0;left:0;}
 .mobile-nav ul{font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:30px;list-style-type:none;margin:0;padding:0 0 0 24px;}
 .mobile-nav ul li{padding:12px 0;border-bottom:solid #4c4c4c 2px}
@@ -91,7 +92,7 @@ html,body{height:100%}
 }@media all and (max-width: 914px){.mobile--img-sm{max-width:30%}
 }.btn{font-family:Roboto;font-size:14px;border:none;-webkit-border-radius:2px;border-radius:2px}
 .btn-blue{background-color:#0aa3e7;padding:6px;color:#fff}
-.gone{opacity:0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";filter:alpha(opacity=0);visibility:hidden;-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
+.gone{visibility:hidden;-webkit-transform:translate(-50px,0);-moz-transform:translate(-50px,0);-o-transform:translate(-50px,0);-ms-transform:translate(-50px,0);transform:translate(-50px,0)}
 .swappable{position:relative}
 .swappable section{-webkit-transition:all 0.3s ease;-moz-transition:all 0.3s ease;-o-transition:all 0.3s ease;-ms-transition:all 0.3s ease;transition:all 0.3s ease;position:absolute}
 .swipeshow{width:100%;}

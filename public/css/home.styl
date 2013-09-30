@@ -63,9 +63,11 @@ html,body
  * Off canvas nav
  ***************************************/
 .mobile-nav,.main-body
-  backface-visibility: hidden;
   transition all ease 0.4s
 
+#work
+  backface-visibility: hidden;
+  
 .mobile-nav
   width 75%
   background-color #343434
@@ -100,8 +102,6 @@ html,body
   margin-left 0
   padding-right gutter*0.5
 
-// .nav-open .main-body
-//   margin-left 80%
 
 .toggle-nav
   margin 16px 0 0 16px
@@ -367,10 +367,8 @@ html,body
  * Swappable styling
  ***************************************/
 .gone
-  opacity 0
   visibility hidden
   transform translate(-50px, 0)
-  // display none
 
 .swappable
   position relative
@@ -508,7 +506,6 @@ header
 #work-container
   background-color main-blue
 #work
-  // background-color main-blue
   color #fff
   aside
     @media desk
