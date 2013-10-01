@@ -1,6 +1,9 @@
-var db = require('../modules/db'),
-    marked = require('marked'),
-    moment = require('moment');
+
+var db = require('../modules/db');
+var marked = require('marked');
+var moment = require('moment');
+var c = require('nconf');
+var recaptcha = require('../modules/recaptcha');
 
 exports.homepage = function(req, res){
   var contacted = req.query.contacted;
@@ -13,7 +16,8 @@ exports.homepage = function(req, res){
       title: 'CSG',
       posts: posts,
       moment: moment,
-      contacted: contacted
+      contacted: contacted,
+      recaptcha_form: recaptcha.toHTML()
     });
   });
 };

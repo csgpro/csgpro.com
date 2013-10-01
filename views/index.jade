@@ -290,7 +290,7 @@ block content
             aside.one-whole(style='min-height: 430px')
                 div.grid__item.one-whole.text-column.hide-desk.space-bottom
                   div.text-size-md.space-top-sm About Us
-                  p Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale, and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their system. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture and anticipates future needs.
+                  p Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their systems. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture, and anticipate future needs.
                   p Headquartered in Portland Oregon, CSG is deeply committed to our values; Do What’s Right, Team Over Self, Deliver Excellence, and Create Value. We hope we have the opportunity to live these out while building something amazing for your business.
                 div.grid__item.one-whole.center
                   img.space-top(src='img/CSG20_icon.svg')
@@ -379,8 +379,8 @@ block content
                   label.lbl Message received loud and clear, thanks!
                   p We'll be getting back to you soon. Want to send another? Go for it!
                 else if (contacted === 'false')
-                  label.lbl Oops! Error error *lasers shooting out of robot eyes*
-                  p We had an issue sending the email. Try again?
+                  label.lbl Oops!
+                  p Looks like those words you typed weren't right. Try again?But only if you're a human...
                 else
                   label.lbl Got a quick question?
                   p We'd love to get to back to you with an answer.
@@ -393,6 +393,13 @@ block content
               div.grid__item.one-whole
                 label.lbl So, what's on your mind?
                 textarea.input-grey(name='comments', type='text', style='height: 100px')
+              div.grid__item.one-whole
+                script.
+                  var RecaptchaOptions = {
+                   theme: 'clean',
+                   lang: 'en'
+                  };
+                div!= recaptcha_form
               div.grid__item.one-whole.right
                 button.serif(type='submit').btn.btn-blue make it so
             div.grid__item.desk--seven-twelfths.one-whole.full
