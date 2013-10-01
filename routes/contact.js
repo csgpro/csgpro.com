@@ -35,28 +35,31 @@ exports.index = function(req, res) {
     if (err) {
       res.redirect('/?contacted=false');
     } else {
-      email.sendEmail(
-        'info@csgpro.com', 
-        subject,
-        message,
-        true,
-        function(err, result) {
+      console.log('Email would be sent here');
 
-          if (!item.type) {
-            if (err) {
-              res.redirect('/?contacted=false#contact');
-            } else {
-              res.redirect('/?contacted=true#contact');
-            }
-          } else {
-            if (err) {
-              res.json({success: false});
-            } else {
-              res.json({success: true});
-            }
-          }
-        }
-      );
+      // Temporary comment out
+      // email.sendEmail(
+      //   'info@csgpro.com', 
+      //   subject,
+      //   message,
+      //   true,
+      //   function(err, result) {
+
+      //     if (!item.type) {
+      //       if (err) {
+      //         res.redirect('/?contacted=false#contact');
+      //       } else {
+      //         res.redirect('/?contacted=true#contact');
+      //       }
+      //     } else {
+      //       if (err) {
+      //         res.json({success: false});
+      //       } else {
+      //         res.json({success: true});
+      //       }
+      //     }
+      //   }
+      // );
     }
   });
 };

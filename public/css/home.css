@@ -194,6 +194,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }#updates article a{color:#fff}
 .search{display:inline-block}
 .search input{border:solid #d3d3d3 2px;-webkit-border-radius:4px;border-radius:4px;padding:3px 3px 3px 12px}
+#recaptcha_area{display:inline-block}
 @media all and (min-width: 915px){#contact-container{background-image:url("/img/contact_bg.jpg");background-repeat:no-repeat;background-position:top}
 }@media all and (max-width: 914px){#contact-container{background-image:url("/img/mobile_contact_bg.jpg");background-position:bottom center;-webkit-background-size:589px;-moz-background-size:589px;background-size:589px}
 }#contact{height:506px;}
@@ -201,7 +202,6 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #contact p{margin-top:0}
 .input-grey{background-color:#e5e5e5;width:100%;max-width:100%;max-height:150px;padding:0;border:none;margin-bottom:12px}
 .panel-white{padding-right:24px;padding-bottom:24px;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px}
-.panel-white div:first-child{margin-top:24px}
 .lbl{color:#0aa3e7;font-size:11px;font-weight:bolder;text-transform:uppercase;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif}
 @media all and (min-width: 915px){.scene-footer{background-color:#353535;background-image:url("/img/footer_bg.png");background-repeat:no-repeat;background-position:center top}
 }@media all and (max-width: 914px){.scene-footer{background-color:#252525}

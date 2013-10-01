@@ -152,6 +152,7 @@ module.exports = init;
 },{}],5:[function(require,module,exports){
 /*jslint
   browser: true,
+  laxbreak: true,
   node: true */
 /*global $ */
 
@@ -170,15 +171,22 @@ function init() {
 
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
-    //pooperz
-    console.dir(this);
+
     var name = this.form.name.value;
     var contactInfo = this.form.contactInfo.value;
     var comments = this.form.comments.value;
     var type = this.form.type.value;
 
+    var dataString = 'name='+ name 
+                   + '&contactInfo=' + contactInfo 
+                   + '&comments=' + comments;
 
-    var dataString = 'name='+ name + '&contactInfo=' + contactInfo + '&comments=' + comments + '&type=' + type;  
+    // DEBUG
+    window.greer = this;
+
+    if (type)
+      dataString += '&type=' + type;
+
     //alert (dataString);return false;  
     $.ajax({  
       type: "POST",  
