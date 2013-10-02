@@ -27,8 +27,7 @@
     "azure": "0.7.15",
     "validator": "1.5.1",
     "nodemailer": "0.5.2",
-    "passport-windowslive": "1.0.0",
-    "re-captcha": "0.0.3"
+    "passport-windowslive": "1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

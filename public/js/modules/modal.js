@@ -6,8 +6,6 @@
 
 'use strict';
 
-var currentDataString;
-
 function init() {
   $('.modal-toggle').on('click', function(){
     var modalName = $(this).data('modal');
@@ -19,55 +17,20 @@ function init() {
 
   });
 
-  $('.recaptcha-submit').on('click', function(event) {
-    var element;
-    var message;
-
-    event.preventDefault();
-
-    currentDataString += '&recaptcha_challenge_field=' + this.form.recaptcha_challenge_field.value;
-    currentDataString += '&recaptcha_response_field=' + this.form.recaptcha_response_field.value;
-
-    $.ajax({  
-      type: "POST",  
-      url: "/contact",  
-      data: currentDataString, 
-      success: function(result) {  
-        // do something cool!
-        // $('#simplemodal-container .modal-header').text('Message received. Thanks!');
-        if (result === 'success') {
-          element = document.createElement('h1');
-          message = document.createTextNode('Message received, thanks!');
-          element.appendChild(message);
-
-          $('#modal-recaptcha').html(element);
-
-          setTimeout(function(){ $.modal.close(); },2000);
-
-          window.location.reload();
-
-        } else {
-          element = document.createElement('h1');
-          message = document.createTextNode('Incorrect response. Try again:');
-          element.appendChild(message);
-
-          $('#modal-recaptcha').prepend(element);
-
-        }
-      },
-    });  
-  });
 
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
 
+    var that = this;
     var name = this.form.name.value;
     var contactInfo = this.form.contactInfo.value;
     var comments = this.form.comments.value;
+    var cryptoTime = this.form.cryptoTime.value;
     var type;
 
     var dataString = 'name='+ name 
                    + '&contactInfo=' + contactInfo 
+                   + '&cryptoTime=' + cryptoTime 
                    + '&comments=' + comments;
     
     if (this.form.hasOwnProperty('type')) {
@@ -77,10 +40,36 @@ function init() {
         dataString += '&type=' + type;
     }
 
-    currentDataString = dataString;
 
-    $.modal.close();
-    $('#modal-recaptcha').modal();
+    $.ajax({  
+      type: "POST",  
+      url: "/contact",  
+      data: dataString, 
+      success: function(result) {  
+        console.log(result);
+        // $('#simplemodal-container .form-header').text('Message received. Thanks!');
+        var header = $(that.form.querySelector('.status-header'));
+
+        if (result === 'success') {
+
+          header.text('Message received!');
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+
+          setTimeout(function(){ $.modal.close(); },2000);
+
+        } else {
+          header.text('Something went wrong, try again.');
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+        }
+      },
+    });  
+
     return false;     
 
   });

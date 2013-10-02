@@ -373,28 +373,13 @@ block content
       // CONTACT
       /////////////////////////////////
 
-      // Recaptcha form
-      script.
-        var RecaptchaOptions = {theme: 'white', lang: 'en'};
-      div#modal-recaptcha.modal.center
-        form(role='form', action='/contact', method='POST')
-          div!= recaptcha_form
-          button(type='submit').recaptcha-submit.btn.btn-blue.serif submit
-
       div#contact-container
         section#contact.grid.wrapper
           article.grid__item.one-whole.desk--space-top-sm.space-bottom-lg
             form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
               div.grid__item.one-whole.space-top-xs
-                if (contacted === 'true')
-                  label.lbl Message received loud and clear, thanks!
-                  p We'll be getting back to you soon. Want to send another? Go for it!
-                else if (contacted === 'false')
-                  label.lbl Oops!
-                  p Looks like those words you typed weren't right. Try again? But only if you're a human...
-                else
-                  label.lbl Got a quick question?
-                  p We'd love to get to back to you with an answer.
+                label.lbl.status-header Got a quick question?
+                p We'd love to get to back to you with an answer.
               div.grid__item.six-twelfths
                 label.lbl What's your name?
                 input.input-grey(name='name', type='text')
@@ -404,6 +389,7 @@ block content
               div.grid__item.one-whole
                 label.lbl So, what's on your mind?
                 textarea.input-grey(name='comments', type='text', style='height: 100px')
+                input.hide(name='cryptoTime', type='text', value='#{cryptoTime}')
               div.grid__item.one-whole.right
                 button.serif(type='submit').btn.btn-blue.ajaxSubmit make it so
             div.grid__item.desk--seven-twelfths.one-whole.full

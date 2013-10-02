@@ -5,18 +5,13 @@
 
 var email = require ('../modules/email');
 var moment = require('moment');
-var recaptcha = require('../modules/recaptcha');
-var r = new require('re-captcha');
+var spam = require('../modules/spam');
 
 exports.index = function(req, res) {
-  // recaptcha stuff
-  var data = {
-    remoteip:  req.connection.remoteAddress,
-    challenge: req.body.recaptcha_challenge_field,
-    response:  req.body.recaptcha_response_field
-  };
 
   var item = req.body;
+  var cryptoTime = req.body.cryptoTime;
+  var isSpam;
   var subject = 'New Request for ' + (item.type || 'Contact');
   var message = 'Someone submitted the contact form from csgpro.com.<br><br>'
               + 'Here are the details of that submission:<br>'
@@ -32,40 +27,26 @@ exports.index = function(req, res) {
             + '<b>So, what\'s on your mind?</b><br>' + item.comments +'<br><br>';
   }
 
-  console.dir(data);
-  console.dir(item);
+  isSpam = spam.isSpam(cryptoTime);
 
-  r.verify(data, function(err) {
-    if (err) {
-      // res.redirect('/?contacted=false');
-      res.send();
-    } else {
-      console.log('Email would be sent here');
-      res.send('success');
+  if (isSpam) {
+    res.send('fail');
+  } else {
+    console.log('Message sent: ' + JSON.stringify(item));
 
-      // Temporary comment out
-      // email.sendEmail(
-      //   'info@csgpro.com', 
-      //   subject,
-      //   message,
-      //   true,
-      //   function(err, result) {
-
-      //     if (!item.type) {
-      //       if (err) {
-      //         res.redirect('/?contacted=false#contact');
-      //       } else {
-      //         res.redirect('/?contacted=true#contact');
-      //       }
-      //     } else {
-      //       if (err) {
-      //         res.json({success: false});
-      //       } else {
-      //         res.json({success: true});
-      //       }
-      //     }
-      //   }
-      // );
-    }
-  });
+    // Temporary comment out
+    email.sendEmail(
+      'info@csgpro.com', 
+      subject,
+      message,
+      true,
+      function(err, result) {
+        if (err) {
+          res.send('fail');
+        } else {
+          res.send('success');
+        }
+      }
+    );
+  }
 };
