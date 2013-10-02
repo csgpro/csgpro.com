@@ -6,6 +6,7 @@
 var email = require ('../modules/email');
 var moment = require('moment');
 var recaptcha = require('../modules/recaptcha');
+var r = new require('re-captcha');
 
 exports.index = function(req, res) {
   // recaptcha stuff
@@ -31,11 +32,16 @@ exports.index = function(req, res) {
             + '<b>So, what\'s on your mind?</b><br>' + item.comments +'<br><br>';
   }
 
-  recaptcha.verify(data, function(err) {
+  console.dir(data);
+  console.dir(item);
+
+  r.verify(data, function(err) {
     if (err) {
-      res.redirect('/?contacted=false');
+      // res.redirect('/?contacted=false');
+      res.send();
     } else {
       console.log('Email would be sent here');
+      res.send('success');
 
       // Temporary comment out
       // email.sendEmail(

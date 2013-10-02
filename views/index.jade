@@ -376,8 +376,10 @@ block content
       // Recaptcha form
       script.
         var RecaptchaOptions = {theme: 'white', lang: 'en'};
-      div#modal-recaptcha.modal.panel-white.center
-        div!= recaptcha_form
+      div#modal-recaptcha.modal.center
+        form(role='form', action='/contact', method='POST')
+          div!= recaptcha_form
+          button(type='submit').recaptcha-submit.btn.btn-blue.serif submit
 
       div#contact-container
         section#contact.grid.wrapper
