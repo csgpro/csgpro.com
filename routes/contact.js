@@ -25,7 +25,7 @@ exports.index = function(req, res) {
   }
 
   email.sendEmail(
-    'info@csgpro.com', 
+    'Webmaster@csgpro.com', 
     subject,
     message,
     true,
