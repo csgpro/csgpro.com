@@ -36,7 +36,7 @@ exports.index = function(req, res) {
 
     // Temporary comment out
     email.sendEmail(
-      'info@csgpro.com', 
+      'Webmaster@csgpro.com', 
       subject,
       message,
       true,
