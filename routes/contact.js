@@ -9,9 +9,9 @@ var spam = require('../modules/spam');
 
 exports.index = function(req, res) {
 
+  var isSpam; // boolean
   var item = req.body;
   var cryptoTime = req.body.cryptoTime;
-  var isSpam;
   var subject = 'New Request for ' + (item.type || 'Contact');
   var message = 'Someone submitted the contact form from csgpro.com.<br><br>'
               + 'Here are the details of that submission:<br>'
@@ -27,16 +27,15 @@ exports.index = function(req, res) {
             + '<b>So, what\'s on your mind?</b><br>' + item.comments +'<br><br>';
   }
 
-  isSpam = spam.isSpam(cryptoTime);
+  isSpam = spam.isSpam(cryptoTime) || item.hpizzle; // check the 'honey pot'
 
   if (isSpam) {
     res.send('fail');
   } else {
-    console.log('Message sent: ' + JSON.stringify(item));
+    console.log('Email sent: ' + JSON.stringify(item));
 
-    // Temporary comment out
     email.sendEmail(
-      'Webmaster@csgpro.com', 
+      'Webmaster@csgpro.com,jond@csgpro.com', 
       subject,
       message,
       true,
