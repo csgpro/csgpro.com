@@ -51,19 +51,24 @@ function init() {
         console.log(result);
         // $('#simplemodal-container .form-header').text('Message received. Thanks!');
         var header = $(that.form.querySelector('.status-header'));
+        var toClear = $(that.form.querySelectorAll('.clearable'));
 
         if (result === 'success') {
 
           header.text('Message received!');
+          header.css('color', '#468847'); // green
           header.fadeTo(90, 0.3);
           header.fadeTo(90, 1);
           header.fadeTo(90, 0.3);
           header.fadeTo(90, 1);
+
+          toClear.val('');
 
           setTimeout(function(){ $.modal.close(); },2000);
 
         } else {
           header.text('Something went wrong, try again.');
+          header.css('color', '#b94a48'); // red
           header.fadeTo(90, 0.3);
           header.fadeTo(90, 1);
           header.fadeTo(90, 0.3);
