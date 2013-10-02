@@ -26,11 +26,13 @@ function init() {
     var contactInfo = this.form.contactInfo.value;
     var comments = this.form.comments.value;
     var cryptoTime = this.form.cryptoTime.value;
+    var hpizzle = this.form.hpizzle.value;
     var type;
 
     var dataString = 'name='+ name 
                    + '&contactInfo=' + contactInfo 
                    + '&cryptoTime=' + cryptoTime 
+                   + '&hpizzle=' + hpizzle 
                    + '&comments=' + comments;
     
     if (this.form.hasOwnProperty('type')) {
