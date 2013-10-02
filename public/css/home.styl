@@ -140,11 +140,18 @@ html,body
   background-color #000
 
 #simplemodal-container
+  padding gutter 0 gutter 0
+  background-color #FCFCFC
+  border-radius border-radii
   height 450px
   @media desk
     width 600px
   @media mobile
     width 320px
+  button
+    position absolute
+    bottom gutter
+    right gutter
 
 #simplemodal-container a.modalCloseImg
   background url('/img/icon_x.png') no-repeat
@@ -314,7 +321,7 @@ html,body
     display none !important
 
 .hide
-  display none
+  display none !important
 
 .right
   text-align right
@@ -749,6 +756,9 @@ picture-spacing = 128px
 /////////////////////////////////
 // CONTACT
 /////////////////////////////////
+#recaptcha_area
+  display inline-block
+  
 #contact-container
   @media desk
     background-image url('/img/contact_bg.jpg')
@@ -778,8 +788,8 @@ picture-spacing = 128px
   padding-bottom gutter
   background-color #FCFCFC
   border-radius border-radii
-.panel-white div:first-child
-  margin-top gutter
+// .panel-white div:first-child
+//   margin-top gutter
 .lbl
   color #0AA3E7
   font-size 11px

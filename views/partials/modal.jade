@@ -1,19 +1,24 @@
 mixin contactForm(type)
+  script.
+    var RecaptchaOptions = {theme: 'white', lang: 'en'};
   form(role='form', action='/contact', method='POST').panel-white
     div.grid__item.one-whole
       - if (type !== 'Windows 8') type = type.toLowerCase();
-      h3.modal-header Contact us about #{type}
+      h3.status-header Contact us about #{type}
     div.grid__item.six-twelfths
       label.lbl What's your name?
       input.input-grey(name='name', type='text')
     div.grid__item.six-twelfths.space-bottom
       label.lbl How can we reach you?
       input.input-grey(name='contactInfo', type='text')
-    div.grid__item.one-whole.space-bottom
+      input.hide(name='cryptoTime', type='text', value='#{cryptoTime}')
+    div.grid__item.one-whole
       label.lbl How can we help you?
       textarea.input-grey(name='comments', type='text', style='height: 177px;')
       input.hide(name='type', type='text', value='#{type}')
+    //- div.grid__item.one-whole.space-bottom
+    //-   div!= recaptcha_form
     div.grid__item.one-whole.right
       button.serif(type='submit').btn.btn-blue.ajaxSubmit submit
 
-
+      

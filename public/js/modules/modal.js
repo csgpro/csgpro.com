@@ -1,5 +1,6 @@
 /*jslint
   browser: true,
+  laxbreak: true,
   node: true */
 /*global $ */
 
@@ -16,29 +17,59 @@ function init() {
 
   });
 
+
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
-    //pooperz
-    console.dir(this);
+
+    var that = this;
     var name = this.form.name.value;
     var contactInfo = this.form.contactInfo.value;
     var comments = this.form.comments.value;
-    var type = this.form.type.value;
+    var cryptoTime = this.form.cryptoTime.value;
+    var type;
+
+    var dataString = 'name='+ name 
+                   + '&contactInfo=' + contactInfo 
+                   + '&cryptoTime=' + cryptoTime 
+                   + '&comments=' + comments;
+    
+    if (this.form.hasOwnProperty('type')) {
+      type = this.form.type.value;
+
+      if (type)
+        dataString += '&type=' + type;
+    }
 
 
-    var dataString = 'name='+ name + '&contactInfo=' + contactInfo + '&comments=' + comments + '&type=' + type;  
-    //alert (dataString);return false;  
     $.ajax({  
       type: "POST",  
       url: "/contact",  
-      data: dataString,  
-      success: function() {  
-        // do something cool!
-        $('#simplemodal-container .modal-header').text('Message received. Thanks!');
+      data: dataString, 
+      success: function(result) {  
+        console.log(result);
+        // $('#simplemodal-container .form-header').text('Message received. Thanks!');
+        var header = $(that.form.querySelector('.status-header'));
 
-        setTimeout(function(){ $.modal.close(); },2000);
-      }  
+        if (result === 'success') {
+
+          header.text('Message received!');
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+
+          setTimeout(function(){ $.modal.close(); },2000);
+
+        } else {
+          header.text('Something went wrong, try again.');
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+          header.fadeTo(90, 0.3);
+          header.fadeTo(90, 1);
+        }
+      },
     });  
+
     return false;     
 
   });
