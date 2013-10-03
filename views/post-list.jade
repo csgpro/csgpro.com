@@ -27,7 +27,7 @@ block content
                 if (post.ProfileUrl)
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
-                  img.avatar.fl.avatar-sm(src='/img/author/guest_blogger.png')
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
                 a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{category.name}.svg')
@@ -50,7 +50,7 @@ block content
                 if (post.ProfileUrl)
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
-                  img.avatar.fl.avatar-sm(src='/img/author/guest_blogger.png')
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
                 a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
@@ -70,7 +70,7 @@ block content
                 if (post.ProfileUrl)
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
-                  img.avatar.fl.avatar-sm(src='/img/author/guest_blogger.png')
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
                 a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
@@ -91,7 +91,7 @@ block content
                 if (post.ProfileUrl)
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
-                  img.avatar.fl.avatar-sm(src='/img/author/guest_blogger.png')
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
                 a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
