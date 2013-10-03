@@ -23,14 +23,18 @@ block content
 
           article.grid__item.desk--nine-twelfths.article.pad-right-1
             h1= post.Title
-            div.grid__item.one-half.full
+            div.grid__item.one-whole.full
               if (post.Category)
-                h3.serif a #{post.Category.toLowerCase()} post by
-                  a(href='/post?q=' + post.AuthorFullName )  #{post.AuthorFullName || 'CSG Pro'}
-            div.grid__item.one-half.full.right
-              if (post.PublishDate)
-                h4.grey posted 
-                  | #{moment(post.PublishDate).format('L')}
+                h3 
+                  span.serif
+                    if (post.ProfileUrl)
+                      a(href='/post?q=' + post.AuthorFullName ): img.avatar.avatar-sm(src='#{post.ProfileUrl}')
+                    br.hide-desk
+                    | a #{post.Category.toLowerCase()} post by
+                    a(href='/post?q=' + post.AuthorFullName )  #{post.AuthorFullName || 'CSG Pro'}
+                  if (post.PublishDate)
+                    span.grey   - posted #{moment(post.PublishDate).format('L')}
+                      img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
             if (post.Markdown)
               p!= marked(post.Markdown)
               if (post.Topics && post.Topics != '')

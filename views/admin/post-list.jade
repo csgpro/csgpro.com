@@ -4,7 +4,7 @@ block content
   div.row
     div.col-md-12
       if (message)
-        div(class="alert alert-#{type}")= message
+        div(class="alert alert-#{type}")= unescape(message)
       div.page-header: h1 All Posts
       table.table.table-condensed
         thead

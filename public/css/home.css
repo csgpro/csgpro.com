@@ -20,6 +20,10 @@ html,body{height:100%}
 .topic-list{list-style-type:none;padding:12px !important}
 .topic-list li{margin:5px 0 5px 0}
 .topic-list a{color:#fff;font-size:13px;text-transform:uppercase}
+.icon-lg{width:60px}
+.icon-sm{width:15px;margin-left:10px;vertical-align:text-top}
+.avatar{vertical-align:middle;background-color:#e5e5e5;margin-right:12px}
+.avatar-sm{-webkit-border-radius:55px;border-radius:55px;width:55px}
 .modal{display:none}
 #simplemodal-overlay{background-color:#000}
 #simplemodal-container{padding:24px 0 24px 0;background-color:#fcfcfc;-webkit-border-radius:4px;border-radius:4px;height:450px;}
@@ -66,6 +70,7 @@ html,body{height:100%}
 .pad-bottom-xl{padding-bottom:96px}
 .pad-right-1{padding-right:24px}
 .pad-right-2{padding-right:48px}
+.vmid{vertical-align:middle}
 @media all and (max-width: 914px){.mobile--pad-right-1{padding-right:24px}
 }@media all and (max-width: 914px){.mobile--pad-right-2{padding-right:48px}
 }@media all and (max-width: 914px){.mobile--pad-top-1{padding-top:24px}
