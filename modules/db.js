@@ -171,6 +171,7 @@ module.exports.getUserFromTwitterProfile = function (profile, callback) {
         var r = JSON.parse(chunk);
 
       if (r && r.length === 0) { // no such profile
+        console.log('Profile not found: ' + JSON.stringify(r));
         callback(new Error('Profile not found, user is not authorized.'));
       } else if (r && r[0]){ // profile found
         var user = r[0];
@@ -532,6 +533,7 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
         r = JSON.parse(chunk);
 
       if (r && r.length === 0) { // no such profile
+        console.log('Profile not found: ' + JSON.stringify(r));
         callback(new Error('Profile not found, user is not authorized.'));
       } else if (r && r[0] && /@csgpro.com/gi.test(email) ){ // profile found
 

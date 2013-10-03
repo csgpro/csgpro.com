@@ -52,11 +52,20 @@ var map = {
 };
 
 module.exports = function(req, res) {
+  var postId;
   var url = req.url;
+  var clearnUrl = url.match(/.+\.aspx/i);
+      clearnUrl = escape(clearnUrl.toString().toLowerCase());
 
-  var postId = map[url];
 
-  console.log(url, postId);
+  Object.keys(map).forEach(function(item) {
+    var cleanItem = escape(item.toLowerCase());
+
+    if (cleanItem === clearnUrl)
+      postId = map[item];
+  });
+
+  console.log('Old post lookup: ', url, postId);
 
   if (postId) {
     res.redirect('/post/' + postId);

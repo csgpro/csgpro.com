@@ -12,19 +12,27 @@ block content
       //- p Sharing stuff
     if (categories)
       each category in categories
-        div.grid__item.one-whole
-          h2 Category:&nbsp;
-            b "#{category.name}"
-          hr
+        div.grid__item.one-whole.full
+          div.grid__item.one-half
+            h2 Category:&nbsp;
+              b "#{category.name}"
+          div.grid__item.one-half.right
+              img(src='/img/update_icon_#{category.name}.svg', style='width: 60px;')
+          div.grid__item.one-whole
+            hr
         each post in category.posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
+            div.space-bottom-sm
+              div
+                img(src='http://1.gravatar.com/avatar/126c1ea4fdb20bbb85c3ff735b7b0964?size=40px', style='width: 55px; float:left; border-radius: 55px; background-color: #e5e5e5; margin-right: 5px;')
+                a.text-size-sm(href='/post/#{post.id}')= post.Title
+              div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+                img(src='/img/update_icon_#{category.name}.svg', style='width: 15px; margin-left: 10px; vertical-align: text-top;')
             div
-              a.text-size-sm(href='/post/#{post.id}')= post.Title
-            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
-            div
-              p #{post.Abstract}
+              p
+                | #{post.Abstract}
                 b: a(href='/post/#{post.id}')  MORE
-        div.grid__item.one-whole.right.space-top-sm.serif
+        div.grid__item.one-whole.right.space-top-sm.serif.space-bottom-lg
           a(href='/post/category/#{category.id}') more blog posts this way }
     else if (topic && posts)
       div.grid__item.one-whole

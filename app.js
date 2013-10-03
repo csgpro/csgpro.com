@@ -205,7 +205,7 @@ app.get('/auth/live/callback',
  * Old Site Redirects
  ****************/
 
-app.get('/Blogs/post/*', redirects);
+app.get('/blogs/post/*', redirects);
 
 /*****************
  * 404 Redirect
