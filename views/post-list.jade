@@ -12,19 +12,29 @@ block content
       //- p Sharing stuff
     if (categories)
       each category in categories
-        div.grid__item.one-whole
-          h2 Category:&nbsp;
-            b "#{category.name}"
-          hr
+        div.grid__item.one-whole.full
+          div.grid__item.one-half
+            h2 Category:&nbsp;
+              b "#{category.name}"
+          div.grid__item.one-half.right
+              img.icon-lg(src='/img/update_icon_#{category.name}.svg')
+          div.grid__item.one-whole
+            hr
         each post in category.posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
-            div
-              a.text-size-sm(href='/post/#{post.id}')= post.Title
-            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+            div.space-bottom-sm
+              div
+                if (post.ProfileUrl)
+                  a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
+                else
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
+                a.text-size-sm(href='/post/#{post.id}')= post.Title
+              div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+                img.icon-sm(src='/img/update_icon_#{category.name}.svg')
             div
               p #{post.Abstract}
                 b: a(href='/post/#{post.id}')  MORE
-        div.grid__item.one-whole.right.space-top-sm.serif
+        div.grid__item.one-whole.right.space-top-sm.serif.space-bottom-lg
           a(href='/post/category/#{category.id}') more blog posts this way }
     else if (topic && posts)
       div.grid__item.one-whole
@@ -35,11 +45,18 @@ block content
       if (posts.length > 0)
         each post in posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
-            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
-            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
-            div
-              p #{post.Abstract}
-                b: a(href='/post/#{post.id}')  MORE
+            div.space-bottom-sm
+              div
+                if (post.ProfileUrl)
+                  a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
+                else
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
+                a.text-size-sm(href='/post/#{post.id}')= post.Title
+              div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+                img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
+              div
+                p #{post.Abstract}
+                  b: a(href='/post/#{post.id}')  MORE
       else
         div.grid__item.one-whole
           h3 No results found for topic "#{topic}", try something else.
@@ -48,11 +65,18 @@ block content
       div.grid__item.one-whole.full
         each post in posts
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
-            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
-            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
-            div
-              p #{post.Abstract}
-                b: a(href='/post/#{post.id}')  MORE
+            div.space-bottom-sm
+              div
+                if (post.ProfileUrl)
+                  a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
+                else
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
+                a.text-size-sm(href='/post/#{post.id}')= post.Title
+              div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+                img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
+              div
+                p #{post.Abstract}
+                  b: a(href='/post/#{post.id}')  MORE
     else if (searchResult && searchInput)
       div.grid__item.one-whole
         h2 Search results:&nbsp;
@@ -62,11 +86,18 @@ block content
       if (searchResult.length > 0)
         each post in searchResult
           div.grid__item.desk--four-twelfths.pad-right-2.space-top-sm
-            div: a.text-size-sm(href='/post/#{post.id}')= post.Title
-            div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
-            div
-              p #{post.Abstract}
-                b: a(href='/post/#{post.id}')  MORE
+            div.space-bottom-sm
+              div
+                if (post.ProfileUrl)
+                  a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
+                else
+                  img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
+                a.text-size-sm(href='/post/#{post.id}')= post.Title
+              div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
+                img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
+              div
+                p #{post.Abstract}
+                  b: a(href='/post/#{post.id}')  MORE
       else
         div.grid__item.one-whole
           h3 No results found for "#{searchInput}", try something else.

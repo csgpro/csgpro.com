@@ -156,6 +156,8 @@ module.exports.deleteUser = function(userId, callback){
  */
 module.exports.getUserFromTwitterProfile = function (profile, callback) {
 
+  console.log('Twitter login attempt, profile: ' + JSON.strigify(profile));
+
   options.path = escape('/tables/users/?$filter=TwitterHandle eq ' + twitterize(profile.username));
 
   var req = https.get(options, function(res){
@@ -508,8 +510,7 @@ exports.createPost = function(post, callback) {
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromLiveProfile = function (profile, callback) {
-  console.log('Attempt to get Live account with email: ' + profile._json.emails.account);
-  console.log('Full live profile: ' + JSON.stringify(profile));
+  console.log('Live login attempt, profile: ' + JSON.strigify(profile));
 
   var email = profile._json.emails.account;
   var username;
@@ -532,6 +533,7 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
         r = JSON.parse(chunk);
 
       if (r && r.length === 0) { // no such profile
+        console.log('Profile not found: ' + JSON.stringify(r));
         callback(new Error('Profile not found, user is not authorized.'));
       } else if (r && r[0] && /@csgpro.com/gi.test(email) ){ // profile found
 
