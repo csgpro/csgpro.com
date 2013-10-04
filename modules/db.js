@@ -156,7 +156,7 @@ module.exports.deleteUser = function(userId, callback){
  */
 module.exports.getUserFromTwitterProfile = function (profile, callback) {
 
-  console.log('Twitter login attempt, profile: ' + JSON.strigify(profile));
+  console.log('Twitter login attempt, profile: ' + JSON.stringify(profile));
 
   options.path = escape('/tables/users/?$filter=TwitterHandle eq ' + twitterize(profile.username));
 
@@ -510,7 +510,7 @@ exports.createPost = function(post, callback) {
  * @param  {Function} callback The callback function once we are done
  */
 module.exports.getUserFromLiveProfile = function (profile, callback) {
-  console.log('Live login attempt, profile: ' + JSON.strigify(profile));
+  console.log('Live login attempt, profile: ' + JSON.stringify(profile));
 
   var email = profile._json.emails.account;
   var username;
