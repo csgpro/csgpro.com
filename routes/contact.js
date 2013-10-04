@@ -31,16 +31,19 @@ exports.index = function(req, res) {
   isSpam = spam.isSpam(cryptoTime) || item.hpizzle; // check the 'honey pot'
 
   // If the comments have 2 or more links, consider it spam
-  hasLinks = item.comments.match(/<a/gi) >= 2; 
 
-  if (isSpam) {
+  hasLinks = item.comments.match(/<a/gi);
+  if (hasLinks)
+    hasLinks = hasLinks.length >= 2;
+
+  if (isSpam || hasLinks) {
     res.send('fail');
   } else {
     console.log('Email sent: ' + JSON.stringify(item));
-    console.log('Sender request item: ' + JSON.stringify(req));
+    console.log('Sender request headers: ' + JSON.stringify(req.headers));
 
     email.sendEmail(
-      'Webmaster@csgpro.com,jond@csgpro.com', 
+      'jond@csgpro.com', 
       subject,
       message,
       true,
