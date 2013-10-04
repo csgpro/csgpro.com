@@ -10,6 +10,7 @@ var spam = require('../modules/spam');
 exports.index = function(req, res) {
 
   var isSpam; // boolean
+  var hasLinks; // boolean
   var item = req.body;
   var cryptoTime = req.body.cryptoTime;
   var subject = 'New Request for ' + (item.type || 'Contact');
@@ -29,10 +30,14 @@ exports.index = function(req, res) {
 
   isSpam = spam.isSpam(cryptoTime) || item.hpizzle; // check the 'honey pot'
 
+  // If the comments have 2 or more links, consider it spam
+  hasLinks = item.comments.match(/<a/gi) >= 2; 
+
   if (isSpam) {
     res.send('fail');
   } else {
     console.log('Email sent: ' + JSON.stringify(item));
+    console.log('Sender request item: ' + JSON.stringify(req));
 
     email.sendEmail(
       'Webmaster@csgpro.com,jond@csgpro.com', 
