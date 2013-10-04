@@ -186,6 +186,10 @@ module.exports.getUserFromTwitterProfile = function (profile, callback) {
     });
   });
 
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
+  });
+
 };
 
 /**
@@ -198,7 +202,7 @@ module.exports.deserializeUser = function (userId, callback) {
 
   options.path = '/tables/users/' + userId;
 
-  https.get(options, function(res){
+  var req = https.get(options, function(res){
     var chunk = '';
 
     res.on('data', function(data){
@@ -219,6 +223,10 @@ module.exports.deserializeUser = function (userId, callback) {
     });
   });
 
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
+  });
+
 };
 
 /**
@@ -235,7 +243,7 @@ exports.getPosts = function (opts, callback) {
   options.path = '/api/allposts';
   var r;
 
-  https.get(options, function(res){
+  var req = https.get(options, function(res){
     var chunk = '';
 
     res.on('data', function(data){
@@ -307,6 +315,10 @@ exports.getPosts = function (opts, callback) {
     });
   });
 
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
+  });
+
 };
 
 exports.getPostsByTopic = function(topic, callback) {
@@ -339,7 +351,7 @@ exports.getPost = function (postId, callback) {
 
   options.path = '/tables/posts/' + postId;
 
-  https.get(options, function(res){
+  var req = https.get(options, function(res){
     var chunk = '';
 
     res.on('data', function(data){
@@ -358,13 +370,17 @@ exports.getPost = function (postId, callback) {
     });
   });
 
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
+  });
+
 };
 
 exports.getFlatPost = function(postId, callback) {
 
   options.path = '/api/allposts/?id=' + postId ;
 
-  https.get(options, function(res){
+  var req = https.get(options, function(res){
     var chunk = '';
 
     res.on('data', function(data){
@@ -381,6 +397,10 @@ exports.getFlatPost = function(postId, callback) {
         callback(new Error('Error retrieving post from Azure Mobile Services'));
       }
     });
+  });
+
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
   });
 
 };
@@ -546,6 +566,10 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
         callback(new Error('Error querying Azure Mobile Services'));
       }
     });
+  });
+  
+  req.on('error', function(e) {
+    callback(new Error('There was trouble in database land. Please try again!'));
   });
 
 };
