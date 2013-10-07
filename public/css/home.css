@@ -114,7 +114,7 @@ html,body{height:100%}
 }@media all and (max-width: 914px){#work,#services,#about,#updates,#contact{overflow:hidden}
 }header{background-color:#000;background-image:-webkit-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-moz-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-o-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:-ms-linear-gradient(bottom, #2c2c2c 20%, #1d1d1d 78%);background-image:linear-gradient(to top, #2c2c2c 20%, #1d1d1d 78%);border-bottom:3px solid #fff;height:60px;position:fixed;z-index:10;border-top:1px solid #000;width:100%}
 header img{max-width:50px;max-height:50px;margin:5px 16px}
-#hero{background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
+#hero{min-height:500px;background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
 @media all and (min-width: 915px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg")}
 }@media all and (max-width: 914px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");min-height:500px}
 }#hero #mobile-title{font-family:Roboto;font-style:italic;font-size:25px;margin:168px 10% 0 10%;text-align:left}
