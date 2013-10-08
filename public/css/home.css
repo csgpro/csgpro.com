@@ -1,3 +1,4 @@
+.browsehappy{width:320px;background:#fff;margin:auto;padding:100px}
 @media all and (min-width: 915px){#nav-spacer{height:96px}
 }@media all and (max-width: 914px){#nav-spacer{height:60px}
 }img{-webkit-transition-property:width, height;-moz-transition-property:width, height;-o-transition-property:width, height;-ms-transition-property:width, height;transition-property:width, height;-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;-webkit-transition-duration:.5s;-moz-transition-duration:.5s;-o-transition-duration:.5s;-ms-transition-duration:.5s;transition-duration:.5s}
@@ -166,7 +167,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #services article .title{font-size:25px}
 #services article section{max-width:780px;}
 #services article section svg{margin:-15px 20px 0 0}
-#about-container{background-image:-webkit-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-moz-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-o-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-ms-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:linear-gradient(to bottom, #595959 0%, #3b3b3b 100%);background-repeat:repeat-x}
+#about-container{background-color:#000;background-image:-webkit-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-moz-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-o-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:-ms-linear-gradient(top, #595959 0%, #3b3b3b 100%);background-image:linear-gradient(to bottom, #595959 0%, #3b3b3b 100%);background-repeat:repeat-x}
 #about{position:relative;}
 #about aside{margin-top:25px;-webkit-border-radius:4px;border-radius:4px;color:#fff;}
 @media all and (min-width: 915px){#about aside{background-color:#333}
