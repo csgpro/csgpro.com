@@ -5,6 +5,11 @@ block meta
   meta(property='og:title', content='#{post.Title}')
   meta(property='og:image', content='http://csgpro.com/apple-touch-icon-precomposed.png')
 
+block js
+  script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js')
+  script.
+    hljs.initHighlightingOnLoad();
+
 block content
 
     div#nav-spacer

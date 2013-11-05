@@ -22,6 +22,7 @@ module.exports = function(grunt) {
           , 'public/css/swipeshow.css'
           , 'public/css/typography.css'
           , 'public/css/lightbox.css'
+          , 'public/css/github.css'
           ]
         }
     }
