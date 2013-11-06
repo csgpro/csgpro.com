@@ -59,12 +59,12 @@ passport.use(new TwitterStrategy({
 
     db.getUserFromTwitterProfile(profile, function(err, user){
 
-      if (user && !err) { 
+      if (user && !err) {
         return done(null, user);
       } else {
         return err ? done(err, null) : done(new Error('User not authorized'), null);
       }
-      
+
     });
   }
 ));
@@ -79,7 +79,7 @@ passport.use(new LiveStrategy({
 
     db.getUserFromLiveProfile(profile, function(err, user) {
 
-      if (user && !err) { 
+      if (user && !err) {
         return done(null, user);
       } else {
         done('User not authorized', null);
@@ -191,8 +191,8 @@ app.get('/auth/twitter/callback',
 app.get('/auth/live',
   passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
 
-app.get('/auth/live/callback', 
-  passport.authenticate('windowslive', { 
+app.get('/auth/live/callback',
+  passport.authenticate('windowslive', {
     failureRedirect: '/admin/login?message=' + message
    }),
   function(req, res) {
@@ -210,7 +210,7 @@ app.get('/blogs/post/*', redirects);
 /*****************
  * 404 Redirect
  ****************/
-app.get('/*', function(req, res) { res.status(404).sendfile('public/404.html'); });
+app.get('/*', function(req, res) { res.status(404).render('404'); });
 
 
 /**********************************
