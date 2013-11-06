@@ -44,23 +44,31 @@ module.exports = function(grunt) {
       }
     }
   , uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
-              + '<%= grunt.template.today("yyyy-mm-dd") %>'
-              + '\r\n *  Third party libraries:'
-              + '\r\n *  - Swipeshow: http://ricostacruz.com/swipeshow/'
-              + '\r\n *  - Magnific: http://dimsemenov.com/plugins/magnific-popup/'
-              + '\r\n *  - Simplemodal: http://www.ericmmartin.com/projects/simplemodal/'
-              + '\r\n *'
-              + '\r\n */'
-      }
-    , compress: {
-        files: {
+      compress: {
+        options: {
+          banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - '
+                + '<%= grunt.template.today("yyyy-mm-dd") %>'
+                + '\r\n *  Third party libraries:'
+                + '\r\n *  - Swipeshow: http://ricostacruz.com/swipeshow/'
+                + '\r\n *  - Magnific: http://dimsemenov.com/plugins/magnific-popup/'
+                + '\r\n *  - Simplemodal: http://www.ericmmartin.com/projects/simplemodal/'
+                + '\r\n *'
+                + '\r\n */'
+        }
+      , files: {
           'public/js/bundle.min.js': [
             'public/js/vendor/swipeshow.js'
           , 'public/js/vendor/magnific.js'
           , 'public/js/vendor/jquery.simplemodal.1.4.4.min.js'
           , 'public/js/bundle.js'
+          ]
+        }
+      }
+    , compressAdmin: {
+        files: {
+          'public/js/admin.js': [
+            'public/js/vendor/simple-ajax-uploader.js',
+            'public/js/admin-custom.js'
           ]
         }
       }
