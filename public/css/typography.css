@@ -4,8 +4,10 @@ h1,h2,h3,h4,h5,h6,.gothic{font-family:'CenturyGothicStd','Century Gothic','Centu
 a{color:#429ec7;text-decoration:none}
 p{line-height:19px}
 p,ul,ol{font-family:'Tahoma',Helvetica,sans-serif;font-size:15px}
-code,pre{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12px}
-pre{padding:10px;border:1px solid #ddd;background-color:#f8f8f8;border-radius:3px}
+code,pre{font-family:Consolas,"Liberation Mono",Courier,monospace;font-size:12px;border-radius:3px}
+code{padding:2px;border:1px solid #ddd;background-color:#f8f8f8}
+pre{overflow:auto;white-space:pre;word-wrap:normal}
+pre > code{border:none}
 .article h1,.article h2,.article h3,.article h4,.article h5,.article h6{color:#09a4e6}
 .article h1{margin-bottom:0}
 .serif{font-family:'CenturySchoolbookBT-Italic',"Century Schoolbook",serif}

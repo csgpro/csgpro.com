@@ -23,13 +23,21 @@ p,ul,ol
 code,pre
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-size: 12px;
+  border-radius: 3px;
+
+code
+  padding: 2px;
+  border: 1px solid #ddd;
+  background-color: #f8f8f8;
 
 pre
   // margin: 0 2px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #f8f8f8;
-  border-radius: 3px;
+  overflow: auto;
+  white-space: pre;
+  word-wrap: normal;
+
+pre > code
+  border: none; // removed border for code blocks
 
 .article // this is a blog post article
   h1,h2,h3,h4,h5,h6

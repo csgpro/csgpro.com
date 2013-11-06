@@ -210,7 +210,7 @@ app.get('/blogs/post/*', redirects);
 /*****************
  * 404 Redirect
  ****************/
-app.get('/*', function(req, res) { res.redirect('/404.html'); });
+app.get('/*', function(req, res) { res.status(404).sendfile('public/404.html'); });
 
 
 /**********************************
