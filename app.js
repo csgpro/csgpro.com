@@ -210,7 +210,9 @@ app.get('/blogs/post/*', redirects);
 /*****************
  * 404 Redirect
  ****************/
-app.get('/*', function(req, res) { res.status(404).render('404'); });
+// TODO: this the wrong way to send a 404, it should be
+// `res.status(404).render('404');` but that doesn't render correctly on Azure.
+app.get('/*', function(req, res) { res.render('404'); });
 
 
 /**********************************
