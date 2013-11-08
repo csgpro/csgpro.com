@@ -71,7 +71,8 @@ module.exports.get = function(req, res) {
       res.render('post', {
         post: post,
         marked: marked,
-        moment: moment
+        moment: moment,
+        user: req.user
       });
     } else {
       res.render('404');

@@ -10,7 +10,11 @@ var db = require('../modules/db')
   , _ = require('lodash')
   , email = require('../modules/email')
   , blob = require('../modules/blog-storage')
+  , check = require('validator').check
   , toString = Object.prototype.toString;
+
+var maxFileSize = 2 * 1024 * 1024;
+
 
 var markdownHelpHtml;
 
@@ -256,22 +260,25 @@ exports.get = function (req, res) {
 exports.imageUpload = function(req, res) {
   var image = req.files.image;
 
-  console.log(image.type);
-  // if(image.type !== 'image/png' || image.type !== 'image/gif' || image.type !== 'image/jpg')
-  //   res.send({error: 'Incorrect file type'});
-
   // Grab the text after the `/` and use that type
   var extension = image.type.match(/\/(\w+)/)[1];
 
-  blob.uploadImage(image.path, extension, function(err, url) {
+  try {
+    check(extension, 'Invalid file type. Use png, gif, or jpg.').isIn(['png','gif','jpg','jpeg']);
+    check(image.size, 'File too big. Max size is 2MB').max(maxFileSize);
+  } catch (e) {
+    res.send({error: e.message});
+  } finally {
+    blob.uploadImage(image.path, extension, function(err, url) {
 
-    // Response with some JSON
-    if (err){
-      res.send({error: err});
-    } else {
-      res.send({url: url});
-    }
-  });
+      // Response with some JSON
+      if (err){
+        res.send({error: err});
+      } else {
+        res.send({url: url});
+      }
+    });
+  }
 }
 
 

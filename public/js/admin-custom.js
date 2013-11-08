@@ -20,11 +20,11 @@ var target = document.getElementById('render');
 
 render.innerHTML = marked(md.value);
 
-md.addEventListener('keyup', function(e){
-  // working
-  render.innerHTML = marked(md.value);
+md.addEventListener('keyup', renderMarkdown);
 
-});
+function renderMarkdown () {
+  render.innerHTML = marked(md.value);
+}
 
 // Image uploading
 
@@ -37,22 +37,32 @@ var uploader = new ss.SimpleUpload({
 
     response = JSON.parse(response);
 
+    // TODO: remove this, debug
+    console.log(response);
+    window.greer = response;
+
     if (response.hasOwnProperty('error')) {
       alert('File upload failed. Error : '  + response.error);
     } else {
       var list = $('#uploads');
-      var item = $(document.createElement('li'));
+      var li = $(document.createElement('li'));
+      var item = $(document.createElement('input'));
       var editor = $('#markdown');
-      var md = '![text placeholder](' + response.url + ')';
+      var md = '!['+ filename +'](' + response.url + ')';
 
-      item.innerText = response.url;
-      item.attr('data-markdown', md);
+      item.attr('type', 'text');
+      item.attr('value', md);
+      item.attr('disabled', 'true');
+      item.addClass('form-control');
 
-      list.toggleClass('hidden');
+      list.removeClass('hidden');
 
-      item.appendTo(list);
+      item.appendTo(li);
+      li.appendTo(list);
 
-      editor.val(md + '\n' + editor.val());
+      editor.val(md + '\n\n' + editor.val());
+
+      renderMarkdown();
 
     }
   }
