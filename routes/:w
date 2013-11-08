@@ -257,8 +257,8 @@ exports.imageUpload = function(req, res) {
   var image = req.files.image;
 
   console.log(image.type);
-  // if(image.type !== 'image/png' || image.type !== 'image/gif' || image.type !== 'image/jpg')
-  //   res.send({error: 'Incorrect file type'});
+  if(image.type !== 'image/png' || image.type !== 'image/gif' || image.type !== 'image/jpg')
+    res.send({error: 'Incorrect file type'});
 
   // Grab the text after the `/` and use that type
   var extension = image.type.match(/\/(\w+)/)[1];

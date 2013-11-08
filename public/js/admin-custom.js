@@ -1,4 +1,6 @@
 
+/*jslint
+  jquery: true*/
 
 // Markdown rendering
 
@@ -29,5 +31,30 @@ md.addEventListener('keyup', function(e){
 var uploader = new ss.SimpleUpload({
   button: 'upload',
   url: '/admin/image-upload',
-  name: 'image'
+  name: 'image',
+  multipart: true,
+  onComplete: function(filename, response) {
+
+    response = JSON.parse(response);
+
+    if (response.hasOwnProperty('error')) {
+      alert('File upload failed. Error : '  + response.error);
+    } else {
+      var list = $('#uploads');
+      var item = $(document.createElement('li'));
+      var editor = $('#markdown');
+      var md = '![text placeholder](' + response.url + ')';
+
+      item.innerText = response.url;
+      item.attr('data-markdown', md);
+
+      list.toggleClass('hidden');
+
+      item.appendTo(list);
+
+      editor.val(md + '\n' + editor.val());
+
+    }
+  }
 });
+
