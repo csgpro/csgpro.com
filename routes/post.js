@@ -74,7 +74,7 @@ module.exports.get = function(req, res) {
         moment: moment
       });
     } else {
-      res.send(404);
+      res.render('404');
     }
   });
 };
