@@ -266,9 +266,7 @@ exports.imageUpload = function(req, res) {
   try {
     check(extension, 'Invalid file type. Use png, gif, or jpg.').isIn(['png','gif','jpg','jpeg']);
     check(image.size, 'File too big. Max size is 2MB').max(maxFileSize);
-  } catch (e) {
-    res.send({error: e.message});
-  } finally {
+
     blob.uploadImage(image.path, extension, function(err, url) {
 
       // Response with some JSON
@@ -278,6 +276,8 @@ exports.imageUpload = function(req, res) {
         res.send({url: url});
       }
     });
+  } catch (e) {
+    res.send({error: e.message});
   }
 }
 
