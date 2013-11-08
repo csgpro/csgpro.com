@@ -57,8 +57,12 @@ block content
           else 
             each topic in topics
               option(value='#{topic}')= topic
-      if (user.IsAdmin)
-        div.col-md-3
+      div.col-md-3
+        div.row
+          div.col-md-12.form-group.right
+            button#upload.btn.btn-primary Upload image
+            ul#uploads.list-unstyled.hidden
+        if (user.IsAdmin)
           div.row
             div.col-md-12.form-group
               label(for='form-publish-date') Publish Date (mm/dd/yyyy):
@@ -77,6 +81,7 @@ block content
                 else
                   each person in users
                     option(value='#{person.id}')= person.FullName
+
 
     div.row
       div.col-md-6
