@@ -158,6 +158,8 @@ app.get('/admin/post/:id/publish'    , authAdmin , admin.publish);
 app.get('/admin/post/:id/unpublish'  , authAdmin , admin.unpublish);
 app.get('/admin/post/:id/delete'     , authAdmin , admin.del);
 
+app.post('/admin/image-upload'       , auth      , admin.imageUpload);
+
 app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
 });

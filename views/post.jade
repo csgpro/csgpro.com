@@ -30,6 +30,8 @@ block content
               div.grid__item.one-half.right
                 if (user && user.IdAdmin)
                   a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
+                if (user)
+                  a.btn.btn-blue(href="/admin/post/#{post.id}/update") Edit
 
           article.grid__item.desk--nine-twelfths.article.pad-right-1
             h1= post.Title
