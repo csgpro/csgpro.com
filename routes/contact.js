@@ -43,7 +43,7 @@ exports.index = function(req, res) {
     console.log('Sender request headers: ' + JSON.stringify(req.headers));
 
     email.sendEmail(
-      'jond@csgpro.com', 
+      'info@csgpro.com',
       subject,
       message,
       true,
