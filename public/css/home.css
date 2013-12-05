@@ -117,7 +117,7 @@ html,body{height:100%}
 header img{max-width:50px;max-height:50px;margin:5px 16px}
 #hero{min-height:500px;background-position:center;background-repeat:no-repeat;-webkit-background-size:cover;-moz-background-size:cover;background-size:cover;color:#fff;}
 @media all and (min-width: 915px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");background-attachment:fixed}
-}@media all and (max-width: 914px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");background-attachment:fixed;min-height:500px}
+}@media all and (max-width: 914px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");min-height:500px}
 }#hero #mobile-title{font-family:Roboto;font-style:italic;font-size:25px;margin:168px 10% 0 10%;text-align:left}
 #hero #headline{min-width:335px;font-size:60px;font-family:'Roboto';color:#fff;font-style:italic;font-weight:100;line-height:.814}
 #hero #subline{font-size:51px;font-family:'Roboto';color:#fff;font-style:italic;line-height:.3}
