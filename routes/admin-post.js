@@ -37,7 +37,7 @@ exports.index = function(req, res) {
 
   db.getPosts(null, function(err, posts){
     posts = posts.sort(function(a,b) {
-      return a.id < b.id ? -1 : 1; // descending
+      return a.id < b.id ? 1 : -1; // descending
     });
 
     if (!req.user.IsAdmin) { // if they are not an admin, show only their posts
