@@ -1,7 +1,4 @@
 
-/*jslint
-  jquery: true*/
-
 // Markdown rendering
 
 marked.setOptions({
@@ -28,6 +25,8 @@ function renderMarkdown () {
 
 // Image uploading
 
+// the `ss` variable is a convention by the upload library and it's a global
+// variable
 var uploader = new ss.SimpleUpload({
   button: 'upload',
   url: '/admin/image-upload',
@@ -36,10 +35,6 @@ var uploader = new ss.SimpleUpload({
   onComplete: function(filename, response) {
 
     response = JSON.parse(response);
-
-    // TODO: remove this, debug
-    console.log(response);
-    window.greer = response;
 
     if (response.hasOwnProperty('error')) {
       alert('File upload failed. Error : '  + response.error);

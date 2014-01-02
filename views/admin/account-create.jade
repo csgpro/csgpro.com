@@ -1,5 +1,9 @@
 extends layout
 
+block js
+  script(src='/js/vendor/simple-ajax-uploader.js')
+  script(src='/js/admin-account.js')
+
 block content
   div.row
     div.col-md-12
@@ -36,6 +40,8 @@ block content
           div.col-md-12.form-group
             label(for='form-profileurl') Profile Image URL:
             input#form-profileurl.form-control(type='text', name='ProfileUrl', value="#{account ? account.ProfileUrl : ''}")
+            br
+            button#upload_profile.btn.btn-primary.btn-medium(type='button') Upload image
       div.col-md-4
         if account
           img(src=account.ProfileUrl)
