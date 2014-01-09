@@ -260,7 +260,7 @@ exports.getPosts = function (opts, callback) {
 
       if (r !== undefined) { // posts found
         if (opts !== null) { // only 1st of each
-                                                            // category 
+                                                            // category
           var posts = [];
 
           r = r.filter(function(item) {
@@ -323,8 +323,9 @@ exports.getPosts = function (opts, callback) {
 
 exports.getPostsByTopic = function(topic, callback) {
 
+  options.path = '/api/allposts';
   var o = {
-    uri: url + "/tables/posts/?$filter=indexof(Topics, '" + topic + "') gt -1",
+    uri: url + "/api/allposts/?$filter=indexof(Topics, '" + topic + "') gt -1",
     headers: {
       'X-ZUMO-APPLICATION': appKey
     }
@@ -412,7 +413,7 @@ exports.patchPost = function (post, callback) {
     headers: {
       'X-ZUMO-APPLICATION': appKey
     },
-    json: post 
+    json: post
   };
 
   request.patch(o, function(err, httpObj, response) {
@@ -567,7 +568,7 @@ module.exports.getUserFromLiveProfile = function (profile, callback) {
       }
     });
   });
-  
+
   req.on('error', function(e) {
     callback(new Error('There was trouble in database land. Please try again!'));
   });
