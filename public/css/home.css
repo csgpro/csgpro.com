@@ -203,8 +203,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 .search{display:inline-block}
 .search input{border:solid #d3d3d3 2px;-webkit-border-radius:4px;border-radius:4px;padding:3px 3px 3px 12px}
 #recaptcha_area{display:inline-block}
-@media all and (min-width: 915px){#contact-container{background-image:url("/img/contact_bg.jpg");background-repeat:no-repeat;background-position:top}
-}@media all and (max-width: 914px){#contact-container{background-image:url("/img/mobile_contact_bg.jpg");background-position:bottom center;-webkit-background-size:589px;-moz-background-size:589px;background-size:589px}
+@media all and (min-width: 915px){#contact-container{background-image:url("/img/contact_bg_winter.jpg");background-repeat:no-repeat;background-position:top}
+}@media all and (max-width: 914px){#contact-container{background-image:url("/img/mobile_contact_bg_winter.jpg");background-position:bottom center;-webkit-background-size:589px;-moz-background-size:589px;background-size:589px}
 }#contact{height:506px;}
 #contact h1{font-size:1.6em}
 #contact p{margin-top:0}

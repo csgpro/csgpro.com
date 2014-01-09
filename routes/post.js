@@ -46,7 +46,7 @@ module.exports.topic = function(req, res) {
       res.send(err);
     } else {
       posts = posts.filter(function(i) {
-        return parseInt(i.PublishDate, 10) > 0;
+        return parseInt(i.PublishDate, 10) > 0; // only published posts
       });
 
       res.render('post-list', {
