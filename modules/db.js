@@ -260,12 +260,9 @@ exports.getPosts = function (opts, callback) {
 
       if (r !== undefined) { // posts found
         if (opts !== null) { // only 1st of each
-                                                            // category
           var posts = [];
 
-          r = r.filter(function(item) {
-            return item.PublishDate;
-          });
+          r = r.filter(function(item) { return item.PublishDate; }); // filter unpublished posts
 
           var blog = _.where(r, {Category: 'Blog'})
             , news = _.where(r, {Category: 'News'})
@@ -323,13 +320,13 @@ exports.getPosts = function (opts, callback) {
 
 exports.getPostsByTopic = function(topic, callback) {
 
-  options.path = '/api/allposts';
   var o = {
-    uri: url + "/api/allposts/?$filter=indexof(Topics, '" + topic + "') gt -1",
+    uri: url + "/api/allposts/?topic=" + topic,
     headers: {
       'X-ZUMO-APPLICATION': appKey
     }
   };
+
 
   request.get(o, function(err, httpObj, response) {
     if (err) {
