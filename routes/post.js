@@ -43,7 +43,7 @@ module.exports.topic = function(req, res) {
 
   db.getPostsByTopic(topic, function(err, posts){
     if (err) {
-      res.send(err);
+      res.send({error: err});
     } else {
       posts = posts.filter(function(i) {
         return parseInt(i.PublishDate, 10) > 0; // only published posts
