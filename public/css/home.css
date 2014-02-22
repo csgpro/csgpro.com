@@ -179,10 +179,9 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #about .swapper .active{z-index:6 !important}
 #about .swapper li{-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;-ms-transition-property:-ms-transform;transition-property:transform;-webkit-transition-duration:.3s;-moz-transition-duration:.3s;-o-transition-duration:.3s;-ms-transition-duration:.3s;transition-duration:.3s;-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;position:absolute;display:inline}
 #about .swapper li:first-child{left:0}
-#about .swapper li:nth-child(2){left:128px;z-index:4}
-#about .swapper li:nth-child(3){left:256px;z-index:5}
-#about .swapper li:nth-child(4){left:384px;z-index:4}
-#about .swapper li:nth-child(5){left:512px;z-index:3}
+#about .swapper li:nth-child(2){left:150px;z-index:4}
+#about .swapper li:nth-child(3){left:300px;z-index:5}
+#about .swapper li:nth-child(4){left:475px;z-index:4}
 #updates-container{background-color:#f3f3f3;background-repeat:repeat-x}
 #updates .container{padding:24px 0 24px 0;line-height:33px}
 #updates h1,#updates h2,#updates h3,#updates h4,#updates h5,#updates h6{margin:0}
