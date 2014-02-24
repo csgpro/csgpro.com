@@ -182,6 +182,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #about .swapper li:nth-child(2){left:150px;z-index:4}
 #about .swapper li:nth-child(3){left:300px;z-index:5}
 #about .swapper li:nth-child(4){left:475px;z-index:4}
+#about .swapper li:hover{cursor:pointer}
+#about .swapper li.active:hover{cursor:default}
 #updates-container{background-color:#f3f3f3;background-repeat:repeat-x}
 #updates .container{padding:24px 0 24px 0;line-height:33px}
 #updates h1,#updates h2,#updates h3,#updates h4,#updates h5,#updates h6{margin:0}
