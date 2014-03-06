@@ -335,17 +335,34 @@ block content
                 span.text-size-sm.serif Practice Manager: Application Development
                 p James manages the development of custom applications for CSG. He has worked extensively with Microsoft technologies such as “classic” ASP, ASP.NET, SQL Server, and Windows Presentation Foundation (WPF). As a web developer, James has also worked extensively with HTML, JavaScript, CSS, Flash, and even occasionally PHP and MySQL.
                 h3: a.about-us(href='javascript:void(0);') { about us
-              //section#swappable-dianec.gone(data-swap='dianec')
-              //  div.text-size-md.space-top-sm Diane Carpenter
-              //  span.text-size-sm.serif Practice Manager: Business Intelligence and Portals & Collaboration
-              //  p Diane manages the Business Intelligence and Portals & Collaboration practices. Her team provides leadership to drive consistency and industry standards that achieve successful project outcomes for our customers. Diane has been leading and participating in business and technology solution projects for more than 15 years. She brings a broad range of management and operational skills to the team.
-              //  h3: a.about-us(href='javascript:void(0);') { about us
             ul.swapper
-              li#swapper-chuckb(data-swap='chuckb'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
-              li#swapper-roneg(data-swap='roneg'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
-              li#swapper-kevinm(data-swap='kevinm'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_kevin.png')
-              li#swapper-jamesc(data-swap='jamesc'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_james.png')
-              //li#swapper-dianec(data-swap='dianec'): img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_diane.png')
+              li#swapper-chuckb(data-swap='chuckb')
+                dl
+                  dt.name Chuck
+                  dd.role
+                    span Sales and Marketing Director
+                div.cutout.cutout_chuck
+                  img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_chuck.png')
+              li#swapper-roneg(data-swap='roneg')
+                dl
+                  dt.name Ron
+                  dd.role
+                    span Vice President Strategic Solutions
+                div.cutout.cutout_ron
+                  img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
+              li#swapper-kevinm(data-swap='kevinm')
+                dl
+                  dt.name Kevin
+                  dd.role
+                    span President
+                div.cutout.cutout_kevin
+                  img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_kevin.png')
+              li#swapper-jamesc(data-swap='jamesc')
+                dl
+                  dt.name James
+                  dd.role Practice Manager: Application Development
+                div.cutout.cutout_james
+                  img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_james.png')
 
       /////////////////////////////////
       // UPDATES
@@ -413,4 +430,3 @@ block content
 
       include partials/footer
       mixin footer(false)
-

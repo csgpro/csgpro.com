@@ -175,15 +175,32 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #about aside #jerry{vertical-align:middle;display:inline-block;margin-top:15px;}
 #about aside #jerry > span{font-size:120%}
 #about section{color:#fff;padding:0 36px 0 36px}
-#about .swapper{list-style-type:none;position:absolute;bottom:264px;right:625px;}
-#about .swapper .active{z-index:6 !important}
+#about .swapper{list-style-type:none;position:absolute;bottom:330px;right:625px;}
+#about .swapper .cutout{width:176px;height:279px;background-position:top right;}
+#about .swapper .cutout img{display:none}
+#about .swapper .cutout.cutout_chuck{background-image:url("/img/about/about_cutout_chuck.png")}
+#about .swapper .cutout.cutout_ron{width:170px;background-image:url("/img/about/about_cutout_ron.png")}
+#about .swapper .cutout.cutout_kevin{width:197px;background-image:url("/img/about/about_cutout_kevin.png")}
+#about .swapper .cutout.cutout_james{width:154px;background-image:url("/img/about/about_cutout_james.png")}
+#about .swapper .active{z-index:6 !important;}
+#about .swapper .active .cutout{background-position:0 -50%}
+#about .swapper .active dl{margin-bottom:19px;}
+#about .swapper .active dl .role{color:#fff}
+#about .swapper .active dl:after{background:url("/img/about_selected_pointer.svg") bottom center no-repeat;clear:both;content:" ";display:block;height:6px;margin:0 auto;width:137px}
 #about .swapper li{-webkit-transition-property:-webkit-transform;-moz-transition-property:-moz-transform;-o-transition-property:-o-transform;-ms-transition-property:-ms-transform;transition-property:transform;-webkit-transition-duration:.3s;-moz-transition-duration:.3s;-o-transition-duration:.3s;-ms-transition-duration:.3s;transition-duration:.3s;-webkit-transition-timing-function:ease;-moz-transition-timing-function:ease;-o-transition-timing-function:ease;-ms-transition-timing-function:ease;transition-timing-function:ease;position:absolute;display:inline}
 #about .swapper li:first-child{left:0}
 #about .swapper li:nth-child(2){left:150px;z-index:4}
 #about .swapper li:nth-child(3){left:300px;z-index:5}
 #about .swapper li:nth-child(4){left:475px;z-index:4}
-#about .swapper li:hover{cursor:pointer}
+#about .swapper li:hover{cursor:pointer;}
+#about .swapper li:hover .cutout{background-position:0 -50%}
 #about .swapper li.active:hover{cursor:default}
+#about .swapper dl{margin:0 0 25px;}
+#about .swapper dl *{margin:0 auto;padding:0;text-align:center;}
+#about .swapper dl * span{display:block;width:130px}
+#about .swapper dl dd{border-bottom:1px solid #fff;height:30px}
+.name{color:#429ec7;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:14px}
+.role{color:#c2c2c2;font-family:"Century Schoolbook","Century Schoolbook L","New Century Schoolbook",Garamond,Georgia,serif;font-size:11px;font-style:italic}
 #updates-container{background-color:#f3f3f3;background-repeat:repeat-x}
 #updates .container{padding:24px 0 24px 0;line-height:33px}
 #updates h1,#updates h2,#updates h3,#updates h4,#updates h5,#updates h6{margin:0}

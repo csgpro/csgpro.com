@@ -695,10 +695,41 @@ picture-spacing = 150px
   .swapper
     list-style-type none
     position absolute
-    bottom 264px
+    bottom 330px
     right 625px
+    .cutout
+      width 176px
+      height 279px
+      background-position top right
+      img
+        display none
+      &.cutout_chuck
+        background-image url('/img/about/about_cutout_chuck.png')
+      &.cutout_ron
+        width 170px
+        background-image url('/img/about/about_cutout_ron.png')
+      &.cutout_kevin
+        width 197px
+        background-image url('/img/about/about_cutout_kevin.png')
+      &.cutout_james
+        width 154px
+        background-image url('/img/about/about_cutout_james.png')
     .active
       z-index 6 !important
+      .cutout
+        background-position 0 -50%
+      dl
+        margin-bottom 19px
+        .role
+          color rgb(255,255,255)
+        &:after
+          background url('/img/about_selected_pointer.svg') bottom center no-repeat
+          clear both
+          content " "
+          display block
+          height 6px
+          margin 0 auto
+          width 137px
     li
       transition-property transform
       transition-duration 0.3s
@@ -722,9 +753,34 @@ picture-spacing = 150px
     // li:hover:not(.active)
     li:hover
       cursor pointer
+      .cutout
+        background-position 0 -50%
     li.active:hover
       cursor default
+    dl
+      margin 0 0 25px
+      *
+        margin 0 auto
+        padding 0
+        text-align center
+        span
+          display block
+          width 130px
+      dd
+        border-bottom 1px solid #fff
+        height 30px
 
+
+.name
+  color rgb( 66, 158, 199 )
+  font-family 'CenturyGothicStd', 'Century Gothic', 'CenturyGothic', Helvetica, sans-serif
+  font-size 14px
+
+.role
+  color rgb( 194, 194, 194 )
+  font-family "Century Schoolbook", "Century Schoolbook L", "New Century Schoolbook", Garamond, Georgia, serif;
+  font-size 11px
+  font-style italic
 
 
 /////////////////////////////////
