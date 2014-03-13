@@ -248,6 +248,11 @@ $class-type:            unquote(".");
             letter-spacing:normal;
             word-spacing:normal;
         }
+        &:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
     }
 
 

@@ -6,7 +6,7 @@
  * This module finds all the specially marked up sections in the html and makes
  * them swap their content based on associated navigation elements. It also
  * handles the accordion when visitors are past the mobile breakpoint.
- * 
+ *
  * Assumes:
  * - jQuery 1.10.2
  */
@@ -23,8 +23,9 @@ function init(o){
   });
 
   $('.about-us').click(function(){
-    $('#about .swappable section').addClass('gone');
-    $('#swappable-about').removeClass('gone');
+    $('#about .swappable section').addClass('hide');
+    $('#swappable-about').removeClass('hide');
+    $('.swapper').find('.active').removeClass();
   });
 
   $('.swapper.accordion > li').each(function(index, item) {
@@ -60,8 +61,8 @@ function swap(element) {
   } else {               // desktop
     me.addClass('active');
     me.siblings().removeClass('active');
-    target.siblings().addClass('gone');
-    target.removeClass('gone');
+    target.siblings().addClass('hide');
+    target.removeClass('hide');
   }
 }
 
@@ -71,4 +72,3 @@ function swap(element) {
 module.exports = init;
 // DANGER global scope
 window.swapElement = swap;
-

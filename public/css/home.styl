@@ -409,10 +409,14 @@ html,body
 
 .swappable
   position relative
+  height 260px
+  .hide
+    opacity 0
+    transform translate(-50px,0)
 
 .swappable section
   transition all 0.3s ease
-  position absolute
+  /*position absolute*/
 
 
 
@@ -454,7 +458,7 @@ html,body
 // version
 @media desk
   #work,#services,#updates,#about
-    max-height 650px
+    /*max-height 650px*/
     overflow hidden
 @media mobile
   #work,#services,#about,#updates,#contact
@@ -664,7 +668,7 @@ header
 /////////////////////////////////
 // ABOUT
 /////////////////////////////////
-picture-spacing = 150px
+picture-spacing = 21%
 
 #about-container
   // background-image url('/img/about_bg.png')
@@ -673,6 +677,10 @@ picture-spacing = 150px
   background-repeat repeat-x
 #about
   position relative
+
+  @media desk
+    max-height 625px!important
+    
   aside
     margin-top 25px
     @media desk
@@ -694,9 +702,11 @@ picture-spacing = 150px
     padding 0 36px 0 36px
   .swapper
     list-style-type none
-    position absolute
-    bottom 330px
-    right 625px
+    position relative
+    /*position absolute
+    bottom 230px
+    right 625px*/
+    left 36px
     .cutout
       width 176px
       height 279px
@@ -735,7 +745,7 @@ picture-spacing = 150px
       transition-duration 0.3s
       transition-timing-function ease
       position absolute
-      display inline
+      /*display inline*/
     li:first-child
       left 0
     li:nth-child(2)
@@ -745,7 +755,7 @@ picture-spacing = 150px
       left picture-spacing * 2
       z-index 5
     li:nth-child(4)
-      left (picture-spacing * 3) + 25
+      left (picture-spacing * 3) + 4
       z-index 4
     //li:nth-child(5)
     //  left picture-spacing * 4
