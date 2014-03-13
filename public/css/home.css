@@ -200,7 +200,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 #about .swapper dl{margin:0 0 25px;}
 #about .swapper dl *{margin:0 auto;padding:0;text-align:center;}
 #about .swapper dl * span{display:block;width:130px}
-#about .swapper dl dd{border-bottom:1px solid #fff;height:30px}
+#about .swapper dl dd{paddint-top:3px;padding-bottom:3px;border-bottom:1px solid #fff;height:30px}
 .name{color:#429ec7;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:14px}
 .role{color:#c2c2c2;font-family:"CenturySchoolbookBT-Italic","Century Schoolbook L","New Century Schoolbook",Garamond,Georgia,serif;font-size:11px}
 #updates-container{background-color:#f3f3f3;background-repeat:repeat-x}
