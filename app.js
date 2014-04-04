@@ -89,8 +89,8 @@ passport.use(new LiveStrategy({
   }
 ));
 
-var app = express();
-
+//var app = express();
+var app = module.exports = express();
 
 /**********************************
  * SETTINGS / MIDDLEWARE

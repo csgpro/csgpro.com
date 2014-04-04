@@ -75,13 +75,17 @@ module.exports = function(grunt) {
     }
   , watch: {
       all: {
-        files: ['public/css/**/*.styl', 'public/js/**/*.js']
+        files: ['public/css/**/*.styl', 'public/js/**/*.js', 'views/*.jade']
       , tasks: ['browserify', 'uglify', 'stylus','cssmin']
       , options: {
           spawn: false
         , livereload: true
         }
       }
+    }
+  , server: {
+      port: 3000,
+      base: './public'
     }
   });
 
@@ -91,6 +95,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
+
+  grunt.registerTask('server', 'Start a custom web server', function ()
+  {
+    var port = 3000;
+    grunt.log.writeln('Started web server on port ' + port);
+    require('./app.js').listen(port);
+  });
 
   // Run browserify then uglify to bundle all my Common JS modules and then the
   // non common JS ones, also minify them
