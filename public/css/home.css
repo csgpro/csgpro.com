@@ -237,7 +237,9 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 @media all and (min-width: 915px){.scene-footer .spaced{margin-top:87px;padding-bottom:90px}
 }.inner-footer footer{background-image:none;background-color:#f3f3f3;}
 @media all and (min-width: 915px){.inner-footer footer .spaced{margin-top:24px;padding-bottom:24px}
-}.small-logo{width:60px;height:60px;margin:19px 0 0 20px;cursor:pointer}
+}.careers p{color:#999;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;font-size:16.900000000000002px;font-weight:lighter;}
+.careers p a{font-weight:bolder}
+.small-logo{width:60px;height:60px;margin:19px 0 0 20px;cursor:pointer}
 .big-logo{margin:-65px 0 0 0;height:160px;width:160px}
 .wrapper{margin:0 auto 0 auto;max-width:1060px}
 .selected{font-size:29px;color:#fff;line-height:0;display:initial}

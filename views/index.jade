@@ -424,10 +424,18 @@ block content
               div.grid__item.desk--one-half.mobile--one-whole
                 h1 503.292.0859 /<small>phone</small><br>503.292.1485 /<small>fax</small>
                 h1: a(href='mailto:info@csgpro.com') info@csgpro.com
-              div.grid__item.one-whole
+              div.grid__item.desk--one-half.mobile--one-whole
                 span.serif.text-size-md connect with us:
                   a(href='http://twitter.com/csgpro'): img.side-margins.vmid(src='/img/twitter_icon.svg', style='width: 30px; height: 30px')
                   a(href='http://www.linkedin.com/company/csg-pro'): img.side-margins.vmid(src='/img/linkedin_icon.svg', style='width: 30px; height: 30px')
+              div.grid__item.desk--one-half.mobile--one-whole
+                span.serif.text-size-md careers:
+                div.careers
+                  :markdown
+                    here's a listing of our current
+                    [open positions](/post/category/Career),
+                    and we're always happy to accept resumés
+                    [via email](mailto:info@csgpro.com).
 
       include partials/footer
       mixin footer(false)
