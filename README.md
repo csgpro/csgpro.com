@@ -11,8 +11,9 @@ This site runs on node.js. To see which version, check the `package.json` manife
 1. Install [node.js](http://nodejs.org/). See `package.json` for the correct version.
 2. Navigate to the root folder and run `npm install`. This will install all the dependencies to run the site. On Linux I had to run the command twice to get it to work right.
 3. Create a `config.json` file in the root folder. This will contain all the secretz your site needs to be happy. *See our production Azure settings for the necessary keys.*
-4. I suggest installing the grunt runner globally with `npm install -g grunt-cli`. Then you can run `grunt` in the root folder to do all the minifaction, pre-compiling, etc...
-5. Run the site with `node app.js`
+4. I suggest installing the grunt runner globally with `npm install -g grunt-cli`.
+5. Install the Chrome extension [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to auto-refresh your browser when files are updated.
+6. Run the site with `grunt server watch`. When you make a change to a file grunt will compile the site.
 
 **Note**: some of the images may not load correctly if you are using a case-sensitive file system such as Linux. Minor changes to the markup would fix this.
 
