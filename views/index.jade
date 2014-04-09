@@ -431,9 +431,12 @@ block content
               div.grid__item.desk--one-half.mobile--one-whole
                 span.serif.text-size-md careers:
                 div.careers
-                  :markdown
-                    [view open positions](/post/category/Career) or
-                    submit a resumé [via email](mailto:jobs@csgpro.com)
+                  p
+                    a(href='/post/category/Career') view open positions
+                    |  or
+                    br
+                    |  submit a resumé
+                    |  <a href="mailto:jobs@csgpro.com">via email</a>
 
       include partials/footer
       mixin footer(false)
