@@ -242,7 +242,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 .small-logo{width:60px;height:60px;margin:19px 0 0 20px;cursor:pointer}
 .big-logo{margin:-65px 0 0 0;height:160px;width:160px}
 .wrapper{margin:0 auto 0 auto;max-width:1060px}
-.selected{font-size:29px;color:#fff;line-height:0;display:initial}
+.updates .nav-updates,.selected{font-size:29px;color:#fff;line-height:0;display:initial}
 .fixed-menu{z-index:10;position:fixed;top:-3px;left:0;width:100%;-webkit-box-shadow:0 5px 15px #000;box-shadow:0 5px 15px #000;}
 .fixed-menu ul{margin:35px 0 0 0}
 nav{color:#4aaad4;font-size:18px;position:relative;}

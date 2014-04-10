@@ -30,7 +30,8 @@ module.exports.category = function(req, res) {
         title: category,
         moment: moment,
         category: category,
-        posts: posts
+        posts: posts,
+        pageClass: 'updates'
       });
     }
   });
@@ -53,7 +54,8 @@ module.exports.topic = function(req, res) {
         title: 'Topics',
         moment: moment,
         topic: topic,
-        posts: posts
+        posts: posts,
+        pageClass: 'updates'
       });
     }
   });
@@ -72,7 +74,8 @@ module.exports.get = function(req, res) {
         post: post,
         marked: marked,
         moment: moment,
-        user: req.user
+        user: req.user,
+        pageClass: 'updates'
       });
     } else {
       res.render('404');
@@ -104,7 +107,8 @@ module.exports.index = function(req, res) {
           title: 'Search',
           moment: moment,
           searchResult: posts,
-          searchInput: searchInput
+          searchInput: searchInput,
+          pageClass: 'updates'
         });
       }
     });
@@ -117,7 +121,8 @@ module.exports.index = function(req, res) {
         res.render('post-list', {
           title: 'All Posts',
           moment: moment,
-          categories: categories
+          categories: categories,
+          pageClass: 'updates'
         });
       }
     });

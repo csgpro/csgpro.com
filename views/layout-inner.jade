@@ -53,11 +53,11 @@ html.no-js
     div.sticky-footer-wrapper
       div.mobile-nav.hide-desk(role='navigation')
         ul
-          li: a(href='/#work') work /
-          li: a(href='/#services') services /
-          li: a(href='/#about') about /
-          li: a(href='/#updates') updates /
-          li: a(href='/#contact') contact /
+          li: a.nav-work(href='/#work') work /
+          li: a.nav-services(href='/#services') services /
+          li: a.nav-about(href='/#about') about /
+          li: a.nav-updates(href='/#updates') updates /
+          li: a.nav-contact(href='/#contact') contact /
         div.bottom
           a(href='/post/24'): img(src='/img/CSG20_round_footer.svg', style='width: 80px; height: 80px; margin: 0 24px -20px 0')
           a(href='http://twitter.com/csgpro'): img.side-margins(src='/img/twitter_icon.svg', style='width: 30px; height: 30px')
@@ -72,11 +72,11 @@ html.no-js
               div.icon-bar
               div.icon-bar
             ul.gothic
-              li(data-nav='work') work /
-              li.selected(data-nav='services') services /
-              li(data-nav='about') about /
-              li(data-nav='updates') updates /
-              li(data-nav='contact') contact /
+              li.nav-work(data-nav='work') work /
+              li.nav-services(data-nav='services') services /
+              li.nav-about(data-nav='about') about /
+              li.nav-updates(data-nav='updates') updates /
+              li.nav-contact(data-nav='contact') contact /
           div.grid__item.four-twelfths.right
             a(href='/')
               img(src='/img/logo.svg')
@@ -89,15 +89,15 @@ html.no-js
       div.wrapper
         a(href='/'): img#logo.small-logo(src='/img/logo.svg')
         ul
-          li: a(href='/#work') work
+          li: a.nav-work(href='/#work') work
           li /
-          li: a(href='/#services') services
+          li: a.nav-services(href='/#services') services
           li /
-          li: a(href='/#about') about
+          li: a.nav-about(href='/#about') about
           li /
-          li: a.selected(href='/#updates') updates
+          li: a.nav-updates(href='/#updates') updates
           li /
-          li: a(href='/#contact') contact
+          li: a.nav-contact(href='/#contact') contact
 
     div.inner-footer.sticky-footer
       include partials/footer
