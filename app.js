@@ -10,6 +10,7 @@
 var express          = require('express')
   , fs               = require('fs')
   , index            = require('./routes/index')
+  , analytics        = require('./routes/analytics')
   , http             = require('http')
   , path             = require('path')
   , passport         = require('passport')
@@ -118,6 +119,7 @@ app.use(function(err, req, res, next) {
  * ROUTES
  **********************************/
 app.get('/', index.homepage);
+app.get('/analytics', analytics.content);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
