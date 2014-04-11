@@ -22,11 +22,16 @@ block content
           h1 Post not found.
       else
         div.grid__item.one-whole.full
-          if (!post.PublishDate)
+
+          if (user)
             div.alert.alert-info.row
-              div.grid__item.one-half.full
-                span This post is
-                  string  unpublished.
+              if (user && !post.PublishDate)
+                div.grid__item.one-half.full
+                  span This post is
+                    string  unpublished.
+              else
+                div.grid__item.one-half.full
+
               div.grid__item.one-half.right
                 if (user && user.IdAdmin)
                   a.btn.btn-blue(href="/admin/post/#{post.id}/publish") Publish
@@ -37,7 +42,7 @@ block content
             h1= post.Title
             div.grid__item.one-whole.full
               if (post.Category)
-                h3 
+                h3
                   span.serif
                     if (post.ProfileUrl)
                       a(href='/post?q=' + post.AuthorFullName ): img.avatar.avatar-sm(src='#{post.ProfileUrl}')
@@ -69,7 +74,7 @@ block content
                   })();
                 noscript
                   | Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-                a.dsq-brlink(href='http://disqus.com') comments powered by 
+                a.dsq-brlink(href='http://disqus.com') comments powered by
                   span.logo-disqus Disqus
             else
               p This blog post is empty.
@@ -80,4 +85,3 @@ block content
                 ul.topic-list
                   each topic in post.Topics
                     li: a(href='/post/topic/#{topic}')= topic
-

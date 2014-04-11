@@ -6,7 +6,7 @@ block content
       if (message)
         div(class="alert alert-#{type}")= unescape(message)
       div.page-header: h1 All Posts
-      table.table.table-condensed
+      table.table.table-condensed.datatable
         thead
           th
           th ID
@@ -53,4 +53,3 @@ block content
                   else
                     a.btn.btn-default.btn-xs(href='') Unpublish
                   a.btn.btn-danger.btn-xs(href='') Delete
-
