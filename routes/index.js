@@ -10,7 +10,7 @@ exports.homepage = function(req, res){
   db.getPosts({top3: true}, function(err, posts){
 
     res.render('index', {
-      title: 'CSG Pro',
+      title: 'CSG Pro | A Team of Digital Craftsmen',
       posts: posts,
       moment: moment,
       contacted: contacted,
