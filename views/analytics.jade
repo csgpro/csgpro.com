@@ -19,16 +19,27 @@ block content
     div.grid.wrapper
       br
 
-      div.grid__item.desk--nine-twelfths.hero
-        img(src='img/analytics/hero.jpg')
+      div.grid__item.desk--nine-twelfths.box.hero.clearfix
+        div.cell-bg
+          img(src='img/analytics/hero.jpg')
+        div.cell-content.inner-pad
+          h3 Predict your future:
+          h4 Productivity and Return with Analytics
 
-      div.grid__item.desk--three-twelfths.hero-support
-        div
-          a(href='#')
-            img(src='img/analytics/pdf-block.jpg')
-        div
-          a(href='#')
-            img(src='img/analytics/case-study-block.jpg')
+      div.grid__item.desk--three-twelfths.no-pad
+        div.box.gray.text-size-base.inner-pad
+          a(href='#').pdf
+            img(src='img/analytics/pdf.png')
+          a(href='#') DOWNLOAD OFFERING PDF
+          a(href='#') ANALYTICS BLOG POSTS
+        div.box.gray.no-pad.text-size-base
+          div.cell-bg
+            img(src='img/analytics/warehouse.jpg')
+          div.cell-content.inner-pad.title
+            a(href='#')
+              h3 LOREM IPSUM TITLE
+              span.link
+                em.serif } Read the Case Study
 
       div.grid__item.one-whole
         :markdown.serif.text-size-sm

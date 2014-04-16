@@ -964,7 +964,7 @@ picture-spacing = 21%
   margin 0 auto 0 auto
   max-width wrapper-max-width
 
-.updates .nav-updates,.selected
+.updates .nav-updates,nav .link.selected
   font-size 29px
   color #fff
   line-height 0
@@ -982,9 +982,11 @@ picture-spacing = 21%
 
 
 nav
-  color rgb(74, 170, 212)
+  color rgb(89, 116, 129)
   font-size 18px
   position relative
+  .link
+    color rgb(74, 170, 212)
   @media desk
     background-color #000
     background-image linear-gradient(bottom, rgb(44,44,44) 20%, rgb(29,29,29) 78%)
@@ -1023,29 +1025,10 @@ nav
   nav
     background-color #0aa3e7
     background-image none
-    a,li
-      color #000
-
-.hero, .hero-support
-  img
-    width 100%
-    height auto
-    max-width 100%
-
-.hero
-  @media mobile
-    padding-right 20px
-    margin-bottom 20px
-
-.hero-support
-  div
-    margin-bottom 20px
-    box-sizing border-box
-  @media mobile
-    div
-      width 50%
-      float left
-      padding-right 20px
+    li
+      color #9bd3eb
+    a
+      color #fff
 
 a.cta
   font-size 24px
@@ -1054,12 +1037,12 @@ a.cta
 .solid
   div
     background-color #999
-    min-height 300px
-    margin-bottom 20px
-    @media mobile
-      min-height initial
-      margin-left -25px
-      margin-bottom 0
+    margin-bottom 0
+    margin-left -25px
+    @media (min-width: 924px)
+      min-height 300px
+      margin-bottom 20px
+      margin-left 0
 
     padding 10px 20px
     color #fff
@@ -1081,13 +1064,166 @@ a.cta
 .solid--three
   div
     background-color #00537d
-    min-height 320px
-    @media mobile
-      min-height initial
+    @media (min-width: 924px)
+      min-height 320px
 
 .solid--four
   div
     background-color #20a1dc
-    min-height 320px
-    @media mobile
-      min-height initial
+    @media (min-width: 924px)
+      min-height 320px
+
+.box
+  box-sizing border-box
+  line-height 20px
+  position relative
+  overflow hidden
+  width 100%
+  @media (min-width: 400px)
+    height 180px
+  @media (min-width: 600px)
+    width 40%
+    margin-right 4%
+    margin-bottom 20px
+    float left
+  @media (min-width: 924px)
+    display block
+    margin-right 0
+    margin-bottom 20px
+    width 100%
+    height 213px
+  &.gray
+    background-color #444
+  a
+    color #fff
+    display block
+    &:hover,&:focus
+      text-decoration underline
+
+a.pdf
+  display block
+  img
+    max-width 84px
+
+.cell-bg
+  position absolute
+  z-index 1
+  left 0
+  img
+    width 125%
+    margin-top -25px
+
+.hero
+  color #fff
+  width 100%
+  height 235px
+  padding-left 0px
+  /*@media (min-width: 400px)*/
+
+  @media (min-width: 600px)
+    height 360px
+
+  @media (min-width: 900px)
+    height 460px
+    width 770px
+
+  .cell-bg
+    @media (min-width: 600px)
+      left 24px
+    img
+      width 100%
+      margin-top 0
+  .cell-content
+    @media (min-width: 600px)
+      left 24px
+  h3
+    font-size base-font-size*1.8
+    line-height 1em
+    font-weight bold
+    margin 0
+    font-family 'CenturyGothicStd-Bold'
+    margin 0
+    @media (min-width: 400px)
+      font-size base-font-size*2.2
+    @media (min-width: 600px)
+      font-size base-font-size*4
+    @media (min-width: 800px)
+      font-size base-font-size*5.3
+  h4
+    margin 0
+    font-size base-font-size*1.4
+    line-height 1.2em
+    color #ddd
+    @media (min-width: 400px)
+      font-size base-font-size*1.8
+    @media (min-width: 600px)
+      font-size base-font-size*2.2
+    @media (min-width: 800px)
+      font-size base-font-size*3
+
+.cell-content
+  position absolute
+  bottom 10px
+  z-index 2
+  left 0
+  a
+    display block
+    h3
+      margin 0
+    span
+      font-size base-font-size*1.3
+      color main-blue
+      text-shadow 0 0 2px #000
+
+.title.cell-content
+  width 100%
+  bottom auto
+  a
+    position relative
+    height 150px
+    @media (min-width: 924px)
+      height 180px
+    h3
+      position absolute
+      top 0
+    span
+      display block
+      position absolute
+      bottom 0
+
+
+
+.hero
+  .cell-content
+    bottom 0
+    @media (min-width: 600px)
+      bottom 30px
+
+/*.no-pad
+  padding 0
+  .cell-bg, .cell-content
+    margin-left -15px
+    margin-right -15px
+    margin-top -15px
+    margin-bottom -15px
+  a
+    &:hover,&:focus
+      text-decoration none*/
+
+.no-pad
+  padding-left 0
+  margin-bottom 20px
+  @media (min-width: 600px)
+    padding-left 24px
+    margin-bottom 0
+
+.inner-pad
+  display block
+  padding 15px
+
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}

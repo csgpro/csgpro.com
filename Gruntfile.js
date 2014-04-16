@@ -75,7 +75,7 @@ module.exports = function(grunt) {
     }
   , watch: {
       all: {
-        files: ['public/css/**/*.styl', 'public/js/**/*.js', 'views/*.jade']
+        files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*.js', 'views/*.jade']
       , tasks: ['browserify', 'uglify', 'stylus','cssmin']
       , options: {
           spawn: false
