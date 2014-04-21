@@ -307,3 +307,5 @@ a.pdf img{max-width:84px}
 @media (min-width: 600px){.no-pad{padding-left:24px;margin-bottom:0}
 }.inner-pad{display:block;padding:15px}
 .clearfix:after{content:"";display:table;clear:both}
+.hr-top{border-top:1px solid #aaa;padding-top:15px;color:#888;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;line-height:20.8px}
+.hr-bottom{border-bottom:1px solid #aaa;padding-bottom:15px;color:#888;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;line-height:20.8px}
