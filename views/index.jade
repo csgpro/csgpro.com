@@ -40,29 +40,31 @@ block content
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
         div.grid__item.one-whole.right.hide-desk
-          div#mobile-title We've been told we have our head in the clouds, and that's not a bad thing&nbsp;
+          div#mobile-title Every business wants to take full advantage of the resources it already has &mdash; it’s people, its data, and its technologies.&nbsp;
         div.grid__item.one-whole.right.hide-mobile
-          div#headline We've been told we have our head
+          div#headline Every business wants to take
           br
-          span#subline in the clouds, and that's not a bad thing&nbsp;
+          span#subline full advantage of the resources it already has &mdash; it’s people, its data, and its technologies.&nbsp;
         div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-mobile learn how cloud services can make your business soar
-          a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-desk learn how cloud services can <br> make your business soar
+          //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-mobile Discover a new way to work together with SharePoint Online
+          //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-desk learn how cloud services can <br> make your business soar
+          a(href='/sharepoint').tagline.hide-mobile Discover a new way to work together with SharePoint Online
+          a(href='/sharepoint').tagline.hide-desk Discover a new way to work together <br> with SharePoint Online
           div }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
-            p OIA leverages<br>time-saving dashboard<br>to manage logistics
+            p Cost anlysis leads<br>Kuni BMW to SharePoint<br>Online Solution
             p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(2);') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p What it means to be<br>a company that is<br>20 years strong
-            p: a(href='/post/20071') read the blog }
+            p SharePoint Online<br>solutions provide<br>cost savings and security
+            p: a(href='/post/80078') read the blog }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p CSG Pro Reviews<br>the BUILD 2014<br>Conference
-            p: a(href='/post/100082') full review }
+            p CSG to present<br>SharePoint Online<br>in PDX and Boise
+            p: a(href='/sharepoint') attend an event }
 
     div.test
       nav.hide-mobile
