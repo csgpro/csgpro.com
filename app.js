@@ -11,6 +11,7 @@ var express          = require('express')
   , fs               = require('fs')
   , index            = require('./routes/index')
   , analytics        = require('./routes/analytics')
+  , sharepoint       = require('./routes/sharepoint')
   , http             = require('http')
   , path             = require('path')
   , passport         = require('passport')
@@ -120,6 +121,7 @@ app.use(function(err, req, res, next) {
  **********************************/
 app.get('/', index.homepage);
 app.get('/analytics', analytics.content);
+app.get('/sharepoint', sharepoint.content);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
