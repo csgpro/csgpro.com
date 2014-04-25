@@ -271,16 +271,19 @@ a.cta{font-size:24px;color:#09a4e6}
 @media (min-width: 400px){.box{height:180px}
 }@media (min-width: 600px){.box{width:40%;margin-right:4%;margin-bottom:20px;float:left}
 }@media (min-width: 924px){.box{display:block;margin-right:0;margin-bottom:20px;width:100%;height:213px}
-}.box.gray{background-color:#444}
-.box a{color:#fff;display:block;}
+}.box.gray{background-color:#444;}
+.box.gray a{color:#fff}
+.box.white{background-color:#fff;border:1px solid #444}
+.box.dark-blue{background-color:#00537d;border:0}
+.box a{display:block;}
 .box a:hover,.box a:focus{text-decoration:underline}
 a.pdf{display:block;}
 a.pdf img{max-width:84px}
-.cell-bg{position:absolute;z-index:1;left:0;}
-.cell-bg img{width:125%;margin-top:-25px}
+.cell-bg{position:absolute;z-index:1;left:-20px;height:213px;width:100%;}
+.cell-bg img{display:block;margin:60px auto 0;max-width:110%}
 .hero{color:#fff;width:100%;height:235px;padding-left:0;}
 @media (min-width: 600px){.hero{height:360px}
-}@media (min-width: 900px){.hero{height:460px;width:770px}
+}@media (min-width: 900px){.hero{height:446px;width:770px}
 }@media (min-width: 600px){.hero .cell-bg{left:24px}
 }.hero .cell-bg img{width:100%;margin-top:0}
 @media (min-width: 600px){.hero .cell-content{left:24px}
@@ -295,7 +298,7 @@ a.pdf img{max-width:84px}
 }.cell-content{position:absolute;bottom:10px;z-index:2;left:0;}
 .cell-content a{display:block;}
 .cell-content a h3{margin:0}
-.cell-content a span{font-size:16.900000000000002px;color:#09a4e6;text-shadow:0 0 2px #000}
+.cell-content a span{font-size:16.900000000000002px;color:#09a4e6;}
 .title.cell-content{width:100%;bottom:auto;}
 .title.cell-content a{position:relative;height:150px;}
 @media (min-width: 924px){.title.cell-content a{height:180px}
@@ -309,3 +312,4 @@ a.pdf img{max-width:84px}
 .clearfix:after{content:"";display:table;clear:both}
 .hr-top{border-top:1px solid #aaa;padding-top:15px;color:#888;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;line-height:20.8px}
 .hr-bottom{border-bottom:1px solid #aaa;padding-bottom:15px;color:#888;font-family:'CenturyGothicStd','Century Gothic','CenturyGothic',Helvetica,sans-serif;line-height:20.8px}
+ul.well-form li{padding-bottom:10px}
