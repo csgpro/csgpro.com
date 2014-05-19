@@ -292,10 +292,14 @@ a.pdf img{max-width:84px}
 @media (min-width: 400px){.hero h3{font-size:28.6px}
 }@media (min-width: 600px){.hero h3{font-size:52px}
 }@media (min-width: 800px){.hero h3{font-size:68.89999999999999px}
-}.hero h4{margin:0;font-size:18.2px;line-height:1.2em;color:#ddd;}
-@media (min-width: 400px){.hero h4{font-size:23.400000000000002px}
-}@media (min-width: 600px){.hero h4{font-size:28.6px}
-}@media (min-width: 800px){.hero h4{font-size:39px}
+}.hero h4,.hero h5{margin:0;font-size:18.2px;line-height:1.2em;color:#ddd;}
+@media (min-width: 400px){.hero h4,.hero h5{font-size:23.400000000000002px}
+}@media (min-width: 600px){.hero h4,.hero h5{font-size:28.6px}
+}@media (min-width: 800px){.hero h4,.hero h5{font-size:39px}
+}.hero h5{font-size:15.6px;}
+@media (min-width: 400px){.hero h5{font-size:20.8px}
+}@media (min-width: 600px){.hero h5{font-size:26px}
+}@media (min-width: 800px){.hero h5{font-size:31.2px}
 }.cell-content{position:absolute;bottom:10px;z-index:2;left:0;}
 .cell-content a{display:block;}
 .cell-content a h3{margin:0}
