@@ -340,6 +340,14 @@ html,body
   color #3a87ad
   background-color #d9edf7
   border-color #bce8f1
+.alert-error
+  color #ffffff
+  background-color #bc0000
+  border-color #730000
+.alert-success
+  color #ffffff
+  background-color #008c33
+  border-color #004c05
 
 @media mobile
   .hide-mobile
@@ -504,7 +512,7 @@ header
   #headline
     // margin-top 150px
     min-width 335px
-    font-size 60px
+    font-size base-font-size*3.4
     font-family 'Roboto'
     color #fff
     font-style italic
@@ -522,7 +530,7 @@ header
     font-style italic
     font-weight 100
     @media desk
-      font-size 30px
+      font-size base-font-size*1.8
       line-height 1.941
       color rgb(82, 189, 236)
     @media mobile
@@ -534,7 +542,7 @@ header
       display none
     @media desk
       display inline
-    font-size 35px
+    font-size base-font-size*1.8
     font-family Roboto
     font-style italic
     font-weight 100
@@ -1118,7 +1126,7 @@ a.pdf
 .cell-bg
   position absolute
   z-index 1
-  left -20px
+  left 0px
   height 213px
   width 100%
   img

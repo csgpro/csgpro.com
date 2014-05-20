@@ -81,6 +81,8 @@ html,body{height:100%}
 .icon-vertical-bar{border-right:1px solid #fff;margin-right:12px;margin-top:8px;height:40px}
 .alert{padding:12px;margin-bottom:12px;margin-top:12px;border:1px solid transparent;-webkit-border-radius:4px;border-radius:4px}
 .alert-info{color:#3a87ad;background-color:#d9edf7;border-color:#bce8f1}
+.alert-error{color:#fff;background-color:#bc0000;border-color:#730000}
+.alert-success{color:#fff;background-color:#008c33;border-color:#004c05}
 @media all and (max-width: 914px){.hide-mobile{display:none !important}
 }@media all and (min-width: 915px){.hide-desk{display:none !important}
 }.hide{display:none !important}
@@ -120,12 +122,12 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 @media all and (min-width: 915px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");background-attachment:fixed}
 }@media all and (max-width: 914px){#hero{background-image:url("https://csgsitestorage.blob.core.windows.net/img/1800_main_hero.jpg");min-height:500px}
 }#hero #mobile-title{font-family:Roboto;font-style:italic;font-size:25px;margin:168px 10% 0 10%;text-align:left}
-#hero #headline{min-width:335px;font-size:60px;font-family:'Roboto';color:#fff;font-style:italic;font-weight:100;line-height:.814}
+#hero #headline{min-width:335px;font-size:44.199999999999996px;font-family:'Roboto';color:#fff;font-style:italic;font-weight:100;line-height:.814}
 #hero #subline{font-size:51px;font-family:'Roboto';color:#fff;font-style:italic;line-height:1em}
 #hero .tagline{font-family:'Roboto';font-style:italic;font-weight:100;}
-@media all and (min-width: 915px){#hero .tagline{font-size:30px;line-height:1.941;color:#52bdec}
+@media all and (min-width: 915px){#hero .tagline{font-size:23.400000000000002px;line-height:1.941;color:#52bdec}
 }@media all and (max-width: 914px){#hero .tagline{font-size:16px;line-height:0;color:#52bdec}
-}#hero .tagline + div{font-size:35px;font-family:Roboto;font-style:italic;font-weight:100;padding:0 10px 0 10px;color:#52bdec}
+}#hero .tagline + div{font-size:23.400000000000002px;font-family:Roboto;font-style:italic;font-weight:100;padding:0 10px 0 10px;color:#52bdec}
 @media all and (max-width: 914px){#hero .tagline + div{display:none}
 }@media all and (min-width: 915px){#hero .tagline + div{display:inline}
 }#hero #blocks{margin-top:50px}
@@ -280,7 +282,7 @@ a.cta{font-size:24px;color:#09a4e6}
 .box a:hover,.box a:focus{text-decoration:underline}
 a.pdf{display:block;}
 a.pdf img{max-width:84px}
-.cell-bg{position:absolute;z-index:1;left:-20px;height:213px;width:100%;}
+.cell-bg{position:absolute;z-index:1;left:0;height:213px;width:100%;}
 .cell-bg img{display:block;margin:60px auto 0;max-width:110%}
 .hero{color:#fff;width:100%;height:235px;padding-left:0;}
 @media (min-width: 600px){.hero{height:360px}

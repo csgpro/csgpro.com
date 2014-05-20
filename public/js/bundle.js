@@ -39,6 +39,75 @@ if (window.location.pathname === '/') { // only do all this javascript in root
   lightbox();
 }
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(document).ready(function() {
+  if(getParameterByName('slideID')) {
+    // scrollToId("work");
+    $(".swipeshow").swipeshow().goTo(parseInt(getParameterByName('slideID')));
+  }
+
+  $('.btnRegister').on('click', function(e) {
+
+    var registrantData = [
+          $('#companyName').val(),
+          $('#firstName').val(),
+          $('#lastName').val(),
+          $('#emailAddress').val(),
+          $('#event').val()
+        ],
+        error  = false,
+        errorMsg = $('.alert-error'),
+        successMsg = $('.alert-success');
+
+    errorMsg.hide(); //reset if not hidden
+
+    for(var i = 0; i < registrantData.length; i++) {
+      if(!registrantData[i]) {
+        error = true;
+      }
+    }
+
+    var dataObj = {
+      file: "sharepoint-registrants",
+      record: registrantData
+    };
+
+    var jsonString = JSON.stringify(dataObj);
+    //console.log(jsonString);
+
+    if(!error) {
+      $.ajax({
+        type: 'post',
+        data: jsonString,
+        contentType: 'application/json',
+        url: '/csv',
+        success: function(data,status,xhr) {
+          if(data == 'success') {
+            successMsg.show();
+          } else {
+            errorMsg.html('Something went wrong. Please try again later.').show();
+          }
+        },
+        error: function(data,status,xhr) {
+          var response = data;
+          errorMsg.html('Something went wrong! Please try again later.').show();
+        }
+      });
+    }
+    else {
+      errorMsg.show();
+    }
+
+    e.preventDefault();
+
+  });
+});
 
 },{"./modules/carousel":2,"./modules/lightbox":3,"./modules/mobile-nav":4,"./modules/modal":5,"./modules/nav-scrolling":6,"./modules/page-sizing":7,"./modules/section-swapping":8,"./modules/sticky-nav":9}],2:[function(require,module,exports){
 /*jslint

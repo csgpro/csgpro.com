@@ -40,31 +40,33 @@ block content
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
         div.grid__item.one-whole.right.hide-desk
-          div#mobile-title We believe you should share and share and share alike.&nbsp;
+          div#mobile-title We believe you should share and share alike.&nbsp;
         div.grid__item.one-whole.right.hide-mobile
-          div#headline We believe you should share&nbsp;
+          div#headline We believe you should share and share alike.&nbsp;
           br
-          span#subline and share and share alike.&nbsp;
+          //- span#subline and share alike.&nbsp;
         div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
           //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-mobile Discover a new way to work together with SharePoint Online
           //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-desk learn how cloud services can <br> make your business soar
-          a(href='/sharepoint').tagline.hide-mobile Files. Emails. Ideas. People. <br> We make them work better together with SharePoint.
+          a(href='/sharepoint').tagline.hide-mobile Files. Emails. Ideas. People. We make them work better together with SharePoint.
           a(href='/sharepoint').tagline.hide-desk Files. Emails. Ideas. People. We make them work better together with SharePoint.
           div }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
-            p Kuni BMW maximizes<br>savings with a SharePoint Online Solution built<br>by CSG Pro.
-            p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(2);') read the case study }
+            p Kuni BMW saves big with SharePoint Online Solution built by CSG Pro
+            p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(0);') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p Let us help<br>you upgrade your<br>management system<br>with SharePoint Online
-            p: a(href='/post/80078') read the blog }
+            p Let CSG ProIntroduce
+              | <br>you to a SharePoint
+              | <br>Online Solution&nbsp;
+            p: a(href='/post/100085') read the blog }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
             p Fast Forward to Collaboration:<br>44 Minutes to<br>SharePoint Online
-            p: a(href='/sharepoint') join the webcast }
+            p: a(href='/post/100084') join the webcast }
 
     div.test
       nav.hide-mobile
@@ -91,9 +93,24 @@ block content
         section#work.grid.wrapper
           div.swipeshow
             ul.slides
+              li.slide#kuni
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_04.jpg")')
+                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile see more work this way }
+                aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
+                  div.space-top-sm.gothic
+                    span.caps Case Study:
+                    span.text-size-md  SharePoint Online
+                  div.text-size-lg.space-top-xs.gothic(style='font-size: 22px') Collaborate more. Pay less.
+                  span.serif.text-size-sm Kuni BMW
+                  p Kuni BMW is the largest BMW Authorized Center in the state of Oregon. With over 16 dealerships in several Western states, they were looking for a way to keep the sales staff, inventory and management all on the same paperless page. The group was interested in a cost effective means of creating, maintaining and growing a web-accessible platform. Enter CSG Pro and SharePoint.
+                  p After comparing the numbers between creation and deployment of SharePoint 2013 on premise versus an online tenant the results were clear. SharePoint Online was the more cost effective choice. It offered the rapid start up and flexibility Kuni was searching for without having to build any additional server farms or requiring support beyond the capabilities of their IT team.
+                  p Having pioneered 0365/SharePoint Online engagements, CSG Pro made the deployment turnkey and perhaps more important—hassle free. Kuni now had basic site topology to measure its effectiveness. Their staff had a central place where they could work together online. Sales kept driving forward.
+                  div.right.container.hide-desk
+                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.next see more work this way }
               li.slide
                 article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_01.jpg")')
-                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile see more work this way }
+                  a(href='javascript:void(0)').serif.white.previous.text-size-md.hide-mobile { previous
+                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile next }
                 aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top-sm.gothic
                     span.caps Case Study:
@@ -103,8 +120,9 @@ block content
                   p Oregon Beverage Recycling Cooperative (OBRC) processes virtually 100% of recyclable containers redeemed throughout Oregon. Know Your Nickel, a campaign by OBRC and their branding agency, was created to educate the public on the impact this recycling.
                   p CSG expanded the campaign message through web and mobile by creating a development strategy that included: cloud hosting, mobile design, responsive development, and localization. CSG used HTML5, CSS3 and Windows Azure was selected as the hosting platform.
                   p The flexibility of Azure’s cloud hosting ensured website availability regardless of high usage spikes. Featured on NPR, Oregon Live and billboards across the Portland Metro area, the web campaign launched successfully and continues to deliver this important message.
-                  div.right.container.hide-desk
-                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.next see more work this way }
+                  div.hide-desk.container
+                    a(href='javascript:void(0)').previous.serif.white.text-size-md.hide-desk.fl { previous
+                    a(href='javascript:void(0)').next.serif.white.text-size-md.hide-desk.fr next }
               li.slide
                 article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_02.jpg")')
                   a(href='javascript:void(0)').serif.white.previous.text-size-md.hide-mobile { previous
@@ -122,18 +140,17 @@ block content
                     a(href='javascript:void(0)').previous.serif.white.text-size-md.hide-desk.fl { previous
                     a(href='javascript:void(0)').next.serif.white.text-size-md.hide-desk.fr next }
               li.slide
-                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_04.jpg")')
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_03.jpg")')
                   a(href='javascript:void(0)').serif.white.previous.text-size-md.hide-mobile { previous
                 aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top-sm.gothic
                     span.caps Case Study:
-                    span.text-size-md  SharePoint Online Solution
-                  div.text-size-lg.space-top-xs.gothic(style='font-size: 28px') Collaborate more. Pay less.
-                  span.serif.text-size-sm Kuni BMW
-                  p Kuni BMW is the largest BMW Authorized Center in the state of Oregon. With over 16 dealerships in several Western states, they were looking for a way to keep the sales staff, inventory and management all on the same paperless page. The group was interested in a cost effective means of creating, maintaining and growing a web-accessible platform. Enter CSG Pro and SharePoint.
-                  p After comparing the numbers between creation and deployment of SharePoint 2013 on premise versus an online tenant the results were clear. SharePoint Online was the more cost effective choice. It offered the rapid start up and flexibility Kuni was searching for without having to build any additional server farms or requiring support beyond the capabilities of their IT team.
-                  p Having pioneered 0365/SharePoint Online engagements, CSG Pro made the deployment turnkey and perhaps more important—hassle free. Kuni now had basic site topology to measure its effectiveness. Their staff had a central place where they could work together online. Sales kept driving forward.
-
+                    span.text-size-md  Analytics
+                  div.text-size-lg.space-top-xs.gothic(style='font-size: 28px') Business Intelligence
+                  span.serif.text-size-sm "OIA - Packaging Financial Dashboard"
+                  p Oregon International Air Freight (OIA) is a leading third-party logistics provider that offers freight forwarding, warehousing, distribution, customs brokering, global sourcing, and creative packaging solutions.
+                  p As a leader in logistics, OIA sought creative ways to efficiently utilize all software and database systems that were helping them lead the industry yet required considerable amounts of manual effort to maintain. CSG tasks included: requirements analysis, backend data modeling, new SharePoint lists, and new ETL processes.
+                  p CSG built a highly functional, time-saving, and user-friendly dashboard that leveraged Microsoft SQL Server, Excel, PowerPivot, SQL Server Integration Services (SSIS), and SharePoint. It delivered essential information required for managing the logistics and packaging divisions.
                   div.hide-desk.container
                     a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.previous { previous
 
