@@ -123,6 +123,7 @@ app.use(function(err, req, res, next) {
 app.get('/', index.homepage);
 app.get('/analytics', analytics.content);
 app.get('/sharepoint', sharepoint.content);
+app.get('/sharepoint/register', sharepoint.register);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
