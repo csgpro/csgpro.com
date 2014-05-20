@@ -27,7 +27,8 @@
     "azure": "0.8.0",
     "validator": "1.5.1",
     "nodemailer": "0.5.2",
-    "passport-windowslive": "1.0.0"
+    "passport-windowslive": "1.0.0",
+    "ya-csv": "0.9.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
