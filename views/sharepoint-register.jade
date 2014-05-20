@@ -14,24 +14,26 @@ block content
         div.grid__item.one-whole
           div.container
             div
-              span.serif.grey.text-size-sm Sharing information effectively.&nbsp;&nbsp;
-              span.blue.text-size-sm CSG Pro can help you do it with SharePoint Online
+              span.serif.grey.text-size-sm Fast Forward to Collaboration:&nbsp;&nbsp;
+              span.blue.text-size-sm 44 Minutes to SharePoint Webcast Registration
     div.grid.wrapper
       br
 
       div.grid__item.one-whole
-        p.text-small.italic Please complete the form below to register for the SharePoint Online event.
+        p.text-small.italic Please complete the form below to register for the SharePoint webcast.
 
       form(role='form', action='/csv', method='POST').register.one-half
         div.grid__item
           h3.alert.alert-error(style="display:none") All fields are required.
           h3.alert.alert-success(style="display:none") Thank you for registering.
+          h3.alert.alert-info(style="display:none")
+            a(href="/files/sharepoint-event.ics",style="text-decoration:underline") Add this event to your calender
         div.form-field.grid__item.one-whole
-          label(for="event").lbl Select an event
-          select(id="event").input-grey
-            option(value="")
-            option(value="pdx") Portland - Wed. May 21st 11:30am - 1:30pm
-            option(value="boise") Boise - Wed. May 28th 11:30am - 1:30pm
+          //- label(for="event").lbl Select an event
+          //- select(id="event").input-grey
+          //-   option(value="")
+          //-   option(value="pdx") Portland - Wed. May 21st 11:30am - 1:30pm
+          //-   option(value="boise") Boise - Wed. May 28th 11:30am - 1:30pm
         div.form-field.grid__item.one-whole
           label(for='companyName').lbl Company Name
           input(id='companyName').input-grey

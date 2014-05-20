@@ -59,11 +59,13 @@ $(document).ready(function() {
           $('#firstName').val(),
           $('#lastName').val(),
           $('#emailAddress').val(),
-          $('#event').val()
+          //$('#event').val()
+          'webcast'
         ],
         error  = false,
         errorMsg = $('.alert-error'),
-        successMsg = $('.alert-success');
+        successMsg = $('.alert-success'),
+        infoMsg = $('.alert-info');
 
     errorMsg.hide(); //reset if not hidden
 
@@ -90,6 +92,7 @@ $(document).ready(function() {
         success: function(data,status,xhr) {
           if(data == 'success') {
             successMsg.show();
+            infoMsg.show();
           } else {
             errorMsg.html('Something went wrong. Please try again later.').show();
           }
