@@ -16,3 +16,4 @@ pids
 logs
 results
 config.json
+.DS_Store
