@@ -10,10 +10,3 @@ exports.content = function(req, res){
       pageClass: 'sharepoint'
     });
 };
-
-exports.register = function(req, res){
-  res.render('sharepoint-register', {
-    title: 'SharePoint Event Registration',
-    pageClass: 'sharepoint'
-  });
-};
