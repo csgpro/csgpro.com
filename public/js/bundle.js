@@ -62,6 +62,7 @@ $(document).ready(function() {
           //$('#event').val()
           'webcast'
         ],
+        file = $('#file').val(),
         error  = false,
         errorMsg = $('.alert-error'),
         successMsg = $('.alert-success'),
@@ -76,12 +77,11 @@ $(document).ready(function() {
     }
 
     var dataObj = {
-      file: "sharepoint-registrants",
+      file: file,
       record: registrantData
     };
 
     var jsonString = JSON.stringify(dataObj);
-    //console.log(jsonString);
 
     if(!error) {
       $.ajax({
