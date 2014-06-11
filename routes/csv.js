@@ -9,7 +9,7 @@ var csv = require('ya-csv');
 
 exports.index = function(req, res) {
   var rec = req.body.record;
-  var file = 'public/exports/' + req.body.file + '.csv';
+  var file = 'public/exports/' + req.body.file;
   if(req.body.file) {
 
     var writer = csv.createCsvFileWriter(file, {'flags': 'a'});
