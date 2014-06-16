@@ -10,8 +10,7 @@
 var express          = require('express')
   , fs               = require('fs')
   , index            = require('./routes/index')
-  , analytics        = require('./routes/analytics')
-  , sharepoint       = require('./routes/sharepoint')
+  , landing       = require('./routes/landing')
   , register         = require('./routes/register')
   , http             = require('http')
   , path             = require('path')
@@ -122,8 +121,7 @@ app.use(function(err, req, res, next) {
  * ROUTES
  **********************************/
 app.get('/', index.homepage);
-app.get('/analytics', analytics.content);
-app.get('/sharepoint', sharepoint.content);
+app.get('/sharepoint', landing.sharepoint);
 app.get('/sharepoint/register', register.sharepoint);
 app.get('/powerplay/register', register.powerplay);
 
@@ -217,6 +215,7 @@ app.get('/auth/live/callback',
  ****************/
 
 app.get('/blogs/post/*', redirects);
+app.get('/analytics', function(req, res) { res.redirect('/post/120085') });
 
 /*****************
  * 404 Redirect
