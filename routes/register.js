@@ -1,12 +1,25 @@
+/*jslint
+  node: true*/
 
-var db = require('../modules/db');
+'use strict';
+
+var csv = require('ya-csv');
+var email = require ('../modules/email');
+var moment = require('moment');
+var spam = require('../modules/spam');
+
+var isSpam = false;
 
 exports.powerplay = function(req, res){
   res.render('register-powerplay', {
     title: 'Power Play Event Registration',
     pageClass: 'register',
     icsfile: 'powerplay_webcast_062614.ics',
-    csvfile: 'powerplay-registrants.csv'
+    csvfile: 'powerplay-registrants.csv',
+    details: 'Live Webcast Presented by CSG Pro on Thursday June 26th at 9am (PDT)',
+    headerImg: 'email-powerplay-header.png',
+    buttonImg: 'email-powerplay-save-cal.png',
+    cryptoTime: spam.create()
   });
 };
 
@@ -15,6 +28,57 @@ exports.sharepoint = function(req, res){
     title: 'SharePoint Event Registration',
     pageClass: 'register',
     icsfile: 'sharepoint-event.ics',
-    csvfile: 'sharepoint-registrants.csv'
+    csvfile: 'sharepoint-registrants.csv',
+    details: 'Live Webcast Presented by CSG Pro on May 30th at 11am (PDT)',
+    cryptoTime: spam.create()
   });
 };
+
+exports.csv = function(req, res) {
+  var isSpam;
+  var rec = req.body.record;
+  var csvData = [];
+  for(var i in rec) {
+    csvData.push(rec[i].value);
+  }
+  var file = 'public/exports/' + req.body.file;
+
+  isSpam = spam.isSpam(req.body.cryptoTime) || req.body.hpizzle; // check the 'honey pot'
+
+  if (isSpam) {
+    res.send('fail!')
+  } else {
+
+    var writer = csv.createCsvFileWriter(file, {'flags': 'a'});
+
+    writer.writeRecord(csvData);
+    if(sendConfirmation(req.body)) {
+      res.send('success');
+    } else {
+      res.send('fail!');
+    }
+  }
+};
+
+var sendConfirmation = function(data) {
+  var registrationDetails = '';
+
+  for(var i in data.record) {
+    registrationDetails = registrationDetails + data.record[i].label + ': ' + data.record[i].value + '<br>';
+  }
+
+  var message = data.message + registrationDetails + '<br><br>';
+
+  email.sendEmail(
+    data.email,
+    data.subject,
+    message,
+    true,
+    function(err, result) {
+      return;
+    },
+    'CSG Pro <noreply@csgpro.com>'
+  );
+
+  return true;
+}

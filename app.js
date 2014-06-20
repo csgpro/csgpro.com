@@ -23,7 +23,6 @@ var express          = require('express')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
-  , csv              = require('./routes/csv')
   , adminTopic       = require('./routes/admin-topic')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post');
@@ -131,7 +130,7 @@ app.get('/post/topic/:topic', post.topic);
 app.get('/post/:id', post.get);
 
 app.post('/contact', contact.index);
-app.post('/csv', csv.index);
+app.post('/csv', register.csv);
 
 app.get('/admin', auth, adminMain.index);
 
