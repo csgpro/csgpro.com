@@ -31,13 +31,17 @@ var options = {
  * @param  {Boolean}  isHtml   Is the body HTML? If `false` then plaintext
  * @param  {Function} callback Callback with (err, success)
  */
-exports.sendEmail = function (to, subject, body, isHtml, callback) {
+exports.sendEmail = function (to, subject, body, isHtml, callback, from) {
 
   var o = {
     from: options.from,
     to: to,
     subject: subject
   };
+
+  if(from) {
+    o.from = from;
+  }
 
   if (isHtml) {
     o.html = body;

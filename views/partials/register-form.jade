@@ -3,25 +3,28 @@ form(role='form', action='/csv', method='POST').register.one-half
     h3.alert.alert-error(style="display:none") All fields are required.
     h3.alert.alert-success(style="display:none") Thank you for registering.
     h3.alert.alert-info(style="display:none")
-      a(href="/files/#{icsfile}",style="text-decoration:underline") Add this event to your calender
-  div.form-field.grid__item.one-whole
-    //- label(for="event").lbl Select an event
-    //- select(id="event").input-grey
-    //-   option(value="")
-    //-   option(value="pdx") Portland - Wed. May 21st 11:30am - 1:30pm
-    //-   option(value="boise") Boise - Wed. May 28th 11:30am - 1:30pm
+      a(href="/files/#{icsfile}",style="text-decoration:underline",id="icsfile") Add this event to your calender
+
   div.form-field.grid__item.one-whole
     label(for='companyName').lbl Company Name
-    input(id='companyName').input-grey
+    input(id='companyName',data-title='Company Name').input-grey
   div.form-field.grid__item.six-twelfths
     label(for='firstName').lbl First Name
-    input(id='firstName').input-grey
+    input(id='firstName',data-title='First Name').input-grey
   div.form-field.grid__item.six-twelfths
     label(for='lastName').lbl Last Name
-    input(id='lastName').input-grey
+    input(id='lastName',data-title='Last Name').input-grey
   div.form-field.grid__item.one-whole
     label(for='emailAddress').lbl Email Address
-    input(id='emailAddress').input-grey
+    input(id='emailAddress',data-title='Email Address').input-grey
   div.form-field.grid__item.one-whole.right.space-bottom
-    button(type="submit").btnRegister.btn.btn-blue.serif Submit Registration
+    input(name='username',type='text',id='hpizzle',style='display:none')
+    input(name='cryptoTime',type='text',id='cryptoTime',value='#{cryptoTime}',style='display:none')
+    button(type='submit').btnRegister.btn.btn-blue.serif Submit Registration
     input(type='hidden',id='file',value='#{csvfile}')
+    input(type='hidden',id='title',value='#{title}')
+    input(type='hidden',id='details',value='#{details}')
+    if(headerImg)
+      input(type='hidden',id='headerImg',value='#{headerImg}')
+    if(buttonImg)
+      input(type='hidden',id='buttonImg',value='#{buttonImg}')

@@ -12,7 +12,7 @@ var KEY = c.get('SESSION_SECRET');
 var ALGORITHM = 'aes192';
 var TEXT_ENCODING = 'ascii';
 var DATA_ENCODING = 'hex';
-var FLOOR_SECONDS = 20; // this is the minimum spam threshold
+var FLOOR_SECONDS = 8; // this is the minimum spam threshold
 var CEILING_SECONDS = 60 * 20; // 20 min max spam threshold
 
 function create() {
@@ -40,7 +40,7 @@ function decode(data) {
 function isSpam(data) {
   var now = moment();
   var startTime = decode(data);
-  
+
   startTime = moment(parseInt(startTime, 10));
 
   var secDiff = now.diff(startTime, 'seconds');
@@ -57,4 +57,3 @@ function isSpam(data) {
 module.exports.create = create;
 module.exports.decode = decode;
 module.exports.isSpam = isSpam;
-
