@@ -14,4 +14,4 @@ block content
         each file in files
           li.file #{file.name}
             | &nbsp;
-            button(data-file="#{file.name}",data-title="#{file.title}",data-details="#{file.details}",data-headerimg="#{file.headerimg}",data-buttonimg="#{file.buttonimg}",data-icsfile="#{file.icsfile}").btn.btn-blue.serif.sendReminders Send Reminders
+            button(data-file="#{file.name}",data-title="#{file.title}",data-details="#{file.details}",data-headerimg="#{file.headerimg}",data-buttonimg="#{file.buttonimg}",data-icsfile="/files/#{file.icsfile}").btn.btn-blue.serif.sendReminders Send Reminders
