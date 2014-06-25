@@ -60,7 +60,7 @@ exports.csv = function(req, res) {
   }
 };
 
-var sendConfirmation = function(data) {
+var sendConfirmation = exports.sendConfirmation = function(data) {
   var registrationDetails = '';
 
   for(var i in data.record) {

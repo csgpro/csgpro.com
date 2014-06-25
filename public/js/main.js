@@ -56,48 +56,55 @@ $(document).ready(function() {
     $(".swipeshow").swipeshow().goTo(parseInt(getParameterByName('slideID')));
   }
 
-  $('.btnRegister').on('click', function(e) {
+  $('.btnRegister,.sendReminders').on('click', function(e) {
 
-    var file = $('#file').val(),
-        title = $('#title').val(),
-        email = $('#emailAddress').val(),
-        details = $('#details').val(),
-        icsfile = $('#icsfile').attr('href'),
-        headerImg = $('#headerImg'),
-        buttonImg = $('#buttonImg'),
-        hpizzle = $('#hpizzle').val(),
-        cryptoTime = $('#cryptoTime').val(),
+    var $el = $(this);
+
+    var reminder = $el.hasClass('sendReminders');
+    var postPath = (reminder) ? '/admin/reminders' : '/csv';
+
+    var file = ($el.data('file') && $el.data('file') != 'undefined') ? $el.data('file') : $('#file').val(),
+        title = ($el.data('title') && $el.data('title') != 'undefined') ? $el.data('title') : $('#title').val(),
+        details = ($el.data('details') && $el.data('details') != 'undefined') ? $el.data('details') : $('#details').val(),
+        headerImg = ($el.data('headerimg') && $el.data('headerimg') != 'undefined') ? $el.data('headerimg') : $('#headerImg').val(),
+        buttonImg = ($el.data('buttonimg') && $el.data('buttonimg') != 'undefined') ? $el.data('buttonimg') : $('#buttonImg').val(),
+        icsfile = ($el.data('icsfile') && $el.data('icsfile') != 'undefined') ? $el.data('icsfile') : $('#icsfile').attr('href'),
         error  = false,
         errorMsg = $('.alert-error'),
         successMsg = $('.alert-success'),
         infoMsg = $('.alert-info'),
         domain = window.location.protocol + '//' + window.location.host;
 
-    errorMsg.hide(); //reset if not hidden
+    if(!reminder) {
+      var email = $('#emailAddress').val(),
+          hpizzle = $('#hpizzle').val(),
+          cryptoTime = $('#cryptoTime').val();
 
-    var fields = [ '#companyName', '#firstName', '#lastName', '#emailAddress' ];
+      errorMsg.hide(); //reset if not hidden
 
-    var registrationData = [];
+      var fields = [ '#companyName', '#firstName', '#lastName', '#emailAddress' ];
 
-    for(var i in fields) {
-      if (!error) {
-        error = !$(fields[i]).val();
-        if($(fields[i]).data('title') == 'Email Address') {
-          if(!IsEmail($(fields[i]).val()))   {
-            error = true;
+      var registrationData = [];
+
+      for(var i in fields) {
+        if (!error) {
+          error = !$(fields[i]).val();
+          if($(fields[i]).data('title') == 'Email Address') {
+            if(!IsEmail($(fields[i]).val()))   {
+              error = true;
+            }
           }
         }
+        registrationData.push({ label: $(fields[i]).data('title'), value: $(fields[i]).val() });
       }
-      registrationData.push({ label: $(fields[i]).data('title'), value: $(fields[i]).val() });
     }
-
     var icsfile = domain + icsfile;
 
-    var calendarLinkMsg = (buttonImg.length) ? '<img src="' + domain + '/img/' + buttonImg.val() + '">' : 'Add this event to your calendar.';
+    var calendarLinkMsg = (buttonImg) ? '<img src="' + domain + '/img/' + buttonImg + '">' : 'Add this event to your calendar.';
     var calendarLink = '<a href="%url%">' + calendarLinkMsg + '</a>';
         calendarLink = calendarLink.replace('%url%',  icsfile);
 
-    var message = (headerImg.length) ? '<img src="' + domain + '/img/' + headerImg.val() + '"><br><br>' : '';
+    var message = (headerImg) ? '<img src="' + domain + '/img/' + headerImg + '"><br><br>' : '';
         message = message + 'This is a confirmation for your recent ' + title + '.' + '<br><br>';
         message = message + details + '<br><br>';
         message = message + calendarLink + '<br><br>';
@@ -105,13 +112,19 @@ $(document).ready(function() {
 
     var dataObj = {
       file: file,
-      record: registrationData,
       subject: title,
-      message: message,
-      email: email,
-      hpizzle: hpizzle,
-      cryptoTime: cryptoTime
+      message: message
     };
+
+    if(!reminder) {
+      var registrationDetails = {
+        email: email,
+        hpizzle: hpizzle,
+        cryptoTime: cryptoTime,
+        record: registrationData
+      }
+      $.extend( dataObj, registrationDetails );
+    }
 
     var jsonString = JSON.stringify(dataObj);
 
@@ -120,12 +133,15 @@ $(document).ready(function() {
         type: 'post',
         data: jsonString,
         contentType: 'application/json',
-        url: '/csv',
+        url: postPath,
         success: function(data,status,xhr) {
           if(data == 'success') {
             successMsg.show();
-            infoMsg.show().css({'marginBottom': 100});
-            $('form.register .form-field').hide();
+            if(!reminder) {
+              infoMsg.show().css({'marginBottom': 100});
+              $('form.register .form-field').hide();
+              $el.attr('disabled','disabled');
+            }
           } else {
             errorMsg.html('Something went wrong. Please try again later.').show();
           }

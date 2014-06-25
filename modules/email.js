@@ -30,6 +30,7 @@ var options = {
  * @param  {String}   body     Html or plain text email body
  * @param  {Boolean}  isHtml   Is the body HTML? If `false` then plaintext
  * @param  {Function} callback Callback with (err, success)
+ * @param  {String}   from     From address (example: 'CSG Pro <noreply@csgpro.com>')
  */
 exports.sendEmail = function (to, subject, body, isHtml, callback, from) {
 

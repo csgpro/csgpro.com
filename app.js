@@ -24,6 +24,7 @@ var express          = require('express')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
   , adminTopic       = require('./routes/admin-topic')
+  , adminReminders   = require('./routes/admin-reminders')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post');
 
@@ -170,7 +171,8 @@ app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
 });
 
-
+app.get('/admin/reminders', authAdmin, adminReminders.index);
+app.post('/admin/reminders', authAdmin, adminReminders.send);
 
 /*****************
  * TWITTER

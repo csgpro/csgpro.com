@@ -1,0 +1,17 @@
+extends layout
+
+block js
+  script(src='/js/bundle.js')
+
+block content
+  div.row
+    div.col-md-12
+      div.grid__item
+        h3.alert.alert-error(style="display:none") All fields are required.
+        h3.alert.alert-success(style="display:none") Reminder emails have been sent.
+      if(files)
+        ul.filelist
+        each file in files
+          li.file #{file.name}
+            | &nbsp;
+            button(data-file="#{file.name}",data-title="#{file.title}",data-details="#{file.details}",data-headerimg="#{file.headerimg}",data-buttonimg="#{file.buttonimg}",data-icsfile="#{file.icsfile}").btn.btn-blue.serif.sendReminders Send Reminders
