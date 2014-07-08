@@ -108,6 +108,16 @@ app.use(express.methodOverride());
 app.use(express.session({ secret: c.get('SESSION_SECRET') }));
 app.use(passport.initialize());
 app.use(passport.session());
+/**************
+ * Robots.txt redirect
+ **************/
+app.use(function(req, res, next){
+  var onAzure = req.host.indexOf("azurewebsites") > -1;
+  if(req.url === '/robots.txt' && onAzure){
+    req.url = '/robots-azure.txt';
+  }
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
