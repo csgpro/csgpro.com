@@ -34,6 +34,17 @@ exports.sharepoint = function(req, res){
   });
 };
 
+exports.powerbi = function(req, res){
+  res.render('register-power-bi', {
+    title: 'Microsoft Power BI Event Registration',
+    pageClass: 'register',
+    icsfile: 'power-bi-event.ics',
+    csvfile: 'power-bi-registrants.csv',
+    details: 'Taking place at the Boise Microsoft office on 10/15 from 8:15am-9:45am',
+    cryptoTime: spam.create()
+  });
+};
+
 exports.csv = function(req, res) {
   var isSpam;
   var rec = req.body.record;

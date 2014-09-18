@@ -132,6 +132,7 @@ app.get('/', index.homepage);
 app.get('/sharepoint', landing.sharepoint);
 app.get('/sharepoint/register', register.sharepoint);
 app.get('/powerplay/register', register.powerplay);
+app.get('/power-bi/register', register.powerbi);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
