@@ -25,7 +25,9 @@ var express          = require('express')
   , contact          = require('./routes/contact')
   , adminTopic       = require('./routes/admin-topic')
   , redirects        = require('./routes/redirects')
-  , post             = require('./routes/post');
+  , post             = require('./routes/post')
+  , app = module.exports = express()
+  , port             = 3000;
 
 // Load the configuration file with our keys in it, first from the env variables
 // then from the config.json file
@@ -91,13 +93,10 @@ passport.use(new LiveStrategy({
   }
 ));
 
-//var app = express();
-var app = module.exports = express();
-
 /**********************************
  * SETTINGS / MIDDLEWARE
  **********************************/
-app.set('port', process.env.PORT || 80);
+// app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger());
@@ -180,8 +179,6 @@ app.get('/admin/notadmin', function(req, res) {
   res.send('You must be an admin to do the thing you were trying to do.');
 });
 
-
-
 /*****************
  * TWITTER
  ****************/
@@ -237,10 +234,11 @@ app.get('/*', function(req, res) { res.render('404'); });
 /**********************************
  * START THE SERVER, SCOTTY!
  **********************************/
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-
+// http.createServer(app).listen(app.get('port'), function(){
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
+app.listen(process.env.PORT || port);
+console.log('Express server listening on port ' + port);
 
 /**********************************
  * MIDDLEWARE
