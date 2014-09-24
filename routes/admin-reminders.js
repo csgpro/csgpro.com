@@ -30,7 +30,7 @@ var updateFileObject = function(file) {
                       'Place: Microsoft Boise Office - 401 W. Front Street Suite 600 Boise, ID 83702';
         file.headerimg = '';
         file.buttonimg = '';
-        file.icsfile = 'power-bi-registrants.csv';
+        file.icsfile = 'power-bi-event.ics';
         break;
   }
 }
