@@ -10,19 +10,28 @@ var fs = require('fs'),
 var updateFileObject = function(file) {
   switch(file.name) {
     case 'powerplay-registrants.csv':
-      file.title = 'Power Play Event Registration';
-      file.details = 'Live Webcast Presented by CSG Pro on Thursday June 26th at 9am (PDT)';
-      file.headerimg = 'email-powerplay-header.png';
-      file.buttonimg = 'email-powerplay-save-cal.png';
-      file.icsfile = 'powerplay_webcast_062614.ics';
-      break;
+        file.title = 'Power Play Event Registration';
+        file.details = 'Live Webcast Presented by CSG Pro on Thursday June 26th at 9am (PDT)';
+        file.headerimg = 'email-powerplay-header.png';
+        file.buttonimg = 'email-powerplay-save-cal.png';
+        file.icsfile = 'powerplay_webcast_062614.ics';
+        break;
     case 'sharepoint-registrants.csv':
-      file.title = 'SharePoint Event Registration';
-      file.details = 'Live Webcast Presented by CSG Pro on May 30th at 11am (PDT)';
-      file.headerimg = '';
-      file.buttonimg = '';
-      file.icsfile = 'sharepoint-event.ics';
-      break;
+        file.title = 'SharePoint Event Registration';
+        file.details = 'Live Webcast Presented by CSG Pro on May 30th at 11am (PDT)';
+        file.headerimg = '';
+        file.buttonimg = '';
+        file.icsfile = 'sharepoint-event.ics';
+        break;
+    case 'power-bi-registrants.csv':
+        file.title = 'Fast-Tracking Data Mastery with Power BI Event Registration';
+        file.details = 'Date: October 15, 2014<br />' +
+                      'Time: 8:15am to 9:45am<br />' +
+                      'Place: Microsoft Boise Office - 401 W. Front Street Suite 600 Boise, ID 83702';
+        file.headerimg = '';
+        file.buttonimg = '';
+        file.icsfile = 'power-bi-registrants.csv';
+        break;
   }
 }
 
@@ -52,11 +61,6 @@ exports.index = function(req, res) {
 };
 
 exports.send = function(req, res) {
-  // var rec = req.body.record; // The record will come from the CSV file.
-  // var csvData = [];
-  // for(var i in rec) {
-  //   csvData.push(rec[i].value);
-  // }
 
   var registrants = [];
 

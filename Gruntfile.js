@@ -87,6 +87,16 @@ module.exports = function(grunt) {
       port: 3000,
       base: './public'
     }
+  , express: {
+      options: {
+
+      },
+      dev: {
+          options: {
+              script: 'app.js'
+          }
+      }
+    }
   });
 
 
@@ -95,6 +105,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
+
+  grunt.registerTask('serve', ['default', 'express:dev', 'watch']);
 
   grunt.registerTask('server', 'Start a custom web server', function ()
   {

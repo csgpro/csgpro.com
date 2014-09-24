@@ -26,7 +26,9 @@ var express          = require('express')
   , adminTopic       = require('./routes/admin-topic')
   , adminReminders   = require('./routes/admin-reminders')
   , redirects        = require('./routes/redirects')
-  , post             = require('./routes/post');
+  , post             = require('./routes/post')
+  , app = module.exports = express()
+  , port             = 3000;
 
 // Load the configuration file with our keys in it, first from the env variables
 // then from the config.json file
@@ -92,13 +94,9 @@ passport.use(new LiveStrategy({
   }
 ));
 
-//var app = express();
-var app = module.exports = express();
-
 /**********************************
  * SETTINGS / MIDDLEWARE
  **********************************/
-app.set('port', process.env.PORT || 80);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.logger());
@@ -134,6 +132,7 @@ app.get('/', index.homepage);
 app.get('/sharepoint', landing.sharepoint);
 app.get('/sharepoint/register', register.sharepoint);
 app.get('/powerplay/register', register.powerplay);
+app.get('/power-bi/register', register.powerbi);
 
 app.get('/post', post.index);
 app.get('/post/category/:category', post.category);
@@ -239,10 +238,8 @@ app.get('/*', function(req, res) { res.render('404'); });
 /**********************************
  * START THE SERVER, SCOTTY!
  **********************************/
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-
+app.listen(process.env.PORT || port);
+console.log('Express server listening on port ' + port);
 
 /**********************************
  * MIDDLEWARE
