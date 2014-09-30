@@ -44,10 +44,7 @@ block content
         div.grid__item.one-whole.right.hide-mobile
           div#headline We believe you should share and share alike.&nbsp;
           br
-          //- span#subline and share alike.&nbsp;
         div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-mobile Discover a new way to work together with SharePoint Online
-          //a(href='javascript:void(0)', onclick='swapElement($("#swapper-cloud"));scrollToId("services");').tagline.hide-desk learn how cloud services can <br> make your business soar
           a(href='/sharepoint').tagline.hide-mobile Files. Emails. Ideas. People. We make them work better together with SharePoint.
           a(href='/sharepoint').tagline.hide-desk Files. Emails. Ideas. People. We make them work better together with SharePoint.
           div }
@@ -55,9 +52,6 @@ block content
           div.grid__item.three-twelfths.right
             p Kuni Automotive saves big with SharePoint Online Solution built by CSG Pro
             p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(0);') read the case study }
-          //- div.grid__item.three-twelfths.right
-          //-   p 7 Approaches to<br>Transitioning SharePoint<br>to the Cloud
-          //-   p: a(href='/post/100086') read the blog }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
@@ -98,9 +92,37 @@ block content
         section#work.grid.wrapper
           div.swipeshow
             ul.slides
+              li.slide#schnitzer
+                article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_05.jpg")')
+                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile see more work this way }
+                aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
+                  div.space-top-sm.gothic
+                    span.caps Case Study:
+                    span.text-size-md  Web &amp; Mobile
+                  div.text-size-lg.space-top-xs.gothic(style='font-size: 22px')
+                    strong Updating &amp; Enhancing
+                  span.serif.text-size-sm "SchnitzerSteel.com Redesign"
+                  p Schnitzer Steel is a global leader in the metals recycling industry that has grown from a single person operation in 1906 to a Fortune 1000 company today.
+
+                  p Schnitzer tapped CSG to architect and develop their four public websites back in 2007. When it came time to freshen up Schnitzer's main website, Schnitzer asked CSG to implement their new designs. CSG took things a step further by using a "responsive design" approach that ensures the site works well on desktops, laptops, tablets and smartphones.
+
+                  p(style="font-style: italic") "The foundation CSG built for us in 2007 has been rock solid so we naturally called them when it was time to update our corporate site. CSG was very responsive, flexible and delivered a high quality website on time and on budget. Impressive experiences like these are why we maintain an ongoing relationship with CSG as a trusted technology provider."
+
+                  p(style="font-style: italic") Alexandra Deignan, VP of Investor Relations
+                    br
+                    | Colin Kelly, Director of Public Affairs
+                    br
+                    | Schnitzer Steel Industries, Inc.
+
+                  p
+                    a(href="/post/110086").serif.white.text-size-md read full case study }
+
+                  div.right.container.hide-desk
+                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.next see more work this way }
               li.slide#kuni
                 article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_04.jpg")')
-                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile see more work this way }
+                  a(href='javascript:void(0)').serif.white.previous.text-size-md.hide-mobile { previous
+                  a(href='javascript:void(0)').serif.white.next.text-size-md.hide-mobile next }
                 aside.grid__item.desk--one-third.pull--desk--two-thirds.pad-right-1
                   div.space-top-sm.gothic
                     span.caps Case Study:
@@ -113,7 +135,8 @@ block content
                   p Having pioneered 0365/SharePoint Online engagements, CSG Pro gave them a turnkey and perhaps more important&mdash;hassle-free deployment. Kuni now had a topology to measure its effectiveness and their staff had a central place where they could collaborate online. The result? Sales kept driving forward.
 
                   div.right.container.hide-desk
-                    a(href='javascript:void(0)').serif.white.text-size-md.hide-desk.next see more work this way }
+                    a(href='javascript:void(0)').previous.serif.white.text-size-md.hide-desk.fl { previous
+                    a(href='javascript:void(0)').next.serif.white.text-size-md.hide-desk.fr next }
               li.slide
                 article.grid__item.desk--two-thirds.push--desk--one-third(style='background-image: url("/img/casestudy_img_01.jpg")')
                   a(href='javascript:void(0)').serif.white.previous.text-size-md.hide-mobile { previous
