@@ -230,7 +230,7 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 }@media all and (max-width: 900px){#contact-container{-webkit-background-size:150%;-moz-background-size:150%;background-size:150%}
 }@media all and (max-width: 700px){#contact-container{-webkit-background-size:180%;-moz-background-size:180%;background-size:180%}
 }@media all and (max-width: 550px){#contact-container{-webkit-background-size:240%;-moz-background-size:240%;background-size:240%}
-}@media all and (max-width: 400px){#contact-container{-webkit-background-size:400%;-moz-background-size:400%;background-size:400%}
+}@media all and (max-width: 400px){#contact-container{-webkit-background-size:300%;-moz-background-size:300%;background-size:300%}
 }#contact{height:506px;}
 #contact h1{font-size:1.6em}
 #contact p{margin-top:0}
