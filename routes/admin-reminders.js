@@ -36,7 +36,7 @@ var updateFileObject = function(file) {
         file.title = 'Fast-Tracking Data Mastery with Power BI Event Registration';
         file.details = 'Date: October 29, 2014<br />' +
                       'Time: 8:15am to 9:45am<br />' +
-                      'Place: Microsoft Portland Office - 1414 NW Northrup St Suite 900 Portland, OR 97209;
+                      'Place: Microsoft Portland Office - 1414 NW Northrup St Suite 900 Portland, OR 97209';
         file.headerimg = '';
         file.buttonimg = '';
         file.icsfile = 'pdx-power-bi-event.ics';
