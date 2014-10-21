@@ -64,25 +64,26 @@ module.exports = function(grunt) {
           ]
         }
     }
-    , compressAdmin: {
-        files: {
-          'public/js/admin-libs.js': [
-            'public/js/admin/libs/angular.min.js',
-            'public/js/admin/libs/angular-route.min.js',
-            'public/js/admin/libs/angular-animage.min.js'
-          ],
-          'public/js/admin-app.js': [
-            'public/js/admin/app/app.js',
-            'public/js/admin/app/**/*.js'
-          ]
-        }
-      }
     }
   , ngtemplates: {
     app: {
-        src: 'public/js/admin/app/**/*.html',
+        cwd: 'public/js/admin/app',
+        src: '**/*.html',
         dest: 'public/js/admin-templates.js'
     }
+  }
+  , concat: {
+      concatAdminLibs: {
+          src: ['public/js/admin/libs/angular.min.js',
+                'public/js/admin/libs/angular-route.min.js',
+                'public/js/admin/libs/angular-animate.min.js'],
+          dest: 'public/js/admin-libs.js'
+      }
+      , concatAdminApp: {
+          src: ['public/js/admin/app/app.js',
+                'public/js/admin/app/**/*.js'],
+          dest: 'public/js/admin-app.js'
+      }
   }
   , watch: {
       all: {
@@ -118,6 +119,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('serve', ['default', 'express:dev', 'watch']);
 
@@ -130,6 +132,6 @@ module.exports = function(grunt) {
 
   // Run browserify then uglify to bundle all my Common JS modules and then the
   // non common JS ones, also minify them
-  grunt.registerTask('default', ['browserify', 'uglify', 'stylus','cssmin']);
+  grunt.registerTask('default', ['browserify', 'uglify', 'concat', 'ngtemplates', 'stylus','cssmin']);
 
 };
