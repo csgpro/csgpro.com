@@ -87,8 +87,8 @@ module.exports = function(grunt) {
   }
   , watch: {
       all: {
-        files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*.js', 'views/*.jade']
-      , tasks: ['browserify', 'uglify', 'stylus','cssmin']
+        files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*', 'views/*.jade']
+      , tasks: ['browserify', 'uglify', 'stylus','cssmin', 'ngtemplates', 'concat']
       , options: {
           spawn: false
         , livereload: true

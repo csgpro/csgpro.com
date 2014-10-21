@@ -2,21 +2,37 @@
 	'use strict';
 
 	angular.module('app', [ 'ngRoute', 'ngAnimate' ])
-		.config(['$routeProvider', function($routeProvider) {
+		.config(function($routeProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
 					controllerAs: 'homeViewModel',
-					template: 'home/home.html'
+					templateUrl: 'home/home.html',
+					title: 'Admin Dashboard'
 				})
 				.otherwise({
 					redirectTo: '/'
 				})
+		});
+
+
+
+
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('AppCtrl', ['$rootScope', '$route', function($rootScope, $route) {
+			var appViewModel = this;
+
+			appViewModel.pageTitle = 'Loading...';
+
+			$rootScope.$on('$routeChangeSuccess', function () {
+				appViewModel.pageTitle = $route.current.title;
+			});
 		}]);
-
-
-
-
 })();
 
 (function() {

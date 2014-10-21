@@ -1,9 +1,9 @@
 doctype
-html
-  head(data-ng-app='app')
+html(data-ng-app='app', data-ng-controller='AppCtrl as appViewModel')
+  head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    title(data-ng-bind='pageTitle')
+    title(data-ng-bind='appViewModel.pageTitle') Loading...
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
@@ -15,5 +15,5 @@ html
     div(data-ng-view='')
 
     script(src='/js/admin-libs.js')
-    script(src='/js/admin-templates.js')
     script(src='/js/admin-app.js')
+    script(src='/js/admin-templates.js')

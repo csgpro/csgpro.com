@@ -2,7 +2,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('home/home.html',
-    "<h1>You Are Home!</h1>\n"
+    "<h1>Dashboard</h1>\n"
   );
 
 

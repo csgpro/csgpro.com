@@ -2,17 +2,18 @@
 	'use strict';
 
 	angular.module('app', [ 'ngRoute', 'ngAnimate' ])
-		.config(['$routeProvider', function($routeProvider) {
+		.config(function($routeProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
 					controllerAs: 'homeViewModel',
-					template: 'home/home.html'
+					templateUrl: 'home/home.html',
+					title: 'Admin Dashboard'
 				})
 				.otherwise({
 					redirectTo: '/'
 				})
-		}]);
+		});
 
 
 
