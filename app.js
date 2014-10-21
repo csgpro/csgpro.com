@@ -19,12 +19,12 @@ var express          = require('express')
   , LiveStrategy     = require('passport-windowslive').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
-  , admin            = require('./routes/admin-post')
+//  , admin            = require('./routes/admin-post')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
-  , adminTopic       = require('./routes/admin-topic')
-  , adminReminders   = require('./routes/admin-reminders')
+//  , adminTopic       = require('./routes/admin-topic')
+//  , adminReminders   = require('./routes/admin-reminders')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
   , app = module.exports = express()
@@ -143,11 +143,12 @@ app.get('/post/:id', post.get);
 app.post('/contact', contact.index);
 app.post('/csv', register.csv);
 
-app.get('/admin', auth, adminMain.index);
+app.get('/admin', adminMain.index);
 
 /*****************
  * ADMIN
  ****************/
+/*
 app.get('/admin/login', adminMain.login);
 
 app.get('/admin/account'             , authAdmin , account.index);
@@ -183,6 +184,7 @@ app.get('/admin/notadmin', function(req, res) {
 
 app.get('/admin/reminders', authAdmin, adminReminders.index);
 app.post('/admin/reminders', authAdmin, adminReminders.send);
+*/
 
 /*****************
  * TWITTER
