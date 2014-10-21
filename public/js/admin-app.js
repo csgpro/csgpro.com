@@ -10,6 +10,12 @@
 					templateUrl: 'home/home.html',
 					title: 'Admin Dashboard'
 				})
+				.when('/posts', {
+					controller: 'PostsCtrl',
+					controllerAs: 'postsViewModel',
+					templateUrl: 'posts/posts.html',
+					title: 'Posts'
+				})
 				.otherwise({
 					redirectTo: '/'
 				})
@@ -52,5 +58,15 @@
 	angular.module('app')
 		.controller('NavbarCtrl', [function() {
 			var navbarViewModel = this;
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('PostsCtrl', [function() {
+			// Do Awesome Stuff!
+			var postsViewModel = this;
 		}]);
 })();

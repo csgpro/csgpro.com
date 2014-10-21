@@ -10,6 +10,12 @@
 					templateUrl: 'home/home.html',
 					title: 'Admin Dashboard'
 				})
+				.when('/posts', {
+					controller: 'PostsCtrl',
+					controllerAs: 'postsViewModel',
+					templateUrl: 'posts/posts.html',
+					title: 'Posts'
+				})
 				.otherwise({
 					redirectTo: '/'
 				})

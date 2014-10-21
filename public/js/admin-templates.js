@@ -12,4 +12,9 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "</div>\n"
   );
 
+
+  $templateCache.put('posts/posts.html',
+    "<h2>Posts</h2>\n"
+  );
+
 }]);
