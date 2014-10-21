@@ -63,16 +63,27 @@ module.exports = function(grunt) {
           , 'public/js/bundle.js'
           ]
         }
-      }
+    }
     , compressAdmin: {
         files: {
-          'public/js/admin.js': [
-            'public/js/vendor/simple-ajax-uploader.js',
-            'public/js/admin-custom.js'
+          'public/js/admin-libs.js': [
+            'public/js/admin/libs/angular.min.js',
+            'public/js/admin/libs/angular-route.min.js',
+            'public/js/admin/libs/angular-animage.min.js'
+          ],
+          'public/js/admin-app.js': [
+            'public/js/admin/app/app.js',
+            'public/js/admin/app/**/*.js'
           ]
         }
       }
     }
+  , ngtemplates: {
+    app: {
+        src: 'public/js/admin/app/**/*.html',
+        dest: 'public/js/admin-templates.js'
+    }
+  }
   , watch: {
       all: {
         files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*.js', 'views/*.jade']
@@ -106,6 +117,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-angular-templates');
 
   grunt.registerTask('serve', ['default', 'express:dev', 'watch']);
 
