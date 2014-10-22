@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'ngRoute', 'ngAnimate' ])
-		.config(function($routeProvider) {
+	angular.module('app', [ 'site-config', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
+		.config(['$routeProvider', function($routeProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
@@ -14,14 +14,15 @@
 					controller: 'PostsCtrl',
 					controllerAs: 'postsViewModel',
 					templateUrl: 'posts/posts.html',
-					title: 'Posts'
+					title: 'Posts',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getCollection('posts');
+						}]
+					}
 				})
 				.otherwise({
 					redirectTo: '/'
 				})
-		});
-
-
-
-
+		}]);
 })();

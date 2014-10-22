@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'ngRoute', 'ngAnimate' ])
-		.config(function($routeProvider) {
+	angular.module('app', [ 'site-config', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
+		.config(['$routeProvider', function($routeProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
@@ -14,16 +14,17 @@
 					controller: 'PostsCtrl',
 					controllerAs: 'postsViewModel',
 					templateUrl: 'posts/posts.html',
-					title: 'Posts'
+					title: 'Posts',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getCollection('posts');
+						}]
+					}
 				})
 				.otherwise({
 					redirectTo: '/'
 				})
-		});
-
-
-
-
+		}]);
 })();
 
 (function() {
@@ -42,6 +43,24 @@
 })();
 
 (function() {
+    'use strict';
+
+    angular.module('site-config',[]);
+
+    var configData = {
+        'CONFIG': {
+            'APP_VERSION': '1.0.0',
+            'API_URL': '/api/admin/',
+        }
+    };
+    angular.forEach(configData, function(key,value) {
+        angular.module('site-config').constant(value,key);
+        // Load config constants
+    });
+
+})();
+
+(function() {
 	'use strict';
 
 	angular.module('app')
@@ -56,8 +75,20 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('NavbarCtrl', [function() {
-			var navbarViewModel = this;
+		.controller('NavbarCtrl', ['$location', function($location) {
+			var navVM = this;
+
+			navVM.isActive = function (r) {
+                var routes = r.join('|'),
+                    regexStr = '^\/(' + routes + ')',
+                    path = new RegExp(regexStr);
+                if(r[0] === 'home' && $location.path() === '/') {
+                    return true;
+                }
+                return path.test($location.path());
+            };
+
+			navVM.isCollapsed = true;
 		}]);
 })();
 
@@ -65,8 +96,128 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostsCtrl', [function() {
+		.controller('PostsCtrl', ['data', '$timeout', function(data, $timeout) {
 			// Do Awesome Stuff!
 			var postsViewModel = this;
+
+			postsViewModel.posts = data;
+
+			postsViewModel.gridRowSelectAction = function(row) {
+				alert('id: ' + row.entity.id);
+			};
+
+			var editCell = function () {
+				return '<div><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
+			};
+
+			postsViewModel.gridOptions = {
+				data: postsViewModel.posts,
+				columnDefs: [
+					{ name: 'id', width: '70' },
+					{ name: 'AuthorUsername', width: '100' },
+					{ name: 'Title' },
+					{ name: 'Topics', width: '100' },
+					{ name: 'Category', width: '100' },
+					{ name: 'PublishDate', width: '100' },
+					{ name: 'UpdateDate', width: '100' },
+					{ name: 'Actions', width: '100', cellTemplate: editCell() }
+				],
+				rowTemplate: 'partials/clickable-row.html'
+			};
+
+		}]);
+})();
+
+(function () {
+	'use strict';
+
+	angular.module('app')
+		.service('httpService', ['$http','CONFIG','$rootScope', function($http, CONFIG, $rootScope) {
+
+			var baseApiUrl = CONFIG.API_URL;
+
+			return ({
+				setAuthHeader: setAuthHeader,
+				getCollection: getCollection,
+				getItem: getItem,
+				createItem: createItem,
+				updateItem: updateItem,
+				deleteItem: deleteItem
+			});
+
+			function setAuthHeader(authStr) {
+				$http.defaults.headers.common.Authorization = authStr;
+			}
+
+			function getCollection(entity) {
+
+				var url = baseApiUrl + entity;
+
+				var request = $rootScope.loadingData = $http({
+					method: "get",
+					url: url
+				});
+
+				return (request.then(handleSuccess, handleError));
+
+			}
+
+			function getItem(entity,id) {
+
+				var url = baseApiUrl + entity + '/' + id;
+
+				var request = $rootScope.loadingData = $http({
+					method: "get",
+					url: url
+				});
+
+				return (request.then(handleSuccess, handleError));
+			}
+
+			function createItem(entity,data) {
+
+				var url = baseApiUrl + entity;
+
+				var request = $rootScope.loadingData = $http({
+					method: "post",
+					url: url,
+					data: data
+				});
+
+				return (request.then(handleSuccess, handleError));
+			}
+
+			function updateItem(entity,id,data) {
+
+				var url = baseApiUrl + entity + '/' + id;
+
+				var request = $rootScope.loadingData = $http({
+					method: "put",
+					url: url,
+					data: data
+				});
+
+				return (request.then(handleSuccess, handleError));
+			}
+
+			function deleteItem(entity,id) {
+
+				var url = baseApiUrl + entity + '/' + id;
+
+				var request = $rootScope.loadingData = $http({
+					method: "delete",
+					url: url
+				});
+
+				return (request.then(handleSuccess, handleError));
+			}
+
+			function handleError(response) {
+				return (response.message);
+			}
+
+			function handleSuccess(response) {
+				return (response.data);
+			}
 		}]);
 })();
