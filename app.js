@@ -19,7 +19,7 @@ var express          = require('express')
   , LiveStrategy     = require('passport-windowslive').Strategy
   , c                = require('nconf')
   , db               = require('./modules/db.js')
-//  , admin            = require('./routes/admin-post')
+  , admin            = require('./routes/admin-post')
   , adminMain        = require('./routes/admin')
   , account          = require('./routes/account')
   , contact          = require('./routes/contact')
@@ -148,6 +148,7 @@ app.get('/admin', adminMain.index);
 /*****************
  * ADMIN
  ****************/
+app.get('/api/admin/posts'           , admin.api.all);
 /*
 app.get('/admin/login', adminMain.login);
 

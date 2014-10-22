@@ -1,0 +1,8 @@
+.ui-grid {
+	width: 100%;
+	height: 500px;
+}
+
+.selectable {
+	cursor: pointer;
+}

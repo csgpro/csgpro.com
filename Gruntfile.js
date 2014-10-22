@@ -23,6 +23,10 @@ module.exports = function(grunt) {
           , 'public/css/typography.css'
           , 'public/css/lightbox.css'
           , 'public/css/github.css'
+          ],
+          'public/css/admin-app.css': [
+            'public/css/admin/ui-grid-stable.min.css',
+            'public/css/admin/**/*.css'
           ]
         }
     }
@@ -76,7 +80,9 @@ module.exports = function(grunt) {
       concatAdminLibs: {
           src: ['public/js/admin/libs/angular.min.js',
                 'public/js/admin/libs/angular-route.min.js',
-                'public/js/admin/libs/angular-animate.min.js'],
+                'public/js/admin/libs/angular-animate.min.js',
+                'public/js/admin/libs/ui-bootstrap-tpls-0.11.2.min.js',
+                'public/js/admin/libs/ui-grid-stable.min.js'],
           dest: 'public/js/admin-libs.js'
       }
       , concatAdminApp: {
