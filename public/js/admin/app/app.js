@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
-		.config(['$routeProvider', function($routeProvider) {
+	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
+		.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
@@ -21,8 +21,19 @@
 						}]
 					}
 				})
+				.when('/login', {
+					controller: 'LoginCtrl',
+					controllerAs: 'loginViewModel',
+					templateUrl: 'login/login.html',
+					title: 'Login'
+				})
 				.otherwise({
 					redirectTo: '/'
-				})
+				});
+
+			$authProvider.twitter({
+		      url: '/auth/twitter/callback'
+		    });
+
 		}]);
 })();
