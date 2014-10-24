@@ -29,11 +29,17 @@ self.getCollection = function (entity, callback) {
 
 	options.uri = url + '/tables/' + entity;
 
-	request.get(options, function(err, obj, res){
+	request.get(options, function(err, obj, response){
 		if(err) {
 			callback(err);
-		} else if (isJSON(res)) {
-			callback(null, JSON.parse(res));
+		} else if (response !== null) {
+			var r;
+			if (isJSON(response)) {
+				r = JSON.parse(response);
+			} else {
+				r = response;
+			}
+			callback(null, r);
 		} else {
 			callback(new Error('Error retrieving data.'));
 		}
@@ -44,11 +50,17 @@ self.getFilteredCollection = function (collectionStr, callback) {
 
 	options.uri = url + '/api/' + collectionStr;
 
-	request.get(options, function(err, obj, res){
+	request.get(options, function(err, obj, response){
 		if(err) {
 			callback(err);
-		} else if (isJSON(res)) {
-			callback(null, JSON.parse(res));
+		} else if (response !== null) {
+			var r;
+			if (isJSON(response)) {
+				r = JSON.parse(response);
+			} else {
+				r = response;
+			}
+			callback(null, r);
 		} else {
 			callback(new Error('Error retrieving data.'));
 		}
@@ -74,11 +86,11 @@ self.createItem = function(entity, data, callback) {
 	options.uri = url +'/tables/' + entity;
 	options.json = data;
 
-	request.post(options, function(err, obj, res) {
-		if (err || res.error) {
+	request.post(options, function(err, obj, response) {
+		if(err) {
 			callback(err);
-		} else if (res !== null && res.hasOwnProperty('id')) {
-			callback(null, res.id);
+		} else if (response !== null && response.hasOwnProperty('id')) {
+			callback(null, response);
 		} else {
 			callback(new Error('Error creating item.'));
 		}
@@ -93,11 +105,11 @@ self.updateItem = function (entity, id, data, callback) {
 	options.uri = url +'/tables/' + entity + '/' + id;
 	options.json = data;
 
-	request.patch(options, function(err, obj, res) {
-		if (err || res.error) {
+	request.patch(options, function(err, obj, response) {
+		if(err) {
 			callback(err);
-		} else if (res !== null && res.hasOwnProperty('id')) {
-			callback(null, res.id);
+		} else if (response !== null && response.hasOwnProperty('id')) {
+			callback(null, response);
 		} else {
 			callback(new Error('Error updating item.'));
 		}
@@ -112,13 +124,13 @@ self.deleteItem = function (entity, id, callback) {
 
 	options.uri = url +'/tables/' + entity + '/' + id;
 
-	request.del(options, function(err, obj, res) {
-		if (err || res.error) {
+	request.del(options, function(err, obj, response) {
+		if(err) {
 			callback(err);
-		} else if (res !== null) {
-			callback(null, true);
+		} else if (response !== null) {
+			callback(null, response);
 		} else {
-			callback(new Error('Error deleting item.'));
+			callback(new Error('Error deleting data.'));
 		}
 	});
 }

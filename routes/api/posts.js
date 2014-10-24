@@ -60,7 +60,12 @@ self.createPost = function (req, res) {
 		if (err) {
 			res.render('404');
 		} else {
-			res.send(data);
+			var msg = {
+				status: 'success',
+				message: 'Successfully Created Post',
+				id: data.id
+			};
+			res.send(JSON.stringify(msg));
 		}
 	});
 };
@@ -70,7 +75,12 @@ self.updatePost = function (req, res) {
 		if (err) {
 			res.render('404');
 		} else {
-			res.send(data);
+			var msg = {
+				status: 'success',
+				message: 'Successfully Updated Post',
+				id: data.id
+			};
+			res.send(JSON.stringify(msg));
 		}
 	});
 };
@@ -80,7 +90,11 @@ self.deletePost = function (req, res) {
 		if (err) {
 			res.render('404');
 		} else {
-			res.send(data);
+			var msg = {
+				status: 'success',
+				message: 'Successfully Deleted Post'
+			}
+			res.send(JSON.stringify(msg));
 		}
 	});
 };
