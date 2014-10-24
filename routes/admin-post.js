@@ -26,6 +26,16 @@ fs.readFile('views/admin/docs/markdown-help.md', function(err, data){
   }
 });
 
+exports.api = {};
+
+exports.api.all = function(req, res) {
+    db.getPosts(null, function(err, posts){
+      res.send(posts);
+    });
+}
+
+
+
 exports.index = function(req, res) {
   var message, type;
 

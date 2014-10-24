@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default navbar-citrus navbar-static-top" role="navigation" ng-controller="NavbarCtrl as navVM">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-click="navVM.isCollapsed = !navVM.isCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">CSG Pro</a>
+    </div>
+    <div class="collapse navbar-collapse" collapse="navVM.isCollapsed" id="main-nav">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active:navVM.isActive(['home'])}" data-toggle="collapse" data-target="#main-nav"><a href="#/" ng-click="navVM.isCollapsed = !navVM.isCollapsed">Home</a></li>
+		<li ng-class="{active:navVM.isActive(['posts'])}" data-toggle="collapse" data-target="#main-nav"><a href="#/posts" ng-click="navVM.isCollapsed = !navVM.isCollapsed">Posts</a></li>
+    </ul>
+
+	<ul class="nav navbar-nav navbar-right">
+	</ul>
+    </div>
+  </div>
+</nav>

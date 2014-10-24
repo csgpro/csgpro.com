@@ -1,72 +1,20 @@
 doctype
-//if lt IE 7
-  <html class="no-js lt-ie9 lt-ie8 lt-ie7">
-//if IE 7
-  <html class="no-js lt-ie9 lt-ie8">
-//if IE 8
-  <html class="no-js lt-ie9">
-//[if gt IE 8]><!
-html.no-js
-  //<![endif]
+html(data-ng-app='app', data-ng-controller='AppCtrl as appViewModel')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    title
-    meta(name='description', content='CSG Pro, a professional services consulting company based in Portland, OR.')
+    title(data-ng-bind='appViewModel.pageTitle') Loading...
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    link(rel='stylesheet', href='/css/normalize.css')
-    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
-    link(rel='stylesheet', href='//cdn.datatables.net/plug-ins/505bef35b56/integration/bootstrap/3/dataTables.bootstrap.css')
-    link(rel='stylesheet', href='/css/bundle.min.css')
-    link(rel='stylesheet', href='/css/admin.css')
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/admin-app.css')
 
-    script(src='/js/vendor/modernizr-2.6.2.min.js')
   body
-    nav.navbar.navbar-inverse(style='height: initial;')
-      div.navbar-header
-        a(href='/admin').navbar-brand Administration
-      if user
-        ul.nav.navbar-nav.nav-right
-          if user.IsAdmin
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | Accounts
-                b.caret
-              ul.dropdown-menu
-                li: a(href='/admin/account') All accounts
-                li: a(href='/admin/account/new') New account
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown')
-                | Topics
-                b.caret
-              ul.dropdown-menu
-                li: a(href='/admin/topic') All topics
-                li: a(href='/admin/topic/new') New topic
-          li.dropdown
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              | Posts
-              b.caret
-            ul.dropdown-menu
-              li: a(href='/admin/post') All posts
-              li: a(href='/admin/post/new') New post
 
+    div(data-ng-include='\'navbar/navbar.html\'')
 
-    //if lt IE 7
-      p.browsehappy
-        | You are using an <strong>outdated</strong> browser.
-        | Please <a href="http://browsehappy.com/">upgrade your browser</a>
-        | to improve your experience.
+    div(data-ng-view='').container
 
-    //- Add your site or application content here
-    div.container
-      block content
-
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
-    script.
-      window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')
-    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.0/js/bootstrap.min.js')
-    script(src='//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js')
-    script(src='//cdn.datatables.net/plug-ins/505bef35b56/integration/bootstrap/3/dataTables.bootstrap.js')
-    script $('.datatable').dataTable();
-    block js
+    script(src='/js/admin-libs.js')
+    script(src='/js/admin-app.js')
+    script(src='/js/admin-templates.js')
