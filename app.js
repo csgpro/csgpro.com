@@ -135,9 +135,6 @@ app.get('/api/posts/category/:category', api.posts.getPosts);
 app.get('/api/posts/topic/:topic', api.posts.getPosts);
 app.get('/api/posts/:id', api.posts.getPostByID);
 app.post('/api/posts', api.posts.createPost);
-app.patch('/api/test', function (req, res) {
-    console.log(req);
-});
 app.patch('/api/posts/:id', api.posts.updatePost);
 app.delete('/api/posts/:id', api.posts.deletePost);
 
