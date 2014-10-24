@@ -17,7 +17,8 @@ var appKey = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY');
 var options = {
 	headers: {
 		'X-ZUMO-APPLICATION': appKey
-	}
+	},
+	json: true
 };
 
 var url = 'https://csgblogs.azure-mobile.net';
@@ -33,13 +34,7 @@ self.getCollection = function (entity, callback) {
 		if(err) {
 			callback(err);
 		} else if (response !== null) {
-			var r;
-			if (isJSON(response)) {
-				r = JSON.parse(response);
-			} else {
-				r = response;
-			}
-			callback(null, r);
+			callback(null, response);
 		} else {
 			callback(new Error('Error retrieving data.'));
 		}
@@ -54,13 +49,7 @@ self.getFilteredCollection = function (collectionStr, callback) {
 		if(err) {
 			callback(err);
 		} else if (response !== null) {
-			var r;
-			if (isJSON(response)) {
-				r = JSON.parse(response);
-			} else {
-				r = response;
-			}
-			callback(null, r);
+			callback(null, response);
 		} else {
 			callback(new Error('Error retrieving data.'));
 		}
@@ -148,12 +137,3 @@ module.exports.deleteItem = self.deleteItem;
 /************
  * HELPERS
  ***********/
-
-function isJSON(str) {
-	try {
-		JSON.parse(str);
-	} catch (e) {
-		return false;
-	}
-	return true;
-}
