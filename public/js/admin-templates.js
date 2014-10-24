@@ -6,6 +6,11 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('login/login.html',
+    "<button class=\"btn btn-sm btn-primary\" ng-click=\"loginViewModel.authenticate('twitter')\">Sign in with Twitter</button>\n"
+  );
+
+
   $templateCache.put('navbar/navbar.html',
     "<nav class=\"navbar navbar-default navbar-citrus navbar-static-top\" role=\"navigation\" ng-controller=\"NavbarCtrl as navVM\">\n" +
     "  <div class=\"container\">\n" +
