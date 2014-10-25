@@ -18,7 +18,6 @@ var express          = require('express')
   , db               = require('./modules/db.js')
   , db2              = require('./modules/db2.js')
   , admin            = require('./routes/admin')
-  , account          = require('./routes/account')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
@@ -115,10 +114,10 @@ app.get('/powerplay/register', register.powerplay);
 app.get('/power-bi/register', register.powerbi);
 app.get('/pdx-power-bi/register', register.pdxpowerbi);
 
-app.get('/post', post.index);
-app.get('/post/category/:category', post.category);
-app.get('/post/topic/:topic', post.topic);
-app.get('/post/:id', post.get);
+app.get('/post', post.getPostsBySearch);
+app.get('/post/category/:category', post.getPostsByCategory);
+app.get('/post/topic/:topic', post.getPostsByTopic);
+app.get('/post/:id', post.getPostByID);
 
 app.post('/contact', contact.index);
 app.post('/csv', register.csv);
