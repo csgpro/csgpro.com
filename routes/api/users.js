@@ -11,7 +11,12 @@ var self = this,
 self.getUsers = function (req, res) {
 	db.getCollection('users', function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Retrieving Users',
+				error: err
+			};
+			res.send(JSON.stringify(msg));
 		} else {
 			res.send(data);
 		}
@@ -22,7 +27,12 @@ self.getUserByID = function (req, res) {
 	var id = req.params.id;
 	db.getItem('users', id, function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Retrieving User',
+				error: err
+			};
+			res.send(JSON.stringify(msg));
 		} else {
 			res.send(data);
 		}
@@ -33,7 +43,12 @@ self.getUserByOther = function (req, res) {
 	var search = req.params.search;
 	db.getCollection('users', function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Retrieving User',
+				error: err
+			};
+			res.send(JSON.stringify(msg));
 		} else {
 			var s = search.split('|');
 			if(s.length) {
@@ -55,43 +70,55 @@ self.getUserByOther = function (req, res) {
 self.createUser = function (req, res) {
 	db.createItem('users', req.body, function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Creating User',
+				error: err
+			};
 		} else {
 			var msg = {
 				status: 'success',
 				message: 'Successfully Created User',
 				id: data.id
 			};
-			res.send(JSON.stringify(msg));
 		}
+		res.send(JSON.stringify(msg));
 	});
 };
 
 self.updateUser = function (req, res) {
 	db.updateItem('users', req.params.id, req.body, function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Updating User',
+				error: err
+			};
 		} else {
 			var msg = {
 				status: 'success',
 				message: 'Successfully Updated User',
 				id: data.id
 			};
-			res.send(JSON.stringify(msg));
 		}
+		res.send(JSON.stringify(msg));
 	});
 };
 
 self.deleteUser = function (req, res) {
 	db.deleteItem('users', req.params.id, function (err, data) {
 		if (err) {
-			res.render('404');
+			var msg = {
+				status: 'fail',
+				message: 'Error Deleting User',
+				error: err
+			};
 		} else {
 			var msg = {
 				status: 'success',
 				message: 'Successfully Deleted User'
 			}
-			res.send(JSON.stringify(msg));
 		}
+		res.send(JSON.stringify(msg));
 	});
 };
