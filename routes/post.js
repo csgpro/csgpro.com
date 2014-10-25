@@ -1,132 +1,155 @@
-var db = require('../modules/db')
-  , marked = require('marked')
-  , moment = require('moment')
-  , sanitize = require('validator').sanitize;
+/*jslint
+  node: true*/
 
-marked.setOptions({
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-  langPrefix: 'lang-'
+'use strict';
+
+var self = this,
+    db = require('../modules/db2'),
+    md = require('marked'),
+    moment = require('moment'),
+    sanitize = require('validator').sanitize,
+    helpers = require('../modules/helpers');
+
+md.setOptions({
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+    langPrefix: 'lang-'
 });
 
+self.getPostsByCategory = function(req, res) {
+    var category = req.params.category;
 
-module.exports.category = function(req, res) {
-  var category = req.params.category;
-
-  db.getPosts({ category: category}, function(err, posts) {
-    if (err) {
-      res.send(err);
-    } else {
-      // The pluralization of the career should be changed in this context
-      if (category && category.toLowerCase() === 'career')
-        category = 'Careers'
-
-      res.render('post-list', {
-        title: category,
-        moment: moment,
-        category: category,
-        posts: posts,
-        pageClass: 'updates'
-      });
-    }
-  });
-
-};
-
-module.exports.topic = function(req, res) {
-  var topic = req.params.topic;
-  topic = sanitize(topic).xss().trim();
-
-  db.getPostsByTopic(topic, function(err, posts){
-    if (err) {
-      res.send({error: err});
-    } else {
-      posts = posts.filter(function(i) {
-        return parseInt(i.PublishDate, 10) > 0; // only published posts
-      });
-
-      res.render('post-list', {
-        title: 'Topics',
-        moment: moment,
-        topic: topic,
-        posts: posts,
-        pageClass: 'updates'
-      });
-    }
-  });
-
-};
-
-module.exports.get = function(req, res) {
-  var postId = req.params.id;
-
-  db.getFlatPost(postId, function(err, post){
-    if (post) {
-      if (post.Topics)
-        post.Topics = post.Topics.split(',');
-
-      res.render('post', {
-        post: post,
-        marked: marked,
-        moment: moment,
-        user: req.user,
-        pageClass: 'updates'
-      });
-    } else {
-      res.render('404');
-    }
-  });
-};
-
-module.exports.index = function(req, res) {
-  if (req.query.q) {
-    var searchInput = sanitize(req.query.q).xss().trim();
-    var regex = new RegExp(searchInput, 'gi');
-
-    db.getPosts(null, function(err, posts){
-      if (err) {
-        res.send(err);
-      } else {
-        // make sure posts are published, and match a query
-        posts = posts.filter(function(i){
-          var a = parseInt(i.PublishDate, 10) > 0;
-          var b = regex.test(i.Markdown);
-          var c = regex.test(JSON.stringify(i.Categories || ''));
-          var d = regex.test(i.Title);
-          var e = regex.test(i.AuthorFullName);
-
-          return a && ( b || c || d  || e);
-        });
-
-        res.render('post-list', {
-          title: 'Search',
-          moment: moment,
-          searchResult: posts,
-          searchInput: searchInput,
-          pageClass: 'updates'
-        });
-      }
+    db.getFilteredCollection('allposts', function(err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            data = helpers.getCollectionByKeyVal(data, { Category: category });
+            // The pluralization of the career should be changed in this context
+            if (category && category === 'Career') {
+                category = 'Careers';
+            }
+            res.render('post-list', {
+                title: category,
+                moment: moment,
+                category: category,
+                posts: helpers.getPublishedPosts(data),
+                pageClass: 'updates'
+            });
+        }
     });
 
-  } else {
-    db.getPosts({ categorizedTop6: true }, function(err, categories) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.render('post-list', {
-          title: 'All Posts',
-          moment: moment,
-          categories: categories,
-          pageClass: 'updates'
-        });
-      }
-    });
-  }
-
-
 };
+
+self.getPostsByTopic = function(req, res) {
+    var topic = sanitize(req.params.topic).xss().trim();
+
+    db.getFilteredCollection('allposts/?topic=' + topic, function(err, data) {
+        if (err) {
+            var msg = {
+                status: 'fail',
+                message: 'Error Retrieving Posts',
+                error: err
+            };
+            res.send(JSON.stringify(msg));
+        } else {
+            res.render('post-list', {
+                title: 'Topics',
+                moment: moment,
+                topic: topic,
+                posts: helpers.getPublishedPosts(data),
+                pageClass: 'updates'
+            });
+        }
+    });
+};
+
+self.getPostByID = function(req, res) {
+    db.getItem('posts', req.params.id, function(err, data) {
+        if (data) {
+            if (data.Topics) {
+                data.Topics = data.Topics.split(','); // convert string to array
+            }
+
+            res.render('post', {
+                post: data,
+                marked: md,
+                moment: moment,
+                pageClass: 'updates'
+            });
+        } else {
+            res.render('404');
+        }
+    });
+};
+
+self.getPostsBySearch = function(req, res) {
+    if (req.query.q) {
+        var searchInput = sanitize(req.query.q).xss().trim();
+        var regex = new RegExp(searchInput, 'gi');
+
+        db.getFilteredCollection('allposts', function(err, data){
+            if (err) {
+                res.send(err);
+            } else {
+                // make sure posts are published, and match a query
+                data = data.filter(function(i){
+                    var a = parseInt(i.PublishDate, 10) > 0;
+                    var b = regex.test(i.Markdown);
+                    var c = regex.test(JSON.stringify(i.Categories || ''));
+                    var d = regex.test(i.Title);
+                    var e = regex.test(i.AuthorFullName);
+
+                    return a && ( b || c || d  || e);
+                });
+
+                res.render('post-list', {
+                    title: 'Search',
+                    moment: moment,
+                    searchResult: data,
+                    searchInput: searchInput,
+                    pageClass: 'updates'
+                });
+            }
+        });
+
+    } else {
+        db.getFilteredCollection('allposts', function(err, data) {
+            if (err) {
+                res.send(err);
+            } else {
+                data = helpers.getPublishedPosts(data);
+                var newData = [],
+                    blogPosts = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Blog' }, 6),
+                    newsArticles = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'News' }, 6),
+                    careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 6);
+
+                if (blogPosts) {
+                    newData.push({ name: 'Blog', id: 'Blog', posts: blogPosts });
+                }
+                if (newsArticles) {
+                    newData.push({ name: 'News', id: 'News',  posts: newsArticles });
+                }
+                if (careerListings) {
+                    newData.push({ name: 'Careers', id: 'Career', posts: careerListings });
+                }
+
+                res.render('post-list', {
+                    title: 'All Posts',
+                    moment: moment,
+                    categories: newData,
+                    pageClass: 'updates'
+                });
+            }
+        });
+    }
+};
+
+module.exports.getPostsByCategory = self.getPostsByCategory;
+module.exports.getPostsByTopic = self.getPostsByTopic;
+module.exports.getPostByID = self.getPostByID;
+module.exports.getPostsBySearch = self.getPostsBySearch;
