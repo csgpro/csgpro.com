@@ -146,6 +146,13 @@ app.post('/api/users', api.users.createUser);
 app.patch('/api/users/:id', api.users.updateUser);
 app.delete('/api/users/:id', api.users.deleteUser);
 
+/* TOPICS */
+app.get('/api/topics', api.topics.getTopics);
+app.get('/api/topics/:id', api.topics.getTopicByID);
+app.post('/api/topics', api.topics.createTopic);
+app.patch('/api/topics/:id', api.topics.updateTopic);
+app.delete('/api/topics/:id', api.topics.deleteTopic);
+
 /*****************
  * TWITTER
  ****************/
