@@ -35,7 +35,7 @@ self.getPosts = function (req, res) {
 			}
 		});
 	} else {
-		db.getCollection('posts', function(err, data) {
+		db.getFilteredCollection('allposts', function(err, data) {
 			if (err) {
 				var msg = {
 					status: 'fail',
