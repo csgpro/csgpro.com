@@ -29,6 +29,7 @@ var url = 'https://csgblogs.azure-mobile.net';
 self.getCollection = function (entity, callback) {
 
 	options.uri = url + '/tables/' + entity;
+	options.method = null;
 
 	request.get(options, function(err, obj, response){
 		if(err) {
@@ -44,6 +45,7 @@ self.getCollection = function (entity, callback) {
 self.getFilteredCollection = function (collectionStr, callback) {
 
 	options.uri = url + '/api/' + collectionStr;
+	options.method = null;
 
 	request.get(options, function(err, obj, response){
 		if(err) {
@@ -72,18 +74,23 @@ self.getItem = function (entity, searchStr, callback) {
  ***********/
 self.createItem = function(entity, data, callback) {
 
-	options.uri = url +'/tables/' + entity;
-	options.json = data;
+	if(typeof data !== 'object' && data !== null) {
+		callback(new Error('Error creating item.'));
+	} else {
+		options.uri = url +'/tables/' + entity;
+		options.json = data;
+		options.method = null;
 
-	request.post(options, function(err, obj, response) {
-		if(err) {
-			callback(err);
-		} else if (response !== null && response.hasOwnProperty('id')) {
-			callback(null, response);
-		} else {
-			callback(new Error('Error creating item.'));
-		}
-	});
+		request.post(options, function(err, obj, response) {
+			if(err) {
+				callback(err);
+			} else if (response !== null && response.hasOwnProperty('id')) {
+				callback(null, response);
+			} else {
+				callback(new Error('Error creating item.'));
+			}
+		});
+	}
 };
 
 /************
@@ -91,37 +98,47 @@ self.createItem = function(entity, data, callback) {
  ***********/
 self.updateItem = function (entity, id, data, callback) {
 
-	options.uri = url +'/tables/' + entity + '/' + id;
-	options.json = data;
+	if(!parseInt(id) && typeof data !== 'object' && data !== null) {
+		callback(new Error('Error updating item.'));
+	} else {
 
-	request.patch(options, function(err, obj, response) {
-		if(err) {
-			callback(err);
-		} else if (response !== null && response.hasOwnProperty('id')) {
-			callback(null, response);
-		} else {
-			callback(new Error('Error updating item.'));
-		}
-	});
+		options.uri = url +'/tables/' + entity + '/' + id;
+		options.json = data;
+		options.method = null;
 
+		request.patch(options, function(err, obj, response) {
+			if(err) {
+				callback(err);
+			} else if (response !== null && response.hasOwnProperty('id')) {
+				callback(null, response);
+			} else {
+				callback(new Error('Error updating item.'));
+			}
+		});
+	}
 };
 
 /************
  * DELETE
  ***********/
 self.deleteItem = function (entity, id, callback) {
+	if(!parseInt(id)) {
+		callback(new Error('Error deleting item.'));
+	} else {
 
-	options.uri = url +'/tables/' + entity + '/' + id;
+		options.uri = url +'/tables/' + entity + '/' + id;
+		options.method = null;
 
-	request.del(options, function(err, obj, response) {
-		if(err) {
-			callback(err);
-		} else if (response !== null) {
-			callback(null, response);
-		} else {
-			callback(new Error('Error deleting data.'));
-		}
-	});
+		request.del(options, function(err, obj, response) {
+			if(err) {
+				callback(err);
+			} else if (response !== null) {
+				callback(null, response);
+			} else {
+				callback(new Error('Error deleting item.'));
+			}
+		});
+	}
 }
 
 /************
