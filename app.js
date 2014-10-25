@@ -138,6 +138,14 @@ app.post('/api/posts', api.posts.createPost);
 app.patch('/api/posts/:id', api.posts.updatePost);
 app.delete('/api/posts/:id', api.posts.deletePost);
 
+/* USERS */
+app.get('/api/users', api.users.getUsers);
+app.get('/api/users/:id', api.users.getUserByID);
+app.get('/api/users/other/:search', api.users.getUserByOther);
+app.post('/api/users', api.users.createUser);
+app.patch('/api/users/:id', api.users.updateUser);
+app.delete('/api/users/:id', api.users.deleteUser);
+
 /*****************
  * TWITTER
  ****************/
