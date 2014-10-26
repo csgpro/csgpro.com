@@ -6,10 +6,7 @@
 			var loginViewModel = this;
 
 			loginViewModel.authenticate = function(provider) {
-				$auth.authenticate(provider).then(function() {
-					var hasAuth = $auth.isAuthenticated();
-					console.log(hasAuth);
-				});
+				$auth.authenticate(provider);
 			}
 		}]);
 })();
