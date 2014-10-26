@@ -21,6 +21,7 @@ var express          = require('express')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
   , api              = require('./routes/api')
+  , upload           = require('./routes/upload')
   , jwt              = require('jwt-simple')
   , moment           = require('moment')
   , qs               = require('querystring')
@@ -223,6 +224,10 @@ app.get('/auth/twitter', function(req, res) {
  * WINDOWS LIVE
  ****************/
 
+/*****************
+ * FILE UPLOADS
+ ****************/
+app.post('/upload/img/author', upload.saveAuthorImage);
 
 /*****************
  * Old Site Redirects
