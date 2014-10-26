@@ -8,7 +8,14 @@
 					controller: 'HomeCtrl',
 					controllerAs: 'homeViewModel',
 					templateUrl: 'home/home.html',
-					title: 'Admin Dashboard'
+					title: 'Admin Dashboard',
+					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if (!$auth.isAuthenticated()) {
+								return $location.path('/login');
+							}
+						}]
+					}
 				})
 				.when('/posts', {
 					controller: 'PostsCtrl',
@@ -30,7 +37,14 @@
 					controller: 'LoginCtrl',
 					controllerAs: 'loginViewModel',
 					templateUrl: 'login/login.html',
-					title: 'Login'
+					title: 'Login',
+					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if($auth.isAuthenticated()) {
+								return $location.path('/');
+							}
+						}]
+					}
 				})
 				.when('/logout', {
 					controller: 'LoginCtrl',
@@ -48,7 +62,13 @@
 					controller: 'ProfileCtrl',
 					controllerAs: 'profileViewModel',
 					templateUrl: 'profile/profile.html',
+					title: 'Profile',
 					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if (!$auth.isAuthenticated()) {
+								return $location.path('/login');
+							}
+						}],
 						data: ['httpService', function(httpService) {
 							return httpService.getItem('users', 'me');
 						}]
@@ -187,11 +207,13 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('ProfileCtrl', ['data', function(data) {
+		.controller('ProfileCtrl', ['data', '$filter', function(data, $filter) {
 			// Do Awesome Stuff!
 			var profileViewModel = this;
 
 			profileViewModel.user = data;
+
+			profileViewModel.user.CreateDateDisplay = $filter('date')(profileViewModel.user.CreateDate);
 
 		}]);
 })();

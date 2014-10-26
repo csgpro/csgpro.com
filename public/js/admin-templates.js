@@ -30,7 +30,8 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "    </ul>\n" +
     "\n" +
     "\t<ul class=\"nav navbar-nav navbar-right\">\n" +
-    "        <li data-toggle=\"collapse\" data-target=\"#main-nav\" data-ng-show=\"!navVM.userLogged()\"><a href=\"#/login\">Log In</a></li>\n" +
+    "        <li data-toggle=\"collapse\" data-target=\"#main-nav\" data-ng-class=\"{active:navVM.isActive(['profile'])}\" data-ng-show=\"navVM.userLogged()\"><a href=\"#/profile\"><span class=\"glyphicon glyphicon-cog\"></span></a></li>\n" +
+    "        <li data-toggle=\"collapse\" data-ng-class=\"{active:navVM.isActive(['login'])}\"  data-target=\"#main-nav\" data-ng-show=\"!navVM.userLogged()\"><a href=\"#/login\">Log In</a></li>\n" +
     "        <li data-toggle=\"collapse\" data-target=\"#main-nav\" data-ng-show=\"navVM.userLogged()\"><a href=\"#/logout\">Log Out</a></li>\n" +
     "\t</ul>\n" +
     "    </div>\n" +
@@ -80,9 +81,43 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('profile/profile.html',
-    "<h1>Profile</h1>\n" +
+    "<h2>Profile</h2>\n" +
     "\n" +
-    "<p data-ng-bind=\"profileViewModel.user.FullName\"></p>\n"
+    "<div class=\"panel panel-default\">\n" +
+    "\t<div class=\"panel-heading\">\n" +
+    "\t\t<h3 class=\"panel-title\">Details</h3>\n" +
+    "\t</div>\n" +
+    "\t<div class=\"panel-body\">\n" +
+    "\t\t<div class=\"row\">\n" +
+    "\t\t\t<div class=\"col-sm-3 form-group\">\n" +
+    "\t\t\t\t<label class=\"control-label\">User Name</label>\n" +
+    "\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"profileViewModel.user.Username\" disabled />\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"col-sm-3 form-group\">\n" +
+    "\t\t\t\t<label class=\"control-label\">Full Name</label>\n" +
+    "\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"profileViewModel.user.FullName\" />\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"col-sm-3 form-group\">\n" +
+    "\t\t\t\t<label class=\"control-label\">Twitter Handle</label>\n" +
+    "\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"profileViewModel.user.TwitterHandle\" />\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"col-sm-3 form-group\">\n" +
+    "\t\t\t\t<label class=\"control-label\">Created On</label>\n" +
+    "\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"::profileViewModel.user.CreateDateDisplay\" disabled />\n" +
+    "\t\t\t</div>\n" +
+    "\t\t\t<div class=\"col-sm-6 form-group\">\n" +
+    "\t\t\t\t<label class=\"conrol-label\">Profile Photo</label>\n" +
+    "\t\t\t\t<div ng-show=\"profileViewModel.user.ProfileUrl\">\n" +
+    "\t\t\t\t\t<img ng-src=\"{{profileViewModel.user.ProfileUrl}}\" />\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t\t<div>\n" +
+    "\t\t\t\t\t<label class=\"control-label\">Profile Image URL</label>\n" +
+    "\t\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"profileViewModel.user.ProfileUrl\" />\n" +
+    "\t\t\t\t</div>\n" +
+    "\t\t\t</div>\n" +
+    "\t</div>\n" +
+    "\t</div>\n" +
+    "</div>\n"
   );
 
 }]);
