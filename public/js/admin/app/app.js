@@ -16,6 +16,11 @@
 					templateUrl: 'posts/posts.html',
 					title: 'Posts',
 					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if (!$auth.isAuthenticated()) {
+								return $location.path('/login');
+							}
+						}],
 						data: ['httpService', function(httpService) {
 							return httpService.getCollection('posts');
 						}]
@@ -27,12 +32,34 @@
 					templateUrl: 'login/login.html',
 					title: 'Login'
 				})
+				.when('/logout', {
+					controller: 'LoginCtrl',
+					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if ($auth.isAuthenticated()) {
+								$auth.logout().then(function() {
+									return $location.path('/');
+								});
+							}
+						}]
+					}
+				})
+				.when('/profile', {
+					controller: 'ProfileCtrl',
+					controllerAs: 'profileViewModel',
+					templateUrl: 'profile/profile.html',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getItem('users', 'me');
+						}]
+					}
+				})
 				.otherwise({
 					redirectTo: '/'
 				});
 
 			$authProvider.twitter({
-		      url: '/auth/twitter/callback'
+		      url: '/auth/twitter'
 		    });
 
 		}]);
