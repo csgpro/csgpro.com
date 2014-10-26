@@ -1,3 +1,37 @@
-<h1>Profile</h1>
+<h2>Profile</h2>
 
-<p data-ng-bind="profileViewModel.user.FullName"></p>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Details</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-3 form-group">
+				<label class="control-label">User Name</label>
+				<input type="text" class="form-control" data-ng-model="profileViewModel.user.Username" disabled />
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="control-label">Full Name</label>
+				<input type="text" class="form-control" data-ng-model="profileViewModel.user.FullName" />
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="control-label">Twitter Handle</label>
+				<input type="text" class="form-control" data-ng-model="profileViewModel.user.TwitterHandle" />
+			</div>
+			<div class="col-sm-3 form-group">
+				<label class="control-label">Created On</label>
+				<input type="text" class="form-control" data-ng-model="::profileViewModel.user.CreateDateDisplay" disabled />
+			</div>
+			<div class="col-sm-6 form-group">
+				<label class="conrol-label">Profile Photo</label>
+				<div ng-show="profileViewModel.user.ProfileUrl">
+					<img ng-src="{{profileViewModel.user.ProfileUrl}}" />
+				</div>
+				<div>
+					<label class="control-label">Profile Image URL</label>
+					<input type="text" class="form-control" data-ng-model="profileViewModel.user.ProfileUrl" />
+				</div>
+			</div>
+	</div>
+	</div>
+</div>
