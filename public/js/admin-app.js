@@ -16,6 +16,11 @@
 					templateUrl: 'posts/posts.html',
 					title: 'Posts',
 					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if (!$auth.isAuthenticated()) {
+								return $location.path('/login');
+							}
+						}],
 						data: ['httpService', function(httpService) {
 							return httpService.getCollection('posts');
 						}]
@@ -27,12 +32,34 @@
 					templateUrl: 'login/login.html',
 					title: 'Login'
 				})
+				.when('/logout', {
+					controller: 'LoginCtrl',
+					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if ($auth.isAuthenticated()) {
+								$auth.logout().then(function() {
+									return $location.path('/');
+								});
+							}
+						}]
+					}
+				})
+				.when('/profile', {
+					controller: 'ProfileCtrl',
+					controllerAs: 'profileViewModel',
+					templateUrl: 'profile/profile.html',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getItem('users', 'me');
+						}]
+					}
+				})
 				.otherwise({
 					redirectTo: '/'
 				});
 
 			$authProvider.twitter({
-		      url: '/auth/twitter/callback'
+		      url: '/auth/twitter'
 		    });
 
 		}]);
@@ -61,7 +88,7 @@
     var configData = {
         'CONFIG': {
             'APP_VERSION': '1.0.0',
-            'API_URL': '/api/admin/',
+            'API_URL': '/api/',
         }
     };
     angular.forEach(configData, function(key,value) {
@@ -90,10 +117,7 @@
 			var loginViewModel = this;
 
 			loginViewModel.authenticate = function(provider) {
-				$auth.authenticate(provider).then(function() {
-					var hasAuth = $auth.isAuthenticated();
-					console.log(hasAuth);
-				});
+				$auth.authenticate(provider);
 			}
 		}]);
 })();
@@ -102,7 +126,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('NavbarCtrl', ['$location', function($location) {
+		.controller('NavbarCtrl', ['$location', '$auth', '$scope', function($location, $auth, $scope) {
 			var navVM = this;
 
 			navVM.isActive = function (r) {
@@ -116,6 +140,10 @@
             };
 
 			navVM.isCollapsed = true;
+
+			navVM.userLogged = function() {
+				return $auth.isAuthenticated();
+			};
 		}]);
 })();
 
@@ -151,6 +179,19 @@
 				],
 				rowTemplate: 'partials/clickable-row.html'
 			};
+
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('ProfileCtrl', ['data', function(data) {
+			// Do Awesome Stuff!
+			var profileViewModel = this;
+
+			profileViewModel.user = data;
 
 		}]);
 })();
