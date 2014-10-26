@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('NavbarCtrl', ['$location', function($location) {
+		.controller('NavbarCtrl', ['$location', '$auth', '$scope', function($location, $auth, $scope) {
 			var navVM = this;
 
 			navVM.isActive = function (r) {
@@ -16,5 +16,9 @@
             };
 
 			navVM.isCollapsed = true;
+
+			navVM.userLogged = function() {
+				return $auth.isAuthenticated();
+			};
 		}]);
 })();

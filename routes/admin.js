@@ -1,6 +1,7 @@
 'use strict';
 
 exports.index = function(req, res) {
+  res.header('Access-Control-Allow-Origin', "*")
   res.render('admin/index', { user: req.user });
 };
 

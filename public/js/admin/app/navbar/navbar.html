@@ -16,6 +16,8 @@
     </ul>
 
 	<ul class="nav navbar-nav navbar-right">
+        <li data-toggle="collapse" data-target="#main-nav" data-ng-show="!navVM.userLogged()"><a href="#/login">Log In</a></li>
+        <li data-toggle="collapse" data-target="#main-nav" data-ng-show="navVM.userLogged()"><a href="#/logout">Log Out</a></li>
 	</ul>
     </div>
   </div>

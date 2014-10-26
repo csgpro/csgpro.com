@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
-		.config(['$routeProvider', function($routeProvider) {
+	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
+		.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',
@@ -16,14 +16,52 @@
 					templateUrl: 'posts/posts.html',
 					title: 'Posts',
 					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if (!$auth.isAuthenticated()) {
+								return $location.path('/login');
+							}
+						}],
 						data: ['httpService', function(httpService) {
 							return httpService.getCollection('posts');
 						}]
 					}
 				})
+				.when('/login', {
+					controller: 'LoginCtrl',
+					controllerAs: 'loginViewModel',
+					templateUrl: 'login/login.html',
+					title: 'Login'
+				})
+				.when('/logout', {
+					controller: 'LoginCtrl',
+					resolve: {
+						authenticated: ['$location', '$auth', function($location, $auth) {
+							if ($auth.isAuthenticated()) {
+								$auth.logout().then(function() {
+									return $location.path('/');
+								});
+							}
+						}]
+					}
+				})
+				.when('/profile', {
+					controller: 'ProfileCtrl',
+					controllerAs: 'profileViewModel',
+					templateUrl: 'profile/profile.html',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getItem('users', 'me');
+						}]
+					}
+				})
 				.otherwise({
 					redirectTo: '/'
-				})
+				});
+
+			$authProvider.twitter({
+		      url: '/auth/twitter'
+		    });
+
 		}]);
 })();
 
@@ -50,7 +88,7 @@
     var configData = {
         'CONFIG': {
             'APP_VERSION': '1.0.0',
-            'API_URL': '/api/admin/',
+            'API_URL': '/api/',
         }
     };
     angular.forEach(configData, function(key,value) {
@@ -75,7 +113,20 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('NavbarCtrl', ['$location', function($location) {
+		.controller('LoginCtrl', ['$auth', function($auth) {
+			var loginViewModel = this;
+
+			loginViewModel.authenticate = function(provider) {
+				$auth.authenticate(provider);
+			}
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('NavbarCtrl', ['$location', '$auth', '$scope', function($location, $auth, $scope) {
 			var navVM = this;
 
 			navVM.isActive = function (r) {
@@ -89,6 +140,10 @@
             };
 
 			navVM.isCollapsed = true;
+
+			navVM.userLogged = function() {
+				return $auth.isAuthenticated();
+			};
 		}]);
 })();
 
@@ -107,7 +162,7 @@
 			};
 
 			var editCell = function () {
-				return '<div><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
+				return '<div class="grid-actions ui-grid-cell-contents"><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
 			};
 
 			postsViewModel.gridOptions = {
@@ -124,6 +179,19 @@
 				],
 				rowTemplate: 'partials/clickable-row.html'
 			};
+
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('ProfileCtrl', ['data', function(data) {
+			// Do Awesome Stuff!
+			var profileViewModel = this;
+
+			profileViewModel.user = data;
 
 		}]);
 })();

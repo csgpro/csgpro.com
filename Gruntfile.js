@@ -82,7 +82,8 @@ module.exports = function(grunt) {
                 'public/js/admin/libs/angular-route.min.js',
                 'public/js/admin/libs/angular-animate.min.js',
                 'public/js/admin/libs/ui-bootstrap-tpls-0.11.2.min.js',
-                'public/js/admin/libs/ui-grid-stable.min.js'],
+                'public/js/admin/libs/ui-grid-stable.min.js',
+                'public/js/admin/libs/satellizer.min.js'],
           dest: 'public/js/admin-libs.js'
       }
       , concatAdminApp: {
