@@ -16,7 +16,8 @@
     </ul>
 
 	<ul class="nav navbar-nav navbar-right">
-        <li data-toggle="collapse" data-target="#main-nav" data-ng-show="!navVM.userLogged()"><a href="#/login">Log In</a></li>
+        <li data-toggle="collapse" data-target="#main-nav" data-ng-class="{active:navVM.isActive(['profile'])}" data-ng-show="navVM.userLogged()"><a href="#/profile"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li data-toggle="collapse" data-ng-class="{active:navVM.isActive(['login'])}"  data-target="#main-nav" data-ng-show="!navVM.userLogged()"><a href="#/login">Log In</a></li>
         <li data-toggle="collapse" data-target="#main-nav" data-ng-show="navVM.userLogged()"><a href="#/logout">Log Out</a></li>
 	</ul>
     </div>
