@@ -15,8 +15,7 @@ var express          = require('express')
   , http             = require('http')
   , path             = require('path')
   , c                = require('nconf')
-  , db               = require('./modules/db.js')
-  , db2              = require('./modules/db2.js')
+  , db               = require('./modules/db2.js')
   , admin            = require('./routes/admin')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
@@ -25,6 +24,7 @@ var express          = require('express')
   , jwt              = require('jwt-simple')
   , moment           = require('moment')
   , qs               = require('querystring')
+  , request          = require('request')
   , app = module.exports = express()
   , port             = 3000;
 
@@ -41,7 +41,7 @@ var TWITTER_CONSUMER_KEY       = c.get('TWITTER_CONSUMER_KEY')
   , WINDOWS_LIVE_CLIENT_ID     = c.get('WINDOWS_LIVE_CLIENT_ID')
   , WINDOWS_LIVE_CLIENT_SECRET = c.get('WINDOWS_LIVE_CLIENT_SECRET')
   , WINDOWS_LIVE_CALLBACK_URL  = c.get('WINDOWS_LIVE_CALLBACK_URL')
-  , TOKEN_SECRET             = c.get('SESSION_SECRET');
+  , SESSION_SECRET             = c.get('SESSION_SECRET');
 
 /**********************************
  * SETTINGS / MIDDLEWARE
@@ -53,7 +53,7 @@ app.use(express.compress());
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.session({ secret: TOKEN_SECRET }));
+app.use(express.session({ secret: SESSION_SECRET }));
 
 /**************
  * Robots.txt redirect
@@ -81,7 +81,7 @@ function ensureAuthenticated(req, res, next) {
     }
 
     var token = req.headers.authorization.split(' ')[1];
-    var payload = jwt.decode(token, TOKEN_SECRET);
+    var payload = jwt.decode(token, SESSION_SECRET);
 
     if (payload.exp <= moment().unix()) {
         return res.status(401).send({ message: 'Token has expired' });
@@ -95,12 +95,16 @@ function ensureAuthenticated(req, res, next) {
 * JWT TIME
 ***************/
 function createToken(user) {
-    var payload = {
-        sub: user.id,
-        iat: moment().unix(),
-        exp: moment().add(14, 'days').unix()
-    };
-    return jwt.encode(payload, TOKEN_SECRET);
+    if(user.id) {
+        var payload = {
+            sub: user.id,
+            iat: moment().unix(),
+            exp: moment().add(14, 'days').unix()
+        };
+        return jwt.encode(payload, SESSION_SECRET);
+    } else {
+        return null;
+    }
 }
 
 
@@ -139,7 +143,7 @@ app.delete('/api/posts/:id', api.posts.deletePost);
 
 /* USERS */
 app.get('/api/users', api.users.getUsers);
-app.get('/api/users/:id', api.users.getUserByID);
+app.get('/api/users/:id', ensureAuthenticated, api.users.getUserByID);
 app.get('/api/users/other/:search', api.users.getUserByOther);
 app.post('/api/users', api.users.createUser);
 app.patch('/api/users/:id', api.users.updateUser);
@@ -155,7 +159,65 @@ app.delete('/api/topics/:id', api.topics.deleteTopic);
 /*****************
  * TWITTER
  ****************/
+app.get('/auth/twitter', function(req, res) {
+    var requestTokenUrl = 'https://api.twitter.com/oauth/request_token';
+    var accessTokenUrl = 'https://api.twitter.com/oauth/access_token';
+    var authenticateUrl = 'https://api.twitter.com/oauth/authenticate';
 
+    if (!req.query.oauth_token || !req.query.oauth_verifier) {
+        var requestTokenOauth = {
+            consumer_key: TWITTER_CONSUMER_KEY,
+            consumer_secret: TWITTER_CONSUMER_SECRET,
+            callback: TWITTER_CALLBACK_URL
+        };
+
+        // Step 1. Obtain request token for the authorization popup.
+        request.post({ url: requestTokenUrl, oauth: requestTokenOauth }, function(err, response, body) {
+            var oauthToken = qs.parse(body);
+            var params = qs.stringify({ oauth_token: oauthToken.oauth_token });
+
+            // Step 2. Redirect to the authorization screen.
+            res.redirect(authenticateUrl + '?' + params);
+        });
+    } else {
+    var accessTokenOauth = {
+        consumer_key: TWITTER_CONSUMER_KEY,
+        consumer_secret: TWITTER_CONSUMER_SECRET,
+        token: req.query.oauth_token,
+        verifier: req.query.oauth_verifier
+    };
+
+    // Step 3. Exchange oauth token and oauth verifier for access token.
+    request.post({ url: accessTokenUrl, oauth: accessTokenOauth }, function(err, response, profile) {
+        profile = qs.parse(profile);
+
+        var searchStr = '$filter=TwitterHandle eq \'@' + profile.screen_name + '\'';
+        db.getItem('users', searchStr, function(err, data) {
+            if (err) {
+                var msg = {
+                    status: 'fail',
+                    message: 'Error Retrieving User',
+                    error: err
+                };
+                return res.send(JSON.stringify(msg));
+            } else {
+                if(req.headers.authorization && req.headers.authorization.indexOf('undefined') == -1) {
+                    var token = req.headers.authorization.split(' ')[1];
+                    var payload = jwt.decode(token, SESSION_SECRET);
+
+                    if (payload.sub !== data.id) {
+                        res.status(400).send({ message: 'User not found' });
+                    } else {
+                        res.send({ token: createToken(data[0]) });
+                    }
+                } else {
+                    res.send({ token: createToken(data[0]) });
+                }
+            }
+        });
+    });
+    }
+});
 
 /*****************
  * WINDOWS LIVE
