@@ -25,7 +25,29 @@ self.getUsers = function (req, res) {
 
 self.getUserByID = function (req, res) {
 	var id = req.params.id;
+	if (!parseInt(id)) {
+		if(id === 'me') {
+			id = req.user;
+		} else {
+			res.render('404');
+		}
+	}
 	db.getItem('users', id, function (err, data) {
+		if (err) {
+			var msg = {
+				status: 'fail',
+				message: 'Error Retrieving User',
+				error: err
+			};
+			res.send(JSON.stringify(msg));
+		} else {
+			res.send(data);
+		}
+	});
+};
+
+self.getCurrentUser = function (req, res) {
+	db.getItem('users', req.user, function (err, data) {
 		if (err) {
 			var msg = {
 				status: 'fail',
