@@ -35,7 +35,7 @@ exports.sharepoint = function(req, res){
 };
 
 exports.powerbi = function(req, res){
-    var details = 'Date: October 15, 2014<br />' +
+    var details = 'Date: November 13, 2014<br />' +
                   'Time: 8:15am to 9:45am<br />' +
                   'Place: Microsoft Boise Office - 401 W. Front Street Suite 600 Boise, ID 83702';
   res.render('register-power-bi', {
