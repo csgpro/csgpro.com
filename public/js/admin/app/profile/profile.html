@@ -30,6 +30,7 @@
 				<div>
 					<label class="control-label">Profile Image URL</label>
 					<input type="text" class="form-control" data-ng-model="profileViewModel.user.ProfileUrl" />
+					<button class="btn btn-primary" ng-file-select="profileViewModel.onFileSelect($files)" data-multiple="true" name="image">Upload Image</button>
 				</div>
 			</div>
 	</div>
