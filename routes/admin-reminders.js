@@ -25,7 +25,7 @@ var updateFileObject = function(file) {
         break;
     case 'power-bi-registrants.csv':
         file.title = 'Fast-Tracking Data Mastery with Power BI Event Registration';
-        file.details = 'Date: October 15, 2014<br />' +
+        file.details = 'Date: November 13, 2014<br />' +
                       'Time: 8:15am to 9:45am<br />' +
                       'Place: Microsoft Boise Office - 401 W. Front Street Suite 600 Boise, ID 83702';
         file.headerimg = '';
