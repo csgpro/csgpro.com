@@ -78,12 +78,15 @@ module.exports = function(grunt) {
   }
   , concat: {
       concatAdminLibs: {
-          src: ['public/js/admin/libs/angular.min.js',
+          src: ['public/js/admin/libs/angular-file-upload-shim.min.js',
+                'public/js/admin/libs/angular.min.js',
                 'public/js/admin/libs/angular-route.min.js',
                 'public/js/admin/libs/angular-animate.min.js',
                 'public/js/admin/libs/ui-bootstrap-tpls-0.11.2.min.js',
                 'public/js/admin/libs/ui-grid-stable.min.js',
-                'public/js/admin/libs/satellizer.min.js'],
+                'public/js/admin/libs/satellizer.min.js',
+                'public/js/admin/libs/angular-file-upload.min.js',
+                'public/js/admin/libs/toaster.js'],
           dest: 'public/js/admin-libs.js'
       }
       , concatAdminApp: {
