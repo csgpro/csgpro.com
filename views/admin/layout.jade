@@ -13,6 +13,11 @@ html(data-ng-app='app', data-ng-controller='AppCtrl as appViewModel')
 
     div(data-ng-include='\'navbar/navbar.html\'')
 
+
+    div(data-ng-include='\'toolbar/toolbar.html\'')
+
+    div(data-ng-include='\'partials/toaster.html\'')
+
     div(data-ng-view='').container
 
     script(src='/js/admin-libs.js')
