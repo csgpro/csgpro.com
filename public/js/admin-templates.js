@@ -47,6 +47,11 @@ angular.module('app').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('partials/toaster.html',
+    "<toaster-container></toaster-container>\n"
+  );
+
+
   $templateCache.put('posts/posts.html',
     "<h2>Posts</h2>\n" +
     "\n" +
