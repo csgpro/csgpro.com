@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection' ])
+	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection', 'angularFileUpload', 'toaster' ])
 		.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
 			$routeProvider
 				.when('/', {
