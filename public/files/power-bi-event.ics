@@ -4,45 +4,103 @@ VERSION:2.0
 METHOD:PUBLISH
 X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 BEGIN:VTIMEZONE
-TZID:Pacific Standard Time
+TZID:Mountain Standard Time
 BEGIN:STANDARD
 DTSTART:16011104T020000
 RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11
-TZOFFSETFROM:-0700
-TZOFFSETTO:-0800
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0700
 END:STANDARD
 BEGIN:DAYLIGHT
 DTSTART:16010311T020000
 RRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3
-TZOFFSETFROM:-0800
-TZOFFSETTO:-0700
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0600
 END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 CLASS:PUBLIC
-CREATED:20140923T231422Z
-DESCRIPTION: \n\n \n
-DTEND;TZID="Pacific Standard Time":20141015T094500
-DTSTAMP:20140923T231422Z
-DTSTART;TZID="Pacific Standard Time":20141015T081500
-LAST-MODIFIED:20140923T231422Z
+CREATED:20141024T162142Z
+DESCRIPTION:Data is changing everything\, including what it takes to win in
+	 business. Are you ready? Are you savvy about your data? If not\, you're n
+	ot alone. The roadblocks are formidable: too much data from too many sourc
+	es\; not enough data understanding on the business side\; low quality data
+	 or incomprehensible data\; limited analysis tool sets.\nWhat does it take
+	 to master your data? What does that look like and how do you get there as
+	 painlessly as possible? Why is Power BI such a smart way to go?\nJoin CSG
+	 Pro to look at a new paradigm for building your organizational data exper
+	tise. We'll talk technology and tools\, but we'll be focused on strategy. 
+	\n• 	Learn what skill base you need	\n• 	Learn what management commitm
+	ent looks like	\n• 	Learn why (and how) Power BI is a fast track way to 
+	get there	\n• 	Understand how to start small for a big payout	\n\nAbout 
+	the presenter\, CSG Pro\nCSG Pro specializes in building custom business s
+	oftware and interactive tools that allow you to collaborate and connect wi
+	th colleagues\, customers and vendors. Based in Portland\, Oregon and main
+	taining a presence in Boise\, Idaho\, CSG Pro has served leading companies
+	 and public agencies since 1993.\n
+DTEND;TZID="Mountain Standard Time":20141113T094500
+DTSTAMP:20141024T162142Z
+DTSTART;TZID="Mountain Standard Time":20141113T081500
+LAST-MODIFIED:20141024T162142Z
 LOCATION:Microsoft Boise Office: 401 W. Front Street Suite 600 Boise\, ID 83702
 ORGANIZER;CN="CSG Pro":mailto:info@csgpro.com
 PRIORITY:5
 SEQUENCE:0
 SUMMARY;LANGUAGE=en-us:Fast-Tracking Data Mastery with Power BI
 TRANSP:OPAQUE
-UID:040000008200E00074C5B7101A82E00800000000F008B6CD48D7CF01000000000000000
-	01000000087028FE4987A824F8A51649F059B02C0
+UID:040000008200E00074C5B7101A82E00800000000C0A422E969EFCF01000000000000000
+	0100000000F4E6637B2B71345B1F7BF223D09E63F
 X-ALT-DESC;FMTTYPE=text/html:<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//E
 	N">\n<HTML>\n<HEAD>\n<META NAME="Generator" CONTENT="MS Exchange Server ve
-	rsion rmj.rmm.rup.rpr">\n<TITLE></TITLE>\n</HEAD>\n<BODY>\n<!-- Converted
+	rsion rmj.rmm.rup.rpr">\n<TITLE></TITLE>\n</HEAD>\n<BODY>\n<!-- Converted 
 	from text/rtf format -->\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LAN
-	G="en-us"><FONT FACE="Calibri"></FONT></SPAN><SPAN LANG="en-us">&nbsp\;</S
-	PAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN
-	></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FAC
-	E="Calibri"></FONT></SPAN><SPAN LANG="en-us">&nbsp\;</SPAN></P>\n\n</BODY>
-	\n</HTML>
+	G="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">Data is changing ev
+	erything\, including what it takes to win in business. Are you ready? Are 
+	you savvy about your data? If not\, you're not alone. The roadblocks are f
+	ormidable: too much data from too many sources\; not enough data understan
+	ding on the business side\; low quality data or incomprehensible data\; li
+	mited analysis tool sets.</FONT></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-u
+	s"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">
+	What does it take to master your data? What does that look like and how do
+	 you get there as painlessly as possible? Why is Power BI such a smart way
+	 to go?</FONT></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LA
+	NG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">Join CSG Pro to lo
+	ok at a new paradigm for building your organizational data expertise. We'l
+	l talk technology and tools\, but we'll be focused on strategy. </FONT></S
+	PAN></P>\n\n<P DIR=LTR ALIGN=RIGHT><SPAN LANG="en-us"></SPAN><SPAN LANG="e
+	n-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Times New Roman">• &nbsp\;&
+	nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
+	ANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE="Arial">Learn what skill
+	 base you need&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="e
+	n-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SP
+	AN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Times New Roman">•
+	 &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SP
+	AN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE="Arial">Learn 
+	what management commitment looks like&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></
+	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us
+	"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
+	ANG="en-us"><FONT FACE="Times New Roman">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;
+	&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><
+	SPAN LANG="en-us"> <FONT FACE="Arial">Learn why (and how) Power BI is a fa
+	st track way to get there&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></
+	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG=
+	"en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Ti
+	mes New Roman">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN
+	 LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT F
+	ACE="Arial">Understand how to start small for a big payout&nbsp\;</FONT></
+	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us
+	"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
+	ANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SP
+	AN LANG="en-us"></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN 
+	LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT COL
+	OR="#757575" SIZE=4 FACE="Arial">About the presenter\, CSG Pro</FONT></SPA
+	N></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><
+	SPAN LANG="en-us"><FONT SIZE=2 FACE="Arial">CSG Pro specializes in buildin
+	g custom business software and interactive tools that allow you to collabo
+	rate and connect with colleagues\, customers and vendors. Based in Portlan
+	d\, Oregon and maintaining a presence in Boise\, Idaho\, CSG Pro has serve
+	d leading companies and public agencies since 1993.</FONT></SPAN><SPAN LAN
+	G="en-us"></SPAN></P>\n\n</BODY>\n</HTML>
 X-MICROSOFT-CDO-BUSYSTATUS:BUSY
 X-MICROSOFT-CDO-IMPORTANCE:1
 X-MICROSOFT-DISALLOW-COUNTER:FALSE
