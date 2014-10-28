@@ -1,0 +1,34 @@
+<div ng-controller="ToolbarCtrl" class="toolbar">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="pull-left">
+                    <button class="btn btn-xs btn-default" ng-click="returnToList()" ng-show="returnButtonEnabled()">
+                        <span class="glyphicon glyphicon-th-list"></span>
+                    </button>
+                    &nbsp;
+                </div>
+                <h2 class="page-title">
+                    {{ pageTitle }}
+                </h2>
+            </div>
+            <div class="col-sm-8">
+
+                <div class="pull-right">
+                    <button class="btn btn-xs btn-primary" ng-click="addItem()" ng-show="addButtonEnabled()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button class="btn btn-xs btn-primary" ng-click="editItem()" ng-show="editButtonEnabled()">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-success btn-xs" ng-click="saveRecord()" ng-show="saveButtonEnabled()">
+                        <span class="glyphicon glyphicon-save"></span> Save
+                    </button>
+                    <button class="btn btn-warning btn-xs" ng-click="cancel()" ng-show="cancelButtonEnabled()">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
