@@ -5,8 +5,10 @@ var self = this,
 	check = require('validator').check,
 	blob = require('../modules/blog-storage');
 
+var maxFileSize = 2 * 1024 * 1024;
+
 self.saveAuthorImage = function(req, res) {
-	var image = req.files.image;
+	var image = req.files.file;
 
 	// Grab the text after the `/` and use that type
 	var extension = image.type.match(/\/(\w+)/)[1];
