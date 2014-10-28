@@ -113,10 +113,49 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "\t\t\t\t<div>\n" +
     "\t\t\t\t\t<label class=\"control-label\">Profile Image URL</label>\n" +
     "\t\t\t\t\t<input type=\"text\" class=\"form-control\" data-ng-model=\"profileViewModel.user.ProfileUrl\" />\n" +
+    "\t\t\t\t\t<button class=\"btn btn-primary\" ng-file-select=\"profileViewModel.onFileSelect($files)\" data-multiple=\"true\" name=\"image\">Upload Image</button>\n" +
     "\t\t\t\t</div>\n" +
     "\t\t\t</div>\n" +
     "\t</div>\n" +
     "\t</div>\n" +
+    "</div>\n"
+  );
+
+
+  $templateCache.put('toolbar/toolbar.html',
+    "<div ng-controller=\"ToolbarCtrl\" class=\"toolbar\">\n" +
+    "    <div class=\"container\">\n" +
+    "        <div class=\"row\">\n" +
+    "            <div class=\"col-sm-4\">\n" +
+    "                <div class=\"pull-left\">\n" +
+    "                    <button class=\"btn btn-xs btn-default\" ng-click=\"returnToList()\" ng-show=\"returnButtonEnabled()\">\n" +
+    "                        <span class=\"glyphicon glyphicon-th-list\"></span>\n" +
+    "                    </button>\n" +
+    "                    &nbsp;\n" +
+    "                </div>\n" +
+    "                <h2 class=\"page-title\">\n" +
+    "                    {{ pageTitle }}\n" +
+    "                </h2>\n" +
+    "            </div>\n" +
+    "            <div class=\"col-sm-8\">\n" +
+    "\n" +
+    "                <div class=\"pull-right\">\n" +
+    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"addItem()\" ng-show=\"addButtonEnabled()\">\n" +
+    "                        <span class=\"glyphicon glyphicon-plus\"></span>\n" +
+    "                    </button>\n" +
+    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"editItem()\" ng-show=\"editButtonEnabled()\">\n" +
+    "                        <span class=\"glyphicon glyphicon-pencil\"></span>\n" +
+    "                    </button>\n" +
+    "                    <button class=\"btn btn-success btn-xs\" ng-click=\"saveRecord()\" ng-show=\"saveButtonEnabled()\">\n" +
+    "                        <span class=\"glyphicon glyphicon-save\"></span> Save\n" +
+    "                    </button>\n" +
+    "                    <button class=\"btn btn-warning btn-xs\" ng-click=\"cancel()\" ng-show=\"cancelButtonEnabled()\">\n" +
+    "                        <span class=\"glyphicon glyphicon-remove\"></span> Cancel\n" +
+    "                    </button>\n" +
+    "                </div>\n" +
+    "            </div>\n" +
+    "        </div>\n" +
+    "    </div>\n" +
     "</div>\n"
   );
 
