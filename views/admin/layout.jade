@@ -18,7 +18,7 @@ html(data-ng-app='app', data-ng-controller='AppCtrl as appViewModel')
     div(data-ng-include='\'partials/toaster.html\'')
 
     div(data-cg-busy='loadingData').view-container
-        div(data-ng-view='').container
+        div(data-ng-view='').container.main
 
     script(src='/js/admin-libs.js')
     script(src='/js/admin-app.js')
