@@ -2,13 +2,19 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('ProfileCtrl', ['data', '$filter', '$upload', function(data, $filter, $upload) {
+		.controller('ProfileCtrl', ['data', '$filter', '$upload', 'common', function(data, $filter, $upload, common) {
 			// Do Awesome Stuff!
 			var profileViewModel = this;
 
-			profileViewModel.user = data;
+			profileViewModel.user = {
+				FullName: data.FullName,
+				IsAdmin: data.IsAdmin,
+				ProfileUrl: data.ProfileUrl,
+				TwitterHandle: data.TwitterHandle,
+				Username: data.Username
+			}
 
-			profileViewModel.user.CreateDateDisplay = $filter('date')(profileViewModel.user.CreateDate);
+			profileViewModel.user.CreateDateDisplay = $filter('date')(data.CreateDate);
 
 			profileViewModel.onFileSelect = function($files) {
 				for (var i = 0; i < $files.length; i++) {
@@ -23,6 +29,23 @@
 					});
 				}
 			};
+
+			profileViewModel.canEdit = false;
+
+			if (common.canEdit() > 0) {
+                common.enableSaveButton = true;
+                common.enableCancelButton = true;
+                profileViewModel.canEdit = true;
+            } else {
+                common.enableEditButton = true;
+                common.enableReturnButton = true;
+            }
+
+			common.setSaveRecordData({
+				entity: 'users',
+				item: profileViewModel.user,
+				id: 'me'
+			});
 
 		}]);
 })();
