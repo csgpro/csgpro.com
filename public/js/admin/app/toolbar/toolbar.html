@@ -1,9 +1,9 @@
-<div ng-controller="ToolbarCtrl" class="toolbar">
+<div ng-controller="ToolbarCtrl as toolbar" class="toolbar">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
                 <div class="pull-left">
-                    <button class="btn btn-xs btn-default" ng-click="returnToList()" ng-show="returnButtonEnabled()">
+                    <button class="btn btn-xs btn-default" ng-click="toolbar.returnToList()" ng-show="toolbar.returnButtonEnabled()">
                         <span class="glyphicon glyphicon-th-list"></span>
                     </button>
                     &nbsp;
@@ -15,16 +15,16 @@
             <div class="col-sm-8">
 
                 <div class="pull-right">
-                    <button class="btn btn-xs btn-primary" ng-click="addItem()" ng-show="addButtonEnabled()">
+                    <button class="btn btn-xs btn-primary" ng-click="toolbar.addItem()" ng-show="toolbar.addButtonEnabled()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                    <button class="btn btn-xs btn-primary" ng-click="editItem()" ng-show="editButtonEnabled()">
+                    <button class="btn btn-xs btn-primary" ng-click="toolbar.editItem()" ng-show="editButtonEnabled()">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button class="btn btn-success btn-xs" ng-click="saveRecord()" ng-show="saveButtonEnabled()">
+                    <button class="btn btn-success btn-xs" ng-click="toolbar.saveRecord()" ng-show="toolbar.saveButtonEnabled()">
                         <span class="glyphicon glyphicon-save"></span> Save
                     </button>
-                    <button class="btn btn-warning btn-xs" ng-click="cancel()" ng-show="cancelButtonEnabled()">
+                    <button class="btn btn-warning btn-xs" ng-click="toolbar.cancel()" ng-show="toolbar.cancelButtonEnabled()">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
                     </button>
                 </div>

@@ -1,30 +1,33 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('ToolbarCtrl', ['$scope','$rootScope','common', function ($scope, $rootScope, common) {
-            $scope.saveRecord = function () { common.saveRecord(); };
-            $scope.cancel = function () { common.cancel(); };
-            $scope.addItem = function () { common.addItem(); };
-            $scope.editItem = function () { common.editItem(); };
-            $scope.returnToList = function () { common.returnToList(); };
+        .controller('ToolbarCtrl', ['$rootScope','common', function ($rootScope, common) {
 
-            $scope.saveButtonEnabled = function () {
+            var toolbar = this;
+
+            toolbar.saveRecord = function () { common.saveRecord(); };
+            toolbar.cancel = function () { common.cancel(); };
+            toolbar.addItem = function () { common.addItem(); };
+            toolbar.editItem = function () { common.editItem(); };
+            toolbar.returnToList = function () { common.returnToList(); };
+
+            toolbar.saveButtonEnabled = function () {
                 return common.enableSaveButton;
             };
 
-            $scope.cancelButtonEnabled = function () {
+            toolbar.cancelButtonEnabled = function () {
                 return common.enableCancelButton;
             };
 
-            $scope.addButtonEnabled = function () {
+            toolbar.addButtonEnabled = function () {
                 return common.enableAddButton;
             };
 
-            $scope.editButtonEnabled = function () {
+            toolbar.editButtonEnabled = function () {
                 return common.enableEditButton;
             };
 
-            $scope.returnButtonEnabled = function () {
+            toolbar.returnButtonEnabled = function () {
                 return common.enableReturnButton;
             };
 
