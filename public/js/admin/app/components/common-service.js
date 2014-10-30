@@ -36,17 +36,25 @@
             self.saveRecord = function () {
                 var entity = self.saveRecordData.entity;
                 var item = self.saveRecordData.item;
+                var id = self.saveRecordData.id;
+                var route;
                 var data = {},
                     singularItemDisplayName = self.upperCaseString(self.singularString(entity));
 
-                data[self.upperCaseString(entity)] = [item];
+                data[entity] = [item];
 
-                if (item.id) {
-                    httpService.updateItem(entity, item.id, data).then(function (item) {
+                if (id) {
+                    httpService.updateItem(entity, id, data).then(function (item) {
                         // Output success message
                         toaster.pop('success', 'Saved ' + singularItemDisplayName);
 
-                        $location.url('/' + entity);
+                        if(entity === 'users') {
+                            route = 'profile'
+                        } else {
+                            route = entity;
+                        }
+
+                        $location.url('/' + route);
                     });
                 } else {
                     httpService.createItem(entity, data).then(function (res) {
@@ -131,7 +139,7 @@
 
             self.canEdit = function () {
                 var path = $location.path();
-                var pattern = /\badd\b|\bedit\b/;
+                var pattern = /\badd\b|\bedit\b|\bprofile\b/;
                 return path.search(pattern);
             };
 

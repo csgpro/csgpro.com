@@ -62,7 +62,7 @@
 				var url = baseApiUrl + entity + '/' + id;
 
 				var request = $rootScope.loadingData = $http({
-					method: "put",
+					method: "patch",
 					url: url,
 					data: data
 				});
