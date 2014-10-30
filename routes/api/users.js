@@ -109,22 +109,33 @@ self.createUser = function (req, res) {
 };
 
 self.updateUser = function (req, res) {
-	db.updateItem('users', req.params.id, req.body, function (err, data) {
-		if (err) {
-			var msg = {
-				status: 'fail',
-				message: 'Error Updating User',
-				error: err
-			};
-		} else {
-			var msg = {
-				status: 'success',
-				message: 'Successfully Updated User',
-				id: data.id
-			};
+	if(req.body.users) {
+		if(req.params.id === 'me') {
+			req.params.id = req.user;
 		}
-		res.send(JSON.stringify(msg));
-	});
+		db.updateItem('users', req.params.id, req.body.users[0], function (err, data) {
+			if (err) {
+				var msg = {
+					status: 'fail',
+					message: 'Error Updating User',
+					error: err
+				};
+			} else {
+				var msg = {
+					status: 'success',
+					message: 'Successfully Updated User',
+					id: data.id
+				};
+			}
+			res.send(JSON.stringify(msg));
+		});
+	} else {
+		var msg = {
+			status: 'fail',
+			message: 'Error Updating User',
+			error: 'Received Malformed Data Object'
+		}
+	}
 };
 
 self.deleteUser = function (req, res) {
