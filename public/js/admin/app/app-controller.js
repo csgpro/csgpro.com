@@ -2,13 +2,12 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('AppCtrl', ['$rootScope', '$route', function($rootScope, $route) {
+		.controller('AppCtrl', ['$rootScope', '$route', 'common', function($rootScope, $route, common) {
 			var appViewModel = this;
 
-			appViewModel.pageTitle = 'Loading...';
-
 			$rootScope.$on('$routeChangeSuccess', function () {
-				appViewModel.pageTitle = $route.current.title;
+				appViewModel.pageTitle = $rootScope.pageTitle = $route.current.title;
+				common.toolbarReset();
 			});
 		}]);
 })();
