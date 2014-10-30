@@ -53,41 +53,11 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/posts.html',
-    "<h2>Posts</h2>\n" +
-    "\n" +
-    "<div ui-grid=\"postsViewModel.gridOptions\" external-scopes=\"postsViewModel\" class=\"ui-grid\"></div>\n" +
-    "<!-- <table class=\"table table-striped table-hover\">\n" +
-    "    <thead>\n" +
-    "        <tr>\n" +
-    "\t\t\t<th width=\"70\">ID</th>\n" +
-    "\t\t\t<th width=\"70\">Author</th>\n" +
-    "            <th>Post Title</th>\n" +
-    "            <th width=\"100\">Topics</th>\n" +
-    "            <th width=\"100\">Category</th>\n" +
-    "\t\t\t<th width=\"70\">Published</th>\n" +
-    "\t\t\t<th width=\"70\">Updated</th>\n" +
-    "\t\t\t<th width=\"70\"></th>\n" +
-    "        </tr>\n" +
-    "    </thead>\n" +
-    "    <tbody>\n" +
-    "        <tr ng-repeat=\"post in postsViewModel.posts\" ng-click=\"postsViewModel.viewItem(post.id)\" class=\"selectable\">\n" +
-    "\t\t\t<td ng-bind=\"post.id\"></td>\n" +
-    "\t\t\t<td ng-bind=\"post.AuthorUsername\"></td>\n" +
-    "            <td ng-bind=\"post.Title\"></td>\n" +
-    "            <td ng-bind=\"post.Topics\"></td>\n" +
-    "            <td ng-bind=\"post.Category\"></td>\n" +
-    "\t\t\t<td ng-bind=\"post.PublishDate | date : 'M-dd-yyyy'\"></td>\n" +
-    "\t\t\t<td ng-bind=\"post.UpdateDate | date : 'M-dd-yyyy'\"></td>\n" +
-    "\t\t\t<td></td>\n" +
-    "        </tr>\n" +
-    "    </tbody>\n" +
-    "</table> -->\n"
+    "<div ui-grid=\"postsViewModel.gridOptions\" external-scopes=\"postsViewModel\" class=\"ui-grid\"></div>\n"
   );
 
 
   $templateCache.put('profile/profile.html',
-    "<h2>Profile</h2>\n" +
-    "\n" +
     "<div class=\"panel panel-default\">\n" +
     "\t<div class=\"panel-heading\">\n" +
     "\t\t<h3 class=\"panel-title\">Details</h3>\n" +
@@ -128,12 +98,12 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('toolbar/toolbar.html',
-    "<div ng-controller=\"ToolbarCtrl\" class=\"toolbar\">\n" +
+    "<div ng-controller=\"ToolbarCtrl as toolbar\" class=\"toolbar\">\n" +
     "    <div class=\"container\">\n" +
     "        <div class=\"row\">\n" +
     "            <div class=\"col-sm-4\">\n" +
     "                <div class=\"pull-left\">\n" +
-    "                    <button class=\"btn btn-xs btn-default\" ng-click=\"returnToList()\" ng-show=\"returnButtonEnabled()\">\n" +
+    "                    <button class=\"btn btn-xs btn-default\" ng-click=\"toolbar.returnToList()\" ng-show=\"toolbar.returnButtonEnabled()\">\n" +
     "                        <span class=\"glyphicon glyphicon-th-list\"></span>\n" +
     "                    </button>\n" +
     "                    &nbsp;\n" +
@@ -145,16 +115,16 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "            <div class=\"col-sm-8\">\n" +
     "\n" +
     "                <div class=\"pull-right\">\n" +
-    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"addItem()\" ng-show=\"addButtonEnabled()\">\n" +
+    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"toolbar.addItem()\" ng-show=\"toolbar.addButtonEnabled()\">\n" +
     "                        <span class=\"glyphicon glyphicon-plus\"></span>\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"editItem()\" ng-show=\"editButtonEnabled()\">\n" +
+    "                    <button class=\"btn btn-xs btn-primary\" ng-click=\"toolbar.editItem()\" ng-show=\"editButtonEnabled()\">\n" +
     "                        <span class=\"glyphicon glyphicon-pencil\"></span>\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-success btn-xs\" ng-click=\"saveRecord()\" ng-show=\"saveButtonEnabled()\">\n" +
+    "                    <button class=\"btn btn-success btn-xs\" ng-click=\"toolbar.saveRecord()\" ng-show=\"toolbar.saveButtonEnabled()\">\n" +
     "                        <span class=\"glyphicon glyphicon-save\"></span> Save\n" +
     "                    </button>\n" +
-    "                    <button class=\"btn btn-warning btn-xs\" ng-click=\"cancel()\" ng-show=\"cancelButtonEnabled()\">\n" +
+    "                    <button class=\"btn btn-warning btn-xs\" ng-click=\"toolbar.cancel()\" ng-show=\"toolbar.cancelButtonEnabled()\">\n" +
     "                        <span class=\"glyphicon glyphicon-remove\"></span> Cancel\n" +
     "                    </button>\n" +
     "                </div>\n" +

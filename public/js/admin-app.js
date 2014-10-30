@@ -89,146 +89,13 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('AppCtrl', ['$rootScope', '$route', function($rootScope, $route) {
+		.controller('AppCtrl', ['$rootScope', '$route', 'common', function($rootScope, $route, common) {
 			var appViewModel = this;
 
-			appViewModel.pageTitle = 'Loading...';
-
 			$rootScope.$on('$routeChangeSuccess', function () {
-				appViewModel.pageTitle = $route.current.title;
+				appViewModel.pageTitle = $rootScope.pageTitle = $route.current.title;
+				common.toolbarReset();
 			});
-		}]);
-})();
-
-(function() {
-    'use strict';
-
-    angular.module('site-config',[]);
-
-    var configData = {
-        'CONFIG': {
-            'APP_VERSION': '1.0.0',
-            'API_URL': '/api/',
-        }
-    };
-    angular.forEach(configData, function(key,value) {
-        angular.module('site-config').constant(value,key);
-        // Load config constants
-    });
-
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('app')
-		.controller('HomeCtrl', [function() {
-			// Do Awesome Stuff!
-			var homeViewModel = this;
-
-		}]);
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('app')
-		.controller('LoginCtrl', ['$auth', function($auth) {
-			var loginViewModel = this;
-
-			loginViewModel.authenticate = function(provider) {
-				$auth.authenticate(provider);
-			}
-		}]);
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('app')
-		.controller('NavbarCtrl', ['$location', '$auth', '$scope', function($location, $auth, $scope) {
-			var navVM = this;
-
-			navVM.isActive = function (r) {
-                var routes = r.join('|'),
-                    regexStr = '^\/(' + routes + ')',
-                    path = new RegExp(regexStr);
-                if(r[0] === 'home' && $location.path() === '/') {
-                    return true;
-                }
-                return path.test($location.path());
-            };
-
-			navVM.isCollapsed = true;
-
-			navVM.userLogged = function() {
-				return $auth.isAuthenticated();
-			};
-		}]);
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('app')
-		.controller('PostsCtrl', ['data', '$timeout', function(data, $timeout) {
-			// Do Awesome Stuff!
-			var postsViewModel = this;
-
-			postsViewModel.posts = data;
-
-			postsViewModel.gridRowSelectAction = function(row) {
-				alert('id: ' + row.entity.id);
-			};
-
-			var editCell = function () {
-				return '<div class="grid-actions ui-grid-cell-contents"><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
-			};
-
-			postsViewModel.gridOptions = {
-				data: postsViewModel.posts,
-				columnDefs: [
-					{ name: 'id', width: '70' },
-					{ name: 'AuthorUsername', width: '100' },
-					{ name: 'Title' },
-					{ name: 'Topics', width: '100' },
-					{ name: 'Category', width: '100' },
-					{ name: 'PublishDate', width: '100' },
-					{ name: 'UpdateDate', width: '100' },
-					{ name: 'Actions', width: '100', cellTemplate: editCell() }
-				],
-				rowTemplate: 'partials/clickable-row.html'
-			};
-
-		}]);
-})();
-
-(function() {
-	'use strict';
-
-	angular.module('app')
-		.controller('ProfileCtrl', ['data', '$filter', '$upload', function(data, $filter, $upload) {
-			// Do Awesome Stuff!
-			var profileViewModel = this;
-
-			profileViewModel.user = data;
-
-			profileViewModel.user.CreateDateDisplay = $filter('date')(profileViewModel.user.CreateDate);
-
-			profileViewModel.onFileSelect = function($files) {
-				for (var i = 0; i < $files.length; i++) {
-					var file = $files[i];
-					profileViewModel.upload = $upload.upload({
-						url: '/upload/img/author',
-						file: file
-					}).progress(function(evt) {
-						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-					}).success(function(data, status, headers, config) {
-						profileViewModel.user.ProfileUrl = data.url;
-					});
-				}
-			};
-
 		}]);
 })();
 
@@ -270,17 +137,25 @@
             self.saveRecord = function () {
                 var entity = self.saveRecordData.entity;
                 var item = self.saveRecordData.item;
+                var id = self.saveRecordData.id;
+                var route;
                 var data = {},
                     singularItemDisplayName = self.upperCaseString(self.singularString(entity));
 
-                data[self.upperCaseString(entity)] = [item];
+                data[entity] = [item];
 
-                if (item.id) {
-                    httpService.updateItem(entity, item.id, data).then(function (item) {
+                if (id) {
+                    httpService.updateItem(entity, id, data).then(function (item) {
                         // Output success message
                         toaster.pop('success', 'Saved ' + singularItemDisplayName);
 
-                        $location.url('/' + entity);
+                        if(entity === 'users') {
+                            route = 'profile'
+                        } else {
+                            route = entity;
+                        }
+
+                        $location.url('/' + route);
                     });
                 } else {
                     httpService.createItem(entity, data).then(function (res) {
@@ -365,7 +240,7 @@
 
             self.canEdit = function () {
                 var path = $location.path();
-                var pattern = /\badd\b|\bedit\b/;
+                var pattern = /\badd\b|\bedit\b|\bprofile\b/;
                 return path.search(pattern);
             };
 
@@ -515,7 +390,7 @@
 				var url = baseApiUrl + entity + '/' + id;
 
 				var request = $rootScope.loadingData = $http({
-					method: "put",
+					method: "patch",
 					url: url,
 					data: data
 				});
@@ -545,33 +420,190 @@
 		}]);
 })();
 
+(function() {
+    'use strict';
+
+    angular.module('site-config',[]);
+
+    var configData = {
+        'CONFIG': {
+            'APP_VERSION': '1.0.0',
+            'API_URL': '/api/',
+        }
+    };
+    angular.forEach(configData, function(key,value) {
+        angular.module('site-config').constant(value,key);
+        // Load config constants
+    });
+
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('HomeCtrl', ['common', function(common) {
+			// Do Awesome Stuff!
+			var homeViewModel = this;
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('LoginCtrl', ['$auth', function($auth) {
+			var loginViewModel = this;
+
+			loginViewModel.authenticate = function(provider) {
+				$auth.authenticate(provider);
+			}
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('NavbarCtrl', ['$location', '$auth', '$scope', function($location, $auth, $scope) {
+			var navVM = this;
+
+			navVM.isActive = function (r) {
+                var routes = r.join('|'),
+                    regexStr = '^\/(' + routes + ')',
+                    path = new RegExp(regexStr);
+                if(r[0] === 'home' && $location.path() === '/') {
+                    return true;
+                }
+                return path.test($location.path());
+            };
+
+			navVM.isCollapsed = true;
+
+			navVM.userLogged = function() {
+				return $auth.isAuthenticated();
+			};
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('PostsCtrl', ['data', '$timeout', function(data, $timeout) {
+			// Do Awesome Stuff!
+			var postsViewModel = this;
+
+			postsViewModel.posts = data;
+
+			postsViewModel.gridRowSelectAction = function(row) {
+				alert('id: ' + row.entity.id);
+			};
+
+			var editCell = function () {
+				return '<div class="grid-actions ui-grid-cell-contents"><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
+			};
+
+			postsViewModel.gridOptions = {
+				data: postsViewModel.posts,
+				columnDefs: [
+					{ name: 'id', width: '70' },
+					{ name: 'AuthorUsername', width: '100' },
+					{ name: 'Title' },
+					{ name: 'Topics', width: '100' },
+					{ name: 'Category', width: '100' },
+					{ name: 'PublishDate', width: '100' },
+					{ name: 'UpdateDate', width: '100' },
+					{ name: 'Actions', width: '100', cellTemplate: editCell() }
+				],
+				rowTemplate: 'partials/clickable-row.html'
+			};
+
+		}]);
+})();
+
+(function() {
+	'use strict';
+
+	angular.module('app')
+		.controller('ProfileCtrl', ['data', '$filter', '$upload', 'common', function(data, $filter, $upload, common) {
+			// Do Awesome Stuff!
+			var profileViewModel = this;
+
+			profileViewModel.user = {
+				FullName: data.FullName,
+				IsAdmin: data.IsAdmin,
+				ProfileUrl: data.ProfileUrl,
+				TwitterHandle: data.TwitterHandle,
+				Username: data.Username
+			}
+
+			profileViewModel.user.CreateDateDisplay = $filter('date')(profileViewModel.user.CreateDate);
+
+			profileViewModel.onFileSelect = function($files) {
+				for (var i = 0; i < $files.length; i++) {
+					var file = $files[i];
+					profileViewModel.upload = $upload.upload({
+						url: '/upload/img/author',
+						file: file
+					}).progress(function(evt) {
+						console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+					}).success(function(data, status, headers, config) {
+						profileViewModel.user.ProfileUrl = data.url;
+					});
+				}
+			};
+
+			profileViewModel.canEdit = false;
+
+			if (common.canEdit() > 0) {
+                common.enableSaveButton = true;
+                common.enableCancelButton = true;
+                profileViewModel.canEdit = true;
+            } else {
+                common.enableEditButton = true;
+                common.enableReturnButton = true;
+            }
+
+			common.setSaveRecordData({
+				entity: 'users',
+				item: profileViewModel.user,
+				id: 'me'
+			});
+
+		}]);
+})();
+
 (function () {
     'use strict';
     angular.module('app')
-        .controller('ToolbarCtrl', ['$scope','$rootScope','common', function ($scope, $rootScope, common) {
-            $scope.saveRecord = function () { common.saveRecord(); };
-            $scope.cancel = function () { common.cancel(); };
-            $scope.addItem = function () { common.addItem(); };
-            $scope.editItem = function () { common.editItem(); };
-            $scope.returnToList = function () { common.returnToList(); };
+        .controller('ToolbarCtrl', ['$rootScope','common', function ($rootScope, common) {
 
-            $scope.saveButtonEnabled = function () {
+            var toolbar = this;
+
+            toolbar.saveRecord = function () { common.saveRecord(); };
+            toolbar.cancel = function () { common.cancel(); };
+            toolbar.addItem = function () { common.addItem(); };
+            toolbar.editItem = function () { common.editItem(); };
+            toolbar.returnToList = function () { common.returnToList(); };
+
+            toolbar.saveButtonEnabled = function () {
                 return common.enableSaveButton;
             };
 
-            $scope.cancelButtonEnabled = function () {
+            toolbar.cancelButtonEnabled = function () {
                 return common.enableCancelButton;
             };
 
-            $scope.addButtonEnabled = function () {
+            toolbar.addButtonEnabled = function () {
                 return common.enableAddButton;
             };
 
-            $scope.editButtonEnabled = function () {
+            toolbar.editButtonEnabled = function () {
                 return common.enableEditButton;
             };
 
-            $scope.returnButtonEnabled = function () {
+            toolbar.returnButtonEnabled = function () {
                 return common.enableReturnButton;
             };
 
