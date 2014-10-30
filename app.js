@@ -146,9 +146,9 @@ app.delete('/api/posts/:id', api.posts.deletePost);
 app.get('/api/users', api.users.getUsers);
 app.get('/api/users/:id', ensureAuthenticated, api.users.getUserByID);
 app.get('/api/users/other/:search', api.users.getUserByOther);
-app.post('/api/users', api.users.createUser);
-app.patch('/api/users/:id', api.users.updateUser);
-app.delete('/api/users/:id', api.users.deleteUser);
+app.post('/api/users', ensureAuthenticated, api.users.createUser);
+app.patch('/api/users/:id', ensureAuthenticated, api.users.updateUser);
+app.delete('/api/users/:id', ensureAuthenticated, api.users.deleteUser);
 
 /* TOPICS */
 app.get('/api/topics', api.topics.getTopics);
