@@ -19,8 +19,18 @@ body {
 }
 
 .toolbar {
-    background-color: #ccc;
+    background-color: #eee;
     padding: 10px 10px;
     position: relative;
     z-index: 950;
+}
+
+.main {
+    padding-top: 20px;
+}
+
+.page-title {
+    margin: 0;
+    color: #777;
+    font-size: 18px;
 }
