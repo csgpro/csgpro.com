@@ -25,7 +25,10 @@ module.exports = function(grunt) {
           , 'public/css/github.css'
           ],
           'public/css/admin-app.css': [
-            'public/css/admin/app.css'
+            'public/css/admin/app.css',
+            '!bower_components/**/*.min.css',
+            '!bower_components/bootstrap/**/*',
+            'bower_components/**/*.css'
           ]
         }
     }
