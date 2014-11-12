@@ -27,8 +27,8 @@ module.exports = function(grunt) {
           'public/css/admin-app.css': [
             'public/css/admin/app.css',
             '!bower_components/**/*.min.css',
-            '!bower_components/bootstrap/**/*',
-            'bower_components/**/*.css'
+            'bower_components/**/*.css',
+            '!bower_components/bootstrap/**/*.css'
           ]
         }
     }
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
                 'bower_components/satellizer/satellizer.js',
                 'bower_components/ng-file-upload/angular-file-upload.js',
                 'bower_components/angularjs-toaster/toaster.js',
-                'bower_components/angular-busy/angular-busy.js'],
+                'bower_components/angular-busy/dist/angular-busy.js'],
           dest: 'public/js/admin-libs.js'
       }
       , concatAdminApp: {
