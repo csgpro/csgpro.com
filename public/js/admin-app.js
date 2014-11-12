@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ui.grid', 'ui.grid.selection', 'angularFileUpload', 'toaster', 'cgBusy' ])
+	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngGrid', 'angularFileUpload', 'toaster', 'cgBusy' ])
 		.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
 			$routeProvider
 				.when('/', {
@@ -496,28 +496,28 @@
 
 			postsViewModel.posts = data;
 
-			postsViewModel.gridRowSelectAction = function(row) {
-				alert('id: ' + row.entity.id);
-			};
-
-			var editCell = function () {
-				return '<div class="grid-actions ui-grid-cell-contents"><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
-			};
-
-			postsViewModel.gridOptions = {
-				data: postsViewModel.posts,
-				columnDefs: [
-					{ name: 'id', width: '70' },
-					{ name: 'AuthorUsername', width: '100' },
-					{ name: 'Title' },
-					{ name: 'Topics', width: '100' },
-					{ name: 'Category', width: '100' },
-					{ name: 'PublishDate', width: '100' },
-					{ name: 'UpdateDate', width: '100' },
-					{ name: 'Actions', width: '100', cellTemplate: editCell() }
-				],
-				rowTemplate: 'partials/clickable-row.html'
-			};
+			// postsViewModel.gridRowSelectAction = function(row) {
+			// 	alert('id: ' + row.entity.id);
+			// };
+			//
+			// var editCell = function () {
+			// 	return '<div class="grid-actions ui-grid-cell-contents"><button class="btn btn-xs btn-primary" ng-click="getExternalScopes().gridRowSelectAction(row)"><span class="glyphicon glyphicon-pencil"></span> Edit</button></div>';
+			// };
+			//
+			// postsViewModel.gridOptions = {
+			// 	data: postsViewModel.posts,
+			// 	columnDefs: [
+			// 		{ name: 'id', width: '70' },
+			// 		{ name: 'AuthorUsername', width: '100' },
+			// 		{ name: 'Title' },
+			// 		{ name: 'Topics', width: '100' },
+			// 		{ name: 'Category', width: '100' },
+			// 		{ name: 'PublishDate', width: '100' },
+			// 		{ name: 'UpdateDate', width: '100' },
+			// 		{ name: 'Actions', width: '100', cellTemplate: editCell() }
+			// 	],
+			// 	rowTemplate: 'partials/clickable-row.html'
+			// };
 
 		}]);
 })();
@@ -538,7 +538,7 @@
 				Username: data.Username
 			}
 
-			profileViewModel.user.CreateDateDisplay = $filter('date')(profileViewModel.user.CreateDate);
+			profileViewModel.user.CreateDateDisplay = $filter('date')(data.CreateDate);
 
 			profileViewModel.onFileSelect = function($files) {
 				for (var i = 0; i < $files.length; i++) {

@@ -53,7 +53,7 @@ angular.module('app').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/posts.html',
-    "<div ui-grid=\"postsViewModel.gridOptions\" external-scopes=\"postsViewModel\" class=\"ui-grid\"></div>\n"
+    "\n"
   );
 
 
