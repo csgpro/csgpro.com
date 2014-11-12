@@ -25,15 +25,17 @@ module.exports = function(grunt) {
           , 'public/css/github.css'
           ],
           'public/css/admin-app.css': [
-            'public/css/admin/app.css',
-            '!bower_components/**/*.min.css',
-            'bower_components/**/*.css'
+            'public/css/admin/app.css'
           ]
         }
     }
     , minify: {
         src: ['public/css/bundle.css']
       , dest: 'public/css/bundle.min.css'
+    }
+    , minify_admin: {
+        src: ['public/css/admin-app.css']
+      , dest: 'public/css/admin-app.min.css'
     }
   }
   , stylus: {
@@ -100,7 +102,7 @@ module.exports = function(grunt) {
   }
   , watch: {
       all: {
-        files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*', 'views/*.jade']
+        files: ['public/css/**/*.css', 'public/css/*.styl', 'public/js/**/*', 'views/*.jade']
       , tasks: ['browserify', 'uglify', 'stylus','cssmin', 'ngtemplates', 'concat']
       , options: {
           spawn: false
