@@ -16,7 +16,6 @@ var express          = require('express')
   , path             = require('path')
   , c                = require('nconf')
   , db               = require('./modules/db2.js')
-  , admin            = require('./routes/admin')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
@@ -29,9 +28,10 @@ var express          = require('express')
   , app = module.exports = express()
   , port             = 3000;
 
+
 // Load the configuration file with our keys in it, first from the env variables
 // then from the config.json file
-c.env().file({ file: 'config.json'});
+c.env().file({ file: 'config.json' });
 
 /**********************************
  * AUTHENTICATION
@@ -126,8 +126,6 @@ app.get('/post/:id', post.getPostByID);
 
 app.post('/contact', contact.index);
 app.post('/csv', register.csv);
-
-app.get('/admin', admin.index);
 
 /*****************
  * API
@@ -249,16 +247,3 @@ app.get('/*', function(req, res) { res.render('404'); });
  **********************************/
 app.listen(process.env.PORT || port);
 console.log('Express server listening on port ' + port);
-
-/**********************************
- * MIDDLEWARE
- **********************************/
-function auth(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/admin/login');
-}
-
-function authAdmin(req, res, next) { // They are authenticated and authorized
-  if (req.isAuthenticated() && req.user.IsAdmin === true) { return next(); }
-  res.redirect('/admin/notadmin');
-}

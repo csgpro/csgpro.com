@@ -4,6 +4,9 @@ var path = require('path');
 var rimraf = require('rimraf');
 var through = require('through2');
 var es = require('event-stream');
+var nib = require('nib');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var buildDir = "./public/";
 var adminBuildDir = "./public/admin/";
 
@@ -31,13 +34,13 @@ gulp.task('css', function(){
 	gulp.src([
 		'public/css/*.styl',
 		'public/css/*.scss',
-		'public/css/normalize.css',
-		'public/css/swipeshow.css',
-		'public/css/lightbox.css',
-		'public/css/github.css',
-		'public/css/MyFontsWebfontsKit.css'])
+        '!public/css/bundle.css',
+		'public/css/*.css'])
 		.pipe(filterStylus)
-		.pipe(plugins.stylus())
+		.pipe(plugins.stylus({
+	      use: nib(),
+	      compress: true
+	    }))
 		.pipe(filterStylus.restore())
 		.pipe(filterScss)
 		.pipe(plugins.sass())
@@ -66,7 +69,7 @@ gulp.task('admin-copy-index', function () {
         .pipe(gulp.dest(adminBuildDir));
 });
 
-gulp.task('admin-scripts', function () {
+gulp.task('admin-scripts', ['admin-clean', 'admin-copy-index'], function () {
 
     libSrc = [
         './bower_components/ng-file-upload/angular-file-upload-shim.js',
@@ -107,11 +110,9 @@ gulp.task('admin-scripts', function () {
 });
 
 gulp.task('scripts', function () {
-	gulp.src(['public/js/vendor/swipeshow.js',
-		'public/js/vendor/magnific.js',
-		'public/js/vendor/jquery.simplemodal.1.4.4.min.js',
-		'public/js/main.js'])
-		.pipe(plugins.concat('bundle.js'))
+	return browserify('./public/js/main.js')
+		.bundle()
+		.pipe(source('bundle.js'))
 		.pipe(gulp.dest(buildDir + 'js/'));
 });
 
@@ -122,17 +123,21 @@ gulp.task('admin-clean', function () {
 });
 
 gulp.task('admin-watch',function(){
-    gulp.watch([
-        adminBuildDir + '*.html',
-        adminBuildDir + 'js/*.js',
-        adminBuildDir + 'css/*.css'
+    var ran = false;
+    if(ran) {
+        gulp.watch([
+            adminBuildDir + '*.html',
+            adminBuildDir + 'js/*.js',
+            adminBuildDir + 'css/*.css'
 
-    ], function(event) {
-        return gulp.src(event.path)
-            .pipe(plugins.express.notify());
-    });
-    gulp.watch(['./admin-app/**/*.js','!./admin-app/**/*test.js'],['scripts']);
-    gulp.watch(['!./admin-app/index.html','./admin-app/**/*.html'],['scripts']);
+        ], function(event) {
+            return gulp.src(event.path)
+                .pipe(plugins.express.notify());
+        });
+    }
+    ran = true;
+    gulp.watch(['./admin-app/**/*.js','!./admin-app/**/*test.js'],['admin-scripts']);
+    gulp.watch(['!./admin-app/index.html','./admin-app/**/*.html'],['admin-scripts']);
     gulp.watch('./admin-app/**/*.less',['css']);
 
 });
@@ -144,8 +149,8 @@ gulp.task('watch', function() {
 		buildDir + 'css/*.css'
 
 	], function(event) {
-		return gulp.src(event.path)
-			.pipe(plugins.express.notify());
+		// return gulp.src(event.path)
+		// 	.pipe(plugins.express.notify());
 	});
 	gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 	gulp.watch([buildDir + '**/*.styl','!' + buildDir + '**/bundle.css'],['css']);
@@ -153,8 +158,7 @@ gulp.task('watch', function() {
 
 gulp.task('connect', plugins.express.run({
     env: "development",
-    file: "app.js",
-    port: 3000
+    file: "app.js"
 }));
 
 // PUBLIC
@@ -162,5 +166,5 @@ gulp.task('default', ['css', 'scripts',])
 gulp.task('serve', ['connect','default','watch']);
 
 // ADMIN
-gulp.task('admin-tasks', ['css', 'admin-clean', 'admin-copy-index', 'admin-scripts', 'vendorCSS', 'admin-vendorFonts'])
+gulp.task('admin-tasks', ['css', 'admin-scripts', 'admin-vendorCSS', 'admin-vendorFonts'])
 gulp.task('serve-admin', ['connect', 'admin-tasks', 'admin-watch']);

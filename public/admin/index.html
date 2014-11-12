@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title ng-bind="title">Loading ...</title>
+        <link href="css/lib.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div ng-include="'navbar/navbar.html'"></div>
+
+        <div ng-include="'toolbar/toolbar.html'"></div>
+
+        <div ng-include="'partials/toaster.html'"></div>
+
+        <div cg-busy="loadingData" class="view-container">
+            <div class="container main" ng-view=""></div>
+        </div>
+
+        <!-- vendor:js -->
+        <script src="js/lib.js"></script>
+        <!-- endinject -->
+
+        <!-- templates:js -->
+        <script src="js/templates.js"></script>
+        <!-- endinject -->
+
+        <!-- app:js -->
+        <script src="js/app.js"></script>
+        <script src="js/app-controller.js"></script>
+        <script src="js/config.js"></script>
+        <script src="js/components/common-service.js"></script>
+        <script src="js/components/http-service.js"></script>
+        <script src="js/home/home-controller.js"></script>
+        <script src="js/login/login-controller.js"></script>
+        <script src="js/navbar/navbar-controller.js"></script>
+        <script src="js/posts/posts-controller.js"></script>
+        <script src="js/toolbar/toolbar-controller.js"></script>
+        <script src="js/profile/profile-controller.js"></script>
+        <!-- endinject -->
+    </body>
+</html>

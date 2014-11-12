@@ -15,16 +15,22 @@
             <div class="col-sm-8">
 
                 <div class="pull-right">
-                    <button class="btn btn-xs btn-primary" ng-click="toolbar.addItem()" ng-show="toolbar.addButtonEnabled()">
+                    <button ng-repeat="button in toolbar.otherButtons()" type="button" class="btn btn-xs" ng-class="button.btnClass" ng-click="button.clickFn()">
+                        <span class="glyphicon" ng-class="button.btnGlyph"></span> <span ng-bind="button.btnText"></span>
+                    </button>
+                    <button type="button" class="btn btn-xs btn-primary" ng-click="toolbar.addItem()" ng-show="toolbar.addButtonEnabled()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
-                    <button class="btn btn-xs btn-primary" ng-click="toolbar.editItem()" ng-show="editButtonEnabled()">
+                    <button type="button" class="btn btn-xs btn-primary" ng-click="toolbar.editItem()" ng-show="toolbar.editButtonEnabled()">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button class="btn btn-success btn-xs" ng-click="toolbar.saveRecord()" ng-show="toolbar.saveButtonEnabled()">
+                    <button type="button" class="btn btn-success btn-xs" ng-click="toolbar.saveRecord()" ng-show="toolbar.saveButtonEnabled()">
                         <span class="glyphicon glyphicon-save"></span> Save
                     </button>
-                    <button class="btn btn-warning btn-xs" ng-click="toolbar.cancel()" ng-show="toolbar.cancelButtonEnabled()">
+                    <button type="button" class="btn btn-info btn-xs" ng-click="toolbar.otherAction()" ng-show="toolbar.otherActionButtonEnabled()">
+                        <span class="glyphicon" ng-class="toolbar.otherActionButtonGlyphicon()"></span> <span ng-bind="toolbar.otherActionButtonLabel()"></span>
+                    </button>
+                    <button type="button" class="btn btn-warning btn-xs" ng-click="toolbar.cancel()" ng-show="toolbar.cancelButtonEnabled()">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
                     </button>
                 </div>

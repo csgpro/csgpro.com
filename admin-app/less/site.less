@@ -1,0 +1,78 @@
+body {
+  /*padding-top: @navbar-height;*/
+}
+
+.main {
+    padding-top: 20px;
+}
+
+.navbar {
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1002;
+    margin-bottom: 0;
+}
+
+.secondary-nav {
+    &:extend(.navbar-inverse);
+    z-index: 950;
+    background-color: lighten(@navbar-inverse-bg, 30%);
+    color: darken(@navbar-inverse-color, 30%);
+    min-height: 0;
+    border-width: 0;
+    a {
+        color: #fff;
+    }
+    .navbar-nav {
+        > li {
+            > a {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                color: #fff;
+                &:hover, &:focus {
+                    background-color: lighten(@navbar-inverse-bg, 50%);
+                }
+            }
+
+            &.active {
+                > a, > a:hover, a:focus {
+                    color: #fff;
+                    background-color: @gray-dark;
+                }
+            }
+        }
+    }
+}
+
+.toolbar {
+    background-color: @gray-lighter;
+    padding: @padding-base-vertical @padding-base-horizontal;
+    position: relative;
+    z-index: 950;
+}
+
+.toolbar-modal {
+
+}
+
+.main {
+    padding-top: @navbar-margin-bottom;
+}
+
+.page-title {
+    margin: 0;
+    font-size: @font-size-h4;
+    color: @gray-light;
+}
+
+.selectable {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.nav-tabs {
+    a:hover {
+        &:extend(.selectable:hover);
+    }
+}

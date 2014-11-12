@@ -18,6 +18,9 @@ var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var modal           = require('./modules/modal');
+var swipeshow       = require('./vendor/swipeshow.js');
+var magnific        = require('./vendor/magnific.js');
+var simplemodal     = require('./vendor/jquery.simplemodal.1.4.4.min.js');
 var options = {    // global options for the site
   breakpoint : 915,  // px
   maxHeight : 750,  // px
