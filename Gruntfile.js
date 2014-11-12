@@ -25,8 +25,8 @@ module.exports = function(grunt) {
           , 'public/css/github.css'
           ],
           'public/css/admin-app.css': [
-            'public/css/admin/ui-grid-stable.min.css',
-            'public/css/admin/**/*.css'
+            '!bower_components/**/*.min.css',
+            'bower_components/**/*.css'
           ]
         }
     }
@@ -78,16 +78,17 @@ module.exports = function(grunt) {
   }
   , concat: {
       concatAdminLibs: {
-          src: ['public/js/admin/libs/angular-file-upload-shim.min.js',
-                'public/js/admin/libs/angular.min.js',
-                'public/js/admin/libs/angular-route.min.js',
-                'public/js/admin/libs/angular-animate.min.js',
-                'public/js/admin/libs/ui-bootstrap-tpls-0.11.2.min.js',
-                'public/js/admin/libs/ui-grid-stable.min.js',
-                'public/js/admin/libs/satellizer.min.js',
-                'public/js/admin/libs/angular-file-upload.min.js',
-                'public/js/admin/libs/toaster.js',
-                'public/js/admin/libs/angular-busy.min.js'],
+          src: ['bower_components/ng-file-upload/angular-file-upload-shim.js',
+                'bower_components/jquery/dist/jquery.js',
+                'bower_components/angular/angular.js',
+                'bower_components/angular-route/angular-route.js',
+                'bower_components/angular-animate/angular-animate.js',
+                'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+                'bower_components/ng-grid/build/ng-grid.js',
+                'bower_components/satellizer/satellizer.js',
+                'bower_components/ng-file-upload/angular-file-upload.js',
+                'bower_components/angularjs-toaster/toaster.js',
+                'bower_components/angular-busy/angular-busy.js'],
           dest: 'public/js/admin-libs.js'
       }
       , concatAdminApp: {
