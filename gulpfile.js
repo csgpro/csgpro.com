@@ -122,38 +122,28 @@ gulp.task('admin-clean', function () {
         .pipe(cleaner());
 });
 
-gulp.task('admin-watch',function(){
-    var ran = false;
-    if(ran) {
+gulp.task('watch',function(){
+    var initializing = true;
+    if(!initializing) {
         gulp.watch([
             adminBuildDir + '*.html',
             adminBuildDir + 'js/*.js',
-            adminBuildDir + 'css/*.css'
+            adminBuildDir + 'css/*.css',
+            buildDir + '*.html',
+            buildDir + 'js/*.js',
+            buildDir + 'css/*.css'
 
         ], function(event) {
             return gulp.src(event.path)
                 .pipe(plugins.express.notify());
         });
+    } else {
+        initializing = false;
     }
-    ran = true;
     gulp.watch(['./admin-app/**/*.js','!./admin-app/**/*test.js'],['admin-scripts']);
     gulp.watch(['!./admin-app/index.html','./admin-app/**/*.html'],['admin-scripts']);
-    gulp.watch('./admin-app/**/*.less',['css']);
-
-});
-
-gulp.task('watch', function() {
-	gulp.watch([
-		buildDir + '*.html',
-		buildDir + 'js/*.js',
-		buildDir + 'css/*.css'
-
-	], function(event) {
-		// return gulp.src(event.path)
-		// 	.pipe(plugins.express.notify());
-	});
-	gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
-	gulp.watch([buildDir + '**/*.styl','!' + buildDir + '**/bundle.css'],['css']);
+    gulp.watch('./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css',['css']);
+    gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
 gulp.task('connect', plugins.express.run({
@@ -162,9 +152,16 @@ gulp.task('connect', plugins.express.run({
 }));
 
 // PUBLIC
-gulp.task('default', ['css', 'scripts',])
-gulp.task('serve', ['connect','default','watch']);
+gulp.task('default', ['shared-tasks', 'public-tasks', 'admin-tasks']);
+gulp.task('serve', ['connect', 'default', 'watch']);
 
 // ADMIN
-gulp.task('admin-tasks', ['css', 'admin-scripts', 'admin-vendorCSS', 'admin-vendorFonts'])
-gulp.task('serve-admin', ['connect', 'admin-tasks', 'admin-watch']);
+gulp.task('admin-tasks', ['admin-scripts', 'admin-vendorCSS', 'admin-vendorFonts']);
+gulp.task('admin', ['shared-tasks', 'admin-tasks']);
+
+// PUBLIC
+gulp.task('public-tasks', ['scripts']);
+gulp.task('public', ['shared-tasks', 'public-tasks']);
+
+// SHARED
+gulp.task('shared-tasks', ['css']);
