@@ -64,12 +64,12 @@ gulp.task('admin-vendorFonts', function(){
     .pipe(gulp.dest(adminBuildDir + 'fonts/'));
 });
 
-gulp.task('admin-copy-index', function () {
+gulp.task('admin-copy-index', ['admin-clean'], function () {
     return gulp.src('./admin-app/index.html')
         .pipe(gulp.dest(adminBuildDir));
 });
 
-gulp.task('admin-scripts', ['admin-clean', 'admin-copy-index'], function () {
+gulp.task('admin-scripts', ['admin-copy-index'], function () {
 
     libSrc = [
         './bower_components/ng-file-upload/angular-file-upload-shim.js',
@@ -132,7 +132,6 @@ gulp.task('watch',function(){
             buildDir + '*.html',
             buildDir + 'js/*.js',
             buildDir + 'css/*.css'
-
         ], function(event) {
             return gulp.src(event.path)
                 .pipe(plugins.express.notify());
@@ -142,7 +141,7 @@ gulp.task('watch',function(){
     }
     gulp.watch(['./admin-app/**/*.js','!./admin-app/**/*test.js'],['admin-scripts']);
     gulp.watch(['!./admin-app/index.html','./admin-app/**/*.html'],['admin-scripts']);
-    gulp.watch('./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css',['css']);
+    gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
     gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
