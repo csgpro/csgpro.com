@@ -21,14 +21,20 @@
 				<input type="text" class="form-control" data-ng-model="::profileViewModel.user.CreateDateDisplay" disabled />
 			</div>
 			<div class="col-sm-6 form-group">
-				<label class="conrol-label">Profile Photo</label>
 				<div ng-show="profileViewModel.user.ProfileUrl">
-					<img ng-src="{{profileViewModel.user.ProfileUrl}}" />
+					<label class="conrol-label">Profile Photo</label>
+					<div ng-show="profileViewModel.user.ProfileUrl">
+						<img ng-src="{{profileViewModel.user.ProfileUrl}}" />
+					</div>
 				</div>
 				<div>
 					<label class="control-label">Profile Image URL</label>
-					<input type="text" class="form-control" data-ng-model="profileViewModel.user.ProfileUrl" />
-					<button class="btn btn-primary" ng-file-select="profileViewModel.onFileSelect($files)" data-multiple="true" name="image">Upload Image</button>
+					<p class="input-group">
+						<input type="text" class="form-control" data-ng-model="profileViewModel.user.ProfileUrl" />
+						<span class="input-group-btn">
+							<button class="btn btn-primary" ng-file-select="profileViewModel.onFileSelect($files)" name="image">Upload Image</button>
+						</span>
+					</p>
 				</div>
 			</div>
 	</div>
