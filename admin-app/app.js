@@ -23,14 +23,31 @@
 					templateUrl: 'posts/posts.html',
 					title: 'Posts',
 					resolve: {
-						authenticated: ['$location', '$auth', function($location, $auth) {
-							if (!$auth.isAuthenticated()) {
-								return $location.path('/login');
-							}
-						}],
 						data: ['httpService', function(httpService) {
 							return httpService.getCollection('posts');
 						}]
+					}
+				})
+				.when('/posts/edit/:postID', {
+					controller: 'PostCtrl',
+					controllerAs: 'postViewModel',
+					templateUrl: 'posts/post-edit.html',
+					title: 'Edit Post',
+					resolve: {
+						data: ['httpService', '$route', function(httpService, $route) {
+							return httpService.getItem('posts', $route.current.params.postID);
+						}]
+					}
+				})
+				.when('/posts/add/new', {
+					controller: 'PostCtrl',
+					controllerAs: 'postViewModel',
+					templateUrl: 'posts/post-edit.html',
+					title: 'Add Post',
+					resolve: {
+						data: function() {
+							return null;
+						}
 					}
 				})
 				.when('/login', {

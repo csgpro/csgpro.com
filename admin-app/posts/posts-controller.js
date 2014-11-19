@@ -8,11 +8,8 @@
 
 			postsViewModel.posts = data;
 
-			postsViewModel.CreateDateDisplay = common.convertToDate(data.CreateDate);
-			postsViewModel.PublishDateDisplay = common.convertToDate(data.PublishDate);
-
 			postsViewModel.goToPost = function (post) {
-				common.goToUrl('/posts/' + post.id);
+				common.goToUrl('/posts/edit/' + post.id);
 			};
 
 			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button></div>';
