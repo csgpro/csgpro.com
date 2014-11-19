@@ -8,14 +8,7 @@
 					controller: 'HomeCtrl',
 					controllerAs: 'homeViewModel',
 					templateUrl: 'home/home.html',
-					title: 'Admin Dashboard',
-					resolve: {
-						authenticated: ['$location', '$auth', function($location, $auth) {
-							if (!$auth.isAuthenticated()) {
-								return $location.path('/login');
-							}
-						}]
-					}
+					title: 'Admin Dashboard'
 				})
 				.when('/posts', {
 					controller: 'PostsCtrl',
@@ -81,12 +74,6 @@
 					templateUrl: 'profile/profile.html',
 					title: 'Profile',
 					resolve: {
-						authenticated: ['$location', '$auth', function($location, $auth) {
-							if (!$auth.isAuthenticated()) {
-								return $location.path('/login');
-							}
-						}],
-						// KHTODO: Move to a user service.
 						data: ['httpService', function(httpService) {
 							return httpService.getItem('users', 'me');
 						}]

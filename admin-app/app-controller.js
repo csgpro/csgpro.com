@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', 'common', function(CONFIG, $rootScope, $route, common) {
+		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', '$auth', '$location', 'common', function(CONFIG, $rootScope, $route, $auth, $location, common) {
 			var appViewModel = this;
 
 			$rootScope.$on('$routeChangeSuccess', function () {
@@ -15,6 +15,14 @@
 	            notifications.showWarning(rejection);
 	            $location.path(redirect);
 	        });
+
+			$rootScope.$on('$routeChangeStart', function(event) {
+				if (!$auth.isAuthenticated() && $location.path() !== '/login') {
+					//event.preventDefault();
+					$location.path('/login');
+					event.preventDefault();
+				}
+			});
 
 	        $rootScope.siteTitle = CONFIG.SITE_NAME;
 
