@@ -48,6 +48,8 @@ self.getPosts = function (req, res) {
 					// Do something with the data;
 					data = _.where(data, { "Category": categoryFilter });
 				}
+				// Sort the data. Newest to Oldest. (Descending)
+				data = _.sortBy(data, ["CreateDate"]).reverse();
 				res.send(data);
 			}
 		});
