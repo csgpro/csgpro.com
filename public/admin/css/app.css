@@ -6366,3 +6366,14 @@ body {
 .nav-tabs a:hover {
   cursor: pointer;
 }
+.datatable {
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 600px;
+}
+.section {
+  margin-bottom: 20px;
+}
+.allowOverflow {
+  overflow: visible;
+}
