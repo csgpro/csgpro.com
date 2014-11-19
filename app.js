@@ -141,7 +141,7 @@ app.patch('/api/posts/:id', api.posts.updatePost);
 app.delete('/api/posts/:id', api.posts.deletePost);
 
 /* USERS */
-app.get('/api/users', api.users.getUsers);
+app.get('/api/users', ensureAuthenticated, api.users.getUsers);
 app.get('/api/users/:id', ensureAuthenticated, api.users.getUserByID);
 app.get('/api/users/other/:search', api.users.getUserByOther);
 app.post('/api/users', ensureAuthenticated, api.users.createUser);

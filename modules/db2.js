@@ -74,7 +74,7 @@ self.getItem = function (entity, searchStr, callback) {
  ***********/
 self.createItem = function(entity, data, callback) {
 
-	if(typeof data !== 'object' && data !== null) {
+	if(typeof data !== 'object' || data === null) {
 		callback(new Error('Error creating item.'));
 	} else {
 		options.uri = url +'/tables/' + entity;
@@ -84,6 +84,8 @@ self.createItem = function(entity, data, callback) {
 		request.post(options, function(err, obj, response) {
 			if(err) {
 				callback(err);
+			} else if (response.error) {
+				callback(response);
 			} else if (response !== null && response.hasOwnProperty('id')) {
 				callback(null, response);
 			} else {
@@ -98,7 +100,7 @@ self.createItem = function(entity, data, callback) {
  ***********/
 self.updateItem = function (entity, id, data, callback) {
 
-	if(!parseInt(id) && typeof data !== 'object' && data !== null) {
+	if(!parseInt(id) && typeof data !== 'object' || data === null) {
 		callback(new Error('Error updating item.'));
 	} else {
 

@@ -109,33 +109,30 @@ self.createUser = function (req, res) {
 };
 
 self.updateUser = function (req, res) {
-	if(req.body.users) {
-		if(req.params.id === 'me') {
-			req.params.id = req.user;
+	var model = {
+		id: req.body.id,
+		TwitterHandle: req.body.TwitterHandle,
+		Username: req.body.Username,
+		IsAdmin: req.body.IsAdmin,
+		FullName: req.body.FullName,
+		ProfileUrl: req.body.ProfileUrl
+	};
+	db.updateItem('users', req.body.id, model, function (err, data) {
+		if (err) {
+			var msg = {
+				status: 'fail',
+				message: err.error,
+				error: err.code
+			};
+		} else {
+			var msg = {
+				status: 'success',
+				message: 'Successfully Updated User',
+				id: data.id
+			};
 		}
-		db.updateItem('users', req.params.id, req.body.users[0], function (err, data) {
-			if (err) {
-				var msg = {
-					status: 'fail',
-					message: 'Error Updating User',
-					error: err
-				};
-			} else {
-				var msg = {
-					status: 'success',
-					message: 'Successfully Updated User',
-					id: data.id
-				};
-			}
-			res.send(JSON.stringify(msg));
-		});
-	} else {
-		var msg = {
-			status: 'fail',
-			message: 'Error Updating User',
-			error: 'Received Malformed Data Object'
-		}
-	}
+		res.send(JSON.stringify(msg));
+	});
 };
 
 self.deleteUser = function (req, res) {
