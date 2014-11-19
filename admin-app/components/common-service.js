@@ -259,6 +259,10 @@
                 return num;
             };
 
+            self.convertToDate = function (timestamp) {
+                return $filter('date')(timestamp);
+            };
+
             return self;
         }]);
 })();
