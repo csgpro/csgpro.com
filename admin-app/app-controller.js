@@ -7,6 +7,7 @@
 
 			$rootScope.$on('$routeChangeSuccess', function () {
 				appViewModel.title = $route.current.title + ' | ' + $rootScope.siteTitle;
+				$rootScope.pageTitle = $route.current.title;
 				common.toolbarReset();
 			});
 
@@ -18,7 +19,6 @@
 
 			$rootScope.$on('$routeChangeStart', function(event) {
 				if (!$auth.isAuthenticated() && $location.path() !== '/login') {
-					//event.preventDefault();
 					$location.path('/login');
 					event.preventDefault();
 				}
