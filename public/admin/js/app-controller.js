@@ -6,7 +6,7 @@
 			var appViewModel = this;
 
 			$rootScope.$on('$routeChangeSuccess', function () {
-				appViewModel.pageTitle = $rootScope.pageTitle = $route.current.title;
+				appViewModel.title = $route.current.title + ' | ' + $rootScope.siteTitle;
 				common.toolbarReset();
 			});
 

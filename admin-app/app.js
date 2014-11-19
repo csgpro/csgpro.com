@@ -24,7 +24,7 @@
 					title: 'Posts',
 					resolve: {
 						data: ['httpService', function(httpService) {
-							return httpService.getCollection('posts');
+							return httpService.getCollection('posts', true);
 						}]
 					}
 				})
@@ -35,7 +35,7 @@
 					title: 'Edit Post',
 					resolve: {
 						data: ['httpService', '$route', function(httpService, $route) {
-							return httpService.getItem('posts', $route.current.params.postID);
+							return httpService.getItem('posts', $route.current.params.postID, true);
 						}]
 					}
 				})
