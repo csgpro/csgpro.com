@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'toaster', function (CONFIG, httpService, $rootScope, $location, toaster) {
+        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'toaster', '$filter', function (CONFIG, httpService, $rootScope, $location, toaster, $filter) {
 
             var self = this;
 
@@ -18,8 +18,8 @@
                 var lastChar = str.length - 1;
                 var lastThreeChar = str.length - 3;
                 var resStr = '';
-                if(str.substring(lastChar) === 's') {
-                    resStr = str.substring(0,lastChar);
+                if (str.substring(lastChar) === 's') {
+                    resStr = str.substring(0, lastChar);
                 }
                 if (str.substring(lastThreeChar) === 'ies') {
                     resStr = str.substring(0, lastThreeChar) + 'y';
@@ -27,46 +27,46 @@
                 return resStr;
             };
 
-            self.saveRecordData = {};
-
             self.setSaveRecordData = function (obj) {
+                delete self.saveRecordData;
                 self.saveRecordData = obj;
             };
 
             self.saveRecord = function () {
-                var entity = self.saveRecordData.entity;
-                var item = self.saveRecordData.item;
-                var id = self.saveRecordData.id;
-                var route;
-                var data = {},
-                    singularItemDisplayName = self.upperCaseString(self.singularString(entity));
+                var endpoint = self.saveRecordData.endpoint,
+                    data = self.saveRecordData.data,
+                    id = self.saveRecordData.id,
+                    method = self.saveRecordData.method,
+                    successMessage = self.saveRecordData.successMessage ? self.saveRecordData.successMessage : 'Saved Data',
+                    onSuccess = self.saveRecordData.onSuccess ? self.saveRecordData.onSuccess : null;
 
-                data[entity] = [item];
-
-                if (id) {
-                    httpService.updateItem(entity, id, data).then(function (item) {
-                        // Output success message
-                        toaster.pop('success', 'Saved ' + singularItemDisplayName);
-
-                        if(entity === 'users') {
-                            route = 'profile'
+                if (method === 'put') {
+                    return httpService.updateItem(endpoint, id, data).then(function (res) {
+                        if (res.errors) {
+                            toaster.pop('error', res.errors[0].title);
                         } else {
-                            route = entity;
+                            toaster.pop('success', successMessage);
+                            if (onSuccess) {
+                                onSuccess();
+                            }
                         }
-
-                        $location.url('/' + route);
                     });
                 } else {
-                    httpService.createItem(entity, data).then(function (res) {
-                        if (res.status) {
-                            toaster.pop('error', 'There was a problem creating the ' + singularItemDisplayName);
+                    return httpService.createItem(endpoint, data).then(function (res) {
+                        if (res.errors) {
+                            toaster.pop('error', res.errors[0].title);
                         } else {
-                            // Output success message
-                            toaster.pop('success', 'Created New ' + singularItemDisplayName);
-                            $location.url('/' + entity);
+                            toaster.pop('success', successMessage);
+                            if (onSuccess) {
+                                onSuccess();
+                            }
                         }
                     });
                 }
+            };
+
+            self.setCancel = function (method) {
+                this.cancel = method;
             };
 
             self.cancel = function () {
@@ -81,13 +81,56 @@
                 }
             };
 
+            self.setReturnToList = function (method) {
+                this.returnToList = method;
+            };
+
             self.returnToList = function () {
                 var path = $location.path();
                 $location.url(path.substring(0, path.lastIndexOf('/')));
             };
 
+            self.otherToolbarButtons = [];
+
+            self.setupToolbarButtons = function (toolbarButtons) {
+                if (typeof toolbarButtons === 'object') {
+                    var i = 0;
+                    var button;
+                    if (toolbarButtons.standardButtons && toolbarButtons.standardButtons.length > 0) {
+                        for (i in toolbarButtons.standardButtons) {
+                            button = toolbarButtons.standardButtons[i];
+                            switch (button) {
+                                case 'save':
+                                    self.enableSaveButton = true;
+                                    break;
+                                case 'edit':
+                                    self.enableEditButton = true;
+                                    break;
+                                case 'add':
+                                    self.enableAddButton = true;
+                                    break;
+                                case 'cancel':
+                                    self.enableCancelButton = true;
+                                    break;
+                                case 'return':
+                                    self.enableReturnButton = true;
+                                    break;
+                            }
+                        }
+                    }
+
+                    if (toolbarButtons.customButtons && toolbarButtons.customButtons.length > 0) {
+                        for (i = 0; i < toolbarButtons.customButtons.length; i++) {
+                            button = toolbarButtons.customButtons[i];
+                            if (!button.condition || button.condition()) {
+                                self.otherToolbarButtons.push(button);
+                            }
+                        }
+                    }
+                }
+            };
+
             self.goToUrl = function (url) {
-                console.log(url);
                 $location.url(url);
             };
 
@@ -111,10 +154,18 @@
                 $location.url($location.path() + route + '/add/new');
             };
 
+            self.editItemRoute = null;
+
+            self.setEditItemRoute = function (route) {
+                self.editItemRoute = route;
+            };
+
             self.editItem = function (route) {
                 var editPath;
                 if (route) {
                     editPath = $location.path() + '/' + route;
+                } else if (self.editItemRoute) {
+                    editPath = self.editItemRoute;
                 } else {
                     var id = $location.path().split('/').pop();
                     editPath = $location.path().substring(0, $location.path().lastIndexOf('/')) + '/edit/' + id;
@@ -132,14 +183,17 @@
                 this.enableSaveButton = false;
                 this.enableCancelButton = false;
                 this.enableReturnButton = false;
+                this.returnToList = self.returnToList;
                 this.secondaryNavTemplate = self.secondaryNavTemplate;
-                this.currentParentEntityId = self.currentParentEntityId;
                 this.currentViewTitle = self.currentViewTitle;
+                this.editItemRoute = self.editItemRoute;
+                this.otherToolbarButtons = [];
+                this.currentParentEntityId = null;
             };
 
             self.canEdit = function () {
                 var path = $location.path();
-                var pattern = /\badd\b|\bedit\b|\bprofile\b/;
+                var pattern = /\badd\b|\bedit\b/;
                 return path.search(pattern);
             };
 
@@ -155,8 +209,6 @@
 
             self.secondaryNavTemplate = null;
 
-            self.currentParentEntityId = null;
-
             self.currentSubPath = function (id) {
                 var path = $location.path();
                 var subPath = path.split(id).pop();
@@ -164,7 +216,7 @@
             };
 
             self.setCurrentPageTitle = function (title) {
-                $rootScope.pageTitle = title + ' ' + $rootScope.pageTitle;
+                $rootScope.pageTitle = title;
             };
 
             self.routeIsActive = function (r) {
@@ -173,15 +225,6 @@
                     path = new RegExp(regexStr);
 
                 return (r[0] === $location.path()) ? true : path.test($location.path());
-            };
-
-            self.getSiteCode = function (site) {
-                if (site.state && site.city && site.name) {
-                    var state = site.state.replace(/\s/g, '').substr(0, 2),
-                        city = site.city.replace(/\s/g, '').substr(0, 4),
-                        name = site.name.replace(/\s/g, '');
-                    return (state + '-' + city + '-' + name).toUpperCase();
-                }
             };
 
             self.setScopeProperty = function (scope, property, getFunction) {
@@ -193,34 +236,29 @@
                 }
             };
 
-            return ({
-                setCurrentPageTitle: self.setCurrentPageTitle,
-                setSaveRecordData: self.setSaveRecordData,
-                saveRecord: self.saveRecord,
-                cancel: self.cancel,
-                returnToList: self.returnToList,
-                viewItem: self.viewItem,
-                deleteItem: self.deleteItem,
-                removeItem: self.removeItem,
-                addItem: self.addItem,
-                editItem: self.editItem,
-                goToUrl: self.goToUrl,
-                canEdit: self.canEdit,
-                currentParentEntityId: self.currentParentEntityId,
-                currentSubPath: self.currentSubPath,
-                toolbarReset: self.toolbarReset,
-                enableAddButton: self.enableAddButton,
-                enableEditButton: self.enableEditButton,
-                enableSaveButton: self.enableSaveButton,
-                enableCancelButton: self.enableCancelButton,
-                enableReturnButton: self.enableReturnButton,
-                revealButtons: self.revealButtons,
-                secondaryNavTemplate: self.secondaryNavTemplate,
-                upperCaseString: self.upperCaseString,
-                singularString: self.singularString,
-                routeIsActive: self.routeIsActive,
-                getSiteCode: self.getSiteCode,
-                setScopeProperty: self.setScopeProperty
-            });
+            self.currentParentEntityId = null;
+
+            self.getQueryStringParams = function () {
+
+                var res = {};
+
+                window.location.search.replace("?", "").split('&').map(
+
+                function (q) {
+                    var v = q.split('=');
+                    res[v[0]] = v[1];
+                });
+
+                return res;
+            };
+
+            self.convertToCurrency = function (num) {
+                if (parseFloat(num)) {
+                    return $filter('currency')(num);
+                }
+                return num;
+            };
+
+            return self;
         }]);
 })();

@@ -6,13 +6,15 @@
 			// Do Awesome Stuff!
 			var profileViewModel = this;
 
-			profileViewModel.user = {
-				FullName: data.FullName,
-				IsAdmin: data.IsAdmin,
-				ProfileUrl: data.ProfileUrl,
-				TwitterHandle: data.TwitterHandle,
-				Username: data.Username
-			};
+			profileViewModel.user = data;
+
+			// profileViewModel.user = {
+			// 	FullName: data.FullName,
+			// 	IsAdmin: data.IsAdmin,
+			// 	ProfileUrl: data.ProfileUrl,
+			// 	TwitterHandle: data.TwitterHandle,
+			// 	Username: data.Username
+			// };
 
 			profileViewModel.user.CreateDateDisplay = $filter('date')(data.CreateDate);
 
@@ -25,22 +27,29 @@
 				});
 			};
 
-			profileViewModel.canEdit = false;
+			profileViewModel.canEdit = true;
 
-			if (common.canEdit() > 0) {
-                common.enableSaveButton = true;
-                common.enableCancelButton = true;
-                profileViewModel.canEdit = true;
-            } else {
-                common.enableEditButton = true;
-                common.enableReturnButton = true;
-            }
+			/*********************
+             * Save Data
+             ********************/
+            var saveRecordData = {
+                endpoint: 'users',
+                method: 'put',
+                data: profileViewModel.user,
+                id: 'me',
+                successMessage: 'Profile Updated'
+            };
 
-			common.setSaveRecordData({
-				entity: 'users',
-				item: profileViewModel.user,
-				id: 'me'
-			});
+			common.setSaveRecordData(saveRecordData);
+
+            /*********************
+             * Setup Toolbar Buttons
+             ********************/
+            var toolbarButtons = {
+                standardButtons: ['save', 'cancel']
+            };
+
+			common.setupToolbarButtons(toolbarButtons);
 
 		}]);
 })();

@@ -69,6 +69,7 @@
 								return $location.path('/login');
 							}
 						}],
+						// KHTODO: Move to a user service.
 						data: ['httpService', function(httpService) {
 							return httpService.getItem('users', 'me');
 						}]

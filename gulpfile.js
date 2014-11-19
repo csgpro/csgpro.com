@@ -117,9 +117,9 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('admin-clean', function () {
-    gulp.src([adminBuildDir + 'index.html',
-        adminBuildDir + 'js/*'], { read: false })
-        .pipe(cleaner());
+    // gulp.src([adminBuildDir + 'index.html',
+    //     adminBuildDir + 'js/*'], { read: false })
+    //     .pipe(cleaner());
 });
 
 gulp.task('watch',function(){

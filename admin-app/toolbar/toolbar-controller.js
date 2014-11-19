@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('app')
-        .controller('ToolbarCtrl', ['$rootScope', 'common', function ($rootScope, common) {
+        .controller('ToolbarCtrl', ['common', function (common) {
 
             var toolbar = this;
 
@@ -30,18 +30,6 @@
 
             toolbar.returnButtonEnabled = function () {
                 return common.enableReturnButton;
-            };
-
-            toolbar.otherActionButtonEnabled = function () {
-                return common.enableOtherActionButton;
-            };
-
-            toolbar.otherActionButtonGlyphicon = function () {
-                return common.otherActionButtonGlyphicon;
-            };
-
-            toolbar.otherActionButtonLabel = function () {
-                return common.otherActionButtonLabel;
             };
 
             toolbar.otherButtons = function () {
