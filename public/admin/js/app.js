@@ -1,8 +1,19 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngGrid', 'angularFileUpload', 'toaster', 'cgBusy', 'templates' ])
-		.config(['$routeProvider', '$authProvider', function($routeProvider, $authProvider) {
+	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngGrid', 'angularFileUpload', 'toaster', 'cgBusy', 'templates', 'hc.marked' ])
+		.config(['$routeProvider', '$authProvider', 'markedProvider', function($routeProvider, $authProvider, markedProvider) {
+
+			markedProvider.setOptions({
+			  gfm: true,
+			  tables: true,
+			  breaks: false,
+			  pedantic: false,
+			  sanitize: false,
+			  smartLists: true,
+			  smartypants: false,
+			  langPrefix: 'lang-'
+			});
 			$routeProvider
 				.when('/', {
 					controller: 'HomeCtrl',

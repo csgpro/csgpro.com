@@ -82,7 +82,9 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
         './bower_components/satellizer/satellizer.js',
         './bower_components/ng-file-upload/angular-file-upload.js',
         './bower_components/angularjs-toaster/toaster.js',
-        './bower_components/angular-busy/dist/angular-busy.js'
+        './bower_components/angular-busy/dist/angular-busy.js',
+        './bower_components/marked/lib/marked.js',
+        './bower_components/angular-marked/angular-marked.js'
     ];
 
     var templateStream = gulp.src(['!./admin-app/index.html',
