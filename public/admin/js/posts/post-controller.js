@@ -26,9 +26,18 @@
 
 			lookup.getAvailableTopics().then(function(res) {
 				postViewModel.availableTopics = res;
-
-				postViewModel.selectedTopics = postViewModel.post.Topics? postViewModel.post.Topics.split(',') : ['']; // Assign values after lookups are added
+				postViewModel.selectedTopics = data.Topics ? postViewModel.post.Topics.split(',') : [];
 			});
+
+			lookup.getAvailableCategories().then(function(res) {
+				postViewModel.availableCategories = res;
+			});
+
+			var toolbarButtons = {
+				standardButtons: ['save','cancel']
+			};
+
+			common.setupToolbarButtons(toolbarButtons);
 
 		}]);
 })();

@@ -12,7 +12,7 @@
 				common.goToUrl('/posts/edit/' + post.id);
 			};
 
-			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button></div>';
+			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button></div>';
 
 			// Set up datatable
 		    postsViewModel.datatable = {
