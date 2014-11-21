@@ -18,6 +18,8 @@ self.getUsers = function (req, res) {
 			};
 			res.send(JSON.stringify(msg));
 		} else {
+			// Sort the data by Username.
+			data = _.sortBy(data, 'Username');
 			res.send(data);
 		}
 	});
