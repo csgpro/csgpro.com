@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.service('lookup', ['common', 'httpService', function(common, httpService) {
+		.service('lookup', ['common', 'httpService', '$q', function(common, httpService, $q) {
 			var self = this;
 
 			self.getAvailableTopics = function () {
@@ -10,7 +10,9 @@
 			};
 
 			self.getAvailableCategories = function () {
-				return ['Blog', 'News', 'Career'];
+				return $q(function(resolve) {
+				    resolve(['Blog','News','Career']);
+				  });
 			};
 
 
