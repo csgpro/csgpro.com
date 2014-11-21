@@ -125,32 +125,19 @@ gulp.task('admin-clean', function () {
 });
 
 gulp.task('watch',function(){
-    var initializing = true;
-    if(!initializing) {
-        gulp.watch([
-            adminBuildDir + '*.html',
-            adminBuildDir + 'js/*.js',
-            adminBuildDir + 'css/*.css',
-            buildDir + '*.html',
-            buildDir + 'js/*.js',
-            buildDir + 'css/*.css'
-        ], function(event) {
-            return gulp.src(event.path)
-                .pipe(plugins.express.notify());
-        });
-    } else {
-        initializing = false;
-    }
-    gulp.watch(['./admin-app/**/*.js','!./admin-app/**/*test.js'],['admin-scripts']);
-    gulp.watch(['!./admin-app/index.html','./admin-app/**/*.html'],['admin-scripts']);
+    plugins.livereload.listen();
+    gulp.watch(['./admin-app/**/*.js', '!./admin-app/**/*test.js', '!./admin-app/index.html', './admin-app/**/*.html'],['admin-scripts']);
     gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
     gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
-gulp.task('connect', plugins.express.run({
-    env: "development",
-    file: "app.js"
-}));
+gulp.task('connect', function() {
+    plugins.nodemon({ script: 'app.js', ext: 'html js' })
+    .on('change', [plugins.livereload.changed])
+    .on('restart', function () {
+      console.log('restarted!')
+    })
+});
 
 // PUBLIC
 gulp.task('default', ['shared-tasks', 'public-tasks', 'admin-tasks']);
