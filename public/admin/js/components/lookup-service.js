@@ -15,6 +15,10 @@
 				  });
 			};
 
+			self.getAvailableUsers = function () {
+				return httpService.getCollection('users');
+			};
+
 
 			return self;
 		}]);

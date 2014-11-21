@@ -33,6 +33,10 @@
 				postViewModel.availableCategories = res;
 			});
 
+			lookup.getAvailableUsers().then(function(res) {
+				postViewModel.availableUsers = res;
+			});
+
 			var toolbarButtons = {
 				standardButtons: ['save','cancel']
 			};

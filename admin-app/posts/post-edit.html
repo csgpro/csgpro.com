@@ -1,46 +1,66 @@
-<div class="col-sm-9">
-	<div class="form-group">
-		<label class="control-label">Post Title</label>
-		<input class="form-control" ng-model="postViewModel.post.Title" placeholder="Post Title Goes Here..." />
-	</div>
-	<tabset>
-		<tab select="postViewModel.autoExpand('Markdown',500)">
-			<tab-heading>
-				Edit
-			</tab-heading>
-			<div class="form-group">
+<div class="row">
+	<div class="col-sm-9">
+		<div class="form-group">
+			<label class="control-label">Post Title</label>
+			<input class="form-control" ng-model="postViewModel.post.Title" placeholder="Post Title Goes Here..." />
+		</div>
+		<tabset>
+			<tab select="postViewModel.autoExpand('Markdown',500)">
+				<tab-heading>
+					Edit
+				</tab-heading>
+				<div class="form-group">
+					<br />
+					<textarea class="form-control noresize" ng-required="true" ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.autoExpand($event)" id="Markdown"></textarea>
+				</div>
+			</tab>
+			<tab>
+				<tab-heading>
+					Preview
+				</tab-heading>
 				<br />
-				<textarea class="form-control noresize" ng-required="true" ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.autoExpand($event)" id="Markdown"></textarea>
-			</div>
-		</tab>
-		<tab>
-			<tab-heading>
-				Preview
-			</tab-heading>
-			<br />
-			<div class="" marked="postViewModel.post.Markdown"></div>
-		</tab>
-	</tabset>
-</div>
-<div class="col-sm-3">
-	<div class="form-group">
-		<label class="control-label">Category</label>
-		<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories" ng-required="true">
-			<option value="">--Select One--</option>
-		</select>
+				<div class="" marked="postViewModel.post.Markdown"></div>
+			</tab>
+		</tabset>
 	</div>
-	<div class="form-group">
-		<div>
-			<label class="control-label">Topics</label>
-			<div class="pull-right">
-				<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push('')"><span class="glyphicon glyphicon-plus"></span></button>
+	<div class="col-sm-3">
+
+		<div class="sidebar">
+
+			<div class="form-group">
+				<label class="control-label">Category</label>
+				<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories" ng-required="true">
+					<option value="">--Select One--</option>
+				</select>
 			</div>
-		</div>
-		<div class="form-group" ng-repeat="topic in postViewModel.selectedTopics">
-			<select class="form-control" ng-model="topic" ng-options="option.Name as option.Name for option in postViewModel.availableTopics">
-				<option value="">--Select One--</option>
-			</select>
-		</div>
+
+			<div class="form-group">
+				<div>
+					<label class="control-label">Topics</label>
+					<div class="pull-right">
+						<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push('')"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+				</div>
+				<div class="form-group" ng-repeat="topic in postViewModel.selectedTopics">
+					<select class="form-control" ng-model="topic" ng-options="option.Name as option.Name for option in postViewModel.availableTopics">
+						<option value="">--Select One--</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label">Author</label>
+				<select class="form-control" ng-model="postViewModel.post.AuthorUserId" ng-options="option.id as option.FullName for option in postViewModel.availableUsers">
+					<option value="form-control">--Select One--</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label">Excerpt</label>
+				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract"></textarea>
+			</div>
+
+		</div><!-- .sidebar -->
 
 	</div>
-</div>
+</div><!-- .row -->
