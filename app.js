@@ -25,7 +25,7 @@ var express          = require('express')
   , moment           = require('moment')
   , qs               = require('querystring')
   , request          = require('request')
-  , app = module.exports = express()
+  , app = module.exports.app = exports.app = express()
   , port             = 3000;
 
 

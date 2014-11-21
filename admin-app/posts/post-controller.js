@@ -30,9 +30,5 @@
 				postViewModel.selectedTopics = postViewModel.post.Topics? postViewModel.post.Topics.split(',') : ['']; // Assign values after lookups are added
 			});
 
-
-
-			//$timeout(expand, 0);
-
 		}]);
 })();

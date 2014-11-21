@@ -9,6 +9,10 @@
 				return httpService.getCollection('topics');
 			};
 
+			self.getAvailableCategories = function () {
+				return ['Blog', 'News', 'Career'];
+			};
+
 
 			return self;
 		}]);
