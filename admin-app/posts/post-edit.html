@@ -11,7 +11,7 @@
 				</tab-heading>
 				<div class="form-group">
 					<br />
-					<textarea class="form-control noresize" ng-required="true" ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.autoExpand($event)" id="Markdown"></textarea>
+					<textarea class="form-control noresize" rows="20" placeholder="Your Story Goes Here... Make it good." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.autoExpand($event)" id="Markdown"></textarea>
 				</div>
 			</tab>
 			<tab>
@@ -29,7 +29,7 @@
 
 			<div class="form-group">
 				<label class="control-label">Category</label>
-				<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories" ng-required="true">
+				<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories">
 					<option value="">--Select One--</option>
 				</select>
 			</div>

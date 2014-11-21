@@ -30,5 +30,11 @@
 		        ]
 		    };
 
+			var toolbarButtons = {
+				standardButtons: ['add']
+			};
+
+			common.setupToolbarButtons(toolbarButtons);
+
 		}]);
 })();
