@@ -126,14 +126,21 @@ gulp.task('admin-clean', function () {
 
 gulp.task('watch',function(){
     plugins.livereload.listen();
+    gulp.watch([buildDir + '**/*.html', buildDir + '**/bundle.js', adminBuildDir + 'js/*.js'],
+    function (event)
+    {
+        setTimeout(function() {
+            plugins.livereload.changed(event);
+        }, 1000);
+    })
     gulp.watch(['./admin-app/**/*.js', '!./admin-app/**/*test.js', '!./admin-app/index.html', './admin-app/**/*.html'],['admin-scripts']);
     gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
     gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
 gulp.task('connect', function() {
-    plugins.nodemon({ script: 'app.js', ext: 'html js' })
-    .on('change', [plugins.livereload.changed])
+    plugins.nodemon({ script: 'app.js', ext: 'html js', ignore: ['./public/**'] })
+    .on('change', [])
     .on('restart', function () {
       console.log('restarted!')
     })
