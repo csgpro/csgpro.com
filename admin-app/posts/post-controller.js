@@ -35,7 +35,7 @@
                 }
 			};
 
-			if (postViewModel.post) {
+			if (postViewModel.post.id) {
                 saveRecordData.method = 'put';
 				saveRecordData.successMessage = 'Updated Post';
             }
@@ -47,7 +47,7 @@
 				customButtons: [
                     {
                         condition: function () {
-                            return (postViewModel.post && !postViewModel.post.PublishDate);
+                            return (postViewModel.post.id && !postViewModel.post.PublishDate);
                         },
                         clickFn: function () {
                             saveRecordData.successMessage = 'Post Successfully Published';
@@ -60,7 +60,7 @@
                     },
 					{
 						condition: function () {
-							return (postViewModel.post && postViewModel.post.PublishDate);
+							return (postViewModel.post.id && postViewModel.post.PublishDate);
 						},
 						clickFn: function () {
 							saveRecordData.successMessage = 'Post Un-Published';
