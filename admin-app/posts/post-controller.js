@@ -2,27 +2,14 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostCtrl', ['data', 'common', 'lookup', '$timeout', function(data, common, lookup, $timeout) {
+		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', function(data, common, lookup, $modal) {
 			var postViewModel = this;
 
-			postViewModel.post = data;
+			postViewModel.post = data ? data : {};
 
-			postViewModel.autoExpand = function(e,delay) {
-				var element = typeof e === 'object' ? e.target : document.getElementById(e);
-				if(delay) {
-					$timeout(resize, delay);
-				} else {
-					resize();
-				}
-				function resize() {
-					var scrollHeight = element.scrollHeight + 10;
-					element.style.height =  scrollHeight + "px";
-				}
+			postViewModel.expand = function() {
+				common.autoExpandTextarea('Markdown');
 			};
-
-			function expand() {
-				postViewModel.autoExpand('Markdown');
-			}
 
 			lookup.getAvailableTopics().then(function(res) {
 				postViewModel.availableTopics = res;
@@ -91,6 +78,32 @@
 			common.setCancel(function() {
 				common.goToUrl('/posts');
 			});
+
+			/********************
+			 * Image Upload Modal
+			 *******************/
+			postViewModel.openImageUploadModal = function () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-file-upload.html',
+					controller: 'ModalFileUploadCtrl',
+					controllerAs: 'modalVM',
+					size: 'sm',
+					resolve: {
+						config: function () {
+							return {
+								title: 'Upload Image',
+								buttonLabel: 'Select Image File'
+							};
+						}
+					}
+				});
+
+				modalInstance.result.then(function (file) {
+					var image = '![image description](' + file + ')';
+					common.insertTextAtLastPos('Markdown', image);
+				});
+			};
 
 		}]);
 })();

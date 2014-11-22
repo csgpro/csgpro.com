@@ -1,0 +1,9 @@
+<div class="modal-header">
+	<h4 class="modal-title">{{modalVM.title}}</h4>
+</div>
+<div class="modal-body">
+	<button class="btn btn-primary btn-xs" ng-file-select="modalVM.onFileSelect($files)">{{modalVM.buttonLabel}}</button>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-warning btn-xs" ng-click="modalVM.close()">Close</button>
+</div>

@@ -5,13 +5,18 @@
 			<input class="form-control" ng-model="postViewModel.post.Title" placeholder="Post Title Goes Here..." />
 		</div>
 		<tabset>
-			<tab select="postViewModel.autoExpand('Markdown',500)">
+			<tab select="postViewModel.expand('Markdown')">
 				<tab-heading>
 					Edit
 				</tab-heading>
-				<div class="form-group">
+				<div>
 					<br />
-					<textarea class="form-control noresize" rows="20" placeholder="Your Story Goes Here... Make it good." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.autoExpand($event)" id="Markdown"></textarea>
+					<div class="form-group tools pull-right">
+						<button class="btn btn-default btn-xs" ng-click="postViewModel.openImageUploadModal()" tooltip="Upload Image"><span class="glyphicon glyphicon-picture"></span></button>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control noresize" rows="20" placeholder="Your Story Goes Here... Make it good." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.expand($event)" id="Markdown"></textarea>
+					</div>
 				</div>
 			</tab>
 			<tab>

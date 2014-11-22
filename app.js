@@ -226,6 +226,7 @@ app.get('/auth/twitter', function(req, res) {
  * FILE UPLOADS
  ****************/
 app.post('/upload/img/author', upload.saveAuthorImage);
+app.post('/upload/img/post', upload.savePostImage);
 
 /*****************
  * Old Site Redirects
