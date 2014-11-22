@@ -69,8 +69,9 @@ self.getPostsByTopic = function(req, res) {
 };
 
 self.getPostByID = function(req, res) {
-    db.getItem('posts', req.params.id, function(err, data) {
+    db.getFilteredCollection('allposts/?id=' + req.params.id, function(err, data) {
         if (data) {
+            data = data[0];
             if (data.Topics) {
                 data.Topics = data.Topics.split(','); // convert string to array
             }

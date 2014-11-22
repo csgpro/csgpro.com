@@ -6315,6 +6315,11 @@ button.close {
 body {
   /*padding-top: @navbar-height;*/
 }
+img {
+  height: auto;
+  max-width: 100%;
+  /* Prevent images from breaking out of their container */
+}
 .main {
   padding-top: 20px;
 }
