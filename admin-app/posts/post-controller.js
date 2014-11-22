@@ -36,7 +36,7 @@
 			};
 
 			if (postViewModel.post) {
-                saveRecordData.method = 'patch';
+                saveRecordData.method = 'put';
 				saveRecordData.successMessage = 'Updated Post';
             }
 

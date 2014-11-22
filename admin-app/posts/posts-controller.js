@@ -8,11 +8,15 @@
 
 			postsViewModel.posts = data;
 
-			postsViewModel.goToPost = function (post) {
-				common.goToUrl('/posts/edit/' + post.id);
+			postsViewModel.goToPost = function (post, mode) {
+				if(mode === 'edit') {
+					common.goToUrl('/posts/edit/' + post.id);
+				} else {
+					window.open('/post/' + post.id, 'preview');
+				}
 			};
 
-			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button></div>';
+			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> </div>';
 
 			// Set up datatable
 		    postsViewModel.datatable = {
