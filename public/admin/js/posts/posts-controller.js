@@ -2,11 +2,15 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostsCtrl', ['common', 'data', function(common, data) {
+		.controller('PostsCtrl', ['common', 'data', 'notifications', function(common, data, notifications) {
 			// Do Awesome Stuff!
 			var postsViewModel = this;
 
 			postsViewModel.posts = data;
+
+			postsViewModel.alert = function(msg) {
+				notifications.alert(msg);
+			};
 
 			postsViewModel.goToPost = function (post, mode) {
 				if(mode === 'edit') {
@@ -16,7 +20,7 @@
 				}
 			};
 
-			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> </div>';
+			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.alert(\'Not Yet Implemented\')" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
 
 			// Set up datatable
 		    postsViewModel.datatable = {

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app')
-        .service('notifications', ['common', 'toaster', function (common, toaster) {
+        .service('notifications', ['common', 'toaster', '$window', function (common, toaster, $window) {
 
             var self = this;
 
@@ -18,10 +18,10 @@
                 toaster.pop('success', msg);
             };
 
-            return ({
-                showError: self.showError,
-                showWarning: self.showWarning,
-                showSuccess: self.showSuccess
-            });
+            self.alert = function(msg) {
+				$window.alert(msg);
+			};
+
+            return self;
         }]);
 })();
