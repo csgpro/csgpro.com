@@ -126,7 +126,7 @@ gulp.task('admin-clean', function () {
 
 gulp.task('watch',function(){
     plugins.livereload.listen();
-    gulp.watch([buildDir + '**/*.html', buildDir + '**/bundle.js', adminBuildDir + 'js/*.js'],
+    gulp.watch([buildDir + '**/*.html', buildDir + '**/bundle.js', adminBuildDir + 'js/*.js', buildDir + '**/*.css'],
     function (event)
     {
         setTimeout(function() {
