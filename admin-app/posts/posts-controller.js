@@ -2,15 +2,11 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostsCtrl', ['common', 'data', 'notifications', function(common, data, notifications) {
+		.controller('PostsCtrl', ['common', 'data', 'notifications', '$modal', function(common, data, notifications, $modal) {
 			// Do Awesome Stuff!
 			var postsViewModel = this;
 
 			postsViewModel.posts = data;
-
-			postsViewModel.alert = function(msg) {
-				notifications.alert(msg);
-			};
 
 			postsViewModel.goToPost = function (post, mode) {
 				if(mode === 'edit') {
@@ -20,7 +16,7 @@
 				}
 			};
 
-			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.alert(\'Not Yet Implemented\')" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
+			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.deletePost(row.entity)" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
 
 			// Set up datatable
 		    postsViewModel.datatable = {
@@ -43,6 +39,34 @@
 			};
 
 			common.setupToolbarButtons(toolbarButtons);
+
+
+
+			/********************
+			* Delete Record Modal
+			*******************/
+			postsViewModel.deletePost = function (post) {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-delete-record.html',
+					controller: 'ModalDeleteRecordCtrl',
+					controllerAs: 'modalVM',
+					size: 'md',
+					resolve: {
+						config: function () {
+							return {
+								endpoint: 'posts',
+								id: post.id,
+								description: post.Title
+							};
+						}
+					}
+				});
+
+				modalInstance.result.then(function () {
+					common.goToUrl('/posts');
+				});
+			};
 
 		}]);
 })();
