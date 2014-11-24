@@ -43,11 +43,11 @@
 				<div>
 					<label class="control-label">Topics</label>
 					<div class="pull-right">
-						<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push('')"><span class="glyphicon glyphicon-plus"></span></button>
+						<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push({})"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
 				</div>
 				<div class="form-group" ng-repeat="topic in postViewModel.selectedTopics">
-					<select class="form-control" ng-model="topic" ng-options="option.Name as option.Name for option in postViewModel.availableTopics">
+					<select class="form-control" ng-model="topic.Name" ng-options="option.Name as option.Name for option in postViewModel.availableTopics">
 						<option value="">--Select One--</option>
 					</select>
 				</div>

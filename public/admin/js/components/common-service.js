@@ -32,13 +32,14 @@
                 self.saveRecordData = obj;
             };
 
-            self.saveRecord = function () {
-                var endpoint = self.saveRecordData.endpoint,
-                    data = self.saveRecordData.data,
-                    id = self.saveRecordData.id,
-                    method = self.saveRecordData.method,
-                    successMessage = self.saveRecordData.successMessage ? self.saveRecordData.successMessage : 'Saved Data',
-                    onSuccess = self.saveRecordData.onSuccess ? self.saveRecordData.onSuccess : null;
+            self.saveRecord = function (data) {
+                var saveRecordData = data ? data : self.saveRecordData;
+                var endpoint = saveRecordData.endpoint,
+                    data = saveRecordData.data,
+                    id = saveRecordData.id,
+                    method = saveRecordData.method,
+                    successMessage = saveRecordData.successMessage ? saveRecordData.successMessage : 'Saved Data',
+                    onSuccess = saveRecordData.onSuccess ? saveRecordData.onSuccess : null;
 
                 if (method === 'put') {
                     return httpService.updateItem(endpoint, id, data).then(function (res) {

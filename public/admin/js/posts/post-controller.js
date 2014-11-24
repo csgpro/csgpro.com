@@ -13,7 +13,24 @@
 
 			lookup.getAvailableTopics().then(function(res) {
 				postViewModel.availableTopics = res;
-				postViewModel.selectedTopics = data && data.Topics ? postViewModel.post.Topics.split(',') : [];
+				postViewModel.selectedTopics = [];
+				if(data && data.Topics) {
+					var topics = data.Topics.split(',');
+					for(var i = 0; i < topics.length; i++) {
+						// Because ngRepeat and ngOptions don't play well together
+						// when using string data.
+						postViewModel.selectedTopics.push({
+							id: i,
+							Name: topics[i]
+						});
+					}
+				} else {
+					postViewModel.selectedTopics.push({
+						id: 0,
+						Name: ''
+					})
+				}
+				postViewModel.post.Topics = '';
 			});
 
 			lookup.getAvailableCategories().then(function(res) {
@@ -24,26 +41,40 @@
 				postViewModel.availableUsers = res;
 			});
 
-			var saveRecordData = {
-                endpoint: 'posts',
-                method: 'post',
-                data: postViewModel.post,
-                id: postViewModel.post ? postViewModel.post.id : null,
-                successMessage: 'Created Post',
-                onSuccess: function () {
-                    common.goToUrl('/posts');
-                }
-			};
+			function getSelectedTopics() {
+				// concat topics.
+				var topics = [];
+				for(var i = 0; i < postViewModel.selectedTopics.length; i++) {
+					var topic = postViewModel.selectedTopics[i];
+					if(topic.hasOwnProperty('Name') && topic.Name != '') {
+						topics.push(topic.Name);
+					}
+				}
+				return topics.join();
+			}
 
-			if (postViewModel.post.id) {
-                saveRecordData.method = 'put';
-				saveRecordData.successMessage = 'Updated Post';
-            }
+			function getSaveRecordData() {
+				postViewModel.post.Topics = getSelectedTopics();
+				var saveRecordData = {
+	                endpoint: 'posts',
+	                method: 'post',
+	                data: postViewModel.post,
+	                id: postViewModel.post ? postViewModel.post.id : null,
+	                successMessage: 'Created Post',
+	                onSuccess: function () {
+	                    common.goToUrl('/posts');
+	                }
+				};
 
-			common.setSaveRecordData(saveRecordData);
+				if (postViewModel.post.id) {
+	                saveRecordData.method = 'put';
+					saveRecordData.successMessage = 'Updated Post';
+	            }
+				return saveRecordData;
+			}
 
 			var toolbarButtons = {
-				standardButtons: ['save','cancel'],
+				standardButtons: ['cancel'],
 				customButtons: [
                     {
                         condition: function () {
@@ -70,6 +101,15 @@
 						btnClass: 'btn-danger',
 						btnGlyph: 'glyphicon-remove',
 						btnText: 'Un-Publish'
+					},
+					{
+						clickFn: function () {
+							var saveRecordData = getSaveRecordData();
+							common.saveRecord(saveRecordData);
+						},
+						btnClass: 'btn-success',
+						btnGlyph: 'glyphicon-save',
+						btnText: 'Save'
 					}
 				]
 			};
@@ -99,8 +139,8 @@
 					}
 				});
 
-				modalInstance.result.then(function (file) {
-					var image = '![image description](' + file + ')';
+				modalInstance.result.then(function (data) {
+					var image = '![' + data.description + '](' + data.url + ')';
 					common.insertTextAtLastPos('Markdown', image);
 				});
 			};

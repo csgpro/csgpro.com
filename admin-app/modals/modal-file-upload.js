@@ -6,6 +6,8 @@
 
 			var modalVM = this;
 
+			modalVM.uploading = false; // Not uploading yet.
+
 			modalVM.title = config && config.title ? config.title : 'Upload File';
 			modalVM.buttonLabel = config && config.buttonLabel ? config.buttonLabel : 'Select File';
 
@@ -13,13 +15,21 @@
 				modalVM.upload = $upload.upload({
 					url: '/upload/img/post',
 					file: file
+				}).progress(function(evt) {
+					modalVM.uploading = true;
 				}).success(function(data, status, headers, config) {
-					$modalInstance.close(data.url);
+					$modalInstance.close({
+						url: data.url,
+						description: modalVM.description
+					});
 				});
 			};
 
-			modalVM.close = function () {
+			modalVM.cancel = function () {
 				$modalInstance.dismiss('cancel');
+				if(modalVM.upload) {
+					modalVM.upload.abort();
+				}
 			};
 	}]);
 })();

@@ -72,7 +72,8 @@ gulp.task('admin-copy-index', ['admin-clean'], function () {
 gulp.task('admin-scripts', ['admin-copy-index'], function () {
 
     libSrc = [
-        './bower_components/ng-file-upload/angular-file-upload-shim.js',
+        /*'./bower_components/ng-file-upload/angular-file-upload-shim.js',*/
+        './bower_components/ng-file-upload/angular-file-upload-html5-shim.js',
         './bower_components/jquery/dist/jquery.js',
         './bower_components/angular/angular.js',
         './bower_components/angular-route/angular-route.js',
