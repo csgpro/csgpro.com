@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', '$auth', '$location', 'common', function(CONFIG, $rootScope, $route, $auth, $location, common) {
+		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', '$auth', '$location', 'common', 'UserService', function(CONFIG, $rootScope, $route, $auth, $location, common, UserService) {
 			var appViewModel = this;
 
 			$rootScope.$on('$routeChangeSuccess', function () {
@@ -21,6 +21,9 @@
 				if (!$auth.isAuthenticated() && $location.path() !== '/login') {
 					$location.path('/login');
 					event.preventDefault();
+				} else {
+					var adminStatus = $auth.getPayload() && $auth.getPayload().admin ? $auth.getPayload().admin : false;
+					UserService.setAdminStatus(adminStatus);
 				}
 			});
 
