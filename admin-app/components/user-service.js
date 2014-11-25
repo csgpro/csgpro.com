@@ -6,14 +6,18 @@
 
 			var self = this;
 
-			self.isAdmin = false;
+			self.user = null;
 
-			self.setAdminStatus = function (status) {
-				self.isAdmin = status;
+			self.setUser = function (user) {
+				self.user = user;
 			};
 
-			self.getAdminStatus = function () {
-				return self.isAdmin;
+			self.getUserAdminStatus = function () {
+				return self.user && self.user.hasOwnProperty('IsAdmin') ? self.user.IsAdmin : false;
+			};
+
+			self.getUserId = function () {
+				return self.user.id;
 			};
 
 			return self;

@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', function(data, common, lookup, $modal) {
+		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', 'UserService', function(data, common, lookup, $modal, UserService) {
 			var postViewModel = this;
 
 			postViewModel.post = data ? data : {};
@@ -39,6 +39,7 @@
 
 			lookup.getAvailableUsers().then(function(res) {
 				postViewModel.availableUsers = res;
+				postViewModel.post.AuthorUserId = UserService.getUserId();
 			});
 
 			function getSelectedTopics() {

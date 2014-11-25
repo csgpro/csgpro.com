@@ -22,8 +22,10 @@
 					$location.path('/login');
 					event.preventDefault();
 				} else {
-					var adminStatus = $auth.getPayload() && $auth.getPayload().admin ? $auth.getPayload().admin : false;
-					UserService.setAdminStatus(adminStatus);
+					var user = $auth.getPayload() && $auth.getPayload().user ? $auth.getPayload().user : null;
+					if (user) {
+						UserService.setUser(user);
+					}
 				}
 			});
 
