@@ -71,7 +71,7 @@ exports.publish = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 
@@ -83,7 +83,7 @@ exports.unpublish = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 
@@ -167,7 +167,7 @@ exports.del = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 

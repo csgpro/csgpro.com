@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  div.row
+    div.col-md-12
+      div.page-header: h1 #{topic ? 'Edit' : 'Create'} Topic
+  form(role='form', action="#{topic ? '/admin-old/topic/'+topic.id+'/update' : '/admin/topic'}", method="POST")
+    div.row
+      div.col-md-8
+        div.row
+          div.col-md-6.form-group
+            label(for='form-name') Name:
+            input#form-name.form-control(type='text', name='Name', value="#{topic ? topic.Name : ''}")
+    div.row.text-right(style='margin-top: 24px;')
+      div.col-md-12
+        if topic
+          input.btn.btn-primary.btn-medium(type='submit', value='Save')
+        else
+          input.btn.btn-primary.btn-medium(type='submit', value='Create')

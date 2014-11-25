@@ -15,12 +15,21 @@ var express          = require('express')
   , http             = require('http')
   , path             = require('path')
   , c                = require('nconf')
-  , db               = require('./modules/db2.js')
+  , db               = require('./modules/db.js')
+  , db2               = require('./modules/db2.js')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
   , api              = require('./routes/api')
   , upload           = require('./routes/upload')
+  , account          = require('./routes/account')
+  , admin            = require('./routes/admin-post')
+  , adminMain        = require('./routes/admin')
+  , adminTopic       = require('./routes/admin-topic')
+  , adminReminders   = require('./routes/admin-reminders')
+  , passport         = require('passport')
+  , TwitterStrategy  = require('passport-twitter').Strategy
+  , LiveStrategy     = require('passport-windowslive').Strategy
   , jwt              = require('jwt-simple')
   , moment           = require('moment')
   , qs               = require('querystring')
@@ -55,6 +64,8 @@ app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.session({ secret: SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**************
  * Robots.txt redirect
@@ -109,7 +120,6 @@ function createToken(user) {
     }
 }
 
-
 /**********************************
  * ROUTES
  **********************************/
@@ -127,6 +137,46 @@ app.get('/post/:id', post.getPostByID);
 
 app.post('/contact', contact.index);
 app.post('/csv', register.csv);
+
+/*****************
+ * ADMIN (deprecated)
+ ****************/
+app.get('/admin-old', auth, adminMain.index);
+app.get('/admin-old/login', adminMain.login);
+
+app.get('/admin-old/account'             , authAdmin , account.index);
+app.post('/admin-old/account'            , authAdmin , account.create);
+app.get('/admin-old/account/new'         , authAdmin , account.entry);
+app.get('/admin-old/account/:id/update'  , authAdmin , account.update);
+app.post('/admin-old/account/:id/update' , authAdmin , account.patch);
+app.get('/admin-old/account/:id/delete'  , authAdmin , account.del);
+
+app.get('/admin-old/topic'               , authAdmin , adminTopic.index);
+app.post('/admin-old/topic'              , authAdmin , adminTopic.create);
+app.get('/admin-old/topic/new'           , authAdmin , adminTopic.entry);
+app.get('/admin-old/topic/:id/update'    , authAdmin , adminTopic.update);
+app.post('/admin-old/topic/:id/update'   , authAdmin , adminTopic.patch);
+app.get('/admin-old/topic/:id/delete'    , authAdmin , adminTopic.del);
+
+app.get('/admin-old/post'                , auth      , admin.index);
+app.get('/admin-old/post/new'            , auth      , admin.entry);
+app.get('/admin-old/post/:id/update'     , auth      , admin.update);
+app.post('/admin-old/post/:id/update'    , auth      , admin.create);
+app.post('/admin-old/post'               , auth      , admin.create);
+app.get('/admin-old/post/:id'            , auth      , admin.get);
+app.get('/admin-old/posts'               , auth      , admin.all);
+app.get('/admin-old/post/:id/publish'    , authAdmin , admin.publish);
+app.get('/admin-old/post/:id/unpublish'  , authAdmin , admin.unpublish);
+app.get('/admin-old/post/:id/delete'     , authAdmin , admin.del);
+
+app.post('/admin-old/image-upload'       , auth      , admin.imageUpload);
+
+app.get('/admin-old/notadmin', function(req, res) {
+  res.send('You must be an admin to do the thing you were trying to do.');
+});
+
+app.get('/admin-old/reminders', authAdmin, adminReminders.index);
+app.post('/admin-old/reminders', authAdmin, adminReminders.send);
 
 /*****************
  * API
@@ -192,7 +242,7 @@ app.get('/auth/twitter', function(req, res) {
         profile = qs.parse(profile);
 
         var searchStr = '$filter=TwitterHandle eq \'@' + profile.screen_name + '\'';
-        db.getItem('users', searchStr, function(err, data) {
+        db2.getItem('users', searchStr, function(err, data) {
             if (err) {
                 var msg = {
                     status: 'fail',
@@ -230,9 +280,113 @@ app.post('/upload/img/author', upload.saveAuthorImage);
 app.post('/upload/img/post', upload.savePostImage);
 
 /*****************
- * Old Site Redirects
+ * PASSPORT (Deprecated)
+ ****************/
+var TWITTER_CONSUMER_KEY_OLD       = c.get('TWITTER_CONSUMER_KEY_OLD')
+  , TWITTER_CONSUMER_SECRET_OLD    = c.get('TWITTER_CONSUMER_SECRET_OLD')
+  , TWITTER_CALLBACK_URL_OLD       = c.get('TWITTER_CALLBACK_URL_OLD')
+  , WINDOWS_LIVE_CLIENT_ID_OLD     = c.get('WINDOWS_LIVE_CLIENT_ID')
+  , WINDOWS_LIVE_CLIENT_SECRET_OLD = c.get('WINDOWS_LIVE_CLIENT_SECRET')
+  , WINDOWS_LIVE_CALLBACK_URL_OLD  = c.get('WINDOWS_LIVE_CALLBACK_URL');
+
+// Serialize users into sessions with just their user id
+passport.serializeUser(function(user, cb){
+    if (user) {
+        cb(null, user.id);
+    } else {
+        cb(new Error('Couldn\'t serialize user'), null);
+    }
+});
+
+passport.deserializeUser(db.deserializeUser);
+
+passport.use(new TwitterStrategy({
+    consumerKey: TWITTER_CONSUMER_KEY_OLD,
+    consumerSecret: TWITTER_CONSUMER_SECRET_OLD,
+    callbackURL: TWITTER_CALLBACK_URL_OLD
+    }, function(token, tokenSecret, profile, done) {
+
+    db.getUserFromTwitterProfile(profile, function(err, user){
+        if (user && !err) {
+            return done(null, user);
+        } else {
+            return err ? done(err, null) : done(new Error('User not authorized'), null);
+        }
+
+    });
+}
+));
+
+passport.use(new LiveStrategy({
+        clientID: WINDOWS_LIVE_CLIENT_ID_OLD,
+        clientSecret: WINDOWS_LIVE_CLIENT_SECRET_OLD,
+        callbackURL: WINDOWS_LIVE_CALLBACK_URL_OLD
+    }, function(accessToken, refreshToken, profile, done) {
+        console.log('access token: ' + accessToken);
+
+        db.getUserFromLiveProfile(profile, function(err, user) {
+
+        if (user && !err) {
+            return done(null, user);
+        } else {
+            done('User not authorized', null);
+        }
+
+        });
+    }
+));
+
+function auth (req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/admin-old/login');
+};
+
+function authAdmin (req, res, next) { // They are authenticated and authorized
+  if (req.isAuthenticated() && req.user.IsAdmin === true) { return next(); }
+  res.redirect('/admin-old/notadmin');
+};
+
+/*****************
+ * TWITTER (Deprecated)
+ ****************/
+var message = 'Unable to authenticate, ' +
+            'or you are not authorized to use this system.';
+
+app.get('/auth-old/twitter',
+  passport.authenticate('twitter'),
+  function(req, res){/* isnt called */}
+);
+
+app.get('/auth-old/twitter/callback',
+  passport.authenticate('twitter', {
+    failureRedirect: '/admin-old/login?message=' + message
+  }),
+  function(req, res) {
+    console.log(req);
+    console.log(res);
+    // Successful authentication, redirect home.
+    res.redirect('/admin-old/post');
+});
+
+/*****************
+ * WINDOWS LIVE (Deprecated)
  ****************/
 
+app.get('/auth-old/live',
+  passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
+
+app.get('/auth-old/live/callback',
+  passport.authenticate('windowslive', {
+    failureRedirect: '/admin-old/login?message=' + message
+   }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/admin-old/post');
+  });
+
+/*****************
+ * Old Site Redirects
+ ****************/
 app.get('/blogs/post/*', redirects);
 app.get('/analytics', function(req, res) { res.redirect('/post/120085') });
 
@@ -242,7 +396,6 @@ app.get('/analytics', function(req, res) { res.redirect('/post/120085') });
 // TODO: this the wrong way to send a 404, it should be
 // `res.status(404).render('404');` but that doesn't render correctly on Azure.
 app.get('/*', function(req, res) { res.render('404'); });
-
 
 /**********************************
  * START THE SERVER, SCOTTY!

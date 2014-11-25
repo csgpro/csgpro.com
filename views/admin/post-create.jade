@@ -1,0 +1,102 @@
+extends layout
+
+block js
+  script(src='//cdnjs.cloudflare.com/ajax/libs/marked/0.2.9/marked.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/7.3/highlight.min.js')
+  script(src='/js/admin.js')
+
+block content
+  //- A hidden modal for info about markdown
+  div.modal.fade(id='markdown-help', tabindex='-1')
+    div.modal-dialog
+      div.modal-content
+        div.modal-header
+          button(type='button', class='close', data-dismiss='modal', aria-hidden='true')&times;
+          h4.modal-title Markdown Help
+        div.modal-body
+          div!= markdownHelpHtml
+        div.modal-footer
+          button.btn.btn-default(data-dismiss='modal') Close
+
+  form(role='form', action="#{post ? '/admin-old/post/'+post.id+'/update' : '/admin/post'}", method="POST")
+    div.row
+      div.col-md-6
+        div.row
+          div.col-md-6.form-group
+            label(for='form-title') Title:
+            input#form-title.form-control(type='text', name='Title', value="#{post ? post.Title : ''}")
+          div.col-md-6.form-group
+            label(for='form-category') Category:
+            select#form-category.form-control(type='text', name='Category')
+              if (post)
+                option(value='Blog', selected=post['Category']==='Blow') Blog
+                option(value='News', selected=post['Category']==='News') News
+                option(value='Career', selected=post['Category']==='Career') Career
+              else
+                option(value='Blog') Blog
+                option(value='News') News
+                option(value='Career') Career
+
+        div.row
+          div.col-md-12.form-group
+            label(for='form-abstract') Abstract (max 400 char.): 
+            if (post && post.Abstract)
+              textarea#form-abstract.no-expand.form-control(name='Abstract', maxlength='400', rows='5')= post.Abstract
+            else
+              textarea#form-abstract.no-expand.form-control(name='Abstract', maxlength='400', rows='5')
+      div.col-md-3.form-group
+        div.row
+          div.col-xs-8
+            label(for='form-topics') Topics (multi-select):
+          div.col-xs-4.text-right
+            small: a(href='#', onclick="$('#form-topics option:selected').removeAttr('selected'); return false; ") reset
+        select#form-topics.form-control(type='text', name='Topics', multiple, style='min-height: 180px')
+          if (postTopics)
+            each topic in topics
+              option(value='#{topic}', selected=postTopics.hasOwnProperty(topic))= topic
+          else 
+            each topic in topics
+              option(value='#{topic}')= topic
+      div.col-md-3
+        div.row
+          div.col-md-12.form-group.right
+            button#upload.btn.btn-primary(type='button') Upload image
+            ul#uploads.list-unstyled.hidden
+        if (user.IsAdmin)
+          div.row
+            div.col-md-12.form-group
+              label(for='form-publish-date') Publish Date (mm/dd/yyyy):
+              if (post && post.PublishDate)
+                input#form-publish-date.form-control(type='text', name='PublishDate', value=moment(post.PublishDate).format('MM/DD/YYYY'))
+              else
+                input#form-publish-date.form-control(type='text', name='PublishDate')
+          div.row
+            div.col-md-12.form-group
+              label(for='form-author') Author:
+              select#form-author.form-control(type='text', name='AuthorUserId')
+                - users.sort(function(a,b){return a.FullName < b.FullName ? -1 : 1 });
+                if (post && post.AuthorUserId)
+                  each person in users
+                    option(value='#{person.id}', selected=post.AuthorUserId===person.id)= person.FullName
+                else
+                  each person in users
+                    option(value='#{person.id}')= person.FullName
+
+
+    div.row
+      div.col-md-6
+        div.panel.panel-default
+          div.panel-heading Markdown input
+            a(href='#markdown-help', data-toggle='modal', style='float:right;') help
+          textarea#markdown.markdown-entry.form-control.tall.panel-body(rows='12', name='Markdown') #{post ? post.Markdown : ''}
+      div.col-md-6
+        div.panel.panel-default
+          div.panel-heading Rendered output
+          div#render.article.panel-body.tall
+            p Enter markdown to the left
+    div.row
+      div.col-md-12.text-right
+        if post
+          input.btn.btn-primary.btn-medium(type='submit', value='Save')
+        else
+          input.btn.btn-primary.btn-medium(type='submit', value='Create')

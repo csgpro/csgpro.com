@@ -36,7 +36,7 @@ exports.create = function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/admin/topic?message='
+      res.redirect('/admin-old/topic?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -77,7 +77,7 @@ exports.update = function(req, res) {
         topic: topic
       });
     }
-  }); 
+  });
 
 
 };
@@ -95,8 +95,8 @@ exports.patch = function(req, res) {
       res.send(err);
     } else {
       res.redirect('/admin/topic?message='
-                    + escape(message) 
-                    + '&type=' 
+                    + escape(message)
+                    + '&type='
                     + type);
     }
 
@@ -129,11 +129,6 @@ exports.del = function(req, res) {
                     + '&type='
                     + type);
     }
-  }); 
+  });
 
 };
-
-
-
-
-
