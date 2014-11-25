@@ -1,1 +1,1580 @@
-function renderMarkdown(){render.innerHTML=marked(md.value)}!function(a,b,c){var d,e=a.ss||{},f=/^\s+/,g=/\s+$/,h=/[xy]/g,i=/.*(\/|\\)/,j=/.*[.]/,k=/[\t\r\n]/g,l=Object.prototype.toString.call(a.HTMLElement).indexOf("Constructor")>0,m=b.createElement("input");m.type="file",d="multiple"in m&&"undefined"!=typeof File&&"undefined"!=typeof(new XMLHttpRequest).upload,e.obj2string=function(a,b){"use strict";var c=[];for(var d in a)if(a.hasOwnProperty(d)){var f=b?b+"["+d+"]":d,g=a[d];c.push("object"==typeof g?e.obj2string(g,f):encodeURIComponent(f)+"="+encodeURIComponent(g))}return c.join("&")},e.extendObj=function(a,b){"use strict";for(var c in b)b.hasOwnProperty(c)&&(a[c]=b[c])},e.contains=function(a,b){"use strict";for(var c=a.length;c--;)if(a[c]===b)return!0;return!1},e.removeItem=function(a,b){"use strict";for(var c=a.length;c--;)if(a[c]===b){a.splice(c,1);break}},e.addEvent=function(a,b,c){"use strict";return a.addEventListener?a.addEventListener(b,c,!1):a.attachEvent("on"+b,c),function(){e.removeEvent(a,b,c)}},e.removeEvent=function(a,b,c){"use strict";a.removeEventListener?a.removeEventListener(b,c,!1):a.detachEvent("on"+b,c)},e.newXHR=function(){"use strict";if("undefined"!=typeof XMLHttpRequest)return new a.XMLHttpRequest;if(a.ActiveXObject)try{return new a.ActiveXObject("Microsoft.XMLHTTP")}catch(b){return!1}},e.parseJSON=function(b){"use strict";if(!b)return!1;if(b=e.trim(b),a.JSON&&a.JSON.parse)try{return a.JSON.parse(b)}catch(c){return!1}return b&&/^[\],:{}\s]*$/.test(b.replace(/\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g,"@").replace(/"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,""))?new Function("return "+b)():!1},e.getBox=function(c){"use strict";var d,e,f=0,g=0;if(c.getBoundingClientRect)d=c.getBoundingClientRect(),e=b.documentElement,f=d.top+(a.pageYOffset||e.scrollTop)-(e.clientTop||0),g=d.left+(a.pageXOffset||e.scrollLeft)-(e.clientLeft||0);else do g+=c.offsetLeft,f+=c.offsetTop;while(c=c.offsetParent);return{top:Math.round(f),left:Math.round(g)}},e.addStyles=function(a,b){"use strict";for(var c in b)b.hasOwnProperty(c)&&(a.style[c]=b[c])},e.copyLayout=function(a,b){"use strict";var c=e.getBox(a);e.addStyles(b,{position:"absolute",left:c.left+"px",top:c.top+"px",width:a.offsetWidth+"px",height:a.offsetHeight+"px"})},e.toElement=function(){"use strict";var a=b.createElement("div");return function(b){a.innerHTML=b;var c=a.firstChild;return a.removeChild(c),c}}(),e.getUID=function(){"use strict";return"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(h,function(a){var b=16*Math.random()|0,c="x"==a?b:3&b|8;return c.toString(16)})},e.trim=function(a){"use strict";return a.toString().replace(f,"").replace(g,"")},e.getFilename=function(a){"use strict";return a.replace(i,"")},e.getExt=function(a){"use strict";return-1!==a.indexOf(".")?a.replace(j,""):""},e.hasClass=function(a,b){"use strict";return(" "+a.className+" ").replace(k," ").indexOf(" "+b+" ")>=0},e.addClass=function(a,b){"use strict";return b&&""!==b?void(e.hasClass(a,b)||(a.className+=" "+b)):!1},e.removeClass=function(){"use strict";var a={};return function(b,c){a[c]||(a[c]=new RegExp("(?:^|\\s)"+c+"(?!\\S)")),b.className=b.className.replace(a[c],"")}}(),e.purge=function(a){"use strict";var b,c,d,f=a.attributes;if(f)for(b=f.length-1;b>=0;b-=1)d=f[b].name,"function"==typeof a[d]&&(a[d]=null);if(f=a.childNodes)for(c=f.length,b=0;c>b;b+=1)e.purge(a.childNodes[b])},e.remove=function(a){"use strict";a.parentNode&&(e.purge(a),a.parentNode.removeChild(a)),a=null},e.verifyElem=function(c){"use strict";return"undefined"!=typeof jQuery&&c instanceof jQuery?c=c[0]:"string"==typeof c&&("#"==c.charAt(0)&&(c=c.substr(1)),c=b.getElementById(c)),c&&1===c.nodeType?("A"==c.nodeName.toUpperCase()&&(c.style.cursor="pointer",e.addEvent(c,"click",function(b){b&&b.preventDefault?b.preventDefault():a.event&&(a.event.returnValue=!1)})),c):!1},e.SimpleUpload=function(a){"use strict";var b,c,f;if(this._opts={button:"",url:"",progressUrl:!1,nginxProgressUrl:!1,multiple:!1,maxUploads:3,queue:!0,checkProgressInterval:50,keyParamName:"APC_UPLOAD_PROGRESS",nginxProgressHeader:"X-Progress-ID",allowedExtensions:[],accept:"",maxSize:!1,name:"",data:{},autoSubmit:!0,multipart:!1,method:"POST",responseType:"",debug:!1,hoverClass:"",focusClass:"",disabledClass:"",onAbort:function(){},onChange:function(){},onSubmit:function(){},onProgress:function(){},onUpdateFileSize:function(){},onComplete:function(){},onExtError:function(){},onSizeError:function(){},onError:function(){},startXHR:function(){},endXHR:function(){},startNonXHR:function(){},endNonXHR:function(){}},e.extendObj(this._opts,a),a=null,this._btns=[],this._opts.button instanceof Array)for(c=this._opts.button.length,b=0;c>b;b++)f=e.verifyElem(this._opts.button[b]),f!==!1?this._btns.push(this.rerouteClicks(f)):this.log("Button with array index "+b+" is invalid");else f=e.verifyElem(this._opts.button),f!==!1&&this._btns.push(this.rerouteClicks(f));if(delete this._opts.button,this._btns.length<1||this._btns[0]===!1)throw new Error("Invalid button. Make sure the element you're passing exists.");this._opts.multiple===!1&&(this._opts.maxUploads=1),this._queue=[],this._active=0,this._disabled=!1,this._progKeys=[],this._maxFails=10,d||(this._opts.progressUrl||this._opts.nginxProgressUrl)&&(this._sizeFlags={},this._progKey=e.getUID()),this._createInput(),this.enable()},e.SimpleUpload.prototype={destroy:function(){"use strict";for(var a=this._btns.length;a--;)this._btns[a].off&&this._btns[a].off(),e.removeClass(this._btns[a],this._opts.hoverClass),e.removeClass(this._btns[a],this._opts.focusClass),e.removeClass(this._btns[a],this._opts.disabledClass),this._btns[a].disabled=!1;e.remove(this._input.parentNode);for(var b in this)this.hasOwnProperty(b)&&delete this.prop},log:function(b){"use strict";this._opts.debug&&a.console&&console.log("[uploader] "+b)},setData:function(a){"use strict";this._opts.data=a},setProgressBar:function(a){"use strict";this._progBar=e.verifyElem(a)},setPctBox:function(a){"use strict";this._pctBox=e.verifyElem(a)},setFileSizeBox:function(a){"use strict";this._sizeBox=e.verifyElem(a)},setProgressContainer:function(a){"use strict";this._progBox=e.verifyElem(a)},setAbortBtn:function(a,b){"use strict";this._abortBtn=e.verifyElem(a),this._removeAbort=!1,b&&(this._removeAbort=!0)},getQueueSize:function(){"use strict";return this._queue.length},_cycleQueue:function(){"use strict";this._queue.length>0&&this._opts.autoSubmit&&this.submit()},removeCurrent:function(){"use strict";e.removeItem(this._queue,this._file),delete this._file,this._file=null,this._cycleQueue()},disable:function(){"use strict";var a,b=this._btns.length;for(this._disabled=!0;b--;)a=this._btns[b].nodeName.toUpperCase(),e.addClass(this._btns[b],this._opts.disabledClass),("INPUT"==a||"BUTTON"==a)&&(this._btns[b].disabled=!0);this._input&&this._input.parentNode&&(this._input.parentNode.style.visibility="hidden")},enable:function(){"use strict";var a=this._btns.length;for(this._disabled=!1;a--;)e.removeClass(this._btns[a],this._opts.disabledClass),this._btns[a].disabled=!1},_createInput:function(){"use strict";var a=this,c=b.createElement("div");this._input=b.createElement("input"),this._input.type="file",this._input.name=this._opts.name,d&&!l&&(this._input.multiple=!0),"accept"in this._input&&""!==this._opts.accept&&(this._input.accept=this._opts.accept),e.addStyles(c,{display:"block",position:"absolute",overflow:"hidden",margin:0,padding:0,opacity:0,direction:"ltr",zIndex:2147483583}),e.addStyles(this._input,{position:"absolute",right:0,margin:0,padding:0,fontSize:"480px",fontFamily:"sans-serif",cursor:"pointer"}),"0"!==c.style.opacity&&(c.style.filter="alpha( opacity=0 )"),e.addEvent(this._input,"change",function(){var b,c,f,g;if(a._input&&""!==a._input.value){if(d){if(b=e.getFilename(a._input.files[0].name),c=e.getExt(b),!1===a._opts.onChange.call(a,b,c))return;for(f=a._input.files.length,a._opts.multiple||(f=1),g=0;f>g;g++)a._queue.push(a._input.files[g])}else{if(b=e.getFilename(a._input.value),c=e.getExt(b),!1===a._opts.onChange.call(a,b,c))return;a._queue.push(a._input)}e.removeClass(a._overBtn,a._opts.hoverClass),e.removeClass(a._overBtn,a._opts.focusClass),e.remove(a._input.parentNode),delete a._input,a._createInput(),a._opts.autoSubmit&&a.submit()}}),e.addEvent(this._input,"mouseover",function(){e.addClass(a._overBtn,a._opts.hoverClass)}),e.addEvent(this._input,"mouseout",function(){e.removeClass(a._overBtn,a._opts.hoverClass),e.removeClass(a._overBtn,a._opts.focusClass),a._input.parentNode.style.visibility="hidden"}),e.addEvent(this._input,"focus",function(){e.addClass(a._overBtn,a._opts.focusClass)}),e.addEvent(this._input,"blur",function(){e.removeClass(a._overBtn,a._opts.focusClass)}),b.body.appendChild(c),c.appendChild(this._input)},rerouteClicks:function(a){"use strict";var b=this;return a.off=e.addEvent(a,"mouseover",function(){b._disabled||(b._input||b._createInput(),b._overBtn=a,e.copyLayout(a,b._input.parentNode),b._input.parentNode.style.visibility="visible")}),a},_getFrame:function(){"use strict";var a=e.getUID(),c=e.toElement('<iframe src="javascript:false;" name="'+a+'" />');return b.body.appendChild(c),c.style.display="none",c.id=a,c},_getForm:function(a){"use strict";var c=e.toElement('<form method="post" enctype="multipart/form-data"></form>');return b.body.appendChild(c),c.style.display="none",c.action=this._opts.url,c.target=a.name,c},_getHidden:function(a,c){"use strict";var d=b.createElement("input");return d.type="hidden",d.name=a,d.value=c,d},_last:function(a,b,c,d,f){"use strict";a&&(a.innerHTML=""),b&&e.remove(b),c&&(c.innerHTML=""),d&&f&&e.remove(d),this._active--,a=b=c=d=f=null,this._disabled&&this.enable(),this._cycleQueue()},_errorFinish:function(a,b,c,d,e,f,g,h,i){"use strict";this.log("Upload failed: "+a+" "+b),this._opts.onError.call(this,d,c,a,b),this._last(e,f,g,h,i),a=b=c=d=e=f=g=h=i=null},_finish:function(a,b,c,d,f,g,h,i,j){"use strict";return this.log("Server response: "+c),"json"==this._opts.responseType.toLowerCase()&&(c=e.parseJSON(c),c===!1)?void this._errorFinish(a,b,"parseerror",d,f,g,i,j):(this._opts.onComplete.call(this,d,c),this._last(f,g,h,i,j),void(a=b=c=d=f=g=h=i=j=null))},_uploadXhr:function(a,b,d,f,g,h){"use strict";var i,j,k,l,m,n=this,o=this._opts,p=e.newXHR(),q={};if(!1===o.startXHR.call(this,a,b))return this._disabled&&this.enable(),void this._active--;if(k=this._abortBtn,l=this._removeAbort,this._abortBtn=this._removeAbort=null,q[o.name]=a,e.extendObj(q,o.data),i=o.url+"?"+e.obj2string(q),d&&(d.innerHTML=b+"K"),h&&(h.innerHTML="0%"),f&&(f.style.width="0%"),o.onProgress.call(this,0),j=function(e,f){var i,m;try{if(j&&(f||4===p.readyState))if(p.onreadystatechange=function(){},j=c,f)4!==p.readyState&&p.abort(),n._last(d,g,h,k,l),o.onAbort.call(n,a);else{i=p.status;try{m=p.statusText}catch(q){m=""}i>=200&&300>i?(o.endXHR.call(n,a,b),n._finish(i,m,p.responseText,a,d,g,h,k,l)):n._errorFinish(i,m,"error",a,d,g,h,k,l)}}catch(q){f||n._errorFinish(-1,q.message,"error",a,d,g,h,k,l)}},m=function(){e.removeEvent(k,"click",m),j&&j(c,!0)},k&&e.addEvent(k,"click",m),p.onreadystatechange=j,p.open(o.method.toUpperCase(),i,!0),e.addEvent(p.upload,"progress",function(a){if(a.lengthComputable){var b=Math.round(a.loaded/a.total*100);o.onProgress.call(n,b),h&&(h.innerHTML=b+"%"),f&&(f.style.width=b+"%")}}),p.setRequestHeader("X-Requested-With","XMLHttpRequest"),p.setRequestHeader("X-File-Name",encodeURIComponent(a)),"json"==o.responseType.toLowerCase()&&p.setRequestHeader("Accept","application/json, text/javascript, */*; q=0.01"),o.multipart===!0){var r=new FormData;for(var s in o.data)o.data.hasOwnProperty(s)&&r.append(s,o.data[s]);r.append(o.name,this._file),this.log("Commencing upload using multipart form"),p.send(r)}else p.setRequestHeader("Content-Type","application/octet-stream"),this.log("Commencing upload using binary stream"),p.send(this._file);this.removeCurrent()},_uploadIframe:function(b,c,d,f,g){"use strict";var h,i,j=this,k=this._opts,l=this._progKey,m=this._getFrame(),n=this._getForm(m);if(!1===k.startNonXHR.call(this,b))return this._disabled&&this.enable(),void this._active--;if(this._opts.nginxProgressUrl&&(n.action=this._opts.url+"?"+this._opts.nginxProgressHeader+"="+l),k.progressUrl!==!1){var o=this._getHidden(k.keyParamName,l);n.appendChild(o),o=null}for(var p in k.data)k.data.hasOwnProperty(p)&&(i=this._getHidden(p,k.data[p]),n.appendChild(i));n.appendChild(this._file),k.onProgress.call(this,0),g&&(g.innerHTML="0%"),d&&(d.style.width="0%"),h=e.addEvent(m,"load",function(){try{var a=m.contentDocument?m.contentDocument:m.contentWindow.document,d=a.body.innerHTML;e.removeItem(j._progKeys,l),k.endNonXHR.call(j,b),j._finish("","",d,b,c,f,g)}catch(i){j._errorFinish("",i.message,"error",b,c,f,g)}j._sizeFlags[l]&&delete j._sizeFlags.key,h(),e.remove(m),k=l=m=c=f=g=null}),j.log("Commencing upload using iframe"),n.submit(),e.remove(n),n=i=null,(this._opts.progressUrl||this._opts.nginxProgressUrl)&&(this._progKeys.push(l),a.setTimeout(function(){j._getProg(l,d,c,g,1),d=c=g=null},j._opts.checkProgressInterval),this._progKey=e.getUID()),this.removeCurrent()},_getProg:function(b,d,f,g,h){"use strict";var i,j,k=this,l=e.newXHR(),m=(new Date).getTime();b&&(this._opts.nginxProgressUrl?i=k._opts.nginxProgressUrl+"?_="+m:this._opts.progressUrl&&(i=k._opts.progressUrl+"?progresskey="+encodeURIComponent(b)+"&_="+m),j=function(){var i,m,n,o,p;try{if(j&&4===l.readyState){l.onreadystatechange=function(){},j=c,o=l.status;try{p=l.statusText}catch(q){p=""}if(o>=200&&300>o){if(i=e.parseJSON(l.responseText),h++,i===!1)return void k.log("Error parsing progress response (expecting JSON)");if(k._opts.nginxProgressUrl){if("uploading"==i.state)m=i.size,m>0&&(n=Math.round(i.received/m*100),m=Math.round(m/1024));else if("done"==i.state)n=100;else if("error"==i.state)return void k.log("Error requesting upload progress: "+i.status)}else k._opts.progressUrl&&i.success===!0&&(m=i.size,n=i.pct);if(n&&(g&&(g.innerHTML=n+"%"),d&&(d.style.width=n+"%"),k._opts.onProgress.call(k,n)),m&&!k._sizeFlags[b]&&(k._sizeFlags[b]=1,f&&(f.innerHTML=m+"K"),k._opts.onUpdateFileSize.call(k,m)),!n&&!m&&h>=k._maxFails)return void k.log("Failed progress request limit reached");100>n&&e.contains(k._progKeys,b)&&a.setTimeout(function(){k._getProg(b,d,f,g,h),b=d=f=g=h=null},k._opts.checkProgressInterval)}else e.removeItem(k._progKeys,b),k.log("Error requesting upload progress: "+o+" "+p);l=m=n=o=p=i=null}}catch(q){k.log("Error requesting upload progress: "+q.message)}},l.onreadystatechange=j,l.open("GET",i,!0),k._opts.nginxProgressUrl&&l.setRequestHeader(k._opts.nginxProgressHeader,b),l.setRequestHeader("X-Requested-With","XMLHttpRequest"),l.setRequestHeader("Accept","application/json, text/javascript, */*; q=0.01"),l.send())},_checkFile:function(a,b,c){"use strict";var d=this._opts.allowedExtensions,e=d.length,f=!1;if(e>0){for(b=b.toLowerCase();e--;)if(d[e].toLowerCase()==b){f=!0;break}if(!f)return this.removeCurrent(),this.log("File extension not permitted"),this._opts.onExtError.call(this,a,b),!1}return c&&this._opts.maxSize!==!1&&c>this._opts.maxSize?(this.removeCurrent(),this.log(a+" exceeds "+this._opts.maxSize+"K limit"),this._opts.onSizeError.call(this,a,c),!1):!0},submit:function(){"use strict";var a,b,c;this._disabled||this._active>=this._opts.maxUploads||this._queue.length<1||(this._file=this._queue[0],d?(a=e.getFilename(this._file.name),c=Math.round(this._file.size/1024)):a=e.getFilename(this._file.value),b=e.getExt(a),this._checkFile(a,b,c)&&!1!==this._opts.onSubmit.call(this,a,b)&&(this._active++,(this._opts.multiple===!1||this._opts.queue===!1&&this._active>=this._opts.maxUploads)&&this.disable(),d?this._uploadXhr(a,c,this._sizeBox,this._progBar,this._progBox,this._pctBox):this._uploadIframe(a,this._sizeBox,this._progBar,this._progBox,this._pctBox),this._sizeBox=this._progBar=this._progBox=this._pctBox=null))}},a.ss=e}(window,document),marked.setOptions({gfm:!0,tables:!0,breaks:!1,pedantic:!1,sanitize:!1,smartLists:!0,smartypants:!1,langPrefix:"lang-"});var md=document.getElementById("markdown"),target=document.getElementById("render");render.innerHTML=marked(md.value),md.addEventListener("keyup",renderMarkdown);var uploader=new ss.SimpleUpload({button:"upload",url:"/admin/image-upload",name:"image",multipart:!0,onComplete:function(a,b){if(b=JSON.parse(b),b.hasOwnProperty("error"))alert("File upload failed. Error : "+b.error);else{var c=$("#uploads"),d=$(document.createElement("li")),e=$(document.createElement("input")),f=$("#markdown"),g="!["+a+"]("+b.url+")";e.attr("type","text"),e.attr("value",g),e.attr("disabled","true"),e.addClass("form-control"),c.removeClass("hidden"),e.appendTo(d),d.appendTo(c),f.val(g+"\n\n"+f.val()),renderMarkdown()}}});
+/**
+ * Simple Ajax Uploader
+ * Version 1.8.1
+ * https://github.com/LPology/Simple-Ajax-Uploader
+ *
+ * Copyright 2012-2013 LPology, LLC
+ * Released under the MIT license
+ */
+
+;(function( window, document, undefined ) {
+
+  var ss = window.ss || {},
+
+  // Pre-compile and cache our regular expressions
+  // Except for JSON regex. Only IE6 and IE7 use it. Screw them.
+  // ss.trim()
+  rLWhitespace = /^\s+/,
+  rTWhitespace = /\s+$/,
+
+  // ss.getUID
+  uidReplace = /[xy]/g,
+
+  // ss.getFilename()
+  rPath = /.*(\/|\\)/,
+
+  // ss.getExt()
+  rExt = /.*[.]/,
+
+  // ss.hasClass()
+  rHasClass = /[\t\r\n]/g,
+
+  // Check for Safari -- it doesn't like multi file uploading. At all.
+  // We do it up here so it only needs to be done once, no matter the # of uploaders
+  // http://stackoverflow.com/a/9851769/1091949
+  isSafari = Object.prototype.toString.call( window.HTMLElement ).indexOf( 'Constructor' ) > 0,
+
+  // Check whether XHR uploads are supported
+  // This also is done here so it only occurs once
+  input = document.createElement( 'input' ),
+  XhrOk;
+  input.type = 'file';
+  XhrOk = (
+    'multiple' in input &&
+    typeof File !== 'undefined' &&
+    typeof ( new XMLHttpRequest() ).upload !== 'undefined' );
+
+/**
+ * Converts object to query string
+ */
+ss.obj2string = function( obj, prefix ) {
+  "use strict";
+
+  var str = [];
+  for ( var prop in obj ) {
+    if ( obj.hasOwnProperty( prop ) ) {
+      var k = prefix ? prefix + '[' + prop + ']' : prop, v = obj[prop];
+      str.push( typeof v === 'object' ?
+        ss.obj2string( v, k ) :
+        encodeURIComponent( k ) + '=' + encodeURIComponent( v ) );
+    }
+  }
+  return str.join( '&' );
+};
+
+/**
+ * Copies all missing properties from second object to first object
+ */
+ss.extendObj = function( first, second ) {
+  "use strict";
+
+  for ( var prop in second ) {
+    if ( second.hasOwnProperty( prop ) ) {
+      first[prop] = second[prop];
+    }
+  }
+};
+
+/**
+ * Returns true if item is found in array
+ */
+ss.contains = function( array, item ) {
+  "use strict";
+
+  var i = array.length;
+  while ( i-- ) {
+    if ( array[i] === item ) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * Remove an item from an array
+ */
+ss.removeItem = function( array, item ) {
+  "use strict";
+
+  var i = array.length;
+  while ( i-- ) {
+    if ( array[i] === item ) {
+      array.splice( i, 1 );
+      break;
+    }
+  }
+};
+
+ss.addEvent = function( elem, type, fn ) {
+  "use strict";
+
+  if ( elem.addEventListener ) {
+    elem.addEventListener( type, fn, false );
+  } else {
+    elem.attachEvent( 'on' + type, fn );
+  }
+  return function() {
+    ss.removeEvent( elem, type, fn );
+  };
+};
+
+ss.removeEvent = function( elem, type, fn ) {
+  "use strict";
+
+ if ( elem.removeEventListener ) {
+    elem.removeEventListener( type, fn, false );
+  } else {
+    elem.detachEvent( 'on' + type, fn );
+  }
+};
+
+ss.newXHR = function() {
+  "use strict";
+
+  if ( typeof XMLHttpRequest !== 'undefined' ) {
+    return new window.XMLHttpRequest();
+  } else if ( window.ActiveXObject ) {
+    try {
+      return new window.ActiveXObject( 'Microsoft.XMLHTTP' );
+    } catch ( err ) {
+      return false;
+    }
+  }
+};
+
+/**
+ * Parses a JSON string and returns a Javascript object
+ * Parts borrowed from www.jquery.com
+ */
+ ss.parseJSON = function( data ) {
+   "use strict";
+
+  if ( !data ) {
+    return false;
+  }
+  data = ss.trim( data );
+  if ( window.JSON && window.JSON.parse ) {
+    try {
+      return window.JSON.parse( data );
+    } catch ( err ) {
+      return false;
+    }
+  }
+  if ( data ) {
+      if (/^[\],:{}\s]*$/.test( data.replace(/\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g, "@" )
+        .replace(/"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g, "]" )
+        .replace(/(?:^|:|,)(?:\s*\[)+/g, "")) ) {
+        return ( new Function( "return " + data ) )();
+      }
+  }
+  return false;
+};
+
+ss.getBox = function( elem ) {
+  "use strict";
+
+  var box,
+      docElem,
+      top = 0,
+      left = 0;
+
+  if ( elem.getBoundingClientRect ) {
+    box = elem.getBoundingClientRect();
+    docElem = document.documentElement;
+    top = box.top  + ( window.pageYOffset || docElem.scrollTop )  - ( docElem.clientTop  || 0 );
+    left = box.left + ( window.pageXOffset || docElem.scrollLeft ) - ( docElem.clientLeft || 0 );
+  } else {
+    do {
+      left += elem.offsetLeft;
+      top += elem.offsetTop;
+    } while ( ( elem = elem.offsetParent ) );
+  }
+  return {
+    top: Math.round( top ),
+    left: Math.round( left )
+  };
+};
+
+/**
+* Helper that takes object literal
+* and add all properties to element.style
+* @param {Element} el
+* @param {Object} styles
+*/
+ss.addStyles = function( elem, styles ) {
+  "use strict";
+
+  for ( var name in styles ) {
+    if ( styles.hasOwnProperty( name ) ) {
+      elem.style[name] = styles[name];
+    }
+  }
+};
+
+/**
+* Function places an absolutely positioned
+* element on top of the specified element
+* copying position and dimensions.
+*/
+ss.copyLayout = function( from, to ) {
+  "use strict";
+
+  var box = ss.getBox( from );
+
+  ss.addStyles( to, {
+    position: 'absolute',
+    left : box.left + 'px',
+    top : box.top + 'px',
+    width : from.offsetWidth + 'px',
+    height : from.offsetHeight + 'px'
+  });
+};
+
+/**
+* Creates and returns element from html chunk
+*/
+ss.toElement = ( function() {
+  "use strict";
+
+  var div = document.createElement( 'div' );
+
+  return function( html ) {
+    div.innerHTML = html;
+    var element = div.firstChild;
+    div.removeChild( element );
+    return element;
+  };
+})();
+
+/**
+* Generates unique ID
+* Complies with RFC 4122 version 4
+* http://stackoverflow.com/a/2117523/1091949
+*/
+ss.getUID = function() {
+  "use strict";
+
+  /*jslint bitwise: true*/
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(uidReplace, function(c) {
+      var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+      return v.toString(16);
+  });
+};
+
+/**
+* Removes white space from left and right of string
+*/
+ss.trim = function( text ) {
+  "use strict";
+  return text.toString().replace(rLWhitespace, '').replace(rTWhitespace, '');
+};
+
+/**
+* Extract file name from path
+*/
+ss.getFilename = function( path ) {
+  "use strict";
+  return path.replace(rPath, '');
+};
+
+/**
+* Get file extension
+*/
+ss.getExt = function( file ) {
+  "use strict";
+  return (-1 !== file.indexOf('.')) ? file.replace(rExt, '') : '';
+};
+
+/**
+* Check whether element has a particular CSS class
+* Parts borrowed from www.jquery.com
+*/
+ss.hasClass = function( elem, name ) {
+  "use strict";
+  return (' ' + elem.className + ' ').replace(rHasClass, ' ').indexOf(' ' + name + ' ') >= 0;
+};
+
+/**
+* Adds CSS class to an element
+*/
+ss.addClass = function( elem, name ) {
+  "use strict";
+
+  if ( !name || name === '' ) {
+    return false;
+  }
+  if ( !ss.hasClass( elem, name ) ) {
+    elem.className += ' ' + name;
+  }
+};
+
+/**
+* Removes CSS class from an element
+*/
+ss.removeClass = (function() {
+  "use strict";
+
+  var c = {}; //cache regexps for performance
+
+  return function( e, name ) {
+    if ( !c[name] ) {
+      c[name] = new RegExp('(?:^|\\s)' + name + '(?!\\S)');
+    }
+    e.className = e.className.replace( c[name], '' );
+  };
+})();
+
+/**
+* Nulls out event handlers to prevent memory leaks in IE6/IE7
+* http://javascript.crockford.com/memory/leak.html
+* @param {Element} d
+* @return void
+*/
+ss.purge = function( d ) {
+  "use strict";
+
+  var a = d.attributes, i, l, n;
+  if ( a ) {
+    for ( i = a.length - 1; i >= 0; i -= 1 ) {
+      n = a[i].name;
+      if ( typeof d[n] === 'function' ) {
+        d[n] = null;
+      }
+    }
+  }
+  a = d.childNodes;
+  if ( a ) {
+    l = a.length;
+    for ( i = 0; i < l; i += 1 ) {
+      ss.purge( d.childNodes[i] );
+    }
+  }
+};
+
+/**
+* Removes element from the DOM
+*/
+ss.remove = function( elem ) {
+  "use strict";
+
+  if ( elem.parentNode ) {
+    // null out event handlers for IE
+    ss.purge( elem );
+    elem.parentNode.removeChild( elem );
+  }
+  elem = null;
+};
+
+/**
+ * Accepts either a jQuery object, a string containing an element ID, or an element,
+ * verifies that it exists, and returns the element.
+ * @param {Mixed} elem
+ * @return {Element}
+ */
+ss.verifyElem = function( elem ) {
+  "use strict";
+
+  if ( typeof jQuery !== 'undefined' && elem instanceof jQuery ) {
+    elem = elem[0];
+
+  } else if ( typeof elem === 'string' ) {
+    if ( elem.charAt( 0 ) == '#' ) {
+      elem = elem.substr( 1 );
+    }
+    elem = document.getElementById( elem );
+  }
+
+  if ( !elem || elem.nodeType !== 1 ) {
+    return false;
+  }
+
+  if ( elem.nodeName.toUpperCase() == 'A' ) {
+    elem.style.cursor = 'pointer';
+    ss.addEvent( elem, 'click', function( e ) {
+        if ( e && e.preventDefault ) {
+          e.preventDefault();
+        } else if ( window.event ) {
+          window.event.returnValue = false;
+        }
+    });
+  }
+
+  return elem;
+};
+
+/**
+* @constructor
+* @param {Object} options
+
+  View README.md for documentation
+*/
+ss.SimpleUpload = function( options ) {
+  "use strict";
+
+  var i,
+      len,
+      btn;
+
+  this._opts = {
+    button: '',
+    url: '',
+    progressUrl: false,
+    nginxProgressUrl: false,
+    multiple: false,
+    maxUploads: 3,
+    queue: true,
+    checkProgressInterval: 50,
+    keyParamName: 'APC_UPLOAD_PROGRESS',
+    nginxProgressHeader: 'X-Progress-ID',
+    allowedExtensions: [],
+    accept: '',
+    maxSize: false,
+    name: '',
+    data: {},
+    autoSubmit: true,
+    multipart: false,
+    method: 'POST',
+    responseType: '',
+    debug: false,
+    hoverClass: '',
+    focusClass: '',
+    disabledClass: '',
+    onAbort: function( filename ) {},
+    onChange: function( filename, extension ) {},
+    onSubmit: function( filename, extension ) {},
+    onProgress: function( pct ) {},
+    onUpdateFileSize: function( filesize ) {},
+    onComplete: function( filename, response ) {},
+    onExtError: function( filename, extension ) {},
+    onSizeError: function( filename, fileSize ) {},
+    onError: function( filename, type, status, statusText ) {},
+    startXHR: function( filename, fileSize ) {},
+    endXHR: function( filename, fileSize ) {},
+    startNonXHR: function( filename ) {},
+    endNonXHR: function( filename ) {}
+  };
+
+  ss.extendObj( this._opts, options );
+  options = null; // Null to avoid leaks in IE
+  this._btns = [];
+
+  // An array of buttons
+  if ( this._opts.button instanceof Array ) {
+    len = this._opts.button.length;
+
+    for ( i = 0; i < len; i++ ) {
+      btn = ss.verifyElem( this._opts.button[i] );
+      if ( btn !== false ) {
+        this._btns.push( this.rerouteClicks( btn ) );
+      } else {
+        this.log( 'Button with array index ' + i + ' is invalid' );
+      }
+    }
+
+  // A single button
+  } else {
+    btn = ss.verifyElem( this._opts.button );
+    if ( btn !== false ) {
+      this._btns.push( this.rerouteClicks( btn ) );
+    }
+  }
+
+  delete this._opts.button;
+
+  // No valid elements were passed to button option
+  if ( this._btns.length < 1 || this._btns[0] === false ) {
+    throw new Error( "Invalid button. Make sure the element you're passing exists." );
+  }
+
+  if ( this._opts.multiple === false ) {
+    this._opts.maxUploads = 1;
+  }
+
+  this._queue = [];
+  this._active = 0;
+  this._disabled = false; // if disabled, clicking on button won't do anything
+  this._progKeys = []; // contains the currently active upload ID progress keys
+  this._maxFails = 10; // max allowed failed progress updates requests in iframe mode
+
+  if ( !XhrOk ) {
+    if ( this._opts.progressUrl || this._opts.nginxProgressUrl ) {
+      // Store keys in _sizeFlags after the first time we set sizeBox
+      // and call UpdateFileSize(). No need to do it > 1 time
+      this._sizeFlags = {};
+      // Generate upload ID progress key
+      this._progKey = ss.getUID();
+    }
+  }
+
+  // Calls below this line must always be last
+  this._createInput();
+  this.enable();
+};
+
+ss.SimpleUpload.prototype = {
+
+  /**
+  * Completely removes uploader functionality
+  */
+  destroy: function() {
+    "use strict";
+
+    // # of upload buttons
+    var i = this._btns.length;
+
+    // Put upload buttons back to the way we found them
+    while ( i-- ) {
+      // Remove event listener
+      if ( this._btns[i].off ) {
+        this._btns[i].off();
+      }
+
+      // Remove any lingering classes
+      ss.removeClass( this._btns[i], this._opts.hoverClass );
+      ss.removeClass( this._btns[i], this._opts.focusClass );
+      ss.removeClass( this._btns[i], this._opts.disabledClass );
+
+      // In case we disabled it
+      this._btns[i].disabled = false;
+    }
+
+    // Remove div/file input combos from the DOM
+    ss.remove( this._input.parentNode );
+
+    // Now burn it all down
+    for ( var prop in this ) {
+      if ( this.hasOwnProperty( prop ) ) {
+        delete this.prop;
+      }
+    }
+  },
+
+  /**
+  * Send data to browser console if debug is set to true
+  */
+  log: function( str ) {
+    "use strict";
+
+    if ( this._opts.debug && window.console ) {
+      console.log( '[uploader] ' + str );
+    }
+  },
+
+  /**
+  * Replaces user data
+  * Note that all previously set data is entirely removed and replaced
+  */
+  setData: function( data ) {
+    "use strict";
+    this._opts.data = data;
+  },
+
+  /**
+  * Designate an element as a progress bar
+  * The CSS width % of the element will be updated as the upload progresses
+  */
+  setProgressBar: function( elem ) {
+    "use strict";
+    this._progBar = ss.verifyElem( elem );
+  },
+
+  /**
+  * Designate an element to receive a string containing progress % during upload
+  * Note: Uses innerHTML, so any existing child elements will be wiped out
+  */
+  setPctBox: function( elem ) {
+    "use strict";
+    this._pctBox = ss.verifyElem( elem );
+  },
+
+  /**
+  * Designate an element to receive a string containing file size at start of upload
+  * Note: Uses innerHTML, so any existing child elements will be wiped out
+  */
+  setFileSizeBox: function( elem ) {
+    "use strict";
+    this._sizeBox = ss.verifyElem( elem );
+  },
+
+  /**
+  * Designate an element to be removed from DOM when upload is completed
+  * Useful for removing progress bar, file size, etc. after upload
+  */
+  setProgressContainer: function( elem ) {
+    "use strict";
+    this._progBox = ss.verifyElem( elem );
+  },
+
+  /**
+  * Designate an element to serve as the upload abort button
+  */
+  setAbortBtn: function( elem, remove ) {
+    "use strict";
+
+    this._abortBtn = ss.verifyElem( elem );
+    this._removeAbort = false;
+
+    if ( remove ) {
+      this._removeAbort = true;
+    }
+  },
+
+  /**
+  * Returns number of files currently in queue
+  */
+  getQueueSize: function() {
+    "use strict";
+    return this._queue.length;
+  },
+
+  /**
+  * Enables uploader and submits next file for upload
+  */
+  _cycleQueue: function() {
+    "use strict";
+
+    if ( this._queue.length > 0 && this._opts.autoSubmit ) {
+      this.submit();
+    }
+  },
+
+  /**
+  * Remove current file from upload queue, reset props, cycle to next upload
+  */
+  removeCurrent: function() {
+    "use strict";
+
+    ss.removeItem( this._queue, this._file );
+    delete this._file;
+    this._file = null;
+    this._cycleQueue();
+  },
+
+  /**
+  * Disables upload functionality
+  */
+  disable: function() {
+    "use strict";
+
+    var i = this._btns.length,
+        nodeName;
+
+    this._disabled = true;
+
+    while ( i-- ) {
+      nodeName = this._btns[i].nodeName.toUpperCase();
+      ss.addClass( this._btns[i], this._opts.disabledClass );
+
+      if ( nodeName == 'INPUT' || nodeName == 'BUTTON' ) {
+        this._btns[i].disabled = true;
+      }
+    }
+
+    // Hide file input
+    // Use visibility instead of display to fix problem with Safari 4
+    if ( this._input && this._input.parentNode ) {
+      this._input.parentNode.style.visibility = 'hidden';
+    }
+  },
+
+  /**
+  * Enables upload functionality
+  */
+  enable: function() {
+    "use strict";
+
+    var i = this._btns.length;
+
+    this._disabled = false;
+
+    while ( i-- ) {
+      ss.removeClass( this._btns[i], this._opts.disabledClass );
+      this._btns[i].disabled = false;
+    }
+  },
+
+  /**
+  * Creates invisible file input
+  * that will hover above the button
+  * <div><input type='file' /></div>
+  */
+  _createInput: function() {
+    "use strict";
+
+    var self = this,
+        div = document.createElement( 'div' );
+
+    this._input = document.createElement( 'input' );
+    this._input.type = 'file';
+    this._input.name = this._opts.name;
+
+    // Don't allow multiple file selection in Safari -- it has a nasty bug
+    // http://stackoverflow.com/q/7231054/1091949
+    if ( XhrOk && !isSafari ) {
+      this._input.multiple = true;
+    }
+
+    // Check support for file input accept attribute
+    if ( 'accept' in this._input && this._opts.accept !== '' ) {
+      this._input.accept = this._opts.accept;
+    }
+
+    ss.addStyles( div, {
+      'display' : 'block',
+      'position' : 'absolute',
+      'overflow' : 'hidden',
+      'margin' : 0,
+      'padding' : 0,
+      'opacity' : 0,
+      'direction' : 'ltr',
+      'zIndex': 2147483583
+    });
+
+    ss.addStyles( this._input, {
+      'position' : 'absolute',
+      'right' : 0,
+      'margin' : 0,
+      'padding' : 0,
+      'fontSize' : '480px',
+      'fontFamily' : 'sans-serif',
+      'cursor' : 'pointer'
+    });
+
+    // Make sure that element opacity exists. Otherwise use IE filter
+    if ( div.style.opacity !== '0' ) {
+      div.style.filter = 'alpha( opacity=0 )';
+    }
+
+    ss.addEvent( this._input, 'change', function() {
+      var filename,
+          ext,
+          total,
+          i;
+
+      if ( !self._input || self._input.value === '' ) {
+        return;
+      }
+
+      if ( !XhrOk ) {
+        filename = ss.getFilename( self._input.value );
+        ext = ss.getExt( filename );
+
+        if ( false === self._opts.onChange.call( self, filename, ext ) ) {
+          return;
+        }
+        self._queue.push( self._input );
+
+      } else {
+        filename = ss.getFilename( self._input.files[0].name );
+        ext = ss.getExt( filename );
+
+        if ( false === self._opts.onChange.call( self, filename, ext ) ) {
+          return;
+        }
+
+        total = self._input.files.length;
+
+        // Only add first file if multiple uploads aren't allowed
+        if ( !self._opts.multiple ) {
+          total = 1;
+        }
+
+        for ( i = 0; i < total; i++ ) {
+          self._queue.push( self._input.files[i] );
+        }
+      }
+
+      // Now that file is in upload queue, remove the file input
+      ss.removeClass( self._overBtn, self._opts.hoverClass );
+      ss.removeClass( self._overBtn, self._opts.focusClass );
+
+      ss.remove( self._input.parentNode );
+      delete self._input;
+
+      // Then create a new file input
+      self._createInput();
+
+      // Submit if autoSubmit option is true
+      if ( self._opts.autoSubmit ) {
+        self.submit();
+      }
+    });
+
+    ss.addEvent( this._input, 'mouseover', function() {
+      ss.addClass( self._overBtn, self._opts.hoverClass );
+    });
+
+    ss.addEvent( this._input, 'mouseout', function() {
+      ss.removeClass( self._overBtn, self._opts.hoverClass );
+      ss.removeClass( self._overBtn, self._opts.focusClass );
+      self._input.parentNode.style.visibility = 'hidden';
+    });
+
+    ss.addEvent( this._input, 'focus', function() {
+      ss.addClass( self._overBtn, self._opts.focusClass );
+    });
+
+    ss.addEvent( this._input, 'blur', function() {
+      ss.removeClass( self._overBtn, self._opts.focusClass );
+    });
+
+    document.body.appendChild( div );
+    div.appendChild( this._input );
+  },
+
+  /**
+  * Makes sure that when user clicks upload button,
+  * the this._input is clicked instead
+  */
+  rerouteClicks: function( elem ) {
+    "use strict";
+
+    var self = this;
+
+    // ss.addEvent() returns a function to detach, which
+    // allows us to call elem.off() to remove mouseover listener
+    elem.off = ss.addEvent( elem, 'mouseover', function() {
+      if ( self._disabled ) {
+        return;
+      }
+
+      if ( !self._input ) {
+        self._createInput();
+      }
+
+      self._overBtn = elem;
+      ss.copyLayout( elem, self._input.parentNode );
+      self._input.parentNode.style.visibility = 'visible';
+    });
+
+    return elem;
+  },
+
+  /**
+  * Creates iframe with unique name
+  * @return {Element} iframe
+  */
+  _getFrame: function() {
+    "use strict";
+
+    var id = ss.getUID(),
+        iframe = ss.toElement( '<iframe src="javascript:false;" name="' + id + '" />' );
+
+    document.body.appendChild( iframe );
+    iframe.style.display = 'none';
+    iframe.id = id;
+    return iframe;
+  },
+
+  /**
+  * Creates form, that will be submitted to iframe
+  * @param {Element} iframe Where to submit
+  * @return {Element} form
+  */
+  _getForm: function( iframe ) {
+    "use strict";
+
+    var form = ss.toElement( '<form method="post" enctype="multipart/form-data"></form>' );
+
+    document.body.appendChild( form );
+    form.style.display = 'none';
+    form.action = this._opts.url;
+    form.target = iframe.name;
+    return form;
+  },
+
+  /**
+  * Creates hidden input fields for the form in iframe method
+  * @param {String} name Input field name
+  * @param {String} value Value assigned to the input
+  * @return {Element} input
+  */
+  _getHidden: function( name, value ) {
+    "use strict";
+
+    var input = document.createElement( 'input' );
+
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    return input;
+  },
+
+  /**
+  * Final cleanup function after upload ends
+  */
+  _last: function( sizeBox, progBox, pctBox, abortBtn, removeAbort ) {
+    "use strict";
+
+    if ( sizeBox ) {
+      sizeBox.innerHTML = '';
+    }
+    if ( progBox ) {
+      ss.remove( progBox );
+    }
+    if ( pctBox ) {
+      pctBox.innerHTML = '';
+    }
+    if ( abortBtn && removeAbort ) {
+      ss.remove( abortBtn );
+    }
+
+    // Decrement the active upload counter
+    this._active--;
+
+    // Null to avoid leaks in IE
+    sizeBox = progBox = pctBox = abortBtn = removeAbort = null;
+
+    if ( this._disabled ) {
+      this.enable();
+    }
+
+    this._cycleQueue();
+  },
+
+  /**
+  * Completes upload request if an error is detected
+  */
+  _errorFinish: function( status, statusText, errorType, filename, sizeBox, progBox, pctBox, abortBtn, removeAbort ) {
+    "use strict";
+
+    this.log( 'Upload failed: '+status+' '+statusText );
+    this._opts.onError.call( this, filename, errorType, status, statusText );
+    this._last( sizeBox, progBox, pctBox, abortBtn, removeAbort );
+
+    // Null to avoid leaks in IE
+    status = statusText = errorType = filename = sizeBox = progBox = pctBox = abortBtn = removeAbort = null;
+  },
+
+  /**
+  * Completes upload request if the transfer was successful
+  */
+  _finish: function( status, statusText, response, filename, sizeBox, progBox, pctBox, abortBtn, removeAbort ) {
+    "use strict";
+
+    this.log( 'Server response: ' + response );
+
+    if ( this._opts.responseType.toLowerCase() == 'json' ) {
+      response = ss.parseJSON( response );
+      if ( response === false ) {
+        this._errorFinish( status, statusText, 'parseerror', filename, sizeBox, progBox, abortBtn, removeAbort );
+        return;
+      }
+    }
+
+    this._opts.onComplete.call( this, filename, response );
+    this._last( sizeBox, progBox, pctBox, abortBtn, removeAbort );
+
+    // Null to avoid leaks in IE
+    status = statusText = response = filename = sizeBox = progBox = pctBox = abortBtn = removeAbort = null;
+  },
+
+  /**
+  * Handles uploading with XHR
+  */
+  _uploadXhr: function( filename, size, sizeBox, progBar, progBox, pctBox ) {
+    "use strict";
+
+    var self = this,
+        settings = this._opts,
+        xhr = ss.newXHR(),
+        params = {},
+        queryURL,
+        callback,
+        abortBtn,
+        removeAbort,
+        cancel;
+
+    if ( false === settings.startXHR.call( this, filename, size ) ) {
+      if ( this._disabled ) {
+        this.enable();
+      }
+      this._active--;
+      return;
+    }
+
+    // Wait until after startXHR() to get abort
+    // button in case that's where setAbortBtn() is called
+    abortBtn = this._abortBtn;
+    removeAbort = this._removeAbort;
+
+    // Reset to default
+    this._abortBtn = this._removeAbort = null;
+
+    // Add name property to query string
+    params[settings.name] = filename;
+
+    // We get the any additional data here after startXHR()
+    // in case the data was changed with setData() prior to submitting
+    ss.extendObj( params, settings.data );
+
+    // Build query string
+    queryURL = settings.url + '?' + ss.obj2string( params );
+
+    // Inject file size into size box
+    if ( sizeBox ) {
+      sizeBox.innerHTML = size + 'K';
+    }
+
+    // Begin progress bars at 0%
+    if ( pctBox ) {
+      pctBox.innerHTML = '0%';
+    }
+
+    if ( progBar ) {
+      progBar.style.width = '0%';
+    }
+
+    settings.onProgress.call( this, 0 );
+
+    // Borrows heavily from jQuery ajax transport
+    callback = function( _, isAbort ) {
+      var status,
+          statusText;
+
+      // Firefox throws exceptions when accessing properties
+      // of an xhr when a network error occurred
+      try {
+        // Was never called and is aborted or complete
+        if ( callback && ( isAbort || xhr.readyState === 4 ) ) {
+
+          xhr.onreadystatechange = function() {};
+          callback = undefined;
+
+          // If it's an abort
+          if ( isAbort ) {
+
+            // Abort it manually if needed
+            if ( xhr.readyState !== 4 ) {
+              xhr.abort();
+            }
+
+            self._last( sizeBox, progBox, pctBox, abortBtn, removeAbort );
+            settings.onAbort.call( self, filename );
+
+          } else {
+            status = xhr.status;
+
+            // Firefox throws an exception when accessing
+            // statusText for faulty cross-domain requests
+            try {
+              statusText = xhr.statusText;
+            } catch(  e  ) {
+              // We normalize with Webkit giving an empty statusText
+              statusText = '';
+            }
+
+            if ( status >= 200 && status < 300 ) {
+              settings.endXHR.call( self, filename, size );
+              self._finish( status, statusText, xhr.responseText, filename, sizeBox, progBox, pctBox, abortBtn, removeAbort );
+
+              // We didn't get a 2xx status so throw an error
+            } else {
+              self._errorFinish( status, statusText, 'error', filename, sizeBox, progBox, pctBox, abortBtn, removeAbort );
+            }
+          }
+        }
+      }
+      catch ( e ) {
+        if ( !isAbort ) {
+          self._errorFinish( -1, e.message, 'error', filename, sizeBox, progBox, pctBox, abortBtn, removeAbort );
+        }
+      }
+    };
+
+    cancel = function() {
+      ss.removeEvent( abortBtn, 'click', cancel );
+      if ( callback ) {
+        callback( undefined, true );
+      }
+    };
+
+    if ( abortBtn ) {
+      ss.addEvent( abortBtn, 'click', cancel );
+    }
+
+    xhr.onreadystatechange = callback;
+    xhr.open( settings.method.toUpperCase(), queryURL, true );
+
+    ss.addEvent( xhr.upload, 'progress', function( event ) {
+      if ( event.lengthComputable ) {
+        var pct = Math.round( ( event.loaded / event.total ) * 100 );
+
+        settings.onProgress.call( self, pct );
+
+        if ( pctBox ) {
+          pctBox.innerHTML = pct + '%';
+        }
+
+        if ( progBar ) {
+          progBar.style.width = pct + '%';
+        }
+      }
+    });
+
+    xhr.setRequestHeader( 'X-Requested-With', 'XMLHttpRequest' );
+    xhr.setRequestHeader( 'X-File-Name', encodeURIComponent( filename ) );
+
+    if ( settings.responseType.toLowerCase() == 'json' ) {
+      xhr.setRequestHeader( 'Accept', 'application/json, text/javascript, */*; q=0.01' );
+    }
+
+    if ( settings.multipart === true ) {
+      var formData = new FormData();
+
+      for ( var prop in settings.data ) {
+        if ( settings.data.hasOwnProperty( prop ) ) {
+          formData.append( prop, settings.data[prop] );
+        }
+      }
+
+      formData.append( settings.name, this._file );
+      this.log( 'Commencing upload using multipart form' );
+      xhr.send( formData );
+
+    } else {
+      xhr.setRequestHeader( 'Content-Type', 'application/octet-stream' );
+      this.log( 'Commencing upload using binary stream' );
+      xhr.send( this._file );
+    }
+
+    // Remove file from upload queue and begin next upload
+    this.removeCurrent();
+  },
+
+  /**
+  * Handles uploading with iFrame
+  */
+  _uploadIframe: function( filename, sizeBox, progBar, progBox, pctBox ) {
+    "use strict";
+
+    var self = this,
+        settings = this._opts,
+        key = this._progKey,
+        iframe = this._getFrame(),
+        form = this._getForm( iframe ),
+        callback,
+        input;
+
+    if ( false === settings.startNonXHR.call( this, filename ) ) {
+      if ( this._disabled ) {
+        this.enable();
+      }
+      this._active--;
+      return;
+    }
+
+    // If we're using Nginx Upload Progress Module, append upload key to the URL
+    if ( this._opts.nginxProgressUrl ) {
+      form.action = this._opts.url + '?' + this._opts.nginxProgressHeader + '=' + key;
+    }
+
+    // PHP APC upload progress key field must come before the file field
+    if ( settings.progressUrl !== false ) {
+      var keyField = this._getHidden( settings.keyParamName, key );
+      form.appendChild( keyField );
+      keyField = null;
+    }
+
+    // We get any additional data here after startNonXHR()
+    // in case the data was changed with setData() prior to submitting
+    for ( var prop in settings.data ) {
+      if ( settings.data.hasOwnProperty( prop ) ) {
+        input = this._getHidden( prop, settings.data[prop] );
+        form.appendChild( input );
+      }
+    }
+
+    form.appendChild( this._file );
+
+    // Begin progress bars at 0%
+    settings.onProgress.call( this, 0 );
+
+    if ( pctBox ) {
+      pctBox.innerHTML = '0%';
+    }
+
+    if ( progBar ) {
+      progBar.style.width = '0%';
+    }
+
+    callback = ss.addEvent( iframe, 'load', function() {
+      try {
+        var doc = iframe.contentDocument ?
+              iframe.contentDocument :
+              iframe.contentWindow.document,
+            response = doc.body.innerHTML;
+
+        // Remove key from active progress keys array
+        ss.removeItem( self._progKeys, key );
+        settings.endNonXHR.call( self, filename );
+
+        // No way to get status and statusText for an iframe so return empty strings
+        self._finish( '', '', response, filename, sizeBox, progBox, pctBox );
+      } catch ( e ) {
+        self._errorFinish( '', e.message, 'error', filename, sizeBox, progBox, pctBox );
+      }
+
+      // Delete upload key from size update flags
+      if (self._sizeFlags[key]) {
+        delete self._sizeFlags.key;
+      }
+
+      // Removes event listener from iframe
+      callback();
+      ss.remove( iframe );
+
+      // Null to avoid leaks in IE
+      settings = key = iframe = sizeBox = progBox = pctBox = null;
+    });
+
+    self.log( 'Commencing upload using iframe' );
+    form.submit();
+    ss.remove( form );
+    form = input = null;
+
+    if ( this._opts.progressUrl || this._opts.nginxProgressUrl ) {
+      // Add progress key to active key array
+      this._progKeys.push( key );
+
+      // Start timer for first progress update
+      window.setTimeout( function() {
+          self._getProg( key, progBar, sizeBox, pctBox, 1 );
+          progBar = sizeBox = pctBox = null;
+      }, self._opts.checkProgressInterval );
+
+      // Get new upload progress key
+      this._progKey = ss.getUID();
+    }
+
+    // Remove this file from the queue and begin next upload
+    this.removeCurrent();
+  },
+
+  /**
+  * Retrieves upload progress updates from the server
+  * (for fallback upload progress support)
+  */
+  _getProg: function( key, progBar, sizeBox, pctBox, counter ) {
+    "use strict";
+
+    var self = this,
+        xhr = ss.newXHR(),
+        time = new Date().getTime(),
+        url,
+        callback;
+
+    if ( !key ) {
+      return;
+    }
+
+    // Nginx Upload Progress Module
+    if ( this._opts.nginxProgressUrl ) {
+      url = self._opts.nginxProgressUrl + '?_=' + time;
+
+    // PHP APC upload progress
+    } else if ( this._opts.progressUrl ) {
+      url = self._opts.progressUrl + '?progresskey=' + encodeURIComponent( key ) + '&_=' + time;
+    }
+
+    callback = function() {
+      var response,
+          size,
+          pct,
+          status,
+          statusText;
+
+      try {
+        if ( callback && xhr.readyState === 4 ) {
+
+          xhr.onreadystatechange = function() {};
+          callback = undefined;
+          status = xhr.status;
+
+          try {
+            statusText = xhr.statusText;
+          } catch(  e  ) {
+            // We normalize with Webkit giving an empty statusText
+            statusText = '';
+          }
+
+          if ( status >= 200 && status < 300 ) {
+            response = ss.parseJSON( xhr.responseText );
+            counter++;
+
+            if ( response === false ) {
+              self.log( 'Error parsing progress response (expecting JSON)' );
+              return;
+            }
+
+            // Handle response if using Nginx Upload Progress Module
+            if ( self._opts.nginxProgressUrl ) {
+
+              if ( response.state == 'uploading' ) {
+                size = response.size;
+                if ( size > 0 ) {
+                  pct = Math.round( ( response.received / size ) * 100 );
+                  size = Math.round( size / 1024 ); // convert to kilobytes
+                }
+
+              } else if ( response.state == 'done' ) {
+                pct = 100;
+
+              } else if ( response.state == 'error' ) {
+                self.log( 'Error requesting upload progress: ' + response.status );
+                return;
+              }
+            }
+
+            // Handle response if using PHP APC
+            else if ( self._opts.progressUrl ) {
+              if ( response.success === true ) {
+                size = response.size;
+                pct = response.pct;
+              }
+            }
+
+            // Update progress bar width
+            if ( pct ) {
+              if ( pctBox ) {
+                pctBox.innerHTML = pct + '%';
+              }
+              if ( progBar ) {
+                progBar.style.width = pct + '%';
+              }
+              self._opts.onProgress.call( self, pct );
+            }
+
+            // Update file size box if we haven't yet done so
+            if ( size && !self._sizeFlags[key] ) {
+              // Set a flag so we don't do it again -- file size doesn't
+              // change, so no need to mess with the DOM more than once
+              self._sizeFlags[key] = 1;
+
+              if ( sizeBox ) {
+                sizeBox.innerHTML = size + 'K';
+              }
+              self._opts.onUpdateFileSize.call( self, size );
+            }
+
+            // Stop attempting progress checks if we keep failing
+            if ( !pct &&
+                 !size &&
+                 counter >= self._maxFails )
+            {
+              self.log( 'Failed progress request limit reached' );
+              return;
+            }
+
+            // Begin countdown until next progress update check
+            if ( pct < 100 && ss.contains( self._progKeys, key ) ) {
+              window.setTimeout( function() {
+                  self._getProg( key, progBar, sizeBox, pctBox, counter );
+                  // Null to avoid leaks in IE
+                  key = progBar = sizeBox = pctBox = counter = null;
+              }, self._opts.checkProgressInterval );
+            }
+
+            // We didn't get a 2xx status so don't continue sending requests
+          } else {
+            ss.removeItem( self._progKeys, key );
+            self.log( 'Error requesting upload progress: ' + status + ' ' + statusText );
+          }
+
+          // Null to avoid leaks in IE
+          xhr = size = pct = status = statusText = response = null;
+        }
+      } catch( e ) {
+        self.log( 'Error requesting upload progress: ' + e.message );
+      }
+    };
+
+    xhr.onreadystatechange = callback;
+    xhr.open( 'GET', url, true );
+
+    // Set the upload progress header for Nginx
+    if ( self._opts.nginxProgressUrl ) {
+      xhr.setRequestHeader( self._opts.nginxProgressHeader, key );
+    }
+
+    xhr.setRequestHeader( 'X-Requested-With', 'XMLHttpRequest' );
+    xhr.setRequestHeader( 'Accept', 'application/json, text/javascript, */*; q=0.01' );
+    xhr.send();
+  },
+
+  /**
+  * Verifies that file is allowed
+  * Checks file extension and file size if limits are set
+  */
+  _checkFile: function( filename, ext, size ) {
+    "use strict";
+
+    var allowed = this._opts.allowedExtensions,
+        i = allowed.length,
+        extOk = false;
+
+    // Only file extension if allowedExtensions is set
+    if ( i > 0 ) {
+      ext = ext.toLowerCase();
+
+      while ( i-- ) {
+        if ( allowed[i].toLowerCase() == ext ) {
+          extOk = true;
+          break;
+        }
+      }
+
+      if ( !extOk ) {
+        this.removeCurrent();
+        this.log( 'File extension not permitted' );
+        this._opts.onExtError.call( this, filename, ext );
+        return false;
+      }
+    }
+
+    if ( size &&
+        this._opts.maxSize !== false &&
+        size > this._opts.maxSize )
+    {
+      this.removeCurrent();
+      this.log( filename + ' exceeds ' + this._opts.maxSize + 'K limit' );
+      this._opts.onSizeError.call( this, filename, size );
+      return false;
+    }
+
+    return true;
+  },
+
+  /**
+  * Validates input and directs to either XHR method or iFrame method
+  */
+  submit: function() {
+    "use strict";
+
+    var filename,
+        ext,
+        size;
+
+    if ( this._disabled ||
+         this._active >= this._opts.maxUploads ||
+         this._queue.length < 1 )
+    {
+      return;
+    }
+
+    // The next file in the queue will always be in the front of the array
+    this._file = this._queue[0];
+
+    if ( XhrOk ) {
+      filename = ss.getFilename( this._file.name );
+      // Convert from bytes to kilobytes
+      size = Math.round( this._file.size / 1024 );
+    } else {
+      filename = ss.getFilename( this._file.value );
+    }
+
+    ext = ss.getExt( filename );
+
+    if ( !this._checkFile( filename, ext, size ) ) {
+      return;
+    }
+
+    // User returned false to cancel upload
+    if ( false === this._opts.onSubmit.call( this, filename, ext ) ) {
+      return;
+    }
+
+    // Increment the active upload counter
+    this._active++;
+
+    // Disable uploading if multiple file uploads are not enabled
+    // or if queue is disabled and we've reached max uploads
+    if ( this._opts.multiple === false ||
+         this._opts.queue === false && this._active >= this._opts.maxUploads )
+    {
+      this.disable();
+    }
+
+    // Use XHR if supported by browser
+    if ( XhrOk ) {
+      this._uploadXhr( filename, size, this._sizeBox, this._progBar, this._progBox, this._pctBox );
+
+    // Otherwise use iframe method
+    } else {
+      this._uploadIframe( filename, this._sizeBox, this._progBar, this._progBox, this._pctBox );
+    }
+
+    // Null to avoid leaks in IE
+    this._sizeBox = this._progBar = this._progBox = this._pctBox = null;
+  }
+};
+
+// Expose to the global window object
+window.ss = ss;
+
+})( window, document );
+
+
+// Markdown rendering
+
+marked.setOptions({
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  langPrefix: 'lang-'
+});
+
+var md = document.getElementById('markdown');
+var target = document.getElementById('render');
+
+render.innerHTML = marked(md.value);
+
+md.addEventListener('keyup', renderMarkdown);
+
+function renderMarkdown () {
+  render.innerHTML = marked(md.value);
+}
+
+// Image uploading
+
+// the `ss` variable is a convention by the upload library and it's a global
+// variable
+var uploader = new ss.SimpleUpload({
+  button: 'upload',
+  url: '/admin-old/image-upload',
+  name: 'image',
+  multipart: true,
+  onComplete: function(filename, response) {
+
+    response = JSON.parse(response);
+
+    if (response.hasOwnProperty('error')) {
+      alert('File upload failed. Error : '  + response.error);
+    } else {
+      var list = $('#uploads');
+      var li = $(document.createElement('li'));
+      var item = $(document.createElement('input'));
+      var editor = $('#markdown');
+      var md = '!['+ filename +'](' + response.url + ')';
+
+      item.attr('type', 'text');
+      item.attr('value', md);
+      item.attr('disabled', 'true');
+      item.addClass('form-control');
+
+      list.removeClass('hidden');
+
+      item.appendTo(li);
+      li.appendTo(list);
+
+      editor.val(md + '\n\n' + editor.val());
+
+      renderMarkdown();
+
+    }
+  }
+});

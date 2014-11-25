@@ -29,7 +29,7 @@ function renderMarkdown () {
 // variable
 var uploader = new ss.SimpleUpload({
   button: 'upload',
-  url: '/admin/image-upload',
+  url: '/admin-old/image-upload',
   name: 'image',
   multipart: true,
   onComplete: function(filename, response) {

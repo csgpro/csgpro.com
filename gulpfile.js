@@ -113,10 +113,14 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
 });
 
 gulp.task('scripts', function () {
-	return browserify('./public/js/main.js')
+	browserify('./public/js/main.js')
 		.bundle()
 		.pipe(source('bundle.js'))
 		.pipe(gulp.dest(buildDir + 'js/'));
+
+    gulp.src(['./public/js/vendor/simple-ajax-uploader.js','./public/js/admin-custom.js'])
+        .pipe(plugins.concat('admin.js'))
+        .pipe(gulp.dest(buildDir + 'js/'));
 });
 
 gulp.task('admin-clean', function () {
