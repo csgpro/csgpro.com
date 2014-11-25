@@ -362,8 +362,6 @@ app.get('/auth-old/twitter/callback',
     failureRedirect: '/admin-old/login?message=' + message
   }),
   function(req, res) {
-    console.log(req);
-    console.log(res);
     // Successful authentication, redirect home.
     res.redirect('/admin-old/post');
 });
