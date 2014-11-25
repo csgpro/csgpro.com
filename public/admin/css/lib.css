@@ -298,20 +298,6 @@ ng\:form {
 	to {opacity: 0.25;}
 }
 
-/* Include this file in your html if you are using the CSP mode. */
-
-@charset "UTF-8";
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
-.ng-cloak, .x-ng-cloak,
-.ng-hide:not(.ng-hide-animate) {
-  display: none !important;
-}
-
-ng\:form {
-  display: block;
-}
-
 /*
  * Toastr
  * Version 2.0.1
@@ -525,6 +511,20 @@ button.toast-close-button {
 #toast-container > div.ng-enter {
     opacity: 0;
 }
+/* Include this file in your html if you are using the CSP mode. */
+
+@charset "UTF-8";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+
 .ngGrid {
   background-color: #fdfdfd;
 }
