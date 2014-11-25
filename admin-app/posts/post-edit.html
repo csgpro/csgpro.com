@@ -62,7 +62,8 @@
 
 			<div class="form-group">
 				<label class="control-label">Excerpt</label>
-				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract"></textarea>
+				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract" maxlength="400"></textarea>
+				<div class="alert" ng-class="{'alert-danger':postViewModel.post.Abstract.length > 380}"><span ng-bind="postViewModel.post.Abstract.length"></span> of 400 character limit.</div>
 			</div>
 
 		</div><!-- .sidebar -->
