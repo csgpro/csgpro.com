@@ -64,7 +64,7 @@
 				});
 
 				modalInstance.result.then(function () {
-					common.goToUrl('/posts');
+					common.reload();
 				});
 			};
 

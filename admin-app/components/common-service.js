@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'toaster', '$filter', function (CONFIG, httpService, $rootScope, $location, toaster, $filter) {
+        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'toaster', '$filter', '$route', function (CONFIG, httpService, $rootScope, $location, toaster, $filter, $route) {
 
             var self = this;
 
@@ -133,6 +133,10 @@
 
             self.goToUrl = function (url) {
                 $location.url(url);
+            };
+
+            self.reload = function () {
+                $route.reload();
             };
 
             self.viewItem = function (subpath) {
