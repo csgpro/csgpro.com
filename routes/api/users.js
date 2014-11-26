@@ -92,48 +92,47 @@ self.getUserByOther = function (req, res) {
 };
 
 self.createUser = function (req, res) {
-	db.createItem('users', req.body, function (err, data) {
+	var user = req.body.user;
+	db.createItem('users', user, function (err, data) {
 		if (err) {
+			var statusCode = 400;
 			var msg = {
 				status: 'fail',
-				message: 'Error Creating User',
-				error: err
+				message: err.error,
+				error: err,
+				response: data
 			};
 		} else {
+			var statusCode = 200;
 			var msg = {
 				status: 'success',
 				message: 'Successfully Created User',
 				id: data.id
 			};
 		}
-		res.send(JSON.stringify(msg));
+		res.status(statusCode).send(JSON.stringify(msg));
 	});
 };
 
 self.updateUser = function (req, res) {
-	var model = {
-		id: req.body.id,
-		TwitterHandle: req.body.TwitterHandle,
-		Username: req.body.Username,
-		IsAdmin: req.body.IsAdmin,
-		FullName: req.body.FullName,
-		ProfileUrl: req.body.ProfileUrl
-	};
-	db.updateItem('users', req.body.id, model, function (err, data) {
+	var user = req.body.user;
+	db.updateItem('users', user.id, user, function (err, data) {
 		if (err) {
+			var statusCode = 400;
 			var msg = {
 				status: 'fail',
 				message: err.error,
-				error: err.code
+				error: err
 			};
 		} else {
+			var statusCode = 200;
 			var msg = {
 				status: 'success',
 				message: 'Successfully Updated User',
 				id: data.id
 			};
 		}
-		res.send(JSON.stringify(msg));
+		res.status(statusCode).send(JSON.stringify(msg));
 	});
 };
 

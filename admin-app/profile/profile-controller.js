@@ -2,40 +2,24 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('ProfileCtrl', ['data', '$filter', '$upload', 'common', function(data, $filter, $upload, common) {
+		.controller('ProfileCtrl', ['data', 'common', '$modal', function(data, common, $modal) {
 			// Do Awesome Stuff!
 			var profileViewModel = this;
 
 			profileViewModel.user = data;
-
-			// profileViewModel.user = {
-			// 	FullName: data.FullName,
-			// 	IsAdmin: data.IsAdmin,
-			// 	ProfileUrl: data.ProfileUrl,
-			// 	TwitterHandle: data.TwitterHandle,
-			// 	Username: data.Username
-			// };
-
-			profileViewModel.user.CreateDateDisplay = $filter('date')(data.CreateDate);
-
-			profileViewModel.onFileSelect = function(file) {
-				profileViewModel.upload = $upload.upload({
-					url: '/upload/img/author',
-					file: file
-				}).success(function(data, status, headers, config) {
-					profileViewModel.user.ProfileUrl = data.url;
-				});
-			};
 
 			profileViewModel.canEdit = true;
 
 			/*********************
              * Save Data
              ********************/
+			var userData = {
+				user: profileViewModel.user
+			};
             var saveRecordData = {
                 endpoint: 'users',
                 method: 'put',
-                data: profileViewModel.user,
+                data: userData,
                 id: 'me',
                 successMessage: 'Profile Updated'
             };
@@ -50,6 +34,46 @@
             };
 
 			common.setupToolbarButtons(toolbarButtons);
+
+			/********************
+			 * Image Upload Modal
+			 *******************/
+			profileViewModel.openImageUploadModal = function () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-file-upload.html',
+					controller: 'ModalFileUploadCtrl',
+					controllerAs: 'modalVM',
+					size: 'sm',
+					resolve: {
+						config: function () {
+							return {
+								title: 'Upload Photo',
+								buttonLabel: 'Select Photo',
+								showDescriptionField: false
+							};
+						}
+					}
+				});
+
+				modalInstance.result.then(function (file) {
+					profileViewModel.user.ProfileUrl = data.ProfileUrl = file.url;
+					/*********************
+		             * Save Data
+		             ********************/
+					var userData = {
+						user: data
+					};
+		            var saveRecordData = {
+		                endpoint: 'users',
+		                method: 'put',
+		                data: userData,
+		                id: 'me',
+		                successMessage: 'Profile Image Updated'
+		            };
+					common.saveRecord(saveRecordData);
+				});
+			};
 
 		}]);
 })();

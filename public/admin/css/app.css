@@ -6385,3 +6385,13 @@ img {
 .noresize {
   resize: none;
 }
+/* PROFILE IMAGE */
+.profile-image button {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.profile-image img {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  width: 100%;
+}

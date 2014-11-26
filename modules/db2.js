@@ -111,6 +111,8 @@ self.updateItem = function (entity, id, data, callback) {
 		request.patch(options, function(err, obj, response) {
 			if(err) {
 				callback(err);
+			} else if (response.error) {
+				callback(response);
 			} else if (response !== null && response.hasOwnProperty('id')) {
 				callback(null, response);
 			} else {

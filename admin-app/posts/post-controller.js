@@ -153,7 +153,8 @@
 						config: function () {
 							return {
 								title: 'Upload Image',
-								buttonLabel: 'Select Image File'
+								buttonLabel: 'Select Image File',
+								showDescriptionField: true
 							};
 						}
 					}
