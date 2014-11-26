@@ -12,11 +12,11 @@
 				self.user = user;
 			};
 
-			self.getUserAdminStatus = function () {
+			self.IsAdmin = function () {
 				return self.user && self.user.hasOwnProperty('IsAdmin') ? self.user.IsAdmin : false;
 			};
 
-			self.getUserId = function () {
+			self.UserId = function () {
 				return self.user.id;
 			};
 

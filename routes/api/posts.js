@@ -79,7 +79,8 @@ self.getPostByID = function (req, res) {
 };
 
 self.createPost = function (req, res) {
-	db.createItem('posts', req.body, function (err, data) {
+	var notify = req.body && req.body.notify ? req.body.notify : false;
+	db.createItem('posts', req.body.post, function (err, data) {
 		if (err) {
 			var msg = {
 				status: 'fail',
@@ -92,27 +93,36 @@ self.createPost = function (req, res) {
 				message: 'Successfully Created Post',
 				id: data.id
 			};
+			if (notify) {
+				console.log('notify called');
+			}
 		}
 		res.send(JSON.stringify(msg));
 	});
 };
 
 self.updatePost = function (req, res) {
-	db.updateItem('posts', req.params.id, req.body, function (err, data) {
+	var notify = req.body && req.body.notify ? req.body.notify : false;
+	db.updateItem('posts', req.params.id, req.body.post, function (err, data) {
 		if (err) {
+			var statusCode = 400;
 			var msg = {
 				status: 'fail',
 				message: 'Error Updating Post',
 				error: err
 			};
 		} else {
+			var statusCode = 200;
 			var msg = {
 				status: 'success',
 				message: 'Successfully Updated Post',
 				id: data.id
 			};
+			if (notify) {
+				console.log('notify called');
+			}
 		}
-		res.send(JSON.stringify(msg));
+		res.status(statusCode).send(JSON.stringify(msg));
 	});
 };
 

@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'toaster', '$filter', '$route', function (CONFIG, httpService, $rootScope, $location, toaster, $filter, $route) {
+        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'notifications', '$filter', '$route', function (CONFIG, httpService, $rootScope, $location, notifications, $filter, $route) {
 
             var self = this;
 
@@ -43,25 +43,23 @@
 
                 if (method === 'put') {
                     return httpService.updateItem(endpoint, id, data).then(function (res) {
-                        if (res.errors) {
-                            toaster.pop('error', res.errors[0].title);
-                        } else {
-                            toaster.pop('success', successMessage);
-                            if (onSuccess) {
-                                onSuccess();
-                            }
+                        notifications.showSuccess(successMessage);
+                        if (onSuccess) {
+                            onSuccess();
                         }
+                    },
+                    function (res) {
+                        notifications.showError(res);
                     });
                 } else {
                     return httpService.createItem(endpoint, data).then(function (res) {
-                        if (res.errors) {
-                            toaster.pop('error', res.errors[0].title);
-                        } else {
-                            toaster.pop('success', successMessage);
-                            if (onSuccess) {
-                                onSuccess();
-                            }
+                        notifications.showSuccess(successMessage);
+                        if (onSuccess) {
+                            onSuccess();
                         }
+                    },
+                    function (res) {
+                        notifications.showError(res);
                     });
                 }
             };

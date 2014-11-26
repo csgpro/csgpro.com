@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app')
-        .service('notifications', ['common', 'toaster', '$window', function (common, toaster, $window) {
+        .service('notifications', ['toaster', '$window', function (toaster, $window) {
 
             var self = this;
 

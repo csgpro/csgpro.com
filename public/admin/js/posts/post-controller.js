@@ -39,7 +39,7 @@
 
 			lookup.getAvailableUsers().then(function(res) {
 				postViewModel.availableUsers = res;
-				postViewModel.post.AuthorUserId = UserService.getUserId();
+				postViewModel.post.AuthorUserId = UserService.UserId();
 			});
 
 			function getSelectedTopics() {
@@ -56,10 +56,13 @@
 
 			function getSaveRecordData() {
 				postViewModel.post.Topics = getSelectedTopics();
+				var data = {
+					post: postViewModel.post
+				};
 				var saveRecordData = {
 	                endpoint: 'posts',
 	                method: 'post',
-	                data: postViewModel.post,
+	                data: data,
 	                id: postViewModel.post ? postViewModel.post.id : null,
 	                successMessage: 'Created Post',
 	                onSuccess: function () {
@@ -79,12 +82,13 @@
 				customButtons: [
                     {
                         condition: function () {
-                            return (postViewModel.post.id && !postViewModel.post.PublishDate);
+                            return (UserService.IsAdmin() && postViewModel.post.id && !postViewModel.post.PublishDate);
                         },
                         clickFn: function () {
+							var saveRecordData = getSaveRecordData();
                             saveRecordData.successMessage = 'Post Successfully Published';
-							common.setSaveRecordData(saveRecordData);
-                            common.saveRecord();
+							saveRecordData.data.post.PublishDate = new Date().getTime();
+                            common.saveRecord(saveRecordData);
                         },
                         btnClass: 'btn-primary',
                         btnGlyph: 'glyphicon-ok',
@@ -92,16 +96,31 @@
                     },
 					{
 						condition: function () {
-							return (postViewModel.post.id && postViewModel.post.PublishDate);
+							return (UserService.IsAdmin() && postViewModel.post.id && postViewModel.post.PublishDate);
 						},
 						clickFn: function () {
+							var saveRecordData = getSaveRecordData();
 							saveRecordData.successMessage = 'Post Un-Published';
-							common.setSaveRecordData(saveRecordData);
-							common.saveRecord();
+							saveRecordData.data.post.PublishDate = null;
+							common.saveRecord(saveRecordData);
 						},
 						btnClass: 'btn-danger',
 						btnGlyph: 'glyphicon-remove',
 						btnText: 'Un-Publish'
+					},
+					{
+						condition: function () {
+							return (!UserService.IsAdmin() && !postViewModel.post.PublishDate);
+						},
+						clickFn: function () {
+							var saveRecordData = getSaveRecordData();
+							saveRecordData.successMessage = 'Request Sent';
+							saveRecordData.data.notify = true;
+							common.saveRecord(saveRecordData);
+						},
+						btnClass: 'btn-info',
+						btnGlyph: 'glyphicon-ok',
+						btnText: 'Ready for Review'
 					},
 					{
 						clickFn: function () {
