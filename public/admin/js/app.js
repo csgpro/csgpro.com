@@ -80,14 +80,47 @@
 					}
 				})
 				.when('/profile', {
-					controller: 'ProfileCtrl',
-					controllerAs: 'profileViewModel',
-					templateUrl: 'profile/profile.html',
-					title: 'Profile',
+					controller: 'UserCtrl',
+					controllerAs: 'userViewModel',
+					templateUrl: 'users/user.html',
+					title: 'Edit Profile',
 					resolve: {
 						data: ['httpService', function(httpService) {
-							return httpService.getItem('users', 'me');
+							return httpService.getItem('users', 'me', true);
 						}]
+					}
+				})
+				.when('/accounts', {
+					controller: 'UsersCtrl',
+					controllerAs: 'usersViewModel',
+					templateUrl: 'users/users.html',
+					title: 'Accounts',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getCollection('users', true);
+						}]
+					}
+				})
+				.when('/accounts/edit/:userId', {
+					controller: 'UserCtrl',
+					controllerAs: 'userViewModel',
+					templateUrl: 'users/user.html',
+					title: 'Edit Account',
+					resolve: {
+						data: ['httpService', '$route', function(httpService, $route) {
+							return httpService.getItem('users', $route.current.params.userId, true);
+						}]
+					}
+				})
+				.when('/accounts/add/new', {
+					controller: 'UserCtrl',
+					controllerAs: 'userViewModel',
+					templateUrl: 'users/user.html',
+					title: 'Create Account',
+					resolve: {
+						data: function () {
+							return null;
+						}
 					}
 				})
 				.otherwise({

@@ -4,22 +4,22 @@
 	</div>
 	<div class="panel-body">
 		<div class="col-sm-3 profile-image">
-			<img ng-src="{{profileViewModel.user.ProfileUrl}}" />
-			<button class="btn btn-primary btn-sm btn-block" ng-click="profileViewModel.openImageUploadModal()">Change Photo</button>
+			<img ng-src="{{userViewModel.user.ProfileUrl}}" />
+			<button class="btn btn-primary btn-sm btn-block" ng-click="userViewModel.openImageUploadModal()">Change Photo</button>
 		</div>
 		<div class="col-sm-9">
 			<div class="col-sm-3 form-group">
 				<label class="control-label">User Name</label>
-				<input type="text" class="form-control" data-ng-model="profileViewModel.user.Username" disabled />
+				<input type="text" class="form-control" data-ng-model="userViewModel.user.Username" />
 			</div>
 			<div class="col-sm-3 form-group">
 				<label class="control-label">Full Name</label>
-				<input type="text" class="form-control" data-ng-model="profileViewModel.user.FullName" />
+				<input type="text" class="form-control" data-ng-model="userViewModel.user.FullName" />
 			</div>
 			<div class="col-sm-3 form-group">
 				<label class="control-label">Twitter Handle</label>
-				<input type="text" class="form-control" data-ng-model="profileViewModel.user.TwitterHandle" />
+				<input type="text" class="form-control" data-ng-model="userViewModel.user.TwitterHandle" />
 			</div>
-	</div>
+		</div>
 	</div>
 </div>

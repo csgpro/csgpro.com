@@ -12,6 +12,10 @@
 				self.user = user;
 			};
 
+			self.getUser = function () {
+				return self.user;
+			};
+
 			self.IsAdmin = function () {
 				return self.user && self.user.hasOwnProperty('IsAdmin') ? self.user.IsAdmin : false;
 			};
