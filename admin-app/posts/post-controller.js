@@ -7,6 +7,14 @@
 
 			postViewModel.post = data ? data : {};
 
+			postViewModel.isAdmin = function () {
+				return UserService.IsAdmin();
+			}
+
+			postViewModel.canEdit = function () {
+				return UserService.IsAdmin() || (!data || UserService.getUser().id === data.id);
+			}
+
 			postViewModel.expand = function() {
 				common.autoExpandTextarea('Markdown');
 			};
@@ -82,7 +90,7 @@
 				customButtons: [
                     {
                         condition: function () {
-                            return (UserService.IsAdmin() && postViewModel.post.id && !postViewModel.post.PublishDate);
+                            return (postViewModel.isAdmin() && postViewModel.post.id && !postViewModel.post.PublishDate);
                         },
                         clickFn: function () {
 							var saveRecordData = getSaveRecordData();
@@ -134,10 +142,12 @@
 				]
 			};
 
-			common.setupToolbarButtons(toolbarButtons);
-			common.setCancel(function() {
-				common.goToUrl('/posts');
-			});
+			if (postViewModel.canEdit()) {
+				common.setupToolbarButtons(toolbarButtons);
+				common.setCancel(function() {
+					common.goToUrl('/posts');
+				});
+			}
 
 			/********************
 			 * Image Upload Modal

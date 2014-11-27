@@ -2,7 +2,7 @@
 	<div class="col-sm-9">
 		<div class="form-group">
 			<label class="control-label">Post Title</label>
-			<input class="form-control" ng-model="postViewModel.post.Title" placeholder="Post Title Goes Here..." />
+			<input class="form-control" ng-model="postViewModel.post.Title" placeholder="Post Title Goes Here..." ng-disabled="!postViewModel.canEdit()" />
 		</div>
 		<tabset>
 			<tab select="postViewModel.expand('Markdown')">
@@ -11,11 +11,11 @@
 				</tab-heading>
 				<div>
 					<br />
-					<div class="form-group tools pull-right">
+					<div class="form-group tools pull-right" ng-show="postViewModel.canEdit()">
 						<button class="btn btn-default btn-xs" ng-click="postViewModel.openImageUploadModal()" tooltip="Upload Image"><span class="glyphicon glyphicon-picture"></span></button>
 					</div>
 					<div class="form-group">
-						<textarea class="form-control noresize" rows="20" placeholder="Your story goes here. Make it a good one." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.expand($event)" id="Markdown"></textarea>
+						<textarea class="form-control noresize" rows="20" placeholder="Your story goes here. Make it a good one." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.expand($event)" id="Markdown" ng-disabled="!postViewModel.canEdit()"></textarea>
 					</div>
 				</div>
 			</tab>
@@ -34,7 +34,7 @@
 
 			<div class="form-group">
 				<label class="control-label">Category</label>
-				<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories">
+				<select class="form-control" ng-model="postViewModel.post.Category" ng-options="option as option for option in postViewModel.availableCategories" ng-disabled="!postViewModel.canEdit()">
 					<option value="">--Select One--</option>
 				</select>
 			</div>
@@ -43,31 +43,31 @@
 				<div>
 					<label class="control-label">Topics</label>
 					<div class="pull-right">
-						<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push({})"><span class="glyphicon glyphicon-plus"></span></button>
+						<button class="btn btn-default btn-xs" ng-click="postViewModel.selectedTopics.push({})" ng-disabled="!postViewModel.canEdit()"><span class="glyphicon glyphicon-plus"></span></button>
 					</div>
 				</div>
 				<div class="form-group row" ng-repeat="topic in postViewModel.selectedTopics">
 					<div class="col-xs-10">
-						<select class="form-control" ng-model="topic.Name" ng-options="option.Name as option.Name for option in postViewModel.availableTopics">
+						<select class="form-control" ng-model="topic.Name" ng-options="option.Name as option.Name for option in postViewModel.availableTopics" ng-disabled="!postViewModel.canEdit()">
 							<option value="">--Select One--</option>
 						</select>
 					</div>
 					<div class="col-xs-2" ng-show="postViewModel.selectedTopics.length > 1">
-						<a ng-click="postViewModel.selectedTopics.splice($index, 1)" class="text-danger"><span class="glyphicon glyphicon-remove"></span></a>
+						<a ng-click="postViewModel.selectedTopics.splice($index, 1)" class="text-danger" ng-show="postViewModel.canEdit()"><span class="glyphicon glyphicon-remove"></span></a>
 					</div>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="control-label">Author</label>
-				<select class="form-control" ng-model="postViewModel.post.AuthorUserId" ng-options="option.id as option.FullName for option in postViewModel.availableUsers">
+				<select class="form-control" ng-model="postViewModel.post.AuthorUserId" ng-options="option.id as option.FullName for option in postViewModel.availableUsers" ng-disabled="!postViewModel.canEdit()">
 					<option value="form-control">--Select One--</option>
 				</select>
 			</div>
 
 			<div class="form-group">
 				<label class="control-label">Excerpt</label>
-				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract" maxlength="400"></textarea>
+				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract" maxlength="400" ng-disabled="!postViewModel.canEdit()"></textarea>
 				<div class="alert" ng-class="{'alert-danger':postViewModel.post.Abstract.length > 380}"><span ng-bind="postViewModel.post.Abstract.length"></span> of 400 character limit.</div>
 			</div>
 

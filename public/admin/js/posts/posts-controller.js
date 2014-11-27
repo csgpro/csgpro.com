@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostsCtrl', ['common', 'data', 'notifications', '$modal', function(common, data, notifications, $modal) {
+		.controller('PostsCtrl', ['common', 'data', 'notifications', '$modal', 'UserService', function(common, data, notifications, $modal, UserService) {
 			// Do Awesome Stuff!
 			var postsViewModel = this;
 
@@ -16,7 +16,15 @@
 				}
 			};
 
-			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.deletePost(row.entity)" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
+			postsViewModel.canEdit = function (post) {
+				return (UserService.user.id === post.AuthorUserId) || UserService.isAdmin();
+			};
+
+			postsViewModel.canDelete = function (post) {
+				return (!post.PublishDate && UserService.user.id === post.AuthorUserId) || UserService.isAdmin();
+			};
+
+			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" ng-show="$parent.postsViewModel.canEdit(row.entity)" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.deletePost(row.entity)" ng-show="$parent.postsViewModel.canDelete(row.entity)" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
 
 			// Set up datatable
 		    postsViewModel.datatable = {
@@ -39,9 +47,7 @@
 			};
 
 			common.setupToolbarButtons(toolbarButtons);
-
-
-
+			
 			/********************
 			* Delete Record Modal
 			*******************/
