@@ -18,6 +18,8 @@ self.getTopics = function (req, res) {
 			};
 			res.send(JSON.stringify(msg));
 		} else {
+			// Sort the data by Name.
+			data = _.sortBy(data, 'Name');
 			res.send(data);
 		}
 	});

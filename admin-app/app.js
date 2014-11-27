@@ -123,6 +123,17 @@
 						}
 					}
 				})
+				.when('/topics', {
+					controller: 'TopicsCtrl',
+					controllerAs: 'topicsViewModel',
+					templateUrl: 'topics/topics.html',
+					title: 'Topics',
+					resolve: {
+						data: ['httpService', function(httpService) {
+							return httpService.getCollection('topics', true);
+						}]
+					}
+				})
 				.otherwise({
 					redirectTo: '/'
 				});
