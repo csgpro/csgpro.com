@@ -17,11 +17,11 @@
 			};
 
 			postsViewModel.canEdit = function (post) {
-				return (UserService.user.id === post.AuthorUserId) || UserService.isAdmin();
+				return (UserService.user.id === post.AuthorUserId) || UserService.IsAdmin();
 			};
 
 			postsViewModel.canDelete = function (post) {
-				return (!post.PublishDate && UserService.user.id === post.AuthorUserId) || UserService.isAdmin();
+				return (!post.PublishDate && UserService.user.id === post.AuthorUserId) || UserService.IsAdmin();
 			};
 
 			var cellButtons = '<div class="ngCellText"><button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity, \'edit\')" ng-show="$parent.postsViewModel.canEdit(row.entity)" tooltip="Edit Post" tooltip-placement="left"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-xs btn-primary" ng-click="$parent.postsViewModel.goToPost(row.entity)" tooltip="View Post" tooltip-placement="left"><span class="glyphicon glyphicon-search"></span></button> <button class="btn btn-xs btn-danger" ng-click="$parent.postsViewModel.deletePost(row.entity)" ng-show="$parent.postsViewModel.canDelete(row.entity)" tooltip="Delete Post" tooltip-placement="left"><span class="glyphicon glyphicon-trash"></span></button></div>';
@@ -47,7 +47,7 @@
 			};
 
 			common.setupToolbarButtons(toolbarButtons);
-			
+
 			/********************
 			* Delete Record Modal
 			*******************/

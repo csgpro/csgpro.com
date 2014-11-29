@@ -60,7 +60,7 @@
 
 			<div class="form-group">
 				<label class="control-label">Author</label>
-				<select class="form-control" ng-model="postViewModel.post.AuthorUserId" ng-options="option.id as option.FullName for option in postViewModel.availableUsers" ng-disabled="!postViewModel.canEdit()">
+				<select class="form-control" ng-model="postViewModel.post.AuthorUserId" ng-options="option.id as option.FullName for option in postViewModel.availableUsers" ng-disabled="!postViewModel.isAdmin()">
 					<option value="form-control">--Select One--</option>
 				</select>
 			</div>
@@ -69,6 +69,16 @@
 				<label class="control-label">Excerpt</label>
 				<textarea class="form-control noresize" rows="8" ng-model="postViewModel.post.Abstract" maxlength="400" ng-disabled="!postViewModel.canEdit()"></textarea>
 				<div class="alert" ng-class="{'alert-danger':postViewModel.post.Abstract.length > 380}"><span ng-bind="postViewModel.post.Abstract.length"></span> of 400 character limit.</div>
+			</div>
+
+			<div class="form-group" ng-show="postViewModel.isAdmin()">
+				<label class="control-label">Publish Date</label>
+				<p class="input-group">
+					<input type="text" class="form-control" datepicker-popup="MM/dd/yyyy" ng-model="postViewModel.post.PublishDate" is-open="postViewModel.datepickerOpened" close-text="Close" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="postViewModel.openDatepicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
 			</div>
 
 		</div><!-- .sidebar -->

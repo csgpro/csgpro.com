@@ -96,8 +96,12 @@
 					templateUrl: 'users/users.html',
 					title: 'Accounts',
 					resolve: {
-						data: ['httpService', function(httpService) {
-							return httpService.getCollection('users', true);
+						data: ['common', 'httpService', 'UserService', function(common, httpService, UserService) {
+							if (UserService.IsAdmin()) {
+								return httpService.getCollection('users', true);
+							} else {
+								common.goToUrl('/');
+							}
 						}]
 					}
 				})

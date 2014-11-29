@@ -12,7 +12,7 @@
 			}
 
 			postViewModel.canEdit = function () {
-				return UserService.IsAdmin() || (!data || UserService.getUser().id === data.id);
+				return !data || UserService.getUser().id === data.AuthorUserId;
 			}
 
 			postViewModel.expand = function() {
@@ -47,7 +47,7 @@
 
 			lookup.getAvailableUsers().then(function(res) {
 				postViewModel.availableUsers = res;
-				postViewModel.post.AuthorUserId = UserService.UserId();
+				postViewModel.post.AuthorUserId = data && data.AuthorUserId ? data.AuthorUserId : UserService.UserId();
 			});
 
 			function getSelectedTopics() {
@@ -67,6 +67,7 @@
 				var data = {
 					post: postViewModel.post
 				};
+				data.post.PublishDate = postViewModel.post.PublishDate ? postViewModel.post.PublishDate.getTime() : null;
 				var saveRecordData = {
 	                endpoint: 'posts',
 	                method: 'post',
@@ -88,34 +89,6 @@
 			var toolbarButtons = {
 				standardButtons: ['cancel'],
 				customButtons: [
-                    {
-                        condition: function () {
-                            return (postViewModel.isAdmin() && postViewModel.post.id && !postViewModel.post.PublishDate);
-                        },
-                        clickFn: function () {
-							var saveRecordData = getSaveRecordData();
-                            saveRecordData.successMessage = 'Post Successfully Published';
-							saveRecordData.data.post.PublishDate = new Date().getTime();
-                            common.saveRecord(saveRecordData);
-                        },
-                        btnClass: 'btn-primary',
-                        btnGlyph: 'glyphicon-ok',
-                        btnText: 'Publish'
-                    },
-					{
-						condition: function () {
-							return (UserService.IsAdmin() && postViewModel.post.id && postViewModel.post.PublishDate);
-						},
-						clickFn: function () {
-							var saveRecordData = getSaveRecordData();
-							saveRecordData.successMessage = 'Post Un-Published';
-							saveRecordData.data.post.PublishDate = null;
-							common.saveRecord(saveRecordData);
-						},
-						btnClass: 'btn-danger',
-						btnGlyph: 'glyphicon-remove',
-						btnText: 'Un-Publish'
-					},
 					{
 						condition: function () {
 							return (!UserService.IsAdmin() && !postViewModel.post.PublishDate);
@@ -174,6 +147,16 @@
 					var image = '![' + data.description + '](' + data.url + ')';
 					common.insertTextAtLastPos('Markdown', image);
 				});
+			};
+
+			/*****************
+			 * Datepicker Controls
+			 ****************/
+			postViewModel.openDatepicker = function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				postViewModel.datepickerOpened = true;
 			};
 
 		}]);
