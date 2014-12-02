@@ -72,7 +72,6 @@ gulp.task('admin-copy-index', ['admin-clean'], function () {
 gulp.task('admin-scripts', ['admin-copy-index'], function () {
 
     libSrc = [
-        /*'./bower_components/ng-file-upload/angular-file-upload-shim.js',*/
         './bower_components/ng-file-upload/angular-file-upload-html5-shim.js',
         './bower_components/jquery/dist/jquery.js',
         './bower_components/angular/angular.js',
@@ -88,10 +87,19 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
         './bower_components/angular-marked/angular-marked.js'
     ];
 
-    var templateStream = gulp.src(['!./admin-app/index.html',
-            './admin-app/**/*.html'])
-            .pipe(plugins.angularTemplatecache('templates.js', { standalone: true }))
-            .pipe(gulp.dest(adminBuildDir + 'js/'));
+    if (plugins.util.env.type === 'production') {
+        var templateStream = gulp.src(['!./admin-app/index.html',
+                './admin-app/**/*.html'])
+                .pipe(plugins.angularTemplatecache('templates.js', { standalone: true }))
+                .pipe(plugins.uglify())
+                .pipe(plugins.rev())
+                .pipe(gulp.dest(adminBuildDir + 'js/'));
+    } else {
+        var templateStream = gulp.src(['!./app/index.html',
+        './app/**/*.html'])
+        .pipe(plugins.angularTemplatecache('templates.js', { standalone: true }))
+        .pipe(gulp.dest(adminBuildDir + 'js/'));
+    }
 
     var appStream = gulp.src([
         './admin-app/app.js',
@@ -99,10 +107,15 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
         './admin-app/**/*.js'])
         .pipe(plugins.jshint())
         .pipe(plugins.jshint.reporter('default'))
+        .pipe(plugins.util.env.type === 'production' ? plugins.concat('app.js') : plugins.util.noop())
+        .pipe(plugins.util.env.type === 'production' ? plugins.uglify() : plugins.util.noop())
+        .pipe(plugins.util.env.type === 'production' ? plugins.rev() : plugins.util.noop())
         .pipe(gulp.dest(adminBuildDir + 'js/'));
 
     var vendorStream = gulp.src(libSrc)
         .pipe(plugins.concat('lib.js'))
+        .pipe(plugins.util.env.type === 'production' ? plugins.uglify() : plugins.util.noop())
+        .pipe(plugins.util.env.type === 'production' ? plugins.rev() : plugins.util.noop())
         .pipe(gulp.dest(adminBuildDir + 'js/'));
 
     return gulp.src(adminBuildDir + 'index.html')
@@ -124,9 +137,9 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('admin-clean', function () {
-    // gulp.src([adminBuildDir + 'index.html',
-    //     adminBuildDir + 'js/*'], { read: false })
-    //     .pipe(cleaner());
+    gulp.src([adminBuildDir + 'index.html',
+        adminBuildDir + 'js/*'], { read: false })
+        .pipe(cleaner());
 });
 
 gulp.task('watch',function(){
