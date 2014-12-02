@@ -5,6 +5,7 @@
 
 var self        = this,
 	db			= require('../../modules/db2'),
+	email       = require('../../modules/email'),
 	sanitize	= require('validator').sanitize,
 	_			= require('lodash');
 
@@ -94,7 +95,7 @@ self.createPost = function (req, res) {
 				id: data.id
 			};
 			if (notify) {
-				console.log('notify called');
+				sendNotification(notify, data.id);
 			}
 		}
 		res.send(JSON.stringify(msg));
@@ -102,7 +103,7 @@ self.createPost = function (req, res) {
 };
 
 self.updatePost = function (req, res) {
-	var notify = req.body && req.body.notify ? req.body.notify : false;
+	var notify = req.body && req.body.notify ? req.body.notify : null;
 	db.updateItem('posts', req.params.id, req.body.post, function (err, data) {
 		if (err) {
 			var statusCode = 400;
@@ -119,7 +120,7 @@ self.updatePost = function (req, res) {
 				id: data.id
 			};
 			if (notify) {
-				console.log('notify called');
+				sendNotification(notify, data.id);
 			}
 		}
 		res.status(statusCode).send(JSON.stringify(msg));
@@ -143,3 +144,33 @@ self.deletePost = function (req, res) {
 		res.send(JSON.stringify(msg));
 	});
 };
+
+function sendNotification (msg, postId) {
+	if (~msg.indexOf('add/new')) {
+		var regExp = new RegExp('add\/new', 'g');
+		msg = msg.replace(regExp, 'edit/' + postId);
+	}
+	db.getCollection('users', function(err, data) {
+		var emails;
+		var users = data.filter(function(user){
+			return user.IsAdmin; // send email to all admins
+		});
+		emails = _.pluck(users, 'Username');
+		emails = emails.map(function(i) { return i + '@csgpro.com'; });
+		emails = emails.join(',');
+
+		email.sendEmail(
+			emails, // to
+			'New blog post submitted', // subject
+			msg, // message body
+			true,
+			function(err, success){
+				if (err) {
+					console.log(err);
+				} else {
+					console.log('Emails successfully sent to ' + emails);
+				}
+			}
+		);
+	});
+}

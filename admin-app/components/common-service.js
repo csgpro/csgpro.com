@@ -133,6 +133,10 @@
                 $location.url(url);
             };
 
+            self.absUrl = function () {
+                return $location.absUrl();
+            }
+
             self.reload = function () {
                 $route.reload();
             };

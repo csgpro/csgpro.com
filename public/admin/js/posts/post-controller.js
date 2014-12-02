@@ -11,8 +11,12 @@
 				return UserService.IsAdmin();
 			}
 
+			// Who can edit this post?
+			// If the user is admin.
+			// If there is no data (new post)
+			// If the user is the author of this post and it's not published
 			postViewModel.canEdit = function () {
-				return !data || UserService.getUser().id === data.AuthorUserId;
+				return UserService.IsAdmin() || !data || (UserService.getUser().id === data.AuthorUserId && !data.PublishDate);
 			}
 
 			postViewModel.expand = function() {
@@ -91,17 +95,12 @@
 				customButtons: [
 					{
 						condition: function () {
-							return (!UserService.IsAdmin() && !postViewModel.post.PublishDate);
+							return (UserService.IsAdmin() && !postViewModel.post.PublishDate);
 						},
-						clickFn: function () {
-							var saveRecordData = getSaveRecordData();
-							saveRecordData.successMessage = 'Request Sent';
-							saveRecordData.data.notify = true;
-							common.saveRecord(saveRecordData);
-						},
+						clickFn: openRequestReviewModal,
 						btnClass: 'btn-info',
 						btnGlyph: 'glyphicon-ok',
-						btnText: 'Ready for Review'
+						btnText: 'Request Review'
 					},
 					{
 						clickFn: function () {
@@ -149,6 +148,30 @@
 				});
 			};
 
+			/*****************
+			* Request Review Modal
+			****************/
+			function openRequestReviewModal () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-request-review.html',
+					controller: 'ModalRequestReviewCtrl',
+					controllerAs: 'modalVM',
+					size: 'md'
+				});
+
+				modalInstance.result.then(function (data) {
+					var url = common.absUrl();
+					var message = data.message + ' <br><br>';
+					message = message + 'Link: <a href="' + url + '">' + url + '</a><br>';
+					message = message + 'Author: ' + UserService.getUser().FullName + '<br>';
+					message = message + 'Post Title: ' + postViewModel.post.Title;
+					var saveRecordData = getSaveRecordData();
+					saveRecordData.successMessage = 'Request Sent';
+					saveRecordData.data.notify = message;
+					common.saveRecord(saveRecordData);
+				});
+			};
 			/*****************
 			 * Datepicker Controls
 			 ****************/
