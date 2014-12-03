@@ -23,12 +23,22 @@ module.exports = function(grunt) {
           , 'public/css/typography.css'
           , 'public/css/lightbox.css'
           , 'public/css/github.css'
+          ],
+          'public/css/admin-app.css': [
+            'public/css/admin/app.css',
+            '!bower_components/**/*.min.css',
+            'bower_components/**/*.css',
+            '!bower_components/bootstrap/**/*.css'
           ]
         }
     }
     , minify: {
         src: ['public/css/bundle.css']
       , dest: 'public/css/bundle.min.css'
+    }
+    , minify_admin: {
+        src: ['public/css/admin-app.css']
+      , dest: 'public/css/admin-app.min.css'
     }
   }
   , stylus: {
@@ -63,20 +73,40 @@ module.exports = function(grunt) {
           , 'public/js/bundle.js'
           ]
         }
-      }
-    , compressAdmin: {
-        files: {
-          'public/js/admin.js': [
-            'public/js/vendor/simple-ajax-uploader.js',
-            'public/js/admin-custom.js'
-          ]
-        }
-      }
     }
+    }
+  , ngtemplates: {
+    app: {
+        cwd: 'public/js/admin/app',
+        src: '**/*.html',
+        dest: 'public/js/admin-templates.js'
+    }
+  }
+  , concat: {
+      concatAdminLibs: {
+          src: ['bower_components/ng-file-upload/angular-file-upload-shim.js',
+                'bower_components/jquery/dist/jquery.js',
+                'bower_components/angular/angular.js',
+                'bower_components/angular-route/angular-route.js',
+                'bower_components/angular-animate/angular-animate.js',
+                'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+                'bower_components/ng-grid/build/ng-grid.js',
+                'bower_components/satellizer/satellizer.js',
+                'bower_components/ng-file-upload/angular-file-upload.js',
+                'bower_components/angularjs-toaster/toaster.js',
+                'bower_components/angular-busy/dist/angular-busy.js'],
+          dest: 'public/js/admin-libs.js'
+      }
+      , concatAdminApp: {
+          src: ['public/js/admin/app/app.js',
+                'public/js/admin/app/**/*.js'],
+          dest: 'public/js/admin-app.js'
+      }
+  }
   , watch: {
       all: {
-        files: ['public/css/*.css', 'public/css/*.styl', 'public/js/**/*.js', 'views/*.jade']
-      , tasks: ['browserify', 'uglify', 'stylus','cssmin']
+        files: ['public/css/**/*.css', 'public/css/*.styl', 'public/js/**/*', 'views/*.jade']
+      , tasks: ['browserify', 'uglify', 'stylus','cssmin', 'ngtemplates', 'concat']
       , options: {
           spawn: false
         , livereload: true
@@ -106,6 +136,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('serve', ['default', 'express:dev', 'watch']);
 
@@ -118,6 +150,6 @@ module.exports = function(grunt) {
 
   // Run browserify then uglify to bundle all my Common JS modules and then the
   // non common JS ones, also minify them
-  grunt.registerTask('default', ['browserify', 'uglify', 'stylus','cssmin']);
+  grunt.registerTask('default', ['browserify', 'uglify', 'concat', 'ngtemplates', 'stylus','cssmin']);
 
 };

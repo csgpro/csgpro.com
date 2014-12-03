@@ -1,0 +1,14 @@
+<div class="modal-header">
+	<h4 class="modal-title">Request Admin Review</h4>
+</div>
+<div class="modal-body">
+	<div class="form-group">
+		<label class="control-label">Your Message</label>
+		<textarea ng-model="modalVM.message" class="form-control" rows="4"></textarea>
+	</div>
+	<div class="alert alert-info"><p>Your message will include a link to this post</p></div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger btn-xs" ng-click="modalVM.send()">Send</button>
+	<button class="btn btn-warning btn-xs" ng-click="modalVM.close()">Cancel</button>
+</div>

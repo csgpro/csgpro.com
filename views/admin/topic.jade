@@ -33,7 +33,7 @@ block content
                       | ?
                   div.modal-footer
                     button.btn.btn-default(data-dismiss='modal') Close
-                    a.btn.btn-danger(href='/admin/topic/#{topic.id}/delete') Delete
+                    a.btn.btn-danger(href='/admin-old/topic/#{topic.id}/delete') Delete
             tr
               td
                 div.btn-group
@@ -41,11 +41,10 @@ block content
                     | Actions
                     span.caret
                   ul.dropdown-menu(role='menu')
-                    li: a(href='/admin/topic/#{topic.id}/update') Edit
+                    li: a(href='/admin-old/topic/#{topic.id}/update') Edit
                     li: a(href='#modal-confirm-#{topic.id}', data-toggle='modal') Delete
               td= topic.id
               td= topic.Name
               td(title="#{moment(topic.Created).format('LLL')}")= moment(topic.Created).fromNow()
               td(title="#{moment(topic.Updated).format('LLL')}")= moment(topic.Updated).fromNow()
           
-

@@ -35,7 +35,7 @@ block content
                       | ?
                   div.modal-footer
                     button.btn.btn-default(data-dismiss='modal') Close
-                    a.btn.btn-danger(href='/admin/account/#{person.id}/delete') Delete
+                    a.btn.btn-danger(href='/admin-old/account/#{person.id}/delete') Delete
             tr(class="#{person.id === user.id ? 'active' : ''}")
               td
                 div.btn-group
@@ -43,7 +43,7 @@ block content
                     | Actions
                     span.caret
                   ul.dropdown-menu(role='menu')
-                    li: a(href='/admin/account/#{person.id}/update') Edit
+                    li: a(href='/admin-old/account/#{person.id}/update') Edit
                     li: a(href='#modal-confirm-#{person.id}', data-toggle='modal') Delete
               td= person.FullName
               td= person.id
@@ -53,4 +53,3 @@ block content
               td(title="#{moment(person.CreateDate).format('LLL')}")= moment(person.CreateDate).fromNow()
               td(title="#{moment(person.UpdateDate).format('LLL')}")= moment(person.UpdateDate).fromNow()
           
-

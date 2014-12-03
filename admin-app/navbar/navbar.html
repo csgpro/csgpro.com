@@ -1,0 +1,26 @@
+<div class="navbar navbar-inverse navbar-static-top" role="navigation" ng-controller="NavCtrl as nav">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="nav.isCollapsed = !nav.isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" ng-bind="siteTitle">...</a>
+        </div>
+        <div class="collapse navbar-collapse" collapse="nav.isCollapsed">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active:nav.isActive(['posts'])}"><a ng-href="#/posts">Posts</a></li>
+                <li ng-class="{active:nav.isActive(['topics'])}"><a ng-href="#/topics">Topics</a></li>
+                <li ng-class="{active:nav.isActive(['accounts'])}" ng-show="nav.isAdmin()"><a ng-href="#/accounts">Accounts</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li data-toggle="collapse" data-target="#main-nav" data-ng-class="{active:nav.isActive(['profile'])}" ng-show="nav.userLogged()"><a href="#/profile"><span class="glyphicon glyphicon-cog"></span></a></li>
+                <li data-toggle="collapse" data-ng-class="{active:nav.isActive(['login'])}"  data-target="#main-nav" data-ng-show="!nav.userLogged()"><a href="#/login">Log In</a></li>
+                <li data-toggle="collapse" data-target="#main-nav" data-ng-show="nav.userLogged()"><a href="#/logout">Log Out</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    <ng-include src="nav.secondaryNav()"></ng-include>
+</div>

@@ -4,7 +4,7 @@
 
 var uploaderProfile = new ss.SimpleUpload({
   button: 'upload_profile',
-  url: '/admin/image-upload',
+  url: '/admin-old/image-upload',
   name: 'image',
   multipart: true,
   onComplete: function(filename, response) {
@@ -19,4 +19,3 @@ var uploaderProfile = new ss.SimpleUpload({
     }
   }
 });
-
