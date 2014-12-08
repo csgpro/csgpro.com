@@ -246,3 +246,9 @@ Temporary Items
 
 config.json
 public/exports
+
+# Ignore Build Directories
+public/admin
+public/js/bundle.*
+public/js/admin.js
+public/css/bundle.*
