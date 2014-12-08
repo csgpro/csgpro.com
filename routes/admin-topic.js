@@ -36,7 +36,7 @@ exports.create = function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/admin/topic?message='
+      res.redirect('/admin-old/topic?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -62,7 +62,7 @@ exports.update = function(req, res) {
       message = 'Error getting topic id ' + topicId + err;
       type = 'danger';
 
-      res.redirect('/admin/topic?message='
+      res.redirect('/admin-old/topic?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -77,7 +77,7 @@ exports.update = function(req, res) {
         topic: topic
       });
     }
-  }); 
+  });
 
 
 };
@@ -94,9 +94,9 @@ exports.patch = function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/admin/topic?message='
-                    + escape(message) 
-                    + '&type=' 
+      res.redirect('/admin-old/topic?message='
+                    + escape(message)
+                    + '&type='
                     + type);
     }
 
@@ -116,7 +116,7 @@ exports.del = function(req, res) {
       message = 'Error deleting topic id: ' + topicId + err;
       type = 'danger';
 
-      res.redirect('/admin/topic?message='
+      res.redirect('/admin-old/topic?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -124,16 +124,11 @@ exports.del = function(req, res) {
       message = 'Topic deleted successfully.';
       type = 'success';
 
-      res.redirect('/admin/topic?message='
+      res.redirect('/admin-old/topic?message='
                     + escape(message)
                     + '&type='
                     + type);
     }
-  }); 
+  });
 
 };
-
-
-
-
-

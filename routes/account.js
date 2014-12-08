@@ -34,7 +34,7 @@ exports.del = function(req, res) {
       message = 'Error deleting user id: ' + userId + err;
       type = 'danger';
 
-      res.redirect('/admin/account?message='
+      res.redirect('/admin-old/account?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -42,12 +42,12 @@ exports.del = function(req, res) {
       message = 'User deleted successfully.';
       type = 'success';
 
-      res.redirect('/admin/account?message='
+      res.redirect('/admin-old/account?message='
                     + escape(message)
                     + '&type='
                     + type);
     }
-  }); 
+  });
 
 };
 
@@ -65,7 +65,7 @@ exports.update = function(req, res) {
       message = 'Error getting user id ' + userId + err;
       type = 'danger';
 
-      res.redirect('/admin/account?message='
+      res.redirect('/admin-old/account?message='
                     + escape(message)
                     + '&type='
                     + type);
@@ -75,7 +75,7 @@ exports.update = function(req, res) {
         account: account
       });
     }
-  }); 
+  });
 
 };
 
@@ -89,13 +89,13 @@ exports.create = function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/admin/account?message='
+      res.redirect('/admin-old/account?message='
                     + escape(message)
                     + '&type='
                     + type);
     }
   });
-  
+
 };
 
 exports.patch = function(req, res) {
@@ -109,9 +109,8 @@ exports.patch = function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.redirect('/admin/account?message=' + escape(message) + '&type=' + type);
+      res.redirect('/admin-old/account?message=' + escape(message) + '&type=' + type);
     }
 
   });
 };
-

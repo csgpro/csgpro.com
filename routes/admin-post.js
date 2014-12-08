@@ -26,6 +26,16 @@ fs.readFile('views/admin/docs/markdown-help.md', function(err, data){
   }
 });
 
+exports.api = {};
+
+exports.api.all = function(req, res) {
+    db.getPosts(null, function(err, posts){
+      res.send(posts);
+    });
+}
+
+
+
 exports.index = function(req, res) {
   var message, type;
 
@@ -61,7 +71,7 @@ exports.publish = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 
@@ -73,7 +83,7 @@ exports.unpublish = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 
@@ -157,7 +167,7 @@ exports.del = function(req, res) {
     if (err) {
       res.send(err);
     } else if (result){
-      res.redirect('/admin/post');
+      res.redirect('/admin-old/post');
     }
   });
 

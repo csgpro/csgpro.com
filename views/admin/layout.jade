@@ -23,9 +23,9 @@ html.no-js
 
     script(src='/js/vendor/modernizr-2.6.2.min.js')
   body
-    nav.navbar.navbar-inverse(style='height: initial;')
+    nav.navbar.navbar-inverse.nav-static(style='height: initial;')
       div.navbar-header
-        a(href='/admin').navbar-brand Administration
+        a(href='/admin-old').navbar-brand Administration
       if user
         ul.nav.navbar-nav.nav-right
           if user.IsAdmin
@@ -34,22 +34,22 @@ html.no-js
                 | Accounts
                 b.caret
               ul.dropdown-menu
-                li: a(href='/admin/account') All accounts
-                li: a(href='/admin/account/new') New account
+                li: a(href='/admin-old/account') All accounts
+                li: a(href='/admin-old/account/new') New account
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown')
                 | Topics
                 b.caret
               ul.dropdown-menu
-                li: a(href='/admin/topic') All topics
-                li: a(href='/admin/topic/new') New topic
+                li: a(href='/admin-old/topic') All topics
+                li: a(href='/admin-old/topic/new') New topic
           li.dropdown
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               | Posts
               b.caret
             ul.dropdown-menu
-              li: a(href='/admin/post') All posts
-              li: a(href='/admin/post/new') New post
+              li: a(href='/admin-old/post') All posts
+              li: a(href='/admin-old/post/new') New post
 
 
     //if lt IE 7
