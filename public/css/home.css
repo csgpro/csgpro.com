@@ -225,8 +225,8 @@ header img{max-width:50px;max-height:50px;margin:5px 16px}
 .search{display:inline-block}
 .search input{border:solid #d3d3d3 2px;-webkit-border-radius:4px;border-radius:4px;padding:3px 3px 3px 12px}
 #recaptcha_area{display:inline-block}
-@media all and (min-width: 915px){#contact-container{background-image:url("/img/contact_bg_autumn.jpg");background-repeat:no-repeat;background-position:top}
-}@media all and (max-width: 914px){#contact-container{background-image:url("/img/mobile_contact_bg_autumn.jpg");background-position:bottom center}
+@media all and (min-width: 915px){#contact-container{background-image:url("/img/contact_bg_holidays.jpg");background-repeat:no-repeat;background-position:top}
+}@media all and (max-width: 914px){#contact-container{background-image:url("/img/mobile_contact_bg_holidays.jpg");background-position:bottom center}
 }@media all and (max-width: 900px){#contact-container{-webkit-background-size:150%;-moz-background-size:150%;background-size:150%}
 }@media all and (max-width: 700px){#contact-container{-webkit-background-size:180%;-moz-background-size:180%;background-size:180%}
 }@media all and (max-width: 550px){#contact-container{-webkit-background-size:240%;-moz-background-size:240%;background-size:240%}
