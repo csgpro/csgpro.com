@@ -78,7 +78,7 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
         './bower_components/angular-route/angular-route.js',
         './bower_components/angular-animate/angular-animate.js',
         './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-        './bower_components/ng-grid/build/ng-grid.js',
+        './bower_components/ng-grid/ng-grid-2.0.14.debug.js',
         './bower_components/satellizer/satellizer.js',
         './bower_components/ng-file-upload/angular-file-upload.js',
         './bower_components/angularjs-toaster/toaster.js',
@@ -95,8 +95,8 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
                 .pipe(plugins.rev())
                 .pipe(gulp.dest(adminBuildDir + 'js/'));
     } else {
-        var templateStream = gulp.src(['!./app/index.html',
-        './app/**/*.html'])
+        var templateStream = gulp.src(['!./admin-app/index.html',
+        './admin-app/**/*.html'])
         .pipe(plugins.angularTemplatecache('templates.js', { standalone: true }))
         .pipe(gulp.dest(adminBuildDir + 'js/'));
     }

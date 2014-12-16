@@ -4,7 +4,7 @@
 [![Build Status](http://img.shields.io/travis/sahat/satellizer.svg?style=flat)](https://travis-ci.org/sahat/satellizer) 
 [![Code Climate](http://img.shields.io/codeclimate/github/sahat/satellizer.svg?style=flat)](https://codeclimate.com/github/sahat/satellizer) 
 [![Test Coverage](http://img.shields.io/codeclimate/coverage/github/sahat/satellizer.svg?style=flat)](https://codeclimate.com/github/sahat/satellizer)
-[![Version](http://img.shields.io/badge/version-0.8.4-orange.svg?style=flat)](https://www.npmjs.org/package/satellizer)
+[![Version](http://img.shields.io/badge/version-0.8.7-orange.svg?style=flat)](https://www.npmjs.org/package/satellizer)
 
 **:space_invader: Live Demo:** [https://satellizer.herokuapp.com](https://satellizer.herokuapp.com)
 
@@ -46,7 +46,7 @@ npm install satellizer --save
 or use the CDN:
 
 ```html
-<script src="//cdn.jsdelivr.net/satellizer/0.8.4/satellizer.min.js"></script>
+<script src="//cdn.jsdelivr.net/satellizer/0.8.7/satellizer.min.js"></script>
 ```
 
 ## Usage
@@ -57,7 +57,7 @@ angular.module('MyApp', ['satellizer'])
   .config(function($authProvider) {
     
     $authProvider.facebook({
-      clientId: '624059410963642',
+      clientId: '624059410963642'
     });
     
     $authProvider.google({
@@ -74,6 +74,10 @@ angular.module('MyApp', ['satellizer'])
 
     $authProvider.yahoo({
       clientId: 'dj0yJmk9dkNGM0RTOHpOM0ZsJmQ9WVdrOVlVTm9hVk0wTkRRbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD0wMA--'
+    });
+
+    $authProvider.live({
+      clientId: '000000004C12E68D'
     });
 
     $authProvider.twitter({
@@ -112,6 +116,7 @@ angular.module('MyApp')
 <button ng-click="authenticate('twitter')">Sign in with Twitter</button>
 <button ng-click="authenticate('foursquare')">Sign in with Foursquare</button>
 <button ng-click="authenticate('yahoo')">Sign in with Yahoo</button>
+<button ng-click="authenticate('live')">Sign in with Windows Live</button>
 ```
 
 **:exclamation: Note:** For server-side usage please refer to the [examples](https://github.com/sahat/satellizer/tree/master/examples/server)
@@ -185,7 +190,6 @@ $authProvider.twitter({
 
 // GitHub
 $authProvider.github({
-  name: 'github',
   url: '/auth/github',
   authorizationEndpoint: 'https://github.com/login/oauth/authorize',
   redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
@@ -194,6 +198,19 @@ $authProvider.github({
   type: '2.0',
   popupOptions: { width: 1020, height: 618 }
 });
+
+// Windows Live
+$authProvider.live: {
+  url: '/auth/live',
+  authorizationEndpoint: 'https://login.live.com/oauth20_authorize.srf',
+  redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
+  scope: ['wl.basic'],
+  scopeDelimiter: ' ',
+  requiredUrlParams: ['display', 'scope'],
+  display: 'popup',
+  type: '2.0',
+  popupOptions: { width: 500, height: 560 }
+}
 
 // OAuth 2.0
 $authProvider.oauth2({
@@ -312,6 +329,7 @@ authentication process works.
 - [`$auth.link(provider, [userData])`](#authlinkprovider-userdata)
 - [`$auth.unlink(provider)`](#authunlinkprovider)
 - [`$auth.getToken()`](#authgettoken)
+- [`$auth.setToken()`](#authsettoken)
 - [`$auth.getPayload()`](#authgetpayload)
  
 #### `$auth.login(user)`
@@ -430,6 +448,11 @@ $auth.getToken();
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyMzQ1Njc4OTAsIm5hbWUiOiJKb2huIERvZSJ9.kRkUHzvZMWXjgB4zkO3d6P1imkdp0ogebLuxnTCiYUU
 ```
 
+#### `$auth.setToken()`
+
+Saves a token to Local Storage. Refer to https://github.com/sahat/satellizer/pull/186 for more information.
+
+
 #### `$auth.getPayload()`
 
 Returns a payload object, i.e. decoded middle part of the JSON Web Token.
@@ -448,7 +471,7 @@ $auth.getPayload();
 - [x] Node.js (Express) implementation
 - [x] PHP (Laravel) implementation
 - [x] Python (Flask) implementation
-- [ ] Ruby (Sinatra and/or Rails) implementation
+- [ ] Ruby (Sinatra) implementation
 - [ ] Scala (Play!) implementation
 
 ## Contributing

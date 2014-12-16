@@ -11,22 +11,6 @@ configFile.read().done((data) ->
 )
 ```
 
-Also, this includes a 2nd wrapper that extends the first and lets you cache the contents of the file directly in the object
-
-```coffee
-File = require 'fobject/cached'
-logFile = new File('log')
-logFile.load().then( ->
-  console.log logFile.content # print out the logs
-  logFile.content += 'this is a demo\n' # add a line
-).then(
-  logFile.save
-).done( ->
-  console.log('the logs are saved, and since we only added to the string, the
-  `File.save()` call was optimized into a single `append()`')
-)
-```
-
 ## why?
 The default fs module has a really ugly interface (including sync and async copies of almost every function) and doesn't make it easy to work with files that may or may not actually be written to the file-system. fobject abstracts out interaction with the file system so if you want to implement caching, or work with files without writing them to the disk, or whatever else you want: you can do so easily.
 

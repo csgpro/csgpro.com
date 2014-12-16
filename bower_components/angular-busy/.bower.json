@@ -1,6 +1,6 @@
 {
   "name": "angular-busy",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "main": [
     "dist/angular-busy.js",
     "dist/angular-busy.css"
@@ -30,14 +30,13 @@
     "jquery": "~2.1.0"
   },
   "homepage": "https://github.com/cgross/angular-busy",
-  "_release": "4.1.1",
+  "_release": "4.1.2",
   "_resolution": {
     "type": "version",
-    "tag": "v4.1.1",
-    "commit": "b3163c2873436a96dfe06e86141faef7905c747a"
+    "tag": "v4.1.2",
+    "commit": "1c82b599b1923f0b6f9ceb0255c782c3fe47aafe"
   },
   "_source": "git://github.com/cgross/angular-busy.git",
   "_target": "~4.1.1",
-  "_originalSource": "angular-busy",
-  "_direct": true
+  "_originalSource": "angular-busy"
 }

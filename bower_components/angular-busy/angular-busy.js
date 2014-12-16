@@ -43,7 +43,7 @@ angular.module('cgBusy').factory('_cgBusyTrackerFactory',['$timeout','$q',functi
 
         tracker.isPromise = function(promiseThing){
             var then = promiseThing && (promiseThing.then || promiseThing.$then ||
-                (promiseThing.$promiseThing && promiseThing.$promiseThing.then));
+                (promiseThing.$promise && promiseThing.$promise.then));
 
             return typeof then !== 'undefined';            
         };
@@ -58,7 +58,7 @@ angular.module('cgBusy').factory('_cgBusyTrackerFactory',['$timeout','$q',functi
                 promise = $q.when(promiseThing);
             }
                        
-            var then = (promise.then || promise.$them);
+            var then = (promise.then || promise.$then);
 
             then.call(promise,success,error);
         };
@@ -139,7 +139,8 @@ angular.module('cgBusy').directive('cgBusy',['$compile','$templateCache','cgBusy
                     delay:0,
                     minDuration:0,
                     backdrop: true,
-                    message:'Please Wait...'
+                    message:'Please Wait...',
+                    wrapperClass: 'cg-busy cg-busy-animation'
                 };
 
                 angular.extend(defaults,cgBusyDefaults);
@@ -216,7 +217,7 @@ angular.module('cgBusy').directive('cgBusy',['$compile','$templateCache','cgBusy
                                 element.append(backdropElement);
                             }
 
-                            var template = '<div class="cg-busy cg-busy-animation ng-hide" ng-show="$cgBusyIsActive()">' + indicatorTemplate + '</div>';
+                            var template = '<div class="'+options.wrapperClass+' ng-hide" ng-show="$cgBusyIsActive()">' + indicatorTemplate + '</div>';
                             templateElement = $compile(template)(templateScope);
 
                             angular.element(templateElement.children()[0])

@@ -27,8 +27,8 @@
     "ng-file-upload": "~1.6.12",
     "angularjs-toaster": "~0.4.8",
     "ui-router": "~0.2.11",
-    "angular-bootstrap": "~0.12.0",
-    "angular-marked": "~0.0.12"
+    "angular-marked": "~0.0.12",
+    "angular-bootstrap": "~0.12.0"
   },
   "resolutions": {
     "angular": ">=1"

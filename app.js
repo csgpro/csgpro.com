@@ -255,7 +255,7 @@ app.get('/auth/twitter', function(req, res) {
                     var token = req.headers.authorization.split(' ')[1];
                     var payload = jwt.decode(token, SESSION_SECRET);
 
-                    if (payload.sub !== data.id) {
+                    if (payload.sub !== data[0].id) {
                         res.status(400).send({ message: 'User not found' });
                     } else {
                         res.send({ token: createToken(data[0]) });

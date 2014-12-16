@@ -37,6 +37,5 @@
   },
   "_source": "git://github.com/angular-ui/ng-grid.git",
   "_target": "~2.0.14",
-  "_originalSource": "ng-grid",
-  "_direct": true
+  "_originalSource": "ng-grid"
 }
