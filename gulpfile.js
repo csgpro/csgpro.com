@@ -32,19 +32,19 @@ gulp.task('css', function(){
 		filterScss = plugins.filter('**/*.scss');
 
 	gulp.src([
-		'public/css/*.styl',
 		'public/css/*.scss',
+        'public/css/*.styl',
         '!public/css/bundle.css',
 		'public/css/*.css'])
+        .pipe(filterScss)
+        .pipe(plugins.sass())
+        .pipe(filterScss.restore())
 		.pipe(filterStylus)
 		.pipe(plugins.stylus({
 	      use: nib(),
 	      compress: true
 	    }))
 		.pipe(filterStylus.restore())
-		.pipe(filterScss)
-		.pipe(plugins.sass())
-		.pipe(filterScss.restore())
 		.pipe(plugins.concat('bundle.css'))
 		.pipe(gulp.dest(buildDir + 'css/'));
 });
