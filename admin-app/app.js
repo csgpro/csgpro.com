@@ -142,9 +142,11 @@
 					redirectTo: '/'
 				});
 
-			$authProvider.twitter({
-		      url: '/auth/twitter'
-		    });
+			$authProvider.live({
+				clientId: '000000004013AA1F',
+				redirectUri: 'http://csgpro.dev:3000/auth/live',
+				scope: ['wl.basic','wl.emails']
+			});
 
 		}]);
 })();

@@ -31,6 +31,7 @@ var express          = require('express')
   , TwitterStrategy  = require('passport-twitter').Strategy
   , LiveStrategy     = require('passport-windowslive').Strategy
   , jwt              = require('jwt-simple')
+  , async            = require('async')
   , moment           = require('moment')
   , qs               = require('querystring')
   , request          = require('request')
@@ -272,6 +273,60 @@ app.get('/auth/twitter', function(req, res) {
 /*****************
  * WINDOWS LIVE
  ****************/
+app.post('/auth/live', function(req, res) {
+    async.waterfall([
+        function(done) {
+            var accessTokenUrl = 'https://login.live.com/oauth20_token.srf';
+            var params = {
+                code: req.body.code,
+                client_id: req.body.clientId,
+                client_secret: WINDOWS_LIVE_CLIENT_SECRET,
+                redirect_uri: req.body.redirectUri,
+                grant_type: 'authorization_code'
+            };
+            request.post(accessTokenUrl, { form: params, json: true }, function(err, response, accessToken) {
+                done(null, accessToken);
+            });
+        },
+        function(accessToken, done) {
+            var profileUrl = 'https://apis.live.net/v5.0/me?access_token=' + accessToken.access_token;
+            request.get({ url: profileUrl, json: true }, function(err, response, profile) {
+                done(err, profile);
+            });
+        },
+        function(profile) {
+            var email = profile.emails.account;
+            var username;
+            if (email) {
+                username = email.match(/(\w+)@/)[1];
+            }
+            var searchStr = '$filter=Username eq \'' + username + '\'';
+            db2.getItem('users', searchStr, function(err, data) {
+                if (err) {
+                    var msg = {
+                        status: 'fail',
+                        message: 'Error Retrieving User',
+                        error: err
+                    };
+                    return res.send(JSON.stringify(msg));
+                } else {
+                    if(req.headers.authorization && req.headers.authorization.indexOf('undefined') == -1) {
+                        var token = req.headers.authorization.split(' ')[1];
+                        var payload = jwt.decode(token, SESSION_SECRET);
+
+                        if (payload.sub !== data[0].id) {
+                            res.status(400).send({ message: 'User not found' });
+                        } else {
+                            res.send({ token: createToken(data[0]) });
+                        }
+                    } else {
+                        res.send({ token: createToken(data[0]) });
+                    }
+                }
+            });
+        }
+    ]);
+});
 
 /*****************
  * FILE UPLOADS
@@ -285,9 +340,9 @@ app.post('/upload/img/post', upload.savePostImage);
 var TWITTER_CONSUMER_KEY_OLD       = c.get('TWITTER_CONSUMER_KEY_OLD')
   , TWITTER_CONSUMER_SECRET_OLD    = c.get('TWITTER_CONSUMER_SECRET_OLD')
   , TWITTER_CALLBACK_URL_OLD       = c.get('TWITTER_CALLBACK_URL_OLD')
-  , WINDOWS_LIVE_CLIENT_ID_OLD     = c.get('WINDOWS_LIVE_CLIENT_ID')
-  , WINDOWS_LIVE_CLIENT_SECRET_OLD = c.get('WINDOWS_LIVE_CLIENT_SECRET')
-  , WINDOWS_LIVE_CALLBACK_URL_OLD  = c.get('WINDOWS_LIVE_CALLBACK_URL');
+  , WINDOWS_LIVE_CLIENT_ID_OLD     = c.get('WINDOWS_LIVE_CLIENT_ID_OLD')
+  , WINDOWS_LIVE_CLIENT_SECRET_OLD = c.get('WINDOWS_LIVE_CLIENT_SECRET_OLD')
+  , WINDOWS_LIVE_CALLBACK_URL_OLD  = c.get('WINDOWS_LIVE_CALLBACK_URL_OLD');
 
 // Serialize users into sessions with just their user id
 passport.serializeUser(function(user, cb){
