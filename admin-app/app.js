@@ -142,10 +142,22 @@
 					redirectTo: '/'
 				});
 
-			var host = window.location.port != 80 ? window.location.host : window.location.hostname;
+			var liveClientId,
+				host = window.location.port != 80 ? window.location.host : window.location.hostname;
+
+			if (window.location.hostname.indexOf('csgpro.com') >= 0) {
+				// Production
+				liveClientId = '000000004813737D';
+			} else if (window.location.hostname === 'csgdev.azurewebsites.net') {
+				// Dev
+				liveClientId = '000000004C133537';
+			} else {
+				// Local
+				liveClientId = '000000004013AA1F';
+			}
 
 			$authProvider.live({
-				clientId: '000000004013AA1F',
+				clientId: liveClientId,
 				redirectUri: window.location.protocol + '//' + host + '/auth/live',
 				scope: ['wl.basic','wl.emails']
 			});
