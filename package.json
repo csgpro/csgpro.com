@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "preinstall": "npm install -g gulp",
+    "preinstall": "npm install gulp",
     "prepublish": "gulp --type production",
     "test": "tap .\\test"
   },
