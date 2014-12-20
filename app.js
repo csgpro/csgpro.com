@@ -337,11 +337,7 @@ app.post('/upload/img/post', upload.savePostImage);
 /*****************
  * PASSPORT (Deprecated)
  ****************/
-var TWITTER_CONSUMER_KEY_OLD       = c.get('TWITTER_CONSUMER_KEY_OLD')
-  , TWITTER_CONSUMER_SECRET_OLD    = c.get('TWITTER_CONSUMER_SECRET_OLD')
-  , TWITTER_CALLBACK_URL_OLD       = c.get('TWITTER_CALLBACK_URL_OLD')
-  , WINDOWS_LIVE_CLIENT_ID_OLD     = c.get('WINDOWS_LIVE_CLIENT_ID_OLD')
-  , WINDOWS_LIVE_CLIENT_SECRET_OLD = c.get('WINDOWS_LIVE_CLIENT_SECRET_OLD')
+var TWITTER_CALLBACK_URL_OLD       = c.get('TWITTER_CALLBACK_URL_OLD')
   , WINDOWS_LIVE_CALLBACK_URL_OLD  = c.get('WINDOWS_LIVE_CALLBACK_URL_OLD');
 
 // Serialize users into sessions with just their user id
@@ -356,8 +352,8 @@ passport.serializeUser(function(user, cb){
 passport.deserializeUser(db.deserializeUser);
 
 passport.use(new TwitterStrategy({
-    consumerKey: TWITTER_CONSUMER_KEY_OLD,
-    consumerSecret: TWITTER_CONSUMER_SECRET_OLD,
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
     callbackURL: TWITTER_CALLBACK_URL_OLD
     }, function(token, tokenSecret, profile, done) {
 
@@ -373,8 +369,8 @@ passport.use(new TwitterStrategy({
 ));
 
 passport.use(new LiveStrategy({
-        clientID: WINDOWS_LIVE_CLIENT_ID_OLD,
-        clientSecret: WINDOWS_LIVE_CLIENT_SECRET_OLD,
+        clientID: WINDOWS_LIVE_CLIENT_ID,
+        clientSecret: WINDOWS_LIVE_CLIENT_SECRET,
         callbackURL: WINDOWS_LIVE_CALLBACK_URL_OLD
     }, function(accessToken, refreshToken, profile, done) {
         console.log('access token: ' + accessToken);
@@ -424,7 +420,6 @@ app.get('/auth-old/twitter/callback',
 /*****************
  * WINDOWS LIVE (Deprecated)
  ****************/
-
 app.get('/auth-old/live',
   passport.authenticate('windowslive', { scope: ['wl.signin', 'wl.basic', 'wl.emails'] }));
 
