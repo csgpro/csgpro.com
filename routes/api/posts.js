@@ -53,7 +53,7 @@ self.getPosts = function (req, res) {
 				data = _.forEach(data, function(post) {
 					post.CreateDate = post.CreateDate ? post.CreateDate : null;
 					post.UpdateDate = post.UpdateDate ? post.UpdateDate : null;
-					post.PublishDate = post.PublishDate ? post.UpdateDate : null;
+					post.PublishDate = post.PublishDate ? post.PublishDate : null;
 				});
 				// Sort the data. Newest to Oldest. (Descending)
 				data = _.sortBy(data, 'CreateDate').reverse();
