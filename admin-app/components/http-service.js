@@ -6,15 +6,6 @@
 
 		    var baseApiUrl = CONFIG.API_URL + 'api/';
 
-		    return ({
-		        setAuthHeader: setAuthHeader,
-		        getCollection: getCollection,
-		        getItem: getItem,
-		        createItem: createItem,
-		        updateItem: updateItem,
-		        deleteItem: deleteItem
-		    });
-
 		    function setAuthHeader(authStr) {
 		        $http.defaults.headers.common.Authorization = authStr;
 		    }
@@ -24,7 +15,7 @@
 		        var url = baseApiUrl + entity,
                     request,
                     reqObj = {
-                        method: "get",
+                        method: 'get',
                         url: url
                     };
 
@@ -43,7 +34,7 @@
 		        var url = baseApiUrl + entity + '/' + id,
                     request,
                     reqObj = {
-                        method: "get",
+                        method: 'get',
                         url: url
                     };
 
@@ -61,7 +52,7 @@
 		        var url = baseApiUrl + entity,
                     request,
                     reqObj = {
-                        method: "post",
+                        method: 'post',
                         url: url,
                         data: data
                     };
@@ -80,7 +71,7 @@
 		        var url = baseApiUrl + entity + '/' + id,
                     request,
                     reqObj = {
-                        method: "patch",
+                        method: 'patch',
                         url: url,
                         data: data
                     };
@@ -96,12 +87,18 @@
 
 		    function deleteItem(entity, id, showLoading) {
 
-		        var url = baseApiUrl + entity + '/' + id;
+		        var url = baseApiUrl + entity + '/' + id,
+                    request,
+                    reqObj = {
+                        method: 'delete',
+                        url: url
+                    };
 
-		        var request = $rootScope.loadingData = $http({
-		            method: "delete",
-		            url: url
-		        });
+                if (showLoading) {
+		            request = $rootScope.loadingData = $http(reqObj);
+                } else {
+                    request = $http(reqObj);
+                }
 
 		        return (request.then(handleSuccess, handleError));
 		    }
@@ -114,7 +111,7 @@
 		            if (response.statusText) {
 		                return ($q.reject(response.statusText));
 		            }
-                    return( $q.reject( "An unknown error occurred." ) );
+                    return( $q.reject( 'An unknown error occurred.' ) );
 		        }
                 return( $q.reject( response.data.message ) );
 		    }
@@ -122,5 +119,14 @@
 		    function handleSuccess(response) {
 		        return (response.data);
 		    }
+
+            return ({
+                setAuthHeader: setAuthHeader,
+                getCollection: getCollection,
+                getItem: getItem,
+                createItem: createItem,
+                updateItem: updateItem,
+                deleteItem: deleteItem
+            });
 		}]);
 })();

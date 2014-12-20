@@ -60,7 +60,7 @@
 			/********************
 			* Add Record Modal
 			*******************/
-			topicsViewModel.addTopic = function (topic) {
+			topicsViewModel.addTopic = function () {
 				var modalInstance = $modal.open({
 					templateUrl: 'topics/topic.html',
 					controller: 'TopicCtrl',

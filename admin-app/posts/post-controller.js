@@ -3,13 +3,76 @@
 
 	angular.module('app')
 		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', 'UserService', function(data, common, lookup, $modal, UserService) {
+
 			var postViewModel = this;
+
+			/********************
+			* Image Upload Modal
+			*******************/
+			postViewModel.openImageUploadModal = function () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-file-upload.html',
+					controller: 'ModalFileUploadCtrl',
+					controllerAs: 'modalVM',
+					size: 'sm',
+					resolve: {
+						config: function () {
+							return {
+								title: 'Upload Image',
+								buttonLabel: 'Select Image File',
+								showDescriptionField: true
+							};
+						}
+					}
+				});
+
+				modalInstance.result.then(function (data) {
+					var image = '![' + data.description + '](' + data.url + ')';
+					common.insertTextAtLastPos('Markdown', image);
+				});
+			};
+
+			/*****************
+			* Request Review Modal
+			****************/
+			postViewModel.openRequestReviewModal = function () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-request-review.html',
+					controller: 'ModalRequestReviewCtrl',
+					controllerAs: 'modalVM',
+					size: 'md'
+				});
+
+				modalInstance.result.then(function (data) {
+					var url = common.absUrl();
+					var message = data.message + ' <br><br>';
+					message = message + 'Link: <a href="' + url + '">' + url + '</a><br>';
+					message = message + 'Author: ' + UserService.getUser().FullName + '<br>';
+					message = message + 'Post Title: ' + postViewModel.post.Title;
+					var saveRecordData = getSaveRecordData();
+					saveRecordData.successMessage = 'Request Sent';
+					saveRecordData.data.notify = message;
+					common.saveRecord(saveRecordData);
+				});
+			};
+
+			/*****************
+			* Datepicker Controls
+			****************/
+			postViewModel.openDatepicker = function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				postViewModel.datepickerOpened = true;
+			};
 
 			postViewModel.post = data ? data : {};
 
 			postViewModel.isAdmin = function () {
 				return UserService.IsAdmin();
-			}
+			};
 
 			// Who can edit this post?
 			// If the user is admin.
@@ -17,7 +80,7 @@
 			// If the user is the author of this post and it's not published
 			postViewModel.canEdit = function () {
 				return UserService.IsAdmin() || !data || (UserService.getUser().id === data.AuthorUserId && !data.PublishDate);
-			}
+			};
 
 			postViewModel.expand = function() {
 				common.autoExpandTextarea('Markdown');
@@ -40,7 +103,7 @@
 					postViewModel.selectedTopics.push({
 						id: 0,
 						Name: ''
-					})
+					});
 				}
 				postViewModel.post.Topics = '';
 			});
@@ -59,7 +122,7 @@
 				var topics = [];
 				for(var i = 0; i < postViewModel.selectedTopics.length; i++) {
 					var topic = postViewModel.selectedTopics[i];
-					if(topic.hasOwnProperty('Name') && topic.Name != '') {
+					if(topic.hasOwnProperty('Name') && topic.Name !== '') {
 						topics.push(topic.Name);
 					}
 				}
@@ -97,7 +160,7 @@
 						condition: function () {
 							return (UserService.IsAdmin() && !postViewModel.post.PublishDate);
 						},
-						clickFn: openRequestReviewModal,
+						clickFn: postViewModel.openRequestReviewModal,
 						btnClass: 'btn-info',
 						btnGlyph: 'glyphicon-ok',
 						btnText: 'Request Review'
@@ -120,67 +183,6 @@
 					common.goToUrl('/posts');
 				});
 			}
-
-			/********************
-			 * Image Upload Modal
-			 *******************/
-			postViewModel.openImageUploadModal = function () {
-
-				var modalInstance = $modal.open({
-					templateUrl: 'modals/modal-file-upload.html',
-					controller: 'ModalFileUploadCtrl',
-					controllerAs: 'modalVM',
-					size: 'sm',
-					resolve: {
-						config: function () {
-							return {
-								title: 'Upload Image',
-								buttonLabel: 'Select Image File',
-								showDescriptionField: true
-							};
-						}
-					}
-				});
-
-				modalInstance.result.then(function (data) {
-					var image = '![' + data.description + '](' + data.url + ')';
-					common.insertTextAtLastPos('Markdown', image);
-				});
-			};
-
-			/*****************
-			* Request Review Modal
-			****************/
-			function openRequestReviewModal () {
-
-				var modalInstance = $modal.open({
-					templateUrl: 'modals/modal-request-review.html',
-					controller: 'ModalRequestReviewCtrl',
-					controllerAs: 'modalVM',
-					size: 'md'
-				});
-
-				modalInstance.result.then(function (data) {
-					var url = common.absUrl();
-					var message = data.message + ' <br><br>';
-					message = message + 'Link: <a href="' + url + '">' + url + '</a><br>';
-					message = message + 'Author: ' + UserService.getUser().FullName + '<br>';
-					message = message + 'Post Title: ' + postViewModel.post.Title;
-					var saveRecordData = getSaveRecordData();
-					saveRecordData.successMessage = 'Request Sent';
-					saveRecordData.data.notify = message;
-					common.saveRecord(saveRecordData);
-				});
-			};
-			/*****************
-			 * Datepicker Controls
-			 ****************/
-			postViewModel.openDatepicker = function($event) {
-				$event.preventDefault();
-				$event.stopPropagation();
-
-				postViewModel.datepickerOpened = true;
-			};
 
 		}]);
 })();

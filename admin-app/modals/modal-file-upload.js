@@ -24,9 +24,9 @@
 				modalVM.upload = $upload.upload({
 					url: '/upload/img/post',
 					file: file
-				}).progress(function(evt) {
+				}).progress(function() {
 					modalVM.uploading = true;
-				}).success(function(data, status, headers, config) {
+				}).success(function(data) {
 					$modalInstance.close({
 						url: data.url,
 						description: modalVM.description

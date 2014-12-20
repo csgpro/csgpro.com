@@ -9,7 +9,7 @@
 		userViewModel.user = data ? data : {};
 
 		if (!userViewModel.user.ProfileUrl) {
-			userViewModel.user.ProfileUrl = "http://www.csgpro.com/img/author/csg_generic_icon.png";
+			userViewModel.user.ProfileUrl = 'http://www.csgpro.com/img/author/csg_generic_icon.png';
 		}
 
 		userViewModel.canEdit = true;

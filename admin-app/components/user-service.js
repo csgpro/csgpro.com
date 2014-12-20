@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.service('UserService', ['common', '$auth', function(common, $auth) {
+		.service('UserService', [function() {
 
 			var self = this;
 

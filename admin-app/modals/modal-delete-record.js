@@ -11,7 +11,7 @@
 			modalVM.delete = function () {
 				httpService.deleteItem(config.endpoint, config.id).then(function (res) {
 					if (res.errors) {
-						notificatoins.showError(res.errors[0].title);
+						notifications.showError(res.errors[0].title);
 					} else {
 						notifications.showWarning('Record Deleted');
 						$modalInstance.close('deleted');

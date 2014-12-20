@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', '$auth', '$location', 'common', 'UserService', function(CONFIG, $rootScope, $route, $auth, $location, common, UserService) {
+		.controller('AppCtrl', ['CONFIG', '$rootScope', '$route', '$auth', '$location', 'common', 'UserService', 'notifications', function(CONFIG, $rootScope, $route, $auth, $location, common, UserService, notifications) {
 			var appViewModel = this;
 
 			$rootScope.$on('$routeChangeSuccess', function () {
@@ -12,9 +12,7 @@
 			});
 
 	        $rootScope.$on('$routeChangeError', function(event, cur, prev, rejection) {
-	            var redirect = (!angular.isUndefined(prev)) ? prev.originalPath : '/';
 	            notifications.showWarning(rejection);
-	            $location.path(redirect);
 	        });
 
 			$rootScope.$on('$routeChangeStart', function(event) {

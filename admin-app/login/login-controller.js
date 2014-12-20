@@ -7,6 +7,6 @@
 
 			loginViewModel.authenticate = function(provider) {
 				$auth.authenticate(provider);
-			}
+			};
 		}]);
 })();

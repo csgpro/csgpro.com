@@ -2,8 +2,7 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('HomeCtrl', ['common', function(common) {
-			// Do Awesome Stuff!
+		.controller('HomeCtrl', [function() {
 			var homeViewModel = this;
 		}]);
 })();

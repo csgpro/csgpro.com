@@ -143,7 +143,7 @@
 				});
 
 			var liveClientId,
-				host = window.location.port != 80 ? window.location.host : window.location.hostname;
+				host = window.location.port !== '80' ? window.location.host : window.location.hostname;
 
 			if (window.location.hostname.indexOf('csgpro.com') >= 0) {
 				// Production

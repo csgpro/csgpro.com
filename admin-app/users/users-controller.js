@@ -1,5 +1,6 @@
 (function() {
-	'user strict';
+	'use strict';
+	
 	angular.module('app')
 		.controller('UsersCtrl', ['common', 'data', '$modal', function(common, data, $modal) {
 			// Do Awesome Things

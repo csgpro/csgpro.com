@@ -1,4 +1,6 @@
 (function () {
+    'use strict';
+
     angular.module('app')
         .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'notifications', '$filter', '$route', function (CONFIG, httpService, $rootScope, $location, notifications, $filter, $route) {
 
@@ -32,8 +34,8 @@
                 self.saveRecordData = obj;
             };
 
-            self.saveRecord = function (data) {
-                var saveRecordData = data ? data : self.saveRecordData;
+            self.saveRecord = function (saveData) {
+                var saveRecordData = saveData ? saveData : self.saveRecordData;
                 var endpoint = saveRecordData.endpoint,
                     data = saveRecordData.data,
                     id = saveRecordData.id,
@@ -42,7 +44,7 @@
                     onSuccess = saveRecordData.onSuccess ? saveRecordData.onSuccess : null;
 
                 if (method === 'put') {
-                    return httpService.updateItem(endpoint, id, data).then(function (res) {
+                    return httpService.updateItem(endpoint, id, data).then(function () {
                         notifications.showSuccess(successMessage);
                         if (onSuccess) {
                             onSuccess();
@@ -52,7 +54,7 @@
                         notifications.showError(res);
                     });
                 } else {
-                    return httpService.createItem(endpoint, data).then(function (res) {
+                    return httpService.createItem(endpoint, data).then(function () {
                         notifications.showSuccess(successMessage);
                         if (onSuccess) {
                             onSuccess();
@@ -135,7 +137,7 @@
 
             self.absUrl = function () {
                 return $location.absUrl();
-            }
+            };
 
             self.reload = function () {
                 $route.reload();
@@ -249,7 +251,7 @@
 
                 var res = {};
 
-                window.location.search.replace("?", "").split('&').map(
+                window.location.search.replace('?','').split('&').map(
 
                 function (q) {
                     var v = q.split('=');
@@ -272,32 +274,33 @@
 
             // http://smplctd.com/1r7k9PX
             self.insertTextAtLastPos = function (field, text) {
-                var txtarea = document.getElementById(field);
-                var scrollPos = txtarea.scrollTop;
-                var strPos = 0;
-                var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
-                    "ff" : (document.selection ? "ie" : false ) );
-                if (br == "ie") {
+                var txtarea = document.getElementById(field),
+                    scrollPos = txtarea.scrollTop,
+                    strPos = 0,
+                    range,
+                    br = ((txtarea.selectionStart || txtarea.selectionStart === '0') ?
+                    'ff' : (document.selection ? 'ie' : false ) );
+                if (br === 'ie') {
                     txtarea.focus();
-                    var range = document.selection.createRange();
+                    range = document.selection.createRange();
                     range.moveStart ('character', -txtarea.value.length);
                     strPos = range.text.length;
+                } else if (br === 'ff') {
+                    strPos = txtarea.selectionStart;
                 }
-                else if (br == "ff") strPos = txtarea.selectionStart;
 
                 var front = (txtarea.value).substring(0,strPos);
                 var back = (txtarea.value).substring(strPos,txtarea.value.length);
                 txtarea.value=front+text+back;
                 strPos = strPos + text.length;
-                if (br == "ie") {
+                if (br === 'ie') {
                     txtarea.focus();
-                    var range = document.selection.createRange();
+                    range = document.selection.createRange();
                     range.moveStart ('character', -txtarea.value.length);
                     range.moveStart ('character', strPos);
                     range.moveEnd ('character', 0);
                     range.select();
-                }
-                else if (br == "ff") {
+                } else if (br === 'ff') {
                     txtarea.selectionStart = strPos;
                     txtarea.selectionEnd = strPos;
                     txtarea.focus();
@@ -311,7 +314,7 @@
 				var element = typeof e === 'object' ? e.target : document.getElementById(e);
 				setTimeout(function() {
 					var scrollHeight = element.scrollHeight + 2;
-					element.style.height =  scrollHeight + "px";
+					element.style.height =  scrollHeight + 'px';
 				}, 500);
 			};
 
