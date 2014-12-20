@@ -6,9 +6,14 @@
 var self = this,
 	_ = require('lodash');
 
-self.getPublishedPosts = function (data) {
+self.getPublishedPosts = function (data, showAll) {
+	var now = new Date().getTime();
     return data.filter(function(i) {
-        return parseInt(i.PublishDate, 10) > 0; // only published posts
+		if (showAll) {
+        	return parseInt(i.PublishDate, 10) > 0; // only published posts
+		} else {
+			return parseInt(i.PublishDate, 10) > 0 && parseInt(i.PublishDate) < now; // only published posts in the past
+		}
     });
 };
 
