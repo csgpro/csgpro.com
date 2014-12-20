@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
+    "preinstall": "npm install gulp",
     "prepublish": "gulp --type production",
     "test": "tap .\\test"
   },
@@ -22,7 +23,6 @@
     "escape-string-regexp": "~1.0.2",
     "event-stream": "~3.1.7",
     "express": "3.3.3",
-    "gulp": "~3.8.10",
     "gulp-angular-templatecache": "~1.1.0",
     "gulp-concat": "~2.4.1",
     "gulp-express": "~0.1.0",
