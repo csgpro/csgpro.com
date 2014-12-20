@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppCtrl as appViewModel">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title ng-bind="appViewModel.title">Loading ...</title>
+        <link href="css/lib.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <div ng-include="'navbar/navbar.html'"></div>
+
+        <div ng-include="'toolbar/toolbar.html'"></div>
+
+        <div ng-include="'partials/toaster.html'"></div>
+
+        <div cg-busy="loadingData" class="view-container">
+            <div class="container main" ng-view=""></div>
+        </div>
+
+        <!-- vendor:js -->
+        <!-- endinject -->
+
+        <!-- templates:js -->
+        <!-- endinject -->
+
+        <!-- app:js -->
+        <!-- endinject -->
+    </body>
+</html>

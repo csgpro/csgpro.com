@@ -11,11 +11,6 @@
  * PUSH.................Push classes.
  * PULL.................Pull classes.
  */
-
-
-
-
-
 /*------------------------------------*\
     $INTRODUCTION
 \*------------------------------------*/
@@ -59,11 +54,6 @@
  *
    `class="grid__item  palm--one-third  desk--five-twelfths"`
  */
-
-
-
-
-
 /*------------------------------------*\
     $VARIABLES
 \*------------------------------------*/
@@ -71,35 +61,19 @@
  * If you are building a non-responsive site but would still like to use
  * csswizardry-grids, set this to ‘false’:
  */
-$responsive:            true!default;
-
-
 /**
  * Is this build mobile first? Setting to ‘true’ means that all grids will be
  * 100% width if you do not apply a more specific class to them.
  */
-$mobile-first:          true!default;
-
-
 /**
  * Set the spacing between your grid items.
  */
-$gutter:                24px!default;
-
-
 /**
  * Would you like Sass’ silent classes, or regular CSS classes?
  */
-$use-silent-classes:    false!default;
-
-
 /**
  * Would you like push and pull classes enabled?
  */
-$push:                  true!default;
-$pull:                  true!default;
-
-
 /**
  * Using `inline-block` means that the grid items need their whitespace removing
  * in order for them to work correctly. Set the following to true if you are
@@ -112,20 +86,11 @@ $pull:                  true!default;
  * github.com/csswizardry/csswizardry-grids/commit/744d4b23c9d2b77d605b5991e54a397df72e0688
  * github.com/csswizardry/inuit.css/issues/170#issuecomment-14859371
  */
-$use-markup-fix:        true!default;
-
-
 /**
  * Define your breakpoints. The first value is the prefix that shall be used for
  * your classes (e.g. `.palm--one-half`), the second value is the media query
  * that the breakpoint fires at.
  */
-$breakpoints: (
-    'mobile' '(max-width: 48em)',
-    'desk' '(min-width: 48em)'
-)!default;
-
-
 /**
  * Define which namespaced breakpoints you would like to generate for each of
  * widths, push and pull. This is handy if you only need pull on, say, desk, or
@@ -136,25 +101,10 @@ $breakpoints: (
  * Push and pull shall only be used if `$push` and/or `$pull` and `$responsive`
  * have been set to ‘true’.
  */
-$breakpoint-has-widths: ('mobile', 'desk')!default;
-$breakpoint-has-push:   ('mobile', 'desk')!default;
-$breakpoint-has-pull:   ('mobile', 'desk')!default;
-
-
 /**
  * You do not need to edit anything from this line onward; csswizardry-grids is
  * good to go. Happy griddin’!
  */
-$class-type:            unquote(".");
-
-@if $use-silent-classes == true{
-    $class-type:        unquote("%");
-}
-
-
-
-
-
 /*------------------------------------*\
     $MIXINS
 \*------------------------------------*/
@@ -164,42 +114,10 @@ $class-type:            unquote(".");
  *
  * Enclose a block of code with a media query as named in `$breakpoints`.
  */
-@mixin grid-media-query($media-query){
-    $breakpoint-found: false;
-
-    @each $breakpoint in $breakpoints{
-        $name: nth($breakpoint, 1);
-        $declaration: nth($breakpoint, 2);
-
-        @if $media-query == $name and $declaration{
-            $breakpoint-found: true;
-
-            @media only screen and #{$declaration}{
-                @content;
-            }
-        }
-    }
-
-    @if $breakpoint-found == false{
-        @warn "Breakpoint ‘#{$media-query}’ does not exist"
-    }
-}
-
-
 /**
  * Drop relative positioning into silent classes which can’t take advantage of
  * the `[class*="push--"]` and `[class*="pull--"]` selectors.
  */
-@mixin silent-relative(){
-    @if $use-silent-classes == true{
-        position:relative;
-    }
-}
-
-
-
-
-
 /*------------------------------------*\
     $GRID SETUP
 \*------------------------------------*/
@@ -208,152 +126,101 @@ $class-type:            unquote(".");
  * 2. Remove any margins and paddings that might affect the grid system.
  * 3. Apply a negative `margin-left` to negate the columns’ gutters.
  */
-#{$class-type}grid{
-    list-style:none;                /* [1] */
-    margin:0;                       /* [2] */
-    padding:0;                      /* [2] */
-    margin-left:-$gutter;           /* [3] */
-    @if $use-markup-fix != true{
-        letter-spacing:-0.31em;
-    }
-}
+.grid {
+  list-style: none;
+  /* [1] */
+  margin: 0;
+  /* [2] */
+  padding: 0;
+  /* [2] */
+  margin-left: -24px;
+  /* [3] */ }
 
-@if $use-markup-fix != true{
-    /* Opera hack */
-    .opera:-o-prefocus,
-    #{$class-type}grid{
-        word-spacing:-0.43em;
-    }
-}
-
-
-    /**
-     * 1. Cause columns to stack side-by-side.
-     * 2. Space columns apart.
-     * 3. Align columns to the tops of each other.
-     * 4. Full-width unless told to behave otherwise.
-     * 5. Required to combine fluid widths and fixed gutters.
-     */
-    #{$class-type}grid__item{
-        display:inline-block;           /* [1] */
-        padding-left:$gutter;           /* [2] */
-        vertical-align:top;             /* [3] */
-        @if $mobile-first == true{
-            width:100%;                 /* [4] */
-        }
-        -webkit-box-sizing:border-box;  /* [5] */
-           -moz-box-sizing:border-box;  /* [5] */
-                box-sizing:border-box;  /* [5] */
-        @if $use-markup-fix != true{
-            letter-spacing:normal;
-            word-spacing:normal;
-        }
-        &:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
-    }
-
+/**
+ * 1. Cause columns to stack side-by-side.
+ * 2. Space columns apart.
+ * 3. Align columns to the tops of each other.
+ * 4. Full-width unless told to behave otherwise.
+ * 5. Required to combine fluid widths and fixed gutters.
+ */
+.grid__item {
+  display: inline-block;
+  /* [1] */
+  padding-left: 24px;
+  /* [2] */
+  vertical-align: top;
+  /* [3] */
+  width: 100%;
+  /* [4] */
+  -webkit-box-sizing: border-box;
+  /* [5] */
+  -moz-box-sizing: border-box;
+  /* [5] */
+  box-sizing: border-box;
+  /* [5] */ }
 
 /**
  * Reversed grids allow you to structure your source in the opposite order to
  * how your rendered layout will appear. Extends `.grid`.
  */
-#{$class-type}grid--rev{
-    direction:rtl;
-    text-align:left;
-
-    > #{$class-type}grid__item{
-        direction:ltr;
-        text-align:left;
-    }
-}
-
+.grid--rev {
+  direction: rtl;
+  text-align: left; }
+  .grid--rev > .grid__item {
+    direction: ltr;
+    text-align: left; }
 
 /**
  * Gutterless grids have all the properties of regular grids, minus any spacing.
  * Extends `.grid`.
  */
-#{$class-type}grid--full{
-    margin-left:0;
-
-    > #{$class-type}grid__item{
-        padding-left:0;
-    }
-}
-
+.grid--full {
+  margin-left: 0; }
+  .grid--full > .grid__item {
+    padding-left: 0; }
 
 /**
  * Align the entire grid to the right. Extends `.grid`.
  */
-#{$class-type}grid--right{
-    text-align:right;
-
-    > #{$class-type}grid__item{
-        text-align:left;
-    }
-}
-
+.grid--right {
+  text-align: right; }
+  .grid--right > .grid__item {
+    text-align: left; }
 
 /**
  * Centered grids align grid items centrally without needing to use push or pull
  * classes. Extends `.grid`.
  */
-#{$class-type}grid--center{
-    text-align:center;
-
-    > #{$class-type}grid__item{
-        text-align:left;
-    }
-}
-
+.grid--center {
+  text-align: center; }
+  .grid--center > .grid__item {
+    text-align: left; }
 
 /**
  * Align grid cells vertically (`.grid--middle` or `.grid--bottom`). Extends
  * `.grid`.
  */
-#{$class-type}grid--middle{
+.grid--middle > .grid__item {
+  vertical-align: middle; }
 
-    > #{$class-type}grid__item{
-        vertical-align:middle;
-    }
-}
-
-#{$class-type}grid--bottom{
-
-    > #{$class-type}grid__item{
-        vertical-align:bottom;
-    }
-}
-
+.grid--bottom > .grid__item {
+  vertical-align: bottom; }
 
 /**
  * Create grids with narrower gutters. Extends `.grid`.
  */
-#{$class-type}grid--narrow{
-    margin-left:-($gutter / 2);
-
-    > #{$class-type}grid__item{
-        padding-left:$gutter / 2;
-    }
-}
-
+.grid--narrow {
+  margin-left: -12px; }
+  .grid--narrow > .grid__item {
+    padding-left: 12px; }
 
 /**
  * Create grids with wider gutters. Extends `.grid`.
  */
-#{$class-type}grid--wide{
-    margin-left:-($gutter * 2);
-
-    > #{$class-type}grid__item{
-        padding-left:$gutter * 2;
-    }
-}
-
-
-
-
+.grid--wide {
+  margin-left: -48px; }
+  .grid--wide > .grid__item {
+    padding-left: 48px; }
 
 /*------------------------------------*\
     $WIDTHS
@@ -361,360 +228,924 @@ $class-type:            unquote(".");
 /**
  * Create our width classes, prefixed by the specified namespace.
  */
-@mixin device-type($namespace:""){
-
-
-    /**
-     * Whole
-     */
-    #{$class-type}#{$namespace}one-whole         { width:100%; }
-
-
-    /**
-     * Halves
-     */
-    #{$class-type}#{$namespace}one-half          { width:50%; }
-
-
-    /**
-     * Thirds
-     */
-    #{$class-type}#{$namespace}one-third         { width:33.333%; }
-    #{$class-type}#{$namespace}two-thirds        { width:66.666%; }
-
-
-    /**
-     * Quarters
-     */
-    #{$class-type}#{$namespace}one-quarter       { width:25%; }
-    #{$class-type}#{$namespace}two-quarters      { @extend #{$class-type}#{$namespace}one-half; }
-    #{$class-type}#{$namespace}three-quarters    { width:75%; }
-
-
-    /**
-     * Fifths
-     */
-    #{$class-type}#{$namespace}one-fifth         { width:20%; }
-    #{$class-type}#{$namespace}two-fifths        { width:40%; }
-    #{$class-type}#{$namespace}three-fifths      { width:60%; }
-    #{$class-type}#{$namespace}four-fifths       { width:80%; }
-
-
-    /**
-     * Sixths
-     */
-    #{$class-type}#{$namespace}one-sixth         { width:16.666%; }
-    #{$class-type}#{$namespace}two-sixths        { @extend #{$class-type}#{$namespace}one-third; }
-    #{$class-type}#{$namespace}three-sixths      { @extend #{$class-type}#{$namespace}one-half; }
-    #{$class-type}#{$namespace}four-sixths       { @extend #{$class-type}#{$namespace}two-thirds; }
-    #{$class-type}#{$namespace}five-sixths       { width:83.333%; }
-
-
-    /**
-     * Eighths
-     */
-    #{$class-type}#{$namespace}one-eighth        { width:12.5%; }
-    #{$class-type}#{$namespace}two-eighths       { @extend #{$class-type}#{$namespace}one-quarter; }
-    #{$class-type}#{$namespace}three-eighths     { width:37.5%; }
-    #{$class-type}#{$namespace}four-eighths      { @extend #{$class-type}#{$namespace}one-half; }
-    #{$class-type}#{$namespace}five-eighths      { width:62.5%; }
-    #{$class-type}#{$namespace}six-eighths       { @extend #{$class-type}#{$namespace}three-quarters; }
-    #{$class-type}#{$namespace}seven-eighths     { width:87.5%; }
-
-
-    /**
-     * Tenths
-     */
-    #{$class-type}#{$namespace}one-tenth         { width:10%; }
-    #{$class-type}#{$namespace}two-tenths        { @extend #{$class-type}#{$namespace}one-fifth; }
-    #{$class-type}#{$namespace}three-tenths      { width:30%; }
-    #{$class-type}#{$namespace}four-tenths       { @extend #{$class-type}#{$namespace}two-fifths; }
-    #{$class-type}#{$namespace}five-tenths       { @extend #{$class-type}#{$namespace}one-half; }
-    #{$class-type}#{$namespace}six-tenths        { @extend #{$class-type}#{$namespace}three-fifths; }
-    #{$class-type}#{$namespace}seven-tenths      { width:70%; }
-    #{$class-type}#{$namespace}eight-tenths      { @extend #{$class-type}#{$namespace}four-fifths; }
-    #{$class-type}#{$namespace}nine-tenths       { width:90%; }
-
-
-    /**
-     * Twelfths
-     */
-    #{$class-type}#{$namespace}one-twelfth       { width:8.333%; }
-    #{$class-type}#{$namespace}two-twelfths      { @extend #{$class-type}#{$namespace}one-sixth; }
-    #{$class-type}#{$namespace}three-twelfths    { @extend #{$class-type}#{$namespace}one-quarter; }
-    #{$class-type}#{$namespace}four-twelfths     { @extend #{$class-type}#{$namespace}one-third; }
-    #{$class-type}#{$namespace}five-twelfths     { width:41.666% }
-    #{$class-type}#{$namespace}six-twelfths      { @extend #{$class-type}#{$namespace}one-half; }
-    #{$class-type}#{$namespace}seven-twelfths    { width:58.333%; }
-    #{$class-type}#{$namespace}eight-twelfths    { @extend #{$class-type}#{$namespace}two-thirds; }
-    #{$class-type}#{$namespace}nine-twelfths     { @extend #{$class-type}#{$namespace}three-quarters; }
-    #{$class-type}#{$namespace}ten-twelfths      { @extend #{$class-type}#{$namespace}five-sixths; }
-    #{$class-type}#{$namespace}eleven-twelfths   { width:91.666%; }
-
-
-}
-
-
 /**
  * Our regular, non-responsive width classes.
  */
-@include device-type();
+/**
+ * Whole
+ */
+.one-whole {
+  width: 100%; }
 
+/**
+ * Halves
+ */
+.one-half, .two-quarters, .three-sixths, .four-eighths, .five-tenths, .six-twelfths {
+  width: 50%; }
+
+/**
+ * Thirds
+ */
+.one-third, .two-sixths, .four-twelfths {
+  width: 33.333%; }
+
+.two-thirds, .four-sixths, .eight-twelfths {
+  width: 66.666%; }
+
+/**
+ * Quarters
+ */
+.one-quarter, .two-eighths, .three-twelfths {
+  width: 25%; }
+
+.three-quarters, .six-eighths, .nine-twelfths {
+  width: 75%; }
+
+/**
+ * Fifths
+ */
+.one-fifth, .two-tenths {
+  width: 20%; }
+
+.two-fifths, .four-tenths {
+  width: 40%; }
+
+.three-fifths, .six-tenths {
+  width: 60%; }
+
+.four-fifths, .eight-tenths {
+  width: 80%; }
+
+/**
+ * Sixths
+ */
+.one-sixth, .two-twelfths {
+  width: 16.666%; }
+
+.five-sixths, .ten-twelfths {
+  width: 83.333%; }
+
+/**
+ * Eighths
+ */
+.one-eighth {
+  width: 12.5%; }
+
+.three-eighths {
+  width: 37.5%; }
+
+.five-eighths {
+  width: 62.5%; }
+
+.seven-eighths {
+  width: 87.5%; }
+
+/**
+ * Tenths
+ */
+.one-tenth {
+  width: 10%; }
+
+.three-tenths {
+  width: 30%; }
+
+.seven-tenths {
+  width: 70%; }
+
+.nine-tenths {
+  width: 90%; }
+
+/**
+ * Twelfths
+ */
+.one-twelfth {
+  width: 8.333%; }
+
+.five-twelfths {
+  width: 41.666%; }
+
+.seven-twelfths {
+  width: 58.333%; }
+
+.eleven-twelfths {
+  width: 91.666%; }
 
 /**
  * Our responsive classes, if we have enabled them.
  */
-@if $responsive == true{
+@media only screen and (max-width: 914px) {
+  /**
+   * Whole
+   */
+  .mobile--one-whole {
+    width: 100%; }
 
-    @each $name in $breakpoint-has-widths {
-        @include grid-media-query($name) {
-           @include device-type('#{$name}--');
-        }
-    }
+  /**
+   * Halves
+   */
+  .mobile--one-half, .mobile--two-quarters, .mobile--three-sixths, .mobile--four-eighths, .mobile--five-tenths, .mobile--six-twelfths {
+    width: 50%; }
 
+  /**
+   * Thirds
+   */
+  .mobile--one-third, .mobile--two-sixths, .mobile--four-twelfths {
+    width: 33.333%; }
 
-}
+  .mobile--two-thirds, .mobile--four-sixths, .mobile--eight-twelfths {
+    width: 66.666%; }
 
+  /**
+   * Quarters
+   */
+  .mobile--one-quarter, .mobile--two-eighths, .mobile--three-twelfths {
+    width: 25%; }
 
+  .mobile--three-quarters, .mobile--six-eighths, .mobile--nine-twelfths {
+    width: 75%; }
 
+  /**
+   * Fifths
+   */
+  .mobile--one-fifth, .mobile--two-tenths {
+    width: 20%; }
 
+  .mobile--two-fifths, .mobile--four-tenths {
+    width: 40%; }
 
+  .mobile--three-fifths, .mobile--six-tenths {
+    width: 60%; }
+
+  .mobile--four-fifths, .mobile--eight-tenths {
+    width: 80%; }
+
+  /**
+   * Sixths
+   */
+  .mobile--one-sixth, .mobile--two-twelfths {
+    width: 16.666%; }
+
+  .mobile--five-sixths, .mobile--ten-twelfths {
+    width: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .mobile--one-eighth {
+    width: 12.5%; }
+
+  .mobile--three-eighths {
+    width: 37.5%; }
+
+  .mobile--five-eighths {
+    width: 62.5%; }
+
+  .mobile--seven-eighths {
+    width: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .mobile--one-tenth {
+    width: 10%; }
+
+  .mobile--three-tenths {
+    width: 30%; }
+
+  .mobile--seven-tenths {
+    width: 70%; }
+
+  .mobile--nine-tenths {
+    width: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .mobile--one-twelfth {
+    width: 8.333%; }
+
+  .mobile--five-twelfths {
+    width: 41.666%; }
+
+  .mobile--seven-twelfths {
+    width: 58.333%; }
+
+  .mobile--eleven-twelfths {
+    width: 91.666%; } }
+@media only screen and (min-width: 915px) {
+  /**
+   * Whole
+   */
+  .desk--one-whole {
+    width: 100%; }
+
+  /**
+   * Halves
+   */
+  .desk--one-half, .desk--two-quarters, .desk--three-sixths, .desk--four-eighths, .desk--five-tenths, .desk--six-twelfths {
+    width: 50%; }
+
+  /**
+   * Thirds
+   */
+  .desk--one-third, .desk--two-sixths, .desk--four-twelfths {
+    width: 33.333%; }
+
+  .desk--two-thirds, .desk--four-sixths, .desk--eight-twelfths {
+    width: 66.666%; }
+
+  /**
+   * Quarters
+   */
+  .desk--one-quarter, .desk--two-eighths, .desk--three-twelfths {
+    width: 25%; }
+
+  .desk--three-quarters, .desk--six-eighths, .desk--nine-twelfths {
+    width: 75%; }
+
+  /**
+   * Fifths
+   */
+  .desk--one-fifth, .desk--two-tenths {
+    width: 20%; }
+
+  .desk--two-fifths, .desk--four-tenths {
+    width: 40%; }
+
+  .desk--three-fifths, .desk--six-tenths {
+    width: 60%; }
+
+  .desk--four-fifths, .desk--eight-tenths {
+    width: 80%; }
+
+  /**
+   * Sixths
+   */
+  .desk--one-sixth, .desk--two-twelfths {
+    width: 16.666%; }
+
+  .desk--five-sixths, .desk--ten-twelfths {
+    width: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .desk--one-eighth {
+    width: 12.5%; }
+
+  .desk--three-eighths {
+    width: 37.5%; }
+
+  .desk--five-eighths {
+    width: 62.5%; }
+
+  .desk--seven-eighths {
+    width: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .desk--one-tenth {
+    width: 10%; }
+
+  .desk--three-tenths {
+    width: 30%; }
+
+  .desk--seven-tenths {
+    width: 70%; }
+
+  .desk--nine-tenths {
+    width: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .desk--one-twelfth {
+    width: 8.333%; }
+
+  .desk--five-twelfths {
+    width: 41.666%; }
+
+  .desk--seven-twelfths {
+    width: 58.333%; }
+
+  .desk--eleven-twelfths {
+    width: 91.666%; } }
 /*------------------------------------*\
     $PUSH
 \*------------------------------------*/
 /**
  * Push classes, to move grid items over to the right by certain amounts.
  */
-@mixin push-setup($namespace: ""){
+/**
+ * Not a particularly great selector, but the DRYest way to do things.
+ */
+[class*="push--"] {
+  position: relative; }
 
-    /**
-     * Whole
-     */
-    #{$class-type}push--#{$namespace}one-whole           { left:100%; @include silent-relative(); }
+/**
+ * Whole
+ */
+.push--one-whole {
+  left: 100%; }
 
+/**
+ * Halves
+ */
+.push--one-half, .push--two-quarters, .push--three-sixths, .push--four-eighths, .push--five-tenths, .push--six-twelfths {
+  left: 50%; }
 
-    /**
-     * Halves
-     */
-    #{$class-type}push--#{$namespace}one-half            { left:50%; @include silent-relative(); }
+/**
+ * Thirds
+ */
+.push--one-third, .push--two-sixths, .push--four-twelfths {
+  left: 33.333%; }
 
+.push--two-thirds, .push--four-sixths, .push--eight-twelfths {
+  left: 66.666%; }
 
-    /**
-     * Thirds
-     */
-    #{$class-type}push--#{$namespace}one-third           { left:33.333%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-thirds          { left:66.666%; @include silent-relative(); }
+/**
+ * Quarters
+ */
+.push--one-quarter, .push--two-eighths, .push--three-twelfths {
+  left: 25%; }
 
+.push--three-quarters, .push--six-eighths, .push--nine-twelfths {
+  left: 75%; }
 
-    /**
-     * Quarters
-     */
-    #{$class-type}push--#{$namespace}one-quarter         { left:25%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-quarters        { @extend #{$class-type}push--#{$namespace}one-half; }
-    #{$class-type}push--#{$namespace}three-quarters      { left:75%; @include silent-relative(); }
+/**
+ * Fifths
+ */
+.push--one-fifth, .push--two-tenths {
+  left: 20%; }
 
+.push--two-fifths, .push--four-tenths {
+  left: 40%; }
 
-    /**
-     * Fifths
-     */
-    #{$class-type}push--#{$namespace}one-fifth           { left:20%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-fifths          { left:40%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}three-fifths        { left:60%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}four-fifths         { left:80%; @include silent-relative(); }
+.push--three-fifths, .push--six-tenths {
+  left: 60%; }
 
+.push--four-fifths, .push--eight-tenths {
+  left: 80%; }
 
-    /**
-     * Sixths
-     */
-    #{$class-type}push--#{$namespace}one-sixth           { left:16.666%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-sixths          { @extend #{$class-type}push--#{$namespace}one-third; }
-    #{$class-type}push--#{$namespace}three-sixths        { @extend #{$class-type}push--#{$namespace}one-half; }
-    #{$class-type}push--#{$namespace}four-sixths         { @extend #{$class-type}push--#{$namespace}two-thirds; }
-    #{$class-type}push--#{$namespace}five-sixths         { left:83.333%; @include silent-relative(); }
+/**
+ * Sixths
+ */
+.push--one-sixth, .push--two-twelfths {
+  left: 16.666%; }
 
+.push--five-sixths, .push--ten-twelfths {
+  left: 83.333%; }
 
-    /**
-     * Eighths
-     */
-    #{$class-type}push--#{$namespace}one-eighth          { left:12.5%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-eighths         { @extend #{$class-type}push--#{$namespace}one-quarter; }
-    #{$class-type}push--#{$namespace}three-eighths       { left:37.5%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}four-eighths        { @extend #{$class-type}push--#{$namespace}one-half; }
-    #{$class-type}push--#{$namespace}five-eighths        { left:62.5%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}six-eighths         { @extend #{$class-type}push--#{$namespace}three-quarters; }
-    #{$class-type}push--#{$namespace}seven-eighths       { left:87.5%; @include silent-relative(); }
+/**
+ * Eighths
+ */
+.push--one-eighth {
+  left: 12.5%; }
 
+.push--three-eighths {
+  left: 37.5%; }
 
-    /**
-     * Tenths
-     */
-    #{$class-type}push--#{$namespace}one-tenth           { left:10%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-tenths          { @extend #{$class-type}push--#{$namespace}one-fifth; }
-    #{$class-type}push--#{$namespace}three-tenths        { left:30%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}four-tenths         { @extend #{$class-type}push--#{$namespace}two-fifths; }
-    #{$class-type}push--#{$namespace}five-tenths         { @extend #{$class-type}push--#{$namespace}one-half; }
-    #{$class-type}push--#{$namespace}six-tenths          { @extend #{$class-type}push--#{$namespace}three-fifths; }
-    #{$class-type}push--#{$namespace}seven-tenths        { left:70%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}eight-tenths        { @extend #{$class-type}push--#{$namespace}four-fifths; }
-    #{$class-type}push--#{$namespace}nine-tenths         { left:90%; @include silent-relative(); }
+.push--five-eighths {
+  left: 62.5%; }
 
+.push--seven-eighths {
+  left: 87.5%; }
 
-    /**
-     * Twelfths
-     */
-    #{$class-type}push--#{$namespace}one-twelfth         { left:8.333%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}two-twelfths        { @extend #{$class-type}push--#{$namespace}one-sixth; }
-    #{$class-type}push--#{$namespace}three-twelfths      { @extend #{$class-type}push--#{$namespace}one-quarter; }
-    #{$class-type}push--#{$namespace}four-twelfths       { @extend #{$class-type}push--#{$namespace}one-third; }
-    #{$class-type}push--#{$namespace}five-twelfths       { left:41.666%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}six-twelfths        { @extend #{$class-type}push--#{$namespace}one-half; }
-    #{$class-type}push--#{$namespace}seven-twelfths      { left:58.333%; @include silent-relative(); }
-    #{$class-type}push--#{$namespace}eight-twelfths      { @extend #{$class-type}push--#{$namespace}two-thirds; }
-    #{$class-type}push--#{$namespace}nine-twelfths       { @extend #{$class-type}push--#{$namespace}three-quarters; }
-    #{$class-type}push--#{$namespace}ten-twelfths        { @extend #{$class-type}push--#{$namespace}five-sixths; }
-    #{$class-type}push--#{$namespace}eleven-twelfths     { left:91.666%; @include silent-relative(); }
-}
+/**
+ * Tenths
+ */
+.push--one-tenth {
+  left: 10%; }
 
-@if $push == true {
+.push--three-tenths {
+  left: 30%; }
 
-    /**
-     * Not a particularly great selector, but the DRYest way to do things.
-     */
-    [class*="push--"]{ position:relative; }
+.push--seven-tenths {
+  left: 70%; }
 
+.push--nine-tenths {
+  left: 90%; }
 
-    @include push-setup();
+/**
+ * Twelfths
+ */
+.push--one-twelfth {
+  left: 8.333%; }
 
+.push--five-twelfths {
+  left: 41.666%; }
 
-    @if $responsive == true{
-        @each $name in $breakpoint-has-push {
-            @include grid-media-query($name) {
-               @include  push-setup('#{$name}--');
-            }
-        }
-    }
+.push--seven-twelfths {
+  left: 58.333%; }
 
+.push--eleven-twelfths {
+  left: 91.666%; }
 
-}
+@media only screen and (max-width: 914px) {
+  /**
+   * Whole
+   */
+  .push--mobile--one-whole {
+    left: 100%; }
 
+  /**
+   * Halves
+   */
+  .push--mobile--one-half, .push--mobile--two-quarters, .push--mobile--three-sixths, .push--mobile--four-eighths, .push--mobile--five-tenths, .push--mobile--six-twelfths {
+    left: 50%; }
 
+  /**
+   * Thirds
+   */
+  .push--mobile--one-third, .push--mobile--two-sixths, .push--mobile--four-twelfths {
+    left: 33.333%; }
 
+  .push--mobile--two-thirds, .push--mobile--four-sixths, .push--mobile--eight-twelfths {
+    left: 66.666%; }
 
+  /**
+   * Quarters
+   */
+  .push--mobile--one-quarter, .push--mobile--two-eighths, .push--mobile--three-twelfths {
+    left: 25%; }
 
+  .push--mobile--three-quarters, .push--mobile--six-eighths, .push--mobile--nine-twelfths {
+    left: 75%; }
+
+  /**
+   * Fifths
+   */
+  .push--mobile--one-fifth, .push--mobile--two-tenths {
+    left: 20%; }
+
+  .push--mobile--two-fifths, .push--mobile--four-tenths {
+    left: 40%; }
+
+  .push--mobile--three-fifths, .push--mobile--six-tenths {
+    left: 60%; }
+
+  .push--mobile--four-fifths, .push--mobile--eight-tenths {
+    left: 80%; }
+
+  /**
+   * Sixths
+   */
+  .push--mobile--one-sixth, .push--mobile--two-twelfths {
+    left: 16.666%; }
+
+  .push--mobile--five-sixths, .push--mobile--ten-twelfths {
+    left: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .push--mobile--one-eighth {
+    left: 12.5%; }
+
+  .push--mobile--three-eighths {
+    left: 37.5%; }
+
+  .push--mobile--five-eighths {
+    left: 62.5%; }
+
+  .push--mobile--seven-eighths {
+    left: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .push--mobile--one-tenth {
+    left: 10%; }
+
+  .push--mobile--three-tenths {
+    left: 30%; }
+
+  .push--mobile--seven-tenths {
+    left: 70%; }
+
+  .push--mobile--nine-tenths {
+    left: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .push--mobile--one-twelfth {
+    left: 8.333%; }
+
+  .push--mobile--five-twelfths {
+    left: 41.666%; }
+
+  .push--mobile--seven-twelfths {
+    left: 58.333%; }
+
+  .push--mobile--eleven-twelfths {
+    left: 91.666%; } }
+@media only screen and (min-width: 915px) {
+  /**
+   * Whole
+   */
+  .push--desk--one-whole {
+    left: 100%; }
+
+  /**
+   * Halves
+   */
+  .push--desk--one-half, .push--desk--two-quarters, .push--desk--three-sixths, .push--desk--four-eighths, .push--desk--five-tenths, .push--desk--six-twelfths {
+    left: 50%; }
+
+  /**
+   * Thirds
+   */
+  .push--desk--one-third, .push--desk--two-sixths, .push--desk--four-twelfths {
+    left: 33.333%; }
+
+  .push--desk--two-thirds, .push--desk--four-sixths, .push--desk--eight-twelfths {
+    left: 66.666%; }
+
+  /**
+   * Quarters
+   */
+  .push--desk--one-quarter, .push--desk--two-eighths, .push--desk--three-twelfths {
+    left: 25%; }
+
+  .push--desk--three-quarters, .push--desk--six-eighths, .push--desk--nine-twelfths {
+    left: 75%; }
+
+  /**
+   * Fifths
+   */
+  .push--desk--one-fifth, .push--desk--two-tenths {
+    left: 20%; }
+
+  .push--desk--two-fifths, .push--desk--four-tenths {
+    left: 40%; }
+
+  .push--desk--three-fifths, .push--desk--six-tenths {
+    left: 60%; }
+
+  .push--desk--four-fifths, .push--desk--eight-tenths {
+    left: 80%; }
+
+  /**
+   * Sixths
+   */
+  .push--desk--one-sixth, .push--desk--two-twelfths {
+    left: 16.666%; }
+
+  .push--desk--five-sixths, .push--desk--ten-twelfths {
+    left: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .push--desk--one-eighth {
+    left: 12.5%; }
+
+  .push--desk--three-eighths {
+    left: 37.5%; }
+
+  .push--desk--five-eighths {
+    left: 62.5%; }
+
+  .push--desk--seven-eighths {
+    left: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .push--desk--one-tenth {
+    left: 10%; }
+
+  .push--desk--three-tenths {
+    left: 30%; }
+
+  .push--desk--seven-tenths {
+    left: 70%; }
+
+  .push--desk--nine-tenths {
+    left: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .push--desk--one-twelfth {
+    left: 8.333%; }
+
+  .push--desk--five-twelfths {
+    left: 41.666%; }
+
+  .push--desk--seven-twelfths {
+    left: 58.333%; }
+
+  .push--desk--eleven-twelfths {
+    left: 91.666%; } }
 /*------------------------------------*\
     $PULL
 \*------------------------------------*/
 /**
  * Pull classes, to move grid items back to the left by certain amounts.
  */
-@mixin pull-setup($namespace: ""){
+/**
+ * Not a particularly great selector, but the DRYest way to do things.
+ */
+[class*="pull--"] {
+  position: relative; }
 
-    /**
-     * Whole
-     */
-    #{$class-type}pull--#{$namespace}one-whole           { right:100%; @include silent-relative(); }
+/**
+ * Whole
+ */
+.pull--one-whole {
+  right: 100%; }
 
+/**
+ * Halves
+ */
+.pull--one-half, .pull--two-quarters, .pull--three-sixths, .pull--four-eighths, .pull--five-tenths, .pull--six-twelfths {
+  right: 50%; }
 
-    /**
-     * Halves
-     */
-    #{$class-type}pull--#{$namespace}one-half            { right:50%; @include silent-relative(); }
+/**
+ * Thirds
+ */
+.pull--one-third, .pull--two-sixths, .pull--four-twelfths {
+  right: 33.333%; }
 
+.pull--two-thirds, .pull--four-sixths, .pull--eight-twelfths {
+  right: 66.666%; }
 
-    /**
-     * Thirds
-     */
-    #{$class-type}pull--#{$namespace}one-third           { right:33.333%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-thirds          { right:66.666%; @include silent-relative(); }
+/**
+ * Quarters
+ */
+.pull--one-quarter, .pull--two-eighths, .pull--three-twelfths {
+  right: 25%; }
 
+.pull--three-quarters, .pull--six-eighths, .pull--nine-twelfths {
+  right: 75%; }
 
-    /**
-     * Quarters
-     */
-    #{$class-type}pull--#{$namespace}one-quarter         { right:25%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-quarters        { @extend #{$class-type}pull--#{$namespace}one-half; }
-    #{$class-type}pull--#{$namespace}three-quarters      { right:75%; @include silent-relative(); }
+/**
+ * Fifths
+ */
+.pull--one-fifth, .pull--two-tenths {
+  right: 20%; }
 
+.pull--two-fifths, .pull--four-tenths {
+  right: 40%; }
 
-    /**
-     * Fifths
-     */
-    #{$class-type}pull--#{$namespace}one-fifth           { right:20%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-fifths          { right:40%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}three-fifths        { right:60%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}four-fifths         { right:80%; @include silent-relative(); }
+.pull--three-fifths, .pull--six-tenths {
+  right: 60%; }
 
+.pull--four-fifths, .pull--eight-tenths {
+  right: 80%; }
 
-    /**
-     * Sixths
-     */
-    #{$class-type}pull--#{$namespace}one-sixth           { right:16.666%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-sixths          { @extend #{$class-type}pull--#{$namespace}one-third; }
-    #{$class-type}pull--#{$namespace}three-sixths        { @extend #{$class-type}pull--#{$namespace}one-half; }
-    #{$class-type}pull--#{$namespace}four-sixths         { @extend #{$class-type}pull--#{$namespace}two-thirds; }
-    #{$class-type}pull--#{$namespace}five-sixths         { right:83.333%; @include silent-relative(); }
+/**
+ * Sixths
+ */
+.pull--one-sixth, .pull--two-twelfths {
+  right: 16.666%; }
 
+.pull--five-sixths, .pull--ten-twelfths {
+  right: 83.333%; }
 
-    /**
-     * Eighths
-     */
-    #{$class-type}pull--#{$namespace}one-eighth          { right:12.5%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-eighths         { @extend #{$class-type}pull--#{$namespace}one-quarter; }
-    #{$class-type}pull--#{$namespace}three-eighths       { right:37.5%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}four-eighths        { @extend #{$class-type}pull--#{$namespace}one-half; }
-    #{$class-type}pull--#{$namespace}five-eighths        { right:62.5%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}six-eighths         { @extend #{$class-type}pull--#{$namespace}three-quarters; }
-    #{$class-type}pull--#{$namespace}seven-eighths       { right:87.5%; @include silent-relative(); }
+/**
+ * Eighths
+ */
+.pull--one-eighth {
+  right: 12.5%; }
 
+.pull--three-eighths {
+  right: 37.5%; }
 
-    /**
-     * Tenths
-     */
-    #{$class-type}pull--#{$namespace}one-tenth           { right:10%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-tenths          { @extend #{$class-type}pull--#{$namespace}one-fifth; }
-    #{$class-type}pull--#{$namespace}three-tenths        { right:30%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}four-tenths         { @extend #{$class-type}pull--#{$namespace}two-fifths; }
-    #{$class-type}pull--#{$namespace}five-tenths         { @extend #{$class-type}pull--#{$namespace}one-half; }
-    #{$class-type}pull--#{$namespace}six-tenths          { @extend #{$class-type}pull--#{$namespace}three-fifths; }
-    #{$class-type}pull--#{$namespace}seven-tenths        { right:70%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}eight-tenths        { @extend #{$class-type}pull--#{$namespace}four-fifths; }
-    #{$class-type}pull--#{$namespace}nine-tenths         { right:90%; @include silent-relative(); }
+.pull--five-eighths {
+  right: 62.5%; }
 
+.pull--seven-eighths {
+  right: 87.5%; }
 
-    /**
-     * Twelfths
-     */
-    #{$class-type}pull--#{$namespace}one-twelfth         { right:8.333%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}two-twelfths        { @extend #{$class-type}pull--#{$namespace}one-sixth; }
-    #{$class-type}pull--#{$namespace}three-twelfths      { @extend #{$class-type}pull--#{$namespace}one-quarter; }
-    #{$class-type}pull--#{$namespace}four-twelfths       { @extend #{$class-type}pull--#{$namespace}one-third; }
-    #{$class-type}pull--#{$namespace}five-twelfths       { right:41.666%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}six-twelfths        { @extend #{$class-type}pull--#{$namespace}one-half; }
-    #{$class-type}pull--#{$namespace}seven-twelfths      { right:58.333%; @include silent-relative(); }
-    #{$class-type}pull--#{$namespace}eight-twelfths      { @extend #{$class-type}pull--#{$namespace}two-thirds; }
-    #{$class-type}pull--#{$namespace}nine-twelfths       { @extend #{$class-type}pull--#{$namespace}three-quarters; }
-    #{$class-type}pull--#{$namespace}ten-twelfths        { @extend #{$class-type}pull--#{$namespace}five-sixths; }
-    #{$class-type}pull--#{$namespace}eleven-twelfths     { right:91.666%; @include silent-relative(); }
-}
+/**
+ * Tenths
+ */
+.pull--one-tenth {
+  right: 10%; }
 
-@if $pull == true{
+.pull--three-tenths {
+  right: 30%; }
 
-    /**
-     * Not a particularly great selector, but the DRYest way to do things.
-     */
-    [class*="pull--"]{ position:relative; }
+.pull--seven-tenths {
+  right: 70%; }
 
+.pull--nine-tenths {
+  right: 90%; }
 
-    @include pull-setup();
+/**
+ * Twelfths
+ */
+.pull--one-twelfth {
+  right: 8.333%; }
 
+.pull--five-twelfths {
+  right: 41.666%; }
 
-    @if $responsive == true{
-        @each $name in $breakpoint-has-pull {
-            @include grid-media-query($name) {
-               @include  pull-setup('#{$name}--');
-            }
-        }
-    }
+.pull--seven-twelfths {
+  right: 58.333%; }
 
+.pull--eleven-twelfths {
+  right: 91.666%; }
 
-}
+@media only screen and (max-width: 914px) {
+  /**
+   * Whole
+   */
+  .pull--mobile--one-whole {
+    right: 100%; }
+
+  /**
+   * Halves
+   */
+  .pull--mobile--one-half, .pull--mobile--two-quarters, .pull--mobile--three-sixths, .pull--mobile--four-eighths, .pull--mobile--five-tenths, .pull--mobile--six-twelfths {
+    right: 50%; }
+
+  /**
+   * Thirds
+   */
+  .pull--mobile--one-third, .pull--mobile--two-sixths, .pull--mobile--four-twelfths {
+    right: 33.333%; }
+
+  .pull--mobile--two-thirds, .pull--mobile--four-sixths, .pull--mobile--eight-twelfths {
+    right: 66.666%; }
+
+  /**
+   * Quarters
+   */
+  .pull--mobile--one-quarter, .pull--mobile--two-eighths, .pull--mobile--three-twelfths {
+    right: 25%; }
+
+  .pull--mobile--three-quarters, .pull--mobile--six-eighths, .pull--mobile--nine-twelfths {
+    right: 75%; }
+
+  /**
+   * Fifths
+   */
+  .pull--mobile--one-fifth, .pull--mobile--two-tenths {
+    right: 20%; }
+
+  .pull--mobile--two-fifths, .pull--mobile--four-tenths {
+    right: 40%; }
+
+  .pull--mobile--three-fifths, .pull--mobile--six-tenths {
+    right: 60%; }
+
+  .pull--mobile--four-fifths, .pull--mobile--eight-tenths {
+    right: 80%; }
+
+  /**
+   * Sixths
+   */
+  .pull--mobile--one-sixth, .pull--mobile--two-twelfths {
+    right: 16.666%; }
+
+  .pull--mobile--five-sixths, .pull--mobile--ten-twelfths {
+    right: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .pull--mobile--one-eighth {
+    right: 12.5%; }
+
+  .pull--mobile--three-eighths {
+    right: 37.5%; }
+
+  .pull--mobile--five-eighths {
+    right: 62.5%; }
+
+  .pull--mobile--seven-eighths {
+    right: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .pull--mobile--one-tenth {
+    right: 10%; }
+
+  .pull--mobile--three-tenths {
+    right: 30%; }
+
+  .pull--mobile--seven-tenths {
+    right: 70%; }
+
+  .pull--mobile--nine-tenths {
+    right: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .pull--mobile--one-twelfth {
+    right: 8.333%; }
+
+  .pull--mobile--five-twelfths {
+    right: 41.666%; }
+
+  .pull--mobile--seven-twelfths {
+    right: 58.333%; }
+
+  .pull--mobile--eleven-twelfths {
+    right: 91.666%; } }
+@media only screen and (min-width: 915px) {
+  /**
+   * Whole
+   */
+  .pull--desk--one-whole {
+    right: 100%; }
+
+  /**
+   * Halves
+   */
+  .pull--desk--one-half, .pull--desk--two-quarters, .pull--desk--three-sixths, .pull--desk--four-eighths, .pull--desk--five-tenths, .pull--desk--six-twelfths {
+    right: 50%; }
+
+  /**
+   * Thirds
+   */
+  .pull--desk--one-third, .pull--desk--two-sixths, .pull--desk--four-twelfths {
+    right: 33.333%; }
+
+  .pull--desk--two-thirds, .pull--desk--four-sixths, .pull--desk--eight-twelfths {
+    right: 66.666%; }
+
+  /**
+   * Quarters
+   */
+  .pull--desk--one-quarter, .pull--desk--two-eighths, .pull--desk--three-twelfths {
+    right: 25%; }
+
+  .pull--desk--three-quarters, .pull--desk--six-eighths, .pull--desk--nine-twelfths {
+    right: 75%; }
+
+  /**
+   * Fifths
+   */
+  .pull--desk--one-fifth, .pull--desk--two-tenths {
+    right: 20%; }
+
+  .pull--desk--two-fifths, .pull--desk--four-tenths {
+    right: 40%; }
+
+  .pull--desk--three-fifths, .pull--desk--six-tenths {
+    right: 60%; }
+
+  .pull--desk--four-fifths, .pull--desk--eight-tenths {
+    right: 80%; }
+
+  /**
+   * Sixths
+   */
+  .pull--desk--one-sixth, .pull--desk--two-twelfths {
+    right: 16.666%; }
+
+  .pull--desk--five-sixths, .pull--desk--ten-twelfths {
+    right: 83.333%; }
+
+  /**
+   * Eighths
+   */
+  .pull--desk--one-eighth {
+    right: 12.5%; }
+
+  .pull--desk--three-eighths {
+    right: 37.5%; }
+
+  .pull--desk--five-eighths {
+    right: 62.5%; }
+
+  .pull--desk--seven-eighths {
+    right: 87.5%; }
+
+  /**
+   * Tenths
+   */
+  .pull--desk--one-tenth {
+    right: 10%; }
+
+  .pull--desk--three-tenths {
+    right: 30%; }
+
+  .pull--desk--seven-tenths {
+    right: 70%; }
+
+  .pull--desk--nine-tenths {
+    right: 90%; }
+
+  /**
+   * Twelfths
+   */
+  .pull--desk--one-twelfth {
+    right: 8.333%; }
+
+  .pull--desk--five-twelfths {
+    right: 41.666%; }
+
+  .pull--desk--seven-twelfths {
+    right: 58.333%; }
+
+  .pull--desk--eleven-twelfths {
+    right: 91.666%; } }
