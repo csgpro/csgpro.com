@@ -142,9 +142,11 @@
 					redirectTo: '/'
 				});
 
+			var host = window.location.port != 80 ? window.location.host : window.location.hostname;
+
 			$authProvider.live({
 				clientId: '000000004013AA1F',
-				redirectUri: 'http://csgpro.dev:3000/auth/live',
+				redirectUri: window.location.protocol + '//' + host + '/auth/live',
 				scope: ['wl.basic','wl.emails']
 			});
 
