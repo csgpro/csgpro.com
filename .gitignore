@@ -29,7 +29,7 @@ config.json
 bundle.css
 bundle.min.css
 bundle.js
-admin.js
+public/js/admin.js
 public/exports/*
 !index.html
 
