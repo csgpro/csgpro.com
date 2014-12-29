@@ -158,7 +158,7 @@
 				customButtons: [
 					{
 						condition: function () {
-							return (UserService.IsAdmin() && !postViewModel.post.PublishDate);
+							return (!postViewModel.post.PublishDate);
 						},
 						clickFn: postViewModel.openRequestReviewModal,
 						btnClass: 'btn-info',
