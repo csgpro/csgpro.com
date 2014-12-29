@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app')
-        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'notifications', '$filter', '$route', function (CONFIG, httpService, $rootScope, $location, notifications, $filter, $route) {
+        .service('common', ['CONFIG', 'httpService', '$rootScope', '$location', 'notifications', '$filter', '$route', '$window', function (CONFIG, httpService, $rootScope, $location, notifications, $filter, $route, $window) {
 
             var self = this;
 
@@ -55,7 +55,9 @@
                     });
                 } else {
                     return httpService.createItem(endpoint, data).then(function () {
-                        notifications.showSuccess(successMessage);
+                        if (successMessage) {
+                            notifications.showSuccess(successMessage);
+                        }
                         if (onSuccess) {
                             onSuccess();
                         }
@@ -317,6 +319,12 @@
 					element.style.height =  scrollHeight + 'px';
 				}, 500);
 			};
+
+            self.isLocalhost = function () {
+                var url = $window.location.href;
+                var pattern = /\blocalhost\b|\bcsgpro.dev\b/;
+                return (url.search(pattern) >= 0);
+            };
 
             return self;
         }]);

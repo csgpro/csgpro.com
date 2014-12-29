@@ -12,7 +12,7 @@
         <div class="collapse navbar-collapse" collapse="nav.isCollapsed">
             <ul class="nav navbar-nav">
                 <li ng-class="{active:nav.isActive(['posts'])}"><a ng-href="#/posts">Posts</a></li>
-                <li ng-class="{active:nav.isActive(['topics'])}"><a ng-href="#/topics">Topics</a></li>
+                <li ng-class="{active:nav.isActive(['topics'])}" ng-show="nav.isAdmin()"><a ng-href="#/topics">Topics</a></li>
                 <li ng-class="{active:nav.isActive(['accounts'])}" ng-show="nav.isAdmin()"><a ng-href="#/accounts">Accounts</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

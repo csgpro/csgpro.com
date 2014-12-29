@@ -14,6 +14,12 @@
 
 		userViewModel.canEdit = true;
 
+		userViewModel.canEditAdminStatus = function () {
+			var isAdmin = UserService.IsAdmin(),
+				isLocalhost = common.isLocalhost();
+			return (isLocalhost);
+		};
+
 		/*********************
 		* Save Data
 		********************/
