@@ -14,18 +14,21 @@ exports.index = function(req, res) {
   var item = req.body;
   var cryptoTime = req.body.cryptoTime;
   var subject = 'New Request for ' + (item.type || 'Contact');
-  var message = 'Someone submitted the contact form from csgpro.com.<br><br>'
-              + 'Here are the details of that submission:<br>'
+  var replyTo = item.emailAddress;
+  var message = item.name + ' submitted the contact form from csgpro.com.<br><br>'
+              + 'Here\'s what they said:<br>'
               + '<b>What\'s your name?</b><br>' + item.name + '<br><br>'
               + '<b>How can we reach you?</b><br>' + item.contactInfo + '<br><br>'
-              + '<b>So, what\'s on your mind?</b><br>' + item.comments +'<br><br>';
+              + '<b>What\'s your email address?</b><br>' + item.emailAddress + '<br><br>'
+              + '<b>What\'s on your mind?</b><br>' + item.comments +'<br><br>';
   if (item.type) {
-    message = 'Someone submitted the contact form from csgpro.com.<br><br>'
-            + 'Here are the details of that submission:<br>'
+    message = item.name + ' submitted the contact form from csgpro.com.<br><br>'
+            + 'Here\'s what they said:<br>'
             + '<b>Type:</b><br>' + item.type + '<br><br>'
             + '<b>What\'s your name?</b><br>' + item.name + '<br><br>'
             + '<b>How can we reach you?</b><br>' + item.contactInfo + '<br><br>'
-            + '<b>So, what\'s on your mind?</b><br>' + item.comments +'<br><br>';
+            + '<b>What\'s your email address?</b><br>' + item.emailAddress + '<br><br>'
+            + '<b>What\'s on your mind?</b><br>' + item.comments +'<br><br>';
   }
 
   isSpam = spam.isSpam(cryptoTime) || item.hpizzle; // check the 'honey pot'
@@ -44,6 +47,7 @@ exports.index = function(req, res) {
 
     email.sendEmail(
       'info@csgpro.com',
+      replyTo,
       subject,
       message,
       true,

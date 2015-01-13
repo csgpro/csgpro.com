@@ -24,17 +24,19 @@ function init() {
     var that = this;
     var name = this.form.name.value;
     var contactInfo = this.form.contactInfo.value;
+    var emailAddress = IsEmail(this.form.emailAddress.value) ? this.form.emailAddress.value : '';
     var comments = this.form.comments.value;
     var cryptoTime = this.form.cryptoTime.value;
     var hpizzle = this.form.hpizzle.value;
     var type;
 
-    var dataString = 'name='+ name 
-                   + '&contactInfo=' + contactInfo 
-                   + '&cryptoTime=' + cryptoTime 
-                   + '&hpizzle=' + hpizzle 
+    var dataString = 'name='+ name
+                   + '&contactInfo=' + contactInfo
+                   + '&emailAddress=' + emailAddress
+                   + '&cryptoTime=' + cryptoTime
+                   + '&hpizzle=' + hpizzle
                    + '&comments=' + comments;
-    
+
     if (this.form.hasOwnProperty('type')) {
       type = this.form.type.value;
 
@@ -43,11 +45,11 @@ function init() {
     }
 
 
-    $.ajax({  
-      type: "POST",  
-      url: "/contact",  
-      data: dataString, 
-      success: function(result) {  
+    $.ajax({
+      type: "POST",
+      url: "/contact",
+      data: dataString,
+      success: function(result) {
         console.log(result);
         // $('#simplemodal-container .form-header').text('Message received. Thanks!');
         var header = $(that.form.querySelector('.status-header'));
@@ -75,12 +77,16 @@ function init() {
           header.fadeTo(90, 1);
         }
       },
-    });  
+    });
 
-    return false;     
+    return false;
 
   });
+
+  function IsEmail(email) {
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return regex.test(email);
+  }
 }
 
 module.exports = init;
-
