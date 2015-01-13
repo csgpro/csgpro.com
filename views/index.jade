@@ -40,32 +40,31 @@ block content
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
         div.grid__item.one-whole.right.hide-desk
-          div#mobile-title We believe you should share and share alike.&nbsp;
+          div#mobile-title We build great web apps!&nbsp;
         div.grid__item.one-whole.right.hide-mobile
-          div#headline We believe you should share and share alike.&nbsp;
+          div#headline We build great web apps!&nbsp;
           br
         div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          a(href='/sharepoint').tagline.hide-mobile Files. Emails. Ideas. People. We make them work better together with SharePoint.
-          a(href='/sharepoint').tagline.hide-desk Files. Emails. Ideas. People. We make them work better together with SharePoint.
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline.hide-mobile Modern application design and development for your business.
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline.hide-desk Modern application design and development for your business.
           div }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths.right
-            p Kuni Automotive saves big with SharePoint Online Solution built by CSG Pro
-            p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(1);') read the case study }
+            p Schnitzer Steel
+              | <br>introduces website
+              | <br>with responsive design
+            p: a(href='/post/110086') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p Let CSG Pro Introduce
-              | <br>you to a SharePoint
-              | <br>Online Solution&nbsp;
-            p: a(href='/post/100085') read the blog }
+            p Need a great web app?
+            p: a(href='javascript:void(0)', onclick='scrollToId("contact");') let us build one for you }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.right.three-twelfths
-            p Boise Event:
-              | <br>Fast-Tracking Data
-              | <br>Mastery with Power BI
-            p: a(href='/archive/2014/10/fast-tracking-data-mastery-power-bi-boise/') Join us on 11/13 }
+            p The app dev
+              | <br>team is growing
+            p: a(href='/post/80085') open position: web developer }
 
     div.test
       nav.hide-mobile
@@ -452,8 +451,11 @@ block content
               div.grid__item.six-twelfths
                 label.lbl How can we reach you?
                 input.input-grey.clearable(name='contactInfo', type='text')
+              div.grid__item.six-twlefths
+                label.lbl What's your email address?
+                input.input-grey.clearable(name='emailAddress', type='email')
               div.grid__item.one-whole
-                label.lbl So, what's on your mind?
+                label.lbl What's on your mind?
                 textarea.input-grey.clearable(name='comments', type='text', style='height: 100px')
                 input.winnie-the-pooh(name='cryptoTime', type='text', value='#{cryptoTime}')
                 input.winnie-the-pooh(name='hpizzle', type='text')
