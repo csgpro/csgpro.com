@@ -145,7 +145,7 @@ gulp.task('admin-clean', function () {
 gulp.task('watch', function () {
     gulp.watch(['./admin-app/**/*.js', '!./admin-app/**/*test.js', '!./admin-app/index.html', './admin-app/**/*.html'],['admin-scripts']);
     gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
-    gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
+    gulp.watch([buildDir + '**/*.js', '!' + buildDir + 'admin/**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
 gulp.task('connect', function() {
@@ -156,6 +156,7 @@ gulp.task('connect', function() {
     gulp.watch([
         buildDir + '**/*.html',
         buildDir + '**/*.js',
+        '!' + buildDir + 'js/main.js',
         buildDir + '**/*.css',
         buildDir + 'images/**/*'], plugins.express.notify);
     gulp.watch([
@@ -167,7 +168,7 @@ gulp.task('connect', function() {
 
 // PUBLIC
 gulp.task('default', ['shared-tasks', 'public-tasks', 'admin-tasks']);
-gulp.task('serve', ['default', 'connect', 'watch']);
+gulp.task('serve', ['connect', 'default', 'watch']);
 
 // ADMIN
 gulp.task('admin-tasks', ['admin-scripts', 'admin-vendorCSS', 'admin-vendorFonts']);
