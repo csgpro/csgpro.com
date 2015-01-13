@@ -131,6 +131,10 @@ app.get('/powerplay/register', register.powerplay);
 app.get('/power-bi/register', register.powerbi);
 app.get('/pdx-power-bi/register', register.pdxpowerbi);
 
+app.get('/admin/login', function (req, res) {
+    res.redirect('/admin');
+});
+
 app.get('/post', post.getPostsBySearch);
 app.get('/post/category/:category', post.getPostsByCategory);
 app.get('/post/topic/:topic', post.getPostsByTopic);
