@@ -7,7 +7,12 @@ var self        = this,
 	db			= require('../../modules/db2'),
 	email       = require('../../modules/email'),
 	sanitize	= require('validator').sanitize,
-	_			= require('lodash');
+	_			= require('lodash'),
+	c 			= require('nconf');
+
+c.env().file({ file: 'config.json' });
+
+var localEnv = c.get('LOCAL');
 
 self.getPosts = function (req, res) {
 	var categoryFilter = null,
@@ -158,6 +163,10 @@ function sendNotification (msg, postId) {
 		emails = _.pluck(users, 'Username');
 		emails = emails.map(function(i) { return i + '@csgpro.com'; });
 		emails = emails.join(',');
+
+		if (localEnv) {
+			emails = 'kenh@csgpro.com';
+		}
 
 		email.sendEmail(
 			emails, // to
