@@ -18,7 +18,7 @@ exports.index = function(req, res) {
   var message = item.name + ' submitted the contact form from csgpro.com.<br><br>'
               + 'Here\'s what they said:<br>'
               + '<b>What\'s your name?</b><br>' + item.name + '<br><br>'
-              + '<b>How can we reach you?</b><br>' + item.contactInfo + '<br><br>'
+              + '<b>What\'s your phone #?</b><br>' + item.phoneNumber + '<br><br>'
               + '<b>What\'s your email address?</b><br>' + item.emailAddress + '<br><br>'
               + '<b>What\'s on your mind?</b><br>' + item.comments +'<br><br>';
   if (item.type) {
@@ -26,7 +26,7 @@ exports.index = function(req, res) {
             + 'Here\'s what they said:<br>'
             + '<b>Type:</b><br>' + item.type + '<br><br>'
             + '<b>What\'s your name?</b><br>' + item.name + '<br><br>'
-            + '<b>How can we reach you?</b><br>' + item.contactInfo + '<br><br>'
+            + '<b>What\'s your phone #?</b><br>' + item.phoneNumber + '<br><br>'
             + '<b>What\'s your email address?</b><br>' + item.emailAddress + '<br><br>'
             + '<b>What\'s on your mind?</b><br>' + item.comments +'<br><br>';
   }
