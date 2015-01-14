@@ -39,32 +39,37 @@ block content
 
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
-        div.grid__item.one-whole.right.hide-desk
+        div.grid__item.one-whole.left.hide-desk
           div#mobile-title We build great web apps!&nbsp;
-        div.grid__item.one-whole.right.hide-mobile
+        div.grid__item.ten-twelfths.left.hide-mobile
           div#headline We build great web apps!&nbsp;
           br
-        div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline.hide-mobile Modern application design and development for your business.
-          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline.hide-desk Modern application design and development for your business.
+        div.grid__item.one-whole.left.mobile--pad-right-2.mobile--pad-top-1.hide-desk
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business.
           div }
+        div.grid__item.ten-twelfths.left.mobile--pad-right-2.mobile--pad-top-1.hide-mobile         
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business.
         div#blocks.grid__item.one-whole.left.hide-mobile
-          div.grid__item.three-twelfths.right
+          div.grid__item.three-twelfths
             p Schnitzer Steel
-              | <br>introduces website
+              | <br>Introduces website
               | <br>with responsive design
+
             p: a(href='/post/110086') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
-          div.grid__item.right.three-twelfths
-            p Need a great web app?
-            p: a(href='javascript:void(0)', onclick='scrollToId("contact");') let us build one for you }
+          div.grid__item.three-twelfths
+            p Need a Great Web App?
+              | <br>Let Us Build One
+              | <br>For You 
+            p: a(href='javascript:void(0)', onclick='scrollToId("contact");') contact us }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
-          div.grid__item.right.three-twelfths
-            p The app dev
-              | <br>team is growing
-            p: a(href='/post/80085') open position: web developer }
+          div.grid__item.three-twelfths
+            p The Best Way to
+              | <br>Setup AngularJS
+              | <br>Controllers: The Basics
+            p: a(href='/post/120112') read the blog }
 
     div.test
       nav.hide-mobile
