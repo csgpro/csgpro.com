@@ -9,8 +9,7 @@
     "test": "tap .\\test"
   },
   "engines": {
-    "node": "0.10.5",
-    "npm": "1.4.9"
+    "node": "0.10.32"
   },
   "dependencies": {
     "async": "^0.9.0",
