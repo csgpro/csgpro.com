@@ -7,6 +7,7 @@ var c = require('nconf');
 
 c.env().file('config.json');
 
+var debugEmail = c.get('DEBUG_EMAIL');
 
 var smtp = nodemailer.createTransport('SMTP', {
   service: 'SendGrid',
@@ -32,7 +33,7 @@ var options = {
  * @param  {Function} callback Callback with (err, success)
  * @param  {String}   from     From address (example: 'CSG Pro <noreply@csgpro.com>')
  */
-exports.sendEmail = function (to, subject, body, isHtml, callback, from) {
+exports.sendEmail = function (to, replyTo, subject, body, isHtml, callback, from) {
 
   var o = {
     from: options.from,
@@ -40,8 +41,16 @@ exports.sendEmail = function (to, subject, body, isHtml, callback, from) {
     subject: subject
   };
 
-  if(from) {
+  if (debugEmail) {
+      o.to = debugEmail;
+  }
+
+  if (from) {
     o.from = from;
+  }
+
+  if (replyTo) {
+    o.replyTo = replyTo;
   }
 
   if (isHtml) {

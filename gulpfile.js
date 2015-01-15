@@ -142,26 +142,28 @@ gulp.task('admin-clean', function () {
         .pipe(cleaner());
 });
 
-gulp.task('watch',function(){
-    plugins.livereload.listen();
-    gulp.watch([buildDir + '**/*.html', buildDir + '**/bundle.js', adminBuildDir + 'js/*.js', buildDir + '**/*.css'],
-    function (event)
-    {
-        setTimeout(function() {
-            plugins.livereload.changed(event);
-        }, 1000);
-    })
+gulp.task('watch', function () {
     gulp.watch(['./admin-app/**/*.js', '!./admin-app/**/*test.js', '!./admin-app/index.html', './admin-app/**/*.html'],['admin-scripts']);
     gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
-    gulp.watch([buildDir + '**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
+    gulp.watch([buildDir + '**/*.js', '!' + buildDir + 'admin/**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
 });
 
 gulp.task('connect', function() {
-    plugins.nodemon({ script: 'app.js', ext: 'html js', ignore: ['./public/**'] })
-    .on('change', [])
-    .on('restart', function () {
-      console.log('restarted!')
-    })
+    plugins.express.run({
+        file: 'app.js'
+    });
+    // Restart the server when file changes
+    gulp.watch([
+        buildDir + '**/*.html',
+        buildDir + '**/*.js',
+        '!' + buildDir + 'js/main.js',
+        buildDir + '**/*.css',
+        buildDir + 'images/**/*'], plugins.express.notify);
+    gulp.watch([
+        'app.js',
+        'routes/**/*.js',
+        'modules/**/*.js',
+        'views/**/*.jade'], [plugins.express.run]);
 });
 
 // PUBLIC

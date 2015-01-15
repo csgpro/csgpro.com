@@ -12,8 +12,6 @@ var self        = this,
 
 c.env().file({ file: 'config.json' });
 
-var localEnv = c.get('LOCAL');
-
 self.getPosts = function (req, res) {
 	var categoryFilter = null,
 		topicFilter = null;
@@ -163,10 +161,6 @@ function sendNotification (msg, postId) {
 		emails = _.pluck(users, 'Username');
 		emails = emails.map(function(i) { return i + '@csgpro.com'; });
 		emails = emails.join(',');
-
-		if (localEnv) {
-			emails = 'kenh@csgpro.com';
-		}
 
 		email.sendEmail(
 			emails, // to

@@ -39,33 +39,36 @@ block content
 
     section#hero
       div.grid.center(style='max-width: 900px; margin: 0 auto 0 auto')
-        div.grid__item.one-whole.right.hide-desk
-          div#mobile-title We believe you should share and share alike.&nbsp;
-        div.grid__item.one-whole.right.hide-mobile
-          div#headline We believe you should share and share alike.&nbsp;
+        div.grid__item.one-whole.left.hide-desk
+          div#mobile-title We build great web apps!&nbsp;
+        div.grid__item.ten-twelfths.left.hide-mobile
+          div#headline We build great web apps!&nbsp;
           br
-        div.grid__item.one-whole.right.mobile--pad-right-2.mobile--pad-top-1
-          a(href='/sharepoint').tagline.hide-mobile Files. Emails. Ideas. People. We make them work better together with SharePoint.
-          a(href='/sharepoint').tagline.hide-desk Files. Emails. Ideas. People. We make them work better together with SharePoint.
+        div.grid__item.one-whole.left.mobile--pad-right-2.mobile--pad-top-1.hide-desk
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business. }
           div }
+        div.grid__item.ten-twelfths.left.mobile--pad-right-2.mobile--pad-top-1.hide-mobile         
+          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business. }
         div#blocks.grid__item.one-whole.left.hide-mobile
-          div.grid__item.three-twelfths.right
-            p Kuni Automotive saves big with SharePoint Online Solution built by CSG Pro
-            p: a(href='javascript:void(0)', onclick='scrollToId("work"); $(".swipeshow").swipeshow().goTo(1);') read the case study }
+          div.grid__item.three-twelfths
+            p Schnitzer Steel
+              | <br>Introduces Website
+              | <br>with Responsive Design
+            p: a(href='/post/110086') read the case study }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
-          div.grid__item.right.three-twelfths
-            p Let CSG Pro Introduce
-              | <br>you to a SharePoint
-              | <br>Online Solution&nbsp;
-            p: a(href='/post/100085') read the blog }
+          div.grid__item.three-twelfths
+            p Need a Great Web App?
+              | <br>That’s What We Do.
+              | <br>Let us Build One for You.
+            p: a(href='javascript:void(0)', onclick='scrollToId("contact");') contact us }
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
-          div.grid__item.right.three-twelfths
-            p Boise Event:
-              | <br>Fast-Tracking Data
-              | <br>Mastery with Power BI
-            p: a(href='/archive/2014/10/fast-tracking-data-mastery-power-bi-boise/') Join us on 11/13 }
+          div.grid__item.three-twelfths
+            p The Best Way to
+              | <br>Setup AngularJS
+              | <br>Controllers: The Basics
+            p: a(href='/post/120112') read the blog }
 
     div.test
       nav.hide-mobile
@@ -343,7 +346,7 @@ block content
                   p Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their systems. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture, and anticipate future needs.
                   p Headquartered in Portland Oregon, CSG is deeply committed to our values; Do What’s Right, Team Over Self, Deliver Excellence, and Create Value. We hope we have the opportunity to live these out while building something amazing for your business.
                 div.grid__item.one-whole.center
-                  img.space-top(src='img/CSG20_icon.svg')
+                  img.space-top(src='img/CSG22_icon.png')
                 div.grid__item.one-whole.text-column.space-bottom(style='color: #ccc;')
                   p "We first opened our doors on July 6, 1993. The first thing we did that day was define our core values - integrity, excellence and teamwork. We felt it was the most important thing to do because it set the foundation for everything that came after. We started CSG to fulfill a need we saw in the industry for unquestioned integrity and excellent customer service. A need for someone to build custom business software that mattered. And we wanted to make sure we were that company."
                   img(src='https://csgsitestorage.blob.core.windows.net/img/about_jerry_thumb.png')
@@ -450,10 +453,13 @@ block content
                 label.lbl What's your name?
                 input.input-grey.clearable(name='name', type='text')
               div.grid__item.six-twelfths
-                label.lbl How can we reach you?
-                input.input-grey.clearable(name='contactInfo', type='text')
+                label.lbl What's your phone #?
+                input.input-grey.clearable(name='phoneNumber', type='tel')
+              div.grid__item.six-twlefths
+                label.lbl What's your email address?
+                input.input-grey.clearable(name='emailAddress', type='email')
               div.grid__item.one-whole
-                label.lbl So, what's on your mind?
+                label.lbl What's on your mind?
                 textarea.input-grey.clearable(name='comments', type='text', style='height: 100px')
                 input.winnie-the-pooh(name='cryptoTime', type='text', value='#{cryptoTime}')
                 input.winnie-the-pooh(name='hpizzle', type='text')

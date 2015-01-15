@@ -16,7 +16,7 @@ var express          = require('express')
   , path             = require('path')
   , c                = require('nconf')
   , db               = require('./modules/db.js')
-  , db2               = require('./modules/db2.js')
+  , db2              = require('./modules/db2.js')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
@@ -130,6 +130,10 @@ app.get('/sharepoint/register', register.sharepoint);
 app.get('/powerplay/register', register.powerplay);
 app.get('/power-bi/register', register.powerbi);
 app.get('/pdx-power-bi/register', register.pdxpowerbi);
+
+app.get('/admin/login', function (req, res) {
+    res.redirect('/admin');
+});
 
 app.get('/post', post.getPostsBySearch);
 app.get('/post/category/:category', post.getPostsByCategory);
