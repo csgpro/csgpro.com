@@ -134,7 +134,11 @@
 				var data = {
 					post: postViewModel.post
 				};
-				data.post.PublishDate = postViewModel.post.PublishDate ? postViewModel.post.PublishDate.getTime() : null;
+				data.post.PublishDate = postViewModel.post.PublishDate ? postViewModel.post.PublishDate : null;
+
+				if (!Number(data.post.PublishDate) && data.post.PublishDate !== null) {
+					data.post.PublishDate = data.post.PublishDate.getTime();
+				}
 				var saveRecordData = {
 	                endpoint: 'posts',
 	                method: 'post',
