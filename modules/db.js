@@ -11,16 +11,17 @@ var https = require('https')
 // Load config files
 c.env().file({ file: 'config.json'});
 
-var appKey = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY');
+var APP_KEY = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY'),
+    APP_URL = c.get('AZURE_MOBILE_SERVICES_URL');
 
 var options = {
-  hostname: 'csgblogs.azure-mobile.net'
+  hostname: APP_URL
 , port: 443
 , headers: {
-    'X-ZUMO-APPLICATION': appKey
+    'X-ZUMO-APPLICATION': APP_KEY
   }
 };
-var url = 'https://csgblogs.azure-mobile.net';
+var url = 'https://' + APP_URL;
 
 /**
  * Gets all the users, should only be run by admins, this is validated in app.js
@@ -31,7 +32,7 @@ module.exports.getUsers = function (callback) {
   var o = {
     uri: url + '/tables/users'
   , headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
   var r;
@@ -65,7 +66,7 @@ module.exports.getUser = function(userId, callback) {
   var o = {
     uri: url + '/tables/users/' + userId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -88,7 +89,7 @@ module.exports.updateUser = function(user, callback) {
   var o = {
     uri: url + '/tables/users/' + user.id,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: user
   };
@@ -111,7 +112,7 @@ module.exports.createUser = function(user, callback) {
   var o = {
     uri: url + '/tables/users',
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: user
   };
@@ -133,7 +134,7 @@ module.exports.deleteUser = function(userId, callback){
   var o = {
     uri: url + '/tables/users/' + userId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -323,7 +324,7 @@ exports.getPostsByTopic = function(topic, callback) {
   var o = {
     uri: url + "/api/allposts/?topic=" + topic,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -408,7 +409,7 @@ exports.patchPost = function (post, callback) {
   var o = {
     uri: url + '/tables/posts/' + post.id,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: post
   };
@@ -432,7 +433,7 @@ exports.publish = function(postId, callback) {
   var o = {
     uri: url + '/tables/posts/' + postId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: {
       PublishDate: new Date().getTime()
@@ -456,7 +457,7 @@ exports.unpublish = function(postId, callback) {
   var o = {
     uri: url + '/tables/posts/' + postId
   , headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
   }
   , json: {
       PublishDate: ''
@@ -479,7 +480,7 @@ exports.del = function(postId, callback) {
   var o = {
     uri: url + '/tables/posts/' + postId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -505,7 +506,7 @@ exports.createPost = function(post, callback) {
   var o = {
     uri: url + '/tables/posts'
   , headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
   }
   , json: post
   };
@@ -577,7 +578,7 @@ module.exports.createTopic = function(topicName, callback) {
   var o = {
     uri: url + '/tables/topics',
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: {Name: topicName}
   };
@@ -603,7 +604,7 @@ module.exports.deleteTopic = function(topicId, callback){
   var o = {
     uri: url + '/tables/topics/' + topicId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -624,7 +625,7 @@ module.exports.updateTopic = function(topicId, newName, callback) {
   var o = {
     uri: url + '/tables/topics/' + topicId,
     headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     },
     json: {
       Name: newName
@@ -648,7 +649,7 @@ module.exports.getTopics = function (callback) {
   var o = {
     uri: url + '/tables/topics'
   , headers: {
-      'X-ZUMO-APPLICATION': appKey
+      'X-ZUMO-APPLICATION': APP_KEY
     }
   };
 
@@ -687,5 +688,3 @@ function isJSON(str) {
     }
     return true;
 }
-
-

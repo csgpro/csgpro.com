@@ -12,16 +12,17 @@ var request = require('request'),
 // Load config files
 c.env().file({ file: 'config.json' });
 
-var appKey = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY');
+var APP_KEY = c.get('AZURE_MOBILE_SERVICES_APPLICATION_KEY'),
+	APP_URL = c.get('AZURE_MOBILE_SERVICES_URL');
 
 var options = {
 	headers: {
-		'X-ZUMO-APPLICATION': appKey
+		'X-ZUMO-APPLICATION': APP_KEY
 	},
 	json: true
 };
 
-var url = 'https://csgblogs.azure-mobile.net';
+var url = 'https://' + APP_URL;
 
 /************
  * GET
