@@ -28,9 +28,10 @@
     "angularjs-toaster": "~0.4.8",
     "ui-router": "~0.2.11",
     "angular-marked": "~0.0.12",
-    "angular-bootstrap": "~0.12.0"
+    "angular-bootstrap": "~0.12.0",
+    "angular-sanitize": "~1.3.10"
   },
   "resolutions": {
-    "angular": ">=1"
+    "angular": "1.3.10"
   }
 }
