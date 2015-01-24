@@ -75,6 +75,7 @@ gulp.task('admin-scripts', ['admin-copy-index'], function () {
         './bower_components/ng-file-upload/angular-file-upload-html5-shim.js',
         './bower_components/jquery/dist/jquery.js',
         './bower_components/angular/angular.js',
+        './bower_components/angular-sanitize/angular-sanitize.js',
         './bower_components/angular-route/angular-route.js',
         './bower_components/angular-animate/angular-animate.js',
         './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',

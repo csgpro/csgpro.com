@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app', [ 'site-config', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngGrid', 'angularFileUpload', 'toaster', 'cgBusy', 'templates', 'hc.marked' ])
+	angular.module('app', [ 'site-config', 'ngSanitize', 'satellizer', 'ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngGrid', 'angularFileUpload', 'toaster', 'cgBusy', 'templates', 'hc.marked' ])
 		.config(['$routeProvider', '$authProvider', 'markedProvider', function($routeProvider, $authProvider, markedProvider) {
 
 			markedProvider.setOptions({
