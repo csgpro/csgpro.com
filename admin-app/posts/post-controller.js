@@ -59,6 +59,30 @@
 			};
 
 			/*****************
+			* Markdown Help Modal
+			****************/
+			postViewModel.openMarkdownHelpModal = function () {
+
+				var modalInstance = $modal.open({
+					templateUrl: 'modals/modal-general.html',
+					controller: 'ModalGeneralCtrl',
+					controllerAs: 'modalVM',
+					size: 'md',
+					reslove: {
+						data: ['httpService', function (httpService) {
+							return httpService.getCollection('markdown-help.txt').then(function (file) {
+								if(file) {
+									return file.data;
+								} else {
+									return null;
+								}
+							});
+						}]
+					}
+				});
+			};
+
+			/*****************
 			* Datepicker Controls
 			****************/
 			postViewModel.openDatepicker = function($event) {

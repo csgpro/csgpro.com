@@ -16,6 +16,7 @@
 					<br />
 					<div class="form-group tools pull-right" ng-show="postViewModel.canEdit()">
 						<button class="btn btn-default btn-xs" ng-click="postViewModel.openImageUploadModal()" tooltip="Upload Image"><span class="glyphicon glyphicon-picture"></span></button>
+						<button class="btn btn-default btn-xs" ng-click="postViewModel.openMarkdownHelpModal()" tooltip="Markdown Help"><span class="glyphicon glyphicon-question-sign"></span></button>
 					</div>
 					<div class="form-group">
 						<textarea class="form-control noresize" rows="20" placeholder="Your story goes here. Make it a good one." ng-model="postViewModel.post.Markdown" ng-keyup="postViewModel.expand($event)" id="Markdown" ng-disabled="!postViewModel.canEdit()"></textarea>
