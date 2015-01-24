@@ -67,15 +67,17 @@
 					templateUrl: 'modals/modal-general.html',
 					controller: 'ModalGeneralCtrl',
 					controllerAs: 'modalVM',
-					size: 'md',
-					reslove: {
-						data: ['httpService', function (httpService) {
-							return httpService.getCollection('markdown-help.txt').then(function (file) {
+					size: 'lg',
+					resolve: {
+						data: ['$http', function ($http) {
+							var data = {
+								title: 'Markdown Help Guide'
+							};
+							return $http.get('/markdown-help.txt').then(function (file) {
 								if(file) {
-									return file.data;
-								} else {
-									return null;
+									data.body = marked(file.data);
 								}
+								return data;
 							});
 						}]
 					}

@@ -9,9 +9,13 @@
     function ModalGeneralCtrl ($modalInstance, data) {
         var self = this;
 
-        self.title = config.title || 'Information';
+        self.title = data.title || 'Information';
 
-        self.content = config || 'No Data';
+        self.content = data.body || 'No Data';
+
+        self.close = function () {
+            $modalInstance.dismiss('cancel');
+        };
     }
 
 })();
