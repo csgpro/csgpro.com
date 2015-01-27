@@ -33,12 +33,18 @@ block content
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
                   img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
-                a.text-size-sm(href='/post/#{post.id}')= post.Title
+                if (post.url)
+                  a.text-size-sm(href='/jobs/#{post.id}')= post.Title
+                else
+                  a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{category.name}.svg')
             div
               p #{post.Abstract}
-                b: a(href='/post/#{post.id}')  MORE
+                if (post.url)
+                  b: a(href='/jobs/#{post.id}')  MORE
+                else
+                  b: a(href='/post/#{post.id}')  MORE
         div.grid__item.one-whole.right.space-top-sm.serif.space-bottom-lg
           a(href='/post/category/#{category.id}') more blog posts this way }
     else if (topic && posts)
@@ -56,11 +62,17 @@ block content
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
                   img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
-                a.text-size-sm(href='/post/#{post.id}')= post.Title
+                if (post.url)
+                  a.text-size-sm(href='/jobs/#{post.id}')= post.Title
+                else
+                  a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
               div
                 p #{post.Abstract}
+                if (post.url)
+                  b: a(href='/jobs/#{post.id}')  MORE
+                else
                   b: a(href='/post/#{post.id}')  MORE
       else
         div.grid__item.one-whole
@@ -76,12 +88,18 @@ block content
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
                   img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
-                a.text-size-sm(href='/post/#{post.id}')= post.Title
+                if (post.url)
+                  a.text-size-sm(href='/jobs/#{post.id}')= post.Title
+                else
+                  a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
               div
                 p #{post.Abstract}
-                  b: a(href='/post/#{post.id}')  MORE
+                  if (post.url)
+                    b: a(href='/jobs/#{post.id}')  MORE
+                  else
+                    b: a(href='/post/#{post.id}')  MORE
     else if (searchResult && searchInput)
       div.grid__item.one-whole
         h2 Search results:&nbsp;
@@ -97,14 +115,18 @@ block content
                   a(href='/post?q=' + post.AuthorFullName ): img.avatar.fl.avatar-sm(src='#{post.ProfileUrl}')
                 else
                   img.avatar.fl.avatar-sm(src='/img/author/csg_generic_icon.png')
-                a.text-size-sm(href='/post/#{post.id}')= post.Title
+                if (post.url)
+                  a.text-size-sm(href='/jobs/#{post.id}')= post.Title
+                else
+                  a.text-size-sm(href='/post/#{post.id}')= post.Title
               div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                 img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
               div
                 p #{post.Abstract}
-                  b: a(href='/post/#{post.id}')  MORE
+                  if (post.url)
+                    b: a(href='/jobs/#{post.id}')  MORE
+                  else
+                    b: a(href='/post/#{post.id}')  MORE
       else
         div.grid__item.one-whole
           h3 No results found for "#{searchInput}", try something else.
-
-
