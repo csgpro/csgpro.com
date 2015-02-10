@@ -24,16 +24,37 @@ self.homepage = function(req, res){
             newsArticles = helpers.getLatestXByProp(posts, 'PublishDate', { Category: 'News' }, 1),
             careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 1);
 
-            blogPosts[0].BaseUrl = '/post';
-            blogPosts[0].CategoryLink = '/post/category/Blog';
-            newsArticles[0].BaseUrl = '/post';
-            newsArticles[0].CategoryLink = '/post/category/News';
-            careerListings[0].BaseUrl = '/jobs';
-            careerListings[0].CategoryLink = '/jobs';
+            var blogPost,
+                newsArticle,
+                careerListing;
+
+            if (blogPosts && blogPosts[0]) {
+                blogPosts[0].BaseUrl = '/post';
+                blogPosts[0].CategoryLink = '/post/category/Blog';
+                blogPost = blogPosts[0];
+            } else {
+                blogPost = {};
+            }
+
+            if (newsArticles && newsArticles[0]) {
+                newsArticles[0].BaseUrl = '/post';
+                newsArticles[0].CategoryLink = '/post/category/News';
+                newsArticle = newsArticles[0];
+            } else {
+                newsArticle = {};
+            }
+
+            if (careerListings && careerListings[0]) {
+                careerListings[0].BaseUrl = '/jobs';
+                careerListings[0].CategoryLink = '/jobs';
+                careerListing = careerListings[0];
+            } else {
+                careerListing = {};
+            }
 
             res.render('index', {
                 title: 'CSG Pro | A Team of Digital Craftsmen',
-                posts: [blogPosts[0], newsArticles[0], careerListings[0]],
+                posts: [blogPost, newsArticle, careerListing],
                 moment: moment,
                 contacted: contacted,
                 cryptoTime: spam.create()

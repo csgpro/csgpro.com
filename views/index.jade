@@ -421,19 +421,22 @@ block content
           div.grid_item.one-whole.space-left-sm.desk--space-top.pad-bottom-lg
             if (posts)
               each post in posts
-                div.post.grid__item.eleven-twelfths.desk--four-twelfths
-                  a(href='#{post.CategoryLink}'): div(class="circle icon-#{post.Category.toLowerCase()}")
-                  article.grid__item.eleven-twelfths
-                    div.grid__item.one-whole.right
-                      small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
-                    div.right-gutter.abstract
-                      h3: a(href='#{post.BaseUrl}/#{post.id}')= post.Title
-                      h4.serif by #{post.AuthorFullName}
-                      p= post.Abstract
-                    div.grid__item.one-whole.right.full
-                      small
-                        a(href="#{post.BaseUrl}/#{post.id}")
-                          b read more }
+                if(post.id)
+                    div.post.grid__item.eleven-twelfths.desk--four-twelfths
+                      a(href='#{post.CategoryLink}'): div(class="circle icon-#{post.Category.toLowerCase()}")
+                      article.grid__item.eleven-twelfths
+                        div.grid__item.one-whole.right
+                          small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
+                        div.right-gutter.abstract
+                          h3: a(href='#{post.BaseUrl}/#{post.id}')= post.Title
+                          h4.serif by #{post.AuthorFullName}
+                          p= post.Abstract
+                        div.grid__item.one-whole.right.full
+                          small
+                            a(href="#{post.BaseUrl}/#{post.id}")
+                              b read more }
+                else
+                  div.post.grid__item.eleven-twelfths.desk--four-twelfths
             else
               h1 We're having trouble loading out blog posts at this moment.
 

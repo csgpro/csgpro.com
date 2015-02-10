@@ -33,7 +33,11 @@ self.getJobs = function (req, res) {
             };
             res.status(400).send(JSON.strinify(msg));
         } else {
-            var jobs = data;
+            var jobs = [];
+
+            if (data && data.length > 0) {
+                jobs = data;
+            }
 
             res.render('post-list', {
                 title: 'Careers',
