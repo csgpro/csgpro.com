@@ -23,6 +23,7 @@ coverage
 build/Release
 
 .DS_Store
+.idea
 
 # CSG stuff
 config.json
