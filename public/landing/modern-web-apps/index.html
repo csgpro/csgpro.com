@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<!--if lt IE 7<html class="no-js lt-ie9 lt-ie8 lt-ie7">-->
+<!--if IE 7<html class="no-js lt-ie9 lt-ie8">-->
+<!--if IE 8<html class="no-js lt-ie9">-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head><meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Custom Application Design and Development | CSG Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="description" content="CSG Pro, a professional services consulting company based in Portland, OR.">
+  <meta property="og:title" content="CSG Pro Consulting">
+  <meta property="og:image" content="http://csgpro.com/apple-touch-icon-precomposed.png">
+  <meta property="og:url" content="http://csgpro.com">
+  <script>if (location.host === 'www.csgpro.com') {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-29382747-1', 'auto');
+    ga('send', 'pageview');
+    }
+  </script>
+  <link rel="stylesheet" href="http://www.csgpro.com/css/MyFontsWebfontsKit.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100italic, 100" type="text/css">
+  <link rel="stylesheet" href="http://www.csgpro.com/css/bundle.css">
+  <style>
+    .project-form{
+      background-color: #f3f3f3;
+      padding:15px;
+      padding-top:30px;
+      margin-bottom:15px;
+    }
+    .wrapper{
+    }
+    .project-form button{
+      background-color:#2b2b2b;
+      color: #fefefe;
+      text-transform:uppercase;
+      padding:15px;
+      font-weight: 500;
+    }
+    .form-header{
+      background-color: #36b6ed;
+      text-transform: uppercase;
+      text-align: center;
+      color:white;
+      padding:10px;
+      border-bottom: solid #2b9bd2 3px;
+      position:relative;
+    }
+    .project-form input, .project-form textarea{
+      background-color:#ddd;
+      padding:15px;
+      border: 1px solid #cdcdcd;
+      margin-bottom: 10px;
+    }
+    .project-form textarea{
+      resize:vertical;
+    }
+    .form-header:after, .arrow_box:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .form-header:after {
+      border-color: rgba(54, 182, 237, 0);
+      border-top-color: #36b6ed;
+      border-width: 20px;
+      margin-left: -20px;
+    }
+    .form-header:before {
+      border-color: rgba(43, 155, 210, 0);
+      border-top-color: #2b9bd2;
+      border-width: 30px;
+      margin-left: -30px;
+    }
+    .second-image{
+      margin-left: 10px;
+    }
+    strong{
+      font-weight:600;
+    }
+    .space-bottom{
+      margin-bottom:0;
+    }
+  </style>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+</head>
+<body class="body-white register">
+  <!--if lt IE 7p.browsehappy
+  | You are using an <strong>outdated</strong> browser.
+  | Please <a href="http://browsehappy.com/">upgrade your browser</a>
+  | to improve your experience.
+  -->
+  <div class="sticky-footer-wrapper">
+    <div role="navigation" class="mobile-nav hide-desk">
+      <ul>
+        <li><a href="tel:503-292-0859">503.292.0859</a></li>
+        <li><a href="/#work" class="nav-work">work /</a></li>
+        <li><a href="/#services" class="nav-services">services /</a></li>
+        <li><a href="/#about" class="nav-about">about /</a></li>
+        <li><a href="/#updates" class="nav-updates">updates /</a></li>
+        <li><a href="/#contact" class="nav-contact">contact /</a></li>
+      </ul>
+      <div class="bottom">
+        <a href="/post/24"><img src="http://www.csgpro.com/post/24" style="width: 80px; height: 80px; margin: 0 24px -20px 0"></a>
+        <a href="http://twitter.com/csgpro"><img src="http://www.csgpro.com/img/twitter_icon.svg" style="width: 30px; height: 30px" class="side-margins"></a>
+        <a href="http://www.linkedin.com/company/csg-pro"><img src="http://www.csgpro.com/img/linkedin_icon.svg" style="width: 30px; height: 30px" class="side-margins"></a>
+      </div>
+    </div>
+    <div class="main-body">
+      <header class="mobile-header grid--full hide-desk">
+        <div class="grid__item eight-twelfths">
+          <div class="toggle-nav">
+            <div class="icon-bar"></div>
+            <div class="icon-bar"></div>
+            <div class="icon-bar"></div>
+          </div>
+          <ul class="gothic">
+            <li data-nav="work" class="nav-work">work /</li>
+            <li data-nav="services" class="nav-services">services /</li>
+            <li data-nav="about" class="nav-about">about /</li>
+            <li data-nav="updates" class="nav-updates">updates /</li>
+            <li data-nav="contact" class="nav-contact">contact /</li>
+          </ul>
+        </div>
+        <div class="grid__item four-twelfths right">
+          <a href="/"><img src="http://www.csgpro.com/img/logo.svg"></a>
+        </div>
+      </header>
+      <div id="nav-spacer"></div>
+      <div id="updates-container">
+        <section id="updates" class="grid wrapper">
+          <div class="grid__item one-whole">
+            <div class="container">
+              <div>
+                <span class="serif grey text-size-sm italic">We Build Great Web Apps.</span>
+                <span class="blue text-size-sm">Modern application design and development for your business</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="grid wrapper">
+        <!-- <div class="grid__item one-whole"> -->
+        <div class="grid__item one-third">
+          <p class="text-small">We are <strong>custom application developers</strong> that design and build solutions for clients that <em>improve your relationship with your customers</em> or <strong>make your employees more productive.</strong></p>
+          <p class="text-small">CSG Pro combines AngularJS front-end development with Microsoft Azure on the back-end to <strong>create great end user experiences.</strong> We build modern web applications that blend high level company goals, intuitive user interfaces, flexible architecture, and visually stunning design to <strong> create unique and compelling solutions for your business.</strong></p>
+          <p class="text-small">Custom applications are typically cloud hosted, web based solutions that <strong>work across all devices</strong> including mobile devices such as smartphones and tablets as well as desktop PCs. The goal is always to <strong>leverage technology to make your business more successful.</strong></p>
+          <img src="logo_angular.png">
+          <img class="second-image" src="logo_azure.png">
+        </div><!--
+      --><div class="grid__item one-third">
+          <br>
+          <img src="./devices.png">
+          <p class="blue strong text-small">Open source and Microsoft technologies</p>
+          <p class="blue strong text-small">Device Agnostic</p>
+          <p class="blue strong text-small">Responsive comes standard</p>
+          <p class="blue strong text-small">Automated unit testing</p>
+          <p class="blue strong text-small">Continuous integration</p>
+          <p class="blue strong text-small">Cloud hosting</p>
+        </div> <!--
+    --> <div class="grid__item one-quarter project-form-wrap">
+          <br>
+          <div class="form-header">
+            free 30 minute
+            <BR>
+            <STRONG>consultation</strong>
+          </div>
+          <form role="form" action="/csv" method="POST" class="register project-form">
+            <div class="">
+              <h3 style="display:none" class="grid__item one-whole alert alert-error">All fields are required.</h3>
+              <h3 style="display:none" class="grid__item one-whole alert alert-success">Thank you for registering.</h3>
+              <h3 style="display:none" class="grid__item one-whole alert alert-info">
+                <a href="/files/pdx-power-bi-event.ics" style="text-decoration:underline" id="icsfile">Add this event to your calender</a>
+              </h3>
+            </div>
+            <div class="form-field">
+              <!-- <label for="firstName" class="lbl">First Name</label> -->
+              <input id="firstName" data-title="First Name" class="grid__item one-whole" placeholder="first name">
+            </div>
+            <div class="form-field">
+              <!-- <label for="lastName" class="lbl">Last Name</label> -->
+              <input id="lastName" data-title="Last Name" class="grid__item one-whole" placeholder="last name">
+            </div>
+            <div class="form-field">
+              <!-- <label for="emailAddress" class="lbl">Email Address</label> -->
+              <input id="emailAddress" data-title="Email Address" class="grid__item one-whole" placeholder="email">
+            </div>
+            <div class="form-field">
+              <!-- <label for="emailAddress" class="lbl">Email Address</label> -->
+              <input id="phone" data-title="phone" class="grid__item one-whole" placeholder="phone">
+            </div>
+            <div class="form-field" style="width:100%">
+              <!-- <label for="emailAddress" class="lbl">Email Address</label> -->
+              <textarea id="projectInfo" data-title="Project Info" class="grid__item one-whole" placeholder="tell us about your project"></textarea>
+            </div>
+            <div class="form-field left space-bottom">
+              <input name="username" type="text" id="hpizzle" style="display:none">
+              <input name="cryptoTime" type="text" id="cryptoTime" value="ce089e85edfdcc0fa44ae66d8c02a304" style="display:none">
+              <button type="submit" class="btnRegister btn btn-lg text-uppercase">let's talk</button>
+              <input type="hidden" id="file" value="pdx-power-bi-registrants.csv">
+              <input type="hidden" id="title" value="Fast-Tracking Data Mastery with Power BI Event Registration">
+              <input type="hidden" id="details" value="Date: October 29, 2014&lt;br /&gt;Time: 8:15am to 9:45am&lt;br /&gt;Place: Microsoft Portland Office - 1414 NW Northrup St Suite 900 Portland, OR 97209">
+            </div>
+          </form>
+        <!-- </div> -->
+        </div>
+      </div>
+      <div class="sticky-footer-push"></div>
+    </div>
+  </div>
+  <nav class="fixed-menu hide-mobile">
+    <div class="wrapper">
+      <a href="/"><img id="logo" src="http://www.csgpro.com/img/logo.svg" class="small-logo"></a>
+      <ul>
+        <li><a href="tel:503-292-0859" class="nav-contact">503.292.0859</a></li>
+        <li>/</li>
+        <li><a href="mailto:info@csgpro.com" class="nav-contact">info@csgpro.com</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="inner-footer sticky-footer">
+    <footer class="scene-footer">
+      <div class="wrapper grid center-images">
+        <div class="grid__item one-whole full mobile--center spaced">
+          <div class="grid__item desk--one-half inline-block space-top-xxs mobile--center">
+            <img src="http://www.csgpro.com/img/ms_partner_goldappdev_logo_inner.svg" width="120px">
+          </div>
+          <div class="grid__item desk--one-half inline-block mobile--center">
+            <img src="http://www.csgpro.com/img/Crafted_in_PDX_inner.svg" width="125px" class="desk--fr">
+            <span class="desk--fr icon-vertical-bar"></span>
+            <img src="http://www.csgpro.com/img/CSG22_round_footer.png" width="60px" class="desk--fr">
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  <script src="http://www.csgpro.com/js/bundle.js"></script>
+</body>
+</html>
