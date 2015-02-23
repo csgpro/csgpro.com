@@ -28,13 +28,41 @@
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100italic, 100" type="text/css">
   <link rel="stylesheet" href="http://www.csgpro.com/css/bundle.css">
   <style>
+    .left p{
+      line-height: 1.5em;
+      font-size: 0.9em;
+      color: #444;
+      letter-spacing: 0.3px;
+    }
+    .middle p{
+      font-weight: 500;
+
+    }
+    .margin-left{
+      margin-left: 20px;
+    }
+    strong{
+      font-weight:600;
+    }
+
+    /* Form styling */
     .project-form{
       background-color: #f3f3f3;
       padding:15px;
       padding-top:30px;
       margin-bottom:15px;
     }
-    .wrapper{
+    .form-header{
+      background-color: #36b6ed;
+      text-transform: uppercase;
+      text-align: center;
+      color:white;
+      padding:15px;
+      padding-bottom:10px;
+      border-bottom: solid #2b9bd2 3px;
+      position:relative;
+      font-size: 1.7em;
+      letter-spacing:2px;
     }
     .project-form button{
       background-color:#2b2b2b;
@@ -42,15 +70,6 @@
       text-transform:uppercase;
       padding:15px;
       font-weight: 500;
-    }
-    .form-header{
-      background-color: #36b6ed;
-      text-transform: uppercase;
-      text-align: center;
-      color:white;
-      padding:10px;
-      border-bottom: solid #2b9bd2 3px;
-      position:relative;
     }
     .project-form input, .project-form textarea{
       background-color:#ddd;
@@ -60,6 +79,7 @@
     }
     .project-form textarea{
       resize:vertical;
+      min-height:10em;
     }
     .form-header:after, .arrow_box:before {
       top: 100%;
@@ -83,12 +103,6 @@
       border-top-color: #2b9bd2;
       border-width: 30px;
       margin-left: -30px;
-    }
-    .second-image{
-      margin-left: 10px;
-    }
-    strong{
-      font-weight:600;
     }
     .space-bottom{
       margin-bottom:0;
@@ -145,32 +159,29 @@
             <div class="container">
               <div>
                 <span class="serif grey text-size-sm italic">We Build Great Web Apps.</span>
-                <span class="blue text-size-sm">Modern application design and development for your business</span>
+                <span class="blue text-size-sm margin-left">Modern application design and development for your business</span>
               </div>
             </div>
           </div>
         </section>
       </div>
       <div class="grid wrapper">
-        <!-- <div class="grid__item one-whole"> -->
-        <div class="grid__item one-third">
-          <p class="text-small">We are <strong>custom application developers</strong> that design and build solutions for clients that <em>improve your relationship with your customers</em> or <strong>make your employees more productive.</strong></p>
+        <div class="grid__item one-third left">
+          <p class="text-small">We are <strong>custom application developers</strong> that design and build solutions for clients that <strong>improve your relationship with your customers</strong> or <strong>make your employees more productive.</strong></p>
           <p class="text-small">CSG Pro combines AngularJS front-end development with Microsoft Azure on the back-end to <strong>create great end user experiences.</strong> We build modern web applications that blend high level company goals, intuitive user interfaces, flexible architecture, and visually stunning design to <strong> create unique and compelling solutions for your business.</strong></p>
           <p class="text-small">Custom applications are typically cloud hosted, web based solutions that <strong>work across all devices</strong> including mobile devices such as smartphones and tablets as well as desktop PCs. The goal is always to <strong>leverage technology to make your business more successful.</strong></p>
           <img src="logo_angular.png">
-          <img class="second-image" src="logo_azure.png">
-        </div><!--
-      --><div class="grid__item one-third">
+          <img class="margin-left" src="logo_azure.png">
+        </div><div class="grid__item one-third middle">
           <br>
           <img src="./devices.png">
-          <p class="blue strong text-small">Open source and Microsoft technologies</p>
-          <p class="blue strong text-small">Device Agnostic</p>
-          <p class="blue strong text-small">Responsive comes standard</p>
-          <p class="blue strong text-small">Automated unit testing</p>
-          <p class="blue strong text-small">Continuous integration</p>
-          <p class="blue strong text-small">Cloud hosting</p>
-        </div> <!--
-    --> <div class="grid__item one-quarter project-form-wrap">
+          <p class="blue text-small">Open source and Microsoft technologies</p>
+          <p class="blue text-small">Device Agnostic</p>
+          <p class="blue text-small">Responsive comes standard</p>
+          <p class="blue text-small">Automated unit testing</p>
+          <p class="blue text-small">Continuous integration</p>
+          <p class="blue text-small">Cloud hosting</p>
+        </div><div class="grid__item one-third project-form-wrap">
           <br>
           <div class="form-header">
             free 30 minute
@@ -214,7 +225,6 @@
               <input type="hidden" id="details" value="Date: October 29, 2014&lt;br /&gt;Time: 8:15am to 9:45am&lt;br /&gt;Place: Microsoft Portland Office - 1414 NW Northrup St Suite 900 Portland, OR 97209">
             </div>
           </form>
-        <!-- </div> -->
         </div>
       </div>
       <div class="sticky-footer-push"></div>
@@ -236,8 +246,7 @@
         <div class="grid__item one-whole full mobile--center spaced">
           <div class="grid__item desk--one-half inline-block space-top-xxs mobile--center">
             <img src="http://www.csgpro.com/img/ms_partner_goldappdev_logo_inner.svg" width="120px">
-          </div>
-          <div class="grid__item desk--one-half inline-block mobile--center">
+          </div><div class="grid__item desk--one-half inline-block mobile--center">
             <img src="http://www.csgpro.com/img/Crafted_in_PDX_inner.svg" width="125px" class="desk--fr">
             <span class="desk--fr icon-vertical-bar"></span>
             <img src="http://www.csgpro.com/img/CSG22_round_footer.png" width="60px" class="desk--fr">
