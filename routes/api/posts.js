@@ -107,6 +107,10 @@ self.createPost = function (req, res) {
 
 self.updatePost = function (req, res) {
 	var notify = req.body && req.body.notify ? req.body.notify : null;
+	if (req.body.post.PublishDate && !Number(req.body.post.PublishDate)) {
+		var publishDate = new Date(req.body.post.PublishDate);
+		req.body.post.PublishDate = publishDate.getTime();
+	}
 	db.updateItem('posts', req.params.id, req.body.post, function (err, data) {
 		if (err) {
 			var statusCode = 400;
