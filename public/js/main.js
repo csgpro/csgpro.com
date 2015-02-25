@@ -39,6 +39,8 @@ if (window.location.pathname === '/') { // only do all this javascript in root
 } else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
   mobileNav(options);
   lightbox();
+} else{
+  modal();
 }
 
 function getParameterByName(name) {
