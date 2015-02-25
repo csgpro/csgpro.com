@@ -31,7 +31,7 @@
   <style>
     .column-one p{
       line-height: 1.5em;
-      font-size: 0.9em;
+      font-size: 0.94em;
       color: #444;
       letter-spacing: 0.3px;
     }
@@ -195,25 +195,25 @@
           </div>
           <form role="form" action="/contact" method="POST" class="project-form">
             <div class="form-field">
-              <input id="firstName" name="firstName" data-title="First Name" class="grid__item one-whole clearable" placeholder="first name">
+              <input name="firstName" type="text" class="grid__item one-whole clearable" placeholder="first name">
             </div>
             <div class="form-field">
-              <input id="lastName" name="lastName" data-title="Last Name" class="grid__item one-whole clearable" placeholder="last name">
+              <input name="lastName" type="text" class="grid__item one-whole clearable" placeholder="last name">
             </div>
             <div class="form-field">
-              <input id="emailAddress" name="emailAddress" data-title="Email Address" class="grid__item one-whole clearable" placeholder="email">
+              <input name="emailAddress" type="email" class="grid__item one-whole clearable" placeholder="email">
             </div>
             <div class="form-field">
-              <input id="phoneNumber" name="phoneNumber" data-title="phoneNumber" class="grid__item one-whole clearable" placeholder="phone">
+              <input name="phoneNumber" type="tel" class="grid__item one-whole clearable" placeholder="phone">
             </div>
             <div class="form-field" style="width:100%">
-              <textarea id="projectInfo" name="comments" data-title="Project Info" class="grid__item one-whole clearable" placeholder="tell us about your project"></textarea>
+              <textarea name="comments" type="text" class="grid__item one-whole clearable" placeholder="tell us about your project"></textarea>
             </div>
-            <div class="form-field left space-bottom">
+            <div class="form-field right space-bottom">
               <input name="username" type="text" id="hpizzle" style="display:none">
               <input name="cryptoTime" type="text" id="cryptoTime" value="ce089e85edfdcc0fa44ae66d8c02a304" style="display:none">
-              <button type="submit" class="btn btn-lg text-uppercase ajaxSubmit">let's talk</button>
               <label class="lbl status-header"></label>
+              <button type="submit" class="btn btn-lg text-uppercase ajaxSubmit margin-left">let's talk</button>
             </div>
           </form>
         </div>
