@@ -38,29 +38,27 @@ self.getJobs = function (filter, callback) {
 
     options.method = null;
 
-    request.get(options, function(err, obj, response){
+    request.get(options, function(err, response, data){
         if(err) {
             callback(err);
-        } else if (response !== null) {
+        } else if (response.statusCode === 404) {
+            callback(); // No jobs found
+        } else if (data === 'object') {
 
-            var aboutCsgPro = '<h3>About CSG PRO</h3>' + "\n\r";
-            aboutCsgPro = aboutCsgPro + 'CSG Pro is a boutique consulting firm that has been providing custom business solutions for clients for over 20 years. We are a privately held, profitable firm that has grown up in Portland, serving mostly local clients. We are a Microsoft Gold Certified Partner specializing in BI/Analytics, Application Development, Windows Azure and SharePoint. We love what we do, and we have a lot of fun doing it.' + "\n\r\n\r";
-            aboutCsgPro = aboutCsgPro + 'Located in the vibrant Pearl District, we fully enjoy being in the cultural heart of the city. The neighborhood is bike friendly with great food, shops, galleries and all the best coffee shops. We look forward to hearing from you.';
-
-            for (var i = 0; i < response.length; i++) {
-                response[i].PublishDate = response[i].created_at;
-                response[i].Category = 'Career';
-                response[i].Title = 'Open Position: ' + response[i].title;
-                response[i].AuthorFullName = 'CSG Pro';
-                response[i].Abstract = response[i].abstract;
-                response[i].Markdown = response[i].description + aboutCsgPro;
+            for (var i = 0; i < data.length; i++) {
+                data[i].PublishDate = data[i].created_at;
+                data[i].Category = 'Career';
+                data[i].Title = 'Open Position: ' + data[i].title;
+                data[i].AuthorFullName = 'CSG Pro';
+                data[i].Abstract = data[i].abstract;
+                data[i].Markdown = data[i].description;
             }
 
             if (filter && !Number(filter)) {
-                response = _.where(response, filter);
+                data = _.where(data, filter);
             }
 
-            callback(null, response);
+            callback(null, data);
         } else {
             callback(new Error('Error retrieving data.'));
         }
