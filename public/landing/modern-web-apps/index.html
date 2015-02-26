@@ -55,6 +55,14 @@
       padding:15px;
       padding-top:30px;
       margin-bottom:15px;
+      position:relative;
+    }
+    .status-header{
+      position: absolute;
+      bottom: -30px;
+      text-align: center;
+      right: 0px;
+      left: 0px;
     }
     .form-header{
       background-color: #36b6ed;
@@ -67,6 +75,7 @@
       position:relative;
       font-size: 1.7em;
       letter-spacing:2px;
+      z-index:10;
     }
     .project-form button{
       background-color:#2b2b2b;
@@ -212,9 +221,9 @@
             <div class="form-field right space-bottom">
               <input name="username" type="text" id="hpizzle" style="display:none">
               <input name="cryptoTime" type="text" id="cryptoTime" value="ce089e85edfdcc0fa44ae66d8c02a304" style="display:none">
-              <label class="lbl status-header"></label>
               <button type="submit" class="btn btn-lg text-uppercase ajaxSubmit margin-left">let's talk</button>
             </div>
+            <div class="status-header"></div>
           </form>
         </div>
       </div>
