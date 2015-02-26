@@ -56,6 +56,12 @@ block content
                       img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
             if (post.Markdown)
               p!= marked(post.Markdown)
+              if (post.url)
+                div.space-top.space-bottom
+                  p Please contact us via &nbsp;
+                    a(href='mailto:jobs@csgpro.com') jobs@csgpro.com
+                  //p
+                    a(href='#{post.url}') Apply for this position
               if (post.Topics && post.Topics != '')
                 div.space-top.hide-desk
                   h4.blue Related Topics:

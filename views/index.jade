@@ -353,7 +353,7 @@ block content
                   div#jerry
                     span Jerry Frank,
                     br
-                    span.serif Founder &amp; Chairman
+                    span.serif CEO
           div.grid__item.eight-twelfths.hide-mobile
             article.swappable
               section#swappable-about(data-swap='about')
@@ -369,11 +369,6 @@ block content
                 div.text-size-md.space-top-sm Ron Ellis Gaut
                 span.text-size-sm.serif VP of Strategic Solutions
                 p As a founding member, Ron has had the unique opportunity to contribute to the growth and success of the company since the beginning.  He brings over 30 years of IT experience and a broad base of expertise to Strategic Solutions at CSG Pro.
-                h3: a.about-us(href='javascript:void(0);') { about us
-              section#swappable-kevinm.hide(data-swap='kevinm')
-                div.text-size-md.space-top-sm Kevin McVicker
-                span.text-size-sm.serif President
-                p Kevin joined CSG in February 2010 with a keen focus on driving growth while enhancing CSG's already strong reputation and consulting capabilities. In January of 2012, Kevin was named President of CSG and is guiding CSG to the next level of leadership in our market, using his many years of experience in information technology and company leadership.
                 h3: a.about-us(href='javascript:void(0);') { about us
               section#swappable-jamesc.hide(data-swap='jamesc')
                 div.text-size-md.space-top-sm James Churchill
@@ -395,13 +390,6 @@ block content
                     span Vice President<br />Strategic Solutions
                 div.cutout.cutout_ron
                   img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_ron.png')
-              li#swapper-kevinm(data-swap='kevinm')
-                dl
-                  dt.name Kevin
-                  dd.role
-                    span President
-                div.cutout.cutout_kevin
-                  img(src='https://csgsitestorage.blob.core.windows.net/img/about_cutout_kevin.png')
               li#swapper-jamesc(data-swap='jamesc')
                 dl
                   dt.name James
@@ -421,19 +409,22 @@ block content
           div.grid_item.one-whole.space-left-sm.desk--space-top.pad-bottom-lg
             if (posts)
               each post in posts
-                div.post.grid__item.eleven-twelfths.desk--four-twelfths
-                  a(href='/post/category/#{post.Category}'): div(class="circle icon-#{post.Category.toLowerCase()}")
-                  article.grid__item.eleven-twelfths
-                    div.grid__item.one-whole.right
-                      small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
-                    div.right-gutter.abstract
-                      h3: a(href='/post/#{post.id}')= post.Title
-                      h4.serif by #{post.AuthorFullName}
-                      p= post.Abstract
-                    div.grid__item.one-whole.right.full
-                      small
-                        a(href="/post/#{post.id}")
-                          b read more }
+                if(post.id)
+                    div.post.grid__item.eleven-twelfths.desk--four-twelfths
+                      a(href='#{post.CategoryLink}'): div(class="circle icon-#{post.Category.toLowerCase()}")
+                      article.grid__item.eleven-twelfths
+                        div.grid__item.one-whole.right
+                          small(title="#{moment(post.PublishDate || 0).format('L')}")= moment(post.PublishDate || 0).fromNow()
+                        div.right-gutter.abstract
+                          h3: a(href='#{post.BaseUrl}/#{post.id}')= post.Title
+                          h4.serif by #{post.AuthorFullName}
+                          p= post.Abstract
+                        div.grid__item.one-whole.right.full
+                          small
+                            a(href="#{post.BaseUrl}/#{post.id}")
+                              b read more }
+                else
+                  div.post.grid__item.eleven-twelfths.desk--four-twelfths
             else
               h1 We're having trouble loading out blog posts at this moment.
 

@@ -17,12 +17,15 @@ function init() {
 
   });
 
-
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
 
     var that = this;
-    var name = this.form.name.value;
+    if(this.form.name.value){
+      var name = this.form.name.value;
+    }else{
+      var name = this.form.firstName.value + " " +this.form.lastName.value;
+    }
     var phoneNumber = this.form.phoneNumber.value;
     var emailAddress = IsEmail(this.form.emailAddress.value) ? this.form.emailAddress.value : '';
     var comments = this.form.comments.value;
@@ -67,6 +70,10 @@ function init() {
           toClear.val('');
 
           setTimeout(function(){ $.modal.close(); },2000);
+
+          if(window.location.pathname === "/landing/modern-web-apps/"){
+            window.location.href = "./thankyou.html";
+          }
 
         } else {
           header.text('Something went wrong, try again.');

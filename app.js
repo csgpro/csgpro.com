@@ -20,6 +20,7 @@ var express          = require('express')
   , contact          = require('./routes/contact')
   , redirects        = require('./routes/redirects')
   , post             = require('./routes/post')
+  , jobs             = require('./routes/jobs')
   , api              = require('./routes/api')
   , upload           = require('./routes/upload')
   , account          = require('./routes/account')
@@ -140,6 +141,9 @@ app.get('/post/category/:category', post.getPostsByCategory);
 app.get('/post/topic/:topic', post.getPostsByTopic);
 app.get('/post/:id', post.getPostByID);
 
+app.get('/jobs', jobs.getJobs);
+app.get('/jobs/:id', jobs.getJobByID);
+
 app.post('/contact', contact.index);
 app.post('/csv', register.csv);
 
@@ -210,6 +214,11 @@ app.get('/api/topics/:id', api.topics.getTopicByID);
 app.post('/api/topics', api.topics.createTopic);
 app.patch('/api/topics/:id', api.topics.updateTopic);
 app.delete('/api/topics/:id', api.topics.deleteTopic);
+
+/* JOBS */
+app.get('/api/jobs', api.jobs.getJobs);
+app.get('/api/jobs/:id', api.jobs.getJobByID);
+app.get('/api/jobs/:filter', api.jobs.getJobsByFilter);
 
 /*****************
  * TWITTER
