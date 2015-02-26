@@ -65,7 +65,7 @@
 
             setTimeout(function(){ $.modal.close(); },2000);
 
-            if(window.location.pathname === "/landing/modern-web-apps/"){
+            if(window.location.pathname.split("/")[1] === "landing"){
               window.location.href = "./thankyou.html";
             }
 
