@@ -1,26 +1,14 @@
-var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')({lazy:false});
-var path = require('path');
-var rimraf = require('rimraf');
-var through = require('through2');
-var es = require('event-stream');
-var nib = require('nib');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var buildDir = "./public/";
-var adminBuildDir = "./public/admin/";
+'use strict';
 
-function cleaner() {
-    return through.obj(function(file, enc, cb){
-        rimraf( path.resolve( (file.cwd || process.cwd()), file.path), function (err) {
-            if (err) {
-                this.emit('error', new plugins.util.PluginError('Cleanup old files', err));
-            }
-            this.push(file);
-            cb();
-        }.bind(this));
-    });
-}
+var gulp = require('gulp'),
+    plugins = require('gulp-load-plugins')({lazy:false}),
+    es = require('event-stream'),
+    del = require('del'),
+    nib = require('nib'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buildDir = "./public/",
+    adminBuildDir = "./public/admin/";
 
 gulp.task('css', function(){
     gulp.src('./admin-app/app.less')
@@ -71,7 +59,7 @@ gulp.task('admin-copy-index', ['admin-clean'], function () {
 
 gulp.task('admin-scripts', ['admin-copy-index'], function () {
 
-    libSrc = [
+    var libSrc = [
         './bower_components/ng-file-upload/angular-file-upload-html5-shim.js',
         './bower_components/jquery/dist/jquery.js',
         './bower_components/angular/angular.js',
@@ -138,15 +126,26 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('admin-clean', function () {
-    gulp.src([adminBuildDir + 'index.html',
-        adminBuildDir + 'js/*'], { read: false })
-        .pipe(cleaner());
+    return del.sync([
+        adminBuildDir + 'index.html',
+            adminBuildDir + 'js/*'
+    ], { force: true });
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['./admin-app/**/*.js', '!./admin-app/**/*test.js', '!./admin-app/index.html', './admin-app/**/*.html'],['admin-scripts']);
-    gulp.watch(['./admin-app/**/*.less', buildDir + '**/*.styl', '!' + buildDir + '**/bundle.css'],['css']);
-    gulp.watch([buildDir + '**/*.js', '!' + buildDir + 'admin/**/*.js', '!' + buildDir + '**/bundle.js'],['scripts']);
+    gulp.watch([
+        './admin-app/**/*.js',
+        '!./admin-app/**/*test.js',
+        '!./admin-app/index.html',
+        './admin-app/**/*.html'], ['admin-scripts']);
+    gulp.watch([
+        './admin-app/**/*.less',
+        buildDir + '**/*.styl',
+        '!' + buildDir + '**/bundle.css'], ['css']);
+    gulp.watch([
+        buildDir + '**/*.js',
+        '!' + buildDir + 'admin/**/*.js',
+        '!' + buildDir + '**/bundle.js'], ['scripts']);
 });
 
 gulp.task('connect', function() {

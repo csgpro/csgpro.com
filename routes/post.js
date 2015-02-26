@@ -5,8 +5,10 @@
 
 var self = this,
     db = require('../modules/db2'),
+    ht = require('../modules/hiringthing'),
     md = require('marked'),
     moment = require('moment'),
+    _ = require('lodash'),
     sanitize = require('validator').sanitize,
     helpers = require('../modules/helpers');
 
@@ -97,23 +99,32 @@ self.getPostsBySearch = function(req, res) {
             if (err) {
                 res.send(err);
             } else {
-                // make sure posts are published, and match a query
-                data = data.filter(function(i){
-                    var a = parseInt(i.PublishDate, 10) > 0;
-                    var b = regex.test(i.Markdown);
-                    var c = regex.test(JSON.stringify(i.Categories || ''));
-                    var d = regex.test(i.Title);
-                    var e = regex.test(i.AuthorFullName);
+                var posts = helpers.getPublishedPosts(data);
+                ht.getJobs(null, function (err, data) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        var postData = _.extend(posts, data);
+                        var results;
+                        // make sure posts are published, and match a query
+                        results = postData.filter(function(i){
+                            var a = parseInt(i.PublishDate, 10) > 0;
+                            var b = regex.test(i.Markdown);
+                            var c = regex.test(JSON.stringify(i.Categories || ''));
+                            var d = regex.test(i.Title);
+                            var e = regex.test(i.AuthorFullName);
 
-                    return a && ( b || c || d  || e);
-                });
+                            return a && ( b || c || d  || e);
+                        });
 
-                res.render('post-list', {
-                    title: 'Search',
-                    moment: moment,
-                    searchResult: data,
-                    searchInput: searchInput,
-                    pageClass: 'updates'
+                        res.render('post-list', {
+                            title: 'Search',
+                            moment: moment,
+                            searchResult: results,
+                            searchInput: searchInput,
+                            pageClass: 'updates'
+                        });
+                    }
                 });
             }
         });
@@ -123,27 +134,34 @@ self.getPostsBySearch = function(req, res) {
             if (err) {
                 res.send(err);
             } else {
-                data = helpers.getPublishedPosts(data);
-                var newData = [],
-                    blogPosts = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Blog' }, 6),
-                    newsArticles = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'News' }, 6),
-                    careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 6);
+                var posts = helpers.getPublishedPosts(data);
+                ht.getJobs(null, function (err, data) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        var postData = _.extend(posts, data);
+                        var newData = [],
+                            blogPosts = helpers.getLatestXByProp(postData, 'PublishDate', { Category: 'Blog' }, 6),
+                            newsArticles = helpers.getLatestXByProp(postData, 'PublishDate', { Category: 'News' }, 6),
+                            careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 6);
 
-                if (blogPosts) {
-                    newData.push({ name: 'Blog', id: 'Blog', posts: blogPosts });
-                }
-                if (newsArticles) {
-                    newData.push({ name: 'News', id: 'News',  posts: newsArticles });
-                }
-                if (careerListings) {
-                    newData.push({ name: 'Careers', id: 'Career', posts: careerListings });
-                }
+                        if (blogPosts) {
+                            newData.push({ name: 'Blog', id: 'Blog', posts: blogPosts });
+                        }
+                        if (newsArticles) {
+                            newData.push({ name: 'News', id: 'News',  posts: newsArticles });
+                        }
+                        if (careerListings) {
+                            newData.push({ name: 'Careers', id: 'Career', posts: careerListings });
+                        }
 
-                res.render('post-list', {
-                    title: 'All Posts',
-                    moment: moment,
-                    categories: newData,
-                    pageClass: 'updates'
+                        res.render('post-list', {
+                            title: 'All Posts',
+                            moment: moment,
+                            categories: newData,
+                            pageClass: 'updates'
+                        });
+                    }
                 });
             }
         });
