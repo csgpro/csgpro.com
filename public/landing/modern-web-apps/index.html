@@ -202,21 +202,21 @@
             <BR>
             <STRONG>consultation</strong>
           </div>
-          <form role="form" action="/contact" method="POST" class="project-form">
+          <form role="form" action="/contact" method="POST" class="project-form" novalidate>
             <div class="form-field">
-              <input name="firstName" type="text" class="grid__item one-whole clearable" placeholder="first name">
+              <input name="firstName" type="text" required="" class="grid__item one-whole clearable" placeholder="first name">
             </div>
             <div class="form-field">
-              <input name="lastName" type="text" class="grid__item one-whole clearable" placeholder="last name">
+              <input name="lastName" type="text" required="" class="grid__item one-whole clearable" placeholder="last name">
             </div>
             <div class="form-field">
-              <input name="emailAddress" type="email" class="grid__item one-whole clearable" placeholder="email">
+              <input name="emailAddress" type="email" required="" class="grid__item one-whole clearable" placeholder="email">
             </div>
             <div class="form-field">
               <input name="phoneNumber" type="tel" class="grid__item one-whole clearable" placeholder="phone">
             </div>
             <div class="form-field" style="width:100%">
-              <textarea name="comments" type="text" class="grid__item one-whole clearable" placeholder="tell us about your project"></textarea>
+              <textarea name="comments" type="text" required="" class="grid__item one-whole clearable" placeholder="tell us about your project"></textarea>
             </div>
             <div class="form-field right space-bottom">
               <input name="username" type="text" id="hpizzle" style="display:none">
