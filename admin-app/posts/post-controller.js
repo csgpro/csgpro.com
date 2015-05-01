@@ -2,10 +2,12 @@
 	'use strict';
 
 	angular.module('app')
-		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', 'UserService', function(data, common, lookup, $modal, UserService) {
+		.controller('PostCtrl', ['data', 'common', 'lookup', '$modal', 'UserService', 'notifications', function(data, common, lookup, $modal, UserService, notifications) {
 
 			var postViewModel = this;
 
+			// Binding the form
+			postViewModel.form = null;
 			/********************
 			* Image Upload Modal
 			*******************/
@@ -197,8 +199,15 @@
 					},
 					{
 						clickFn: function () {
-							var saveRecordData = getSaveRecordData();
-							common.saveRecord(saveRecordData);
+							if (postViewModel.form.$valid) {
+								postViewModel.form.$setSubmitted();
+								var saveRecordData = getSaveRecordData();
+								// common.saveRecord(saveRecordData);
+								console.log('saved');
+							} else {
+								postViewModel.form.$setSubmitted();
+								notifications.showError('All fields are required');
+							}
 						},
 						btnClass: 'btn-success',
 						btnGlyph: 'glyphicon-save',
