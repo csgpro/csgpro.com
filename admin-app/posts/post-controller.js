@@ -202,7 +202,7 @@
 							if (postViewModel.form.$valid) {
 								postViewModel.form.$setSubmitted();
 								var saveRecordData = getSaveRecordData();
-								// common.saveRecord(saveRecordData);
+								common.saveRecord(saveRecordData);
 								console.log('saved');
 							} else {
 								postViewModel.form.$setSubmitted();
