@@ -45,10 +45,10 @@ block content
           div#headline We build great web apps!&nbsp;
           br
         div.grid__item.one-whole.left.mobile--pad-right-2.mobile--pad-top-1.hide-desk
-          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business. }
+          a(href='/landing/modern-web-apps/').tagline Modern application design and development for your business. }
           div }
         div.grid__item.ten-twelfths.left.mobile--pad-right-2.mobile--pad-top-1.hide-mobile         
-          a(href='javascript:void(0)', onclick='scrollToId("services");').tagline Modern application design and development for your business. }
+          a(href='/landing/modern-web-apps/').tagline Modern application design and development for your business. }
         div#blocks.grid__item.one-whole.left.hide-mobile
           div.grid__item.three-twelfths
             p Schnitzer Steel
@@ -58,17 +58,17 @@ block content
           div.grid__item.one-twelfth
             img(src='/img/line.svg')
           div.grid__item.three-twelfths
-            p Need a Great Web App?
-              | <br>That’s What We Do.
-              | <br>Let us Build One for You.
-            p: a(href='javascript:void(0)', onclick='scrollToId("contact");') contact us }
-          div.grid__item.one-twelfth
-            img(src='/img/line.svg')
-          div.grid__item.three-twelfths
             p The Best Way to
               | <br>Setup AngularJS
               | <br>Controllers: The Basics
             p: a(href='/post/120112') read the blog }
+          div.grid__item.one-twelfth
+            img(src='/img/line.svg')
+          div.grid__item.three-twelfths
+            p CSG Live Streaming
+              | <br>Angular ng-conf at
+              | <br>PDX Office March 5/6
+            p: a(href='https://eventbrite.com/event/15750808091/') get your ticket }
 
     div.test
       nav.hide-mobile
@@ -353,7 +353,7 @@ block content
                   div#jerry
                     span Jerry Frank,
                     br
-                    span.serif Founder &amp; Chairman
+                    span.serif CEO
           div.grid__item.eight-twelfths.hide-mobile
             article.swappable
               section#swappable-about(data-swap='about')
@@ -436,22 +436,22 @@ block content
       div#contact-container
         section#contact.grid.wrapper
           article.grid__item.one-whole.desk--space-top-sm.space-bottom-lg
-            form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
+            form(role='form', action='/contact', method='POST', novalidate).grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
               div.grid__item.one-whole.space-top-xs
                 label.lbl.status-header Got a quick question?
                 p We'd love to get to back to you with an answer.
               div.grid__item.six-twelfths
                 label.lbl What's your name?
-                input.input-grey.clearable(name='name', type='text')
+                input(required="").input-grey.clearable(name='name', type='text')
               div.grid__item.six-twelfths
                 label.lbl What's your phone #?
                 input.input-grey.clearable(name='phoneNumber', type='tel')
               div.grid__item.six-twlefths
                 label.lbl What's your email address?
-                input.input-grey.clearable(name='emailAddress', type='email')
+                input(required="").input-grey.clearable(name='emailAddress', type='email')
               div.grid__item.one-whole
                 label.lbl What's on your mind?
-                textarea.input-grey.clearable(name='comments', type='text', style='height: 100px')
+                textarea(required="").input-grey.clearable(name='comments', type='text', style='height: 100px')
                 input.winnie-the-pooh(name='cryptoTime', type='text', value='#{cryptoTime}')
                 input.winnie-the-pooh(name='hpizzle', type='text')
               div.grid__item.one-whole.right

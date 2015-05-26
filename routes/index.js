@@ -20,41 +20,41 @@ self.homepage = function(req, res){
 
         ht.getJobs(null, function(err, data) {
 
-            var blogPosts = helpers.getLatestXByProp(posts, 'PublishDate', { Category: 'Blog' }, 1),
-            newsArticles = helpers.getLatestXByProp(posts, 'PublishDate', { Category: 'News' }, 1),
-            careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 1);
+            var visiblePosts = [];
 
-            var blogPost,
-                newsArticle,
-                careerListing;
+            var blogPosts = helpers.getLatestXByProp(posts, 'PublishDate', { Category: 'Blog' }, 3),
+                newsArticles = helpers.getLatestXByProp(posts, 'PublishDate', { Category: 'News' }, 1),
+                careerListings = helpers.getLatestXByProp(data, 'PublishDate', { Category: 'Career' }, 1);
 
-            if (blogPosts && blogPosts[0]) {
-                blogPosts[0].BaseUrl = '/post';
-                blogPosts[0].CategoryLink = '/post/category/Blog';
-                blogPost = blogPosts[0];
-            } else {
-                blogPost = {};
+            if (blogPosts.length) {
+                for (var i = 0; i < blogPosts.length; i++) {
+                    blogPosts[i].BaseUrl = '/post';
+                    blogPosts[i].CategoryLink = '/post/category/Blog';
+                    visiblePosts.push(blogPosts[i]);
+                }
             }
 
-            if (newsArticles && newsArticles[0]) {
+            if (newsArticles.length) {
+                visiblePosts.pop();
                 newsArticles[0].BaseUrl = '/post';
                 newsArticles[0].CategoryLink = '/post/category/News';
-                newsArticle = newsArticles[0];
-            } else {
-                newsArticle = {};
+                visiblePosts.push(newsArticles[0]);
             }
 
-            if (careerListings && careerListings[0]) {
+            if (careerListings.length) {
+                if (newsArticles.length) {
+                    visiblePosts.splice(1, 1);
+                } else {
+                    visiblePosts.pop();
+                }
                 careerListings[0].BaseUrl = '/jobs';
                 careerListings[0].CategoryLink = '/jobs';
-                careerListing = careerListings[0];
-            } else {
-                careerListing = {};
+                visiblePosts.push(careerListings[0]);
             }
 
             res.render('index', {
                 title: 'CSG Pro | A Team of Digital Craftsmen',
-                posts: [blogPost, newsArticle, careerListing],
+                posts: visiblePosts,
                 moment: moment,
                 contacted: contacted,
                 cryptoTime: spam.create()

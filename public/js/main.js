@@ -18,6 +18,7 @@ var carousel        = require('./modules/carousel');
 var mobileNav       = require('./modules/mobile-nav');
 var lightbox        = require('./modules/lightbox');
 var modal           = require('./modules/modal');
+var contactHandler  = require('./modules/contact-handler');
 var swipeshow       = require('./vendor/swipeshow.js');
 var magnific        = require('./vendor/magnific.js');
 var simplemodal     = require('./vendor/jquery.simplemodal.1.4.4.min.js');
@@ -39,7 +40,7 @@ if (window.location.pathname === '/') { // only do all this javascript in root
 } else if (/^\/post/i.test(window.location.pathname)){ // do on "post" pages
   mobileNav(options);
   lightbox();
-}
+} 
 
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
