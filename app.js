@@ -126,11 +126,7 @@ function createToken(user) {
  * ROUTES
  **********************************/
 app.get('/', index.homepage);
-app.get('/sharepoint', landing.sharepoint);
-app.get('/sharepoint/register', register.sharepoint);
-app.get('/powerplay/register', register.powerplay);
 app.get('/power-bi/register', register.powerbi);
-app.get('/pdx-power-bi/register', register.pdxpowerbi);
 
 app.get('/admin/login', function (req, res) {
     res.redirect('/admin');

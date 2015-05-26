@@ -4,110 +4,126 @@ VERSION:2.0
 METHOD:PUBLISH
 X-MS-OLK-FORCEINSPECTOROPEN:TRUE
 BEGIN:VTIMEZONE
-TZID:Mountain Standard Time
+TZID:Pacific Standard Time
 BEGIN:STANDARD
 DTSTART:16011104T020000
 RRULE:FREQ=YEARLY;BYDAY=1SU;BYMONTH=11
-TZOFFSETFROM:-0600
-TZOFFSETTO:-0700
+TZOFFSETFROM:-0700
+TZOFFSETTO:-0800
 END:STANDARD
 BEGIN:DAYLIGHT
 DTSTART:16010311T020000
 RRULE:FREQ=YEARLY;BYDAY=2SU;BYMONTH=3
-TZOFFSETFROM:-0700
-TZOFFSETTO:-0600
+TZOFFSETFROM:-0800
+TZOFFSETTO:-0700
 END:DAYLIGHT
 END:VTIMEZONE
 BEGIN:VEVENT
 CLASS:PUBLIC
-CREATED:20141024T162142Z
-DESCRIPTION:Data is changing everything\, including what it takes to win in
-	 business. Are you ready? Are you savvy about your data? If not\, you're n
-	ot alone. The roadblocks are formidable: too much data from too many sourc
-	es\; not enough data understanding on the business side\; low quality data
-	 or incomprehensible data\; limited analysis tool sets.\nWhat does it take
-	 to master your data? What does that look like and how do you get there as
-	 painlessly as possible? Why is Power BI such a smart way to go?\nJoin CSG
-	 Pro to look at a new paradigm for building your organizational data exper
-	tise. We'll talk technology and tools\, but we'll be focused on strategy. 
-	\n• 	Learn what skill base you need	\n• 	Learn what management commitm
-	ent looks like	\n• 	Learn why (and how) Power BI is a fast track way to 
-	get there	\n• 	Understand how to start small for a big payout	\n\nAbout 
-	the presenter\, CSG Pro\nCSG Pro specializes in building custom business s
-	oftware and interactive tools that allow you to collaborate and connect wi
-	th colleagues\, customers and vendors. Based in Portland\, Oregon and main
-	taining a presence in Boise\, Idaho\, CSG Pro has served leading companies
-	 and public agencies since 1993.\n
-DTEND;TZID="Mountain Standard Time":20141113T094500
-DTSTAMP:20141024T162142Z
-DTSTART;TZID="Mountain Standard Time":20141113T081500
-LAST-MODIFIED:20141024T162142Z
-LOCATION:Microsoft Boise Office: 401 W. Front Street Suite 600 Boise\, ID 83702
-ORGANIZER;CN="CSG Pro":mailto:info@csgpro.com
+CREATED:20150526T223343Z
+DESCRIPTION:Event: Understanding Microsoft’s Self-Service Landscape and t
+	he Power BI Puzzle\nIn recent years Microsoft has become the standard bear
+	er for self-service BI. The Microsoft cadre of products supporting self-se
+	rvice BI is both rich and diverse. Recent additions of Power Designer\, Po
+	wer BI Service and Datazen to the Power BI offering are intriguing but als
+	o confusing. The big challenge for self-service adopters is understanding
+	how the pieces fit together.\nJoin CSG Pro as we map the current landscape
+	 of the Microsoft self-service BI stack and sort out the confusion. Learn
+	how to get the most from the Microsoft BI stack while empowering business
+	users through self-service. You'll leave with answers to these questions:\
+	n\n• 	What are the capabilities to best fit my needs?	\n• 	What are th
+	e trade-offs?	\n• 	How do the tools and technologies enable adequate con
+	trol?\n\nJune 16th\, 2015\n4:00pm-6:00pm\nCSG Pro: 734 NW 14th Avenue Port
+	land\, OR 97209\nMap <https://www.bing.com/maps/?v=2&cp=45.528622~-122.685
+	449&lvl=19&sty=r&q=734%20NW%2014th%20Avenue&form=LMLTCC>  \n\n	\n		\n\n
+DTEND;TZID="Pacific Standard Time":20150616T180000
+DTSTAMP:20150526T223343Z
+DTSTART;TZID="Pacific Standard Time":20150616T160000
+LAST-MODIFIED:20150526T223343Z
+LOCATION:CSG Pro: 734 NW 14th Avenue Portland\, Oregon 97209
 PRIORITY:5
 SEQUENCE:0
-SUMMARY;LANGUAGE=en-us:Fast-Tracking Data Mastery with Power BI
+SUMMARY;LANGUAGE=en-us:From Confusion to Clarity: Understanding Microsoft's
+	 Self-service Landscape and the Power BI Puzzle
 TRANSP:OPAQUE
-UID:040000008200E00074C5B7101A82E00800000000C0A422E969EFCF01000000000000000
-	0100000000F4E6637B2B71345B1F7BF223D09E63F
+UID:040000008200E00074C5B7101A82E00800000000E0AA48A7A094D001000000000000000
+	0100000003A0791A779A23748AB2F3B5758D0A285
 X-ALT-DESC;FMTTYPE=text/html:<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//E
 	N">\n<HTML>\n<HEAD>\n<META NAME="Generator" CONTENT="MS Exchange Server ve
-	rsion rmj.rmm.rup.rpr">\n<TITLE></TITLE>\n</HEAD>\n<BODY>\n<!-- Converted 
-	from text/rtf format -->\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LAN
-	G="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">Data is changing ev
-	erything\, including what it takes to win in business. Are you ready? Are 
-	you savvy about your data? If not\, you're not alone. The roadblocks are f
-	ormidable: too much data from too many sources\; not enough data understan
-	ding on the business side\; low quality data or incomprehensible data\; li
-	mited analysis tool sets.</FONT></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-u
-	s"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">
-	What does it take to master your data? What does that look like and how do
-	 you get there as painlessly as possible? Why is Power BI such a smart way
-	 to go?</FONT></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LA
-	NG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Arial">Join CSG Pro to lo
-	ok at a new paradigm for building your organizational data expertise. We'l
-	l talk technology and tools\, but we'll be focused on strategy. </FONT></S
-	PAN></P>\n\n<P DIR=LTR ALIGN=RIGHT><SPAN LANG="en-us"></SPAN><SPAN LANG="e
-	n-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Times New Roman">• &nbsp\;&
-	nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
-	ANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE="Arial">Learn what skill
-	 base you need&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="e
-	n-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SP
-	AN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Times New Roman">•
-	 &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SP
-	AN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE="Arial">Learn 
-	what management commitment looks like&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></
-	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us
-	"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
-	ANG="en-us"><FONT FACE="Times New Roman">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;
-	&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><
-	SPAN LANG="en-us"> <FONT FACE="Arial">Learn why (and how) Power BI is a fa
-	st track way to get there&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></
-	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG=
-	"en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Ti
-	mes New Roman">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN
-	 LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT F
-	ACE="Arial">Understand how to start small for a big payout&nbsp\;</FONT></
-	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us
-	"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN L
-	ANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SP
-	AN LANG="en-us"></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN 
-	LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT COL
-	OR="#757575" SIZE=4 FACE="Arial">About the presenter\, CSG Pro</FONT></SPA
-	N></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><
-	SPAN LANG="en-us"><FONT SIZE=2 FACE="Arial">CSG Pro specializes in buildin
-	g custom business software and interactive tools that allow you to collabo
-	rate and connect with colleagues\, customers and vendors. Based in Portlan
-	d\, Oregon and maintaining a presence in Boise\, Idaho\, CSG Pro has serve
-	d leading companies and public agencies since 1993.</FONT></SPAN><SPAN LAN
-	G="en-us"></SPAN></P>\n\n</BODY>\n</HTML>
+	rsion rmj.rmm.rup.rpr">\n<TITLE></TITLE>\n</HEAD>\n<BODY>\n<!-- Converted
+	from text/rtf format -->\n\n<P DIR=LTR><SPAN LANG="en-us"><B></B></SPAN><S
+	PAN LANG="en-us"><B><FONT FACE="Century Gothic">Event: Understanding Micro
+	soft’s Self-Service Landscape and the Power BI Puzzle</FONT></B></SPAN><
+	/P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPA
+	N LANG="en-us"><FONT FACE="Century Gothic">In recent years Microsoft has b
+	ecome the standard bearer for self-service BI. The Microsoft cadre of prod
+	ucts supporting self-service BI is both rich and diverse. Recent additions
+	 of Power Designer\, Power BI Service and Datazen to the Power BI offering
+	 are intriguing but also confusing. The big challenge for self-service ado
+	pters is understanding how the pieces fit together.</FONT></SPAN></P>\n\n<
+	P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="
+	en-us"><FONT FACE="Century Gothic">Join CSG Pro as we map the current land
+	scape of the Microsoft self-service BI stack and sort out the confusion. L
+	earn how to get the most from the Microsoft BI stack while empowering busi
+	ness users through self-service. You'll leave with answers to these questi
+	ons:</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPA
+	N LANG="en-us"></SPAN></P>\n\n<P DIR=LTR ALIGN=RIGHT><SPAN LANG="en-us"></
+	SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Century Goth
+	ic">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-u
+	s"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE="Centur
+	y Gothic">What are the capabilities to best fit my needs?</FONT></SPAN><SP
+	AN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><BR>\n
+	</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-
+	us"><FONT FACE="Century Gothic">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</
+	FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG
+	="en-us"> <FONT FACE="Century Gothic">What are the trade-offs?&nbsp\;&nbsp
+	\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LANG="en-us"></SP
+	AN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG="e
+	n-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><FONT FACE="Cent
+	ury Gothic">• &nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</FONT></SPAN><SPAN LA
+	NG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> <FONT FACE
+	="Century Gothic">How do the tools and technologies enable adequate contro
+	l?</FONT></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN
+	LANG="en-us"></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"><B></B></SPAN><S
+	PAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B><FONT FACE="Century G
+	othic">June 16</FONT></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LAN
+	G="en-us"><B></B></SPAN><SPAN LANG="en-us"><B><SUP><FONT FACE="Century Got
+	hic">th</FONT></SUP></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG
+	="en-us"><B></B></SPAN><SPAN LANG="en-us"><B><FONT FACE="Century Gothic">\
+	, 2015</FONT></B></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"><B><FONT FAC
+	E="Century Gothic">4:00pm-6:00pm</FONT></B></SPAN></P>\n\n<P DIR=LTR><SPAN
+	 LANG="en-us"><B><FONT FACE="Century Gothic">CSG Pro: 734 NW 14</FONT></B>
+	</SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><
+	SPAN LANG="en-us"><B><SUP><FONT FACE="Century Gothic">th</FONT></SUP></B><
+	/SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><S
+	PAN LANG="en-us"><B><FONT FACE="Century Gothic"> Avenue Portland\, OR 9720
+	9</FONT></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B>
+	</B></SPAN><SPAN LANG="en-us"><B></B></SPAN></P>\n\n<P DIR=LTR><SPAN LANG=
+	"en-us"></SPAN><A HREF="https://www.bing.com/maps/?v=2&amp\;cp=45.528622~-
+	122.685449&amp\;lvl=19&amp\;sty=r&amp\;q=734%20NW%2014th%20Avenue&amp\;for
+	m=LMLTCC"><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B></B></SPA
+	N><SPAN LANG="en-us"><B><U><FONT COLOR="#0563C1" FACE="Century Gothic">Map
+	</FONT></U></B></SPAN><SPAN LANG="en-us"></SPAN></A><SPAN LANG="en-us"><B>
+	</B></SPAN><SPAN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B><FONT FA
+	CE="Century Gothic"></FONT></B></SPAN><SPAN LANG="en-us"><B></B></SPAN><SP
+	AN LANG="en-us"><B></B></SPAN><SPAN LANG="en-us"><B> </B></SPAN></P>\n\n<P
+	 DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="e
+	n-us"></SPAN></P>\n\n<P DIR=LTR><SPAN LANG="en-us"></SPAN><SPAN LANG="en-u
+	s"></SPAN><SPAN LANG="en-us">&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nb
+	sp\;</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG=
+	"en-us"><BR>\n</SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><
+	SPAN LANG="en-us">&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</SPAN>
+	<SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"> &n
+	bsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;&nbsp\;</SPAN><SPAN LANG="en-us"><
+	/SPAN><SPAN LANG="en-us"></SPAN><SPAN LANG="en-us"><BR>\n</SPAN><SPAN LANG
+	="en-us"></SPAN></P>\n\n</BODY>\n</HTML>
 X-MICROSOFT-CDO-BUSYSTATUS:BUSY
 X-MICROSOFT-CDO-IMPORTANCE:1
 X-MICROSOFT-DISALLOW-COUNTER:FALSE
 X-MS-OLK-AUTOFILLLOCATION:FALSE
 X-MS-OLK-CONFTYPE:0
 BEGIN:VALARM
-TRIGGER:-PT15M
+TRIGGER:-PT60M
 ACTION:DISPLAY
 DESCRIPTION:Reminder
 END:VALARM
