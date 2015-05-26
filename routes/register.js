@@ -15,7 +15,7 @@ exports.powerbi = function(req, res){
                   'Time: 4pm to 6pm<br />' +
                   'Place: 734 NW 14th Avenue, Portland, Oregon 97209';
   res.render('register-power-bi', {
-    title: 'Understanding Microsoft’s Self-service Landscape and the Power BI Puzzle',
+    title: 'Understanding Microsoft’s Self-Service Landscape and the Power BI Puzzle',
     pageClass: 'register',
     icsfile: 'power-bi-event.ics',
     csvfile: 'power-bi-registrants.csv',
