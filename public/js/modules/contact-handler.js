@@ -1,15 +1,31 @@
 (function(){
   'use strict';
 
+  // binding onchange on inputs for all forms routing to contact
+  $('form').each(function(){
+    if($(this).attr("action") === "/contact"){
+      var form = $(this);
+
+      $(this).find(":input").each(function(){
+        $(this).on("change", function(){
+          valid(form);
+          $(this).addClass('dirty');
+        });
+      });
+    }
+  });
+
   $('.ajaxSubmit').on('click', function(event){
     event.preventDefault();
 
+    $(this.form).addClass("dirty");
+
     var that = this;
 
-    var name,
-        phoneNumber,
-        emailAddress,
-        comments;
+    var name = "",
+        phoneNumber = "",
+        emailAddress = "",
+        comments = "";
 
     if(this.form.name.value){
       name = this.form.name.value;
@@ -95,80 +111,44 @@
   });
 
   function valid(form){
+    var validity = true;
 
+    $(form).find(':input').each(function(index){
+      if($(this).attr("required") === "required"){
+        // Check email fields
+        if($(this).attr("type") === 'email'){
+          if(!IsEmail(this.value)){
+            if($(this).hasClass("dirty") || $(form).hasClass("dirty")){
+              $(this).addClass("invalid");
+            }
+            validity = false;
+          }
+          else{
+            $(this).removeClass("invalid");
+          }
+        }
 
-    var hasName = false
-    var hasLastOrFirstName = false;
-    var hasEmail = false;
-    var hasComments = false;
+        // catch all (mainly text)
+        // just verifies that there is a value
+        else{
+          if(!this.value){
+            if($(this).hasClass("dirty") || $(form).hasClass("dirty")){
+              $(this).addClass("invalid");
+            }
+            validity = false;
+          }
+          else{
+            $(this).removeClass("invalid");
+          }
+        }
+      }
+    });
 
-    // Checking for names, firstNames, and lastNames
-    if(form.name){
-      if(form.name.value){
-        hasName = true;
-        $(form.name).removeClass("invalid");
-      }
-      else{
-        hasName = false;
-        $(form.name).addClass("invalid");
-      }
-    }
-    if(form.firstName){
-      if(form.firstName.value){
-        hasLastOrFirstName = true;
-        $(form.firstName).removeClass("invalid");
-      }
-      else{
-        $(form.firstName).addClass("invalid");
-      }
-    }
-    if(form.lastName){
-      if(form.lastName.value){
-        hasLastOrFirstName = true;
-        $(form.lastName).removeClass("invalid");
-      }
-      else{
-        $(form.lastName).addClass("invalid");
-      }
-    }
-
-
-    // Checking for emails
-    if(form.emailAddress){
-      if(IsEmail(form.emailAddress.value)){
-        hasEmail = true;
-        $(form.emailAddress).removeClass("invalid");
-      }
-      else{
-        hasEmail = false;
-        $(form.emailAddress).addClass("invalid");
-      }
-    }
-
-    // Checking for comments
-    if(form.comments){
-      if(form.comments.value){
-        hasComments = true;
-        $(form.comments).removeClass("invalid");
-      }
-      else{
-        hasComments = false;
-        $(form.comments).addClass("invalid");
-      }
-    }
-
-    if((hasName || hasLastOrFirstName) && hasEmail && hasComments){
-      return true;
-    }
-    else{
-      return false;
-    }
-
-
+    return validity;
   }
 
   function IsEmail(email) {
-      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      return regex.test(email);
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
   }
 })();

@@ -10,53 +10,15 @@ var spam = require('../modules/spam');
 
 var isSpam = false;
 
-exports.powerplay = function(req, res){
-  res.render('register-powerplay', {
-    title: 'Power Play Event Registration',
-    pageClass: 'register',
-    icsfile: 'powerplay_webcast_062614.ics',
-    csvfile: 'powerplay-registrants.csv',
-    details: 'Live Webcast Presented by CSG Pro on Thursday June 26th at 9am (PDT)',
-    headerImg: 'email-powerplay-header.png',
-    buttonImg: 'email-powerplay-save-cal.png',
-    cryptoTime: spam.create()
-  });
-};
-
-exports.sharepoint = function(req, res){
-  res.render('register-sharepoint', {
-    title: 'SharePoint Event Registration',
-    pageClass: 'register',
-    icsfile: 'sharepoint-event.ics',
-    csvfile: 'sharepoint-registrants.csv',
-    details: 'Live Webcast Presented by CSG Pro on May 30th at 11am (PDT)',
-    cryptoTime: spam.create()
-  });
-};
-
 exports.powerbi = function(req, res){
-    var details = 'Date: November 13, 2014<br />' +
-                  'Time: 8:15am to 9:45am<br />' +
-                  'Place: Microsoft Boise Office - 401 W. Front Street Suite 600 Boise, ID 83702';
+    var details = 'Date: June 16, 2015<br />' +
+                  'Time: 4pm to 6pm<br />' +
+                  'Place: 734 NW 14th Avenue, Portland, Oregon 97209';
   res.render('register-power-bi', {
-    title: 'Fast-Tracking Data Mastery with Power BI Event Registration',
+    title: 'Understanding Microsoft’s Self-Service Landscape and the Power BI Puzzle',
     pageClass: 'register',
     icsfile: 'power-bi-event.ics',
     csvfile: 'power-bi-registrants.csv',
-    details: details,
-    cryptoTime: spam.create()
-  });
-};
-
-exports.pdxpowerbi = function(req, res){
-    var details = 'Date: October 29, 2014<br />' +
-                  'Time: 8:15am to 9:45am<br />' +
-                  'Place: Microsoft Portland Office - 1414 NW Northrup St Suite 900 Portland, OR 97209';
-  res.render('register-power-bi', {
-    title: 'Fast-Tracking Data Mastery with Power BI Event Registration',
-    pageClass: 'register',
-    icsfile: 'pdx-power-bi-event.ics',
-    csvfile: 'pdx-power-bi-registrants.csv',
     details: details,
     cryptoTime: spam.create()
   });

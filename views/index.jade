@@ -436,22 +436,22 @@ block content
       div#contact-container
         section#contact.grid.wrapper
           article.grid__item.one-whole.desk--space-top-sm.space-bottom-lg
-            form(role='form', action='/contact', method='POST').grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
+            form(role='form', action='/contact', method='POST', novalidate).grid__item.five-twelfths.panel-white.full.right-gutter.hide-mobile
               div.grid__item.one-whole.space-top-xs
                 label.lbl.status-header Got a quick question?
                 p We'd love to get to back to you with an answer.
               div.grid__item.six-twelfths
                 label.lbl What's your name?
-                input.input-grey.clearable(name='name', type='text')
+                input(required="").input-grey.clearable(name='name', type='text')
               div.grid__item.six-twelfths
                 label.lbl What's your phone #?
                 input.input-grey.clearable(name='phoneNumber', type='tel')
               div.grid__item.six-twlefths
                 label.lbl What's your email address?
-                input.input-grey.clearable(name='emailAddress', type='email')
+                input(required="").input-grey.clearable(name='emailAddress', type='email')
               div.grid__item.one-whole
                 label.lbl What's on your mind?
-                textarea.input-grey.clearable(name='comments', type='text', style='height: 100px')
+                textarea(required="").input-grey.clearable(name='comments', type='text', style='height: 100px')
                 input.winnie-the-pooh(name='cryptoTime', type='text', value='#{cryptoTime}')
                 input.winnie-the-pooh(name='hpizzle', type='text')
               div.grid__item.one-whole.right
