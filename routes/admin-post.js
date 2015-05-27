@@ -233,6 +233,7 @@ exports.create = function (req, res) {
 
             email.sendEmail(
               emails, // to
+              null, // replyTo
               'New blog post submitted', // subject
               'A new post was submitted by ' // body
               + req.user.FullName + ' at ' + moment().format('LLL') + '.\r\n\r\n'
