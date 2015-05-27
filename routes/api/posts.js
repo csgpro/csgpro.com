@@ -168,6 +168,7 @@ function sendNotification (msg, postId) {
 
 		email.sendEmail(
 			emails, // to
+			null, // replyTo
 			'New blog post submitted', // subject
 			msg, // message body
 			true,

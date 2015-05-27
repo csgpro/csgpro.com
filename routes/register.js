@@ -61,6 +61,7 @@ var sendConfirmation = exports.sendConfirmation = function(data) {
 
   email.sendEmail(
     data.email,
+    'CSG Pro <info@csgpro.com>',
     data.subject,
     message,
     true,
