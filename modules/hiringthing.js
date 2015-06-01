@@ -43,7 +43,7 @@ self.getJobs = function (filter, callback) {
             callback(err);
         } else if (response.statusCode === 404) {
             callback(); // No jobs found
-        } else if (data === 'object') {
+        } else if (data.length) {
 
             for (var i = 0; i < data.length; i++) {
                 data[i].PublishDate = data[i].created_at;
