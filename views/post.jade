@@ -59,9 +59,7 @@ block content
               p!= marked(post.Markdown)
               if (post.url)
                 div.space-top.space-bottom
-                  p Please contact us via &nbsp;
-                    a(href='mailto:jobs@csgpro.com') jobs@csgpro.com
-                  //p
+                  p
                     a(href='#{post.url}') Apply for this position
               if (post.Topics && post.Topics != '')
                 div.space-top.hide-desk

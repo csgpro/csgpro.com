@@ -48,12 +48,6 @@ self.getJobByID = function (req, res) {
         if (!err) {
             var job = data[0];
 
-            var aboutCsgPro = '<h3>About CSG PRO</h3>' + "\n\r";
-            aboutCsgPro = aboutCsgPro + 'CSG Pro is a boutique consulting firm that has been providing custom business solutions for clients for over 20 years. We are a privately held, profitable firm that has grown up in Portland, serving mostly local clients. We are a Microsoft Gold Certified Partner specializing in BI/Analytics, Application Development, Windows Azure and SharePoint. We love what we do, and we have a lot of fun doing it.' + "\n\r\n\r";
-            aboutCsgPro = aboutCsgPro + 'Located in the vibrant Pearl District, we fully enjoy being in the cultural heart of the city. The neighborhood is bike friendly with great food, shops, galleries and all the best coffee shops. We look forward to hearing from you.';
-
-            job.Markdown = job.Markdown + aboutCsgPro;
-
             res.render('post', {
                 post: job,
                 marked: md,
