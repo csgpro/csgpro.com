@@ -196,10 +196,6 @@ block content
         mixin contactForm('Cloud services')
       div#modal-analytics.modal
         mixin contactForm('Analytics')
-      div#modal-portals.modal
-        mixin contactForm('Portals')
-      div#modal-windows8.modal
-        mixin contactForm('Windows 8')
 
       div#services-container
         section#services.grid.wrapper
@@ -234,20 +230,6 @@ block content
                   | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
                   hr.hide-mobile
               div#swapper-target-analytics.hide-desk.section
-              li#swapper-portals(data-swap='portals')
-                div.services-menu
-                  | <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" width="90" height="72" viewBox="0 0 90 72" enable-background="new 0 0 90 72" xml:space="preserve"><path fill="#003C56" d="M67.813 12.465h-48.98c-1.942 0-4.516 2.416-4.516 4.162v29.622c0 1.746 2.574 4.162 4.516 4.162h12.891v14.032l12.501-14.032h23.587c1.942 0 4.516-2.416 4.516-4.162V16.627C72.328 14.88 69.754 12.465 67.813 12.465zM26.397 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.968-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C33.025 34.821 30.057 37.564 26.397 37.564zM43.323 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127s6.628 2.743 6.628 6.127C49.951 34.821 46.983 37.564 43.323 37.564zM60.249 37.564c-3.66 0-6.628-2.743-6.628-6.127 0-3.384 2.967-6.127 6.628-6.127 3.66 0 6.628 2.743 6.628 6.127C66.876 34.821 63.909 37.564 60.249 37.564z"></path></svg>
-                  span.serif.text-size-md portals
-                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
-                  hr.hide-mobile
-              div#swapper-target-portals.hide-desk.section
-              li#swapper-windows8(data-swap='windows8')
-                div.services-menu
-                  | <svg width="60" height="50" viewBox="0 0 70 72" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <path id="svg_2" d="m56.20145,15.464183l-44.824055,0c-1.707499,0 -3.091434,1.245015 -3.091434,2.780181l0,27.803576c0,1.53516 1.383937,2.780178 3.091434,2.780178l12.213629,0l10.99148,0l21.618065,0c1.7075,0 3.091438,-1.245018 3.091438,-2.780178l0,-27.803576c0.000877,-1.535166 -1.38306,-2.780181 -3.090557,-2.780181zm-22.412029,27.239972c-5.831171,0 -10.558006,-4.72683 -10.558006,-10.558002c0,-5.831173 4.726835,-10.558012 10.558006,-10.558012s10.55801,4.726839 10.55801,10.558012c0,5.831173 -4.726837,10.558002 -10.55801,10.558002z" fill="#003C56"/> <polygon id="svg_3" points="32.9348 27.4975 35.7748 31.0242 28.1473 31.0242 28.1473 33.0755 35.7704 33.0755 32.9348 36.6021 35.8416 36.6021 39.8589 32.0504 35.8416 27.4975" fill="#003C56"/> </g> </g> </svg>
-                  span.serif.text-size-md win 8
-                  | <svg width="51.688" height="27.688" xmlns="http://www.w3.org/2000/svg" class="chevron hide-desk"> <g> <title>Layer 1</title> <polyline transform="rotate(-180 25.8125 13.875)" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="  0.75,26.812 25.75,0.812 50.875,26.938 " /> </g> </svg>
-                  hr.hide-mobile
-              div#swapper-target-windows8.hide-desk.section
           article.grid__item.desk--ten-twelfths.hide-mobile
             div.swappable.space-top.grid__item.one-whole
               section#swappable-web(data-swap='web')
@@ -308,30 +290,6 @@ block content
                       li Data Presentation — Web-based or SharePoint dashboards
                       li Business Data Architecture and Analytics
                     h3.right: a.modal-toggle(data-modal='analytics', href='javascript:void(0)').text-size-md contact us about analytics }
-              section#swappable-portals.hide(data-swap='portals')
-                div.grid__item.one-whole
-                  span.title Portals
-                  div.fr.hide-mobile
-                    | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <path fill="#003C56" d="m51.742538,3.215l-42.964195,0c-1.703482,0 -3.961339,2.119262 -3.961339,3.650817l0,25.983777c0,1.531555 2.257857,3.650822 3.961339,3.650822l11.307707,0l0,12.308567l10.965605,-12.308567l20.69001,0c1.703484,0 3.961338,-2.119267 3.961338,-3.650822l0,-25.983777c0,-1.532431 -2.257862,-3.650817 -3.960464,-3.650817zm-36.329222,22.016302c-3.210474,0 -5.81394,-2.406101 -5.81394,-5.374475c0,-2.96837 2.603466,-5.37447 5.81394,-5.37447c3.210472,0 5.81394,2.406099 5.81394,5.37447c0,2.968374 -2.603468,5.374475 -5.81394,5.374475zm14.847126,0c-3.210476,0 -5.81394,-2.406101 -5.81394,-5.374475c0,-2.96837 2.602589,-5.37447 5.81394,-5.37447s5.813936,2.406099 5.813936,5.37447c0,2.968374 -2.603462,5.374475 -5.813936,5.374475zm14.84712,0c-3.210472,0 -5.813942,-2.406101 -5.813942,-5.374475c0,-2.96837 2.602589,-5.37447 5.813942,-5.37447c3.210472,0 5.813934,2.406099 5.813934,5.37447c-0.000874,2.968374 -2.603462,5.374475 -5.813934,5.374475z" /> </g> </svg>
-                  hr
-                div.one-whole
-                  div.grid__item.one-whole.text-column
-                    p A portal should serve as an inviting and effective window into valuable information that is enjoyable for all users. At CSG, we design and develop highly functional and collaborative, cloud or hybrid SharePoint solutions firmly rooted in business strategy. We believe that business requirements, architecture, user interface design, information architecture, and governance are not just “nice to have” but are key elements to any successful implementation.
-                    p Using technologies like Office 365 with SharePoint Online, we build powerful enterprise content management and collaboration tools without the need to support on-premises infrastructure. For clients who require customized on-premises solutions, we have a wealth of experience in infrastructure architecture and a legacy of application development knowledge that gives us unique capabilities to develop collaboration and portal solutions that help connect people, processes and information across an organization.
-                    p The output is a portal functioning as a core business tool with high user adoption and satisfaction.
-                    h3.right: a.modal-toggle(data-modal='portals', href='javascript:void(0)').text-size-md contact us about portals }
-              section#swappable-windows8.hide(data-swap='windows8')
-                div.grid__item.one-whole
-                  span.title Windows 8
-                  div.fr.hide-mobile
-                    | <svg width="60" height="50" xmlns="http://www.w3.org/2000/svg"> <g> <title>Layer 1</title> <g id="svg_1"> <path fill="#003C56" d="m52.648151,8.154538l-44.824056,0c-1.707499,0 -3.091435,1.245015 -3.091435,2.780181l0,27.803574c0,1.535164 1.383936,2.780182 3.091435,2.780182l12.21363,0l10.991478,0l21.618067,0c1.7075,0 3.091438,-1.245018 3.091438,-2.780182l0,-27.803574c0.000877,-1.535166 -1.38306,-2.780181 -3.090557,-2.780181zm-22.412029,27.239974c-5.831171,0 -10.558006,-4.726833 -10.558006,-10.558004c0,-5.831173 4.726835,-10.558009 10.558006,-10.558009s10.55801,4.726836 10.55801,10.558009c0,5.831171 -4.726837,10.558004 -10.55801,10.558004z" id="svg_2"/> <polygon fill="#003C56" points="29.3815 20.1879 32.2215 23.7145 24.594 23.7145 24.594 25.7658 32.2171 25.7658 29.3815 29.2925 32.2883 29.2925 36.3056 24.7407 32.2883 20.1879" id="svg_3"/> </g> </g> </svg>
-                  hr
-                div.one-whole
-                  div.grid__item.one-whole.text-column
-                    p Tablet devices have outsold the desktop PC and are expected to outsell laptops in the next 3 years. This dramatic trend has driven change in operating systems and apps. Microsoft’s release of Windows 8 adds fuel to that fire. CNET says, "Microsoft makes an aggressive, forward-thinking, and bold statement for the future of PCs with Windows 8." The world of possibilities is wide open for building great apps that take advantage of things like touch, video and proximity sharing.
-                    p Great apps are defined by the quality of the user experience and the seamless blending of mobile, web and cloud capabilities that enable users to connect, share and interact in rich and meaningful ways. Our passion is building great apps on Windows 8.
-                    p Whether you need a world-class consumer app in the Windows Store or a line of business application using Windows 8, we have the team and experience you need. CSG has worked closely with Microsoft through the Application Fast Track (AFT) program, the Microsoft Application Acceleration Program (MAAP) and is a Windows Design Agency Network partner. We have built Windows 8 applications for some of today's biggest brands.
-                    h3.right: a.modal-toggle(data-modal='windows8', href='javascript:void(0)').text-size-md contact us about Windows 8 }
 
 
       /////////////////////////////////
