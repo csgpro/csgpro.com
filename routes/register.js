@@ -11,13 +11,12 @@ var spam = require('../modules/spam');
 var isSpam = false;
 
 exports.powerbi = function(req, res){
-    var details = 'Date: June 16, 2015<br />' +
+    var details = 'Date: November 17, 2015<br />' +
                   'Time: 4pm to 6pm<br />' +
                   'Place: 734 NW 14th Avenue, Portland, Oregon 97209';
   res.render('register-power-bi', {
-    title: 'Understanding Microsoft’s Self-Service Landscape and the Power BI Puzzle',
+    title: 'Power BI Deployed - A Real World Case Study',
     pageClass: 'register',
-    icsfile: 'power-bi-event.ics',
     csvfile: 'power-bi-registrants.csv',
     details: details,
     cryptoTime: spam.create()
