@@ -1,63 +1,20 @@
 {
-  "name": "csg-website",
-  "description": "An express app used to serve the CSG public website!",
-  "version": "1.0.1",
-  "private": true,
+  "name": "csgpro.com",
+  "version": "0.0.1",
+  "description": "Corporate Website",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "prepublish": "gulp --type production",
-    "test": "tap .\\test"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "engines": {
-    "node": "0.10.32"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csgpro/website.git"
   },
-  "dependencies": {
-    "async": "^0.9.0",
-    "azure": "0.8.0",
-    "browserify": "~6.3.2",
-    "combined-stream": "0.0.5",
-    "connect-livereload": "~0.5.0",
-    "debug": "~2.0.0",
-    "del": "^1.1.1",
-    "escape-string-regexp": "~1.0.2",
-    "event-stream": "~3.1.7",
-    "express": "3.3.3",
-    "gulp": "3.8.0",
-    "gulp-angular-templatecache": "~1.1.0",
-    "gulp-concat": "~2.4.1",
-    "gulp-express": "~0.1.0",
-    "gulp-filter": "~1.0.2",
-    "gulp-flatten": "0.0.2",
-    "gulp-inject": "~1.0.2",
-    "gulp-jshint": "~1.5.0",
-    "gulp-less": "~1.3.3",
-    "gulp-livereload": "~2.1.1",
-    "gulp-load-plugins": "~0.7.1",
-    "gulp-rev": "~2.0.1",
-    "gulp-sass": "~1.1.0",
-    "gulp-stylus": "~1.3.4",
-    "gulp-uglify": "~1.0.1",
-    "gulp-util": "~3.0.1",
-    "jade": "*",
-    "jwt-simple": "0.2.0",
-    "lodash": "1.3.1",
-    "marked": "0.2.9",
-    "moment": "2.1.0",
-    "nconf": "0.6.7",
-    "nib": "*",
-    "nodemailer": "0.5.2",
-    "passport": "0.1.17",
-    "passport-twitter": "1.0.0",
-    "passport-windowslive": "1.0.0",
-    "path": "~0.4.9",
-    "readable-stream": "~1.1.13",
-    "request": "2.27.0",
-    "rimraf": "~2.2.8",
-    "stylus": "*",
-    "through2": "~0.6.3",
-    "tiny-lr": "~0.1.4",
-    "validator": "1.5.1",
-    "vinyl-source-stream": "~1.0.0",
-    "ya-csv": "0.9.3"
-  }
+  "author": "Ken Howard <kenh@csgpro.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csgpro/website/issues"
+  },
+  "homepage": "https://github.com/csgpro/website#readme",
+  "dependencies": {}
 }
