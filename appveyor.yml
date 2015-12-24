@@ -24,12 +24,13 @@ test_script:
   # Output useful info for debugging.
   - node --version && npm --version
   - cmd: npm test
+  
+build: off
 
 matrix:
   fast_finish: true
 
 deploy:
-
   - provider: FTP
     protocol: ftps
     host: waws-prod-bay-001.ftp.azurewebsites.windows.net
