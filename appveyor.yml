@@ -39,6 +39,8 @@ deploy:
     password: zLo6kp3AQmoevYxL63Na1WqbPT70ftR4n8hxfTW80e2KC8z2QqfHolzDvfu9
     folder: site/wwwroot
     active_mode: false
+    on:
+      branch: appveyor-test
 
 cache:
   - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
