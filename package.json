@@ -1,0 +1,19 @@
+{
+  "name": "csgpro.com",
+  "version": "0.0.1",
+  "description": "Corporate Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csgpro/website.git"
+  },
+  "author": "Ken Howard <kenh@csgpro.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csgpro/website/issues"
+  },
+  "homepage": "https://github.com/csgpro/website#readme"
+}
