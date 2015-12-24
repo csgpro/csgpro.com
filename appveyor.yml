@@ -39,7 +39,7 @@ deploy:
       secure: lNTBac9FRJv1Qc2vurvVl6UaAJrKJifQWLNhQ8tU5wxKC5LEO42xFTMY/KPMM+xhxXYOEMu8/NoeYGahDFJ5Dw==
     folder: site/wwwroot
     active_mode: false
-    artifacts:
+    artifact:
     on:
       branch: appveyor-test
 
