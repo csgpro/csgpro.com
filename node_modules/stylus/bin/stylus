@@ -138,6 +138,12 @@ var disableCache = false;
 var deps = false;
 
 /**
+ * Hoist at-rules.
+ */
+
+var hoist = false;
+
+/**
  * Usage docs.
  */
 
@@ -178,7 +184,9 @@ var usage = [
   , '    --include-css           Include regular CSS on @import'
   , '    -D, --deps              Display dependencies of the compiled file'
   , '    --disable-cache         Disable caching'
+  , '    --hoist-atrules         Move @import and @charset to the top'
   , '    -r, --resolve-url       Resolve relative urls inside imports'
+  , '    --resolve-url-nocheck   Like --resolve-url but without file existence check'
   , '    -V, --version           Display the version of Stylus'
   , '    -h, --help              Display help information'
   , ''
@@ -274,6 +282,9 @@ while (args.length) {
     case '--disable-cache':
       disableCache = true;
       break;
+    case '--hoist-atrules':
+      hoist = true;
+      break;
     case '-i':
     case '--repl':
     case '--interactive':
@@ -322,7 +333,10 @@ while (args.length) {
       break;
     case '-r':
     case '--resolve-url':
-      resolveURL = true;
+      resolveURL = {};
+      break;
+    case '--resolve-url-nocheck':
+      resolveURL = { nocheck: true };
       break;
     case '-D':
     case '--deps':
@@ -395,6 +409,10 @@ function help(name) {
 
 // Compilation options
 
+if (files.length > 1 && extname(dest) === '.css') {
+  dest = dirname(dest);
+}
+
 var options = {
     filename: 'stdin'
   , compress: compress
@@ -404,6 +422,7 @@ var options = {
   , paths: [process.cwd()].concat(paths)
   , prefix: prefix
   , dest: dest
+  , 'hoist atrules': hoist
 };
 
 // Buffer stdin
@@ -567,7 +586,6 @@ function compileStdio() {
     // Compile to css
     var style = stylus(str, options);
     if (includeCSS) style.set('include css', true);
-    if (resolveURL) style.set('resolve url', true);
     if (disableCache) style.set('cache', false);
     usePlugins(style);
     importFiles(style);
@@ -605,7 +623,6 @@ function displayDeps() {
         if (err) throw err;
         options.filename = file;
         var style = stylus(str, options);
-        if (resolveURL) style.set('resolve url', true);
 
         usePlugins(style);
         importFiles(style);
@@ -631,7 +648,6 @@ function compileFile(file) {
         options._imports = [];
         var style = stylus(str, options);
         if (includeCSS) style.set('include css', true);
-        if (resolveURL) style.set('resolve url', true);
         if (disableCache) style.set('cache', false);
         if (sourcemap) style.set('sourcemap', sourcemap);
 
@@ -672,14 +688,22 @@ function compileFile(file) {
  * Write the given CSS output.
  */
 
+function createPath(file, sourceMap) {
+  var out;
+  if (files.length === 1 && extname(dest) === '.css') {
+    return [dest, sourceMap ? '.map' : ''].join('');
+  }
+  // --out support
+  out = [basename(file, extname(file)), sourceMap ? '.css.map' : '.css'].join('');
+  return dest
+    ? join(dest, out)
+    : join(dirname(file), out);
+}
+
 function writeFile(file, css) {
   // --print support
   if (print) return process.stdout.write(css);
-  // --out support
-  var out = basename(file, extname(file)) + '.css'
-    , path = dest
-      ? join(dest, out)
-      : join(dirname(file), out);
+  var path = createPath(file);
   fs.writeFile(path, css, function(err){
     if (err) throw err;
     console.log('  \033[90mcompiled\033[0m %s', path);
@@ -693,11 +717,7 @@ function writeFile(file, css) {
 */
 
 function writeSourcemap(file, sourcemap) {
-  // --out support
-  var out = basename(file, extname(file)) + '.css.map'
-    , path = dest
-      ? join(dest, out)
-      : join(dirname(file), out);
+  var path = createPath(file, true);
   fs.writeFile(path, JSON.stringify(sourcemap), function(err){
     if (err) throw err;
     // don't output log message if --print is present
@@ -722,6 +742,10 @@ function watch(file, rootFile) {
   // watch the file itself
   watchers[file] = {};
   watchers[file][rootFile] = true;
+  if (print) {
+    console.error('Stylus CLI Error: Watch and print cannot be used together');
+    process.exit(1);
+  }
   console.log('  \033[90mwatching\033[0m %s', file);
   // if is windows use fs.watch api instead
   // TODO: remove watchFile when fs.watch() works on osx etc
@@ -771,7 +795,7 @@ function usePlugins(style) {
   if (urlFunction) {
     style.define('url', stylus.url(urlFunction));
   } else if (resolveURL) {
-    style.define('url', stylus.resolver());
+    style.define('url', stylus.resolver(resolveURL));
   }
 }
 

@@ -198,12 +198,7 @@ Lexer.prototype = {
 
   interpolation: function() {
     if (/^#\{/.test(this.input)) {
-      var match;
-      try {
-        match = this.bracketExpression(1);
-      } catch (ex) {
-        return;//not an interpolation expression, just an unmatched open interpolation
-      }
+      var match = this.bracketExpression(1);
 
       this.consume(match.end + 1);
       return this.tok('interpolation', match.src);
@@ -223,6 +218,10 @@ Lexer.prototype = {
         name = name.slice(0, -1);
         tok = this.tok('tag', name);
         this.defer(this.tok(':'));
+        if (this.input[0] !== ' ') {
+          console.warn('Warning: space required after `:` on line ' + this.lineno +
+              ' of jade file "' + this.filename + '"');
+        }
         while (' ' == this.input[0]) this.input = this.input.substr(1);
       } else {
         tok = this.tok('tag', name);
@@ -456,12 +455,7 @@ Lexer.prototype = {
         tok = this.tok('call', captures[3]);
       } else {
         // interpolated call
-        var match;
-        try {
-          match = this.bracketExpression(2 + captures[1].length);
-        } catch (ex) {
-          return;//not an interpolation expression, just an unmatched open interpolation
-        }
+        var match = this.bracketExpression(2 + captures[1].length);
         this.consume(match.end + 1);
         assertExpression(match.src);
         tok = this.tok('call', '#{'+match.src+'}');
@@ -469,14 +463,10 @@ Lexer.prototype = {
 
       // Check for args (not attributes)
       if (captures = /^ *\(/.exec(this.input)) {
-        try {
-          var range = this.bracketExpression(captures[0].length - 1);
-          if (!/^\s*[-\w]+ *=/.test(range.src)) { // not attributes
-            this.consume(range.end + 1);
-            tok.args = range.src;
-          }
-        } catch (ex) {
-          //not a bracket expcetion, just unmatched open parens
+        var range = this.bracketExpression(captures[0].length - 1);
+        if (!/^\s*[-\w]+ *=/.test(range.src)) { // not attributes
+          this.consume(range.end + 1);
+          tok.args = range.src;
         }
         if (tok.args) {
           assertExpression('[' + tok.args + ']');
@@ -592,6 +582,21 @@ Lexer.prototype = {
       tok.escape = flags.charAt(0) === '=';
       tok.buffer = flags.charAt(0) === '=' || flags.charAt(1) === '=';
       if (tok.buffer) assertExpression(captures[1])
+      return tok;
+    }
+  },
+
+
+  /**
+   * Block code.
+   */
+
+  blockCode: function() {
+    var captures;
+    if (captures = /^-\n/.exec(this.input)) {
+      this.consume(captures[0].length - 1);
+      var tok = this.tok('blockCode');
+      this.pipeless = true;
       return tok;
     }
   },
@@ -855,6 +860,7 @@ Lexer.prototype = {
         if (isMatch) {
           // consume test along with `\n` prefix if match
           this.consume(str.length + 1);
+          ++this.lineno;
           tokens.push(str.substr(indent.length));
         }
       } while(this.input.length && isMatch);
@@ -868,7 +874,13 @@ Lexer.prototype = {
    */
 
   colon: function() {
-    return this.scan(/^: */, ':');
+    var good = /^: +/.test(this.input);
+    var res = this.scan(/^: */, ':');
+    if (res && !good) {
+      console.warn('Warning: space required after `:` on line ' + this.lineno +
+          ' of jade file "' + this.filename + '"');
+    }
+    return res;
   },
 
   fail: function () {
@@ -920,6 +932,7 @@ Lexer.prototype = {
       || this["while"]()
       || this.tag()
       || this.filter()
+      || this.blockCode()
       || this.code()
       || this.id()
       || this.className()
