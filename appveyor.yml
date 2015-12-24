@@ -2,9 +2,14 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
 # Build version format
-version: "{build}"
+version: 1.0.{build}-{branch}
 
-clone_depth: 1
+shallow_clone: true
+
+branches:
+  only:
+    - master
+    - dev
 
 # Fix line endings on Windows
 init:
@@ -24,31 +29,11 @@ test_script:
   # Output useful info for debugging.
   - node --version && npm --version
   - cmd: npm test
-
-on_finish:
-  - ps: $root = Resolve-Path .; [IO.Directory]::GetFiles($root.Path, '*.*', 'AllDirectories') | % { Push-AppveyorArtifact $_ -FileName $_.Substring($root.Path.Length + 1) -DeploymentName to-publish }
-
-artifacts:
-  - path: ./**/*
-    name: app
   
 build: off
 
 matrix:
   fast_finish: true
-
-deploy:
-  - provider: FTP
-    protocol: ftps
-    host: waws-prod-bay-001.ftp.azurewebsites.windows.net
-    username: csgdev\$csgdev
-    password:
-      secure: lNTBac9FRJv1Qc2vurvVl6UaAJrKJifQWLNhQ8tU5wxKC5LEO42xFTMY/KPMM+xhxXYOEMu8/NoeYGahDFJ5Dw==
-    folder: site/wwwroot
-    active_mode: false
-    artifact:
-    on:
-      branch: appveyor-test
 
 cache:
   - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
