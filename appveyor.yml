@@ -36,10 +36,10 @@ deploy:
     host: waws-prod-bay-001.ftp.azurewebsites.windows.net
     username: csgdev\$csgdev
     password:
-      secure: zLo6kp3AQmoevYxL63Na1WqbPT70ftR4n8hxfTW80e2KC8z2QqfHolzDvfu9
+      secure: lNTBac9FRJv1Qc2vurvVl6UaAJrKJifQWLNhQ8tU5wxKC5LEO42xFTMY/KPMM+xhxXYOEMu8/NoeYGahDFJ5Dw==
     folder: site/wwwroot
     active_mode: false
-    artifact:
+    artifacts:
     on:
       branch: appveyor-test
 
