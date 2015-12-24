@@ -30,6 +30,16 @@ test_script:
 matrix:
   fast_finish: true
 
+deploy:
+
+  - provider: FTP
+    protocol: ftps
+    host: waws-prod-bay-001.ftp.azurewebsites.windows.net
+    username: csgdev\$csgdev
+    password: zLo6kp3AQmoevYxL63Na1WqbPT70ftR4n8hxfTW80e2KC8z2QqfHolzDvfu9
+    folder: site/wwwroot
+    active_mode: false
+
 cache:
   - C:\Users\appveyor\AppData\Roaming\npm\node_modules -> package.json  # global npm modules
   - C:\Users\appveyor\AppData\Roaming\npm-cache -> package.json         # npm cache
