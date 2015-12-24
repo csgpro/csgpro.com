@@ -20,8 +20,6 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
 
-build_script: npm install
-
 test_script:
   # Output useful info for debugging.
   - node --version && npm --version
@@ -36,7 +34,8 @@ deploy:
     protocol: ftps
     host: waws-prod-bay-001.ftp.azurewebsites.windows.net
     username: csgdev\$csgdev
-    password: zLo6kp3AQmoevYxL63Na1WqbPT70ftR4n8hxfTW80e2KC8z2QqfHolzDvfu9
+    password:
+      secure: zLo6kp3AQmoevYxL63Na1WqbPT70ftR4n8hxfTW80e2KC8z2QqfHolzDvfu9
     folder: site/wwwroot
     active_mode: false
     on:
