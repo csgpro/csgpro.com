@@ -16,7 +16,5 @@
     "url": "https://github.com/csgpro/website/issues"
   },
   "homepage": "https://github.com/csgpro/website#readme",
-  "dependencies": {
-    "gulp": "^3.9.0"
-  }
+  "dependencies": {}
 }
