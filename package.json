@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Corporate Website",
   "main": "src/app.js",
+  "engines": {
+    "node": "^4.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node ./src/app.js",
+    "prepublish": "npm install -g tsd && tsd reinstall --overwrite",
+    "test": "tsc && mocha"
   },
   "repository": {
     "type": "git",
@@ -15,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/csgpro/website/issues"
   },
-  "homepage": "https://github.com/csgpro/website#readme"
+  "homepage": "https://github.com/csgpro/website#readme",
+  "dependencies": {
+    "boom": "^3.1.1",
+    "chai": "^3.4.1",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
+    "hapi": "^11.1.4",
+    "mocha": "^2.3.4",
+    "typescript": "^1.7.5"
+  }
 }
