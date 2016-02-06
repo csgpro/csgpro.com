@@ -8,11 +8,12 @@
   },
   "scripts": {
     "start": "node app.js",
-    "prepublish": "npm run build",
+    "prepublish": "npm install -g typescript typings && typings install && npm run build",
     "test": "mocha",
-    "build": "npm run tsc && npm run sass",
-    "tsc": "npm install -g typescript typings && typings install && tsc",
-    "sass": "node utils/compile-sass.js"
+    "build": "npm run tsc && npm run sass && npm run site-js",
+    "tsc": "tsc",
+    "sass": "node utils/compile-sass.js",
+    "site-js": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -33,12 +34,18 @@
     "handlebars": "^4.0.5",
     "hapi": "^11.1.4",
     "inert": "^3.2.0",
+    "jquery": "^2.2.0",
     "mocha": "^2.4.5",
     "node-sass": "^3.4.2",
+    "script-loader": "^0.6.1",
     "sinon": "^1.17.3",
+    "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
     "typings": "^0.6.6",
-    "vision": "^4.0.1"
+    "uglify": "^0.1.5",
+    "uglify-loader": "^1.3.0",
+    "vision": "^4.0.1",
+    "webpack": "^1.12.13"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^1.1.5"
