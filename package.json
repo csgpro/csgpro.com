@@ -34,5 +34,13 @@
     "typescript": "^1.7.5",
     "typings": "^0.6.6",
     "vision": "^4.0.1"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
