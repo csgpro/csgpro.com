@@ -21,7 +21,7 @@ server.register(require('vision'), (err) => {
         engines: {
             html: require('handlebars')
         },
-        relativeTo: '.',
+        relativeTo: __dirname,
         path: 'views',
         layout: true,
         layoutPath: 'views/layouts'

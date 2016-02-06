@@ -2,7 +2,7 @@
   "name": "csgpro.com",
   "version": "1.0.0",
   "description": "Corporate Website",
-  "main": "src/app.js",
+  "main": "app.js",
   "engines": {
     "node": "4.2.4"
   },
