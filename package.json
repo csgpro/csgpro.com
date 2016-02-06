@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "tsc && node ./src/app.js",
-    "prepublish": "npm install -g typings && typings install",
+    "prepublish": "npm install -g typescript typings && typings install",
     "test": "tsc && mocha"
   },
   "repository": {
