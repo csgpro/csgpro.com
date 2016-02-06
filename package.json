@@ -7,9 +7,9 @@
     "node": "4.2.4"
   },
   "scripts": {
-    "start": "tsc && node ./src/app.js",
-    "prepublish": "npm install -g typescript typings && typings install",
-    "test": "tsc && mocha"
+    "start": "node app.js",
+    "prepublish": "npm install -g typescript typings && typings install && tsc",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
     "handlebars": "^4.0.5",
     "hapi": "^11.1.4",
     "inert": "^3.2.0",
-    "mocha": "^2.3.4",
+    "mocha": "^2.4.5",
     "sinon": "^1.17.3",
     "typescript": "^1.7.5",
     "typings": "^0.6.6",

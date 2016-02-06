@@ -1,6 +1,6 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
-import * as server from '../src/app';
+import * as server from '../src';
 import * as hapi from 'hapi';
 
 var expect = chai.expect;
