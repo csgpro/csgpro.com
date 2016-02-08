@@ -4,7 +4,8 @@
   "description": "Corporate Website",
   "main": "app.js",
   "engines": {
-    "node": "4.2.4"
+    "node": "4.2.4",
+    "npm" : "3.5.3"
   },
   "scripts": {
     "start": "node app.js",
