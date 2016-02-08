@@ -1,17 +1,23 @@
 {
   "ambientDependencies": {
     "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#800a7047cf275cc9f695cbd116748cd408a09d6d",
+    "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#290a1d7ee6c04ccf64c6fcfdf39d935baa91d55b",
     "boom": "github:DefinitelyTyped/DefinitelyTyped/boom/boom.d.ts#cde81f5458364ef1dc43a85e1be6a9e132c94e11",
     "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#9c25433c84251bfe72bf0030a95edbbb2c81c9d5",
     "foundation": "github:DefinitelyTyped/DefinitelyTyped/foundation/foundation.d.ts#c7a2374b86f8cb79d293be28dd53346a8627705f",
     "hapi": "github:DefinitelyTyped/DefinitelyTyped/hapi/hapi.d.ts#37afc2c83af2b87a3d2812d2fd2615a6dde825ae",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#cf2a968f0edd7d30773f7d23fe3708fa029d5ab7",
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#14e772882bcade8a8f970a360771623aa5cfd5d2",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
+    "nconf": "github:DefinitelyTyped/DefinitelyTyped/nconf/nconf.d.ts#f913f681ac646953c312343d8c0a2c76105fb409",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
     "node-sass": "github:DefinitelyTyped/DefinitelyTyped/node-sass/node-sass.d.ts#cfc0247741abbad9d12472cac7ec4a6e97f1f474",
+    "sequelize": "github:DefinitelyTyped/DefinitelyTyped/sequelize/sequelize.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34",
     "sinon": "github:DefinitelyTyped/DefinitelyTyped/sinon/sinon.d.ts#6e7d83167d86d857817bd492786f8304f5c4a0e4",
     "source-map": "github:DefinitelyTyped/DefinitelyTyped/source-map/source-map.d.ts#1c572762b93d4b059d89339867edf54946176361",
     "uglify-js": "github:DefinitelyTyped/DefinitelyTyped/uglify-js/uglify-js.d.ts#51b587292f2ba85d68939d9c59cf7fa745a6173e",
+    "umzug": "github:DefinitelyTyped/DefinitelyTyped/umzug/umzug.d.ts#5fe89fb639d8d7f772aaac09882b7c1269fe3820",
+    "validator": "github:DefinitelyTyped/DefinitelyTyped/validator/validator.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34",
     "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/webpack.d.ts#51868917c7480cc6b1187a59bbd0120effa29841"
   }
 }

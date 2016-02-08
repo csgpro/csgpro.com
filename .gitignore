@@ -12,3 +12,8 @@ node_modules
 typings
 
 *.css
+
+# exclude settings.json
+settings.json
+settings.*.json
+!settings.sample.json
