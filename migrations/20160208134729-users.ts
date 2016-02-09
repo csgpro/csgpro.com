@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, columnExists, sqlAttribute } from '../src/database';
+import { sequelize, columnExists, sqlAttribute, NOW } from '../src/database';
 import roleByName from '../src/modules/roles';
 
 export = {
@@ -10,7 +10,7 @@ export = {
         let dateColumnConfig: Sequelize.DefineAttributeColumnOptions = {
             type: DataTypes.DATE,
             allowNull: false,
-            defaultValue: Sequelize.fn('NOW')
+            defaultValue: NOW
         };
         
         return queryInterface.addColumn('users', 'roleId', { type: DataTypes.INTEGER, allowNull: false, defaultValue: roleByName.USER })
