@@ -19,5 +19,8 @@
     "umzug": "github:DefinitelyTyped/DefinitelyTyped/umzug/umzug.d.ts#5fe89fb639d8d7f772aaac09882b7c1269fe3820",
     "validator": "github:DefinitelyTyped/DefinitelyTyped/validator/validator.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34",
     "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/webpack.d.ts#51868917c7480cc6b1187a59bbd0120effa29841"
+  },
+  "dependencies": {
+    "moment": "github:typings/typed-moment#a4075cd50e63efbedd850f654594f293ab81a385"
   }
 }

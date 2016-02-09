@@ -31,3 +31,11 @@ export function columnExists(table: string, column: string): Promise<boolean> {
         return (results && results.length);
     });
 }
+
+export function sqlAttribute(key: string): string {
+    if (DB_DIALECT === 'mssql') {
+        return `[${key}]`;
+    } else {
+        return `"${key}"`;
+    }
+}
