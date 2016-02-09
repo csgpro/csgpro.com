@@ -15,6 +15,9 @@ export = {
         
         return queryInterface.addColumn('users', 'roleId', { type: DataTypes.INTEGER, allowNull: false, defaultValue: roleByName.USER })
             .then(() => {
+                return queryInterface.addColumn('users', 'password', { type: DataTypes.STRING, allowNull: false, defaultValue: 'no password given' });
+            })
+            .then(() => {
                 return queryInterface.addColumn('users', 'firstName', DataTypes.STRING);
             })
             .then(() => {
@@ -36,12 +39,17 @@ export = {
                 return queryInterface.renameColumn('users', 'ProfileUrl', 'profilePhotoUrl');
             })
             .then(() => {
-                let selectUsers: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('IsAdmin')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('FullName')} FROM users`;
+                let selectUsers: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('twitterHandle')}, ${sqlAttribute('IsAdmin')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('FullName')} FROM users`;
                 return sequelize.query(selectUsers, { type: sequelize.QueryTypes.SELECT }).then((results) => {
                     var queue: any[] = [];
                     if (results && results.length) {
                         results.forEach((user: any) => {
                             let sets: string[] = [];
+                            
+                            if (user.twitterHandle && /^@/.test(user.twitterHandle)) {
+                                let handle: string = user.twitterHandle;
+                                sets.push(`${sqlAttribute('twitterHandle')} = '${handle.substr(1)}'`);
+                            }
                             
                             if (user.IsAdmin) {
                                 sets.push(`${sqlAttribute('roleId')} = ${roleByName.ADMIN}`);
