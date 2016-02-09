@@ -13,6 +13,7 @@ const DB_DIALECT    = conf.get('DB_DIALECT'),
       DB_PASSWORD   = conf.get('DB_PASSWORD');
       
 export const NOW = (DB_DIALECT === 'mssql') ? Sequelize.fn('GETDATE') : Sequelize.fn('NOW');
+export const RESTRICT = (DB_DIALECT === 'mssql') ? 'NO ACTION' : 'RESTRICT';
 
 export var sequelize: Sequelize.Sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
     host: DB_HOST,

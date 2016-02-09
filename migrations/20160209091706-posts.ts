@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, columnExists, sqlAttribute, NOW, createSlug } from '../src/database';
+import { sequelize, columnExists, sqlAttribute, NOW, RESTRICT, createSlug } from '../src/database';
 import postTypes from '../src/modules/post-types';
 
 export = {
@@ -25,7 +25,7 @@ export = {
                         type: DataTypes.BIGINT,
                         references: { model: 'users', key: 'id' },
                         onUpdate: 'CASCADE',
-                        onDelete: 'RESTRICT',
+                        onDelete: RESTRICT,
                         defaultValue: 21 // CSG Pro user
                     });
             })
