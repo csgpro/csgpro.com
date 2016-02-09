@@ -40,3 +40,10 @@ export function sqlAttribute(key: string): string {
         return `"${key}"`;
     }
 }
+
+export function createSlug(str: string): string {
+    return str.toLowerCase().trim()
+        .replace(/&/g, '-and-')          // Replace & with 'and'
+        .replace(/[\s\W-]+/g, '-')      // Replace spaces, non-word characters and dashes with a single dash (-)
+        .replace(/-$/, ''); // Remove last floating dash if exists
+}

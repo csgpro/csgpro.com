@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, columnExists, sqlAttribute } from '../src/database';
+import { sequelize, columnExists, sqlAttribute, createSlug } from '../src/database';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {
@@ -20,7 +20,7 @@ export = {
                 return sequelize.query(`SELECT ${sqlAttribute('id')}, ${sqlAttribute('topic')} FROM topics`, { type: sequelize.QueryTypes.SELECT }).then((results) => {
                     let queue: any[] = [];
                     results.forEach((t: { id: number; topic: string; }) => {
-                        let slug = t.topic.replace(/\s/g, '-').toLowerCase();
+                        let slug = createSlug(t.topic);
                         queue.push(sequelize.query(`UPDATE topics SET ${sqlAttribute('slug')} = '${slug}' WHERE ${sqlAttribute('id')} = ${t.id}`));
                     });
                     return Promise.all(queue);
