@@ -26,24 +26,27 @@ export = {
                     let topics: { id: number; topic: string }[] = results;
                     let selectPosts: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('topics')} FROM posts`;
                     return sequelize.query(selectPosts, { type: sequelize.QueryTypes.SELECT }).then((results) => {
-                        var records: { postId: number; topicId: number }[] = [];
+                        var query: string[] = [];
                         if (results && results.length) {
                             results.forEach((post: { id: number; topics: string; }) => {
-                                let sets: string[] = [];
-                                
                                 if (post.topics) {
                                     let postTopics: string[] = post.topics.split(',');
                                     postTopics.forEach(t => {
                                         let topic = _.find(topics, { topic: t.trim() });
                                         if (topic) {
-                                            records.push({ postId: post.id, topicId: topic.id })
+                                            let q = `( ${post.id}, ${topic.id} )`;
+                                            query.push(q)
                                         }
                                     });
                                 }
                                 
                             });
                         }
-                        return queryInterface.bulkInsert('postTopics', records);
+                        if (query.length) {
+                            return sequelize.query(`INSERT INTO ${sqlAttribute('postTopics')} ( ${sqlAttribute('postId')}, ${sqlAttribute('topicId')} ) VALUES ` + query.join(', '), { type: sequelize.QueryTypes.INSERT });
+                        } else {
+                            return Promise.resolve('');
+                        }
                     });
                 });
             })
