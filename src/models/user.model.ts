@@ -15,7 +15,6 @@ interface IUserSchema extends Sequelize.DefineAttributes {
 interface IUserModelOptions {
     setPassword(password: string): Promise<UserInstance>;
     verifyPassword(password: string): Promise<boolean>;
-    generatePasswordResetToken(): Promise<string>;
 }
 
 export interface IUserModel extends IUserModelOptions {
