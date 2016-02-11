@@ -1,6 +1,7 @@
 {
   "ambientDependencies": {
     "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#800a7047cf275cc9f695cbd116748cd408a09d6d",
+    "bcrypt-nodejs": "github:DefinitelyTyped/DefinitelyTyped/bcrypt-nodejs/bcrypt-nodejs.d.ts#d61a1c6578c9f0d2612a6a860ebe5f47fc716cc7",
     "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#290a1d7ee6c04ccf64c6fcfdf39d935baa91d55b",
     "boom": "github:DefinitelyTyped/DefinitelyTyped/boom/boom.d.ts#cde81f5458364ef1dc43a85e1be6a9e132c94e11",
     "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#9c25433c84251bfe72bf0030a95edbbb2c81c9d5",

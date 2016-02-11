@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt-nodejs';
 import { sequelize } from '../database';
 
 interface IUserSchema extends Sequelize.DefineAttributes {

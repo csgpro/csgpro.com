@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/csgpro/website#readme",
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.2.2",
     "boom": "^3.1.1",
     "chai": "^3.4.1",
