@@ -4,4 +4,7 @@ enum postTypes {
     NEWS = 3
 }
 
+/**
+ * @deprecated 
+ */
 export default postTypes;
