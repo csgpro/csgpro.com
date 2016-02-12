@@ -1,3 +1,5 @@
+'use strict';
+
 import * as Sequelize from 'sequelize';
 import * as bcrypt from 'bcrypt-nodejs';
 import { sequelize } from '../database';

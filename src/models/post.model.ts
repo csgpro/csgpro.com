@@ -3,8 +3,10 @@
 import * as Sequelize from 'sequelize';
 import { sequelize } from '../database';
 import { Topic, ITopicModel } from './topic.model';
+import { PostCategory, IPostCategoryModel } from './post-category.model';
+import { User, IUserModel } from './user.model';
 
-var PostTopic = sequelize.define('postTopic', {}, { timestamps: false });
+let PostTopic = sequelize.define('postTopic', {}, { timestamps: false });
 
 interface IPostSchema extends Sequelize.DefineAttributes {
     title: Sequelize.DefineAttributeColumnOptions;
@@ -12,7 +14,6 @@ interface IPostSchema extends Sequelize.DefineAttributes {
     excerpt: Sequelize.DefineAttributeColumnOptions;
     slug: Sequelize.DefineAttributeColumnOptions;
     authorId: Sequelize.DataTypeAbstract;
-    postTypeId: Sequelize.DataTypeAbstract;
     publishedAt: Sequelize.DataTypeAbstract;
 }
 
@@ -25,10 +26,10 @@ export interface IPostModel extends IPostModelOptions {
     post: string;
     excerpt: string;
     slug: string;
-    authorId: number;
-    postTypeId: number;
     publishedAt: Date;
+    author: IUserModel;
     topics: ITopicModel[];
+    category: IPostCategoryModel;
 }
 
 export interface PostInstance extends Sequelize.Instance<IPostSchema>, IPostModel { };
@@ -43,20 +44,24 @@ var PostSchema: IPostSchema = {
     publishedAt: Sequelize.DATE
 };
 
-var UserSchemaOptions: Sequelize.DefineOptions<PostInstance> = {
+var PostSchemaOptions: Sequelize.DefineOptions<PostInstance> = {
     instanceMethods: {},
     hooks: {
         beforeFind: function postsBeforeFind(options:any, fn:any) {
             let topicAttributes: any = { exclude: ['id'] };
             options.include = [
                 { model: Topic, through: { attributes: [] }, attributes: topicAttributes },
+                { model: PostCategory, as: 'category', attributes: { exclude: ['id'] } },
+                { model: User, as: 'author', attributes: { exclude: ['id', 'password', 'roleId'] } }
             ];
             fn(null, options);
         }
     }
 };
 
-export var Post: Sequelize.Model<PostInstance, any> = sequelize.define('post', PostSchema, UserSchemaOptions);
+export var Post: Sequelize.Model<PostInstance, any> = sequelize.define('post', PostSchema, PostSchemaOptions);
 
 Post.belongsToMany(Topic, { through: PostTopic });
 Topic.belongsToMany(Post, { through: PostTopic });
+Post.belongsTo(User, { as: 'author', foreignKey: 'authorId' });
+Post.belongsTo(PostCategory, { as: 'category', foreignKey: 'categoryId' });
