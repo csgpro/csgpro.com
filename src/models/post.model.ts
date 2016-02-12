@@ -13,7 +13,6 @@ interface IPostSchema extends Sequelize.DefineAttributes {
     post: Sequelize.DefineAttributeColumnOptions;
     excerpt: Sequelize.DefineAttributeColumnOptions;
     slug: Sequelize.DefineAttributeColumnOptions;
-    authorId: Sequelize.DataTypeAbstract;
     publishedAt: Sequelize.DataTypeAbstract;
 }
 
@@ -39,8 +38,6 @@ var PostSchema: IPostSchema = {
     post: { type: Sequelize.TEXT, allowNull: false },
     excerpt: { type: Sequelize.TEXT, allowNull: false },
     slug: { type: Sequelize.STRING, unique: true, allowNull: false },
-    authorId: Sequelize.BIGINT,
-    postTypeId: Sequelize.BIGINT,
     publishedAt: Sequelize.DATE
 };
 
