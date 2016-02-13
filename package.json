@@ -1,63 +1,68 @@
 {
-  "name": "csg-website",
-  "description": "An express app used to serve the CSG public website!",
-  "version": "1.0.1",
-  "private": true,
+  "name": "csgpro.com",
+  "version": "1.0.0",
+  "description": "Corporate Website",
+  "main": "app.js",
+  "engines": {
+    "node": "4.2.4",
+    "npm": "3.5.3"
+  },
   "scripts": {
     "start": "node app.js",
-    "prepublish": "gulp --type production",
-    "test": "tap .\\test"
+    "prepublish": "npm install -g typescript typings && typings install && npm run build",
+    "test": "mocha",
+    "build": "npm run tsc && npm run sass && npm run site-js",
+    "tsc": "tsc",
+    "tsc:watch": "tsc --watch",
+    "sass": "node utils/compile-sass.js",
+    "site-js": "webpack --config webpack.config.js"
   },
-  "engines": {
-    "node": "0.10.32"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csgpro/website.git"
   },
+  "author": "Ken Howard <kenh@csgpro.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csgpro/website/issues"
+  },
+  "homepage": "https://github.com/csgpro/website#readme",
   "dependencies": {
-    "async": "^0.9.0",
-    "azure": "0.8.0",
-    "browserify": "~6.3.2",
-    "combined-stream": "0.0.5",
-    "connect-livereload": "~0.5.0",
-    "debug": "~2.0.0",
-    "del": "^1.1.1",
-    "escape-string-regexp": "~1.0.2",
-    "event-stream": "~3.1.7",
-    "express": "3.3.3",
-    "gulp": "3.8.0",
-    "gulp-angular-templatecache": "~1.1.0",
-    "gulp-concat": "~2.4.1",
-    "gulp-express": "~0.1.0",
-    "gulp-filter": "~1.0.2",
-    "gulp-flatten": "0.0.2",
-    "gulp-inject": "~1.0.2",
-    "gulp-jshint": "~1.5.0",
-    "gulp-less": "~1.3.3",
-    "gulp-livereload": "~2.1.1",
-    "gulp-load-plugins": "~0.7.1",
-    "gulp-rev": "~2.0.1",
-    "gulp-sass": "~1.1.0",
-    "gulp-stylus": "~1.3.4",
-    "gulp-uglify": "~1.0.1",
-    "gulp-util": "~3.0.1",
-    "jade": "*",
-    "jwt-simple": "0.2.0",
-    "lodash": "1.3.1",
-    "marked": "0.2.9",
-    "moment": "2.1.0",
-    "nconf": "0.6.7",
-    "nib": "*",
-    "nodemailer": "0.5.2",
-    "passport": "0.1.17",
-    "passport-twitter": "1.0.0",
-    "passport-windowslive": "1.0.0",
-    "path": "~0.4.9",
-    "readable-stream": "~1.1.13",
-    "request": "2.27.0",
-    "rimraf": "~2.2.8",
-    "stylus": "*",
-    "through2": "~0.6.3",
-    "tiny-lr": "~0.1.4",
-    "validator": "1.5.1",
-    "vinyl-source-stream": "~1.0.0",
-    "ya-csv": "0.9.3"
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.2.2",
+    "boom": "^3.1.1",
+    "chai": "^3.4.1",
+    "foundation-sites": "^6.1.2",
+    "good": "^6.4.0",
+    "good-console": "^5.2.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^11.1.4",
+    "inert": "^3.2.0",
+    "jquery": "^2.2.0",
+    "lodash": "^4.2.1",
+    "mocha": "^2.4.5",
+    "moment": "^2.11.2",
+    "nconf": "^0.8.4",
+    "node-sass": "^3.4.2",
+    "script-loader": "^0.6.1",
+    "sequelize": "^3.19.2",
+    "sinon": "^1.17.3",
+    "tedious": "^1.13.2",
+    "ts-loader": "^0.8.0",
+    "typescript": "^1.7.5",
+    "typings": "^0.6.6",
+    "uglify": "^0.1.5",
+    "uglify-loader": "^1.3.0",
+    "umzug": "^1.8.0",
+    "vision": "^4.0.1",
+    "webpack": "^1.12.13"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

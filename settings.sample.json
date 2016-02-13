@@ -1,0 +1,9 @@
+{
+    "//": "RENAME FILE TO settings.json, REPLACE KEYS",
+    "DB_DIALECT": "mssql",
+    "DB_HOST": "localhost",
+    "DB_PORT": "1337",
+    "DB_DATABASE": "my_awesome_db",
+    "DB_USER": "mssql_admin",
+    "DB_PASSWORD": "$up3R$ecr37"
+}
