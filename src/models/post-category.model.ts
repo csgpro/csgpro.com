@@ -2,33 +2,35 @@
 
 import * as Sequelize from 'sequelize';
 import { sequelize } from '../database';
-import { Post } from './post.model';
+import { Post, IPostInstance } from './post.model';
 
-interface IPostCategorySchema extends Sequelize.DefineAttributes {
-    category: Sequelize.DefineAttributeColumnOptions;
-    slug: Sequelize.DefineAttributeColumnOptions;
+export interface IPostCategoryAttributes {
+    id: number,
+    category: string;
+    slug: string;
+    posts?: IPostCategoryInstance[];
 }
 
-let PostCategorySchema: IPostCategorySchema = {
+export interface IPostCategoryInstance extends Sequelize.Instance<IPostCategoryAttributes> {
+    getPosts: Sequelize.HasManyGetAssociationsMixin<IPostInstance>;
+    setPosts: Sequelize.HasManySetAssociationsMixin<IPostInstance, {}>;
+    addPosts: Sequelize.HasManyAddAssociationsMixin<IPostInstance, {}>;
+    addPost: Sequelize.HasManyAddAssociationMixin<IPostInstance, {}>;
+    createPost: Sequelize.HasManyCreateAssociationMixin<{}>;
+    removePost: Sequelize.HasManyRemoveAssociationMixin<IPostInstance, {}>;
+    hasPost: Sequelize.HasManyHasAssociationMixin<IPostInstance, {}>;
+    hasPosts: Sequelize.HasManyHasAssociationsMixin<IPostInstance, {}>;
+    countPosts: Sequelize.HasManyCountAssociationsMixin;
+};
+
+
+let PostCategorySchema: Sequelize.DefineAttributes = {
     category: { type: Sequelize.STRING, allowNull: false, unique: true },
     slug: { type: Sequelize.STRING, allowNull: false, unique: 'true' }
 }
 
-interface IPostCategoryModelOptions {
-}
-
-export interface IPostCategoryModel extends IPostCategoryModelOptions {
-    id: number,
-    category: string;
-    slug: string;
-}
-
-export interface PostCategoryInstance extends Sequelize.Instance<IPostCategorySchema>, IPostCategoryModel { };
-
-let PostCategorySchemaOptions: Sequelize.DefineOptions<PostCategoryInstance> = {
+let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = {
     timestamps: false
 };
 
-export let PostCategory = sequelize.define('postCategory', PostCategorySchema, PostCategorySchemaOptions);
-
-//PostCategory.hasMany(Post);
+export let PostCategory = sequelize.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);

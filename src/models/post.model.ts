@@ -2,38 +2,46 @@
 
 import * as Sequelize from 'sequelize';
 import { sequelize } from '../database';
-import { Topic, ITopicModel } from './topic.model';
-import { PostCategory, IPostCategoryModel } from './post-category.model';
-import { User, IUserModel } from './user.model';
+import { Topic, ITopicInstance, ITopicAttributes } from './topic.model';
+import { PostCategory, IPostCategoryInstance, IPostCategoryAttributes } from './post-category.model';
+import { User, IUserInstance, IUserAttributes } from './user.model';
 
 let PostTopic = sequelize.define('postTopic', {}, { timestamps: false });
 
-interface IPostSchema extends Sequelize.DefineAttributes {
-    title: Sequelize.DefineAttributeColumnOptions;
-    post: Sequelize.DefineAttributeColumnOptions;
-    excerpt: Sequelize.DefineAttributeColumnOptions;
-    slug: Sequelize.DefineAttributeColumnOptions;
-    publishedAt: Sequelize.DataTypeAbstract;
-}
-
-interface IPostModelOptions {
-}
-
-export interface IPostModel extends IPostModelOptions {
+export interface IPostAttributes {
     id: number,
     title: string;
     post: string;
     excerpt: string;
     slug: string;
     publishedAt: Date;
-    author: IUserModel;
-    topics: ITopicModel[];
-    category: IPostCategoryModel;
+    author?: IUserInstance;
+    topics?: ITopicInstance[];
+    category?: IPostCategoryInstance;
 }
 
-export interface PostInstance extends Sequelize.Instance<IPostSchema>, IPostModel { };
+export interface IPostInstance extends Sequelize.Instance<IPostAttributes> {
+    getTopics: Sequelize.BelongsToManyGetAssociationsMixin<ITopicInstance>;
+    setTopics: Sequelize.BelongsToManySetAssociationsMixin<ITopicInstance, number, void>;
+    addTopics: Sequelize.BelongsToManyAddAssociationsMixin<ITopicInstance, number, void>;
+    addTopic: Sequelize.BelongsToManyAddAssociationMixin<ITopicInstance, number, void>;
+    createTopic: Sequelize.BelongsToManyCreateAssociationMixin<ITopicAttributes, void>;
+    removeTopic: Sequelize.BelongsToManyRemoveAssociationMixin<ITopicInstance, number>;
+    hasTopic: Sequelize.BelongsToManyHasAssociationMixin<ITopicInstance, number>;
+    hasTopics: Sequelize.BelongsToManyHasAssociationsMixin<ITopicInstance, number>;
+    countTopics: Sequelize.BelongsToManyCountAssociationsMixin;
+    getPostCategories: Sequelize.BelongsToManyGetAssociationsMixin<IPostCategoryInstance>;
+    setPostCategories: Sequelize.BelongsToManySetAssociationsMixin<IPostCategoryInstance, number, void>;
+    addPostCategories: Sequelize.BelongsToManyAddAssociationsMixin<IPostCategoryInstance, number, void>;
+    addPostCategory: Sequelize.BelongsToManyAddAssociationMixin<IPostCategoryInstance, number, void>;
+    createPostCategory: Sequelize.BelongsToManyCreateAssociationMixin<IPostCategoryAttributes, void>;
+    removePostCategory: Sequelize.BelongsToManyRemoveAssociationMixin<IPostCategoryInstance, number>;
+    hasPostCategory: Sequelize.BelongsToManyHasAssociationMixin<IPostCategoryInstance, number>;
+    hasPostCategories: Sequelize.BelongsToManyHasAssociationsMixin<IPostCategoryInstance, number>;
+    countPostCategories: Sequelize.BelongsToManyCountAssociationsMixin;
+};
 
-var PostSchema: IPostSchema = {
+let PostSchema: Sequelize.DefineAttributes = {
     title: { type: Sequelize.STRING, allowNull: false },
     post: { type: Sequelize.TEXT, allowNull: false },
     excerpt: { type: Sequelize.TEXT, allowNull: false },
@@ -41,24 +49,14 @@ var PostSchema: IPostSchema = {
     publishedAt: Sequelize.DATE
 };
 
-var PostSchemaOptions: Sequelize.DefineOptions<PostInstance> = {
-    instanceMethods: {},
-    hooks: {
-        beforeFind: function postsBeforeFind(options:any, fn:any) {
-            let topicAttributes: any = { exclude: ['id'] };
-            options.include = [
-                { model: Topic, through: { attributes: [] }, attributes: topicAttributes },
-                { model: PostCategory, as: 'category', attributes: { exclude: ['id'] } },
-                { model: User, as: 'author', attributes: { exclude: ['id', 'password', 'roleId'] } }
-            ];
-            fn(null, options);
-        }
-    }
+let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
+    instanceMethods: {}
 };
 
-export var Post: Sequelize.Model<PostInstance, any> = sequelize.define('post', PostSchema, PostSchemaOptions);
+export let Post = sequelize.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);
 
 Post.belongsToMany(Topic, { through: PostTopic });
 Topic.belongsToMany(Post, { through: PostTopic });
 Post.belongsTo(User, { as: 'author', foreignKey: 'authorId' });
 Post.belongsTo(PostCategory, { as: 'category', foreignKey: 'categoryId' });
+PostCategory.hasMany(Post, { as: 'posts', foreignKey: 'categoryId' });

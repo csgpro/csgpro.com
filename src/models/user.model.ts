@@ -3,36 +3,36 @@
 import * as Sequelize from 'sequelize';
 import * as bcrypt from 'bcrypt-nodejs';
 import { sequelize } from '../database';
+import { Post, IPostInstance, IPostAttributes } from './post.model';
 
-interface IUserSchema extends Sequelize.DefineAttributes {
-    username: Sequelize.DefineAttributeColumnOptions;
-    password: Sequelize.DefineAttributeColumnOptions;
-    roleId: Sequelize.DataTypeAbstract;
-    firstName: Sequelize.DataTypeAbstract;
-    lastName: Sequelize.DataTypeAbstract;
-    twitterHandle: Sequelize.DataTypeAbstract;
-    profilePhotoUrl: Sequelize.DataTypeAbstract;
-}
-
-interface IUserModelOptions {
-    setPassword(password: string): Promise<UserInstance>;
-    verifyPassword(password: string): Promise<boolean>;
-}
-
-export interface IUserModel extends IUserModelOptions {
+export interface IUserAttributes {
     id: number,
     username: string;
     password: string;
     roleId: number;
     firstName: string;
     lastName: string;
+    fullName: string;
     twitterHandle: string;
     profilePhotoUrl: string;
+    posts?: IPostInstance[];
 }
 
-export interface UserInstance extends Sequelize.Instance<IUserSchema>, IUserModel { };
+export interface IUserInstance extends Sequelize.Instance<IUserAttributes> {
+    setPassword(password: string): Promise<IUserInstance>;
+    verifyPassword(password: string): Promise<boolean>;
+    getPosts: Sequelize.HasManyGetAssociationsMixin<IPostInstance>;
+    setPosts: Sequelize.HasManySetAssociationsMixin<IPostInstance, number>;
+    addPosts: Sequelize.HasManyAddAssociationsMixin<IPostInstance, number>;
+    addPost: Sequelize.HasManyAddAssociationMixin<IPostInstance, number>;
+    createPost: Sequelize.HasManyCreateAssociationMixin<IPostAttributes>;
+    removePost: Sequelize.HasManyRemoveAssociationMixin<IPostInstance, number>;
+    hasPost: Sequelize.HasManyHasAssociationMixin<IPostInstance, number>;
+    hasPosts: Sequelize.HasManyHasAssociationsMixin<IPostInstance, number>;
+    countPosts: Sequelize.HasManyCountAssociationsMixin;
+};
 
-var UserSchema: IUserSchema = {
+let UserSchema: Sequelize.DefineAttributes = {
     username: { type: Sequelize.STRING, unique: true, allowNull: false },
     password: { type: Sequelize.STRING, allowNull: false },
     roleId: Sequelize.INTEGER,
@@ -42,17 +42,33 @@ var UserSchema: IUserSchema = {
     profilePhotoUrl: Sequelize.STRING
 };
 
-var UserSchemaOptions: Sequelize.DefineOptions<UserInstance> = {
+let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
+    getterMethods: {
+        fullName: function (): string {
+            let self: IUserInstance = this;
+            return self.getDataValue('firstName') + ' ' + self.getDataValue('lastName');
+        }
+    },
+    setterMethods: {
+        fullName: function (value: string): void {
+            let self: IUserInstance = this;
+            let splitIndex = value.indexOf(' ');
+            let firstName = value.substring(0, splitIndex).trim();
+            let lastName = value.substring(splitIndex+1).trim();
+            self.setDataValue('firstName', firstName);
+            self.setDataValue('lastName', lastName);
+        }
+    },
     instanceMethods: {
-        setPassword: function setPasswordFn(password: string): Promise<UserInstance> {
-            var self: UserInstance = this;
+        setPassword: function setPasswordFn(password: string): Promise<IUserInstance> {
+            var self: IUserInstance = this;
             if (!password) {
                 throw new Error('Password Can\'t Be Null!');
             }
-            var promise = new Promise<UserInstance>((resolve, reject) => {
+            var promise = new Promise<IUserInstance>((resolve, reject) => {
                 return bcrypt.genSalt(10, function (err: Error, salt: string) {
                     return bcrypt.hash(password, salt, function (err: Error, encrypted: string) {
-                        self.password = encrypted;
+                        self.setDataValue('password', encrypted);
                         self.save().then(() => {
                             resolve(self);
                         });
@@ -62,9 +78,9 @@ var UserSchemaOptions: Sequelize.DefineOptions<UserInstance> = {
             return promise;
         },
         verifyPassword: function verifyPasswordFn(password: string) {
-            var self: UserInstance = this;
+            var self: IUserInstance = this;
             var promise = new Promise((resolve, reject) => {
-                bcrypt.compare(password, self.password, function(err, res) {
+                bcrypt.compare(password, self.get('password'), function(err, res) {
                     if (err) {
                         reject(err);
                     } else {
@@ -77,4 +93,4 @@ var UserSchemaOptions: Sequelize.DefineOptions<UserInstance> = {
     }
 };
 
-export var User: Sequelize.Model<UserInstance, any> = sequelize.define('user', UserSchema, UserSchemaOptions);
+export let User = sequelize.define<IUserInstance, IUserAttributes>('user', UserSchema, UserSchemaOptions);
