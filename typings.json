@@ -9,6 +9,7 @@
     "hapi": "github:DefinitelyTyped/DefinitelyTyped/hapi/hapi.d.ts#37afc2c83af2b87a3d2812d2fd2615a6dde825ae",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#cf2a968f0edd7d30773f7d23fe3708fa029d5ab7",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#14e772882bcade8a8f970a360771623aa5cfd5d2",
+    "marked": "github:DefinitelyTyped/DefinitelyTyped/marked/marked.d.ts#493d3b6882c79289cd9597a45c287250297d5b9d",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
     "nconf": "github:DefinitelyTyped/DefinitelyTyped/nconf/nconf.d.ts#f913f681ac646953c312343d8c0a2c76105fb409",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#1c56e368e17bb28ca57577250624ca5bd561aa81",
