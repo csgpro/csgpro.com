@@ -12,7 +12,6 @@ export interface IUserAttributes {
     roleId: number;
     firstName: string;
     lastName: string;
-    fullName: string;
     twitterHandle: string;
     profilePhotoUrl: string;
     posts?: IPostInstance[];
@@ -47,6 +46,11 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
         fullName: function (): string {
             let self: IUserInstance = this;
             return self.getDataValue('firstName') + ' ' + self.getDataValue('lastName');
+        },
+        photoUrl: function (): string {
+            let self: IUserInstance = this;
+            let photoUrl = self.getDataValue('profilePhotoUrl');
+            return photoUrl || '/images/author/csg_generic_icon.png';
         }
     },
     setterMethods: {
@@ -57,6 +61,10 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
             let lastName = value.substring(splitIndex+1).trim();
             self.setDataValue('firstName', firstName);
             self.setDataValue('lastName', lastName);
+        },
+        photoUrl: function (value: string): void {
+            let self: IUserInstance = this;
+            self.setDataValue('profilePhotoUrl', value);
         }
     },
     instanceMethods: {

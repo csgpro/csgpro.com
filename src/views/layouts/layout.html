@@ -8,9 +8,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="/styles/main.css">
+        <link rel="stylesheet" href="/styles/foundation-icons/foundation-icons.css">
     </head>
     <body>
+        {{! Import the contents of header.html from partials}}
+        {{> header}}
+        
         {{{content}}}
+        
         <script src="/scripts/vendor.bundle.js"></script>
         <script src="/scripts/scripts.bundle.js"></script>
     </body>

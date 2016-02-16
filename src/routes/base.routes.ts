@@ -7,12 +7,38 @@ import { getHomepageContext } from '../controllers/base.controller';
 const routes: hapi.IRouteConfiguration[] = [
     {
         method: 'GET',
-        path: '/{param*}',
+        path: '/scripts/{param*}',
         handler: {
             directory: {
-                path: '.'
-            },
-            
+                path: './scripts'
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/styles/{param*}',
+        handler: {
+            directory: {
+                path: './styles'
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/images/{param*}',
+        handler: {
+            directory: {
+                path: './images'
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/img/{param*}',
+        handler: {
+            directory: {
+                path: './images'
+            }
         }
     },
     {
@@ -21,7 +47,7 @@ const routes: hapi.IRouteConfiguration[] = [
         handler: (request, reply) => {
             getHomepageContext((err, context) => {
                 if (err) {
-                    reply(boom.create(500, err));
+                    reply(boom.create(500, <any>err));
                 } else {
                     reply.view(context.template, context);
                 }
