@@ -50,7 +50,28 @@ let PostSchema: Sequelize.DefineAttributes = {
 };
 
 let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
-    instanceMethods: {}
+    instanceMethods: {},
+    getterMethods: {
+        permalink: function (): string {
+            let self: IPostInstance = this;
+            let permalink: string;
+            let postSlug = self.getDataValue('slug');
+            let categorySlug = self.getDataValue('category') ? self.getDataValue('category').slug : null;
+            if (categorySlug) {
+                permalink = `/${categorySlug}/${postSlug}`;
+            }
+            return permalink;
+        }
+    },
+    hooks: {
+        beforeFind: (options: { include: any[]; }, fn: Function) => {
+            // If the original query doesn't include associated models, do it here
+            if (!options.include) {
+                options.include = [{ model: PostCategory, as: 'category'}, { model: Topic, as: 'topics' }, { model: User, as: 'author' }];
+            }
+            return fn(null, options);
+        }
+    }
 };
 
 export let Post = sequelize.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);

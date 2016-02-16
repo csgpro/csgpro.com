@@ -2,7 +2,9 @@
 
 import * as Sequelize from 'sequelize';
 import { sequelize } from '../database';
+import { User } from './user.model';
 import { Post, IPostInstance } from './post.model';
+import { Topic } from './topic.model';
 
 export interface IPostCategoryAttributes {
     id: number,
@@ -30,7 +32,23 @@ let PostCategorySchema: Sequelize.DefineAttributes = {
 }
 
 let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = {
-    timestamps: false
+    timestamps: false,
+    getterMethods: {
+        permalink: function (): string {
+            let self: IPostCategoryInstance = this;
+            let postCategorySlug = self.getDataValue('slug');
+            return `/${postCategorySlug}`;
+        }
+    },
+    hooks: {
+        beforeFind: (options: { include: any[]; }, fn: Function) => {
+            // If the original query doesn't include posts associated models, do it here
+            if (!options.include) {
+                options.include = [{ model: Post, as: 'posts', include: [{ model: Topic, as: 'topics' }, { model: User, as: 'author' }] }];
+            }
+            return fn(null, options);
+        }
+    }
 };
 
 export let PostCategory = sequelize.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);

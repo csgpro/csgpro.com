@@ -27,7 +27,9 @@ server.register(require('vision'), (err) => {
         relativeTo: __dirname,
         path: 'views',
         layout: true,
-        layoutPath: 'views/layouts'
+        layoutPath: 'views/layouts',
+        helpersPath: 'views/helpers',
+        partialsPath: 'views/partials'
     });
 });
 

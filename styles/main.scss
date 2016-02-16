@@ -1,3 +1,26 @@
 @import 'foundation';
+@import 'syntax_highlighting';
 
 @include foundation-everything;
+
+a.label {
+    &:focus, &:hover {
+        cursor: pointer;
+        color: #fff;
+    }
+}
+
+.author.thumbnail {
+    max-width: 200px;
+    height: auto;
+}
+
+.callout.secondary {
+    background-image: url(https://placeimg.com/1000/200/tech/grayscale);
+    background-position: center center;
+    background-size: cover;
+    h1 {
+        color: #fff;
+        text-shadow: 0 0 3px #000;
+    }
+}

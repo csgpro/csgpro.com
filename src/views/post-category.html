@@ -1,0 +1,26 @@
+<div class="callout large secondary">
+    <div class="row column text-center">
+        <h1>{{category.category}}</h1>
+    </div>
+</div>
+
+<div class="row" id="content">
+    <div class="medium-8 columns">
+        
+        {{#each category.posts}}
+        <div class="blog-post" style="min-height: 300px;">
+            <div class="media-object">
+                <div class="media-object-section">
+                    <img src="{{{author.photoUrl}}}" class="author thumbnail" />
+                </div>
+                <div class="media-object-section">
+                    <h3><a href="{{permalink}}">{{title}}</a></h3>
+                    <h5 class="subheader">By {{author.fullName}} on {{formatDate publishedAt}}</h5>
+                    <p>{{excerpt}}</p>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        
+    </div>
+</div>

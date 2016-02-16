@@ -4,8 +4,8 @@ export interface IContextComposer {
     (cb: IContextCallback): void;
 }
 
-interface IContextCallback {
-    (err: any, context?: Context): void;
+export interface IContextCallback {
+    (err: Error, context?: any): void;
 }
 
 export class Context {

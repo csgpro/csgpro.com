@@ -27,7 +27,14 @@ let TopicSchema: Sequelize.DefineAttributes = {
 };
 
 let TopicSchemaOptions: Sequelize.DefineOptions<ITopicInstance> = {
-    timestamps: false
+    timestamps: false,
+    getterMethods: {
+        permalink: function (): string {
+            let self: ITopicInstance = this;
+            let topicSlug = self.getDataValue('slug');
+            return `/topic/${topicSlug}`;
+        }
+    }
 };
 
 export let Topic = sequelize.define<ITopicInstance, ITopicAttributes> ('topic', TopicSchema, TopicSchemaOptions);

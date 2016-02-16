@@ -39,7 +39,7 @@ export = {
                 return queryInterface.addColumn('posts', 'postTypeId', { type: DataTypes.BIGINT, allowNull: false, defaultValue: postTypes.BLOG });
             })
             .then(() => {
-                return queryInterface.addColumn('posts', 'publishedAt', dateColumnConfig);
+                return queryInterface.addColumn('posts', 'publishedAt', { type: DataTypes.DATE });
             })
             .then(() => {
                 return queryInterface.addColumn('posts', 'createdAt', dateColumnConfig);

@@ -1,0 +1,23 @@
+<br />
+<div class="row" id="content">
+    <div class="medium-8 columns">
+        <div class="media-object">
+            <div class="media-object-section">
+                <img src="{{author.photoUrl}}" class="author thumbnail" />
+            </div>
+            <div class="media-object-section">
+                <h2>{{title}}</h2>
+                <h4 class="subheader">By {{author.fullName}} on {{formatDate publishedAt}}</h4>
+                <div class="labels">
+                    <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
+                {{#each topics}}
+                    <a href="{{permalink}}" class="info label"><i class="fi-price-tag"></i> {{topic}}</a>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+        <article>
+            {{{markdown post}}}
+        </article>
+    </div>
+</div>
