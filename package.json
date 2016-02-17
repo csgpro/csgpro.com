@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node app.js",
-    "prepublish": "npm run clean && npm install -g typescript typings && typings install && npm run build",
+    "prepublish": "npm install -g typescript typings rimraf && typings install && npm run build",
     "test": "mocha",
-    "build": "npm run tsc && npm run sass && npm run site-js",
+    "build": "npm run clean && npm run tsc && npm run sass && npm run site-js",
     "clean": "rimraf **/*.js",
     "tsc": "tsc",
     "tsc:watch": "tsc --watch",
