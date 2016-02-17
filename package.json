@@ -9,8 +9,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "preinstall": "npm install rimraf && npm run clean",
-    "postinstall": "typings install && npm run build",
+    "postinstall": "npm run clean && typings install && npm run build",
     "test": "mocha",
     "build": "npm run tsc && npm run sass && npm run site-js",
     "clean": "rimraf ./*.js src/**/*.js migrations/**/*.js seeders/**/*.js scripts/**/*.js test/**/*.js utis/**/*.js",
