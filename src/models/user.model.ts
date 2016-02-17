@@ -50,7 +50,7 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
         photoUrl: function (): string {
             let self: IUserInstance = this;
             let photoUrl = self.getDataValue('profilePhotoUrl');
-            return photoUrl || '/images/author/csg_generic_icon.png';
+            return photoUrl || '/resources/images/author/csg_generic_icon.png';
         }
     },
     setterMethods: {
