@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "preinstall": "npm install -g typescript typings rimraf && npm run clean",
+    "preinstall": "npm install rimraf && npm run clean",
     "postinstall": "typings install && npm run build",
     "test": "mocha",
     "build": "npm run tsc && npm run sass && npm run site-js",
