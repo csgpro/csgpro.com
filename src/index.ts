@@ -25,11 +25,11 @@ server.register(require('vision'), (err) => {
             html: require('handlebars')
         },
         relativeTo: __dirname,
-        path: 'views',
+        path: './views',
         layout: true,
-        layoutPath: path.join('views', 'layouts'),
-        helpersPath: path.join('views', 'helpers'),
-        partialsPath: path.join('views', 'partials')
+        layoutPath: './views/layouts',
+        helpersPath: './views/helpers',
+        partialsPath: './views/partials'
     });
 });
 
