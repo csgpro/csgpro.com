@@ -24,12 +24,11 @@ server.register(require('vision'), (err) => {
         engines: {
             html: require('handlebars')
         },
-        relativeTo: __dirname,
-        path: 'views',
+        path: __dirname + '/views',
         layout: true,
-        layoutPath: 'views/layouts',
-        helpersPath: 'views/helpers',
-        partialsPath: 'views/partials'
+        layoutPath: __dirname + '/views/layouts',
+        helpersPath: __dirname + '/views/helpers',
+        partialsPath: __dirname + '/views/partials'
     });
 });
 
