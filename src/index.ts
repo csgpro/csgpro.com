@@ -68,28 +68,25 @@ server.register({
     if (err) {
         throw (err);
     }
-    sequelize
-        .sync()
-        .then(() => {
-            // Run migrations
-            return migrate().then(() => {
-                server.log('info', 'Migrations complete.');
-                return;
+    migrate().then(() => {
+        server.log('info', 'Migrations complete.');
+    }).then (() => {
+        sequelize
+            .sync()
+            .then(() => {
+                // Run seeders
+                return seed().then(() => {
+                    server.log('info', 'Seed complete.');
+                    return;
+                });
+            })
+            .then(() => {
+                // Start server
+                server.start(function () {
+                    server.log('info', 'Server running at: ' + server.info.uri);
+                });
             });
-        })
-        .then(() => {
-            // Run seeders
-            return seed().then(() => {
-                server.log('info', 'Seed complete.');
-                return;
-            });
-        })
-        .then(() => {
-            // Start server
-            server.start(function () {
-                server.log('info', 'Server running at: ' + server.info.uri);
-            });
-        });
+    });
 });
 
 export = server;
