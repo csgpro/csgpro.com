@@ -2,45 +2,10 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
+import * as path from 'path';
 import { getHomepageContext } from '../controllers/base.controller';
 
 const routes: hapi.IRouteConfiguration[] = [
-    {
-        method: 'GET',
-        path: '/scripts/{param*}',
-        handler: {
-            directory: {
-                path: './scripts'
-            }
-        }
-    },
-    {
-        method: 'GET',
-        path: '/styles/{param*}',
-        handler: {
-            directory: {
-                path: './styles'
-            }
-        }
-    },
-    {
-        method: 'GET',
-        path: '/images/{param*}',
-        handler: {
-            directory: {
-                path: './images'
-            }
-        }
-    },
-    {
-        method: 'GET',
-        path: '/img/{param*}',
-        handler: {
-            directory: {
-                path: './images'
-            }
-        }
-    },
     {
         method: 'GET',
         path: '/',
@@ -53,7 +18,26 @@ const routes: hapi.IRouteConfiguration[] = [
                 }
             });
         }
-    }
+    },
+    {
+        method: 'GET',
+        path: '/resources/{param*}',
+        handler: {
+            directory: {
+                path: '.',
+                redirectToSlash: true,
+                listing: true
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/img/{param*}',
+        handler: (request, reply) => {
+            let path = request.path.replace('img', 'resources/images');
+            reply.redirect(path);
+        }
+    },
 ];
 
 export = routes;
