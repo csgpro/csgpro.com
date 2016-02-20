@@ -29,7 +29,7 @@ export function init(server: hapi.Server) {
                         break;
                     case name:
                         method = 'GET';
-                        path = `/${name}`;
+                        path = (name === 'main') ? '/' : `/${name}`;
                         break;
                     default:
                         throw new Error('unrecognized route: ' + name + '.' + key);
