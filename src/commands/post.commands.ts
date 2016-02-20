@@ -1,7 +1,5 @@
 'use strict';
 
-import * as hapi from 'hapi';
-import * as boom from 'boom';
 import * as Sequelize from 'sequelize';
 import { User } from '../models/user.model';
 import { Topic } from '../models/topic.model';
@@ -32,7 +30,21 @@ export function getPostCategory(categorySlug: string) {
     });
 };
 
-export function getPostTopic(topicSlug: string) {
+export function getPost(postSlug: string, categorySlug: string) {
+    return Post.findOne({ where: { slug: postSlug } }).then(post => {
+        if (!post || (post.getDataValue('category').slug !== categorySlug)) {
+            return;
+        } else {
+            return post;
+        }
+    });
+}
+
+export function getTopics() {
+    return Topic.findAll();
+}
+
+export function getTopic(topicSlug: string) {
     return Topic.findOne({
         where: { slug: topicSlug },
         include: [<any>include.publishedPosts],
@@ -41,7 +53,3 @@ export function getPostTopic(topicSlug: string) {
         ]
     });
 };
-
-export function getPost(postSlug: string) {
-    return Post.findOne({ where: { slug: postSlug } });
-}

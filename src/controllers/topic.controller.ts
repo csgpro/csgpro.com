@@ -1,0 +1,19 @@
+'use strict';
+
+import * as hapi from 'hapi';
+import * as boom from 'boom';
+import { getTopic } from '../commands/post.commands';
+
+export function topic(request: hapi.Request, reply: hapi.IReply) {
+    reply.redirect('/blog');
+}
+
+export function show(request: hapi.Request, reply: hapi.IReply) {
+    let topicSlug: string = request.params['slug'];
+    getTopic(topicSlug).then(topic => {
+        if (!topic) {
+            reply(boom.notFound());
+        }
+        reply.view('topic', { title: topic.getDataValue('topic'), description: '', topic });
+    });
+}
