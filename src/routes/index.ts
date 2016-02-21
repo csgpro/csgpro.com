@@ -23,6 +23,10 @@ export function init(server: hapi.Server) {
                 let path: string;
                 
                 switch(key) {
+                    case 'create':
+                        method = 'POST';
+                        path = `/${name}`;
+                        break;
                     case 'show':
                         method = 'GET';
                         path = `/${name}/{slug}`;

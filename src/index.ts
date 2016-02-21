@@ -1,3 +1,10 @@
+'use strict';
+
+import * as conf from 'nconf';
+
+// Load environment variables
+conf.env().file({ file: __dirname + '/../settings.json' });
+
 import * as hapi from 'hapi';
 import * as path from 'path';
 import * as routes from './routes';
