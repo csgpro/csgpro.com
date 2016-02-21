@@ -9,9 +9,9 @@ export function create(request: hapi.Request, reply: hapi.IReply) {
     sendContactFormEmail({ name, phone, email, note })
         .then(info => {
             reply({ message: 'Message Sent' });
-        }, err => {
+        }, errors => {
             let error = boom.badData();
-            error.output.payload.errors = err.errors;
+            error.output.payload.errors = errors;
             reply(error);
         });
 }
