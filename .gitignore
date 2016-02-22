@@ -11,7 +11,8 @@ logs
 node_modules
 *.js
 *.js.map
-typings
+typings/*
+!typings/csgpro.d.ts
 
 *.css
 !public/styles/foundation-icons/*.css
