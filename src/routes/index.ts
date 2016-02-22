@@ -61,7 +61,7 @@ export function init(server: hapi.Server) {
                 
                 // Add page to sitemap -> `/sitemap`
                 if (handler.title) {
-                    sitemap.addPage(path, handler.title);
+                    sitemap.addPage(path, handler.title, (prefix));
                     inSitemap = '(in sitemap)';
                 }
                 
