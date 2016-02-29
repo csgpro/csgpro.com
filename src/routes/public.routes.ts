@@ -14,6 +14,13 @@ const routes: hapi.IRouteConfiguration[] = [
                 redirectToSlash: true,
                 listing: true
             }
+        },
+        config: {
+            plugins: {
+                sitemap: {
+                    exclude: true
+                }
+            }
         }
     },
     {
@@ -22,6 +29,13 @@ const routes: hapi.IRouteConfiguration[] = [
         handler: (request, reply) => {
             let path = request.path.replace('img', 'resources/images');
             reply.redirect(path);
+        },
+        config: {
+            plugins: {
+                sitemap: {
+                    exclude: true
+                }
+            }
         }
     }
 ];

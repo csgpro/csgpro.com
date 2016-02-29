@@ -4,9 +4,10 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { getPost, getPostCategory } from '../commands/post.commands';
 
+blog.title = 'Blog';
 export function blog(request: hapi.Request, reply: hapi.IReply) {
     getPostCategory('blog').then(category => {
-        reply.view('category', { title: category.getDataValue('category'), description: '', category });
+        reply.view('category', { title: blog.title, description: '', category });
     });
 }
 

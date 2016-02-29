@@ -3,8 +3,6 @@
 import * as Sequelize from 'sequelize';
 import * as conf from 'nconf';
 
-conf.env().file({ file: __dirname + '/../../settings.json' });
-
 const DB_DIALECT    = conf.get('DB_DIALECT'),
       DB_HOST       = conf.get('DB_HOST'),
       DB_PORT       = conf.get('DB_PORT'),

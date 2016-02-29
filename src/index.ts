@@ -1,3 +1,10 @@
+'use strict';
+
+import * as conf from 'nconf';
+
+// Load environment variables
+conf.env().file({ file: __dirname + '/../settings.json' });
+
 import * as hapi from 'hapi';
 import * as path from 'path';
 import * as routes from './routes';
@@ -11,6 +18,10 @@ const server = new hapi.Server({
             files: {
                 relativeTo: path.join(__dirname, '..', 'public')
             }
+        },
+        router: {
+            isCaseSensitive: true,
+            stripTrailingSlash: true
         }
     }
 });
@@ -33,6 +44,18 @@ server.register(require('vision'), (err) => {
         helpersPath: './views/helpers',
         partialsPath: './views/partials'
     });
+});
+
+server.register({
+    register: require('hapi-sitemap'),
+    options: {
+        baseUri: 'http://csgpro.com'
+    }
+},
+function(err) {
+    if (err) {
+        console.error('Failed to load plugin: ', err);
+    }
 });
 
 // Handle errors
