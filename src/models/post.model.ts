@@ -58,7 +58,8 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             let postSlug = self.getDataValue('slug');
             let categorySlug = self.getDataValue('category') ? self.getDataValue('category').slug : null;
             if (categorySlug) {
-                permalink = `/${categorySlug}/${postSlug}`;
+                let baseSlug = (categorySlug === 'career') ? 'careers' : categorySlug;
+                permalink = `/${baseSlug}/${postSlug}`;
             }
             return permalink;
         }
