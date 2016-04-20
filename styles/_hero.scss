@@ -1,0 +1,71 @@
+.hero {
+    background-color: #999;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    > img {
+        min-width: 100%;
+        position: absolute;
+    }
+    > .intro {
+        padding-top: 2em;
+        padding-bottom: 2em;
+        position: relative;
+        z-index: 1;
+        @media screen and (max-width: 40em) {
+            text-align: center;
+        }
+        h1, h2 {
+            font-size: 1.4em;
+            text-align: center;
+            @media screen and (min-width: 40em) {
+                font-size: 1.6em;
+                text-align: right;
+            }
+            @media screen and (min-width: 64em) {
+                font-size: 2.4em;
+            }
+        }
+        h1 {
+            padding-right: 1.4em;
+            @media screen and (max-width: 40em) {
+                padding-right: 0;
+            }
+        }
+        h2 + button, h2 + button + button {
+            margin-top: .8em;
+        }
+        .copy {
+            @media screen and (min-width: 40em) {
+                padding-top: 1.5em;
+                button {
+                    margin-right: 2em;
+                    display: block;
+                    float: right;
+                }
+            }
+            @media screen and (min-width: 64em) {
+                padding-top: 3em;
+                padding-bottom: 2em;
+                button {
+                    margin-right: 3em;
+                }
+            }
+        }
+        .graphic {
+            @media screen and (max-width: 40em) {
+                padding-bottom: 1em;
+                img {
+                    max-width: 50%;
+                }
+            }
+            @media screen and (min-width: 40.1em) {
+                padding-top: 1em;
+                padding-bottom: 1em;
+                img {
+                    max-width: 80%;
+                }
+            }
+        }
+    }
+}
