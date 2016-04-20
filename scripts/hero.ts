@@ -12,8 +12,14 @@ function resizeHero() {
     const viewportHeight = window.innerHeight;
     const viewportWidth = window.innerWidth;
     
+    let topBar = $('.top-bar');
+    
+    if (topBar.css('display') === 'none') {
+        topBar = $('.title-bar');
+    }
+    
     if (viewportHeight > 480 && viewportWidth > 480) {
-        const newHeroHeight = Math.ceil(viewportHeight - $('.top-bar').outerHeight());
+        const newHeroHeight = Math.ceil(viewportHeight - topBar.outerHeight() - $('.technologies').outerHeight());
         const difference = newHeroHeight - intro.outerHeight();
         
         intro.css({ marginTop: Math.floor(difference / 2), marginBottom: Math.floor(difference / 2) });
