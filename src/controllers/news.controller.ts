@@ -4,10 +4,10 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { getPost, getPostCategory } from '../commands/post.commands';
 
-news.title = 'News';
-export function news(request: hapi.Request, reply: hapi.IReply) {
+index.sitemap = true;
+export function index(request: hapi.Request, reply: hapi.IReply) {
     getPostCategory('news').then(category => {
-        reply.view('category', { title: news.title, description: '', category });
+        reply.view('category', { title: 'News', description: '', category });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

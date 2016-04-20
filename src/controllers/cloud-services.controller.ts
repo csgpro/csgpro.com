@@ -5,7 +5,7 @@ import * as boom from 'boom';
 
 export let prefix = '/services';
 
-cloudServices.title = 'Cloud Services'
-export function cloudServices(request: hapi.Request, reply: hapi.IReply) {
-    reply.view('cloud-services', { title: cloudServices.title, description: '' });
+index.sitemap = true;
+export function index(request: hapi.Request, reply: hapi.IReply) {
+    reply.view('cloud-services', { title: 'Cloud Services', description: '' });
 }

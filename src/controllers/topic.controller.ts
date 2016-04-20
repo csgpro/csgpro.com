@@ -4,7 +4,7 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { getTopic } from '../commands/post.commands';
 
-export function topic(request: hapi.Request, reply: hapi.IReply) {
+export function index(request: hapi.Request, reply: hapi.IReply) {
     reply.redirect('/blog');
 }
 

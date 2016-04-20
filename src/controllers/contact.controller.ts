@@ -4,9 +4,9 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { sendContactFormEmail } from '../commands/mail.commands';
 
-contact.title = 'Contact';
-export function contact(request: hapi.Request, reply: hapi.IReply) {
-    reply.view('contact', { title: contact.title, description: '' });
+index.sitemap = true;
+export function index(request: hapi.Request, reply: hapi.IReply) {
+    reply.view('contact', { title: 'Contact', description: '' });
 }
 
 export function create(request: hapi.Request, reply: hapi.IReply) {

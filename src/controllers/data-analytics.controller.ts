@@ -5,7 +5,7 @@ import * as boom from 'boom';
 
 export let prefix = '/services';
 
-dataAnalytics.title = 'Data Analytics';
-export function dataAnalytics(request: hapi.Request, reply: hapi.IReply) {
-    reply.view('data-analytics', { title: dataAnalytics.title, description: '' });
+index.sitemap = true;
+export function index(request: hapi.Request, reply: hapi.IReply) {
+    reply.view('data-analytics', { title: 'Data Analytics', description: '' });
 }
