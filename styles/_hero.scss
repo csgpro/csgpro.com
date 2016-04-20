@@ -1,5 +1,5 @@
 .hero {
-    background-color: #999;
+    background-color: #00405c;
     color: #fff;
     position: relative;
     overflow: hidden;
@@ -19,11 +19,16 @@
             font-size: 1.4em;
             text-align: center;
             @media screen and (min-width: 40em) {
-                font-size: 1.6em;
                 text-align: right;
             }
+            @media screen and (min-width: 50em) {
+                font-size: 1.6em;
+            }
             @media screen and (min-width: 64em) {
-                font-size: 2.4em;
+                font-size: 2em;
+            }
+            @media screen and (min-width: 82em) {
+                font-size: 3em;
             }
         }
         h1 {
@@ -37,7 +42,7 @@
         }
         .copy {
             @media screen and (min-width: 40em) {
-                padding-top: 1.5em;
+                padding-top: 3em;
                 button {
                     margin-right: 2em;
                     display: block;
