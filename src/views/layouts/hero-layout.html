@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{{{title}}}</title>
+        <meta name="description" content="{{{description}}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/resources/styles/main.css">
+        <link rel="stylesheet" href="/resources/styles/foundation-icons/foundation-icons.css">
+    </head>
+    <body>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                <div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+
+                    <!-- Close button -->
+                    <button class="close-button" aria-label="Close menu" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    
+                    {{! Import the contents of side-nav.html from partials}}
+                    {{> side-nav}}
+
+                </div>
+                
+                {{! Import the contents of header.html from partials}}
+                {{> header}}
+                
+                {{{content}}}
+            </div>
+        </div>
+        
+        <script src="/resources/scripts/vendor.bundle.js"></script>
+        <script src="/resources/scripts/scripts.bundle.js"></script>
+    </body>
+</html>
