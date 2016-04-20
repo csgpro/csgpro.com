@@ -23,7 +23,7 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
         if (!post) {
             reply(boom.notFound());
         }
-        reply.view('post', post);
+        reply.view('post', post.toJSON());
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

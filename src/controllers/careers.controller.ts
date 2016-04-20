@@ -19,11 +19,11 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
 
 export function show(request: hapi.Request, reply: hapi.IReply) {
     let postSlug: string = request.params['slug'];
-    getPost(postSlug, 'career').then(post => {
-        if (!post) {
+    getPost(postSlug, 'career').then(job => {
+        if (!job) {
             reply(boom.notFound());
         }
-        reply.view('post', post);
+        reply.view('post', job.toJSON());
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
