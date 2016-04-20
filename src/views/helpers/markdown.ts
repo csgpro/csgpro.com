@@ -29,6 +29,7 @@ marked.setOptions({
 });
 
 function markdown(input: string): string {
+    if (!input) return;
     return marked(input);  
 }
 
