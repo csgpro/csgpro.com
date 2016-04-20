@@ -28,8 +28,8 @@ marked.setOptions({
     renderer
 });
 
-function formatDate(input: string): string {
+function markdown(input: string): string {
     return marked(input);  
 }
 
-export = formatDate;
+export = markdown;
