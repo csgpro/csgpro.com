@@ -16,6 +16,7 @@
     "server-js": "tsc --rootDir src",
     "server-js:watch": "tsc --watch --rootDir src",
     "sass": "node utils/compile-sass.js",
+    "sass:watch": "node utils/compile-sass.js --watch",
     "client-js": "webpack --config webpack.config.js",
     "client-js:watch": "webpack --watch --config webpack.config.js"
   },
@@ -42,6 +43,7 @@
     "hapi": "^11.1.4",
     "hapi-sitemap": "^1.0.3",
     "highlight.js": "^9.1.0",
+    "hound": "^1.0.4",
     "inert": "^3.2.0",
     "jquery": "^2.2.0",
     "lodash": "^4.2.1",
