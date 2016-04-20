@@ -47,7 +47,7 @@ export function sendContactFormEmail(formData: IContactFormData, subject = 'Cont
             
             mailer.sendMail({ to, from, subject, html, text }, (err, info) => {
                 if (err) {
-                    throw err;
+                    reject(err);
                 } else {
                     resolve(info);
                 }
