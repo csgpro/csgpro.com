@@ -8,6 +8,12 @@ news.title = 'News';
 export function news(request: hapi.Request, reply: hapi.IReply) {
     getPostCategory('news').then(category => {
         reply.view('category', { title: news.title, description: '', category });
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
     });
 }
 
@@ -18,5 +24,11 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
         }
         reply.view('post', post);
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
     });
 }

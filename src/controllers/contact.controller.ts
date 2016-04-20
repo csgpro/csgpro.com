@@ -11,12 +11,12 @@ export function contact(request: hapi.Request, reply: hapi.IReply) {
 
 export function create(request: hapi.Request, reply: hapi.IReply) {
     let { name, phone, email, note } = request.payload;
-    sendContactFormEmail({ name, phone, email, note })
-        .then(info => {
-            reply({ message: 'Message Sent' });
-        }, errors => {
-            let error = boom.badData();
-            error.output.payload.errors = errors;
-            reply(error);
-        });
+    sendContactFormEmail({ name, phone, email, note }).then(info => {
+        reply({ message: 'Message Sent' });
+    }).catch((errors) => {
+        let error = boom.badData();
+        error.reformat();
+        error.output.payload.errors = errors;
+        reply(error);
+    });
 }

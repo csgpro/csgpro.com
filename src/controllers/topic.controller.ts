@@ -15,5 +15,11 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
         }
         reply.view('topic', { title: topic.getDataValue('topic'), description: '', topic });
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
     });
 }
