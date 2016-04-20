@@ -1,23 +1,28 @@
 import * as Umzug from 'umzug';
-import { sequelize } from './index';
+import * as Sequelize from 'sequelize';
 
-var umzug: Umzug.Umzug = new Umzug({
+let umzug: Umzug.Umzug;
 
-    storage: 'sequelize',
+export default function (database: Sequelize.Sequelize) {
+    umzug = new Umzug({
 
-    storageOptions: {
-        sequelize: sequelize,
-    },
+        storage: 'sequelize',
 
-    migrations: {
-        params: [sequelize.getQueryInterface(), sequelize.constructor, function() {
-            throw new Error('Seed tried to use old style "done" callback. Please upgrade to "umzug" and return a promise instead.');
-        }],
-        path: __dirname + '/../../seeders',
-        pattern: /\.js$/
-    }
+        storageOptions: {
+            sequelize: database,
+        },
 
-});
+        migrations: {
+            params: [database.getQueryInterface(), database.constructor, function() {
+                throw new Error('Seed tried to use old style "done" callback. Please upgrade to "umzug" and return a promise instead.');
+            }],
+            path: __dirname + '/../../seeders',
+            pattern: /\.js$/
+        }
+
+    });
+    return seed;
+}
 
 export function seed() {
     return umzug.up();

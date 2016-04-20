@@ -1,7 +1,7 @@
 'use strict';
 
 import * as Sequelize from 'sequelize';
-import { sequelize } from '../database';
+import { database } from '../database';
 import { User } from './user.model';
 import { Post, IPostInstance } from './post.model';
 import { Topic } from './topic.model';
@@ -51,4 +51,4 @@ let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = 
     }
 };
 
-export let PostCategory = sequelize.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);
+export let PostCategory = database.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);

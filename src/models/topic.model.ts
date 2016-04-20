@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize';
-import { sequelize } from '../database';
+import { database } from '../database';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 export interface ITopicAttributes {
@@ -37,4 +37,4 @@ let TopicSchemaOptions: Sequelize.DefineOptions<ITopicInstance> = {
     }
 };
 
-export let Topic = sequelize.define<ITopicInstance, ITopicAttributes> ('topic', TopicSchema, TopicSchemaOptions);
+export let Topic = database.define<ITopicInstance, ITopicAttributes> ('topic', TopicSchema, TopicSchemaOptions);

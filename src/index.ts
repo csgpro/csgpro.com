@@ -8,9 +8,7 @@ conf.env().file({ file: __dirname + '/../settings.json' });
 import * as hapi from 'hapi';
 import * as path from 'path';
 import * as routes from './routes';
-import { sequelize } from './database';
-import { migrate } from './database/migrate';
-import { seed } from './database/seed';
+import database from './database';
 
 const server = new hapi.Server({
     connections: {
@@ -25,6 +23,8 @@ const server = new hapi.Server({
         }
     }
 });
+
+database(server);
 
 const port = process.env.PORT || 3000;
 
@@ -91,25 +91,24 @@ server.register({
     if (err) {
         throw (err);
     }
-    migrate().then(() => {
-        server.log('info', 'Migrations complete.');
-    }).then (() => {
-        sequelize
-            .sync()
-            .then(() => {
-                // Run seeders
-                return seed().then(() => {
-                    server.log('info', 'Seed complete.');
-                    return;
-                });
-            })
-            .then(() => {
-                // Start server
-                server.start(function () {
-                    server.log('info', 'Server running at: ' + server.info.uri);
-                });
-            });
+    // migrate().then(() => {
+    //     server.log('info', 'Migrations complete.');
+    // }).then (() => {
+    //     database
+    //         .then(() => {
+    //             // Run seeders
+    //             return seed().then(() => {
+    //                 server.log('info', 'Seed complete.');
+    //                 return;
+    //             });
+    //         })
+    //         .then(() => {
+    // Start server
+    server.start(function () {
+        server.log('info', 'Server running at: ' + server.info.uri);
     });
+            // });
+    //});
 });
 
 export = server;

@@ -1,7 +1,7 @@
 'use strict';
 
 import * as Sequelize from 'sequelize';
-import { sequelize, sqlAttribute } from '../src/database';
+import { database, sqlAttribute } from '../src/database';
 import { PostCategory } from '../src/models/post-category.model';
 
 export = {
@@ -30,7 +30,7 @@ export = {
                 return queryInterface.addColumn('posts', 'categoryId', { type: DataTypes.BIGINT, allowNull: false, defaultValue: 1 });
             })
             .then(() => {
-                return sequelize.query(`UPDATE posts SET ${sqlAttribute('categoryId')} = ${sqlAttribute('postTypeId')}`, { type: Sequelize.QueryTypes.UPDATE });
+                return database.query(`UPDATE posts SET ${sqlAttribute('categoryId')} = ${sqlAttribute('postTypeId')}`, { type: Sequelize.QueryTypes.UPDATE });
             })
             .then(() => {
                 return queryInterface.removeColumn('posts', 'postTypeId');

@@ -1,12 +1,12 @@
 'use strict';
 
 import * as Sequelize from 'sequelize';
-import { sequelize } from '../database';
+import { database } from '../database';
 import { Topic, ITopicInstance, ITopicAttributes } from './topic.model';
 import { PostCategory, IPostCategoryInstance, IPostCategoryAttributes } from './post-category.model';
 import { User, IUserInstance, IUserAttributes } from './user.model';
 
-let PostTopic = sequelize.define('postTopic', {}, { timestamps: false });
+let PostTopic = database.define('postTopic', {}, { timestamps: false });
 
 export interface IPostAttributes {
     id: number,
@@ -74,7 +74,7 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
     }
 };
 
-export let Post = sequelize.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);
+export let Post = database.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);
 
 Post.belongsToMany(Topic, { through: PostTopic });
 Topic.belongsToMany(Post, { through: PostTopic });

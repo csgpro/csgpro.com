@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, columnExists, sqlAttribute, NOW } from '../src/database';
+import { database, columnExists, sqlAttribute, NOW } from '../src/database';
 import roleByName from '../src/modules/roles';
 
 export = {
@@ -40,7 +40,7 @@ export = {
             })
             .then(() => {
                 let selectUsers: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('twitterHandle')}, ${sqlAttribute('IsAdmin')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('FullName')} FROM users`;
-                return sequelize.query(selectUsers, { type: sequelize.QueryTypes.SELECT }).then((results) => {
+                return database.query(selectUsers, { type: database.QueryTypes.SELECT }).then((results) => {
                     var queue: any[] = [];
                     if (results && results.length) {
                         results.forEach((user: any) => {
@@ -79,7 +79,7 @@ export = {
                             
                             if (sets.length) {
                                 let setValues = sets.join(', ');
-                                let query = sequelize.query(`UPDATE users SET ${setValues} WHERE ${sqlAttribute('id')} = ${user.id}`);
+                                let query = database.query(`UPDATE users SET ${setValues} WHERE ${sqlAttribute('id')} = ${user.id}`);
                                 queue.push(query);
                             }
                         });

@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, columnExists, sqlAttribute, NOW, RESTRICT, createSlug } from '../src/database';
+import { database, columnExists, sqlAttribute, NOW, RESTRICT, createSlug } from '../src/database';
 import postTypes from '../src/modules/post-types';
 
 export = {
@@ -49,10 +49,10 @@ export = {
             })
             .then(() => {
                 let selectPosts: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('PublishDate')}, ${sqlAttribute('title')}, ${sqlAttribute('AuthorUserId')}, ${sqlAttribute('Category')} FROM posts`;
-                return sequelize.query(`SELECT ${sqlAttribute('id')} FROM users`, { type: sequelize.QueryTypes.SELECT }).then((results: { id: number }[]) => {
+                return database.query(`SELECT ${sqlAttribute('id')} FROM users`, { type: database.QueryTypes.SELECT }).then((results: { id: number }[]) => {
                     var userIds: number[] = results.map(user => user.id);
                     console.info('userIds:', userIds);
-                    return sequelize.query(selectPosts, { type: sequelize.QueryTypes.SELECT }).then((results) => {
+                    return database.query(selectPosts, { type: database.QueryTypes.SELECT }).then((results) => {
                         var queue: any[] = [];
                         if (results && results.length) {
                             results.forEach((post: any) => {
@@ -93,7 +93,7 @@ export = {
                                 sets.push(`${sqlAttribute('authorId')} = ${userId}`);
                                 
                                 let setValues = sets.join(', ');
-                                let query = sequelize.query(`UPDATE posts SET ${setValues} WHERE ${sqlAttribute('id')} = ${post.id}`, { type: sequelize.QueryTypes.UPDATE });
+                                let query = database.query(`UPDATE posts SET ${setValues} WHERE ${sqlAttribute('id')} = ${post.id}`, { type: database.QueryTypes.UPDATE });
                                 queue.push(query);
                             });
                         }

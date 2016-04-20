@@ -2,7 +2,7 @@
 
 import * as Sequelize from 'sequelize';
 import * as bcrypt from 'bcrypt-nodejs';
-import { sequelize } from '../database';
+import { database } from '../database';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 export interface IUserAttributes {
@@ -101,4 +101,4 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
     }
 };
 
-export let User = sequelize.define<IUserInstance, IUserAttributes>('user', UserSchema, UserSchemaOptions);
+export let User = database.define<IUserInstance, IUserAttributes>('user', UserSchema, UserSchemaOptions);

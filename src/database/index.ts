@@ -1,7 +1,16 @@
 'use strict';
 
+import * as hapi from 'hapi';
 import * as Sequelize from 'sequelize';
 import * as conf from 'nconf';
+import m from './migrate';
+import s from './seed';
+
+let server: hapi.Server;
+
+export default function (s: hapi.Server) {
+    server = s;
+}
 
 const DB_DIALECT    = conf.get('DB_DIALECT'),
       DB_HOST       = conf.get('DB_HOST'),
@@ -13,7 +22,7 @@ const DB_DIALECT    = conf.get('DB_DIALECT'),
 export const NOW = (DB_DIALECT === 'mssql') ? Sequelize.fn('GETDATE') : Sequelize.fn('NOW');
 export const RESTRICT = (DB_DIALECT === 'mssql') ? 'NO ACTION' : 'RESTRICT';
 
-export var sequelize: Sequelize.Sequelize = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
+export const database = new Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
     host: DB_HOST,
     port: DB_PORT,
     dialect: DB_DIALECT,
@@ -22,12 +31,37 @@ export var sequelize: Sequelize.Sequelize = new Sequelize(DB_DATABASE, DB_USER, 
     }
 });
 
+const migrate = m(database);
+const seed = s(database);
+
+database.authenticate()
+    .then(() => {
+        migrate().then(() => {
+            server.log('info', 'Migrations complete.');
+            return database.sync();
+        }).then(() => {
+            return seed().then(() => {
+                server.log('info', 'Seed complete.');
+            }).catch((err) => {
+                server.log('error', 'failed seed'); 
+                server.log('error', err);
+            });
+        }).catch((err) => {
+            server.log('error', 'failed migration');
+            server.log('error', err);
+        });
+    })
+    .catch((err) => {
+        server.log('error', 'error connecting to database');
+        server.log('error', err);
+    })
+
 export function columnExists(table: string, column: string): Promise<boolean> {
     let query = `SELECT column_name 
                  FROM information_schema.columns 
                  WHERE table_name='${table}' and column_name='${column}'`;
     
-    return sequelize.query(query).spread<boolean>((results: any, metadata: any) => {
+    return database.query(query).spread<boolean>((results: any, metadata: any) => {
         return (results && results.length);
     });
 }

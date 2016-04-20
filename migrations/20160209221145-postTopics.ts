@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { sequelize, sqlAttribute } from '../src/database';
+import { database, sqlAttribute } from '../src/database';
 import * as _ from 'lodash';
 
 export = {
@@ -22,10 +22,10 @@ export = {
         return queryInterface.createTable('postTopics', postTopicsAttributes)
             .then(() => {
                 let selectTopics: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('topic')} FROM topics`;
-                return sequelize.query(selectTopics, { type: sequelize.QueryTypes.SELECT }).then((results) => {
+                return database.query(selectTopics, { type: database.QueryTypes.SELECT }).then((results) => {
                     let topics: { id: number; topic: string }[] = results;
                     let selectPosts: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('topics')} FROM posts`;
-                    return sequelize.query(selectPosts, { type: sequelize.QueryTypes.SELECT }).then((results) => {
+                    return database.query(selectPosts, { type: database.QueryTypes.SELECT }).then((results) => {
                         var query: string[] = [];
                         if (results && results.length) {
                             results.forEach((post: { id: number; topics: string; }) => {
@@ -43,7 +43,7 @@ export = {
                             });
                         }
                         if (query.length) {
-                            return sequelize.query(`INSERT INTO ${sqlAttribute('postTopics')} ( ${sqlAttribute('postId')}, ${sqlAttribute('topicId')} ) VALUES ` + query.join(', '), { type: sequelize.QueryTypes.INSERT });
+                            return database.query(`INSERT INTO ${sqlAttribute('postTopics')} ( ${sqlAttribute('postId')}, ${sqlAttribute('topicId')} ) VALUES ` + query.join(', '), { type: database.QueryTypes.INSERT });
                         } else {
                             return Promise.resolve('');
                         }
