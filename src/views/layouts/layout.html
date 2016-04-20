@@ -11,10 +11,29 @@
         <link rel="stylesheet" href="/resources/styles/foundation-icons/foundation-icons.css">
     </head>
     <body>
-        {{! Import the contents of header.html from partials}}
-        {{> header}}
-        
-        {{{content}}}
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+                <div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+
+                    <!-- Close button -->
+                    <button class="close-button" aria-label="Close menu" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    
+                    {{! Import the contents of side-nav.html from partials}}
+                    {{> side-nav}}
+
+                </div>
+                
+                {{! Import the contents of header.html from partials}}
+                {{> header}}
+                
+                <div class="row">
+                    {{{content}}}
+                </div>
+            </div>
+        </div>
         
         <script src="/resources/scripts/vendor.bundle.js"></script>
         <script src="/resources/scripts/scripts.bundle.js"></script>

@@ -8,6 +8,7 @@ conf.env().file({ file: __dirname + '/../settings.json' });
 import * as hapi from 'hapi';
 import * as path from 'path';
 import * as routes from './routes';
+import * as sitemap from './modules/sitemap';
 import database from './database';
 
 const server = new hapi.Server({
@@ -23,6 +24,10 @@ const server = new hapi.Server({
         }
     }
 });
+
+const defaultContext = {
+    sitename: 'CSG Pro'
+}
 
 database(server);
 
@@ -42,7 +47,8 @@ server.register(require('vision'), (err) => {
         layout: true,
         layoutPath: './views/layouts',
         helpersPath: './views/helpers',
-        partialsPath: './views/partials'
+        partialsPath: './views/partials',
+        context: defaultContext
     });
 });
 
@@ -60,6 +66,10 @@ function(err) {
 
 // Handle errors
 server.ext('onPreResponse', function (request, reply) {
+    if (request.response.variety === 'view') {
+        const context = request.response.source.context;
+        context.sitemap = sitemap.getPages();
+    }
     if (request.response.isBoom) {
         let response: hapi.IBoom = <any>request.response;
         let code = response.output.statusCode;
@@ -91,24 +101,10 @@ server.register({
     if (err) {
         throw (err);
     }
-    // migrate().then(() => {
-    //     server.log('info', 'Migrations complete.');
-    // }).then (() => {
-    //     database
-    //         .then(() => {
-    //             // Run seeders
-    //             return seed().then(() => {
-    //                 server.log('info', 'Seed complete.');
-    //                 return;
-    //             });
-    //         })
-    //         .then(() => {
     // Start server
     server.start(function () {
         server.log('info', 'Server running at: ' + server.info.uri);
     });
-            // });
-    //});
 });
 
 export = server;
