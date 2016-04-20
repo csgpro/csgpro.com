@@ -1,13 +1,16 @@
 .hero {
+    transition: height ease 0.5s;
     background-color: #00405c;
     color: #fff;
     position: relative;
     overflow: hidden;
     > img {
+        transition: height ease 0.5s;
         min-width: 100%;
         position: absolute;
     }
     > .intro {
+        transition: margin-top ease 0.5s, margin-bottom ease 0.5s;
         padding-top: 2em;
         padding-bottom: 2em;
         position: relative;

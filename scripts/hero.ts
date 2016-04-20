@@ -18,6 +18,10 @@ function resizeHero() {
         topBar = $('.title-bar');
     }
     
+    if (!hero.attr('style') || (hero.attr('style') && hero.attr('style').indexOf('height') === -1)) {
+        hero.height(hero.outerHeight());
+    }
+    
     if (viewportHeight > 480 && viewportWidth > 480) {
         const newHeroHeight = Math.ceil(viewportHeight - topBar.outerHeight() - $('.technologies').outerHeight());
         const difference = newHeroHeight - intro.outerHeight();
@@ -35,5 +39,5 @@ function resizeHero() {
 $(window).on('load resize orientationchange', () => {
     setTimeout(() => {
         resizeHero();
-    }, 500);
+    }, 100);
 });
