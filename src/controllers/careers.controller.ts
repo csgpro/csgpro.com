@@ -7,7 +7,7 @@ import { getPost, getPostCategory } from '../commands/post.commands';
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
     getPostCategory('career').then(category => {
-        reply.view('category', { title: 'Careers', description: '', category }, { layout: 'hero-layout' });
+        reply.view('category', { title: 'Careers', description: '', category });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

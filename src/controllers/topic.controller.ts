@@ -14,7 +14,7 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
         if (!topic) {
             reply(boom.notFound());
         }
-        reply.view('topic', { title: topic.getDataValue('topic'), description: '', topic }, { layout: 'hero-layout' });
+        reply.view('topic', { title: topic.getDataValue('topic'), description: '', topic });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
