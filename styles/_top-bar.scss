@@ -1,0 +1,63 @@
+.csg.top-bar, .csg.top-bar ul {
+    background-color: #fff;
+}
+
+.csg.top-bar {
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    .menu {
+        > li {
+            display: block;
+            float: left;
+            text-align: center;
+            width: 15%;
+            a {
+                border-style: dashed;
+                border-width: 0 0 0 1px;
+            }
+            &:last-child {
+                a {
+                    border-right-width: 1px;
+                }
+            }
+            &:nth-child(1) {
+                width: 20%;
+            }
+            &:nth-child(2) {
+                width: 16%;
+            }
+            &:nth-child(3) {
+                width: 9%;
+            }
+            &:nth-child(4) {
+                width: 10%;
+                position: relative;
+                img {
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 70%;
+                }
+                a {
+                    border-top-width: 0;
+                    border-bottom: 0;
+                    min-height: 36px;
+                }
+            }
+            &:nth-child(1), &:nth-child(2) {
+                @media screen and (min-width: 40em) and (max-width: 45em) {
+                    font-size: .6em;
+                }
+                @media screen and (min-width: 45em) and (max-width: 55em) {
+                    font-size: .7em;
+                }
+                @media screen and (min-width: 55em) and (max-width: 65em) {
+                    font-size: .8em;
+                }
+            }
+        }
+    }
+}
