@@ -14,8 +14,11 @@ a.label {
 }
 
 .author.thumbnail {
-    max-width: 200px;
+    width: 80px;
     height: auto;
+    border-radius: 100%;
+    border-width: 1px;
+    margin-top: 10px;
 }
 
 li.nested {
@@ -24,4 +27,8 @@ li.nested {
 
 .title-bar button {
     vertical-align: middle;
+}
+
+.main-content {
+    padding-top: 2em;
 }
