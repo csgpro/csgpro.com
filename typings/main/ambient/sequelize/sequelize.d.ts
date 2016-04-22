@@ -295,7 +295,7 @@ declare module "sequelize" {
              * Get everything currently associated with this, using an optional where clause.
              * @param options The options to use when getting the associations.
              */
-            (options?: HasManyGetAssociationsMixinOptions): Promise<TInstance[]>;
+            (options?: HasManyGetAssociationsMixinOptions & FindOptions): Promise<TInstance[]>;
         }
 
         /**
