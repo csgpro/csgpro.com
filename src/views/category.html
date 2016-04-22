@@ -1,22 +1,30 @@
 <h2>{{title}}</h2>
 
 <div class="row" id="content">
-    <div class="medium-8 columns">
+    <div class="medium-9 columns">
         
-        {{#each category.posts}}
-        <div class="blog-post" style="min-height: 300px;">
+        {{#each posts}}
+        <div class="blog-post">
             <div class="media-object">
                 <div class="media-object-section">
                     <img src="{{{author.photoUrl}}}" class="author thumbnail" />
                 </div>
                 <div class="media-object-section">
                     <h3><a href="{{permalink}}">{{title}}</a></h3>
-                    <h5 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h5>
+                    <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
                     <p>{{excerpt}}</p>
                 </div>
             </div>
         </div>
         {{/each}}
         
+    </div>
+    
+    <div class="medium-3 columns">
+        <ul class="menu vertical">
+            {{#each topics}}
+            <li><a href="{{permalink}}">{{topic}}</a></li>
+            {{/each}}
+        </ul>
     </div>
 </div>

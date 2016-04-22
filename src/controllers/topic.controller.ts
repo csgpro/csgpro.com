@@ -2,7 +2,7 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { getTopic } from '../commands/post.commands';
+import { getTopic, getTopics } from '../commands/post.commands';
 
 export function index(request: hapi.Request, reply: hapi.IReply) {
     reply.redirect('/blog');
@@ -10,11 +10,14 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
 
 export function show(request: hapi.Request, reply: hapi.IReply) {
     let topicSlug: string = request.params['slug'];
-    getTopic(topicSlug).then(topic => {
-        if (!topic) {
-            reply(boom.notFound());
-        }
-        reply.view('topic', { title: topic.getDataValue('topic'), description: '', topic });
+    
+    let promises: Promise<any>[] = [];
+    
+    promises.push(getTopics());
+    promises.push(getTopic(topicSlug));
+    
+    Promise.all(promises).then(data => {
+        reply.view('category', { title: data[1].topic, description: '', posts: data[1].posts, topics: data[0] });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

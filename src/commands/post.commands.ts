@@ -2,33 +2,10 @@
 
 import * as Sequelize from 'sequelize';
 import { User } from '../models/user.model';
-import { Topic } from '../models/topic.model';
-import { Post } from '../models/post.model';
+import { Topic, ITopicInstance } from '../models/topic.model';
+import { Post, IPostInstance } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
-
-const include = {
-    publishedPosts: {
-        model: Post,
-        as: 'posts',
-        where: { publishedAt: { $gt: new Date('1993-01-01') } },
-        attributes: ['title', 'slug', 'excerpt', 'publishedAt'],
-        include: [
-            { model: PostCategory, as: 'category' },
-            { model: Topic, as: 'topics' },
-            { model: User, as: 'author' }
-        ]
-    }
-}
-
-export function getPostCategory(categorySlug: string) {
-    return PostCategory.findOne({
-        where: { slug: categorySlug },
-        include: [<any>include.publishedPosts],
-        order: [
-            [ { model: Post, as: 'posts' }, 'publishedAt', 'DESC' ]
-        ]
-    });
-};
+import * as _ from 'lodash';
 
 export function getPost(postSlug: string, categorySlug: string) {
     return Post.findOne({ where: { slug: postSlug } }).then(post => {
@@ -44,12 +21,43 @@ export function getTopics() {
     return Topic.findAll();
 }
 
-export function getTopic(topicSlug: string) {
-    return Topic.findOne({
-        where: { slug: topicSlug },
-        include: [<any>include.publishedPosts],
-        order: [
-            [ Post, 'publishedAt', 'DESC' ]
-        ]
+export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
+    return Topic.findOne({ where: { slug: topic }}).then(t => {
+        return t.getPosts({
+            where: { publishedAt: { $gt: new Date('1993-01-01') } },
+            order: [[ 'publishedAt', sortOrder]],
+            include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
+        })
+            .then(posts => {
+                let topics = _.sortBy(_.uniqWith(_.flatten(_.map<IPostInstance, ITopicInstance[]>(posts, 'topics').map(topics => {
+                    return topics.map(t => {
+                        if (t.getDataValue('slug') !== topic) { // exclude the current topic
+                            return t.toJSON();
+                        }
+                    });
+                })), _.isEqual), 'topic');
+                
+                return { posts, topic: t.getDataValue('topic'), topics };
+            });
     });
-};
+}
+
+export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
+    return PostCategory.findOne({ where: { slug: category }}).then(c => {
+        return c.getPosts({
+            where: { publishedAt: { $gt: new Date('1993-01-01') } },
+            order: [[ 'publishedAt', sortOrder]],
+            include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }],
+            limit
+        })
+            .then(posts => {
+                let topics = _.sortBy(_.uniqWith(_.flatten(_.map<IPostInstance, ITopicInstance[]>(posts, 'topics').map(topics => {
+                    return topics.map(topic => {
+                        return topic.toJSON();
+                    });
+                })), _.isEqual), 'topic');
+                
+                return { posts, topics };
+            });
+    });
+}

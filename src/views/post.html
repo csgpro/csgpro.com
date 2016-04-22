@@ -1,5 +1,5 @@
-<br />
-<div class="row" id="content">
+{{#with post}}
+<div class="row blog-post" id="content">
     <div class="medium-8 columns">
         <div class="media-object">
             <div class="media-object-section">
@@ -7,7 +7,7 @@
             </div>
             <div class="media-object-section">
                 <h2>{{title}}</h2>
-                <h4 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h4>
+                <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
                 <div class="labels">
                     <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
                 {{#each topics}}
@@ -21,3 +21,4 @@
         </article>
     </div>
 </div>
+{{/with}}
