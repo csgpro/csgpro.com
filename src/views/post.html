@@ -1,21 +1,20 @@
 {{#with post}}
 <div class="row blog-post" id="content">
-    <div class="medium-8 columns">
-        <div class="media-object">
-            <div class="media-object-section">
-                <img src="{{author.photoUrl}}" class="author thumbnail" />
-            </div>
-            <div class="media-object-section">
-                <h2>{{title}}</h2>
-                <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
-                <div class="labels">
-                    <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
-                {{#each topics}}
-                    <a href="{{permalink}}" class="info label"><i class="fi-price-tag"></i> {{topic}}</a>
-                {{/each}}
-                </div>
-            </div>
+    <div class="medium-2 columns sticky">
+        
+        <img src="{{author.photoUrl}}" class="author thumbnail" />
+        
+        <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
+        
+        <div class="labels">
+            <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
+        {{#each topics}}
+            <a href="{{permalink}}" class="info label"><i class="fi-price-tag"></i> {{topic}}</a>
+        {{/each}}
         </div>
+        
+    </div>
+    <div class="medium-8 columns end">
         <article>
             {{{markdown post}}}
         </article>
