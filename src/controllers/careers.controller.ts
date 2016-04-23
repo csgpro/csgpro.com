@@ -28,7 +28,8 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
         if (!job) {
             reply(boom.notFound());
         }
-        reply.view('post', job.toJSON());
+        let jobJSON = job.toJSON();
+        reply.view('post', { title: jobJSON.title, post: jobJSON }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

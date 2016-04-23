@@ -6,16 +6,6 @@ import { getPost, getCategory, getTopics } from '../commands/post.commands';
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
-    // getCategory('news').then(data => {
-    //     reply.view('category', { title: 'News', description: '', posts: data.posts,  topics: data.topics});
-    // }).catch((err: Error) => {
-    //     if (err.name === 'SequelizeConnectionError') {
-    //         reply(boom.create(500, 'Bad Connection'));
-    //     } else {
-    //         reply(boom.create(500, err.message));
-    //     }
-    // });
-    
     let promises: Promise<any>[] = [];
     
     promises.push(getTopics());
@@ -38,7 +28,8 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
         if (!news) {
             reply(boom.notFound());
         }
-        reply.view('post', news.toJSON());
+        let newsJSON = news.toJSON();
+        reply.view('post', { title: newsJSON.title, post: newsJSON }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

@@ -13,7 +13,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     promises.push(getCategory('blog'));
     
     Promise.all(promises).then(data => {
-        reply.view('category', { title: 'Blog', description: '', posts: data[1].posts, topics: data[0] });
+        reply.view('category', { title: 'Blog', description: '', posts: data[1], topics: data[0] });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
@@ -45,7 +45,7 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
         }
         let postJSON = post.toJSON();
-        reply.view('post', { title: postJSON.title, post }, { layout: 'hero-layout' });
+        reply.view('post', { title: postJSON.title, post: postJSON }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

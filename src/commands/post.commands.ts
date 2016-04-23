@@ -8,7 +8,10 @@ import { PostCategory } from '../models/post-category.model';
 import * as _ from 'lodash';
 
 export function getPost(postSlug: string, categorySlug: string) {
-    return Post.findOne({ where: { slug: postSlug } }).then(post => {
+    return Post.findOne({
+        where: { slug: postSlug },
+        include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
+    }).then(post => {
         if (!post || (post.getDataValue('category').slug !== categorySlug)) {
             return;
         } else {
@@ -27,18 +30,9 @@ export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
             where: { publishedAt: { $gt: new Date('1993-01-01') } },
             order: [[ 'publishedAt', sortOrder]],
             include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
-        })
-            .then(posts => {
-                let topics = _.sortBy(_.uniqWith(_.flatten(_.map<IPostInstance, ITopicInstance[]>(posts, 'topics').map(topics => {
-                    return topics.map(t => {
-                        if (t.getDataValue('slug') !== topic) { // exclude the current topic
-                            return t.toJSON();
-                        }
-                    });
-                })), _.isEqual), 'topic');
-                
-                return { posts, topic: t.getDataValue('topic'), topics };
-            });
+        }).then(posts => {
+            return { topic: t.getDataValue('topic'), posts };
+        });
     });
 }
 
@@ -49,15 +43,6 @@ export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC'
             order: [[ 'publishedAt', sortOrder]],
             include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }],
             limit
-        })
-            .then(posts => {
-                let topics = _.sortBy(_.uniqWith(_.flatten(_.map<IPostInstance, ITopicInstance[]>(posts, 'topics').map(topics => {
-                    return topics.map(topic => {
-                        return topic.toJSON();
-                    });
-                })), _.isEqual), 'topic');
-                
-                return { posts, topics };
-            });
+        });
     });
 }

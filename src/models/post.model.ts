@@ -63,15 +63,6 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             }
             return permalink;
         }
-    },
-    hooks: {
-        beforeFind: (options: { include: any[]; }, fn: Function) => {
-            // If the original query doesn't include associated models, do it here
-            if (!options.include) {
-                options.include = [{ model: PostCategory, as: 'category'}, { model: Topic, as: 'topics' }, { model: User, as: 'author' }];
-            }
-            return fn(null, options);
-        }
     }
 };
 

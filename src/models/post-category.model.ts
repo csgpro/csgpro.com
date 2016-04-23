@@ -39,15 +39,6 @@ let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = 
             let postCategorySlug = self.getDataValue('slug');
             return `/${postCategorySlug}`;
         }
-    },
-    hooks: {
-        beforeFind: (options: { include: any[]; }, fn: Function) => {
-            // If the original query doesn't include posts associated models, do it here
-            if (!options.include) {
-                options.include = [{ model: Post, as: 'posts', include: [{ model: Topic, as: 'topics' }, { model: User, as: 'author' }] }];
-            }
-            return fn(null, options);
-        }
     }
 };
 
