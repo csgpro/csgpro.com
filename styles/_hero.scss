@@ -14,7 +14,7 @@
         padding-top: 2em;
         padding-bottom: 2em;
         position: relative;
-        z-index: 1;
+        z-index: 0;
         @media screen and (max-width: 40em) {
             text-align: center;
         }
@@ -73,6 +73,26 @@
                 img {
                     max-width: 80%;
                 }
+            }
+        }
+    }
+    &.post {
+        > img {
+            opacity: 0.6;
+        }
+        > .intro {
+            .copy {
+                @media screen and (min-width: 40em) {
+                    padding-top: .5em;
+                }
+                @media screen and (min-width: 64em) {
+                    padding-top: 1.5em;
+                }
+            }
+            h1, h2 {
+                font-weight: 700;
+                text-align: center;
+                text-shadow: 0 0 4px rgba(10, 10, 10, 0.7);
             }
         }
     }

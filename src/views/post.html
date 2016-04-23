@@ -1,16 +1,31 @@
+<section class="post hero">
+    <img data-interchange="[/resources/images/post/header-marina-small.jpg, small], [/resources/images/post/header-marina-medium.jpg, medium], [/resources/images/post/header-marina-large.jpg, large]">
+    <div class="row intro">
+        <div class="copy medium-centered medium-8 columns">
+            <h2>{{title}}</h2>
+        </div>
+    </div>
+</section>
+
 {{#with post}}
-<div class="row blog-post" id="content">
+<div class="row main-content">
     <div class="medium-2 columns sticky">
         
-        <img src="{{author.photoUrl}}" class="author thumbnail" />
+        <div class="small-2 medium-12 columns">
+            <img src="{{author.photoUrl}}" class="author thumbnail" />
+        </div>
         
-        <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
+        <div class="small-10 medium-12 columns">
         
-        <div class="labels">
-            <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
-        {{#each topics}}
-            <a href="{{permalink}}" class="info label"><i class="fi-price-tag"></i> {{topic}}</a>
-        {{/each}}
+            <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
+            
+            <div class="labels show-for-large">
+                <a href="{{category.permalink}}" class="info label"><i class="fi-folder"></i> {{category.category}}</a>
+            {{#each topics}}
+                <a href="{{permalink}}" class="info label"><i class="fi-price-tag"></i> {{topic}}</a>
+            {{/each}}
+            </div>
+            
         </div>
         
     </div>

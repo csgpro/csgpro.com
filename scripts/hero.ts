@@ -2,7 +2,7 @@
 
 import $ = require('jquery');
 
-const hero = $('.hero');
+const hero = $('.hero.expand');
 
 function resizeHero() {
     if (!hero.length) return;
