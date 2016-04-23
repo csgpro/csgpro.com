@@ -3,5 +3,6 @@
 import $ = require('jquery');
 require('./hero');
 require('./contact-form');
+require('./sticky');
 
 $(document).foundation();
