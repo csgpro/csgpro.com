@@ -1,19 +1,19 @@
-<h2>{{title}}</h2>
+<div class="row column">
+    <h2 class="page-title">{{title}}</h2>
+</div>
 
 <div class="row" id="content">
-    <div class="medium-9 columns">
+    <div class="medium-9 columns posts">
         
         {{#each posts}}
-        <div class="blog-post">
-            <div class="media-object">
-                <div class="media-object-section">
-                    <img src="{{{author.photoUrl}}}" class="author thumbnail" />
-                </div>
-                <div class="media-object-section">
-                    <h3><a href="{{permalink}}">{{title}}</a></h3>
-                    <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
-                    <p>{{excerpt}}</p>
-                </div>
+        <div class="row">
+            <div class="show-for-medium medium-2 columns">
+                <img src="{{{author.photoUrl}}}" class="author thumbnail" />
+            </div>
+            <div class="small-12 medium-10 columns">
+                <h3 class="post-title"><a href="{{permalink}}">{{title}}</a></h3>
+                <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
+                <p>{{excerpt}}</p>
             </div>
         </div>
         {{/each}}

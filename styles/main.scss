@@ -14,11 +14,15 @@ a.label {
 }
 
 .author.thumbnail {
-    width: 80px;
+    width: 100%;
     height: auto;
     border-radius: 100%;
     border-width: 1px;
     margin-top: 10px;
+}
+
+.author.thumbnail:hover {
+    box-shadow: 0 0 0 1px rgba(10,10,10,0.2);
 }
 
 li.nested {
@@ -52,4 +56,16 @@ h6.subheader {
     @media screen and (max-width: 20em) {
         padding-top: 0;
     }
+}
+
+.posts > .row {
+    padding-bottom: 2em;
+}
+
+.page-title {
+    margin: 1rem 0;
+}
+
+.sharing {
+    padding-bottom: 1rem;
 }
