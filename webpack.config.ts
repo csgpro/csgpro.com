@@ -23,7 +23,8 @@ var webpackConfig: webpack.Configuration = {
     ],
     
     externals: {
-        jquery: "jQuery"
+        jquery: "jQuery",
+        foundation: "Foundation"
     },
 
     module: {
