@@ -36,13 +36,18 @@ export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
     });
 }
 
-export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
-    return PostCategory.findOne({ where: { slug: category }}).then(c => {
-        return c.getPosts({
-            where: { publishedAt: { $gt: new Date('1993-01-01') } },
-            order: [[ 'publishedAt', sortOrder]],
-            include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }],
-            limit
-        });
-    });
+export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+    return Post.findAndCount({
+        include: [{
+            model: PostCategory,
+            as: 'category',
+            where: { slug: category }
+        },
+        { model: User, as: 'author' },
+        { model: Topic, as: 'topics' }],
+        where: { publishedAt: { $gt: new Date('1993-01-01') } },
+        order: [[ 'publishedAt', sortOrder]],
+        offset,
+        limit
+    })
 }

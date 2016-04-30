@@ -41,6 +41,7 @@
     "good": "^6.4.0",
     "good-console": "^5.2.0",
     "handlebars": "^4.0.5",
+    "handlebars-paginate": "^0.1.0",
     "hapi": "^11.1.4",
     "hapi-sitemap": "^1.0.3",
     "highlight.js": "^9.1.0",

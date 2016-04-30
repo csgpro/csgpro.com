@@ -10,6 +10,10 @@ import * as path from 'path';
 import * as routes from './routes';
 import * as sitemap from './modules/sitemap';
 import database from './database';
+import * as handlebars from 'handlebars';
+import * as paginate from 'handlebars-paginate';
+
+handlebars.registerHelper('paginate', paginate);
 
 const server = new hapi.Server({
     connections: {
@@ -40,7 +44,7 @@ server.register(require('inert'), (err) => {});
 server.register(require('vision'), (err) => {
     server.views({
         engines: {
-            html: require('handlebars')
+            html: handlebars
         },
         relativeTo: __dirname,
         path: './views',
