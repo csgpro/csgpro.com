@@ -12,7 +12,7 @@
     "postinstall": "npm run clean && npm run build",
     "test": "mocha",
     "build": "npm run server-js && npm run sass && npm run client-js",
-    "clean": "rimraf ./*.js src/**/*.js migrations/**/*.js seeders/**/*.js scripts/**/*.js test/**/*.js utis/**/*.js",
+    "clean": "rimraf ./*.js src/**/*.js src/**/*.js.map migrations/**/*.js seeders/**/*.js scripts/**/*.js test/**/*.js utis/**/*.js",
     "server-js": "tsc --rootDir src",
     "server-js:watch": "tsc --watch --rootDir src",
     "sass": "node utils/compile-sass.js",
