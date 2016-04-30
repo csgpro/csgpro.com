@@ -2,10 +2,9 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-
-export let prefix = '/services';
+import { pageView } from '../modules/view-matcher';
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
-    reply.view('data-analytics', { title: 'Data Analytics', description: '' });
+    reply.view(pageView('stories'), { title: 'Stories', description: '' });
 }
