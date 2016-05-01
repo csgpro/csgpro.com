@@ -61,7 +61,7 @@
     "sequelize": "^3.19.2",
     "sinon": "^1.17.3",
     "striptags": "^2.1.1",
-    "tedious": "^1.13.2",
+    "tedious": "^1.14.0",
     "ts-loader": "^0.8.0",
     "typescript": "^1.8.10",
     "uglify": "^0.1.5",
