@@ -3,6 +3,7 @@ node_js:
   - "6"
   - "5"
   - "4.2"
+before_deploy: "npm run prepare-deploy"
 deploy:
   provider: azure_web_apps
   on:

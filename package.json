@@ -18,7 +18,8 @@
     "sass": "node utils/compile-sass.js",
     "sass:watch": "node utils/compile-sass.js --watch",
     "client-js": "webpack --config webpack.config.js",
-    "client-js:watch": "webpack --watch --config webpack.config.js"
+    "client-js:watch": "webpack --watch --config webpack.config.js",
+    "prepare-deploy": "node prepare-deploy.js"
   },
   "repository": {
     "type": "git",
