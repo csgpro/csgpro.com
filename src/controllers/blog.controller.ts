@@ -12,7 +12,6 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let page = (!isNaN(Number(request.params['page']))) ? Number(request.params['page']) : 1;
     let limit = 10;
     let offset = page <= 1 ? 0 : (page * limit) - limit;
-    let something = 'something';
     
     promises.push(getTopics());
     promises.push(getCategory('blog', undefined, offset, limit));
@@ -51,7 +50,8 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
         }
         let postJSON = post.toJSON();
-        reply.view('post', { title: postJSON.title, post: postJSON }, { layout: 'hero-layout' });
+        let POST_URL = `${request.server.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
+        reply.view('post', { title: postJSON.title, post: postJSON, POST_URL, POST_ID: postJSON.id }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
@@ -59,37 +59,4 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.create(500, err.message));
         }
     });
-}
-
-function getPagination(totalPages: number, currentPage: number) {
-    let pagination = {
-        pages: [],
-        previous: null,
-        next: null
-    };
-    
-    if (currentPage >= 2) {
-        let previousPage = currentPage - 1;
-        pagination.previous = {
-            url: `/blog/${previousPage}`,
-            label: 'Previous'
-        };
-    }
-    
-    for(let i = 0; i < totalPages; i++) {
-        pagination.pages.push({
-            url: `/blog/${i + 1}`,
-            label: i + 1
-        });
-    }
-    
-    if (currentPage !== totalPages) {
-        let nextPage = currentPage + 1;
-        pagination.next = {
-            url: `/blog/${nextPage}`,
-            label: 'Next'
-        };
-    }
-    
-    return pagination;
 }

@@ -18,6 +18,7 @@ export interface IPostAttributes {
     author?: IUserInstance;
     topics?: ITopicInstance[];
     category?: IPostCategoryInstance;
+    permalink: string;
 }
 
 export interface IPostInstance extends Sequelize.Instance<IPostAttributes> {
