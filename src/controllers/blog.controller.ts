@@ -3,6 +3,7 @@
 import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { getPost, getCategory, getTopics } from '../commands/post.commands';
+import { pageHeader } from '../modules/view-matcher';
 
 index.sitemap = true;
 index.route = '/blog/{page?}'
@@ -17,7 +18,17 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     promises.push(getCategory('blog', undefined, offset, limit));
     
     Promise.all(promises).then(data => {
-        reply.view('category', { title: 'Blog', description: '', posts: data[1].rows, topics: data[0], pagination: { basePath: '/blog', pageCount: Math.ceil(data[1].count / limit), page } });
+        reply.view('category', {
+            title: 'Blog',
+            description: '',
+            posts: data[1].rows,
+            topics: data[0],
+            pagination: {
+                basePath: '/blog',
+                pageCount: Math.ceil(data[1].count / limit),
+                page
+            }
+        });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
@@ -51,7 +62,13 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
         }
         let postJSON = post.toJSON();
         let POST_URL = `${request.server.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
-        reply.view('post', { title: postJSON.title, post: postJSON, POST_URL, POST_ID: postJSON.id }, { layout: 'hero-layout' });
+        reply.view('post', {
+            title: postJSON.title,
+            header: pageHeader('marina'),
+            post: postJSON,
+            POST_URL,
+            POST_ID: postJSON.id
+        }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
