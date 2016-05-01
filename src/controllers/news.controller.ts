@@ -5,14 +5,19 @@ import * as boom from 'boom';
 import { getPost, getCategory, getTopics } from '../commands/post.commands';
 
 index.sitemap = true;
+index.route = '/news/{page?}'
 export function index(request: hapi.Request, reply: hapi.IReply) {
+    
     let promises: Promise<any>[] = [];
+    let page = (!isNaN(Number(request.params['page']))) ? Number(request.params['page']) : 1;
+    let limit = 10;
+    let offset = page <= 1 ? 0 : (page * limit) - limit;
     
     promises.push(getTopics());
-    promises.push(getCategory('news'));
+    promises.push(getCategory('news', undefined, offset, limit));
     
     Promise.all(promises).then(data => {
-        reply.view('category', { title: 'News', description: '', posts: data[1].posts, topics: data[0] });
+        reply.view('category', { title: 'News', description: '', posts: data[1].rows, topics: data[0], pagination: { basePath: '/news', pageCount: Math.ceil(data[1].count / limit), page } });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
@@ -22,7 +27,8 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
-export function show(request: hapi.Request, reply: hapi.IReply) {
+read.route = '/news/{year}/{month}/{slug}';
+export function read(request: hapi.Request, reply: hapi.IReply) {
     let postSlug: string = request.params['slug'];
     getPost(postSlug, 'news').then(news => {
         if (!news) {

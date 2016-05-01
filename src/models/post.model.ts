@@ -64,6 +64,8 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
                 permalink = `/careers/${postSlug}`;
             } else if (categorySlug === 'blog') {
                 permalink = `/blog/${postYear}/${postMonth}/${postSlug}`;
+            } else if (categorySlug === 'news') {
+                permalink = `/news/${postYear}/${postMonth}/${postSlug}`;
             } else {
                 permalink = `/${categorySlug}/${postSlug}`;
             }
