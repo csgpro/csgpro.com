@@ -61,7 +61,7 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             let postMonth = ("0" + (self.getDataValue('publishedAt').getMonth() + 1)).slice(-2);
 
             if (categorySlug === 'career') {
-                permalink = `/careers/${postSlug}`;
+                permalink = `/careers/${postYear}/${postMonth}/${postSlug}`;
             } else if (categorySlug === 'blog') {
                 permalink = `/blog/${postYear}/${postMonth}/${postSlug}`;
             } else if (categorySlug === 'news') {
