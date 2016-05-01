@@ -4,6 +4,7 @@
 @import 'home';
 @import 'top-bar';
 @import 'post';
+@import 'footer';
 
 @include foundation-everything;
 
@@ -39,14 +40,6 @@ li.nested {
     @media screen and (min-width: 40em) {
         padding-top: 2em;
     }
-}
-
-.main-footer {
-    background-color: #444;
-}
-
-.footer-content {
-    padding-top: 1em;
 }
 
 .sticky {

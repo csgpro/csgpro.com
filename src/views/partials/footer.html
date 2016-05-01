@@ -1,5 +1,13 @@
 <footer class="main-footer">
     <div class="row column footer-content">
-        <h1>&nbsp;</h1>
+        <a href="/" class="show-for-large"><img src="/resources/images/site/csg-pro-logo.png" style="width: 40px;"></a>
+        <ul class="csg-links">
+        {{#each sitemap}}
+            <li {{#if nested}}class="nested"{{/if}}><a href="{{path}}">{{title}}</a></li>
+        {{/each}}
+        </ul>
+        
+        <p class="copyright">&copy; 1993‐{{formatDate "YYYY"}} CSG Professional Services, Inc. All rights reserved.</p>
+        
     </div>
 </footer>
