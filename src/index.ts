@@ -10,7 +10,7 @@ import * as path from 'path';
 import * as routes from './routes';
 import * as sitemap from './modules/sitemap';
 import database from './database';
-const handlebars = require('handlebars');
+import * as handlebars from 'handlebars';
 const paginate = require('handlebars-paginate');
 
 handlebars.registerHelper('paginate', paginate);
