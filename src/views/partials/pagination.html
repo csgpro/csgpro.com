@@ -1,17 +1,53 @@
+{{#if pagination}}
 <ul class="pagination text-center" role="navigation" aria-label="Pagination">
     {{#paginate pagination type="first"}}
-    <li {{#if disabled}}class="disabled"{{/if}}><a href="{{../pagination.basePath}}/{{n}}">First <span class="show-for-sr">page</span></a></li>
+        <li {{#if disabled}}class="disabled"{{/if}}>
+            {{#if disabled}}
+            First <span class="show-for-sr">page</span>
+            {{else}}
+            <a href="{{../pagination.basePath}}/{{n}}">First <span class="show-for-sr">page</span></a>
+            {{/if}}
+        </li>
     {{/paginate}}
+    
     {{#paginate pagination type="previous"}}
-    <li class="pagination-previous{{#if disabled}} disabled{{/if}}"><a href="{{../pagination.basePath}}/{{n}}">Previous <span class="show-for-sr">page</span></a></li>
+        <li class="pagination-previous{{#if disabled}} disabled{{/if}}">
+            {{#if disabled}}
+            Previous <span class="show-for-sr">page</span>
+            {{else}}
+            <a href="{{../pagination.basePath}}/{{n}}">Previous <span class="show-for-sr">page</span></a>
+            {{/if}}
+        </li>
     {{/paginate}}
+    
     {{#paginate pagination type="middle" limit="7"}}
-    <li {{#if active}}class="current"{{/if}} aria-label="Page {{n}}"><a href="{{../pagination.basePath}}/{{n}}">{{n}}</a></li>
+        <li class="{{#if active}}current{{/if}}" aria-label="Page {{n}}">
+            {{#if active}}
+            {{n}}
+            {{else}}
+            <a href="{{../pagination.basePath}}/{{n}}">{{n}}</a>
+            {{/if}}
+        </li>
     {{/paginate}}
+    
     {{#paginate pagination type="next"}}
-    <li class="pagination-next{{#if disabled}} disabled{{/if}}"><a href="{{../pagination.basePath}}/{{n}}">Next <span class="show-for-sr">page</span></a></li>
+        <li class="pagination-next{{#if disabled}} disabled{{/if}}">
+            {{#if disabled}}
+            Next <span class="show-for-sr">page</span>
+            {{else}}
+            <a href="{{../pagination.basePath}}/{{n}}">Next <span class="show-for-sr">page</span></a>
+            {{/if}}
+        </li>
     {{/paginate}}
+    
     {{#paginate pagination type="last"}}
-    <li {{#if disabled}}class="disabled"{{/if}}><a href="{{../pagination.basePath}}/{{n}}">Last <span class="show-for-sr">page</span></a></li>
+        <li {{#if disabled}}class="disabled"{{/if}}>
+            {{#if disabled}}
+            Last <span class="show-for-sr">page</span>
+            {{else}}
+            <a href="{{../pagination.basePath}}/{{n}}">Last <span class="show-for-sr">page</span></a>
+            {{/if}}
+        </li>
     {{/paginate}}
 </ul>
+{{/if}}
