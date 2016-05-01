@@ -2,13 +2,14 @@
 
 import * as moment from 'moment';
 
-function formatDate(date: string, format?: string): string {
-    let f = 'MM/DD/YYYY';
-    let d = date;
-    if (typeof format === 'string') {
-        f = format;
+function formatDate(date: string | Date, format = 'MM/DD/YYYY'): string {
+    if (arguments.length <= 2) {
+        date = new Date();
+        if (typeof arguments[0] === 'string') {
+            format = arguments[0];
+        }
     }
-    return moment(d).format(f);
+    return moment(date).format(format);
 }
 
 export = formatDate;
