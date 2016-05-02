@@ -9,7 +9,6 @@ let content = ignoreFile.toString().replace(/(\*\.[css|js]{2,3})\s/g, (match) =>
 });
 
 content += '\n*.ts'; // Ignore TypeScript files
-content += '\nwebpack'; // Ignore webpack files
 
 console.log('Updating .gitignore', '\n', content);
 
