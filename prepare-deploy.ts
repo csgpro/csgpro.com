@@ -4,7 +4,7 @@ import * as fs from 'fs';
 
 let ignoreFile = fs.readFileSync('.gitignore');
 
-let content = ignoreFile.toString().replace(/(\*\.[css|js]{2,3}|node_modules)\s/g, (match) => {
+let content = ignoreFile.toString().replace(/(\*\.[css|js]{2,3})\s/g, (match) => {
     return `# ${match}`;
 });
 
