@@ -9,6 +9,7 @@ logs
 .vscode
 
 node_modules
+src/**/*.js
 *.js
 *.js.map
 

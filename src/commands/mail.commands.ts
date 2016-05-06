@@ -7,8 +7,8 @@ let striptags = require('striptags');
 
 interface IContactFormData {
     name: string;
-    phone: string;
-    email: string;
+    phone?: string;
+    email?: string;
     note: string;
 }
 
@@ -81,7 +81,7 @@ function validateContactForm(formData: IContactFormData) {
         }
         
         if (errors.length) {
-            throw errors;
+            reject(errors);
         } else {
             resolve();
         }
