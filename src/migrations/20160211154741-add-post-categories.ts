@@ -1,8 +1,8 @@
 'use strict';
 
 import * as Sequelize from 'sequelize';
-import { database, sqlAttribute } from '../src/database';
-import { PostCategory } from '../src/models/post-category.model';
+import { database, sqlAttribute } from '../database';
+import { PostCategory } from '../models/post-category.model';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {

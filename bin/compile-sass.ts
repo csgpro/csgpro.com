@@ -6,10 +6,12 @@ import * as fs from 'fs';
 import * as _ from 'lodash';
 
 const hound = require('hound');
+const mkdirp = require('mkdirp');
 
-const srcDir = 'styles';
-const srcFile = 'styles/main.scss';
-const destFile = 'public/styles/main.css';
+const srcDir = 'src/scss',
+      srcFile = `main.scss`,
+      destDir = 'lib/public/styles',
+      destFile = 'main.css';
 
 const args = process.argv;
 
@@ -26,7 +28,7 @@ if (watch) {
 function renderSass() {
     console.log('rendering sass');
     sass.render({
-        file: srcFile,
+        file: `${srcDir}/${srcFile}`,
         sourceMapEmbed: true,
         outputStyle: 'compressed'
     }, (err, result) => {
@@ -34,8 +36,9 @@ function renderSass() {
             console.error(err);
             process.exit(1);
         } else {
+            mkdirp.sync(`${destDir}`);
             // No errors during the compilation, write this result on the disk
-            fs.writeFile(destFile, result.css, function(err){
+            fs.writeFile(`${destDir}/${destFile}`, result.css, function(err){
                 if(err){
                     console.error(err);
                     process.exit(1);

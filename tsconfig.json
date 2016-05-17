@@ -5,8 +5,8 @@
         "inlineSourceMap": true
     },
     "exclude": [
+        "node_modules",
         "typings/browser.d.ts",
-        "typings/browser",
-        "node_modules"
+        "typings/browser"
     ]
 }

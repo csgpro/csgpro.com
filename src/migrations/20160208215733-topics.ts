@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { database, columnExists, sqlAttribute, createSlug } from '../src/database';
+import { database, columnExists, sqlAttribute, createSlug } from '../database';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {

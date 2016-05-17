@@ -1,7 +1,7 @@
 'use strict';
 
 import * as Sequelize from 'sequelize';
-import { database, sqlAttribute } from '../src/database';
+import { database, sqlAttribute } from '../database';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {

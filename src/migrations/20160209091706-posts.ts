@@ -2,8 +2,8 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { database, columnExists, sqlAttribute, NOW, RESTRICT, createSlug } from '../src/database';
-import postTypes from '../src/modules/post-types';
+import { database, columnExists, sqlAttribute, NOW, RESTRICT, createSlug } from '../database';
+import postTypes from '../modules/post-types';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {

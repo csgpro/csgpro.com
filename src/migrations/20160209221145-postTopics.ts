@@ -2,7 +2,7 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { database, sqlAttribute } from '../src/database';
+import { database, sqlAttribute } from '../database';
 import * as _ from 'lodash';
 
 export = {

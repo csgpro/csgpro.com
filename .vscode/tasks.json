@@ -7,8 +7,13 @@
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "build",
+            "taskName": "server-js",
             "isBuildCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "test",
+            "isTestCommand": true,
             "showOutput": "always"
         }
     ]

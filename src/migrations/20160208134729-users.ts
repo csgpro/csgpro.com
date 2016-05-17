@@ -2,8 +2,8 @@
 
 import * as moment from 'moment';
 import * as Sequelize from 'sequelize';
-import { database, columnExists, sqlAttribute, NOW } from '../src/database';
-import roleByName from '../src/modules/roles';
+import { database, columnExists, sqlAttribute, NOW } from '../database';
+import roleByName from '../modules/roles';
 
 export = {
     up: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes): any => {

@@ -9,12 +9,11 @@ logs
 .vscode
 
 node_modules
-src/**/*.js
-*.js
-*.js.map
-
-*.css
-!public/styles/foundation-icons/*.css
+src/**/*.js*
+test/**/*.js*
+bin/**/*.js*
+public/scripts/*.bundle.js
+lib
 
 # exclude settings.json
 settings.json
