@@ -14,7 +14,7 @@ export function pageView(page: string) {
 }
 
 export function pageHeader(image: 'lights' | 'marina') {
-    let imagesPath = __dirname + '/../../public/images/site';
+    let imagesPath = __dirname + '/../public/images/site';
     let imagesUrlPath = '/resources/images/site';
     let base = 'header';
     let img = `${base}-${image}`;
