@@ -2,9 +2,12 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "es5",
-        "inlineSourceMap": true
+        "inlineSourceMap": true,
+        "rootDir": "src",
+        "outDir": "lib"
     },
     "exclude": [
+        "src/browser-scripts",
         "node_modules",
         "typings/browser.d.ts",
         "typings/browser"

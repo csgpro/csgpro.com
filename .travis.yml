@@ -2,11 +2,9 @@ language: node_js
 node_js:
   - "6"
   - "5"
-  - "4.2"
-before_deploy: "npm run prepare-deploy"
+  - "4"
 deploy:
   provider: azure_web_apps
   on:
     branch: next
-    node: "4.2"
-  skip_cleanup: true
+    node: "4"

@@ -29,9 +29,6 @@ var webpackConfig = {
     resolve: {
         alias: {},
         extensions: ['', '.js', '.ts', '.json']
-    },
-    ts: {
-        transpileOnly: true
     }
 };
 

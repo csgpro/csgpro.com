@@ -1,6 +1,6 @@
 'use strict';
 
-import $ = require('jquery');
+import * as $ from 'jquery';
 require('./hero');
 require('./contact-form');
 require('./sticky');

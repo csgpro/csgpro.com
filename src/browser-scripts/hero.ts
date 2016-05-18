@@ -1,6 +1,6 @@
 'use strict';
 
-import $ = require('jquery');
+import * as $ from 'jquery';
 
 const hero = $('.hero.expand');
 

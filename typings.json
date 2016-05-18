@@ -1,5 +1,6 @@
 {
-  "ambientDependencies": {
+  "version": false,
+  "globalDependencies": {
     "assertion-error": "github:DefinitelyTyped/DefinitelyTyped/assertion-error/assertion-error.d.ts#800a7047cf275cc9f695cbd116748cd408a09d6d",
     "bcrypt-nodejs": "github:DefinitelyTyped/DefinitelyTyped/bcrypt-nodejs/bcrypt-nodejs.d.ts#d61a1c6578c9f0d2612a6a860ebe5f47fc716cc7",
     "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#290a1d7ee6c04ccf64c6fcfdf39d935baa91d55b",
@@ -8,7 +9,6 @@
     "chai-as-promised": "github:DefinitelyTyped/DefinitelyTyped/chai-as-promised/chai-as-promised.d.ts#d6e3f732183ca0ee4c4b438323253b384f5b4091",
     "foundation": "github:DefinitelyTyped/DefinitelyTyped/foundation/foundation.d.ts#c7a2374b86f8cb79d293be28dd53346a8627705f",
     "hapi": "github:DefinitelyTyped/DefinitelyTyped/hapi/hapi.d.ts#37afc2c83af2b87a3d2812d2fd2615a6dde825ae",
-    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#cf2a968f0edd7d30773f7d23fe3708fa029d5ab7",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#14e772882bcade8a8f970a360771623aa5cfd5d2",
     "marked": "github:DefinitelyTyped/DefinitelyTyped/marked/marked.d.ts#493d3b6882c79289cd9597a45c287250297d5b9d",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
@@ -25,8 +25,7 @@
     "source-map": "github:DefinitelyTyped/DefinitelyTyped/source-map/source-map.d.ts#1c572762b93d4b059d89339867edf54946176361",
     "uglify-js": "github:DefinitelyTyped/DefinitelyTyped/uglify-js/uglify-js.d.ts#51b587292f2ba85d68939d9c59cf7fa745a6173e",
     "umzug": "github:DefinitelyTyped/DefinitelyTyped/umzug/umzug.d.ts#5fe89fb639d8d7f772aaac09882b7c1269fe3820",
-    "validator": "github:DefinitelyTyped/DefinitelyTyped/validator/validator.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34",
-    "webpack": "github:DefinitelyTyped/DefinitelyTyped/webpack/webpack.d.ts#51868917c7480cc6b1187a59bbd0120effa29841"
+    "validator": "github:DefinitelyTyped/DefinitelyTyped/validator/validator.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34"
   },
   "dependencies": {
     "moment": "github:typings/typed-moment#a4075cd50e63efbedd850f654594f293ab81a385"

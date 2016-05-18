@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/5fe89fb639d8d7f772aaac09882b7c1269fe3820/umzug/umzug.d.ts",
+    "raw": "github:DefinitelyTyped/DefinitelyTyped/umzug/umzug.d.ts#5fe89fb639d8d7f772aaac09882b7c1269fe3820",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/5fe89fb639d8d7f772aaac09882b7c1269fe3820/umzug/umzug.d.ts"
+  }
+}

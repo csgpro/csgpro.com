@@ -2,7 +2,7 @@
 
 declare var window: any;
 
-import $ = require('jquery');
+import * as $ from 'jquery';
 
 const contactForm = $('#contactModal form');
 const callout = contactForm.find('.callout');
