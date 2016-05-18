@@ -32,9 +32,6 @@
   },
   "author": "Ken Howard <kenh@csgpro.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/csgpro/website/issues"
-  },
   "homepage": "https://github.com/csgpro/website#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
