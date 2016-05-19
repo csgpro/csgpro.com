@@ -7,8 +7,18 @@ const hound = require('hound');
 
 const filesGlob = process.argv.splice(2);
 
+let ext = '*';
 let outDir = '.';
 let srcDir = '.';
+
+const extIdx = _.findIndex(filesGlob, (value) => {
+    return value === '--ext';
+});
+
+if (extIdx != -1) {
+    ext = filesGlob[extIdx+1];
+    filesGlob.splice(extIdx, extIdx+1);
+}
 
 const outDirIdx = _.findIndex(filesGlob, (value) => {
     return value === '--outDir';
@@ -47,7 +57,7 @@ if (watchIdx != -1) {
 
 function moveFiles() {
     console.log('moving files');
-    copyFiles([`${srcDir}/**/*.*`], outDir, (err, file) => {
+    copyFiles([`${srcDir}/**/*.${ext}`], outDir, (err, file) => {
         if (err) {
             console.log('Error', err);
             process.exit(1);

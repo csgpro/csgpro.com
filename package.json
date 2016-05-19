@@ -22,8 +22,8 @@
     "sass:watch": "node lib/bin/compile-sass.js --watch",
     "public": "node lib/bin/copy-files.js --outDir lib/public --srcDir src/public",
     "public:watch": "node lib/bin/copy-files.js --outDir lib/public --srcDir src/public --watch",
-    "views": "node lib/bin/copy-files.js --outDir lib/views --srcDir src/views",
-    "views:watch": "node lib/bin/copy-files.js --outDir lib/views --srcDir src/views --watch",
+    "views": "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views",
+    "views:watch": "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views --watch",
     "test": "mocha lib/test"
   },
   "repository": {

@@ -16,7 +16,7 @@ export default function (database: Sequelize.Sequelize) {
             params: [database.getQueryInterface(), database.constructor, function() {
                 throw new Error('Migration tried to use old style "done" callback. Please upgrade to "umzug" and return a promise instead.');
             }],
-            path: __dirname + '/../../migrations',
+            path: __dirname + '/../migrations',
             pattern: /\.js$/
         }
 
