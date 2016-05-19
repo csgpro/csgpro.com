@@ -2,7 +2,7 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { getPost, getCategory, getTopics } from '../commands/post.commands';
+import { getPost, getPostsByCategory, getTopics } from '../commands/post.commands';
 
 index.sitemap = true;
 index.route = '/news/{page?}'
@@ -14,7 +14,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let offset = page <= 1 ? 0 : (page * limit) - limit;
     
     promises.push(getTopics());
-    promises.push(getCategory('news', undefined, offset, limit));
+    promises.push(getPostsByCategory('news', undefined, offset, limit));
     
     Promise.all(promises).then(data => {
         reply.view('category', { title: 'News', description: '', posts: data[1].rows, topics: data[0], pagination: { basePath: '/news', pageCount: Math.ceil(data[1].count / limit), page } });

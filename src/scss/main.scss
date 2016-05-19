@@ -60,6 +60,11 @@ h6.subheader {
     }
 }
 
+.header, .subheader, .sidebar-header, .page-title, .hero h1, .hero h2 {
+    color: #00405c;
+    font-family: "century-old-style-std",serif;
+}
+
 .posts > .row {
     padding-bottom: 2em;
 }
@@ -74,4 +79,8 @@ h6.subheader {
 
 #disqus_thread {
     margin: 3em 0 1em 0;
+}
+
+.recent-posts li {
+    padding-bottom: 1em;
 }

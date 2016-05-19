@@ -36,7 +36,7 @@ export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
     });
 }
 
-export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+export function getPostsByCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
     return Post.findAndCount({
         include: [{
             model: PostCategory,
@@ -50,4 +50,25 @@ export function getCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC'
         offset,
         limit
     })
+}
+
+export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
+    return Topic.findAll({ where: { slug: { $in: topics } } }).then((topics) => {
+        let queue = [];
+        
+        topics.forEach(topic => {
+            queue.push(topic.getPosts({
+                include: [{ model: PostCategory, as: 'category' }],
+                where: { publishedAt: { $gt: new Date('1993-01-01') } },
+                order: [[ 'publishedAt', sortOrder ]]
+            }));
+        });
+        
+        return Promise.all<IPostInstance>(queue).then((data) => {
+            let posts = _.flatten(data);
+            let postsRaw = posts.map(post => post.toJSON());
+            
+            return _.take(_.uniqBy(postsRaw, 'id'), limit);
+        });
+    });
 }

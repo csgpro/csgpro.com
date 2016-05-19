@@ -2,7 +2,7 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { getPost, getCategory, getTopics } from '../commands/post.commands';
+import { getPost, getPostsByCategory, getTopics } from '../commands/post.commands';
 import { pageHeader } from '../modules/view-matcher';
 
 index.sitemap = true;
@@ -15,7 +15,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let offset = page <= 1 ? 0 : (page * limit) - limit;
     
     promises.push(getTopics());
-    promises.push(getCategory('blog', undefined, offset, limit));
+    promises.push(getPostsByCategory('blog', undefined, offset, limit));
     
     Promise.all(promises).then(data => {
         reply.view('category', {
@@ -42,7 +42,7 @@ list.route = '/api/posts';
 export function list(request: hapi.Request, reply: hapi.IReply) {
     let lastIndex = Number(request.params['lastIndex']);
     let limit = Number(request.params['limit']);
-    getCategory('blog').then(posts => {
+    getPostsByCategory('blog').then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {

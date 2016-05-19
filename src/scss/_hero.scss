@@ -34,12 +34,6 @@
                 font-size: 3.1em;
             }
         }
-        h1 {
-            padding-right: 1.4em;
-            @media screen and (max-width: 40em) {
-                padding-right: 0;
-            }
-        }
         h2 + button, h2 + button + button {
             margin-top: .8em;
         }
