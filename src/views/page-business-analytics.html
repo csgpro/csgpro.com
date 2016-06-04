@@ -1,0 +1,23 @@
+<section class="post hero">
+    {{{header}}}
+    <div class="row intro">
+        <div class="copy medium-centered medium-8 columns">
+            <h2>{{title}}</h2>
+        </div>
+    </div>
+</section>
+
+<div class="row main-content">
+    <div class="medium-3 columns sticky">
+        {{> contact-widget}}
+        {{> posts-widget}}
+    </div>
+    <div class="medium-9 columns end">
+        <article>
+            {{{markdown pageContent}}}
+        </article>
+        <aside>
+            <h4>Our Power BI Samples</h4>
+        </aside>
+    </div>
+</div>
