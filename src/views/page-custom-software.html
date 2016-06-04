@@ -8,18 +8,13 @@
 </section>
 
 <div class="row main-content">
-    <div class="medium-2 columns sticky">
+    <div class="medium-3 columns sticky">
         <div class="sidebar-widget">
             <button type="button" data-toggle="contactModal" class="large button">reach out</button>
         </div>
-        <div class="sidebar-widget">
-            <h4 class="sidebar-header">Recent Posts</h4>
-            <ul class="no-bullet recent-posts">
-            {{#each posts}}<li><a href="{{permalink}}">{{title}}</a></li>{{/each}}
-            </ul>
-        </div>
+        {{> posts-widget}}
     </div>
-    <div class="medium-10 columns">
+    <div class="medium-9 columns">
         <article>
             <p>Do you have a dependency on spreadsheet or paper-based processes that are inconsistent, inefficient, or not widely adopted throughout your business? Or an outdated application that no longer aligns to your processes or doesn't work on mobile devices? Don't worry - we can help.</p>
             
