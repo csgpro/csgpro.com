@@ -3,7 +3,6 @@
 @import 'hero';
 @import 'home';
 @import 'top-bar';
-@import 'post';
 @import 'footer';
 
 @include foundation-everything;
@@ -60,8 +59,8 @@ h6.subheader {
     }
 }
 
-.header, .subheader, .sidebar-header, .page-title, .hero h1, .hero h2 {
-    color: #00405c;
+.header, .subheader, .sidebar-header, .page-title, .hero h1, .hero h2, .primary-heading, .secondary-heading, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: darken($primary-color, 32%);
     font-family: "century-old-style-std",serif;
 }
 
@@ -83,4 +82,29 @@ h6.subheader {
 
 .recent-posts li {
     padding-bottom: 1em;
+}
+
+.paragraph {
+    line-height: $global-lineheight * 1.2;
+}
+
+.paragraph-primary {
+    @extend .paragraph;
+    font-size: 1.2em;
+}
+
+/**
+ * Widget Styles
+ */
+ 
+.widget-title {
+    text-align: left;
+}
+
+.callout.csg {
+    color: #fff;
+    background-color: $primary-color;
+    .button {
+        background-color: #fff;
+    }
 }
