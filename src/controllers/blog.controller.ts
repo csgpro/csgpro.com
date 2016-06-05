@@ -67,7 +67,8 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             header: pageHeader('marina'),
             post: postJSON,
             POST_URL,
-            POST_ID: postJSON.id
+            POST_ID: postJSON.id,
+            isBlogPost: true
         }, { layout: 'hero-layout' });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {

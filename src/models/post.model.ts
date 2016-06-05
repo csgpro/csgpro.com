@@ -66,7 +66,8 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             } else if (categorySlug === 'blog') {
                 permalink = `/blog/${postYear}/${postMonth}/${postSlug}`;
             } else if (categorySlug === 'news') {
-                permalink = `/news/${postYear}/${postMonth}/${postSlug}`;
+                // TODO: Update to 'events' categorySlug when db migration is complete.
+                permalink = `/events/${postYear}/${postMonth}/${postSlug}`;
             } else {
                 permalink = `/${categorySlug}/${postSlug}`;
             }
