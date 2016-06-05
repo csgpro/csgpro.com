@@ -64,7 +64,6 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
         let POST_URL = `${request.server.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
         reply.view('post', {
             title: postJSON.title,
-            header: pageHeader('marina'),
             post: postJSON,
             POST_URL,
             POST_ID: postJSON.id,
