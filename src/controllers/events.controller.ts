@@ -17,11 +17,8 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let limit = 10;
     let offset = page <= 1 ? 0 : (page * limit) - limit;
     
-    promises.push(getTopics());
-    promises.push(getPostsByCategory('news', undefined, offset, limit));
-    
-    Promise.all(promises).then(data => {
-        reply.view('category', { title: 'Events', description: '', posts: data[1].rows, topics: data[0], pagination: { basePath: '/news', pageCount: Math.ceil(data[1].count / limit), page } });
+    getPostsByCategory('news', undefined, offset, limit).then(data => {
+        reply.view('category', { title: 'Events', description: '', posts: data.rows, pagination: { basePath: '/events', pageCount: Math.ceil(data.count / limit), page } });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
