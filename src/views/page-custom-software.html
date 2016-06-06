@@ -8,11 +8,13 @@
 </section>
 
 <div class="row main-content">
-    <div class="medium-3 columns sticky">
+    <div class="medium-3 columns" data-sticky-container>
+        <div class="sticky" data-sticky data-anchor="content-container">
         {{> contact-widget}}
         {{> posts-widget}}
+        </div>
     </div>
-    <div class="medium-9 columns">
+    <div class="medium-9 columns" id="content-container">
         <article>
             <p>Do you have a dependency on spreadsheet or paper-based processes that are inconsistent, inefficient, or not widely adopted throughout your business? Or an outdated application that no longer aligns to your processes or doesn't work on mobile devices? Don't worry - we can help.</p>
             
