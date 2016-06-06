@@ -37,6 +37,21 @@ hard to earn your trust.
 do what it takes to deliver what we promise, every time.
 `;
 
+const powerBISamples = [
+    {
+        title: 'World Data',
+        description: 'This chart is fully interactive and allows users to filter and compare data by country.',
+        previewImageUrl: '/resources/images/powerbi/world-economy.png',
+        url: 'https://app.powerbi.com/view?r=eyJrIjoiZWIzNDQ2ZDctZjRmNi00NzlkLTgxNjEtODM2Nzk5ODgyMjU2IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9' 
+    },
+    {
+        title: 'Power BI Color Schemes',
+        description: 'Choosing the right color scheme for your Power BI chart is difficult. We want to make it easier.',
+        previewImageUrl: '/resources/images/powerbi/color-schemes.png',
+        url: 'https://app.powerbi.com/view?r=eyJrIjoiYTA5MTQwYTgtMmE0ZC00NGExLWE2ZmEtYjZhNjhhMDE5OTM4IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9'
+    }
+];
+
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
     getPostsByTopic(['business-analytics']).then(posts => {
@@ -44,7 +59,8 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
             title: 'Business Analytics',
             description: '',
             pageContent,
-            posts
+            posts,
+            powerBISamples
         },
         { layout: 'hero-layout' });
     });

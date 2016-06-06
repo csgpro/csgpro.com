@@ -22,7 +22,7 @@
     {{#each stories}}
     <div class="medium-4 columns {{#if @last}}end{{/if}}">
         <div class="callout story" data-equalizer-watch>
-            <a data-open="storyModal{{@index}}">
+            <a data-open="storyModal{{id}}">
             {{#if sliderImageUrl}}
             <img src="{{sliderImageUrl}}" />
             {{else}}
