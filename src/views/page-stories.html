@@ -4,7 +4,10 @@
         <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button> {{#each featuredStories}}
         <li class="{{#if @first}}is-active{{/if}} orbit-slide">
             <img class="orbit-image" src="{{sliderImageUrl}}" alt="{{title}}">
-            <figcaption class="orbit-caption">{{title}}</figcaption>
+            <figcaption class="orbit-caption">
+                <h3 style="color: #fff">{{title}}</h3>
+                <button class="button expanded" data-open="storyModal{{id}}">Get The Full Story</button>
+            </figcaption>
         </li>
         {{/each}}
     </ul>
@@ -28,8 +31,9 @@
             </a>
             <br />
             <br />
-            <h6 class="story-title"><a data-open="storyModal{{@index}}">{{title}}</a></h6>
-            <div class="reveal" id="storyModal{{@index}}" data-reveal>
+            <h5 class="story-title"><a data-open="storyModal{{id}}">{{title}}</a></h5>
+            {{{markdown (truncate body 100)}}}
+            <div class="reveal" id="storyModal{{id}}" data-reveal>
                 <div class="modal-header">
                     {{#if sliderImageUrl}}
                     <img src="{{sliderImageUrl}}" />
