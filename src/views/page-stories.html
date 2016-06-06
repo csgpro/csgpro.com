@@ -1,9 +1,8 @@
 <div class="orbit stories-slider" role="region" aria-label="Featured Stories" data-orbit data-use-m-u-i="false">
     <ul class="orbit-container">
         <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
-        {{#each featuredStories}}
-        <li class="{{#unless @index}}is-active{{/unless}} orbit-slide">
+        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button> {{#each featuredStories}}
+        <li class="{{#if @first}}is-active{{/if}} orbit-slide">
             <img class="orbit-image" src="{{sliderImageUrl}}" alt="{{title}}">
             <figcaption class="orbit-caption">{{title}}</figcaption>
         </li>
@@ -11,7 +10,41 @@
     </ul>
     <nav class="orbit-bullets">
         {{#each featuredStories}}
-        <button {{#unless @index}}class="is-active"{{/unless}} data-slide="{{@index}}"><span class="show-for-sr">{{title}}</span>{{#unless @index}}<span class="show-for-sr">Current Slide</span>{{/unless}}</button>
+        <button {{#if @first}}class="is-active" {{/if}} data-slide="{{@index}}"><span class="show-for-sr">{{title}}</span>{{#if @first}}<span class="show-for-sr">Current Slide</span>{{/if}}</button>
         {{/each}}
     </nav>
+</div>
+
+<div class="row" data-equalizer data-equalize-on="medium">
+    {{#each stories}}
+    <div class="medium-4 columns {{#if @last}}end{{/if}}">
+        <div class="callout story" data-equalizer-watch>
+            <a data-open="storyModal{{@index}}">
+            {{#if sliderImageUrl}}
+            <img src="{{sliderImageUrl}}" />
+            {{else}}
+            <img src="http://www.fillmurray.com/336/112" />
+            {{/if}}
+            </a>
+            <br />
+            <br />
+            <h6 class="story-title"><a data-open="storyModal{{@index}}">{{title}}</a></h6>
+            <div class="reveal" id="storyModal{{@index}}" data-reveal>
+                <div class="modal-header">
+                    {{#if sliderImageUrl}}
+                    <img src="{{sliderImageUrl}}" />
+                    {{else}}
+                    <img src="http://www.fillmurray.com/570/190" />
+                    {{/if}}
+                    <figcaption class="modal-header-caption">{{title}}</figcaption>
+                </div>
+                <br />
+                {{{markdown body}}}
+                <button class="close-button" data-close aria-label="Close reveal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {{/each}}
 </div>

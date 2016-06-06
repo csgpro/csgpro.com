@@ -9,7 +9,7 @@ index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
     const featuredStoriesPromise = getStories({ inSlider: true });
-    const storiesPromise = getStories();
+    const storiesPromise = getStories(undefined, undefined, undefined, null)
     
     Promise.all([featuredStoriesPromise, storiesPromise]).then(data => {
         let featuredStories = data[0].rows;
@@ -18,6 +18,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
             title: 'Stories',
             description: '',
             stories,
+            totalStories: data[1].count,
             featuredStories
         });
     })

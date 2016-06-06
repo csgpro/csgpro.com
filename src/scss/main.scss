@@ -107,3 +107,15 @@ h6.subheader {
         background-color: #fff;
     }
 }
+
+
+.modal-header-caption {
+    @include orbit-caption;
+    // TODO: Add Media Queries for Small Screens
+    position: absolute;
+    top: 7%;
+    left: 0;
+    bottom: auto;
+    width: 35%;
+    margin-left: 4%;
+}
