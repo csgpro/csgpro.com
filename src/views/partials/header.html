@@ -4,13 +4,20 @@
 
 <div class="csg top-bar show-for-medium">
     <div class="row">
-        <ul class="menu">
+        <ul class="dropdown menu" data-dropdown-menu>
             <li><a href="/custom-software">Custom Software</a></li>
             <li><a href="/business-analytics">Business Analytics</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/"><img src="/resources/images/site/csg-pro-logo.png"></a></li>
+            <li><a href="/stories">Stories</a></li>
             <li><a href="/events">Events</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li role="menuitem" class="is-dropdown-submenu-parent opens-right" aria-haspopup="true" aria-expanded="false" aria-label="About" data-is-click="false"><a>About</a>
+                <ul class="menu submenu is-dropdown-submenu first-sub vertical" data-submenu="" aria-hidden="true" role="menu">
+                    <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><a href="/about">About CSG Pro</a></li>
+                    <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><a href="/contact">Contact Us</a></li>
+                    <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><a href="/careers">Careers</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

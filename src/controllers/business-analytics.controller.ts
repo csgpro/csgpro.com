@@ -3,6 +3,7 @@
 import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { pageView, pageHeader } from '../modules/view-matcher';
+import { getPostsByTopic } from '../commands/post.commands';
 
 const pageContent = `
 <p class="paragraph-primary">We are specialists with data. We help you make better decisions that support your business strategy. Those decisions happen by transforming and analyzing data into actionable information. This is what we do and care about, every day. The outcome &mdash; delighted clients.</p>
@@ -38,11 +39,13 @@ do what it takes to deliver what we promise, every time.
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
-    reply.view(pageView('business-analytics'), {
-        title: 'Business Analytics',
-        description: '',
-        header: pageHeader('marina'),
-        pageContent
-    },
-    { layout: 'hero-layout' });
+    getPostsByTopic(['business-analytics']).then(posts => {
+        reply.view(pageView('business-analytics'), {
+            title: 'Business Analytics',
+            description: '',
+            pageContent,
+            posts
+        },
+        { layout: 'hero-layout' });
+    });
 }

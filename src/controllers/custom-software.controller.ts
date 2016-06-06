@@ -11,7 +11,6 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
         reply.view(pageView('custom-software'), {
             title: 'Custom Software',
             description: '',
-            header: pageHeader('lights'),
             posts
         },
         { layout: 'hero-layout'});

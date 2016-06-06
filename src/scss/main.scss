@@ -4,8 +4,7 @@
 @import 'home';
 @import 'top-bar';
 @import 'footer';
-
-@include foundation-everything;
+@import 'story_slider';
 
 a.label {
     &:focus, &:hover {

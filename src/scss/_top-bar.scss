@@ -6,20 +6,20 @@
     padding: 0;
     position: relative;
     z-index: 1;
-    .menu {
+    .dropdown.menu {
         > li {
             display: block;
             float: left;
             text-align: center;
             width: 15%;
-            a {
+            > a {
                 padding-top: 20px;
                 border-style: dashed;
                 border-width: 0 0 0 1px;
                 height: 58px;
             }
             &:last-child {
-                a {
+                > a {
                     border-right-width: 1px;
                 }
             }
@@ -35,7 +35,7 @@
             &:nth-child(4) {
                 width: 10%;
                 position: relative;
-                img {
+                > img {
                     position: absolute;
                     top: 5px;
                     left: 0;
@@ -43,22 +43,11 @@
                     margin: auto;
                     width: 70%;
                 }
-                a {
+                > a {
                     border-top-width: 0;
                     border-bottom: 0;
                     min-height: 36px;
                 }
-            }
-            &:nth-child(1), &:nth-child(2) {
-                // @media screen and (min-width: 40em) and (max-width: 45em) {
-                //     font-size: .6em;
-                // }
-                // @media screen and (min-width: 45em) and (max-width: 55em) {
-                //     font-size: .7em;
-                // }
-                // @media screen and (min-width: 55em) and (max-width: 65em) {
-                //     font-size: .8em;
-                // }
             }
         }
     }
