@@ -3,7 +3,6 @@
 import * as Sequelize from 'sequelize';
 import { Contact, IContactAttributes, IContactInstance } from '../models/contact.model';
 import { ContactRequest, IContactRequestInstance } from '../models/contact-request.model';
-import * as _ from 'lodash';
 
 export function addContactRequest(contact: IContactAttributes, note: string) {
     let { email } = contact;
