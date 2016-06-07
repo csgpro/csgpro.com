@@ -57,6 +57,10 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
         fullName: function (value: string): void {
             let self: IUserInstance = this;
             let splitIndex = value.indexOf(' ');
+            if (splitIndex === -1) {
+                self.setDataValue('firstName', value);
+                return;
+            }
             let firstName = value.substring(0, splitIndex).trim();
             let lastName = value.substring(splitIndex+1).trim();
             self.setDataValue('firstName', firstName);

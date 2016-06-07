@@ -57,8 +57,6 @@ export function sendContactFormEmail(formData: IContactFormData, subject = 'Cont
     });
 }
 
-
-
 function validateContactForm(formData: IContactFormData) {
     let promise = new Promise((resolve, reject) => {
         let errors: IError[] = [];

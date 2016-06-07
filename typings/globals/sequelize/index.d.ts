@@ -3832,7 +3832,7 @@ declare module "sequelize" {
              * an instance of sequelize.TimeoutError will be thrown instead. If a transaction is created, a savepoint
              * will be created instead, and any unique constraint violation will be handled internally.
              */
-            findOrCreate( options : FindOrInitializeOptions<TAttributes> ) : Promise<TInstance>;
+            findOrCreate( options : FindOrInitializeOptions<TAttributes> ) : Promise<FindOrCreateResult<TInstance>>;
 
             /**
              * Insert or update a single row. An update will be executed if a row which matches the supplied values on
@@ -5985,6 +5985,11 @@ declare module "sequelize" {
             compactLite<T>( arr : T[] ): T[];
             matchesDots( dots : string | string[], value : Object ) : ( item : Object ) => boolean;
 
+        }
+
+        interface FindOrCreateResult<TInstance> extends Array<any> {
+            [0]: TInstance;
+            [1]: boolean;
         }
 
         interface Utils {

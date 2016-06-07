@@ -2,6 +2,7 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
+import { addContactRequest } from '../commands/contact.commands';
 import { sendContactFormEmail } from '../commands/mail.commands';
 import { pageView } from '../modules/view-matcher';
 
@@ -11,13 +12,20 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
 }
 
 export function create(request: hapi.Request, reply: hapi.IReply) {
-    let { name, phone, email, note } = request.payload;
-    sendContactFormEmail({ name, phone, email, note }).then(info => {
-        reply({ message: 'Message Sent' });
-    }).catch((errors) => {
-        let error = boom.badData();
-        error.reformat();
-        error.output.payload.errors = errors;
-        reply(error);
-    });
+    let { name, phone, email, note, company } = request.payload;
+    let contact = { fullName: name, phone, email, company };
+
+    addContactRequest(contact, note)
+        .then(() => {
+            return sendContactFormEmail({ name, phone, email, note });
+        })
+        .then(() => {
+            reply({ message: 'Message Sent' });
+        })
+        .catch((errors) => {
+            let error = boom.badData();
+            error.reformat();
+            error.output.payload.errors = errors;
+            reply(error);
+        });
 }
