@@ -7,6 +7,7 @@
     "boom": "github:DefinitelyTyped/DefinitelyTyped/boom/boom.d.ts#cde81f5458364ef1dc43a85e1be6a9e132c94e11",
     "chai": "github:DefinitelyTyped/DefinitelyTyped/chai/chai.d.ts#9c25433c84251bfe72bf0030a95edbbb2c81c9d5",
     "chai-as-promised": "github:DefinitelyTyped/DefinitelyTyped/chai-as-promised/chai-as-promised.d.ts#d6e3f732183ca0ee4c4b438323253b384f5b4091",
+    "crypto-js": "registry:dt/crypto-js#3.1.4+20160505170201",
     "foundation": "github:DefinitelyTyped/DefinitelyTyped/foundation/foundation.d.ts#c7a2374b86f8cb79d293be28dd53346a8627705f",
     "hapi": "github:DefinitelyTyped/DefinitelyTyped/hapi/hapi.d.ts#37afc2c83af2b87a3d2812d2fd2615a6dde825ae",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#14e772882bcade8a8f970a360771623aa5cfd5d2",

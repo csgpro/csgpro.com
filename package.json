@@ -11,7 +11,7 @@
     "start": "node index.js",
     "postinstall": "npm run build",
     "prepare-build": "npm run clean",
-    "build": "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views",
+    "build": "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run downloads",
     "clean": "rimraf ./lib/* !./lib/.gitkeep",
     "clean-deep": "rimraf ./src/**/*.js ./test/**/*.js ./utils/**/*.js, ./lib/* !./lib/.gitkeep !./src/public/scripts/*.js",
     "lib-js": "tsc",
@@ -24,6 +24,8 @@
     "public:watch": "node lib/bin/copy-files.js --outDir lib/public --srcDir src/public --watch",
     "views": "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views",
     "views:watch": "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views --watch",
+    "downloads": "node lib/bin/copy-files.js --outDir lib/downloads --srcDir src/downloads",
+    "downloads:watch": "node lib/bin/copy-files.js --outDir lib/downloads --srcDir src/downloads --watch",
     "test": "mocha lib/test"
   },
   "repository": {
@@ -37,6 +39,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.2.2",
     "boom": "^3.1.1",
+    "crypto": "0.0.3",
     "good": "^6.4.0",
     "good-console": "^5.2.0",
     "handlebars": "^4.0.5",
