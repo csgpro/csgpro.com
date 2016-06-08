@@ -33,7 +33,8 @@ export function create(request: hapi.Request, reply: hapi.IReply) {
 
     addDownloadRequest(contact, fullFilePath)
         .then(dr => {
-            let url = `${request.connection.info.protocol}://${request.headers['host']}/download/${dr.toJSON().token}`;
+            let address = request.connection.info.uri;
+            let url = `${address}/download/${dr.toJSON().token}`;
             return sendDownloadEmail(email, url);
         })
         .then(() => {
