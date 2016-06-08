@@ -6,3 +6,4 @@
  */
 require('!!script!jquery/dist/jquery.min.js');
 require('!!script!foundation-sites/dist/foundation.min.js');
+require('!!script!motion-ui/dist/motion-ui.min.js');

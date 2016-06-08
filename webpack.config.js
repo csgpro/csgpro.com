@@ -18,7 +18,8 @@ var webpackConfig = {
     ],
     externals: {
         jquery: "jQuery",
-        foundation: "Foundation"
+        foundation: "Foundation",
+        motionUI: "MotionUI"
     },
     module: {
         noParse: [],
