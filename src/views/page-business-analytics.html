@@ -38,6 +38,9 @@
                         <div class="reveal large" id="powerBIModal{{@index}}" data-reveal>
                             <h3>{{title}}</h3>
                             {{{markdown description}}}
+                            {{#if downloadFile}}
+                                <button class="button" onclick="openDownloadModal('{{downloadFile}}')">Download</button>
+                            {{/if}}
                             <div class="flex-video widescreen">
                                 <iframe width="1600" height="900" src="{{url}}" frameborder="0" allowFullScreen="true"></iframe>
                             </div>
