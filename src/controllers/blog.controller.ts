@@ -61,7 +61,7 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
         }
         let postJSON = post.toJSON();
-        let POST_URL = `${request.server.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
+        let POST_URL = `${request.connection.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
         reply.view('post', {
             title: postJSON.title,
             post: postJSON,
