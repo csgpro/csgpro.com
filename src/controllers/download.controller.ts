@@ -5,14 +5,16 @@ import * as boom from 'boom';
 import { addDownloadRequest, getDownloadRequest } from '../commands/contact.commands';
 import { sendDownloadEmail } from '../commands/mail.commands';
 import { pageView } from '../modules/view-matcher';
+import * as path from 'path';
 
-download.route = '/download/{token?}'
+download.route = '/download/{token?}';
 export function download(request: hapi.Request, reply: hapi.IReply) {
     let token: string = request.params['token'];
 
     getDownloadRequest(token)
         .then((file) => {
-            reply.file(file);
+            let filename = path.basename(file);
+            reply.file(file, { mode: 'attachment', filename, lookupCompressed: false });
         })
         .catch((err: Error) => {
             if (err.name === 'SequelizeConnectionError') {
