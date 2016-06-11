@@ -20,6 +20,13 @@ export function getPost(postSlug: string, categorySlug: string) {
     });
 }
 
+export function getPostByPostId(postId: number) {
+    return Post.findOne({
+        where: { id: postId },
+        include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
+    });
+}
+
 export function getTopics() {
     return Topic.findAll();
 }

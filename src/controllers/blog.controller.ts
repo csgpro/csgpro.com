@@ -2,7 +2,7 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { getPost, getPostsByCategory, getTopics } from '../commands/post.commands';
+import { getPost, getPostsByCategory, getTopics, getPostByPostId } from '../commands/post.commands';
 import { pageHeader } from '../modules/view-matcher';
 
 index.sitemap = true;
@@ -53,15 +53,36 @@ export function list(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
+legacyPostRoute.route = '/post/{id}';
+export function legacyPostRoute(request: hapi.Request, reply: hapi.IReply) {
+    let postId = Number(request.params['id']);
+    getPostByPostId(postId).then(post => {
+        if (!post) {
+            reply(boom.notFound());
+            return;
+        }
+        let postJSON = post.toJSON();
+        let POST_URL = `http://${request.headers['host']}${postJSON.permalink}`;
+        reply.redirect(POST_URL);
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
+    });
+}
+
 read.route = '/blog/{year}/{month}/{slug}';
 export function read(request: hapi.Request, reply: hapi.IReply) {
     let postSlug: string = request.params['slug'];
     getPost(postSlug, 'blog').then(post => {
         if (!post) {
             reply(boom.notFound());
+            return;
         }
         let postJSON = post.toJSON();
-        let POST_URL = `${request.connection.info.protocol}://${request.headers['host']}${postJSON.permalink}`;
+        let POST_URL = `http://${request.headers['host']}${postJSON.permalink}`;
         reply.view('post', {
             title: postJSON.title,
             post: postJSON,
