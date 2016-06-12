@@ -5,6 +5,7 @@ import * as boom from 'boom';
 import { addDownloadRequest, getDownloadRequest } from '../commands/contact.commands';
 import { sendDownloadEmail } from '../commands/mail.commands';
 import { pageView } from '../modules/view-matcher';
+import { getProtocolByHost } from '../modules/utility';
 import * as path from 'path';
 
 download.route = '/download/{token?}';
@@ -33,7 +34,9 @@ export function create(request: hapi.Request, reply: hapi.IReply) {
 
     addDownloadRequest(contact, fullFilePath)
         .then(dr => {
-            let url = `http://${request.headers['host']}/download/${dr.toJSON().token}`;
+            let host = request.headers['host'];
+            let protocol = getProtocolByHost(host);
+            let url = `${protocol}://${host}/download/${dr.toJSON().token}`;
             return sendDownloadEmail(email, url);
         })
         .then(() => {

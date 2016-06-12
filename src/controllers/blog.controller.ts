@@ -4,6 +4,7 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { getPost, getPostsByCategory, getTopics, getPostByPostId } from '../commands/post.commands';
 import { pageHeader } from '../modules/view-matcher';
+import { getProtocolByHost } from '../modules/utility';
 
 index.sitemap = true;
 index.route = '/blog/{page?}'
@@ -61,8 +62,10 @@ export function legacyPostRoute(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
             return;
         }
+        let host = request.headers['host'];
+        let protocol = getProtocolByHost(host);
         let postJSON = post.toJSON();
-        let POST_URL = `http://${request.headers['host']}${postJSON.permalink}`;
+        let POST_URL = `${protocol}://${host}${postJSON.permalink}`;
         reply.redirect(POST_URL);
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
@@ -81,8 +84,10 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.notFound());
             return;
         }
+        let host = request.headers['host'];
+        let protocol = getProtocolByHost(host);
         let postJSON = post.toJSON();
-        let POST_URL = `http://${request.headers['host']}${postJSON.permalink}`;
+        let POST_URL = `${protocol}://${host}${postJSON.permalink}`;
         reply.view('post', {
             title: postJSON.title,
             post: postJSON,
