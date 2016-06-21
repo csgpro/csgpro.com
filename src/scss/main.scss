@@ -7,11 +7,23 @@
 @import 'footer';
 @import 'story_slider';
 
+a, a:visited, a:link, a:active {
+    color: $dark-blue;
+}
+
+a:hover, a:focus {
+    color: $primary-color;
+}
+
 a.label {
     &:focus, &:hover {
         cursor: pointer;
         color: #fff;
     }
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+    border-color: $dark-blue transparent transparent;
 }
 
 .author.thumbnail {
