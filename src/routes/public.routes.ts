@@ -37,6 +37,18 @@ const routes: hapi.IRouteConfiguration[] = [
                 }
             }
         }
+    },
+    {
+        method: 'GET',
+        path: '/robots.txt',
+        handler: (request: hapi.Request, reply: hapi.IReply) => {
+            const host = request.headers['host'];
+            if (!/^www|csgpro/.test(host)) {
+                reply.file(path.join('..', 'public', 'block-robots.txt'));
+            } else {
+                reply.file(path.join('..', 'public', 'robots.txt'));
+            }
+        }
     }
 ];
 
