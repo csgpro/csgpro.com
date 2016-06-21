@@ -27,8 +27,8 @@ export function getPostByPostId(postId: number) {
     });
 }
 
-export function getTopics() {
-    return Topic.findAll();
+export function getTopics(where: Sequelize.WhereOptions = { active: true }, order = 'topic') {
+    return Topic.findAll({ where, order });
 }
 
 export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {

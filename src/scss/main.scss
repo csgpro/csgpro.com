@@ -16,6 +16,7 @@ a:hover, a:focus {
 }
 
 a.label {
+    color: #fff;
     &:focus, &:hover {
         cursor: pointer;
         color: #fff;

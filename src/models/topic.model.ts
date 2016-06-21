@@ -6,6 +6,7 @@ export interface ITopicAttributes {
     id: number,
     topic: string;
     slug: string;
+    active: boolean;
     posts?: IPostInstance[]
 }
 
@@ -23,7 +24,8 @@ export interface ITopicInstance extends Sequelize.Instance<ITopicAttributes> {
 
 let TopicSchema: Sequelize.DefineAttributes = {
     topic: { type: Sequelize.STRING, unique: true, allowNull: false },
-    slug: { type: Sequelize.STRING, unique: true, allowNull: false }
+    slug: { type: Sequelize.STRING, unique: true, allowNull: false },
+    active: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true }
 };
 
 let TopicSchemaOptions: Sequelize.DefineOptions<ITopicInstance> = {
