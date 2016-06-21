@@ -39,21 +39,6 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
-list.route = '/api/posts';
-export function list(request: hapi.Request, reply: hapi.IReply) {
-    let lastIndex = Number(request.params['lastIndex']);
-    let limit = Number(request.params['limit']);
-    getPostsByCategory('blog').then(posts => {
-        reply({ data: posts });
-    }).catch((err: Error) => {
-        if (err.name === 'SequelizeConnectionError') {
-            reply(boom.create(503, 'Bad Connection'));
-        } else {
-            reply(boom.create(503, err.message));
-        }
-    });
-}
-
 legacyPostRoute.route = '/post/{id}';
 export function legacyPostRoute(request: hapi.Request, reply: hapi.IReply) {
     let postId = Number(request.params['id']);
@@ -102,4 +87,24 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.create(500, err.message));
         }
     });
+}
+
+list.route = '/api/post';
+export function list(request: hapi.Request, reply: hapi.IReply) {
+    let lastIndex = Number(request.params['lastIndex']);
+    let limit = Number(request.params['limit']);
+    getPostsByCategory('blog').then(posts => {
+        reply({ data: posts });
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(503, 'Bad Connection'));
+        } else {
+            reply(boom.create(503, err.message));
+        }
+    });
+}
+
+create.route = '/api/post'
+export function create(request: hapi.Request, reply: hapi.IReply) {
+
 }

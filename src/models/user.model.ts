@@ -2,24 +2,29 @@
 
 import * as Sequelize from 'sequelize';
 import * as bcrypt from 'bcrypt-nodejs';
+import * as crypto from 'crypto';
 import { database } from '../database';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 export interface IUserAttributes {
     id: number,
     username: string;
+    email: string;
     password: string;
     roleId: number;
     firstName: string;
     lastName: string;
     twitterHandle: string;
     profilePhotoUrl: string;
+    resetPasswordToken: string;
+    resetPasswordTokenExpires: Date;
     posts?: IPostInstance[];
 }
 
 export interface IUserInstance extends Sequelize.Instance<IUserAttributes> {
     setPassword(password: string): Promise<IUserInstance>;
-    verifyPassword(password: string): Promise<boolean>;
+    validPassword(password: string): boolean;
+    generatePasswordResetToken(): Promise<string>;
     getPosts: Sequelize.HasManyGetAssociationsMixin<IPostInstance>;
     setPosts: Sequelize.HasManySetAssociationsMixin<IPostInstance, number>;
     addPosts: Sequelize.HasManyAddAssociationsMixin<IPostInstance, number>;
@@ -33,12 +38,15 @@ export interface IUserInstance extends Sequelize.Instance<IUserAttributes> {
 
 let UserSchema: Sequelize.DefineAttributes = {
     username: { type: Sequelize.STRING, unique: true, allowNull: false },
+    email: { type: Sequelize.STRING, allowNull: false, validate: { isEmail: true } },
     password: { type: Sequelize.STRING, allowNull: false },
     roleId: Sequelize.INTEGER,
     firstName: Sequelize.STRING,
     lastName: Sequelize.STRING,
     twitterHandle: Sequelize.STRING,
-    profilePhotoUrl: Sequelize.STRING
+    profilePhotoUrl: Sequelize.STRING,
+    resetPasswordToken: Sequelize.STRING,
+    resetPasswordTokenExpires: { type: Sequelize.DATE, allowNull: true }
 };
 
 let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
@@ -72,32 +80,36 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
         }
     },
     instanceMethods: {
-        setPassword: function setPasswordFn(password: string): Promise<IUserInstance> {
-            var self: IUserInstance = this;
+        setPassword: function setPasswordFn(password: string) {
+            const self: IUserInstance = this;
             if (!password) {
                 throw new Error('Password Can\'t Be Null!');
             }
-            var promise = new Promise<IUserInstance>((resolve, reject) => {
-                return bcrypt.genSalt(10, function (err: Error, salt: string) {
-                    return bcrypt.hash(password, salt, function (err: Error, encrypted: string) {
-                        self.setDataValue('password', encrypted);
-                        self.save().then(() => {
-                            resolve(self);
-                        });
-                    });
-                });
-            });
-            return promise;
+
+            const salt = bcrypt.genSaltSync();
+            const encrypted = bcrypt.hashSync(password, salt);
+
+            self.setDataValue('password', encrypted);
+
+            return self.save();
         },
-        verifyPassword: function verifyPasswordFn(password: string) {
-            var self: IUserInstance = this;
-            var promise = new Promise((resolve, reject) => {
-                bcrypt.compare(password, self.get('password'), function(err, res) {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(res);
-                    }
+        validPassword: function validPasswordFn(password: string) {
+            const self: IUserInstance = this;
+
+            return bcrypt.compareSync(password, self.getDataValue('password'));
+        },
+        generatePasswordResetToken: function generatePasswordResetToken() {
+            const self: IUserInstance = this;
+            let promise = new Promise((resolve, reject) => {
+                crypto.randomBytes(20, (err, buffer) => {
+                    if (err) reject(err);
+                    var token = buffer.toString('hex');
+                    let expireDate = new Date().setDate(new Date().getDate() + 2);
+                    self.setDataValue('resetPasswordToken', token);
+                    self.setDataValue('resetPasswordTokenExpires', expireDate);
+                    self.save().then(() => {
+                        resolve(token);
+                    }).catch(e => reject(e));
                 });
             });
             return promise;

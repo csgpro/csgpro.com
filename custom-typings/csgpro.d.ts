@@ -1,3 +1,4 @@
+//import hapi = require('hapi');
 interface Function {
     /**
      * sitemap {Boolean} or {Object}
@@ -10,4 +11,12 @@ interface Function {
      * Sets a custom route for the action
      */
     route?: string;
+    /**
+     * method
+     */
+    method?: 'GET'|'POST'|'PUT'|'DELETE';
+    /**
+     * auth
+     */
+    auth?: any;
 }

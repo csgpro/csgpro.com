@@ -7,6 +7,7 @@
 /// <reference path="globals/crypto-js/index.d.ts" />
 /// <reference path="globals/foundation/index.d.ts" />
 /// <reference path="globals/hapi/index.d.ts" />
+/// <reference path="globals/jsonwebtoken/index.d.ts" />
 /// <reference path="globals/lodash/index.d.ts" />
 /// <reference path="globals/marked/index.d.ts" />
 /// <reference path="globals/mime/index.d.ts" />

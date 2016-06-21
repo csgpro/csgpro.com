@@ -13,6 +13,8 @@ import database from './database';
 const handlebars = require('handlebars');
 const paginate = require('handlebars-paginate');
 
+const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
+
 handlebars.registerHelper('paginate', paginate);
 
 const server = new hapi.Server({
@@ -38,6 +40,17 @@ database(server);
 const port = process.env.PORT || 3000;
 
 server.connection({ port: port, host: process.env.HOST });
+
+server.register([require('hapi-auth-jwt2')], (err) => {
+    if (err) {
+        console.error('Failed to load plugin: ', err);
+    }
+});
+
+server.auth.strategy('jwt', 'jwt', false, {
+    key: AUTH_TOKEN_SECRET,
+    validateFunc: require('./modules/auth.validate')
+});
 
 server.register(require('inert'), (err) => {});
 

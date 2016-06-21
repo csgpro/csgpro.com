@@ -10,6 +10,7 @@
     "crypto-js": "registry:dt/crypto-js#3.1.4+20160505170201",
     "foundation": "github:DefinitelyTyped/DefinitelyTyped/foundation/foundation.d.ts#c7a2374b86f8cb79d293be28dd53346a8627705f",
     "hapi": "github:DefinitelyTyped/DefinitelyTyped/hapi/hapi.d.ts#37afc2c83af2b87a3d2812d2fd2615a6dde825ae",
+    "jsonwebtoken": "registry:dt/jsonwebtoken#0.0.0+20160521152605",
     "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#14e772882bcade8a8f970a360771623aa5cfd5d2",
     "marked": "github:DefinitelyTyped/DefinitelyTyped/marked/marked.d.ts#493d3b6882c79289cd9597a45c287250297d5b9d",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#d6dd320291705694ba8e1a79497a908e9f5e6617",
