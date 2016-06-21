@@ -13,7 +13,7 @@ export function pageView(page: string) {
     return base;
 }
 
-export function pageHeader(image: 'lights' | 'marina') {
+export function pageHeader(image: 'lights' | 'marina' | 'portland') {
     let imagesPath = __dirname + '/../public/images/site';
     let imagesUrlPath = '/resources/images/site';
     let base = 'header';

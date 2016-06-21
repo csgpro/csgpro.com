@@ -2,13 +2,22 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { pageView } from '../modules/view-matcher';
+import { pageView, pageHeader } from '../modules/view-matcher';
 
-const pageContent = `Our team loves to build solutions that are beautifully designed, functional and hardworking. We integrate modern cloud and mobile technologies with on-premises systems to maximize value, create massive scale and ensure long-term supportability. CSG does whatever it takes to help organizations get the most value out of their systems. We know that every project is connected to the business. The right solution will meet business requirements, have a great user experience, complement current architecture, and anticipate future needs.
-
-Headquartered in Portland Oregon, CSG is deeply committed to our values: Do What’s Right, Team Over Self, Deliver Excellence, and Create Value. We hope we have the opportunity to live these out while building something amazing for your business.`;
+const pageContent = `
+<p class="paragraph-primary">CSG Pro builds modern software solutions that expand knowledge through a more informed and visual use of data.    Through Business Analytics and Custom Software Solutions, CSG Pro delivers value by helping clients intelligently bring together, analyze and visualize data to make informed decisions and streamline their business processes.  We integrate cloud and mobile as appropriate to allow for scale, enhance the user’s experience and ensure long-term payoff.</p>
+ 
+Headquartered in Portland Oregon’s urban, tech savvy Pearl District, CSG Pro is committed to delighting its clients through the innovative application of modern technology solutions.   We hope to have the opportunity to build something amazing for you today, as we have for many since 1993.
+`;
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
-    reply.view(pageView('about'), { title: 'About CSG Pro', description: '', pageContent });
+    reply.view(pageView('about'),
+    {
+        title: 'About CSG Pro',
+        description: '',
+        header: pageHeader('portland'),
+        pageContent
+    },
+    { layout: 'hero-layout' });
 }
