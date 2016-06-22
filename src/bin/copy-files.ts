@@ -57,7 +57,9 @@ if (watchIdx != -1) {
 
 function moveFiles() {
     console.log('moving files');
-    copyFiles([`${srcDir}/**/*.${ext}`], outDir, (err, file) => {
+    // Note: ignore patterns don't work with the copy library.
+    // GitHub Issue: https://github.com/jonschlinkert/copy/issues/10
+    copyFiles([`${srcDir}/**/*.${ext}`, `!${srcDir}/**/*.ts`], outDir, (err, file) => {
         if (err) {
             console.log('Error', err);
             process.exit(1);

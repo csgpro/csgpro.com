@@ -49,6 +49,13 @@ const routes: hapi.IRouteConfiguration[] = [
                 reply.file(path.join('..', 'public', 'robots.txt'));
             }
         }
+    },
+    {
+        method: 'GET',
+        path: '/admin/{param*}',
+        handler: (request: hapi.Request, reply: hapi.IReply) => {
+            reply.file(path.join('..', 'public', 'admin', 'index.html'));
+        }
     }
 ];
 

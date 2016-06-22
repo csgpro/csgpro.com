@@ -6,8 +6,10 @@
 
 | Task | Description |
 |---|---|
+| "start" | "node index.js" |
+| "postinstall" | "npm run build" |
 | "prepare-build" | "npm run clean" |
-| "build" "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views" |
+| "build" "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run downloads" |
 | "clean" | "rimraf ./lib/* !./lib/.gitkeep" |
 | "clean-deep" | "rimraf ./src/**/*.js ./test/**/*.js ./utils/**/*.js, ./lib/* !./lib/.gitkeep !./src/public/scripts/*.js" |
 | "lib-js" | "tsc" |
@@ -18,6 +20,9 @@
 | "sass:watch" | "node lib/bin/compile-sass.js --watch" |
 | "public" | "node lib/bin/copy-files.js --outDir lib/public --srcDir src/public" |
 | "public:watch" | "node lib/bin/copy-files.js --outDir lib/public --srcDir src/public --watch" |
-| "views" | "node lib/bin/copy-files.js --outDir lib/views --srcDir src/views" |
-| "views:watch" | "node lib/bin/copy-files.js --outDir lib/views --srcDir src/views --watch" |
+| "views" | "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views" |
+| "views:watch" | "node lib/bin/copy-files.js --ext html --outDir lib/views --srcDir src/views --watch" |
+| "downloads" | "node lib/bin/copy-files.js --outDir lib/downloads --srcDir src/downloads" |
+| "downloads:watch" | "node lib/bin/copy-files.js --outDir lib/downloads --srcDir src/downloads --watch" |
 | "test" | "mocha lib/test" |
+| "watch" | "concurrently \"npm run lib-js:watch\" \"npm run browser-js:watch\" \"npm run sass:watch\" \"npm run public:watch\" \"npm run views:watch\" \"npm run downloads:watch\"" |

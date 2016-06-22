@@ -8,6 +8,7 @@
     },
     "exclude": [
         "src/browser-scripts",
+        "src/admin",
         "node_modules",
         "typings/browser.d.ts",
         "typings/browser"
