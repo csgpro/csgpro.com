@@ -117,6 +117,12 @@ h6.subheader {
     }
 }
 
+.post .questions-widget {
+    margin-top: 1em;
+    h4 {
+        font-size: 1em;
+    }
+}
 
 .modal-header-caption {
     @include orbit-caption;

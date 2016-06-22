@@ -8,7 +8,7 @@
 </section>
 
 {{#with post}}
-<div class="row main-content">
+<div class="row main-content post">
     <div class="medium-2 columns" data-sticky-container>
         <div class="sticky" data-sticky data-anchor="content-container">
             <div class="small-2 medium-12 columns">
@@ -31,6 +31,8 @@
                 {{/each}}
                 </div>
                 {{/if}}
+            
+                {{> questions-widget}}
                 
             </div>
         </div>
