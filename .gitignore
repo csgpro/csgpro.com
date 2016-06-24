@@ -10,6 +10,7 @@ logs
 
 node_modules
 src/**/*.js*
+!src/**/*.json
 test/**/*.js*
 bin/**/*.js*
 public/scripts/*.bundle.js
