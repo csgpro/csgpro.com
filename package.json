@@ -44,7 +44,7 @@
     "@angular/http": "2.0.0-rc.3",
     "@angular/platform-browser": "2.0.0-rc.3",
     "@angular/platform-browser-dynamic": "2.0.0-rc.3",
-    "@angular/router": "3.0.0-alpha.7",
+    "@angular/router": "^3.0.0-alpha.7",
     "@angular/upgrade": "2.0.0-rc.3",
     "angular2-template-loader": "^0.4.0",
     "awesome-typescript-loader": "^1.1.1",
