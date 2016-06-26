@@ -59,6 +59,8 @@ export default class ApiService {
             msg += error;
         } else if (error.message) {
             msg += error.message;
+        } else if (error.error) {
+            msg += error.error;
         } else {
             msg += JSON.stringify(error);
         }

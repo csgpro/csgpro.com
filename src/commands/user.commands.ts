@@ -43,8 +43,9 @@ export function generateJWT({ username, password } = { username: '', password: '
      });
 }
 
-export function resetPassword(email: string, host: string) {
+export function requestResetPasswordToken(email: string, host: string) {
     let promise = new Promise((resolve, reject) => {
+        // TODO: Validate token hasn'
         User.findOne({
             where: { email }
         }).then(user => {
@@ -56,7 +57,7 @@ export function resetPassword(email: string, host: string) {
                         throw new Error('Error Generating Token');
                     }
                     let protocol = getProtocolByHost(host);
-                    let resetURL = `${protocol}://${host}/admin/resetpassword/${token}`;
+                    let resetURL = `${protocol}://${host}/admin/reset-password/${token}`;
                     let to = user.getDataValue('email');
                     let from = 'CSG Notification <noreply@csgpro.com>';
                     let subject = 'Password Reset Request';
