@@ -22,6 +22,12 @@ export interface IUserAttributes {
 }
 
 export interface IUserInstance extends Sequelize.Instance<IUserAttributes> {
+    
+    /**
+     * Calls save before returning IUserInstance
+     * @param  {string} password
+     * @returns Promise
+     */
     setPassword(password: string): Promise<IUserInstance>;
     validPassword(password: string): boolean;
     generatePasswordResetToken(): Promise<string>;

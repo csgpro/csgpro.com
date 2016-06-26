@@ -26,11 +26,17 @@ export default class AuthenticationService {
         });
     }
 
+    logout() {
+        this.isLoggedIn = false;
+        this._store.clearString('authtoken');
+        this._router.navigate(['/login']);
+    }
+
     requestPasswordReset(email: string) {
         return this._api.post('resetpassword', { email });
     }
 
-    resetPassword(email: string, token: string) {
-        return this._api.post('resetpassword', { email, token });
+    resetPassword(password: string, token: string) {
+        return this._api.post('resetpassword', { password, token });
     }
 }

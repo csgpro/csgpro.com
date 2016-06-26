@@ -66,7 +66,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             this._errors.add({ message: 'Missing reset password token.' });
         }
         if (this._errors.size) return;
-        this._auth.resetPassword(this.email, this.resetToken)
+        this._auth.resetPassword(this.password, this.resetToken)
         .then((a) => {
             // TODO: Log the user in.
             debugger;

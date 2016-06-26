@@ -18,9 +18,9 @@ const CSGBOT_IMG_URL = conf.get('CSGBOT_IMG_URL');
 
 const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
 
-export function generateJWT({ username, password } = { username: '', password: '' }) {
+export function generateJWT({ email, password } = { email: '', password: '' }) {
     return User.findOne({
-        where: { username },
+        where: { email },
      }).then(user => {
         if (!user) {
             throw new Error('Invalid Credentials');
@@ -43,9 +43,25 @@ export function generateJWT({ username, password } = { username: '', password: '
      });
 }
 
+export function resetPassword(token: string, password: string) {
+    if (!token) throw new Error('Token Can\'t Be Null!');
+    return User.findOne({
+        where: { resetPasswordToken: token, resetPasswordTokenExpires: { $gt: new Date() } },
+    }).then(user => {
+        if (!user) {
+            throw new Error('Invalid Token');
+        } else {
+            return user.setPassword(password).then(u => {
+                u.setDataValue('resetPasswordToken', '');
+                u.setDataValue('resetPasswordTokenExpires', null);
+                return u.save();
+            });
+        }
+    });
+}
+
 export function requestResetPasswordToken(email: string, host: string) {
     let promise = new Promise((resolve, reject) => {
-        // TODO: Validate token hasn'
         User.findOne({
             where: { email }
         }).then(user => {

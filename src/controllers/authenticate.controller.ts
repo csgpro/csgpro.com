@@ -7,9 +7,9 @@ import { generateJWT } from '../commands/user.commands';
 authenticate.method = 'POST';
 authenticate.route = '/api/authenticate';
 export function authenticate(request: hapi.Request, reply: hapi.IReply) {
-    const { username, password } = request.payload || { username: undefined, password: undefined };
+    const { email, password } = request.payload || { email: undefined, password: undefined };
 
-    generateJWT({ username, password })
+    generateJWT({ email, password })
         .then((token)=> {
             reply({ token });
         }).catch((err: Error) => {

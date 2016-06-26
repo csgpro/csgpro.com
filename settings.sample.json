@@ -7,5 +7,8 @@
     "DB_USER": "mssql_admin",
     "DB_PASSWORD": "$up3R$ecr37",
     "SENDGRID_APIKEY": "",
-    "CONTACT_FORM_EMAIL": ""
+    "CONTACT_FORM_EMAIL": "",
+    "CSGBOT_URL": "",
+    "CSGBOT_IMG_URL": "",
+    "AUTH_TOKEN_SECRET": "ASuperSecretToken! :)"
 }
