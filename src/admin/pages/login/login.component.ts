@@ -1,12 +1,18 @@
 // angular
-import {Component, OnInit} from '@angular/core';
+import {OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ROUTER_DIRECTIVES} from '@angular/router';
 
-@Component({
+// framework
+import {BaseComponent} from '../../framework';
+
+// app
+import AuthService from '../../services/authentication.service';
+import ErrorSummary from '../../components/error-summary/error-summary.component';
+
+@BaseComponent({
     moduleId: 'LoginComponent',
-    templateUrl: 'login.html', 
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'login.html',
+    directives: [ErrorSummary]
 })
 export class LoginComponent implements OnInit {
     title = 'Login';
@@ -14,12 +20,17 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor(private _title: Title) {
+    errors;
+
+    constructor(private _title: Title, private _auth: AuthService) {
         this._title.setTitle(this.title);
     }
 
     submit() {
-        alert('Submit Not Implemented!');
+        this.errors = null;
+        this._auth.login({ email: this.email, password: this.password }).catch((e: Error) => {
+            this.errors = [e];
+        });
     }
     
     ngOnInit() {

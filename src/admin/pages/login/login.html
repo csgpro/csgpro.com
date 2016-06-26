@@ -13,6 +13,7 @@
                         <input type="password" placeholder="Password" [(ngModel)]="password">
                     </label>
                 </div>
+                <error-summary [errors]="errors"></error-summary>
                 <div>
                     <button class="primary expanded button" (click)="submit()">Login</button>
                 </div>

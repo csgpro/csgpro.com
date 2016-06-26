@@ -7,9 +7,11 @@ import {LoginComponent} from './pages/login/login.component';
 import {ResetPasswordComponent} from './pages/reset-password/reset-password.component';
 
 export const routes: RouterConfig = [
-    { path: '', component: DashboardComponent },
+    { path: '', redirectTo: '/dashboard', terminal: true },
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'reset-password', component: ResetPasswordComponent }
+    { path: 'reset-password', component: ResetPasswordComponent },
+    { path: 'reset-password/:token', component: ResetPasswordComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

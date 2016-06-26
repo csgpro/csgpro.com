@@ -150,6 +150,7 @@ const METADATA = {
 };
 
 const adminConfig = {
+    devtool: "source-map",
     metadata: METADATA,
     context: helpers.root('src/admin'),
     entry: {
