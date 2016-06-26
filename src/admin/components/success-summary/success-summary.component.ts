@@ -2,9 +2,9 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'error-summary',
-    templateUrl: 'error-summary.html'
+    selector: 'success-summary',
+    templateUrl: 'success-summary.html'
 })
 export default class ErrorSummary {
-    @Input() errors;
+    @Input() message;
 }

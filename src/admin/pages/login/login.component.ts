@@ -20,16 +20,29 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
 
-    errors;
+    get errors() {
+        if (this._errors.size) {
+            return Array.from(this._errors);
+        }
+    }
 
     constructor(private _title: Title, private _auth: AuthService) {
         this._title.setTitle(this.title);
     }
 
+    private _errors = new Set();
+
     submit() {
-        this.errors = null;
+        this._errors.clear();
+        if (!this.email) {
+            this._errors.add({ message: 'Email Address is required.' });
+        }
+        if (!this.password) {
+            this._errors.add({ message: 'Password is required.' });
+        }
+        if (this._errors.size) return;
         this._auth.login({ email: this.email, password: this.password }).catch((e: Error) => {
-            this.errors = [e];
+            this._errors.add(e);
         });
     }
     

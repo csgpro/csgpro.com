@@ -16,4 +16,8 @@ export default class AuthenticationService {
             this._router.navigate(['/dashboard']);
         });
     }
+
+    resetPassword(email: string) {
+        return this._api.post('resetpassword', { email });
+    }
 }
