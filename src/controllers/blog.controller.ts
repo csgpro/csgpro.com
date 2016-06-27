@@ -91,8 +91,6 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
 
 list.route = '/api/post';
 export function list(request: hapi.Request, reply: hapi.IReply) {
-    let lastIndex = Number(request.params['lastIndex']);
-    let limit = Number(request.params['limit']);
     getPostsByCategory('blog').then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {

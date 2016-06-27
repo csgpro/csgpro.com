@@ -20,7 +20,7 @@ export default class ApiService {
 
         const request: Promise<T> = this._http.get(`${this.baseUrl}${route}`, options).toPromise();
 
-        return request.then(d => d).catch(this._handleErrors);
+        return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
 
     post<T>(route: string, body: any, options?: RequestOptionsArgs): Promise<T> {
@@ -46,8 +46,9 @@ export default class ApiService {
             console.log('Response Was Empty.');
             return;
         }
-        if (response['data']) {
-            return response['data'];
+        let data = response.json().data;
+        if (data) {
+            return data;
         }
         return response;
     }

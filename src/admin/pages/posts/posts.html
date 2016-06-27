@@ -1,0 +1,7 @@
+<div id="post-list">
+    <ul class="no-bullet" *ngIf="posts">
+        <template ngFor let-item [ngForOf]="posts" let-i="index">
+            <li>{{item.title}}</li>
+        </template>
+    </ul>
+</div>
