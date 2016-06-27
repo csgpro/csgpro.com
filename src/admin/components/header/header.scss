@@ -10,7 +10,7 @@
 }
 
 .menu {
-    .active > a {
+    a.router-link-active {
         background: transparent;
         color: #555;
         border-bottom: 1px inset #777;
