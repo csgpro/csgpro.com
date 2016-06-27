@@ -1,7 +1,23 @@
-<div id="post-list">
-    <ul class="no-bullet" *ngIf="posts">
-        <template ngFor let-item [ngForOf]="posts" let-i="index">
-            <li>{{item.title}}</li>
-        </template>
-    </ul>
+<br />
+<div id="post-list" class="row">
+    <table class="stack">
+        <thead>
+            <tr>
+                <td>Author</td>
+                <td>Post Title</td>
+                <td>Topics</td>
+                <td>Publish Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <template ngFor let-item [ngForOf]="posts" let-i="index">
+            <tr (click)="editPost(item.id)">
+                <td>{{item.author.fullName}}</td>
+                <td>{{item.title}}</td>
+                <td>List of topics...</td>
+                <td>{{formatDate(item.publishedAt)}}</td>
+            </tr>
+            </template>
+        </tbody>
+    </table>
 </div>

@@ -41,7 +41,7 @@ export default class ApiService {
         return request.then(d => d).catch(this._handleErrors);
     }
 
-    private _prepareResponse(response: Response) {
+    private _prepareResponse(response: any) {
         if (!response) {
             console.log('Response Was Empty.');
             return;
@@ -55,7 +55,7 @@ export default class ApiService {
 
     private _handleErrors(response: Response) {
         let error = response.json();
-        let msg = "Error: ";
+        let msg = "";
         if (typeof error === 'string') {
             msg += error;
         } else if (error.message) {
