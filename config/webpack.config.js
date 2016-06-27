@@ -214,8 +214,8 @@ const adminConfig = {
             *
             */
             {
-                test: /\.css$/,
-                loaders: ['to-string-loader', 'css-loader']
+                test: /\.css|scss$/,
+                loaders: ['raw-loader', 'sass-loader']
             },
 
             /* Raw loader support for *.html

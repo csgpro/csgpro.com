@@ -9,7 +9,8 @@ import AuthService from '../../services/authentication.service';
 
 @BaseComponent({
     moduleId: 'DashboardComponent',
-    templateUrl: 'dashboard.html'
+    templateUrl: 'dashboard.html',
+    styleUrls: ['dashboard.scss']
 })
 export class DashboardComponent {
     title = 'Dashboard';
