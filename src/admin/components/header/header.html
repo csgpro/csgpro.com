@@ -1,5 +1,19 @@
-<div id="header" [hidden]="!visible">
+<!--<div id="header" [hidden]="!visible">
     <div class="row">
         <a [routerLink]="['/']">Dashboard</a>
+    </div>
+</div>-->
+
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-brand"><img src="/resources/images/site/csg-pro-logo.png" /></li>
+            <li [class.active]="activeUrl === '/dashboard'"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="menu">
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
     </div>
 </div>

@@ -1,27 +1,36 @@
 // angular
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ROUTER_DIRECTIVES, Router, NavigationEnd} from '@angular/router';
+import {OnInit, OnDestroy} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
 
-@Component({
+// framework
+import {BaseComponent} from '../../framework';
+
+// app
+import AuthService from '../../services/authentication.service';
+
+@BaseComponent({
     selector: 'header',
     templateUrl: 'header.html',
-    directives: [ROUTER_DIRECTIVES]
+    styleUrls: ['header.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    visible = true;
+    activeUrl: string;
 
     private sub: any;
 
-    constructor(private _router: Router) { }
+    constructor(private _router: Router, private _auth: AuthService) { }
+
+    logout() {
+        this._auth.logout();
+    }
 
     ngOnInit() {
         this.sub = this._router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                this.visible = (!/login|reset\-password/.test(event.url));
+                this.activeUrl = event.url;
             }
         });
-        console.log('Header initialized.');
     }
 
     ngOnDestroy() {
