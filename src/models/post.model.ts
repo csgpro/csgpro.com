@@ -51,6 +51,25 @@ let PostSchema: Sequelize.DefineAttributes = {
 };
 
 let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
+    defaultScope: {
+        where: { publishedAt: { $gt: new Date('1993-01-01') } },
+        include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }],
+        attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ]
+    },
+    scopes: {
+        category: function (value): any {
+            let options: any = {
+                where: { publishedAt: { $gt: new Date('1993-01-01') } },
+                attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ],
+                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }]
+            };
+            if (value) {
+                // Add 'where' clause to PostCategory include
+                options.include[1].where = { slug: value };
+            }
+            return options;
+        }
+    },
     instanceMethods: {},
     getterMethods: {
         permalink: function (): string {

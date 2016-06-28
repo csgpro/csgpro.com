@@ -44,19 +44,18 @@ export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
 }
 
 export function getPostsByCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
-    return Post.findAndCount({
-        include: [{
-            model: PostCategory,
-            as: 'category',
-            where: { slug: category }
-        },
-        { model: User, as: 'author' },
-        { model: Topic, as: 'topics' }],
-        where: { publishedAt: { $gt: new Date('1993-01-01') } },
-        order: [[ 'publishedAt', sortOrder]],
-        offset,
-        limit
-    })
+    limit = (isNaN(limit)) ? undefined : +limit;
+    offset = (isNaN(offset)) ? undefined : +offset;
+    let options: any = {
+        order: [[ 'publishedAt', sortOrder ]]
+    };
+    if (limit) {
+        options.limit = limit;
+    }
+    if (offset) {
+        options.offset = offset;
+    }
+    return Post.scope({ method: ['category', category] }).findAndCount(options);
 }
 
 export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {

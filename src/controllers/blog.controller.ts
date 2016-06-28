@@ -91,12 +91,8 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
 
 list.route = '/api/post';
 export function list(request: hapi.Request, reply: hapi.IReply) {
-    let category: string = request.query['category'];
-    if (!category) {
-        reply(boom.badRequest(`Missing 'category' parameter.`));
-        return;
-    }
-    getPostsByCategory('blog', undefined, undefined, null).then(posts => {
+    let {category, sort, offset, limit}  = request.query;
+    getPostsByCategory(category, sort, offset, limit).then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
