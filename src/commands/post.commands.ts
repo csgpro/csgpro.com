@@ -8,7 +8,7 @@ import { PostCategory } from '../models/post-category.model';
 import * as _ from 'lodash';
 
 export function getPost(postSlug: string, categorySlug: string) {
-    return Post.findOne({
+    return Post.unscoped().findOne({
         where: { slug: postSlug },
         include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
     }).then(post => {
@@ -21,7 +21,7 @@ export function getPost(postSlug: string, categorySlug: string) {
 }
 
 export function getPostByPostId(postId: number) {
-    return Post.findOne({
+    return Post.unscoped().findOne({
         where: { id: postId },
         include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
     });
