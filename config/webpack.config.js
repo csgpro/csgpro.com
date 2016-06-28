@@ -150,7 +150,7 @@ const METADATA = {
 };
 
 const adminConfig = {
-    devtool: "source-map",
+    devtool: "#source-map",
     metadata: METADATA,
     context: helpers.root('src/admin'),
     entry: {
@@ -160,8 +160,39 @@ const adminConfig = {
     },
     output: {
         path: helpers.root('lib/public/admin'),
-        filename: 'scripts.bundle.js'
+        filename: 'scripts.bundle.js',
+        sourceMapFilename: '[name].js.map',
+        chunkFilename: '[id].chunk.js',
+        devtoolModuleFilenameTemplate: function(info){
+            if(info.absoluteResourcePath.charAt(0) === '/') {
+                return 'file://'+info.absoluteResourcePath;
+            } else {
+                return 'file:///'+info.absoluteResourcePath;
+            }      
+        },
+        devtoolFallbackModuleFilenameTemplate: function(info){
+            if(info.absoluteResourcePath.charAt(0) === '/') {
+                return 'file://'+info.absoluteResourcePath+'?'+info.hash;
+            } else {
+                return 'file:///'+info.absoluteResourcePath+'?'+info.hash;
+            }      
+        }
     },
+
+/*
+output: {
+    path: root('__build__'),
+    filename: '[name].js',
+    // filename: '[name].[hash].js',
+    sourceMapFilename: '[name].js.map',
+    chunkFilename: '[id].chunk.js',
+    // publicPath: 'http://mycdn.com/'
+    devtoolModuleFilenameTemplate: function(info){
+      return "file:///"+info.absoluteResourcePath;
+    }
+  },
+*/
+
     plugins: mainConfig.plugins,
     module: {
         noParse: [],
@@ -182,6 +213,7 @@ const adminConfig = {
                 helpers.root('node_modules/@angular'),
                 helpers.root('node_modules/@ngrx'),
                 helpers.root('node_modules/@angular2-material'),
+                helpers.root('node_modules/moment'),
                 ]
             }
 
