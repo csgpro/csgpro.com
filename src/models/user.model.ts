@@ -56,6 +56,25 @@ let UserSchema: Sequelize.DefineAttributes = {
 };
 
 let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
+    defaultScope: {
+        attributes: [
+            'id',
+            'email',
+            'firstName',
+            'lastName',
+            'profilePhotoUrl'
+        ]
+    },
+    scopes: {
+        private: {
+            attributes: [
+                'password',
+                'twitterHandle',
+                'resetPasswordToken',
+                'resetPasswordTokenExpires'
+            ]
+        }
+    },
     getterMethods: {
         fullName: function (): string {
             let self: IUserInstance = this;

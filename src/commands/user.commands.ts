@@ -19,7 +19,7 @@ const CSGBOT_IMG_URL = conf.get('CSGBOT_IMG_URL');
 const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
 
 export function generateJWT({ email, password } = { email: '', password: '' }) {
-    return User.findOne({
+    return User.scope('defaultScope', 'private').findOne({
         where: { email },
      }).then(user => {
         if (!user) {
@@ -45,7 +45,7 @@ export function generateJWT({ email, password } = { email: '', password: '' }) {
 
 export function resetPassword(token: string, password: string) {
     if (!token) throw new Error('Token Can\'t Be Null!');
-    return User.findOne({
+    return User.scope('defaultScope', 'private').findOne({
         where: { resetPasswordToken: token, resetPasswordTokenExpires: { $gt: new Date() } },
     }).then(user => {
         if (!user) {
@@ -62,7 +62,7 @@ export function resetPassword(token: string, password: string) {
 
 export function requestResetPasswordToken(email: string, host: string) {
     let promise = new Promise((resolve, reject) => {
-        User.findOne({
+        User.scope('defaultScope', 'private').findOne({
             where: { email }
         }).then(user => {
             if (!user) {
