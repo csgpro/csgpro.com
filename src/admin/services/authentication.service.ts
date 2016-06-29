@@ -3,11 +3,11 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 
 // app
-import ApiService from './api.service';
-import StoreService from './store.service';
+import {ApiService} from './api.service';
+import {StoreService} from './store.service';
 
 @Injectable()
-export default class AuthenticationService {
+export class AuthenticationService {
 
     isLoggedIn = false;
 

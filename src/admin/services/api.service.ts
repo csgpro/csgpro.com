@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 import ContentTypes from '../helpers/content-types.helper';
 
 @Injectable()
-export default class ApiService {
+export class ApiService {
     private baseUrl = '/api/';
     private headers = new Headers({ 'Content-Type': ContentTypes.JSON });
 

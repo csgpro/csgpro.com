@@ -11,9 +11,9 @@ import {BaseComponent} from '../../framework';
 import * as moment from 'moment';
 
 // app
-import ApiService from '../../services/api.service';
+import {ApiService} from '../../services/api.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
-import LoadingService from '../../services/loading.service';
+import {LoadingService} from '../../services/loading.service';
 
 @BaseComponent({
     moduleId: 'PostsComponent',

@@ -5,6 +5,6 @@ import {Component, Input} from '@angular/core';
     selector: 'error-summary',
     templateUrl: 'error-summary.html'
 })
-export default class ErrorSummary {
+export class ErrorSummary {
     @Input() errors;
 }

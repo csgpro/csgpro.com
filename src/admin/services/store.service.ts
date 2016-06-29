@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export default class StoreService {
+export class StoreService {
     
     getString(key: string): string {
         return localStorage.getItem(key);

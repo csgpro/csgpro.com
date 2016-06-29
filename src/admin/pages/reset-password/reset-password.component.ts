@@ -5,9 +5,9 @@ import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 
 // app
 import {BaseComponent} from '../../framework';
-import ErrorSummary from '../../components/error-summary/error-summary.component';
-import SuccessSummary from '../../components/success-summary/success-summary.component';
-import AuthService from '../../services/authentication.service';
+import {ErrorSummary} from '../../components/error-summary/error-summary.component';
+import {SuccessSummary} from '../../components/success-summary/success-summary.component';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @BaseComponent({
     moduleId: 'ResetPasswordComponent',
@@ -33,7 +33,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         }
     }
 
-    constructor(private _title: Title, private _route: ActivatedRoute, private _auth: AuthService) {
+    constructor(private _title: Title, private _route: ActivatedRoute, private _auth: AuthenticationService) {
         this._title.setTitle(this.title);
     }
 

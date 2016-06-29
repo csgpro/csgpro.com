@@ -2,7 +2,7 @@
 import {BaseComponent} from '../../framework';
 
 // app
-import LoadingService from "../../services/loading.service";
+import {LoadingService} from "../../services/loading.service";
 
 @BaseComponent({
     selector: 'loading-indicator',

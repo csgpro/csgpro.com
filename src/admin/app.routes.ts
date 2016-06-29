@@ -2,7 +2,7 @@
 import {provideRouter, RouterConfig} from '@angular/router';
 
 // app
-import AuthGuard from './services/auth.guard';
+import {AuthGuard} from './services/auth.guard';
 
 // pages
 import {DashboardComponent} from './pages/dashboard/dashboard.component';

@@ -8,7 +8,7 @@ import {CORE_PROVIDERS} from './framework';
 // app
 import {AppComponent} from './app.component';
 import {APP_ROUTER_PROVIDERS} from './app.routes';
-import SERVICE_PROVIDERS from './services/service-providers';
+import {SERVICE_PROVIDERS} from './services/service-providers';
 
 bootstrap(AppComponent, [
     CORE_PROVIDERS,

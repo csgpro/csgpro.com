@@ -6,8 +6,8 @@ import {Title} from '@angular/platform-browser';
 import {BaseComponent} from '../../framework';
 
 // app
-import AuthService from '../../services/authentication.service';
-import ErrorSummary from '../../components/error-summary/error-summary.component';
+import {AuthenticationService} from '../../services/authentication.service';
+import {ErrorSummary} from '../../components/error-summary/error-summary.component';
 
 @BaseComponent({
     moduleId: 'LoginComponent',
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    constructor(private _title: Title, private _auth: AuthService) {
+    constructor(private _title: Title, private _auth: AuthenticationService) {
         this._title.setTitle(this.title);
     }
 
