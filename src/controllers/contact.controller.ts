@@ -8,7 +8,12 @@ import { pageView } from '../modules/view-matcher';
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
-    reply.view(pageView('contact'), { title: 'Contact Us', description: '' });
+    reply.view(pageView('contact'),
+        {
+            title: 'Contact Us',
+            description: ''
+        },
+        { layout: 'hero-layout' });
 }
 
 export function create(request: hapi.Request, reply: hapi.IReply) {
