@@ -14,7 +14,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
 
 const mainConfig = {
     context: helpers.root('src/browser-scripts'),
-    devtool: "inline-source-map",
+    devtool: "#source-map",
     entry: {
         scripts: './main.ts',
         vendor: './vendor.ts',
@@ -22,7 +22,23 @@ const mainConfig = {
     },
     output: {
         path: helpers.root('lib/public/scripts'),
-        filename: 'scripts.bundle.js'
+        filename: 'scripts.bundle.js',
+        sourceMapFilename: '[name].js.map',
+        chunkFilename: '[id].chunk.js',
+        devtoolModuleFilenameTemplate: function(info){
+            if(info.absoluteResourcePath.charAt(0) === '/') {
+                return 'file://'+info.absoluteResourcePath;
+            } else {
+                return 'file:///'+info.absoluteResourcePath;
+            }      
+        },
+        devtoolFallbackModuleFilenameTemplate: function(info){
+            if(info.absoluteResourcePath.charAt(0) === '/') {
+                return 'file://'+info.absoluteResourcePath+'?'+info.hash;
+            } else {
+                return 'file:///'+info.absoluteResourcePath+'?'+info.hash;
+            }      
+        }
     },
     plugins: [
         /*
