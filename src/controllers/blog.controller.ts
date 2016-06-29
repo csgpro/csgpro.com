@@ -88,22 +88,3 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
         }
     });
 }
-
-list.route = '/api/post';
-export function list(request: hapi.Request, reply: hapi.IReply) {
-    let {category, sort, offset, limit}  = request.query;
-    getPostsByCategory(category, sort, offset, limit).then(posts => {
-        reply({ data: posts });
-    }).catch((err: Error) => {
-        if (err.name === 'SequelizeConnectionError') {
-            reply(boom.create(503, 'Bad Connection'));
-        } else {
-            reply(boom.create(503, err.message));
-        }
-    });
-}
-
-create.route = '/api/post'
-export function create(request: hapi.Request, reply: hapi.IReply) {
-    reply(boom.notImplemented());
-}

@@ -1,1 +1,62 @@
-<h1>Not Implemented (post)</h1>
+<div id="post-edit">
+    <h3>Post <loading-indicator></loading-indicator></h3>
+
+    <div>
+        <form #f="ngForm" class="large-6 columns">
+            <div class="row">
+                <div class="column">
+                    <label class="requied">
+                        Title
+                        <input placeholder="My Blog Post Title" type="text" name="title" [(ngModel)]="post.title" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label class="required">
+                        Slug
+                        <input placeholder="my-blog-post-slug" type="text" [(ngModel)]="post.slug" />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 medium-4 columns">
+                    <!-- TODO: Author Dropdown -->
+                    <label>
+                        Author
+                        <input placeholder="placeholder" type="text" name="author" [(ngModel)]="post.author.fullName" disabled />
+                    </label>
+                </div>
+                <div class="small-6 medium-4 columns end">
+                    <!-- TODO: Category Dropdown -->
+                    <label>
+                        Category
+                        <input placeholder="placeholder" type="text" name="category" [(ngModel)]="post.category.category" disabled />
+                    </label>
+                </div>
+                <div class="small-6 medium-4 columns">
+                    <!-- TODO: Topics Select (pills w/ checkbox?) -->
+                    <ul>
+                        <li *ngFor="let item of post.topics">
+                            {{item.topic}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <textarea name="post" [(ngModel)]="post.post" rows="20"></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="large-6 columns">
+            <label>Preview</label>
+            <div class="callout">
+                <h4>{{post.title}}</h4>
+                <br />
+                <!-- TODO: Render W/ Marked -->
+                {{post.post}}
+            </div>
+        </div>
+    </div>
+</div>
