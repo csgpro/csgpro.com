@@ -4,32 +4,34 @@ declare var window: any;
 
 import * as $ from 'jquery';
 
-const contactForm = $('#contactModal form');
-const callout = contactForm.find('.callout');
-
-$('#contactModal').on('closed.zf.reveal', () => {
-    resetCallout();
-    resetForm();
-});
-
-function resetForm() {
-    const name = contactForm.find('[name="name"]').val('');
-    const phone = contactForm.find('[name="phone"]').val('');
-    const email = contactForm.find('[name="email"]').val('');
-    const note = contactForm.find('[name="note"]').val('');
+function resetForm(container: JQuery) {
+    const name = container.find('[name="name"]').val('');
+    const phone = container.find('[name="phone"]').val('');
+    const email = container.find('[name="email"]').val('');
+    const note = container.find('[name="note"]').val('');
 }
 
-function resetCallout() {
+function resetCallout(callout: JQuery) {
     callout.removeClass('success warning alert').addClass('hide');
 }
 
-window.submitContactForm = function submitContactForm() {
-    const name = contactForm.find('[name="name"]').val();
-    const phone = contactForm.find('[name="phone"]').val();
-    const email = contactForm.find('[name="email"]').val();
-    const note = contactForm.find('[name="note"]').val();
+window.submitContactForm = function submitContactForm(target: string) {
+    const container = $(target);
+
+    const callout = container.find('.callout');
+
+    const name = container.find('[name="name"]').val();
+    const phone = container.find('[name="phone"]').val();
+    const email = container.find('[name="email"]').val();
+    const note = container.find('[name="note"]').val();
+
+    // Reset values if modal is closed (assuming container is a modal)
+    container.on('closed.zf.reveal', () => {
+        resetCallout(callout);
+        resetForm(container);
+    });
     
-    resetCallout();
+    resetCallout(callout);
     
     if (!(name && email && note)) {
         callout.addClass('warning').removeClass('hide').html('<h5>We need your name, email address and some information about what you need.</h5>');
@@ -38,7 +40,7 @@ window.submitContactForm = function submitContactForm() {
     
     $.ajax('/contact', { type: 'POST', data: { name, phone, email, note } }).done((res) => {
         callout.addClass('success').removeClass('hide').html('<h5>Thank you! We\'ll be in touch soon.</h5>');
-        resetForm();
+        resetForm(container);
     }).fail((err) => {
         let data = err.responseJSON;
         let html = `<h5>${(data.errors && data.errors.length > 1) ? 'Errors Occured' : 'An Error Occured' }</h5>`;

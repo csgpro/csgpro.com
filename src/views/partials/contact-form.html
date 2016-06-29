@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="column">
+        <h2>What's on your mind?</h2>
+        <p class="lead">We want to hear from you.</p>
+    </div>
+</div>
+<form novalidate="novalidate">
+    <div class="callout hide"><!-- placeholder for validation messages --></div>
+    <div class="row">
+        <div class="small-6 columns">
+            <label>What's your name?
+                <input type="text" name="name">
+            </label>
+        </div>
+        <div class="small-6 columns">
+            <label>Email address?
+                <input type="email" name="email">
+            </label>
+        </div>
+        <div class="small-6 columns">
+            <label>Company? (optional)
+                <input type="tel" name="company">
+            </label>
+        </div>
+        <div class="small-6 columns">
+            <label>Phone? (optional)
+                <input type="tel" name="phone">
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <label>
+                Tell us what you need
+                <textarea name="note"></textarea>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-4 small-centered columns">
+            <button type="button" class="expanded button" onclick="submitContactForm('#{{parentId}}')">submit</button>
+        </div>
+    </div>
+</form>
