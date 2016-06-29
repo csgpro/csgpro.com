@@ -1,4 +1,4 @@
-<div [style.visibility]="isLoading ? 'visible' : 'hidden'" class="loading-indicator-container">
+<div *ngIf="loadingService.loading$ | async" class="loading-indicator-container">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>

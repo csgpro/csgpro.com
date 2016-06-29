@@ -1,17 +1,12 @@
+// angular
+import {Injectable} from '@angular/core';
+
 // rxjs
-import {Observable} from "rxjs/Observable";  
-import {Observer} from "rxjs/Observer";
-import {Subject} from "rxjs/Subject";
-import 'rxjs/add/operator/share';
-import 'rxjs/add/operator/debounce';
-import 'rxjs/add/operator/distinctUntilChanged';
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
+@Injectable()
 export default class LoadingService {
-    loading$: Observable<boolean>;
-
-    constructor() {
-        this.loading$ = new Subject<boolean>();
-    }
+    loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     on() {
         console.log('indicator on');
@@ -24,6 +19,6 @@ export default class LoadingService {
     }
 
     private _toggleLoadingIndicator(name) {
-        this.loading$.debounce(400).next(name);
+        this.loading$.next(name);
     }
 }
