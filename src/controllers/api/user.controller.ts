@@ -9,11 +9,7 @@ import { getUsers, getUser } from '../../commands/user.commands';
 
 getUsersApi.route = '/api/user';
 export function getUsersApi(request: hapi.Request, reply: hapi.IReply) {
-    getUsers().then(data => {
-        let users = [...data.rows];
-        Object.defineProperty(users, 'count', {
-            value: data.count
-        });
+    getUsers().then(users => {
         reply({ data: users });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {

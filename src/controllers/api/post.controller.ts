@@ -10,11 +10,7 @@ import { getPostsByCategory, getPostByPostId } from '../../commands/post.command
 getPostsApi.route = '/api/post';
 export function getPostsApi(request: hapi.Request, reply: hapi.IReply) {
     let {category, sort, offset, limit}  = request.query;
-    getPostsByCategory(category, sort, offset, limit).then(data => {
-        let posts = [...data.rows];
-        Object.defineProperty(posts, 'count', {
-            value: data.count
-        });
+    getPostsByCategory(category, sort, offset, limit).then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {

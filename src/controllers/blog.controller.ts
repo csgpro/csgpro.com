@@ -22,7 +22,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
         reply.view('category', {
             title: 'Blog',
             description: '',
-            posts: data[1].rows,
+            posts: data[1],
             topics: data[0],
             pagination: {
                 basePath: '/blog',

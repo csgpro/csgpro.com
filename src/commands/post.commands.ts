@@ -28,19 +28,28 @@ export function getPostByPostId(postId: number) {
 }
 
 export function getTopics(where: Sequelize.WhereOptions = { active: true }, order = 'topic') {
-    return Topic.findAll({ where, order });
+    return Topic.findAndCountAll({ where, order }).then(data => {
+        let topics = [...data.rows];
+        Object.defineProperty(topics, 'count', {
+            value: data.count
+        });
+        return topics;
+    });
 }
 
-export function getTopic(topic: string, sortOrder: 'ASC' | 'DESC' = 'DESC') {
-    return Topic.findOne({ where: { slug: topic }}).then(t => {
-        return t.getPosts({
-            where: { publishedAt: { $gt: new Date('1993-01-01') } },
-            order: [[ 'publishedAt', sortOrder]],
-            include: [{ model: User, as: 'author' }, { model: Topic, as: 'topics' }, { model: PostCategory, as: 'category' }]
-        }).then(posts => {
-            return { topic: t.getDataValue('topic'), posts };
-        });
-    });
+export function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC') {
+    let where: any = {};
+    if (typeof topic === 'string') {
+        where = { slug: topic };
+    } else {
+        where = { id: topic };
+    }
+
+    if (includePosts) {
+        return Topic.findOne({ where, include: [{ model: Post }] });
+    } else {
+        return Topic.findOne({ where });
+    }
 }
 
 export function getPostsByCategory(category: string, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
@@ -55,7 +64,13 @@ export function getPostsByCategory(category: string, sortOrder: 'ASC' | 'DESC' =
     if (offset) {
         options.offset = offset;
     }
-    return Post.scope({ method: ['category', category] }).findAndCount(options);
+    return Post.scope({ method: ['category', category] }).findAndCount(options).then(data => {
+        let posts = [...data.rows];
+        Object.defineProperty(posts, 'count', {
+            value: data.count
+        });
+        return posts;
+    })
 }
 
 export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
@@ -80,7 +95,13 @@ export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'D
 }
 
 export function getPostCategories() {
-    return PostCategory.findAndCountAll();
+    return PostCategory.findAndCountAll().then(data => {
+        let categories = [...data.rows];
+        Object.defineProperty(categories, 'count', {
+            value: data.count
+        });
+        return categories;
+    })
 }
 
 export function getPostCategory(categoryId: number) {

@@ -110,7 +110,13 @@ export function requestResetPasswordToken(email: string, host: string) {
 }
 
 export function getUsers() {
-    return User.findAndCountAll();
+    return User.findAndCountAll().then(data => {
+        let users = [...data.rows];
+        Object.defineProperty(users, 'count', {
+            value: data.count
+        });
+        return users;
+    })
 }
 
 export function getUser(userId: number) {
