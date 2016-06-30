@@ -9,6 +9,7 @@ import {BaseComponent} from '../../framework';
 import {PostService, Post} from '../../models/post';
 import {LoadingService} from '../../services/loading.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
+import {MarkdownService} from '../../services/markdown.service';
 
 @BaseComponent({
     moduleId: 'PostComponent',
@@ -21,7 +22,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, public loadingService: LoadingService, private _route: ActivatedRoute) {}
+    constructor(private _postService: PostService, public loadingService: LoadingService, private _route: ActivatedRoute, public markdown: MarkdownService) {}
 
     ngOnInit() {
         // Get post

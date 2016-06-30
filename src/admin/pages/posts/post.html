@@ -54,8 +54,7 @@
             <div class="callout">
                 <h4>{{post.title}}</h4>
                 <br />
-                <!-- TODO: Render W/ Marked -->
-                {{post.post}}
+                <div [innerHTML]="markdown.render(post.post)"></div>
             </div>
         </div>
     </div>
