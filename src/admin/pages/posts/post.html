@@ -15,16 +15,17 @@
                 <div class="column">
                     <label class="required">
                         Slug
-                        <input placeholder="my-blog-post-slug" type="text" [(ngModel)]="post.slug" />
+                        <input name="slug" placeholder="my-blog-post-slug" type="text" [(ngModel)]="post.slug" />
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="small-6 medium-4 columns">
-                    <!-- TODO: Author Dropdown -->
                     <label>
                         Author
-                        <input placeholder="placeholder" type="text" name="author" [(ngModel)]="post.author.fullName" disabled />
+                        <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
+                            <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
+                        </select>
                     </label>
                 </div>
                 <div class="small-6 medium-4 columns end">
