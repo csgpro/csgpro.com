@@ -32,7 +32,9 @@
                     <!-- TODO: Category Dropdown -->
                     <label>
                         Category
-                        <input placeholder="placeholder" type="text" name="category" [(ngModel)]="post.category.category" disabled />
+                        <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
+                            <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+                        </select>
                     </label>
                 </div>
                 <div class="small-6 medium-4 columns">

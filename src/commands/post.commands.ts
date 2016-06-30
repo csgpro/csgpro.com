@@ -78,3 +78,11 @@ export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'D
         });
     });
 }
+
+export function getPostCategories() {
+    return PostCategory.findAndCountAll();
+}
+
+export function getPostCategory(categoryId: number) {
+    return PostCategory.findOne({ where: { id: categoryId } });
+}

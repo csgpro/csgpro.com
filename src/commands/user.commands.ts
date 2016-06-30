@@ -112,3 +112,7 @@ export function requestResetPasswordToken(email: string, host: string) {
 export function getUsers() {
     return User.findAndCountAll();
 }
+
+export function getUser(userId: number) {
+    return User.findOne({ where: { id: userId } });
+}
