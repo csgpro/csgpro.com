@@ -1,5 +1,6 @@
 // angular
 import {bootstrap} from '@angular/platform-browser-dynamic';
+import {disableDeprecatedForms, provideForms} from '@angular/forms';
 import {Title} from '@angular/platform-browser';
 
 // framework
@@ -12,6 +13,8 @@ import {SERVICE_PROVIDERS} from './services/service-providers';
 import {MODEL_PROVIDERS} from './models/model-providers';
 
 bootstrap(AppComponent, [
+    disableDeprecatedForms(),
+    provideForms(),
     CORE_PROVIDERS,
     APP_ROUTER_PROVIDERS,
     SERVICE_PROVIDERS,
