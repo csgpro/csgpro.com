@@ -16,7 +16,7 @@ export class ApiService {
 
     constructor(private _http: Http) {}
 
-    get<T>(route: string, options?: RequestOptionsArgs): Promise<T> {
+    get<T>(route: string, options?: RequestOptionsArgs): Promise<T|T[]> {
 
         const request: Promise<T> = this._http.get(`${this.baseUrl}${route}`, options).toPromise();
 

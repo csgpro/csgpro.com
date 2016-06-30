@@ -11,7 +11,7 @@ import {BaseComponent} from '../../framework';
 import * as moment from 'moment';
 
 // app
-import {ApiService} from '../../services/api.service';
+import {PostService} from '../../models/post';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {LoadingService} from '../../services/loading.service';
 
@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
 
     posts: any[];
 
-    search = new URLSearchParams('category=blog');
+    search = new URLSearchParams('category=blog&limit=all');
 
     formatDate(dateStr: string, format = 'M/D/YYYY') {
         return moment(dateStr).format(format);
@@ -34,15 +34,15 @@ export class PostsComponent implements OnInit {
         this._router.navigate(['/post', id])
     }
 
-    constructor(private _title: Title, private _api: ApiService, private _router: Router, private _loadingService: LoadingService) {}
+    constructor(private _title: Title, private _postService: PostService, private _router: Router, private _loadingService: LoadingService) {}
     ngOnInit() {
         this._title.setTitle('Posts');
         this.search.set('publshed', 'true');
         // Get posts
         this._loadingService.on();
-        this._api.get('post', { search: this.search })
-        .then((data: any) => {
-            this.posts = data.rows;
+        this._postService.get({ search: this.search })
+        .then(posts => {
+            this.posts = posts;
             this._loadingService.off()
         })
         .catch(e => {
