@@ -29,7 +29,6 @@
                     </label>
                 </div>
                 <div class="small-6 medium-4 columns end">
-                    <!-- TODO: Category Dropdown -->
                     <label>
                         Category
                         <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
@@ -37,17 +36,18 @@
                         </select>
                     </label>
                 </div>
-                <div class="small-6 medium-4 columns">
-                    <!-- TODO: Topics Select (pills w/ checkbox?) -->
-                    <ul>
-                        <li *ngFor="let item of post.topics">
-                            {{item.topic}}
-                        </li>
-                    </ul>
+            </div>
+            <div class="row">
+                <div class="columns">
+                    <label>Topics</label>
+                    <label class="label" *ngFor="let topic of topics" [ngClass]="topic.selected ? '' : 'secondary'">
+                        <input type="checkbox" name="topics" (change)="topic.selected = !topic.selected" /> {{topic.topic}}
+                    </label>
                 </div>
             </div>
             <div class="row">
                 <div class="column">
+                    <label>Post Body</label>
                     <textarea name="post" [(ngModel)]="post.post" rows="20"></textarea>
                 </div>
             </div>

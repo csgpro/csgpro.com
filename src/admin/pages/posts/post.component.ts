@@ -12,6 +12,7 @@ import {BaseComponent} from '../../framework';
 // app
 import {PostService, Post} from '../../models/post';
 import {CategoryService, Category} from '../../models/category';
+import {TopicService, Topic} from '../../models/topic';
 import {UserService, User} from '../../models/user';
 import {LoadingService} from '../../services/loading.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
@@ -29,10 +30,11 @@ export class PostComponent implements OnInit, OnDestroy {
     // selects
     authors: User[] = [];
     categories: Category[] = [];
+    topics: Topic[] = [];
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, public loadingService: LoadingService, private _route: ActivatedRoute, public markdown: MarkdownService) {}
+    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, public markdown: MarkdownService) {}
 
     ngOnInit() {
         // Get post
@@ -44,13 +46,15 @@ export class PostComponent implements OnInit, OnDestroy {
 
             queue.push(this._postService.get(postId));
             queue.push(this._categoryService.get());
+            queue.push(this._topicService.get());
             queue.push(this._userService.get());
 
             Promise.all(queue).then(response => {
-                const [post, categories, users] = response;
+                const [post, categories, topics, users] = response;
 
                 this.post = post;
                 this.categories = categories;
+                this.topics = topics;
                 this.authors = users;
             })
             .then(() => {
@@ -62,6 +66,14 @@ export class PostComponent implements OnInit, OnDestroy {
                 if (currentCategoryIndex > -1) {
                     this.post.category = this.categories[currentCategoryIndex];
                 }
+
+                // Set selected topics
+                this.post.topics.forEach(topic => {
+                    let topicIndex = _.findIndex(this.topics, { id: topic.id });
+                    if (topicIndex > -1) {
+                        this.topics[topicIndex]['selected'] = true;
+                    }
+                });
             })
             .then(() => {
                 // done
