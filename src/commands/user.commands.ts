@@ -108,3 +108,7 @@ export function requestResetPasswordToken(email: string, host: string) {
     });
     return promise;
 }
+
+export function getUsers() {
+    return User.findAndCountAll();
+}
