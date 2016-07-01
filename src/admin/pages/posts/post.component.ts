@@ -63,6 +63,16 @@ export class PostComponent implements OnInit, OnDestroy {
 
     }
 
+    publish() {
+        this.post.publishedAt = new Date();
+        this.onSubmit();
+    }
+
+    unPublish() {
+        this.post.publishedAt = null;
+        this.onSubmit();
+    }
+
     ngOnInit() {
         // Get post
         this.loadingService.on();
