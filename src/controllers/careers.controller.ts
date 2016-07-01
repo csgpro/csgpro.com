@@ -13,7 +13,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let limit = 10;
     let offset = page <= 1 ? 0 : (page * limit) - limit;
     
-    getPostsByCategory('career', undefined, offset, limit).then(posts => {
+    getPostsByCategory('career', true, undefined, offset, limit).then(posts => {
         reply.view('category', {
             title: 'Careers',
             description: '',

@@ -6,7 +6,7 @@ import { Topic, ITopicInstance, ITopicAttributes } from './topic.model';
 import { PostCategory, IPostCategoryInstance, IPostCategoryAttributes } from './post-category.model';
 import { User, IUserInstance, IUserAttributes } from './user.model';
 
-let PostTopic = database.define('postTopic', {}, { timestamps: false });
+export let PostTopic = database.define('postTopic', {}, { timestamps: false });
 
 export interface IPostAttributes {
     id: number,
@@ -51,21 +51,19 @@ let PostSchema: Sequelize.DefineAttributes = {
 };
 
 let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
-    defaultScope: {
-        where: { publishedAt: { $gt: new Date('1993-01-01') } },
-        include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }],
-        attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ]
-    },
     scopes: {
-        category: function (value): any {
+        list: function (published = true, categorySlug?: string, sortOrder = 'DESC'): any {
             let options: any = {
-                where: { publishedAt: { $gt: new Date('1993-01-01') } },
                 attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ],
-                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }]
+                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }],
+                order: [[ 'publishedAt', sortOrder ]]
             };
-            if (value) {
+            if (published) {
+                options.where = { publishedAt: { $gt: new Date('1993-01-01') } };
+            }
+            if (categorySlug) {
                 // Add 'where' clause to PostCategory include
-                options.include[1].where = { slug: value };
+                options.include[1].where = { slug: categorySlug };
             }
             return options;
         }
@@ -74,6 +72,9 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
     getterMethods: {
         permalink: function (): string {
             let self: IPostInstance = this;
+
+            if (!self.getDataValue('publishedAt')) return;
+
             let permalink: string;
             let postSlug = self.getDataValue('slug');
             let categorySlug = self.getDataValue('category') ? self.getDataValue('category').slug : null;

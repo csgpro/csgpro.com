@@ -23,13 +23,13 @@ export class ApiService {
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
 
-    post<T>(route: string, body: any, options?: RequestOptionsArgs): Promise<T> {
+    post<T>(route: string, body: T, options?: RequestOptionsArgs): Promise<T> {
         const request: Promise<T> = this._http.post(`${this.baseUrl}${route}`, body).toPromise();
 
         return request.then(d => d).catch(this._handleErrors);
     }
 
-    put<T>(route: string, body: any, options?: RequestOptionsArgs): Promise<T> {
+    put<T>(route: string, body: T, options?: RequestOptionsArgs): Promise<T> {
         const request: Promise<T> = this._http.put(`${this.baseUrl}${route}`, body).toPromise();
 
         return request.then(d => d).catch(this._handleErrors);

@@ -1,6 +1,20 @@
 <div id="post-list">
     <h3>Posts <loading-indicator></loading-indicator></h3>
-    
+
+    <div>
+        <fieldset class="large-6 columns radio">
+            <legend>Category</legend>
+            <label>
+                <input type="radio" name="category" [checked]="selectedCategory === ''" (click)="onCategoryChange()" /> All
+            </label>
+            <label *ngFor="let category of categories">
+                <input type="radio" name="category" [checked]="selectedCategory === category.slug" (click)="onCategoryChange(category.slug)" /> {{category.category}}
+            </label>
+        </fieldset>
+        <div class="large-6 columns">
+            <a class="button primary float-right" [routerLink]="['/post', 'new']">New</a>
+        </div>
+    </div>
     <table class="stack">
         <thead>
             <tr>

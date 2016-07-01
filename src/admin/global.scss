@@ -7,3 +7,10 @@
         display: none;
     }
 }
+
+fieldset.radio {
+    label {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}

@@ -18,4 +18,12 @@ export class PostService {
         }
         return this._apiService.get<Post>('post', search);
     }
+
+    post(post: Post) {
+        return this._apiService.post<Post>(`post`, post);
+    }
+
+    put(post: Post) {
+        return this._apiService.put<Post>(`post/${post.id}`, post);
+    }
 }

@@ -1,7 +1,8 @@
 // angular
 import {OnInit, OnDestroy} from '@angular/core';
+import {Location} from '@angular/common';
+import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
-import {NgForm}    from '@angular/common';
 
 // libs
 import * as _ from 'lodash';
@@ -34,7 +35,33 @@ export class PostComponent implements OnInit, OnDestroy {
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, public markdown: MarkdownService) {}
+    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService) {}
+
+    onSubmit() {
+        let request: Promise<any>;
+
+        // prepare post
+        const post: Post = Object.assign({}, this.post);
+
+        // prepare topics
+        const selectedTopics = this.topics.filter(topic => topic['selected'] === true);
+        
+        post.topics = selectedTopics;
+
+        if (this.post.id) {
+            request = this._postService.put(post);
+        } else {
+            request = this._postService.post(post);
+        }
+
+        request.then(() => {
+            // TODO: Add Confirmation
+            alert('Saved Post');
+        }).catch(() => {
+            alert('Trouble Saving Post');
+        });
+
+    }
 
     ngOnInit() {
         // Get post
@@ -42,9 +69,18 @@ export class PostComponent implements OnInit, OnDestroy {
         this._paramsSubscription = this._route.params.subscribe(params => {
             let postId = +params['id'];
 
-            let queue = [];
+            let queue: Promise<any>[] = [];
 
-            queue.push(this._postService.get(postId));
+            if (postId) {
+                queue.push(this._postService.get(postId));
+            } else {
+                if (params['id'] !== 'new') {
+                    // Navigate Back
+                    this._location.back();
+                }
+                queue.push(<any>(() => {})()); // Need to look for another way to do this.
+            }
+
             queue.push(this._categoryService.get());
             queue.push(this._topicService.get());
             queue.push(this._userService.get());
@@ -52,7 +88,9 @@ export class PostComponent implements OnInit, OnDestroy {
             Promise.all(queue).then(response => {
                 const [post, categories, topics, users] = response;
 
-                this.post = post;
+                if (post) {
+                    this.post = post;
+                }
                 this.categories = categories;
                 this.topics = topics;
                 this.authors = users;

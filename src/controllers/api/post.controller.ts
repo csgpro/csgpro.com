@@ -3,14 +3,15 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 
 // app
-import { getPostsByCategory, getPostByPostId } from '../../commands/post.commands';
+import { getPostsByCategory, getPostByPostId, updatePost, createPost } from '../../commands/post.commands';
 
 // posts
 
 getPostsApi.route = '/api/post';
 export function getPostsApi(request: hapi.Request, reply: hapi.IReply) {
-    let {category, sort, offset, limit}  = request.query;
-    getPostsByCategory(category, sort, offset, limit).then(posts => {
+    let {category, published, sort, offset, limit}  = request.query;
+    published = "false" ? false : true;
+    getPostsByCategory(category, published, sort, offset, limit).then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
@@ -30,19 +31,43 @@ export function getPostApi(request: hapi.Request, reply: hapi.IReply) {
             return;
         }
         reply({ data: post.toJSON() });
-    })
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(503, 'Bad Connection'));
+        } else {
+            reply(boom.create(503, err.message));
+        }
+    });
 }
 
 createPostApi.method = 'POST';
 createPostApi.route = '/api/post';
 export function createPostApi(request: hapi.Request, reply: hapi.IReply) {
-    reply(boom.notImplemented());
+    let post = request.payload;
+    createPost(post).then(data => {
+        reply({ message: 'saved', data });
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(503, 'Bad Connection'));
+        } else {
+            reply(boom.create(503, err.message));
+        }
+    });
 }
 
 updatePostApi.method = 'PUT';
 updatePostApi.route = '/api/post/{id}';
 export function updatePostApi(request: hapi.Request, reply: hapi.IReply) {
-    reply(boom.notImplemented());
+    let post = request.payload;
+    updatePost(post).then(data => {
+        reply({ message: 'saved', data });
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(503, 'Bad Connection'));
+        } else {
+            reply(boom.create(503, err.message));
+        }
+    });
 }
 
 deletePostApi.method = 'DELETE';

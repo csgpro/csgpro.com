@@ -11,7 +11,8 @@ import {BaseComponent} from '../../framework';
 import * as moment from 'moment';
 
 // app
-import {PostService} from '../../models/post';
+import {PostService, Post} from '../../models/post';
+import {CategoryService, Category} from '../../models/category';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {LoadingService} from '../../services/loading.service';
 
@@ -22,11 +23,15 @@ import {LoadingService} from '../../services/loading.service';
 })
 export class PostsComponent implements OnInit {
 
-    posts: any[];
+    selectedCategory = '';
 
-    search = new URLSearchParams('category=blog&limit=all');
+    posts: Post[];
+    categories: Category[];
+
+    search = new URLSearchParams('limit=all');
 
     formatDate(dateStr: string, format = 'M/D/YYYY') {
+        if (!dateStr) return;
         return moment(dateStr).format(format);
     }
 
@@ -34,16 +39,30 @@ export class PostsComponent implements OnInit {
         this._router.navigate(['/post', id])
     }
 
-    constructor(private _title: Title, private _postService: PostService, private _router: Router, private _loadingService: LoadingService) {}
+    onCategoryChange(categorySlug) {
+        this.selectedCategory = categorySlug;
+        this._loadingService.on();
+        this.search.delete('category');
+        this.search.set('category', this.selectedCategory || '');
+        this._postService.get({ search: this.search }).then(posts => this.posts = posts).then(() => this._loadingService.off());
+    }
+
+    constructor(private _title: Title, private _postService: PostService, private _categoryService: CategoryService, private _router: Router, private _loadingService: LoadingService) {}
+
     ngOnInit() {
         this._title.setTitle('Posts');
-        this.search.set('publshed', 'true');
+        this.search.set('published', 'false');
         // Get posts
         this._loadingService.on();
         this._postService.get({ search: this.search })
         .then(posts => {
             this.posts = posts;
-            this._loadingService.off()
+        })
+        .then(() => {
+            return this._categoryService.get({}).then(c => this.categories = c);
+        })
+        .then(() => {
+            this._loadingService.off();
         })
         .catch(e => {
             this._loadingService.off();

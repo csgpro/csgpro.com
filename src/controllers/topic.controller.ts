@@ -17,7 +17,8 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
     promises.push(getTopic(topicSlug));
     
     Promise.all(promises).then(data => {
-        reply.view('category', { title: data[1].topic, description: '', posts: data[1].posts, topics: data[0] });
+        let [topic, posts] = data[1];
+        reply.view('category', { title: topic.topic, description: '', posts, topics: data[0] });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));

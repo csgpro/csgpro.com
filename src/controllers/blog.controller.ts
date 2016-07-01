@@ -16,7 +16,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
     let offset = page <= 1 ? 0 : (page * limit) - limit;
     
     promises.push(getTopics());
-    promises.push(getPostsByCategory('blog', undefined, offset, limit));
+    promises.push(getPostsByCategory('blog', true, undefined, offset, limit));
     
     Promise.all(promises).then(data => {
         reply.view('category', {

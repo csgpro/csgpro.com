@@ -24,12 +24,18 @@ getTopicApi.route = '/api/topic/{id}'
 export function getTopicApi(request: hapi.Request, reply: hapi.IReply) {
     let { id, includePosts } = request.params;
     let topicId = +id; // It needs to be a number;
-    getTopic(topicId, !!includePosts).then(topic => {
-        if (!topic) {
-            reply(boom.notFound());
-            return;
+    let posts = includePosts === "false" ? false : true;
+    getTopic(topicId, posts).then(data => {
+        let topic;
+        let posts;
+        if (typeof data === 'object') {
+            [topic, posts] = data;
+            topic = topic.toJSON();
+            topic.posts = posts;
+        } else {
+            topic = data;
         }
-        reply({ data: topic.toJSON() });
+        reply({ data: topic });
     })
 }
 
