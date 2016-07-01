@@ -1,7 +1,7 @@
 // angular
 import {OnInit, OnDestroy} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
+import {ROUTER_DIRECTIVES, ActivatedRoute, Router} from '@angular/router';
 
 // app
 import {BaseComponent} from '../../framework';
@@ -33,11 +33,19 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         }
     }
 
-    constructor(private _title: Title, private _route: ActivatedRoute, private _auth: AuthenticationService) {
+    constructor(private _title: Title, private _route: ActivatedRoute, private _router: Router, private _auth: AuthenticationService) {
         this._title.setTitle(this.title);
     }
 
     private _errors = new Set();
+
+    onSubmit() {
+        if (this.resetToken) {
+            this.resetPassword();
+        } else {
+            this.requestReset();
+        }
+    }
 
     requestReset() {
         this._errors.clear();
@@ -68,8 +76,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
         if (this._errors.size) return;
         this._auth.resetPassword(this.password, this.resetToken)
         .then((a) => {
-            // TODO: Log the user in.
-            debugger;
+            this._router.navigate(['/login']);
         })
         .catch((e: Error) => {
             this._errors.add(e);

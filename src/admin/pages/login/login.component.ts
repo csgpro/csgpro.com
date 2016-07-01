@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     private _errors = new Set();
 
-    submit() {
+    onSubmit() {
         this._errors.clear();
         if (!this.email) {
             this._errors.add({ message: 'Email Address is required.' });
