@@ -73,6 +73,11 @@ export class PostComponent implements OnInit, OnDestroy {
         this.onSubmit();
     }
 
+    slugify(e: KeyboardEvent, title?: string) {
+        let source = title || this.post.slug;
+        this.post.slug = source.trim().replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+    }
+
     ngOnInit() {
         // Get post
         this.loadingService.on();
