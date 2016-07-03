@@ -8,12 +8,13 @@ var Renderer = marked.Renderer;
 // Create your custom renderer.
 const renderer = new Renderer();
 renderer.code = (code, language) => {
-  // Check whether the given language is valid for highlight.js.
-  const validLang = !!(language && hljs.getLanguage(language));
-  // Highlight only if the language is valid.
-  const highlighted = validLang ? hljs.highlight(language, code).value : code;
-  // Render the highlighted code with `hljs` class.
-  return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
+    // Check whether the given language is valid for highlight.js.
+    const validLang = !!(language && hljs.getLanguage(language));
+    language = validLang ? language : 'html'; // Default to html
+    // Highlight only if the language is valid.
+    const highlighted = hljs.highlight(language, code).value;
+    // Render the highlighted code with `hljs` class.
+    return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;
 };
 
 marked.setOptions({
