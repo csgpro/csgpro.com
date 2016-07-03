@@ -10,11 +10,8 @@ const striptags = require('striptags');
 
 // application
 import { User } from '../models/user.model';
-import { mailer } from '../modules/mailer';
+import { mailer, frankSignature } from '../modules/mailer';
 import { getProtocolByHost } from '../modules/utility';
-
-const CSGBOT_URL = conf.get('CSGBOT_URL');
-const CSGBOT_IMG_URL = conf.get('CSGBOT_IMG_URL');
 
 const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
 
@@ -87,11 +84,7 @@ export function requestResetPasswordToken(email: string, host: string) {
                         <br>
                         If this wasn't you, please disregard this email.<br>
                         <br>
-                        Thank you,<br>
-                        <br>
-                        <a href="${CSGBOT_URL}">@frank</a> - The Friendly CSG Bot<br>
-                        <br>
-                        <a href="${CSGBOT_URL}"><img src="${CSGBOT_IMG_URL}" width="48" height="48"></a>
+                        ${frankSignature}
                     `;
                     let text = striptags(html);
 

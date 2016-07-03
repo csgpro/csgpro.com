@@ -4,41 +4,44 @@
         <p class="lead">We want to hear from you.</p>
     </div>
 </div>
-<form novalidate="novalidate">
+<form class="contact-form">
     <div class="callout hide"><!-- placeholder for validation messages --></div>
-    <div class="row">
-        <div class="small-6 columns">
-            <label>What's your name?
-                <input type="text" name="name">
-            </label>
+    <div class="form-body">
+        <div class="row">
+            <div class="small-6 columns">
+                <label>What's your name?
+                    <input type="text" name="name" required>
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Email address?
+                    <input type="email" name="email" required>
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Company? (optional)
+                    <input type="text" name="company">
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Phone? (optional)
+                    <input type="tel" name="phone" pattern="^1?\W*([2-9][0-8][0-9])\W*([2-9][0-9]{2})\W*([0-9]{4})\s*.*$">
+                </label>
+                <p class="help-text" id="passwordHelpText">Ex: (555) 555-5555 x555</p>
+            </div>
         </div>
-        <div class="small-6 columns">
-            <label>Email address?
-                <input type="email" name="email">
-            </label>
+        <div class="row">
+            <div class="column">
+                <label>
+                    Tell us what you need
+                    <textarea name="note" required></textarea>
+                </label>
+            </div>
         </div>
-        <div class="small-6 columns">
-            <label>Company? (optional)
-                <input type="text" name="company">
-            </label>
-        </div>
-        <div class="small-6 columns">
-            <label>Phone? (optional)
-                <input type="tel" name="phone">
-            </label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="column">
-            <label>
-                Tell us what you need
-                <textarea name="note"></textarea>
-            </label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="small-4 small-centered columns">
-            <button type="button" class="expanded button" onclick="submitContactForm('#{{parentId}}')">submit</button>
+        <div class="row">
+            <div class="small-4 small-centered columns">
+                <button class="expanded button">submit</button>
+            </div>
         </div>
     </div>
 </form>

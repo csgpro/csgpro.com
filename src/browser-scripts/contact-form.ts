@@ -4,32 +4,36 @@ declare var window: any;
 
 import * as $ from 'jquery';
 
+$(document).find('.contact-form').each(function() {
+    const $form = $(this);
+    $form.on('submit',function(e) {
+        submitContactForm($form);
+        e.preventDefault();
+    });
+});
+
 function resetForm(container: JQuery) {
     const name = container.find('[name="name"]').val('');
     const phone = container.find('[name="phone"]').val('');
     const email = container.find('[name="email"]').val('');
     const note = container.find('[name="note"]').val('');
+    const company = container.find('[name="company"]').val('');
 }
 
 function resetCallout(callout: JQuery) {
     callout.removeClass('success warning alert').addClass('hide');
 }
 
-window.submitContactForm = function submitContactForm(target: string) {
-    const container = $(target);
+function submitContactForm(container: JQuery) {
 
     const callout = container.find('.callout');
+    const formBody = container.find('.form-body');
 
     const name = container.find('[name="name"]').val();
     const phone = container.find('[name="phone"]').val();
     const email = container.find('[name="email"]').val();
     const note = container.find('[name="note"]').val();
-
-    // Reset values if modal is closed (assuming container is a modal)
-    container.on('closed.zf.reveal', () => {
-        resetCallout(callout);
-        resetForm(container);
-    });
+    const company = container.find('[name="company"]').val();
     
     resetCallout(callout);
     
@@ -38,8 +42,9 @@ window.submitContactForm = function submitContactForm(target: string) {
         return;
     }
     
-    $.ajax('/contact', { type: 'POST', data: { name, phone, email, note } }).done((res) => {
+    $.ajax('/contact', { type: 'POST', data: { name, phone, email, note, company } }).done((res) => {
         callout.addClass('success').removeClass('hide').html('<h5>Thank you! We\'ll be in touch soon.</h5>');
+        formBody.addClass('hide');
         resetForm(container);
     }).fail((err) => {
         let data = err.responseJSON;

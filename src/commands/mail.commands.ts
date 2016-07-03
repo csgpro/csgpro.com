@@ -1,12 +1,13 @@
 'use strict';
 
 import * as conf from 'nconf';
-import { mailer } from '../modules/mailer';
+import { mailer, frankSignature } from '../modules/mailer';
 
 let striptags = require('striptags');
 
 interface IContactFormData {
     name: string;
+    company?: string;
     phone?: string;
     email?: string;
     note: string;
@@ -31,6 +32,9 @@ export function sendContactFormEmail(formData: IContactFormData, subject = 'Cont
             <b>What's your name?</b><br>
             ${formData.name}<br>
             <br>
+            <b>Company</b><br>
+            ${formData.company || 'Not Provided'}<br>
+            <br>
             <b>What's your phone #?</b><br>
             ${formData.phone || 'Not Provided'}<br>
             <br>
@@ -40,6 +44,7 @@ export function sendContactFormEmail(formData: IContactFormData, subject = 'Cont
             <b>What's on your mind?</b><br>
             ${formData.note}<br>
             <br>
+            ${frankSignature}
         `;
         
         let text = striptags(html);

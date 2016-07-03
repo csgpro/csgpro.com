@@ -22,7 +22,7 @@ export function create(request: hapi.Request, reply: hapi.IReply) {
 
     addContactRequest(contact, note)
         .then(() => {
-            return sendContactFormEmail({ name, phone, email, note });
+            return sendContactFormEmail({ name, phone, email, note, company });
         })
         .then(() => {
             reply({ message: 'Message Sent' });
