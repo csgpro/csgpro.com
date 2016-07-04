@@ -68,3 +68,19 @@ export function getDownloadRequest(token: string) {
         return file;
     });
 }
+
+export function getContacts(order = 'createdAt', sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+    limit = (isNaN(limit)) ? undefined : +limit;
+    offset = (isNaN(offset)) ? undefined : +offset;
+    return Contact.findAndCountAll({
+        limit,
+        offset,
+        order: [[order, sortOrder]]
+    }).then(data => {
+        let contacts = [...data.rows];
+        Object.defineProperty(contacts, 'count', {
+            value: data.count
+        });
+        return contacts;
+    });
+}

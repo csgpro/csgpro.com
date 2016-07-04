@@ -78,7 +78,9 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
     getterMethods: {
         fullName: function (): string {
             let self: IUserInstance = this;
-            return self.getDataValue('firstName') + ' ' + self.getDataValue('lastName');
+            let firstName = self.getDataValue('firstName');
+            let lastName = self.getDataValue('lastName');
+            return `${firstName || ''} ${lastName || ''}`.trim();
         },
         photoUrl: function (): string {
             let self: IUserInstance = this;

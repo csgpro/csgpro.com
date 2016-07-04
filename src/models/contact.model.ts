@@ -28,7 +28,9 @@ let ContactSchemaOptions: Sequelize.DefineOptions<IContactInstance> = {
     getterMethods: {
         fullName: function (): string {
             let self: IContactInstance = this;
-            return self.getDataValue('firstName') + ' ' + self.getDataValue('lastName');
+            let firstName = self.getDataValue('firstName');
+            let lastName = self.getDataValue('lastName');
+            return `${firstName || ''} ${lastName || ''}`.trim();
         }
     },
     setterMethods: {

@@ -10,6 +10,7 @@ import {LoginComponent} from './pages/login/login.component';
 import {ResetPasswordComponent} from './pages/reset-password/reset-password.component';
 import {PostComponent} from './pages/posts/post.component';
 import {PostsComponent} from './pages/posts/posts.component';
+import {ContactsComponent} from './pages/contacts/contacts.component';
 
 export const routes: RouterConfig = [
     { path: '', redirectTo: '/dashboard', terminal: true },
@@ -19,7 +20,8 @@ export const routes: RouterConfig = [
     { path: 'reset-password/:token', component: ResetPasswordComponent },
     { path: 'post', redirectTo: '/posts', terminal: true},
     { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
-    { path: 'post/:id', component: PostComponent, canActivate: [AuthGuard] }
+    { path: 'post/:id', component: PostComponent, canActivate: [AuthGuard] },
+    { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] }
 ];
 
 export const APP_ROUTER_PROVIDERS = [
