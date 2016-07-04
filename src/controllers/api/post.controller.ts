@@ -40,6 +40,7 @@ export function getPostApi(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
+createPostApi.auth = 'jwt';
 createPostApi.method = 'POST';
 createPostApi.route = '/api/post';
 export function createPostApi(request: hapi.Request, reply: hapi.IReply) {
@@ -55,6 +56,7 @@ export function createPostApi(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
+updatePostApi.auth = 'jwt';
 updatePostApi.method = 'PUT';
 updatePostApi.route = '/api/post/{id}';
 export function updatePostApi(request: hapi.Request, reply: hapi.IReply) {
@@ -70,6 +72,7 @@ export function updatePostApi(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
+deletePostApi.auth = 'jwt';
 deletePostApi.method = 'DELETE';
 deletePostApi.route = '/api/post/{id}';
 export function deletePostApi(request: hapi.Request, reply: hapi.IReply) {

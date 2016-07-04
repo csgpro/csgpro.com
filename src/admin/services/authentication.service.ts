@@ -14,14 +14,18 @@ export class AuthenticationService {
     constructor(private _api: ApiService, private _store: StoreService, private _router: Router) {
         const token = this._store.getString('authtoken');
         if (token) {
+            this._api.headers.append('Authorization', 'Bearer ' + token);
             this.isLoggedIn = true;
         }
     }
 
     login(credentials: { email: string; password: string }) {
-        return this._api.post('authenticate', credentials).then(response => {
+        return this._api.post('authenticate', credentials).then((res: any) => {
+            let response = res.json();
+            let token = response.token;
             this.isLoggedIn = true;
-            this._store.setString('authtoken', response['token']);
+            this._store.setString('authtoken', token);
+            this._api.headers.append('Authorization', 'Bearer ' + token);
             this._router.navigate(['/dashboard']);
         });
     }
@@ -29,6 +33,7 @@ export class AuthenticationService {
     logout() {
         this.isLoggedIn = false;
         this._store.clearString('authtoken');
+        this._api.headers.delete('Authorization');
         this._router.navigate(['/login']);
     }
 

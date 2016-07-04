@@ -32,18 +32,21 @@ export function getPostCategoryApi(request: hapi.Request, reply: hapi.IReply) {
     })
 }
 
+createPostCategoryApi.auth = 'jwt';
 createPostCategoryApi.method = 'POST';
 createPostCategoryApi.route = '/api/category';
 export function createPostCategoryApi(request: hapi.Request, reply: hapi.IReply) {
     reply(boom.notImplemented());
 }
 
+createPostCategoryApi.auth = 'jwt';
 updatePostCategoryApi.method = 'PUT';
 updatePostCategoryApi.route = '/api/category/{id}';
 export function updatePostCategoryApi(request: hapi.Request, reply: hapi.IReply) {
     reply(boom.notImplemented());
 }
 
+deletePostCategoryApi.auth = 'jwt';
 deletePostCategoryApi.method = 'DELETE';
 deletePostCategoryApi.route = '/api/category/{id}';
 export function deletePostCategoryApi(request: hapi.Request, reply: hapi.IReply) {

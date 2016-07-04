@@ -39,18 +39,21 @@ export function getTopicApi(request: hapi.Request, reply: hapi.IReply) {
     })
 }
 
+createTopicApi.auth = 'jwt';
 createTopicApi.method = 'POST';
 createTopicApi.route = '/api/topic';
 export function createTopicApi(request: hapi.Request, reply: hapi.IReply) {
     reply(boom.notImplemented());
 }
 
+updateTopicApi.auth = 'jwt';
 updateTopicApi.method = 'PUT';
 updateTopicApi.route = '/api/topic/{id}';
 export function updateTopicApi(request: hapi.Request, reply: hapi.IReply) {
     reply(boom.notImplemented());
 }
 
+deleteTopicApi.auth = 'jwt';
 deleteTopicApi.method = 'DELETE';
 deleteTopicApi.route = '/api/topic/{id}';
 export function deleteTopicApi(request: hapi.Request, reply: hapi.IReply) {
