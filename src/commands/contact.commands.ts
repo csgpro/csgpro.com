@@ -69,13 +69,21 @@ export function getDownloadRequest(token: string) {
     });
 }
 
-export function getContacts(order = 'createdAt', sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+export function getContacts(order = 'createdAt', sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6, where?: Sequelize.WhereOptions) {
     limit = (isNaN(limit)) ? undefined : +limit;
     offset = (isNaN(offset)) ? undefined : +offset;
+    let include;
+
+    if (where) {
+        include = [ContactRequest, DownloadRequest];
+    }
+
     return Contact.findAndCountAll({
         limit,
         offset,
-        order: [[order, sortOrder]]
+        order: [[order, sortOrder]],
+        where,
+        include
     }).then(data => {
         let contacts = [...data.rows];
         Object.defineProperty(contacts, 'count', {

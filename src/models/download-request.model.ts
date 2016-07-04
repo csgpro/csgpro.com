@@ -41,3 +41,4 @@ let DownloadRequestSchemaOptions: Sequelize.DefineOptions<IDownloadRequestInstan
 export let DownloadRequest = database.define<IDownloadRequestInstance, IDownloadRequestAttributes>('downloadRequest', DownloadRequestSchema, DownloadRequestSchemaOptions);
 
 DownloadRequest.belongsTo(Contact);
+Contact.hasMany(DownloadRequest);

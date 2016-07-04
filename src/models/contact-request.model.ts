@@ -29,3 +29,4 @@ let ContactRequestSchemaOptions: Sequelize.DefineOptions<IContactRequestInstance
 export let ContactRequest = database.define<IContactRequestInstance, IContactRequestAttributes>('contactRequest', ContactRequestSchema, ContactRequestSchemaOptions);
 
 ContactRequest.belongsTo(Contact);
+Contact.hasMany(ContactRequest);
