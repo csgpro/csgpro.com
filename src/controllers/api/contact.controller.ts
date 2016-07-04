@@ -11,8 +11,8 @@ getContactsApi.auth = 'jwt';
 getContactsApi.route = '/api/contact';
 export function getContactsApi(request: hapi.Request, reply: hapi.IReply) {
     let { limit, offset, sort, order } = request.query;
-    getContacts(order, sort, offset, limit).then(topics => {
-        reply({ data: topics });
+    getContacts(order, sort, offset, limit).then(contacts => {
+        reply({ data: contacts });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(503, 'Bad Connection'));
