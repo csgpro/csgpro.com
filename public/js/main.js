@@ -71,12 +71,9 @@ $(document).ready(function() {
         title = ($el.data('title') && $el.data('title') != 'undefined') ? $el.data('title') : $('#title').val(),
         details = ($el.data('details') && $el.data('details') != 'undefined') ? $el.data('details') : $('#details').val(),
         headerImg = ($el.data('headerimg') && $el.data('headerimg') != 'undefined') ? $el.data('headerimg') : $('#headerImg').val(),
-        buttonImg = ($el.data('buttonimg') && $el.data('buttonimg') != 'undefined') ? $el.data('buttonimg') : $('#buttonImg').val(),
-        icsfile = ($el.data('icsfile') && $el.data('icsfile') != 'undefined') ? $el.data('icsfile') : $('#icsfile').attr('href'),
         error  = false,
         errorMsg = $('.alert-error'),
         successMsg = $('.alert-success'),
-        infoMsg = $('.alert-info'),
         domain = window.location.protocol + '//' + window.location.host;
 
     if(!reminder) {
@@ -102,16 +99,10 @@ $(document).ready(function() {
         registrationData.push({ label: $(fields[i]).data('title'), value: $(fields[i]).val() });
       }
     }
-    var icsfile = domain + icsfile;
-
-    var calendarLinkMsg = (buttonImg) ? '<img src="' + domain + '/img/' + buttonImg + '">' : 'Add this event to your calendar.';
-    var calendarLink = '<a href="%url%">' + calendarLinkMsg + '</a>';
-        calendarLink = calendarLink.replace('%url%',  icsfile);
 
     var message = (headerImg) ? '<img src="' + domain + '/img/' + headerImg + '"><br><br>' : '';
         message = message + 'This is a confirmation for your recent ' + title + '.' + '<br><br>';
         message = message + details + '<br><br>';
-        message = message + calendarLink + '<br><br>';
         message = message + 'You submitted the following information:' + '<br><br>';
 
     var dataObj = {
@@ -142,7 +133,6 @@ $(document).ready(function() {
           if(data == 'success') {
             successMsg.show();
             if(!reminder) {
-              infoMsg.show().css({'marginBottom': 100});
               $('form.register .form-field').hide();
               $el.attr('disabled','disabled');
             }

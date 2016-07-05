@@ -96,7 +96,7 @@ block content
                   div: b.text-size-base.grey= post.PublishDate ? moment(post.PublishDate).format('L') : ''
                     img.icon-sm(src='/img/update_icon_#{post.Category}.svg')
                   div
-                    p #{post.Abstract}
+                    p!= post.Abstract
                       if (post.url)
                         b: a(href='/jobs/#{post.id}')  MORE
                       else
