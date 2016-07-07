@@ -1,0 +1,25 @@
+<section class="post hero">
+    {{{header}}}
+    <div class="row intro">
+        <div class="copy medium-centered medium-8 columns">
+            <h2>{{title}}</h2>
+        </div>
+    </div>
+</section>
+
+<div class="row main-content">
+    <div class="medium-3 columns show-for-medium show-for-large" data-sticky-container>
+        <div class="sticky" data-sticky data-anchor="content-container">
+        {{> contact-widget}}
+        {{> posts-widget}}
+        <img src="/resources/images/site/ms-gold-logo.png" alt="Microsoft Gold Certified Partner" />
+        </div>
+    </div>
+    <div class="medium-9 columns" id="content-container">
+        <article>
+            {{{markdown pageContent}}}
+            
+            {{> questions-widget}}
+        </article>
+    </div>
+</div>
