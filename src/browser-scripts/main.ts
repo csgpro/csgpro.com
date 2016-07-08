@@ -7,4 +7,6 @@ require('./download-form');
 require('./external-links');
 require('./footer');
 
-$(document).foundation();
+setTimeout(() => {
+    $(document).foundation();
+}, 500);
