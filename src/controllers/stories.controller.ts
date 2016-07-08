@@ -40,7 +40,7 @@ export function list(request: hapi.Request, reply: hapi.IReply) {
     }
     let sortOrder: any = request.params['sortOrder'];
     let search = request.params['search'];
-    getStories(search, sortOrder, offset, limit).then(stories => {
+    getStories('active', search, sortOrder, offset, limit).then(stories => {
         reply({ data: stories });
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
