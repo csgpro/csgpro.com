@@ -27,7 +27,7 @@ export function getStories(search?: string | Sequelize.WhereOptions, sortOrder: 
             where = <Sequelize.WhereOptions>search;
         }
     }
-    return Story.findAndCount({
+    return Story.scope('active').findAndCount({
         where,
         order: [['createdAt', sortOrder]],
         offset,

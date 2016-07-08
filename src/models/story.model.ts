@@ -28,6 +28,13 @@ let StorySchema: Sequelize.DefineAttributes = {
 };
 
 let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
+    scopes: {
+        active: {
+            where: {
+                isActive: true
+            }
+        }
+    },
     instanceMethods: {},
     getterMethods: {
         permalink: function getStoryPermalink(): string {
