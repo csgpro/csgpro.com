@@ -33,6 +33,11 @@ let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
             where: {
                 isActive: true
             }
+        },
+        featured: {
+            where: {
+                inSlider: true
+            }
         }
     },
     instanceMethods: {},

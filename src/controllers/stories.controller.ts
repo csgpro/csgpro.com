@@ -8,8 +8,8 @@ import { getStories } from '../commands/story.commands';
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
-    const featuredStoriesPromise = getStories({ inSlider: true });
-    const storiesPromise = getStories(undefined, undefined, undefined, null)
+    const featuredStoriesPromise = getStories('featured');
+    const storiesPromise = getStories('active', undefined, undefined, undefined, null)
     
     Promise.all([featuredStoriesPromise, storiesPromise]).then(data => {
         let featuredStories = data[0].rows;
