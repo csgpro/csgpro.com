@@ -1,5 +1,6 @@
 // angular
 import {Component, OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 
 // app
@@ -9,7 +10,7 @@ import {ErrorSummary} from '../../components/error-summary/error-summary.compone
 @Component({
     moduleId: 'LoginComponent',
     templateUrl: 'login.html',
-    directives: [ErrorSummary]
+    directives: [ROUTER_DIRECTIVES, ErrorSummary]
 })
 export class LoginComponent implements OnInit {
     title = 'Login';
