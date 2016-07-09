@@ -1,15 +1,14 @@
 // angular
-import {OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ROUTER_DIRECTIVES, ActivatedRoute, Router} from '@angular/router';
 
 // app
-import {BaseComponent} from '../../framework';
 import {ErrorSummary} from '../../components/error-summary/error-summary.component';
 import {SuccessSummary} from '../../components/success-summary/success-summary.component';
 import {AuthenticationService} from '../../services/authentication.service';
 
-@BaseComponent({
+@Component({
     moduleId: 'ResetPasswordComponent',
     templateUrl: 'reset-password.html',
     directives: [ErrorSummary, SuccessSummary]

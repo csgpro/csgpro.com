@@ -1,13 +1,11 @@
 // angular
+import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-
-// framework
-import {BaseComponent} from '../../framework';
 
 // app
 import {AuthenticationService} from '../../services/authentication.service';
 
-@BaseComponent({
+@Component({
     moduleId: 'DashboardComponent',
     templateUrl: 'dashboard.html',
     styleUrls: ['dashboard.scss']

@@ -13,12 +13,11 @@ import {PostsComponent} from './pages/posts/posts.component';
 import {ContactsComponent} from './pages/contacts/contacts.component';
 
 export const routes: RouterConfig = [
-    { path: '', redirectTo: '/dashboard', terminal: true },
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     { path: 'login', component: LoginComponent },
     { path: 'reset-password', component: ResetPasswordComponent },
     { path: 'reset-password/:token', component: ResetPasswordComponent },
-    { path: 'post', redirectTo: '/posts', terminal: true},
     { path: 'posts', component: PostsComponent, canActivate: [AuthGuard] },
     { path: 'post/:id', component: PostComponent, canActivate: [AuthGuard] },
     { path: 'contacts', component: ContactsComponent, canActivate: [AuthGuard] }

@@ -1,13 +1,11 @@
 // angular
-import {ViewEncapsulation} from '@angular/core';
-
-// framework
-import {BaseComponent} from './framework';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 // app
 import {HeaderComponent} from './components/header/header.component';
 
-@BaseComponent({
+@Component({
   selector: 'app',
   template: `
     <header></header>
@@ -15,6 +13,6 @@ import {HeaderComponent} from './components/header/header.component';
   `,
   styleUrls: ['global.scss'],
   encapsulation: ViewEncapsulation.None,
-  directives: [HeaderComponent]
+  directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 export class AppComponent {}

@@ -1,11 +1,8 @@
 // angular
-import {OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 import {URLSearchParams} from '@angular/http';
-
-// framework
-import {BaseComponent} from '../../framework';
 
 // libs
 import * as moment from 'moment';
@@ -16,10 +13,10 @@ import {CategoryService, Category} from '../../models/category';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {LoadingService} from '../../services/loading.service';
 
-@BaseComponent({
+@Component({
     moduleId: 'PostsComponent',
     templateUrl: 'posts.html',
-    directives: [LoadingIndicatorComponent]
+    directives: [ROUTER_DIRECTIVES, LoadingIndicatorComponent]
 })
 export class PostsComponent implements OnInit {
 

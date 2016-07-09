@@ -1,15 +1,12 @@
 // angular
-import {OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-
-// framework
-import {BaseComponent} from '../../framework';
 
 // app
 import {AuthenticationService} from '../../services/authentication.service';
 import {ErrorSummary} from '../../components/error-summary/error-summary.component';
 
-@BaseComponent({
+@Component({
     moduleId: 'LoginComponent',
     templateUrl: 'login.html',
     directives: [ErrorSummary]

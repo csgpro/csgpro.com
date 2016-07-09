@@ -1,14 +1,11 @@
 // angular
-import {OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Location} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
 
 // libs
 import * as _ from 'lodash';
-
-// framework
-import {BaseComponent} from '../../framework';
 
 // app
 import {PostService, Post} from '../../models/post';
@@ -19,7 +16,7 @@ import {LoadingService} from '../../services/loading.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {MarkdownService} from '../../services/markdown.service';
 
-@BaseComponent({
+@Component({
     moduleId: 'PostComponent',
     templateUrl: 'post.html',
     directives: [LoadingIndicatorComponent]

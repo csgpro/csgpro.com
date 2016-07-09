@@ -1,10 +1,10 @@
-// framework
-import {BaseComponent} from '../../framework';
+// angular
+import {Component} from '@angular/core';
 
 // app
 import {LoadingService} from "../../services/loading.service";
 
-@BaseComponent({
+@Component({
     selector: 'loading-indicator',
     templateUrl: 'loading-indicator.html',
     styleUrls: ['loading-indicator.scss']
