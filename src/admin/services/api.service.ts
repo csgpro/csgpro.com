@@ -30,7 +30,7 @@ export class ApiService {
 
         options = this._applyDefaultOptions(options);
         
-        const request: Promise<T> = this._http.post(`${this.baseUrl}${route}`, body).toPromise();
+        const request: Promise<T> = this._http.post(`${this.baseUrl}${route}`, body, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
@@ -39,7 +39,7 @@ export class ApiService {
 
         options = this._applyDefaultOptions(options);
 
-        const request: Promise<T> = this._http.put(`${this.baseUrl}${route}`, body).toPromise();
+        const request: Promise<T> = this._http.put(`${this.baseUrl}${route}`, body, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
