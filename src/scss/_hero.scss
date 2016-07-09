@@ -1,0 +1,93 @@
+.hero {
+    transition: height ease 0.5s;
+    color: #00405c;
+    position: relative;
+    overflow: hidden;
+    > img {
+        transition: height ease 0.5s;
+        min-width: 100%;
+        position: absolute;
+        opacity: 0.3;
+    }
+    > .intro {
+        transition: margin-top ease 0.5s, margin-bottom ease 0.5s;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        position: relative;
+        z-index: 0;
+        @media screen and (max-width: 40em) {
+            text-align: center;
+        }
+        h1, h2 {
+            font-size: 1.4em;
+            text-align: center;
+            @media screen and (min-width: 40em) {
+                //text-align: right;
+            }
+            @media screen and (min-width: 50em) {
+                font-size: 1.6em;
+            }
+            @media screen and (min-width: 64em) {
+                font-size: 2em;
+            }
+            @media screen and (min-width: 82em) {
+                font-size: 3.1em;
+            }
+        }
+        h2 + button, h2 + button + button {
+            margin-top: .8em;
+        }
+        .copy {
+            @media screen and (min-width: 40em) {
+                padding-top: 3em;
+                button {
+                    margin-right: 2em;
+                    display: block;
+                    float: right;
+                }
+            }
+            @media screen and (min-width: 64em) {
+                padding-top: 3em;
+                padding-bottom: 2em;
+                button {
+                    margin-right: 3em;
+                }
+            }
+        }
+        .graphic {
+            @media screen and (max-width: 40em) {
+                padding-bottom: 1em;
+                img {
+                    max-width: 50%;
+                }
+            }
+            @media screen and (min-width: 40.1em) {
+                padding-top: 1em;
+                padding-bottom: 1em;
+                img {
+                    max-width: 80%;
+                }
+            }
+        }
+    }
+    &.post {
+        background-color: #f8f8f8;
+        > img {
+            opacity: 0.3;
+        }
+        > .intro {
+            .copy {
+                @media screen and (min-width: 40em) {
+                    padding-top: .5em;
+                }
+                @media screen and (min-width: 64em) {
+                    padding-top: 1.5em;
+                }
+            }
+            h1, h2 {
+                font-weight: 700;
+                text-align: center;
+            }
+        }
+    }
+}

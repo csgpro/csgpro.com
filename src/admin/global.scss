@@ -1,0 +1,16 @@
+@import "variables";
+
+.label {
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+    input[type="checkbox"] {
+        display: none;
+    }
+}
+
+fieldset.radio {
+    label {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}

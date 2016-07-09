@@ -1,0 +1,7 @@
+<h2>{{title}}</h2>
+
+<ul class="menu vertical">
+{{#each sitemap}}
+    <li {{#if nested}}class="nested"{{/if}}><a href="{{path}}">{{title}}</a></li>
+{{/each}}
+</ul>

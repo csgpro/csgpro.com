@@ -1,0 +1,67 @@
+.csg.top-bar, .csg.top-bar ul {
+    background-color: #fff;
+}
+
+.csg.top-bar {
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    .dropdown.menu {
+        > li {
+            display: block;
+            float: left;
+            text-align: center;
+            width: 15%;
+            > a {
+                padding-top: 20px;
+                border-style: dashed;
+                border-width: 0 0 0 1px;
+                height: 58px;
+            }
+            &:last-child {
+                > a {
+                    border-right-width: 1px;
+                }
+            }
+            &:nth-child(1) {
+                width: 18%;
+            }
+            &:nth-child(2) {
+                width: 18%;
+            }
+            &:nth-child(3) {
+                width: 9%;
+            }
+            &:nth-child(4) {
+                width: 10%;
+                position: relative;
+                > img {
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 70%;
+                }
+                > a {
+                    border-top-width: 0;
+                    border-bottom: 0;
+                    min-height: 36px;
+                }
+            }
+        }
+    }
+}
+
+.top-bar-accent {
+    max-width: none;
+    border-top: 1px solid $primary-color;
+    border-bottom-color: lighten($primary-color, 25%);
+    border-bottom-width: 40px;
+    margin: 0;
+    box-shadow: 0 1px 2px rgba(10,10,10, 0.20);
+}
+
+.off-canvas .menu {
+    font-size: 1.4em;
+}

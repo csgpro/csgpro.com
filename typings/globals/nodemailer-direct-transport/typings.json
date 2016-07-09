@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/231e5fd7306e693e63858813a50266c7da371a5f/nodemailer-direct-transport/nodemailer-direct-transport.d.ts",
+    "raw": "github:DefinitelyTyped/DefinitelyTyped/nodemailer-direct-transport/nodemailer-direct-transport.d.ts#231e5fd7306e693e63858813a50266c7da371a5f",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/231e5fd7306e693e63858813a50266c7da371a5f/nodemailer-direct-transport/nodemailer-direct-transport.d.ts"
+  }
+}

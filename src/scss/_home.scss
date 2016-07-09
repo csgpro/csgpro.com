@@ -1,0 +1,20 @@
+.technologies {
+    background-color: #ebebeb;
+    text-align: center;
+    img {
+        margin: 10px;
+        max-height: 20px;
+        @media screen and (min-width: 40em) {
+            margin: 12px;
+            max-height: 24px;
+        }
+        @media screen and (min-width: 64em) {
+            margin: 20px;
+            max-height: 36px;
+        }
+    }
+    
+    + .main-footer {
+        margin-top: 0;
+    }
+}

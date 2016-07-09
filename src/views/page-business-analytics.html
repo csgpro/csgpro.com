@@ -1,0 +1,63 @@
+<section class="post hero">
+    {{{header}}}
+    <div class="row intro">
+        <div class="copy medium-centered medium-8 columns">
+            <h2>{{title}}</h2>
+            <div class="powered text-center">
+                <p>
+                    Powered By
+                    <img src="/resources/images/site/power-bi-logo.png" alt="Power BI Logo" />
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="row main-content">
+    <div class="medium-4 large-3 columns show-for-medium" data-sticky-container>
+        <div class="sticky" data-sticky data-anchor="content-container">
+        {{> contact-widget}}
+        {{> posts-widget}}
+        </div>
+    </div>
+    <div class="medium-8 large-9 columns" id="content-container">
+        <article>
+            {{{markdown pageContent}}}
+        </article>
+        <aside>
+            <h4>Our Power BI Samples</h4>
+            <div class="row" data-equalizer data-equalize-on="medium">
+                {{#each powerBISamples}}
+                <div class="medium-4 columns {{#if @last}}end{{/if}}">
+                    <div class="callout power-bi" data-equalizer-watch>
+                        <a data-open="powerBIModal{{@index}}">
+                        {{#if previewImageUrl}}
+                        <img src="{{previewImageUrl}}" />
+                        {{else}}
+                        <img src="http://www.fillmurray.com/336/112" />
+                        {{/if}}
+                        </a>
+                        <br />
+                        <br />
+                        <h5 class="power-bi-title"><a data-open="powerBIModal{{@index}}">{{title}}</a></h5>
+                        {{{markdown (truncate description 60)}}}
+                        <div class="reveal large" id="powerBIModal{{@index}}" data-reveal>
+                            <h3>{{title}}</h3>
+                            {{{markdown description}}}
+                            {{#if downloadFile}}
+                                <button class="button" onclick="openDownloadModal('{{downloadFile}}')">Download</button>
+                            {{/if}}
+                            <div class="flex-video widescreen">
+                                <iframe width="1600" height="900" src="{{url}}" frameborder="0" allowFullScreen="true"></iframe>
+                            </div>
+                            <button class="close-button" data-close aria-label="Close reveal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </aside>
+    </div>
+</div>

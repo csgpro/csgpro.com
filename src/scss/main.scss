@@ -1,0 +1,145 @@
+@import 'foundation';
+@import '../../node_modules/motion-ui/motion-ui';
+@import 'syntax_highlighting';
+@import 'hero';
+@import 'home';
+@import 'top-bar';
+@import 'footer';
+@import 'story_slider';
+
+a, a:visited, a:link, a:active {
+    color: $dark-blue;
+}
+
+a:hover, a:focus {
+    color: $primary-color;
+}
+
+a.label {
+    color: #fff;
+    &:focus, &:hover {
+        cursor: pointer;
+        color: #fff;
+    }
+}
+
+.dropdown.menu > li.is-dropdown-submenu-parent > a::after {
+    border-color: $dark-blue transparent transparent;
+}
+
+.author.thumbnail {
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+    border-width: 1px;
+    margin-top: 10px;
+}
+
+.author.thumbnail:hover {
+    box-shadow: 0 0 0 1px rgba(10,10,10,0.2);
+}
+
+li.nested {
+    margin-left: 1rem;
+}
+
+.title-bar button {
+    vertical-align: middle;
+}
+
+.main-content {
+    padding-top: 1em;
+    @media screen and (min-width: 40em) {
+        padding-top: 2em;
+    }
+}
+
+h6.subheader {
+    padding-top: 0;
+    @media screen and (max-width: 40em) {
+        padding-top: 1.6em;
+    }
+    @media screen and (max-width: 30em) {
+        padding-top: .6em;
+    }
+    @media screen and (max-width: 20em) {
+        padding-top: 0;
+    }
+}
+
+.header, .subheader, .sidebar-header, .page-title, .hero h1, .hero h2, .primary-heading, .secondary-heading, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: darken($primary-color, 32%);
+}
+
+.posts > .row {
+    padding-bottom: 2em;
+}
+
+.page-title {
+    margin: 1rem 0;
+}
+
+.sharing {
+    padding-bottom: 1rem;
+}
+
+#disqus_thread {
+    margin: 3em 0 1em 0;
+}
+
+.recent-posts li {
+    padding-bottom: 1em;
+}
+
+.paragraph {
+    line-height: $global-lineheight * 1.2;
+}
+
+.paragraph-primary {
+    @extend .paragraph;
+    font-size: 1.2em;
+}
+
+/**
+ * Widget Styles
+ */
+ 
+.widget-title {
+    text-align: left;
+}
+
+.callout.csg {
+    color: #fff;
+    background-color: $primary-color;
+    .button {
+        background-color: #fff;
+    }
+}
+
+.post .questions-widget {
+    margin-top: 1em;
+    h4 {
+        font-size: 1em;
+    }
+}
+
+/**
+ * Setting slide position so they don't stack on load.
+ */
+.orbit-slide {
+    position: relative;
+    top: 0;
+    display: none;
+    &.is-active, &.mui-leave {
+        display: block;
+    }
+}
+
+.sticky-container {
+    min-height: 100px;
+}
+
+.powered img {
+    max-width: 276px;
+}

@@ -1,0 +1,62 @@
+.stories-slider {
+    .orbit-bullets {
+        button {
+            width: .7rem;
+            height: .7rem;
+        }
+    }
+}
+
+.stories-slider, .modal-header {
+    position: relative;
+
+    .orbit-caption, .modal-header-caption {
+        @include orbit-caption;
+        // TODO: Add Media Queries for Small Screens
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 15px 36px 0;
+        button {
+            display: none;
+        }
+        h3 {
+            text-align: center;
+            font-size: 1rem;
+            color: #fff;
+            a {
+                color: #fff;
+            }
+        }
+        @media (min-width: 22em) {
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+        @media (min-width: 30em) {
+            top: auto;
+            h3 {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .orbit-caption {
+        @media (min-width: 50em) {
+            top: 10%;
+            width: 40%;
+            margin-left: 5%;
+            bottom: auto;
+            padding-bottom: 15px;
+            button {
+                display: block;
+            }
+            h3 {
+                text-align: left;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

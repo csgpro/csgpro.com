@@ -1,0 +1,41 @@
+<div class="reveal" id="downloadModal" data-reveal>
+    <div class="row">
+        <div class="column">
+            <h2>File Download</h2>
+            <p class="lead">Fill out this form and we'll send you an email to download the file.</p>
+        </div>
+    </div>
+    <form novalidate="novalidate">
+        <div class="callout hide"><!-- placeholder for validation messages --></div>
+        <div class="row">
+            <div class="small-6 columns">
+                <label>What's your name?
+                    <input type="text" name="name">
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Email address?
+                    <input type="email" name="email">
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Company? (optional)
+                    <input type="tel" name="company">
+                </label>
+            </div>
+            <div class="small-6 columns">
+                <label>Phone? (optional)
+                    <input type="tel" name="phone">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-4 small-centered columns">
+                <button type="button" class="expanded button" onclick="submitDownloadForm()">submit</button>
+            </div>
+        </div>
+    </form>
+    <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

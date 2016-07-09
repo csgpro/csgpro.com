@@ -1,0 +1,7 @@
+<div id="error-summary" class="small alert callout" *ngIf="errors">
+    <ul class="no-bullet">
+        <template ngFor let-item [ngForOf]="errors" let-i="index">
+            <li>{{item.message}}</li>
+        </template>
+    </ul>
+</div>

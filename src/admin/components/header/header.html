@@ -1,0 +1,16 @@
+<div class="top-bar">
+    <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-brand"><img src="/resources/images/site/csg-pro-logo.png" /></li>
+            <li><a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">Dashboard</a></li>
+            <li><a [routerLink]="['/posts']" routerLinkActive="router-link-active">Posts</a></li>
+            <li><a [routerLink]="['/contacts']" routerLinkActive="router-link-active">Contacts</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right" *ngIf="_auth.isLoggedIn">
+        <ul class="menu">
+            <li><a (click)="logout()">Logout</a></li>
+        </ul>
+    </div>
+</div>
+<br />

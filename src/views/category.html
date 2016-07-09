@@ -1,0 +1,32 @@
+<div class="row column">
+    <h2 class="page-title">{{title}}</h2>
+</div>
+
+<div class="row" id="content">
+    <div class="medium-12 large-9 columns posts">
+        
+        {{#each posts}}
+        <div class="row">
+            <div class="show-for-medium medium-3 large-2 columns">
+                <img src="{{{author.photoUrl}}}" class="author thumbnail" />
+            </div>
+            <div class="small-12 medium-9 large-10 columns">
+                <h3 class="post-title"><a href="{{permalink}}">{{title}}</a></h3>
+                <h6 class="subheader">By {{author.fullName}} on {{formatDate publishedAt "l"}}</h6>
+                <p>{{excerpt}}</p>
+            </div>
+        </div>
+        {{/each}}
+        
+        {{> pagination }}
+        
+    </div>
+    
+    <div class="medium-3 show-for-large columns">
+        <ul class="menu vertical">
+            {{#each topics}}
+            <li><a href="{{permalink}}">{{topic}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>

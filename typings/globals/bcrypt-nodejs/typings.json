@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d61a1c6578c9f0d2612a6a860ebe5f47fc716cc7/bcrypt-nodejs/bcrypt-nodejs.d.ts",
+    "raw": "github:DefinitelyTyped/DefinitelyTyped/bcrypt-nodejs/bcrypt-nodejs.d.ts#d61a1c6578c9f0d2612a6a860ebe5f47fc716cc7",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d61a1c6578c9f0d2612a6a860ebe5f47fc716cc7/bcrypt-nodejs/bcrypt-nodejs.d.ts"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "version": "0.1.0",
+    "command": "npm",
+    "args": [
+        "run"
+    ],
+    "isShellCommand": true,
+    "tasks": [
+        {
+            "taskName": "lib-js",
+            "isBuildCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "watch",
+            "isWatching": true
+        },
+        {
+            "taskName": "test",
+            "isTestCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "browser-js",
+            "isTestCommand": true,
+            "showOutput": "always"
+        }
+    ]
+}

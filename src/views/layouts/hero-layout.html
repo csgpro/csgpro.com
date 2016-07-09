@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    {{> head}}
+    <body>
+        <div class="off-canvas-wrapper">
+            <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+
+                {{! Import the contents of header.html from partials}}
+                {{> header}}
+                
+                {{{content}}}
+                
+                {{> footer}}
+            </div>
+        </div>
+        
+        {{> contact-modal}}
+        {{> download-modal}}
+        
+        {{> scripts}}
+        
+    </body>
+</html>

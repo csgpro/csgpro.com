@@ -1,0 +1,14 @@
+<div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+
+    <!-- Close button -->
+    <button class="close-button" aria-label="Close menu" type="button" data-close>
+    <span aria-hidden="true">&times;</span>
+    </button>
+
+    <ul class="vertical menu">
+    {{#each sitemap}}
+        <li {{#if nested}}class="nested"{{/if}}><a href="{{path}}">{{title}}</a></li>
+    {{/each}}
+    </ul>
+
+</div>

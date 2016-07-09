@@ -1,0 +1,77 @@
+<div id="post-edit">
+    <h3>Post <loading-indicator></loading-indicator></h3>
+
+    <div>
+        <form #postForm="ngForm" (ngSubmit)="onSubmit()" class="large-6 columns">
+            <div class="row">
+                <div class="columns">
+                    <button class="button primary float-right">Save</button>
+                    <button type="button" class="button secondary float-right" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
+                    <button type="button" class="button secondary float-right" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label class="requied">
+                        Title
+                        <input placeholder="My Blog Post Title" type="text" name="title" [(ngModel)]="post.title" (keyup)="slugify($event, post.title)" required />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label class="required">
+                        Slug
+                        <input name="slug" placeholder="my-blog-post-slug" type="text" [(ngModel)]="post.slug" (keyup)="slugify($event)" required />
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-6 medium-4 columns">
+                    <label>
+                        Author
+                        <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
+                            <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="small-6 medium-4 columns end">
+                    <label>
+                        Category
+                        <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
+                            <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns">
+                    <label>Topics</label>
+                    <label class="label" *ngFor="let topic of topics" [ngClass]="topic.selected ? '' : 'secondary'">
+                        <input type="checkbox" name="topics" (change)="topic.selected = !topic.selected" /> {{topic.topic}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label>Excerpt</label>
+                    <textarea name="post" [(ngModel)]="post.excerpt" maxlength="400" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label>Post Body</label>
+                    <textarea name="post" [(ngModel)]="post.post" rows="20" required></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="large-6 columns">
+            <label>Preview</label>
+            <div class="callout">
+                <h4>{{post.title}}</h4>
+                <br />
+                <div [innerHTML]="markdown.render(post.post)"></div>
+            </div>
+        </div>
+    </div>
+</div>

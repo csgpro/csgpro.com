@@ -1,0 +1,28 @@
+<div id="contact-list">
+    <h3>Contacts <loading-indicator></loading-indicator></h3>
+
+    <table class="stack">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Company</td>
+                <td>Phone</td>
+                <td>Email</td>
+                <td>Created</td>
+                <td>Updated</td>
+            </tr>
+        </thead>
+        <tbody>
+            <template ngFor let-item [ngForOf]="contacts" let-i="index">
+            <tr>
+                <td>{{item.fullName}}</td>
+                <td>{{item.company}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.email}}</td>
+                <td>{{formatDate(item.createdAt)}}</td>
+                <td>{{formatDate(item.updatedAt)}}</td>
+            </tr>
+            </template>
+        </tbody>
+    </table>
+</div>
