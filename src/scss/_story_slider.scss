@@ -1,3 +1,15 @@
+/**
+ * Setting slide position so they don't stack on load.
+ */
+.orbit-slide {
+    position: relative;
+    top: 0;
+    display: none;
+    &.is-active, &.mui-leave {
+        display: block;
+    }
+}
+
 .stories-slider {
     .orbit-bullets {
         button {
@@ -7,11 +19,14 @@
     }
 }
 
-.stories-slider, .modal-header {
-    position: relative;
+.modal-header {
+    .modal-header-caption {
+        margin-top: 1.5rem;
+    }
+}
 
-    .orbit-caption, .modal-header-caption {
-        @include orbit-caption;
+.stories-slider .orbit-slide {
+    .orbit-caption {
         // TODO: Add Media Queries for Small Screens
         position: absolute;
         top: 0;
@@ -41,9 +56,6 @@
                 font-size: 1.5rem;
             }
         }
-    }
-
-    .orbit-caption {
         @media (min-width: 50em) {
             top: 10%;
             width: 40%;
@@ -60,3 +72,57 @@
         }
     }
 }
+
+// .stories-slider, .modal-header {
+//     position: relative;
+
+//     .orbit-caption, .modal-header-caption {
+//         @include orbit-caption;
+//         // TODO: Add Media Queries for Small Screens
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         bottom: 0;
+//         left: 0;
+//         padding: 15px 36px 0;
+//         button {
+//             display: none;
+//         }
+//         h3 {
+//             text-align: center;
+//             font-size: 1rem;
+//             color: #fff;
+//             a {
+//                 color: #fff;
+//             }
+//         }
+//         @media (min-width: 22em) {
+//             h3 {
+//                 font-size: 1.5rem;
+//             }
+//         }
+//         @media (min-width: 30em) {
+//             top: auto;
+//             h3 {
+//                 font-size: 1.5rem;
+//             }
+//         }
+//     }
+
+//     .orbit-caption {
+//         @media (min-width: 50em) {
+//             top: 10%;
+//             width: 40%;
+//             margin-left: 5%;
+//             bottom: auto;
+//             padding-bottom: 15px;
+//             button {
+//                 display: block;
+//             }
+//             h3 {
+//                 text-align: left;
+//                 font-size: 1.5rem;
+//             }
+//         }
+//     }
+// }
