@@ -7,7 +7,7 @@
     "isShellCommand": true,
     "tasks": [
         {
-            "taskName": "lib-js",
+            "taskName": "build",
             "isBuildCommand": true,
             "showOutput": "always"
         },

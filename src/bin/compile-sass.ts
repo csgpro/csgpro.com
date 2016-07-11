@@ -10,7 +10,7 @@ const mkdirp = require('mkdirp');
 
 const srcDir = 'src/scss',
       srcFile = `main.scss`,
-      destDir = 'lib/public/styles',
+      destDir = 'dist/public/styles',
       destFile = 'main.css';
 
 const args = process.argv;

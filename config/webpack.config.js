@@ -21,7 +21,7 @@ const mainConfig = {
         polyfills: './polyfills.ts'
     },
     output: {
-        path: helpers.root('lib/public/scripts'),
+        path: helpers.root('dist/public/scripts'),
         filename: 'scripts.bundle.js',
         sourceMapFilename: '[name].js.map',
         chunkFilename: '[id].chunk.js',
@@ -79,7 +79,7 @@ const mainConfig = {
         */
         new CopyWebpackPlugin([
             { from: 'index.html' },
-            { from: 'assets', to: helpers.root('lib/public/assets') }
+            { from: 'assets', to: helpers.root('dist/public/assets') }
         ]),
 
         /*
@@ -175,7 +175,7 @@ const adminConfig = {
         polyfills: './polyfills.ts'
     },
     output: {
-        path: helpers.root('lib/public/admin'),
+        path: helpers.root('dist/public/admin'),
         filename: 'scripts.bundle.js',
         sourceMapFilename: '[name].js.map',
         chunkFilename: '[id].chunk.js',

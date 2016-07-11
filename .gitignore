@@ -14,7 +14,7 @@ src/**/*.js*
 test/**/*.js*
 bin/**/*.js*
 public/scripts/*.bundle.js
-lib
+dist
 
 # exclude settings.json
 settings.json
