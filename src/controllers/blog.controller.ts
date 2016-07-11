@@ -50,7 +50,7 @@ export function legacyPostRoute(request: hapi.Request, reply: hapi.IReply) {
         let host = request.headers['host'];
         let protocol = getProtocolByHost(host);
         let postJSON = post.toJSON();
-        if (postJSON.permalink) {
+        if (postJSON.permalink && postJSON.permalink !== 'undefined') {
             let POST_URL = `${protocol}://${host}${postJSON.permalink}`;
             reply.redirect(POST_URL);
         } else {
