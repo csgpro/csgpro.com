@@ -50,8 +50,12 @@ export function legacyPostRoute(request: hapi.Request, reply: hapi.IReply) {
         let host = request.headers['host'];
         let protocol = getProtocolByHost(host);
         let postJSON = post.toJSON();
-        let POST_URL = `${protocol}://${host}${postJSON.permalink}`;
-        reply.redirect(POST_URL);
+        if (postJSON.permalink) {
+            let POST_URL = `${protocol}://${host}${postJSON.permalink}`;
+            reply.redirect(POST_URL);
+        } else {
+            reply(boom.notFound());
+        }
     }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {
             reply(boom.create(500, 'Bad Connection'));
