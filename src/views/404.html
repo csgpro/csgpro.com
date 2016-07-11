@@ -1,3 +1,8 @@
 <h2>{{{title}}}</h2>
-<pre>{{{message}}}</pre>
-<span>{{{statusCode}}}</span>
+
+<p><a data-toggle="panel">details</a></p>
+
+<div class="callout is-hidden" id="panel" data-toggler="is-hidden">  
+    <pre>{{{message}}}</pre>
+    <span>Status Code: {{{statusCode}}}</span>
+</div>

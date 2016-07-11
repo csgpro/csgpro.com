@@ -94,7 +94,7 @@ server.ext('onPreResponse', function (request, reply) {
             let template: any = code;
             let title = response.output.payload.error;
             let message = response.stack;
-            return reply.view(template, { title: title, message: message, statusCode: code }).code(code);
+            return reply.view(template, { title: title, message: message, statusCode: code, sitemap: sitemap.getPages() }).code(code);
         }
     }
 
