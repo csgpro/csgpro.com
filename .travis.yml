@@ -15,7 +15,7 @@ deploy:
   - provider: azure_web_apps
     site: csgprod-staging
     on:
-      branch: staging
+      branch: master
       node: '4'
 notifications:
   slack:
