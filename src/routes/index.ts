@@ -25,6 +25,7 @@ function configureRoutes(baseRoute: string, controller: any) {
         let auth: string;
         let payload: any;
         let inSitemap = '';
+        let plugins: any = {};
         
         switch(action) {
             case 'index':
@@ -76,6 +77,8 @@ function configureRoutes(baseRoute: string, controller: any) {
             }
             sitemap.addPage(path, title, (prefix));
             inSitemap = '(in sitemap)';
+        } else {
+            plugins.sitemap = { exclude: true };
         }
         
         if (controller[action].hasOwnProperty('route')) {
@@ -90,7 +93,7 @@ function configureRoutes(baseRoute: string, controller: any) {
             payload = { parse: true };
         }
         
-        Server.route({ method, path, handler: null, config: { auth, handler, payload } });
+        Server.route({ method, path, handler: null, config: { auth, handler, payload, plugins } });
     
         console.log(`     ${method} ${path} -> ${action} ${inSitemap}`);
         if (auth) {

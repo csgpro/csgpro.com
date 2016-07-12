@@ -11,7 +11,7 @@
     "start": "node index.js",
     "postinstall": "npm run build",
     "prepare-build": "npm run clean",
-    "build": "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run downloads",
+    "build": "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run hbs && npm run downloads",
     "clean": "rimraf ./dist/* !./dist/.gitkeep",
     "clean-deep": "rimraf ./src/**/*.js ./test/**/*.js ./utils/**/*.js, ./dist/* !./dist/.gitkeep !./src/public/scripts/*.js",
     "lib-js": "tsc",
@@ -24,10 +24,12 @@
     "public:watch": "node dist/bin/copy-files.js --outDir dist/public --srcDir src/public --watch",
     "views": "node dist/bin/copy-files.js --ext html --outDir dist/views --srcDir src/views",
     "views:watch": "node dist/bin/copy-files.js --ext html --outDir dist/views --srcDir src/views --watch",
+    "hbs": "node dist/bin/copy-files.js --ext hbs --outDir dist --srcDir src",
+    "hbs:watch": "node dist/bin/copy-files.js --ext hbs --outDir dist --srcDir src --watch",
     "downloads": "node dist/bin/copy-files.js --outDir dist/downloads --srcDir src/downloads",
     "downloads:watch": "node dist/bin/copy-files.js --outDir dist/downloads --srcDir src/downloads --watch",
     "test": "mocha dist/test",
-    "watch": "concurrently \"npm run lib-js:watch\" \"npm run browser-js:watch\" \"npm run sass:watch\" \"npm run public:watch\" \"npm run views:watch\" \"npm run downloads:watch\""
+    "watch": "concurrently \"npm run lib-js:watch\" \"npm run browser-js:watch\" \"npm run sass:watch\" \"npm run public:watch\" \"npm run views:watch\" \"npm run hbs:watch\" \"npm run downloads:watch\""
   },
   "repository": {
     "type": "git",
@@ -61,7 +63,6 @@
     "handlebars-paginate": "^0.1.0",
     "hapi": "^11.1.4",
     "hapi-auth-jwt2": "^7.0.1",
-    "hapi-sitemap": "^1.0.3",
     "highlight.js": "^9.1.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.21.0",

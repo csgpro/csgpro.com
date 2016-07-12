@@ -10,6 +10,7 @@ import * as path from 'path';
 import * as routes from './routes';
 import * as sitemap from './modules/sitemap';
 import database from './database';
+import * as hapiSitemap from './modules/hapi-sitemap';
 const handlebars = require('handlebars');
 const paginate = require('handlebars-paginate');
 
@@ -70,9 +71,9 @@ server.register(require('vision'), (err) => {
 });
 
 server.register({
-    register: require('hapi-sitemap'),
+    register: hapiSitemap.register,
     options: {
-        baseUri: 'http://csgpro.com'
+        baseUri: 'https://www.csgpro.com'
     }
 },
 function(err) {

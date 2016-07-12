@@ -55,6 +55,11 @@ const routes: hapi.IRouteConfiguration[] = [
         path: '/admin/{param*}',
         handler: (request: hapi.Request, reply: hapi.IReply) => {
             reply.file(path.join('..', 'public', 'admin', 'index.html'));
+        },
+        config: {
+            plugins: {
+                sitemap: { exclude: true }
+            }
         }
     }
 ];
