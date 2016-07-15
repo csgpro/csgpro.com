@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt-nodejs';
 import * as crypto from 'crypto';
 import { database } from '../database';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
+import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IUserAttributes {
     id: number,
@@ -140,6 +141,17 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
                 });
             });
             return promise;
+        }
+    },
+    hooks: {
+        afterCreate: function (user, options) {
+            triggerWebhooks(WebhookEvents.CreateUser, user.toJSON());
+        },
+        afterUpdate: function (user, options) {
+            triggerWebhooks(WebhookEvents.UpdateUser, user.toJSON());
+        },
+        afterDelete: function (user, options) {
+            triggerWebhooks(WebhookEvents.DeleteUser, user.toJSON());
         }
     }
 };

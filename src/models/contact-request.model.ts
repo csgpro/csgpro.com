@@ -3,6 +3,7 @@
 import * as Sequelize from 'sequelize';
 import { database } from '../database';
 import { Contact, IContactInstance } from './contact.model';
+import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IContactRequestAttributes {
     id?: number,
@@ -23,7 +24,12 @@ let ContactRequestSchema: Sequelize.DefineAttributes = {
 let ContactRequestSchemaOptions: Sequelize.DefineOptions<IContactRequestInstance> = {
     instanceMethods: {},
     getterMethods: {},
-    setterMethods: {}
+    setterMethods: {},
+    hooks: {
+        afterCreate: function (cr, options) {
+            triggerWebhooks(WebhookEvents.ContactRequest, cr.toJSON());
+        }
+    }
 };
 
 export let ContactRequest = database.define<IContactRequestInstance, IContactRequestAttributes>('contactRequest', ContactRequestSchema, ContactRequestSchemaOptions);

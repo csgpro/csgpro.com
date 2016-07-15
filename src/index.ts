@@ -1,18 +1,20 @@
 'use strict';
 
+// load environment variables
 import * as conf from 'nconf';
-
-// Load environment variables
 conf.env().file({ file: __dirname + '/../settings.json' });
 
+// libs
 import * as hapi from 'hapi';
 import * as path from 'path';
-import * as routes from './routes';
-import * as sitemap from './modules/sitemap';
-import database from './database';
-import * as hapiSitemap from './modules/hapi-sitemap';
 const handlebars = require('handlebars');
 const paginate = require('handlebars-paginate');
+
+// app
+import * as routes from './routes';
+import * as sitemap from './modules/sitemap';
+import { initializeDB } from './database';
+import * as hapiSitemap from './modules/hapi-sitemap';
 
 const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
 
@@ -36,7 +38,7 @@ const defaultContext = {
     sitename: 'CSG Pro'
 }
 
-database(server);
+initializeDB(server);
 
 const port = process.env.PORT || 3000;
 

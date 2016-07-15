@@ -39,7 +39,7 @@ export function createPostCategoryApi(request: hapi.Request, reply: hapi.IReply)
     reply(boom.notImplemented());
 }
 
-createPostCategoryApi.auth = 'jwt';
+updatePostCategoryApi.auth = 'jwt';
 updatePostCategoryApi.method = 'PUT';
 updatePostCategoryApi.route = '/api/category/{id}';
 export function updatePostCategoryApi(request: hapi.Request, reply: hapi.IReply) {

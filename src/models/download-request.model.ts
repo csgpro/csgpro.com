@@ -4,6 +4,7 @@ import * as Sequelize from 'sequelize';
 import { database } from '../database';
 import * as crypto from 'crypto';
 import { Contact, IContactInstance } from './contact.model';
+import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IDownloadRequestAttributes {
     id?: number,
@@ -34,6 +35,9 @@ let DownloadRequestSchemaOptions: Sequelize.DefineOptions<IDownloadRequestInstan
             let buffer = crypto.randomBytes(20);
             let token = buffer.toString('hex');
             downloadRequest.setDataValue('token', token);
+        },
+        afterCreate: function (dr, options) {
+            triggerWebhooks(WebhookEvents.DownloadRequest, dr.toJSON());
         }
     }
 };

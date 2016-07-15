@@ -30,6 +30,7 @@
     "validator": "github:DefinitelyTyped/DefinitelyTyped/validator/validator.d.ts#25ef75ce61530b82d5b4e7664c109e1ee3bc0c34"
   },
   "dependencies": {
-    "moment": "github:typings/typed-moment#a4075cd50e63efbedd850f654594f293ab81a385"
+    "moment": "github:typings/typed-moment#a4075cd50e63efbedd850f654594f293ab81a385",
+    "request": "registry:npm/request#2.69.0+20160428223725"
   }
 }

@@ -2,6 +2,7 @@
 
 import * as Sequelize from 'sequelize';
 import { database } from '../database';
+import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IStoryAttributes {
     id: number,
@@ -50,6 +51,17 @@ let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
             permalink = `/stories/${slug}`;
             
             return permalink;
+        }
+    },
+    hooks: {
+        afterCreate: function (story, options) {
+            triggerWebhooks(WebhookEvents.CreateStory, story.toJSON());
+        },
+        afterUpdate: function (story, options) {
+            triggerWebhooks(WebhookEvents.UpdateStory, story.toJSON());
+        },
+        afterDelete: function (story, options) {
+            triggerWebhooks(WebhookEvents.DeleteStory, story.toJSON());
         }
     }
 };

@@ -5,10 +5,11 @@ import * as Sequelize from 'sequelize';
 import * as conf from 'nconf';
 import m from './migrate';
 import s from './seed';
+import { Webhook, IWebhookInstance } from '../models/webhook.model';
 
 let server: hapi.Server;
 
-export default function (s: hapi.Server) {
+export function initializeDB(s: hapi.Server) {
     server = s;
 }
 
