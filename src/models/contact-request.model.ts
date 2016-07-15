@@ -26,8 +26,10 @@ let ContactRequestSchemaOptions: Sequelize.DefineOptions<IContactRequestInstance
     getterMethods: {},
     setterMethods: {},
     hooks: {
-        afterCreate: function (cr, options) {
-            triggerWebhooks(WebhookEvents.ContactRequest, cr.toJSON());
+        afterCreate: function (cr, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.ContactRequest, cr.toJSON());
+            }
         }
     }
 };

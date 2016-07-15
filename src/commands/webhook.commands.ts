@@ -38,12 +38,18 @@ export function createWebhook(webhook: any) {
                 let queue = events.map(e => WebhookEvent.findOne({ where: { id: e.id }, transaction: t }));
 
                 return Promise.all(queue).then(eventsArray => {
-                    return wh.setWebhookEvents(eventsArray, { transaction: t });
+                    return wh.setWebhookEvents(eventsArray, { transaction: t }).then(() => wh);
                 });
             } else {
-                wh.setWebhookEvents([], { transaction: t });
+                return wh.setWebhookEvents([], { transaction: t }).then(() => wh);
             }
         });
+    }).then(wh => {
+        syncWebhooks();
+        return wh;
+    }).catch((err) => {
+        console.error(err.stack || err);
+        throw new Error('Unable to create webhook');
     });
 }
 
@@ -55,12 +61,18 @@ export function updateWebhook(webhook: any) {
                 let queue = events.map(e => WebhookEvent.findOne({ where: { id: e.id } }));
 
                 return Promise.all(queue).then(eventsArray => {
-                    return wh.setWebhookEvents(eventsArray, { transaction: t });
+                    return wh.setWebhookEvents(eventsArray, { transaction: t }).then(() => wh);
                 });
             } else {
-                wh.setWebhookEvents([], { transaction: t });
+                return wh.setWebhookEvents([], { transaction: t }).then(() => wh);
             }
         });
+    }).then(wh => {
+        syncWebhooks();
+        return wh;
+    }).catch((err) => {
+        console.error(err.stack || err);
+        throw new Error('Unable to update webhook');
     });
 }
 

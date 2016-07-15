@@ -36,8 +36,10 @@ let DownloadRequestSchemaOptions: Sequelize.DefineOptions<IDownloadRequestInstan
             let token = buffer.toString('hex');
             downloadRequest.setDataValue('token', token);
         },
-        afterCreate: function (dr, options) {
-            triggerWebhooks(WebhookEvents.DownloadRequest, dr.toJSON());
+        afterCreate: function (dr, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.DownloadRequest, dr.toJSON());
+            }
         }
     }
 };

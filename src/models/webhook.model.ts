@@ -35,11 +35,15 @@ let WebhookSchemaOptions: Sequelize.DefineOptions<IWebhookInstance> = {
     instanceMethods: {},
     getterMethods: {},
     hooks: {
-        afterCreate: function (webhook, options) {
-            syncWebhooks();
+        afterCreate: function (webhook, options: any) {
+            if (!options.transaction) {
+                syncWebhooks();
+            }
         },
-        afterDelete: function (webhook, options) {
-            syncWebhooks();
+        afterDelete: function (webhook, options: any) {
+            if (!options.transaction) {
+                syncWebhooks();
+            }
         }
     },
     timestamps: false

@@ -97,14 +97,20 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
         }
     },
     hooks: {
-        afterCreate: function (post, options) {
-            triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
+        afterCreate: function (post, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
+            }
         },
-        afterUpdate: function (post, options) {
-            triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
+        afterUpdate: function (post, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
+            }
         },
-        afterDelete: function (post, options) {
-            triggerWebhooks(WebhookEvents.DeletePost, post.toJSON());
+        afterDelete: function (post, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.DeletePost, post.toJSON());
+            }
         }
     }
 };

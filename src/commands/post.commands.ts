@@ -6,6 +6,7 @@ import { User } from '../models/user.model';
 import { Topic, ITopicInstance } from '../models/topic.model';
 import { Post, IPostInstance, PostTopic } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
+import { triggerWebhooks, WebhookEvents } from './webhook.commands';
 import * as _ from 'lodash';
 
 export function getPost(postSlug: string, categorySlug: string) {
@@ -116,34 +117,60 @@ export function getPostCategory(categoryId: number) {
 
 export function createPost(post: any) {
     post.authorId = post.author.id;
-    post.postCategoryId = post.category.id;
-    return Post.create(post);
-}
-
-export function updatePost(post: any): Promise<IPostInstance> {
-    post.authorId = post.author.id;
     post.categoryId = post.category.id;
     let topics: any[] = post.topics;
-    let resultPost: IPostInstance;
     return database.transaction(function(t) {
-        return Post.update(post, { where: { id: post.id }, transaction: t }).then(() => {
-            // Update post
-            return Post.findOne({ where: { id: post.id }, transaction: t });
-        }).then(p => {
+        return Post.create(post, { transaction: t }).then(p => {
             // Update topics
-            resultPost = p;
             if (topics && topics.length) {
                 let queue = [];
                 topics.forEach(topic => {
-                    queue.push(Topic.findOne({ where: { id: topic.id } }));
+                    queue.push(Topic.findById(topic.id, { transaction: t }));
                 });
 
                 return Promise.all(queue).then(topicsArray => {
-                    return p.setTopics(topicsArray, { transaction: t });
+                    return p.setTopics(topicsArray, { transaction: t }).then(() => p);
                 });
             } else {
-                return p.setTopics([], { transaction: t });
+                return p.setTopics([], { transaction: t }).then(() => p);
             }
         });
+    }).then(post => {
+        triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
+        return post;
+    }).catch((err) => {
+        console.error(err.stack || err);
+        throw new Error('Unable to create post');
+    });
+}
+
+export function updatePost(post: any) {
+    post.authorId = post.author.id;
+    post.categoryId = post.category.id;
+    let topics: any[] = post.topics;
+    return database.transaction(function(t) {
+        return Post.findById(post.id, { transaction: t }).then(p => {
+            return p.update(post, { transaction: t }).then(() => {
+                // Update topics
+                if (topics && topics.length) {
+                    let queue = [];
+                    topics.forEach(topic => {
+                        queue.push(Topic.findById(topic.id, { transaction: t }));
+                    });
+
+                    return Promise.all(queue).then(topicsArray => {
+                        return p.setTopics(topicsArray, { transaction: t }).then(() => p);
+                    });
+                } else {
+                    return p.setTopics([], { transaction: t }).then(() => p);
+                }
+            });
+        });
+    }).then(post => {
+        triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
+        return post;
+    }).catch((err) => {
+        console.error(err.stack || err);
+        throw new Error('Unable to update post');
     });
 }

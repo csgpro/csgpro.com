@@ -144,14 +144,20 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
         }
     },
     hooks: {
-        afterCreate: function (user, options) {
-            triggerWebhooks(WebhookEvents.CreateUser, user.toJSON());
+        afterCreate: function (user, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.CreateUser, user.toJSON());
+            }
         },
-        afterUpdate: function (user, options) {
-            triggerWebhooks(WebhookEvents.UpdateUser, user.toJSON());
+        afterUpdate: function (user, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.UpdateUser, user.toJSON());
+            }
         },
-        afterDelete: function (user, options) {
-            triggerWebhooks(WebhookEvents.DeleteUser, user.toJSON());
+        afterDelete: function (user, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.DeleteUser, user.toJSON());
+            }
         }
     }
 };

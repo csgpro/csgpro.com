@@ -54,14 +54,20 @@ let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
         }
     },
     hooks: {
-        afterCreate: function (story, options) {
-            triggerWebhooks(WebhookEvents.CreateStory, story.toJSON());
+        afterCreate: function (story, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.CreateStory, story.toJSON());
+            }
         },
-        afterUpdate: function (story, options) {
-            triggerWebhooks(WebhookEvents.UpdateStory, story.toJSON());
+        afterUpdate: function (story, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.UpdateStory, story.toJSON());
+            }
         },
-        afterDelete: function (story, options) {
-            triggerWebhooks(WebhookEvents.DeleteStory, story.toJSON());
+        afterDelete: function (story, options: any) {
+            if (!options.transaction) {
+                triggerWebhooks(WebhookEvents.DeleteStory, story.toJSON());
+            }
         }
     }
 };
