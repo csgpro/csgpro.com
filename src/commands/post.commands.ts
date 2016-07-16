@@ -4,7 +4,7 @@ import * as Sequelize from 'sequelize';
 import { database } from '../database';
 import { User } from '../models/user.model';
 import { Topic, ITopicInstance } from '../models/topic.model';
-import { Post, IPostInstance, PostTopic } from '../models/post.model';
+import { Post, IPostInstance, IPostAttributes, PostTopic } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
 import { triggerWebhooks, WebhookEvents } from './webhook.commands';
 import * as _ from 'lodash';
@@ -136,7 +136,12 @@ export function createPost(post: any) {
             }
         });
     }).then(post => {
-        triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
+        let postJson: IPostAttributes = post.toJSON();
+        if (postJson.publishedAt) {
+            triggerWebhooks(WebhookEvents.PublishPost, post.toJSON());
+        } else {
+            triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
+        }
         return post;
     }).catch((err) => {
         console.error(err.stack || err);
@@ -148,8 +153,12 @@ export function updatePost(post: any) {
     post.authorId = post.author.id;
     post.categoryId = post.category.id;
     let topics: any[] = post.topics;
+    let published = false;
     return database.transaction(function(t) {
         return Post.findById(post.id, { transaction: t }).then(p => {
+            if (!p.getDataValue('publishedAt') && post.publishedAt) {
+                published = true;
+            }
             return p.update(post, { transaction: t }).then(() => {
                 // Update topics
                 if (topics && topics.length) {
@@ -167,7 +176,11 @@ export function updatePost(post: any) {
             });
         });
     }).then(post => {
-        triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
+        if (published) {
+            triggerWebhooks(WebhookEvents.PublishPost, post.toJSON());
+        } else {
+            triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
+        }
         return post;
     }).catch((err) => {
         console.error(err.stack || err);
