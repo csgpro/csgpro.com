@@ -43,7 +43,6 @@ const routes: hapi.IRouteConfiguration[] = [
         path: '/robots.txt',
         handler: (request: hapi.Request, reply: hapi.IReply) => {
             const host = request.headers['host'];
-            console.log(host);
             if (!/^www.csgpro.com$/.test(host)) {
                 reply.file(path.join('..', 'public', 'block-robots.txt'));
             } else {
