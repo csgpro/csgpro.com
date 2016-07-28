@@ -109,13 +109,15 @@ routes.init(server);
 server.register({
     register: require('good'),
     options: {
-        reporters: [{
-            reporter: require('good-console'),
-            events: {
-                response: '*',
-                log: '*'
-            }
-        }]
+        reporters: {
+            console: [{
+                module: 'good-squeeze',
+                name: 'Squeeze',
+                args: [{ log: '*', response: '*' }]
+            }, {
+                module: 'good-console'
+            }, 'stdout']
+        }
     }
 }, (err) => {
     if (err) {

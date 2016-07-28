@@ -26,5 +26,6 @@
 /// <reference path="globals/uglify-js/index.d.ts" />
 /// <reference path="globals/umzug/index.d.ts" />
 /// <reference path="globals/validator/index.d.ts" />
+/// <reference path="modules/azure-storage/index.d.ts" />
 /// <reference path="modules/moment/index.d.ts" />
 /// <reference path="modules/request/index.d.ts" />
