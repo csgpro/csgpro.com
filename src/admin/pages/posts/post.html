@@ -60,8 +60,15 @@
             </div>
             <div class="row">
                 <div class="column">
+                    <div class="float-right"><button type="button" (click)="openImageUploadModal()"><span class="fi-photo"></span></button></div>
+                    <modal [title]='"Upload Image"' [showClose]='true' (onClose)="closeImageUploadModal()" #editModal>{{ bindModal(editModal) }}
+                        <form name="imageUploadForm" id="imageUploadForm">
+                            <input type="file" id="imageUpload" (change)="setFile($event)">
+                        </form>
+                        <mfoot><button class='button secondary' (click)="closeImageUploadModal()">Close</button><button class='button primary' (click)="uploadImage()">Upload Image</button></mfoot>
+                    </modal>
                     <label>Post Body</label>
-                    <textarea name="post" [(ngModel)]="post.post" rows="20" required></textarea>
+                    <textarea name="post" [(ngModel)]="post.post" rows="20" required id="post"></textarea>
                 </div>
             </div>
         </form>
