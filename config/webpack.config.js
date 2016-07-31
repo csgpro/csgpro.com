@@ -301,7 +301,11 @@ output: {
         root: helpers.root('src/admin'),
         extensions: ['', '.js', '.ts', '.json']
     },
-    externals: null
+    externals: {
+        jquery: "jQuery",
+        foundation: "Foundation",
+        motionUI: "MotionUI"
+    }
 }
 
 module.exports = [mainConfig, adminConfig];
