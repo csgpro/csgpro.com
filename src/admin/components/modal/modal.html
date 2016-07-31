@@ -1,0 +1,19 @@
+<div class="reveal" id="{{modal_id}}" data-reveal>
+
+    <div [ngClass]="{hide: !(title) }">
+        <h1 *ngIf="title">{{title}}</h1>
+    </div>
+
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+
+    <div class="modal-footer text-right">
+        <ng-content select="mfoot"></ng-content>
+    </div>
+
+    <button *ngIf="showClose" class="close-button" type="button" (click)="closeInternal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+</div>
