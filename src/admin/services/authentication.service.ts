@@ -5,16 +5,18 @@ import {Router} from '@angular/router';
 // app
 import {ApiService} from './api.service';
 import {StoreService} from './store.service';
+import {UploadService} from './upload.service';
 
 @Injectable()
 export class AuthenticationService {
 
     isLoggedIn = false;
 
-    constructor(private _api: ApiService, private _store: StoreService, private _router: Router) {
+    constructor(private _api: ApiService, private _store: StoreService, private _upload: UploadService, private _router: Router) {
         const token = this._store.getString('authtoken');
         if (token) {
             this._api.headers.append('Authorization', 'Bearer ' + token);
+            this._upload.headers.append('Authorization', 'Bearer ' + token);
             this.isLoggedIn = true;
         }
     }

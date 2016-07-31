@@ -15,7 +15,7 @@ export function create(request: hapi.Request, reply: hapi.IReply) {
     let file = request.payload['file'];
     let filename = request.payload['file'].hapi.filename;
     uploadFile(file, filename).then(result => {
-        reply({ filename: result.name, url: getUrl(request.headers['host'], result.name) });
+        reply({ data: { filename: result.name, url: getUrl(request.headers['host'], result.name) } });
     }).catch(err => {
         reply(boom.create(500, err.message || err));
     });
