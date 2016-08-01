@@ -1,5 +1,6 @@
 // angular
 import {Injectable} from '@angular/core';
+import {DomSanitizationService} from '@angular/platform-browser';
 
 // libs
 import * as marked from 'marked';
@@ -27,9 +28,10 @@ marked.setOptions(options);
 
 @Injectable()
 export class MarkdownService {
-    render(input: string): string {
+    constructor(private _domSanitization: DomSanitizationService) {}
+    render(input: string) {
         if (!input) return;
-        return marked(input);  
+        return this._domSanitization.bypassSecurityTrustHtml(marked(input));
     }
 }
 
