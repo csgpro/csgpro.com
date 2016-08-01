@@ -144,3 +144,10 @@ h6.subheader {
         min-height: 500px;
     }
 }
+
+/***
+ * If the browser supports -ms-fullscreen make image transparent
+ * Reduced Test Case for IE11: http://codepen.io/kenhowardpdx/pen/WxgQpR?editors=1100
+ * SO: http://stackoverflow.com/a/27315792/3732163
+ */
+_:-ms-fullscreen, :root .sticky > img { display: none }
