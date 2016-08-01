@@ -23,7 +23,7 @@ function configureRoutes(baseRoute: string, controller: any) {
         let method: 'GET' | 'POST' | 'PUT' | 'DELETE';
         let path: string;
         let auth: string;
-        let payload: any;
+        let payload: any = controller[action]['payload'];
         let inSitemap = '';
         let plugins: any = {};
         
@@ -89,7 +89,7 @@ function configureRoutes(baseRoute: string, controller: any) {
             }
         }
         
-        if (/^(POST|PUT)$/.test(method)) {
+        if (/^(POST|PUT)$/.test(method) && !payload) {
             payload = { parse: true };
         }
         

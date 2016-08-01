@@ -1,8 +1,9 @@
 // angular
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, Inject} from '@angular/core';
 import {Location} from '@angular/common';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute} from '@angular/router';
+import {DOCUMENT} from '@angular/platform-browser';
 
 // libs
 import * as _ from 'lodash';
@@ -15,11 +16,13 @@ import {UserService, User} from '../../models/user';
 import {LoadingService} from '../../services/loading.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {MarkdownService} from '../../services/markdown.service';
+import {Modal} from '../../components/modal/modal.component';
+import {UploadService} from '../../services/upload.service';
 
 @Component({
     moduleId: 'PostComponent',
     templateUrl: 'post.html',
-    directives: [LoadingIndicatorComponent]
+    directives: [LoadingIndicatorComponent, Modal]
 })
 export class PostComponent implements OnInit, OnDestroy {
 
@@ -30,9 +33,47 @@ export class PostComponent implements OnInit, OnDestroy {
     categories: Category[] = [];
     topics: Topic[] = [];
 
+    // File Upload
+    private _imageToUpload = null;
+
+    setFile({ target: { files } } = <any>{}) {
+        let [file] = files;
+        this._imageToUpload = file;
+    }
+
+    uploadImage() {
+        if (this._imageToUpload) {
+            this._uploadService.uploadFiles([this._imageToUpload])
+                .then(data => {
+                    let imageMarkdown = `![${data.filename}](${data.url})`;
+                    this._insertTextAtLastPos('post', imageMarkdown);
+                    this.closeImageUploadModal();
+                })
+                .catch(error => {
+                    console.error(error);
+                    alert('Unable to upload image.');
+                });
+        }
+    }
+
+    // File Upload Modal
+    private _modal: Modal = null;
+
+    bindModal(modal) {this._modal=modal;}
+
+    openImageUploadModal() {
+        this._modal.open();
+    }
+
+    closeImageUploadModal() {
+        const imageForm: HTMLFormElement = <any>this._document.getElementById('imageUploadForm');
+        imageForm.reset();
+        this._modal.close();
+    }
+
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService) {}
+    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _uploadService: UploadService, @Inject(DOCUMENT) private _document: Document) {}
 
     onSubmit() {
         let request: Promise<any>;
@@ -137,5 +178,47 @@ export class PostComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this._paramsSubscription.unsubscribe();
+    }
+
+    // http://bitly.com/1r7k9PX
+    private _insertTextAtLastPos(targetId: string, text: string) {
+
+        const textarea: HTMLInputElement = <any>this._document.getElementById(targetId);
+        const scrollPosition = textarea.scrollTop;
+        let stringPosition = 0;
+        let br = ((textarea.selectionStart !== undefined) ?
+            'ff' : (document['selection'] ? 'ie' : 'other' ) );
+
+        if (br == 'ie') {
+            textarea.focus();
+            let range: TextRange = document['selection'].createRange();
+            range.moveStart ('character', -textarea.value.length);
+            stringPosition = range.text.length;
+        } else if (br == 'ff') {
+            stringPosition = textarea.selectionStart;
+        }
+
+        let before = (textarea.value).substring(0,stringPosition);
+        let after = (textarea.value).substring(stringPosition,textarea.value.length);
+        textarea.value = before + text + after;
+        stringPosition = stringPosition + text.length;
+
+        if (br === 'ie') {
+            textarea.focus();
+            let range: TextRange = document['selection'].createRange();
+            range.moveStart ('character', -textarea.value.length);
+            range.moveStart ('character', stringPosition);
+            range.moveEnd ('character', 0);
+            range.select();
+        }
+        else if (br === 'ff') {
+            textarea.selectionStart = stringPosition;
+            textarea.selectionEnd = stringPosition;
+            textarea.focus();
+        }
+        
+        textarea.scrollTop = scrollPosition;
+        textarea.dispatchEvent(new Event('input'));
+        textarea.dispatchEvent(new Event('change'));
     }
 }

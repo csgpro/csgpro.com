@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/typed-contrib/azure-storage-node/e709e52170ddd262c091dc95d85496c704a583c5/typings.json",
+    "raw": "registry:npm/azure-storage#0.10.0+20160526142523",
+    "main": "lib/azure-storage.d.ts",
+    "global": false,
+    "name": "azure-storage",
+    "type": "typings"
+  }
+}
