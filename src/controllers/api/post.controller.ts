@@ -8,6 +8,7 @@ import { getPostsByCategory, getPostByPostId, updatePost, createPost } from '../
 // posts
 
 getPostsApi.route = '/api/post';
+getPostsApi.auth = 'jwt';
 export function getPostsApi(request: hapi.Request, reply: hapi.IReply) {
     let {category, published, sort, offset, limit}  = request.query;
     published = "false" ? false : true;
@@ -22,7 +23,8 @@ export function getPostsApi(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
-getPostApi.route = '/api/post/{id}'
+getPostApi.route = '/api/post/{id}';
+getPostApi.auth = 'jwt';
 export function getPostApi(request: hapi.Request, reply: hapi.IReply) {
     let postId = +request.params['id'];
     getPostByPostId(postId).then(post => {

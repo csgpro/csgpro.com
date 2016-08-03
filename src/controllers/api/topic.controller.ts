@@ -8,6 +8,7 @@ import * as boom from 'boom';
 import { getTopics, getTopic } from '../../commands/post.commands';
 
 getTopicsApi.route = '/api/topic';
+getTopicsApi.auth = 'jwt';
 export function getTopicsApi(request: hapi.Request, reply: hapi.IReply) {
     getTopics().then(topics => {
         reply({ data: topics });
@@ -20,7 +21,8 @@ export function getTopicsApi(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
-getTopicApi.route = '/api/topic/{id}'
+getTopicApi.route = '/api/topic/{id}';
+getTopicApi.auth = 'jwt';
 export function getTopicApi(request: hapi.Request, reply: hapi.IReply) {
     let { id, includePosts } = request.params;
     let topicId = +id; // It needs to be a number;

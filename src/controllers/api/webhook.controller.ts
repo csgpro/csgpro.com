@@ -8,6 +8,7 @@ import * as boom from 'boom';
 import { getWebhooks, getWebhook, createWebhook, updateWebhook, deleteWebhook } from '../../commands/webhook.commands';
 
 getWebhooksApi.route = '/api/webhook';
+getWebhooksApi.auth = 'jwt';
 export function getWebhooksApi(request: hapi.Request, reply: hapi.IReply) {
     getWebhooks().then(categories => {
         reply({ data: categories });
@@ -21,6 +22,7 @@ export function getWebhooksApi(request: hapi.Request, reply: hapi.IReply) {
 }
 
 getWebhookApi.route = '/api/webhook/{id}';
+getWebhookApi.auth = 'jwt';
 export function getWebhookApi(request: hapi.Request, reply: hapi.IReply) {
     let webhookId = Number(request.params['id']);
     getWebhook(webhookId).then(webhook => {

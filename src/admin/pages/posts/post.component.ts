@@ -17,7 +17,7 @@ import {LoadingService} from '../../services/loading.service';
 import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
 import {MarkdownService} from '../../services/markdown.service';
 import {Modal} from '../../components/modal/modal.component';
-import {UploadService} from '../../services/upload.service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
     moduleId: 'PostComponent',
@@ -43,7 +43,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
     uploadImage() {
         if (this._imageToUpload) {
-            this._uploadService.uploadFiles([this._imageToUpload])
+            this._api.file('file', this._imageToUpload)
                 .then(data => {
                     let imageMarkdown = `![${data.filename}](${data.url})`;
                     this._insertTextAtLastPos('post', imageMarkdown);
@@ -73,7 +73,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _uploadService: UploadService, @Inject(DOCUMENT) private _document: Document) {}
+    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _api: ApiService, @Inject(DOCUMENT) private _document: Document) {}
 
     onSubmit() {
         let request: Promise<any>;

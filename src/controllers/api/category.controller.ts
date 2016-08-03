@@ -8,6 +8,7 @@ import * as boom from 'boom';
 import { getPostCategories, getPostCategory } from '../../commands/post.commands';
 
 getPostCategoriesApi.route = '/api/category';
+getPostCategoriesApi.auth = 'jwt';
 export function getPostCategoriesApi(request: hapi.Request, reply: hapi.IReply) {
     getPostCategories().then(categories => {
         reply({ data: categories });
@@ -20,7 +21,8 @@ export function getPostCategoriesApi(request: hapi.Request, reply: hapi.IReply) 
     });
 }
 
-getPostCategoryApi.route = '/api/category/{id}'
+getPostCategoryApi.route = '/api/category/{id}';
+getPostCategoryApi.auth = 'jwt';
 export function getPostCategoryApi(request: hapi.Request, reply: hapi.IReply) {
     let categoryId = +request.params['id'];
     getPostCategory(categoryId).then(category => {
