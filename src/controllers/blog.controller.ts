@@ -92,3 +92,20 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
         }
     });
 }
+
+rssBlog.route = '/blog/feed/rss';
+export function rssBlog(request: hapi.Request, reply: hapi.IReply) {
+    let host = request.headers['host'];
+    let title = 'CSG Pro Blog Posts';
+    let description = 'Lastest posts about custom software development and business analytics.';
+    let permalink = rssBlog.route;
+    getPostsByCategory('blog', undefined, undefined, undefined, 20).then(posts => {
+        reply.view('rss', { posts, host, title, description, permalink }, { layout: 'blank' }).type('text/xml');
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
+    });
+}

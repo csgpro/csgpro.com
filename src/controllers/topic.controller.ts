@@ -27,3 +27,22 @@ export function show(request: hapi.Request, reply: hapi.IReply) {
         }
     });
 }
+
+rssTopic.route = '/topic/{slug}/feed/rss';
+export function rssTopic(request: hapi.Request, reply: hapi.IReply) {
+    let topicSlug: string = request.params['slug'];
+    let host = request.headers['host'];
+    let permalink = `/topic/${topicSlug}/feed/rss`;
+    getTopic(topicSlug).then(data => {
+        let [topic, posts] = data;
+        let title = `CSG Pro ${topic.topic} Posts`;
+        let description = `Lastest posts about "${topic.topic}"`;
+        reply.view('rss', { posts, host, title, description, permalink }, { layout: 'blank' }).type('text/xml');
+    }).catch((err: Error) => {
+        if (err.name === 'SequelizeConnectionError') {
+            reply(boom.create(500, 'Bad Connection'));
+        } else {
+            reply(boom.create(500, err.message));
+        }
+    });
+}

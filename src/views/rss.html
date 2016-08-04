@@ -1,0 +1,16 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <atom:link href="https://{{host}}{{permalink}}" rel="self" type="application/rss+xml" />
+        <title>{{title}}</title>
+        <description>{{description}}</description>
+        <link>https://{{host}}/blog</link>
+        {{#each posts}}
+        <item>
+            <guid>https://{{@root.host}}{{permalink}}</guid>
+            <title>{{title}}</title>
+            <description>{{excerpt}}</description>
+            <link>https://{{@root.host}}{{permalink}}</link>
+        </item>
+        {{/each}}
+    </channel>
+</rss>
