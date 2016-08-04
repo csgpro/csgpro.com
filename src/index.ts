@@ -17,6 +17,7 @@ import { initializeDB } from './database';
 import * as hapiSitemap from './modules/hapi-sitemap';
 
 const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
+const GTM_KEY: string = conf.get('GOOGLE_TAG_MANAGER_KEY');
 
 handlebars.registerHelper('paginate', paginate);
 
@@ -35,7 +36,8 @@ const server = new hapi.Server({
 });
 
 const defaultContext = {
-    sitename: 'CSG Pro'
+    sitename: 'CSG Pro',
+    GTM_KEY
 }
 
 initializeDB(server);
