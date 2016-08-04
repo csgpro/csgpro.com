@@ -96,7 +96,7 @@ export function read(request: hapi.Request, reply: hapi.IReply) {
 rssBlog.route = '/blog/feed/rss';
 export function rssBlog(request: hapi.Request, reply: hapi.IReply) {
     let host = request.headers['host'];
-    let title = 'CSG Pro Blog Posts';
+    let title = 'Updates from CSG Pro';
     let description = 'Lastest posts about custom software development and business analytics.';
     let permalink = rssBlog.route;
     getPostsByCategory('blog', undefined, undefined, undefined, 20).then(posts => {

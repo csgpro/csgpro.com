@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <atom:link href="https://{{host}}{{permalink}}" rel="self" type="application/rss+xml" />
         <title>{{title}}</title>
@@ -7,11 +7,12 @@
         <lastBuildDate>{{formatDate "ddd, DD MMM YYYY HH:mm:ss ZZ"}}</lastBuildDate>
         {{#each posts}}
         <item>
-            <guid>https://{{@root.host}}{{permalink}}</guid>
             <title>{{title}}</title>
-            <description>{{excerpt}}</description>
             <link>https://{{@root.host}}{{permalink}}</link>
             <pubDate>{{formatDate publishedAt "ddd, DD MMM YYYY HH:mm:ss ZZ"}}</pubDate>
+            <dc:creator><![CDATA[{{author.fullName}}]]></dc:creator>
+            <guid>https://{{@root.host}}{{permalink}}</guid>
+            <description><![CDATA[{{{markdown excerpt}}}]]></description>
         </item>
         {{/each}}
     </channel>
