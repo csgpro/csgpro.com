@@ -4,12 +4,14 @@
         <title>{{title}}</title>
         <description>{{description}}</description>
         <link>https://{{host}}/blog</link>
+        <lastBuildDate>{{formatDate "ddd, DD MMM YYYY HH:mm:ss ZZ"}}</lastBuildDate>
         {{#each posts}}
         <item>
             <guid>https://{{@root.host}}{{permalink}}</guid>
             <title>{{title}}</title>
             <description>{{excerpt}}</description>
             <link>https://{{@root.host}}{{permalink}}</link>
+            <pubDate>{{formatDate publishedAt "ddd, DD MMM YYYY HH:mm:ss ZZ"}}</pubDate>
         </item>
         {{/each}}
     </channel>
