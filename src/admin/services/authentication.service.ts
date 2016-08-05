@@ -10,6 +10,7 @@ import {StoreService} from './store.service';
 export class AuthenticationService {
 
     isLoggedIn = false;
+    ready = false;
 
     constructor(private _api: ApiService, private _store: StoreService, private _router: Router) {
         const token = this._store.getString('authtoken');
@@ -18,6 +19,7 @@ export class AuthenticationService {
             this._renewToken().then((token) => {
                 this.isLoggedIn = true;
                 this._setToken(token);
+                this.ready = true;
             }).catch(err => {
                 if (err.status === 401) {
                     this.logout();
@@ -25,7 +27,10 @@ export class AuthenticationService {
                     alert('Internal Server Error');
                     this.logout();
                 }
+                this.ready = true;
             });
+        } else {
+            this.ready = true;
         }
     }
 
