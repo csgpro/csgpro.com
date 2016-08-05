@@ -2,14 +2,14 @@
 
 import * as hapi from 'hapi';
 import * as boom from 'boom';
-import { generateJWT } from '../commands/user.commands';
+import { authenticateUser, renewAuthentication } from '../../commands/user.commands';
 
 authenticate.method = 'POST';
 authenticate.route = '/api/authenticate';
 export function authenticate(request: hapi.Request, reply: hapi.IReply) {
     const { email, password } = request.payload || { email: undefined, password: undefined };
 
-    generateJWT({ email, password })
+    authenticateUser({ email, password })
         .then((token)=> {
             reply({ token });
         }).catch((err: Error) => {
@@ -21,7 +21,11 @@ export function authenticate(request: hapi.Request, reply: hapi.IReply) {
     });
 }
 
-getAuth.route = '/api/authenticate';
-export function getAuth(request: hapi.Request, reply: hapi.IReply) {
-    reply(boom.notImplemented());
+renew.method = 'PUT';
+renew.route = '/api/authenticate';
+renew.auth = 'jwt';
+export function renew(request: hapi.Request, reply: hapi.IReply) {
+    const oldToken = request.auth['token'];
+    const token = renewAuthentication(oldToken);
+    reply({ token });
 }

@@ -5,20 +5,34 @@ import {Router} from '@angular/router';
 // app
 import {ApiService} from './api.service';
 import {StoreService} from './store.service';
-import {UploadService} from './upload.service';
 
 @Injectable()
 export class AuthenticationService {
 
     isLoggedIn = false;
 
-    constructor(private _api: ApiService, private _store: StoreService, private _upload: UploadService, private _router: Router) {
+    constructor(private _api: ApiService, private _store: StoreService, private _router: Router) {
         const token = this._store.getString('authtoken');
         if (token) {
-            this._api.headers.append('Authorization', 'Bearer ' + token);
-            this._upload.headers.append('Authorization', 'Bearer ' + token);
-            this.isLoggedIn = true;
+            this._setToken(token);
+            this._renewToken().then((token) => {
+                this.isLoggedIn = true;
+                this._setToken(token);
+            }).catch(err => {
+                if (err.status === 401) {
+                    this.logout();
+                } else {
+                    alert('Internal Server Error');
+                    this.logout();
+                }
+            });
         }
+    }
+
+    private _renewToken() {
+        return this._api.put('authenticate', null).then((res: any) => {
+            return res.json().token;
+        });
     }
 
     login(credentials: { email: string; password: string }) {
@@ -26,16 +40,14 @@ export class AuthenticationService {
             let response = res.json();
             let token = response.token;
             this.isLoggedIn = true;
-            this._store.setString('authtoken', token);
-            this._api.headers.append('Authorization', 'Bearer ' + token);
+            this._setToken(token);
             this._router.navigate(['/dashboard']);
         });
     }
 
     logout() {
         this.isLoggedIn = false;
-        this._store.clearString('authtoken');
-        this._api.headers.delete('Authorization');
+        this._clearToken();
         this._router.navigate(['/login']);
     }
 
@@ -45,5 +57,15 @@ export class AuthenticationService {
 
     resetPassword(password: string, token: string) {
         return this._api.post('resetpassword', { password, token });
+    }
+
+    private _setToken(token) {
+        this._store.setString('authtoken', token);
+        this._api.headers.set('Authorization', 'Bearer ' + token);
+    }
+
+    private _clearToken() {
+        this._store.clearString('authtoken');
+        this._api.headers.delete('Authorization');
     }
 }

@@ -46,11 +46,29 @@ export class ApiService {
 
     delete<T>(route: string, options?: RequestOptionsArgs): Promise<T> {
 
-        options = this._applyDefaultOptions(options);
-
         const request: Promise<T> = this._http.delete(`${this.baseUrl}${route}`, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
+    }
+
+    file(route: string, file: File, options?: RequestOptionsArgs) {
+
+        options = this._applyDefaultOptions(options);
+
+        const headers = new Headers(this.headers);
+
+        headers.delete('Content-Type');
+
+        options.headers = headers;
+
+        const formData = new FormData();
+
+        formData.append('file', file);
+
+        const request = this._http.post(`${this.baseUrl}${route}`, formData, options).toPromise();
+
+        return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
+
     }
 
     private _prepareResponse(response: any) {
@@ -78,6 +96,9 @@ export class ApiService {
             msg += JSON.stringify(error);
         }
         error = new Error(msg);
+        Object.defineProperty(error, 'status', {
+            value: response.status
+        });
         console.error(error);
         return Promise.reject(error);
     }
