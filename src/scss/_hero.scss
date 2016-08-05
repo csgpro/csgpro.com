@@ -9,6 +9,16 @@
         position: absolute;
         opacity: 0.3;
     }
+    > img ~ .intro {
+        @media screen and (min-width: 50em) {
+            padding-top: 3.5em;
+            padding-bottom: 3.5em;
+        }
+        @media screen and (min-width: 110em) {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+    }
     > .intro {
         transition: margin-top ease 0.5s, margin-bottom ease 0.5s;
         padding-top: 2em;
