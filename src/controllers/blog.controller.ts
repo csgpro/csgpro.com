@@ -24,6 +24,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
             description: '',
             posts: data[1],
             topics: data[0],
+            isBlog: true,
             pagination: {
                 basePath: '/blog',
                 pageCount: Math.ceil(data[1].count / limit),
@@ -108,4 +109,12 @@ export function rssBlog(request: hapi.Request, reply: hapi.IReply) {
             reply(boom.create(500, err.message));
         }
     });
+}
+
+subscriptionThankYou.route = '/blog/subscription/thank-you';
+export function subscriptionThankYou(request: hapi.Request, reply: hapi.IReply) {
+
+    let pageContent = '<div class="callout primary">You will begin receiving updates next Monday.</div>';
+
+    reply.view('page', { title: 'Thank You!', pageContent });
 }
