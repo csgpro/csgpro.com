@@ -114,7 +114,17 @@ export function rssBlog(request: hapi.Request, reply: hapi.IReply) {
 subscriptionThankYou.route = '/blog/subscription/thank-you';
 export function subscriptionThankYou(request: hapi.Request, reply: hapi.IReply) {
 
+    let pageContent = `<div class="callout primary">We need to confirm your email address.<br><br>
+
+To complete the subscription process, please click the link in the email we just sent you.</div>`;
+
+    reply.view('page', { title: 'Thank You', pageContent });
+}
+
+subscriptionConfirmed.route = '/blog/subscription/confirmed';
+export function subscriptionConfirmed(request: hapi.Request, reply: hapi.IReply) {
+
     let pageContent = '<div class="callout primary">You will begin receiving updates next Monday.</div>';
 
-    reply.view('page', { title: 'Thank You!', pageContent });
+    reply.view('page', { title: 'Subscription Confirmed', pageContent });
 }
