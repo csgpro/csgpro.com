@@ -50,10 +50,10 @@ export = {
             .then(() => {
                 let selectPosts: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('PublishDate')}, ${sqlAttribute('title')}, ${sqlAttribute('AuthorUserId')}, ${sqlAttribute('Category')} FROM posts`;
                 return database.query(`SELECT ${sqlAttribute('id')} FROM users`, { type: database.QueryTypes.SELECT }).then((results: { id: number }[]) => {
-                    var userIds: number[] = results.map(user => user.id);
+                    let userIds: number[] = results.map(user => user.id);
                     console.info('userIds:', userIds);
                     return database.query(selectPosts, { type: database.QueryTypes.SELECT }).then((results) => {
-                        var queue: any[] = [];
+                        let queue: any[] = [];
                         if (results && results.length) {
                             results.forEach((post: any) => {
                                 let sets: string[] = [];
@@ -123,4 +123,4 @@ export = {
     down: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes) => {
         // Restore backup.
     }
-}
+};

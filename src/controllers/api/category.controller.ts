@@ -31,7 +31,7 @@ export function getPostCategoryApi(request: hapi.Request, reply: hapi.IReply) {
             return;
         }
         reply({ data: category.toJSON() });
-    })
+    });
 }
 
 createPostCategoryApi.auth = 'jwt';

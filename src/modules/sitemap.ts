@@ -23,5 +23,5 @@ export function getPages() {
 
 function prepareTitle(title: string) {
     title = title.replace(/-/g, ' ');
-    return title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    return title.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 }

@@ -74,7 +74,7 @@ export function getPostsByCategory(category: string, published = true, sortOrder
             value: data.count
         });
         return posts;
-    })
+    });
 }
 
 export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
@@ -108,7 +108,7 @@ export function getPostCategories() {
             value: data.count
         });
         return categories;
-    })
+    });
 }
 
 export function getPostCategory(categoryId: number) {

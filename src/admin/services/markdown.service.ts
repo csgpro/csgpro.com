@@ -16,7 +16,7 @@ const options = {
     smartypants: false,
     langPrefix: 'lang-',
     renderer: new marked.Renderer()
-}
+};
 
 options.renderer.code = function highlightFn(code, language) {
     const validLang = !!(language && hljs.getLanguage(language));

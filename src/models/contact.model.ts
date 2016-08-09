@@ -4,7 +4,7 @@ import * as Sequelize from 'sequelize';
 import { database } from '../database';
 
 export interface IContactAttributes {
-    id?: number,
+    id?: number;
     firstName?: string;
     lastName?: string;
     fullName: string; // not mapped
@@ -42,7 +42,7 @@ let ContactSchemaOptions: Sequelize.DefineOptions<IContactInstance> = {
                 return;
             }
             let firstName = value.substring(0, splitIndex).trim();
-            let lastName = value.substring(splitIndex+1).trim();
+            let lastName = value.substring(splitIndex + 1).trim();
             self.setDataValue('firstName', firstName);
             self.setDataValue('lastName', lastName);
         }

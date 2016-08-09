@@ -3,7 +3,7 @@
 export function getProtocolByHost(host: string) {
     let protocol = 'http';
     if (/^www|csgpro|csgnext/.test(host)) {
-        protocol = 'https'
+        protocol = 'https';
     }
     return protocol;
 }

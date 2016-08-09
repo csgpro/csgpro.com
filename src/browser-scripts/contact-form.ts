@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 
 $(document).find('.contact-form').each(function() {
     const $form = $(this);
-    $form.on('submit',function(e) {
+    $form.on('submit', function(e) {
         submitContactForm($form);
         e.preventDefault();
     });

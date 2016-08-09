@@ -9,7 +9,7 @@ import { getPost, getPostsByCategory, getTopics } from '../commands/post.command
  */
 
 index.sitemap = true;
-index.route = '/events/{page?}'
+index.route = '/events/{page?}';
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
     let promises: Promise<any>[] = [];

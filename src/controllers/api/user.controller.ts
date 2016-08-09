@@ -22,7 +22,7 @@ export function getUsersApi(request: hapi.Request, reply: hapi.IReply) {
 }
 
 getUserApi.auth = 'jwt';
-getUserApi.route = '/api/user/{id}'
+getUserApi.route = '/api/user/{id}';
 export function getUserApi(request: hapi.Request, reply: hapi.IReply) {
     let userId = +request.params['id'];
     getUser(userId).then(user => {
@@ -31,7 +31,7 @@ export function getUserApi(request: hapi.Request, reply: hapi.IReply) {
             return;
         }
         reply({ data: user.toJSON() });
-    })
+    });
 }
 
 createUserApi.auth = 'jwt';

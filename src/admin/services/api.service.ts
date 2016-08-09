@@ -85,7 +85,7 @@ export class ApiService {
 
     private _handleErrors(response: Response) {
         let error = response.json();
-        let msg = "";
+        let msg = '';
         if (typeof error === 'string') {
             msg += error;
         } else if (error.message) {

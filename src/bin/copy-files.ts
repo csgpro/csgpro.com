@@ -15,18 +15,18 @@ const extIdx = _.findIndex(filesGlob, (value) => {
     return value === '--ext';
 });
 
-if (extIdx != -1) {
-    ext = filesGlob[extIdx+1];
-    filesGlob.splice(extIdx, extIdx+1);
+if (extIdx !== -1) {
+    ext = filesGlob[extIdx + 1];
+    filesGlob.splice(extIdx, extIdx + 1);
 }
 
 const outDirIdx = _.findIndex(filesGlob, (value) => {
     return value === '--outDir';
 });
 
-if (outDirIdx != -1) {
-    outDir = filesGlob[outDirIdx+1];
-    filesGlob.splice(outDirIdx, outDirIdx+1);
+if (outDirIdx !== -1) {
+    outDir = filesGlob[outDirIdx + 1];
+    filesGlob.splice(outDirIdx, outDirIdx + 1);
 } else {
     console.error('Missing --outDir');
     process.exit(1);
@@ -36,9 +36,9 @@ const srcDirIdx = _.findIndex(filesGlob, (value) => {
     return value === '--srcDir';
 });
 
-if (srcDirIdx != -1) {
-    srcDir = filesGlob[srcDirIdx+1];
-    filesGlob.splice(srcDirIdx, srcDirIdx+1);
+if (srcDirIdx !== -1) {
+    srcDir = filesGlob[srcDirIdx + 1];
+    filesGlob.splice(srcDirIdx, srcDirIdx + 1);
 } else {
     console.error('Missing --srcDir');
     process.exit(1);
@@ -48,7 +48,7 @@ const watchIdx = _.findIndex(filesGlob, (value) => {
     return value === '--watch';
 });
 
-if (watchIdx != -1) {
+if (watchIdx !== -1) {
     filesGlob.splice(watchIdx);
     watchFiles();
 } else {

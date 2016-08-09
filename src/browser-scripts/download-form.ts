@@ -29,7 +29,7 @@ function resetCallout() {
 window.openDownloadModal = function openDownloadModal(fp: string) {
     filePath = fp;
     downloadModal.foundation('open');
-}
+};
 
 window.submitDownloadForm = function submitDownloadForm() {
     const name = downloadForm.find('[name="name"]').val();
@@ -62,4 +62,4 @@ window.submitDownloadForm = function submitDownloadForm() {
         callout.addClass('alert').removeClass('hide').html(html);
     });
     
-}
+};

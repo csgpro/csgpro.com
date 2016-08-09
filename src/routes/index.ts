@@ -6,7 +6,7 @@ import * as path from 'path';
 import * as publicRoutes from './public.routes';
 import * as sitemap from '../modules/sitemap';
 
-var Server: hapi.Server;
+let Server: hapi.Server;
 
 function configureRoutes(baseRoute: string, controller: any) {
     console.log(`\n   ${baseRoute}[controller]:`);
@@ -27,7 +27,7 @@ function configureRoutes(baseRoute: string, controller: any) {
         let inSitemap = '';
         let plugins: any = {};
         
-        switch(action) {
+        switch (action) {
             case 'index':
                 method = 'GET';
                 path = (baseRoute === 'main') ? '/' : `/${baseRoute}`;
@@ -110,7 +110,7 @@ function walkDirectory(directory: string) {
         let stats = fs.lstatSync(filePath);
         
         if (stats.isDirectory()) {
-            walkDirectory(filePath)
+            walkDirectory(filePath);
         } else if (stats.isFile()) {
             if (/\.controller\.js$/.test(item)) {
                 let route = item.substring(0, item.indexOf('.'));

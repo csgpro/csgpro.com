@@ -9,7 +9,7 @@ index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
     const featuredStoriesPromise = getStories('featured');
-    const storiesPromise = getStories('active', undefined, undefined, undefined, null)
+    const storiesPromise = getStories('active', undefined, undefined, undefined, null);
     
     Promise.all([featuredStoriesPromise, storiesPromise]).then(data => {
         let featuredStories = data[0].rows;
@@ -21,7 +21,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
             totalStories: data[1].count,
             featuredStories
         });
-    })
+    });
 }
 
 list.route = '/api/stories';

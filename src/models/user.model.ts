@@ -8,7 +8,7 @@ import { Post, IPostInstance, IPostAttributes } from './post.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IUserAttributes {
-    id: number,
+    id: number;
     username: string;
     email: string;
     password: string;
@@ -98,7 +98,7 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
                 return;
             }
             let firstName = value.substring(0, splitIndex).trim();
-            let lastName = value.substring(splitIndex+1).trim();
+            let lastName = value.substring(splitIndex + 1).trim();
             self.setDataValue('firstName', firstName);
             self.setDataValue('lastName', lastName);
         },
@@ -131,7 +131,7 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
             let promise = new Promise((resolve, reject) => {
                 crypto.randomBytes(20, (err, buffer) => {
                     if (err) reject(err);
-                    var token = buffer.toString('hex');
+                    let token = buffer.toString('hex');
                     let expireDate = new Date().setDate(new Date().getDate() + 2);
                     self.setDataValue('resetPasswordToken', token);
                     self.setDataValue('resetPasswordTokenExpires', expireDate);

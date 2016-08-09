@@ -133,6 +133,10 @@ const mainConfig = {
                 helpers.root('node_modules/@ngrx'),
                 helpers.root('node_modules/@angular2-material'),
                 ]
+            },
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader'
             }
 
         ],
@@ -231,6 +235,10 @@ output: {
                 helpers.root('node_modules/@angular2-material'),
                 helpers.root('node_modules/moment'),
                 ]
+            },
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader'
             }
 
         ],

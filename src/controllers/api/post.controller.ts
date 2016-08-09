@@ -11,7 +11,7 @@ getPostsApi.route = '/api/post';
 getPostsApi.auth = 'jwt';
 export function getPostsApi(request: hapi.Request, reply: hapi.IReply) {
     let {category, published, sort, offset, limit}  = request.query;
-    published = "false" ? false : true;
+    published = 'false' ? false : true;
     getPostsByCategory(category, published, sort, offset, limit).then(posts => {
         reply({ data: posts });
     }).catch((err: Error) => {

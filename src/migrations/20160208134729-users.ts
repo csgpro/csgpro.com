@@ -41,7 +41,7 @@ export = {
             .then(() => {
                 let selectUsers: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('twitterHandle')}, ${sqlAttribute('IsAdmin')}, ${sqlAttribute('CreateDate')}, ${sqlAttribute('UpdateDate')}, ${sqlAttribute('FullName')} FROM users`;
                 return database.query(selectUsers, { type: database.QueryTypes.SELECT }).then((results) => {
-                    var queue: any[] = [];
+                    let queue: any[] = [];
                     if (results && results.length) {
                         results.forEach((user: any) => {
                             let sets: string[] = [];
@@ -58,7 +58,7 @@ export = {
                             if (user.FullName) {
                                 let fullName: string = user.FullName;
                                 let firstName = (fullName.indexOf(' ') > -1) ? fullName.substr(0, fullName.indexOf(' ')) : fullName;
-                                let lastName = (fullName.indexOf(' ') > -1) ? fullName.substr(fullName.indexOf(' ')+1) : '';
+                                let lastName = (fullName.indexOf(' ') > -1) ? fullName.substr(fullName.indexOf(' ') + 1) : '';
                                 if (firstName) {
                                     sets.push(`${sqlAttribute('firstName')} = '${firstName}'`);
                                 }
@@ -103,4 +103,4 @@ export = {
     down: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes) => {
         // Restore backup.
     }
-}
+};

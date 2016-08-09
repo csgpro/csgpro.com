@@ -1,9 +1,9 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
-var chaip = require('chai-as-promised');
+const chaip = require('chai-as-promised');
 import { sendContactFormEmail } from '../commands/mail.commands';
 
-var expect = chai.expect;
+const expect = chai.expect;
 
 chai.use(chaip);
 

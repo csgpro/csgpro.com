@@ -26,7 +26,7 @@ export = {
                     let topics: { id: number; topic: string }[] = results;
                     let selectPosts: string = `SELECT ${sqlAttribute('id')}, ${sqlAttribute('topics')} FROM posts`;
                     return database.query(selectPosts, { type: database.QueryTypes.SELECT }).then((results) => {
-                        var query: string[] = [];
+                        let query: string[] = [];
                         if (results && results.length) {
                             results.forEach((post: { id: number; topics: string; }) => {
                                 if (post.topics) {
@@ -35,7 +35,7 @@ export = {
                                         let topic = _.find(topics, { topic: t.trim() });
                                         if (topic) {
                                             let q = `( ${post.id}, ${topic.id} )`;
-                                            query.push(q)
+                                            query.push(q);
                                         }
                                     });
                                 }
@@ -57,4 +57,4 @@ export = {
     down: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes) => {
         // Restore backup.
     }
-}
+};

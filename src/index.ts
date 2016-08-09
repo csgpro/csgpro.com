@@ -38,7 +38,7 @@ const server = new hapi.Server({
 const defaultContext = {
     sitename: 'CSG Pro',
     GTM_KEY
-}
+};
 
 initializeDB(server);
 
