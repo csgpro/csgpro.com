@@ -35,10 +35,22 @@ export class PostComponent implements OnInit, OnDestroy {
 
     // File Upload
     private _imageToUpload = null;
+    private _imagePreviewContainer: HTMLElement;
 
     setFile({ target: { files } } = <any>{}) {
+        let imgPreviewContainer = this._imagePreviewContainer = this._document.getElementById('imagePreview');
         let [file] = files;
         this._imageToUpload = file;
+
+        let reader = new FileReader();
+
+        reader.onload = function (e: Event) {
+            let img = new Image();
+            img.src = reader.result;
+            imgPreviewContainer.appendChild(img);
+        }
+
+        reader.readAsDataURL(file);
     }
 
     uploadImage() {
@@ -68,6 +80,7 @@ export class PostComponent implements OnInit, OnDestroy {
     closeImageUploadModal() {
         const imageForm: HTMLFormElement = <any>this._document.getElementById('imageUploadForm');
         imageForm.reset();
+        this._imagePreviewContainer.innerHTML = null;
         this._modal.close();
     }
 
@@ -139,7 +152,7 @@ export class PostComponent implements OnInit, OnDestroy {
             queue.push(this._userService.get());
 
             Promise.all(queue).then(response => {
-                const [post, categories, topics, users] = response;
+                const [post, categories, topics, users] = <any>response;
 
                 if (post) {
                     this.post = post;
