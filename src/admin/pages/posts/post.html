@@ -63,8 +63,10 @@
                     <div class="float-right"><button type="button" (click)="openImageUploadModal()"><span class="fi-photo"></span></button></div>
                     <modal [title]='"Upload Image"' [showClose]='true' (onClose)="closeImageUploadModal()" #editModal>{{ bindModal(editModal) }}
                         <form name="imageUploadForm" id="imageUploadForm">
-                            <input type="file" id="imageUpload" (change)="setFile($event)">
+                            <label for="imageUpload" class="button">Select Image...</label>
+                            <input type="file" id="imageUpload" (change)="setFile($event)" accept="image/*" class="show-for-sr">
                         </form>
+                        <div id="imagePreview"></div>
                         <mfoot><button class='button secondary' (click)="closeImageUploadModal()">Close</button><button class='button primary' (click)="uploadImage()">Upload Image</button></mfoot>
                     </modal>
                     <label>Post Body</label>
