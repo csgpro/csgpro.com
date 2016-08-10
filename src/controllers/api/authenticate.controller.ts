@@ -10,7 +10,7 @@ export function authenticate(request: hapi.Request, reply: hapi.IReply) {
     const { email, password } = request.payload || { email: undefined, password: undefined };
 
     authenticateUser({ email, password })
-        .then((token)=> {
+        .then((token) => {
             reply({ token });
         }).catch((err: Error) => {
         if (err.name === 'SequelizeConnectionError') {

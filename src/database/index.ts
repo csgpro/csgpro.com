@@ -55,7 +55,7 @@ database.authenticate()
     .catch((err) => {
         server.log('error', 'error connecting to database');
         server.log('error', err);
-    })
+    });
 
 export function columnExists(table: string, column: string): Promise<boolean> {
     let query = `SELECT column_name 

@@ -3,7 +3,7 @@ import * as chai from 'chai';
 import * as server from '../';
 import * as hapi from 'hapi';
 
-var expect = chai.expect;
+const expect = chai.expect;
 
 describe('Server', () => {
     it('should be instance of hapi.Server', () => {

@@ -12,7 +12,7 @@ const options = {
     auth: {
         api_key: conf.get('SENDGRID_APIKEY')
     }
-}
+};
 
 export let mailer = nodemailer.createTransport(sendgridTransport(options));
 

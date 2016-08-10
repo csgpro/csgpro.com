@@ -26,7 +26,7 @@ getTopicApi.auth = 'jwt';
 export function getTopicApi(request: hapi.Request, reply: hapi.IReply) {
     let { id, includePosts } = request.params;
     let topicId = +id; // It needs to be a number;
-    let posts = includePosts === "false" ? false : true;
+    let posts = includePosts === 'false' ? false : true;
     getTopic(topicId, posts).then(data => {
         let topic;
         let posts;
@@ -38,7 +38,7 @@ export function getTopicApi(request: hapi.Request, reply: hapi.IReply) {
             topic = data;
         }
         reply({ data: topic });
-    })
+    });
 }
 
 createTopicApi.auth = 'jwt';

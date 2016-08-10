@@ -3,11 +3,11 @@ import { database } from '../database';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 export interface ITopicAttributes {
-    id: number,
+    id: number;
     topic: string;
     slug: string;
     active: boolean;
-    posts?: IPostInstance[]
+    posts?: IPostInstance[];
 }
 
 export interface ITopicInstance extends Sequelize.Instance<ITopicAttributes> {

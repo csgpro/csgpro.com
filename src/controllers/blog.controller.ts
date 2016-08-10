@@ -7,7 +7,7 @@ import { pageHeader } from '../modules/view-matcher';
 import { getProtocolByHost } from '../modules/utility';
 
 index.sitemap = true;
-index.route = '/blog/{page?}'
+index.route = '/blog/{page?}';
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
     let promises: Promise<any>[] = [];

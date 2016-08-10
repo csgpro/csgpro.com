@@ -33,7 +33,7 @@ export class PostsComponent implements OnInit {
     }
 
     editPost(id) {
-        this._router.navigate(['/post', id])
+        this._router.navigate(['/post', id]);
     }
 
     onCategoryChange(categorySlug) {

@@ -7,7 +7,7 @@ import { Post, IPostInstance } from './post.model';
 import { Topic } from './topic.model';
 
 export interface IPostCategoryAttributes {
-    id: number,
+    id: number;
     category: string;
     slug: string;
     posts?: IPostCategoryInstance[];
@@ -29,7 +29,7 @@ export interface IPostCategoryInstance extends Sequelize.Instance<IPostCategoryA
 let PostCategorySchema: Sequelize.DefineAttributes = {
     category: { type: Sequelize.STRING, allowNull: false, unique: true },
     slug: { type: Sequelize.STRING, allowNull: false, unique: 'true' }
-}
+};
 
 let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = {
     timestamps: false,

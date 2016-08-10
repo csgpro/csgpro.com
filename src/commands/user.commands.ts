@@ -111,7 +111,7 @@ export function requestResetPasswordToken(email: string, host: string) {
                 resolve();
             } else {
                 user.generatePasswordResetToken().then(token => {
-                    if (!token || typeof token != 'string') {
+                    if (!token || typeof token !== 'string') {
                         throw new Error('Error Generating Token');
                     }
                     let protocol = getProtocolByHost(host);
@@ -158,7 +158,7 @@ export function getUsers() {
             value: data.count
         });
         return users;
-    })
+    });
 }
 
 /**

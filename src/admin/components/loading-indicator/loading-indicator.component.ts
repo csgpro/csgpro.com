@@ -2,7 +2,7 @@
 import {Component} from '@angular/core';
 
 // app
-import {LoadingService} from "../../services/loading.service";
+import {LoadingService} from '../../services/loading.service';
 
 @Component({
     selector: 'loading-indicator',

@@ -59,7 +59,9 @@ export class PostComponent implements OnInit, OnDestroy {
     // File Upload Modal
     private _modal: Modal = null;
 
-    bindModal(modal) {this._modal=modal;}
+    bindModal(modal) {
+        this._modal = modal;
+    }
 
     openImageUploadModal() {
         this._modal.open();
@@ -189,17 +191,17 @@ export class PostComponent implements OnInit, OnDestroy {
         let br = ((textarea.selectionStart !== undefined) ?
             'ff' : (document['selection'] ? 'ie' : 'other' ) );
 
-        if (br == 'ie') {
+        if (br === 'ie') {
             textarea.focus();
             let range: TextRange = document['selection'].createRange();
             range.moveStart ('character', -textarea.value.length);
             stringPosition = range.text.length;
-        } else if (br == 'ff') {
+        } else if (br === 'ff') {
             stringPosition = textarea.selectionStart;
         }
 
-        let before = (textarea.value).substring(0,stringPosition);
-        let after = (textarea.value).substring(stringPosition,textarea.value.length);
+        let before = (textarea.value).substring(0, stringPosition);
+        let after = (textarea.value).substring(stringPosition, textarea.value.length);
         textarea.value = before + text + after;
         stringPosition = stringPosition + text.length;
 

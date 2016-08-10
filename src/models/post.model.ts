@@ -10,7 +10,7 @@ import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 export let PostTopic = database.define('postTopic', {}, { timestamps: false });
 
 export interface IPostAttributes {
-    id: number,
+    id: number;
     title: string;
     post: string;
     excerpt: string;
@@ -80,7 +80,7 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             let postSlug = self.getDataValue('slug');
             let categorySlug = self.getDataValue('category') ? self.getDataValue('category').slug : null;
             let postYear = self.getDataValue('publishedAt').getFullYear();
-            let postMonth = ("0" + (self.getDataValue('publishedAt').getMonth() + 1)).slice(-2);
+            let postMonth = ('0' + (self.getDataValue('publishedAt').getMonth() + 1)).slice(-2);
 
             if (categorySlug === 'career') {
                 permalink = `/careers/${postYear}/${postMonth}/${postSlug}`;

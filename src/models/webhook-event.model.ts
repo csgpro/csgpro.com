@@ -7,7 +7,7 @@ import { IWebhookInstance } from './webhook.model';
 export interface IWebhookEventAttributes {
     id: number;
     event: string;
-    webhooks?: IWebhookInstance[] 
+    webhooks?: IWebhookInstance[];
 }
 
 export interface IWebhookEventInstance extends Sequelize.Instance<IWebhookEventAttributes> {

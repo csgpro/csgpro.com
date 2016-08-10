@@ -6,7 +6,7 @@ import { Contact, IContactInstance } from './contact.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IContactRequestAttributes {
-    id?: number,
+    id?: number;
     note: string;
     contact?: IContactInstance;
 }

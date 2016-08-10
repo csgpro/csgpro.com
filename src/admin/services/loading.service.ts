@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 
 // rxjs
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class LoadingService {

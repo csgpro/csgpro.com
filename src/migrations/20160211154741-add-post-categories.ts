@@ -24,7 +24,7 @@ export = {
                         category: 'News',
                         slug: 'news'
                     }
-                ])
+                ]);
             })
             .then(() => {
                 return queryInterface.addColumn('posts', 'categoryId', { type: DataTypes.BIGINT, allowNull: false, defaultValue: 1 });
@@ -39,4 +39,4 @@ export = {
     down: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes) => {
         // Restore backup.
     }
-}
+};

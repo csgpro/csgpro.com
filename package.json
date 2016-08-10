@@ -11,9 +11,10 @@
     "start": "node index.js",
     "postinstall": "npm run build",
     "prepare-build": "npm run clean",
-    "build": "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run hbs && npm run downloads",
+    "build": "npm run prepare-build && npm run lint && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run hbs && npm run downloads",
     "clean": "rimraf ./dist/* !./dist/.gitkeep",
     "clean-deep": "rimraf ./src/**/*.js ./test/**/*.js ./utils/**/*.js, ./dist/* !./dist/.gitkeep !./src/public/scripts/*.js",
+    "lint": "tslint -c tslint.json --project tsconfig.json",
     "lib-js": "tsc",
     "lib-js:watch": "tsc --watch",
     "browser-js": "webpack",
@@ -29,7 +30,7 @@
     "downloads": "node dist/bin/copy-files.js --outDir dist/downloads --srcDir src/downloads",
     "downloads:watch": "node dist/bin/copy-files.js --outDir dist/downloads --srcDir src/downloads --watch",
     "test": "mocha dist/test",
-    "watch": "concurrently \"npm run lib-js:watch\" \"npm run browser-js:watch\" \"npm run sass:watch\" \"npm run public:watch\" \"npm run views:watch\" \"npm run hbs:watch\" \"npm run downloads:watch\""
+    "watch": "concurrently \"npm run lint\" \"npm run lib-js:watch\" \"npm run browser-js:watch\" \"npm run sass:watch\" \"npm run public:watch\" \"npm run views:watch\" \"npm run hbs:watch\" \"npm run downloads:watch\""
   },
   "repository": {
     "type": "git",
@@ -90,6 +91,8 @@
     "tedious": "^1.14.0",
     "to-string-loader": "^1.1.4",
     "ts-helpers": "^1.1.1",
+    "tslint": "^3.14.0",
+    "tslint-loader": "^2.1.5",
     "umzug": "^1.11.0",
     "vision": "^4.1.0",
     "zone.js": "~0.6.12"

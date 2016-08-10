@@ -7,7 +7,7 @@ import { Contact, IContactInstance } from './contact.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IDownloadRequestAttributes {
-    id?: number,
+    id?: number;
     token?: string;
     downloadCount?: number;
     filePath?: string;

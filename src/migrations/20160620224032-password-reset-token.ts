@@ -13,4 +13,4 @@ export = {
     down: (queryInterface: Sequelize.QueryInterface, DataTypes: Sequelize.DataTypes) => {
         // Restore backup.
     }
-}
+};

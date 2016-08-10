@@ -1,17 +1,17 @@
 import * as moment from 'moment';
 import * as roles from './roles';
 
-var validate = function(decoded, request, callback) {
-    var userId = decoded.sub;
+let validate = function(decoded, request, callback) {
+    let userId = decoded.sub;
     
-    var roleName = roles.roleByName[decoded.role];
+    let roleName = roles.roleByName[decoded.role];
     
-    var credentials = {
+    let credentials = {
         scope: [roleName],
         userId
     };
     
-    var valid = ((userId > 0) && (decoded.exp >= moment().unix()));
+    let valid = ((userId > 0) && (decoded.exp >= moment().unix()));
     
     return callback(null, valid, credentials);
 };

@@ -5,7 +5,7 @@ import { database } from '../database';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IStoryAttributes {
-    id: number,
+    id: number;
     title: string;
     body: string;
     downloadUrl: string;

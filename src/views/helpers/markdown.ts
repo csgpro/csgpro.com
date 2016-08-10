@@ -1,9 +1,9 @@
 'use strict';
 
 import * as marked from 'marked';
-var hljs = require('highlight.js');
+let hljs = require('highlight.js');
 
-var Renderer = marked.Renderer;
+let Renderer = marked.Renderer;
 
 // Create your custom renderer.
 const renderer = new Renderer();

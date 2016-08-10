@@ -39,7 +39,7 @@ function renderSass() {
             mkdirp.sync(`${destDir}`);
             // No errors during the compilation, write this result on the disk
             fs.writeFile(`${destDir}/${destFile}`, result.css, function(err){
-                if(err){
+                if (err) {
                     console.error(err);
                     process.exit(1);
                 }

@@ -10,12 +10,11 @@ function truncate(str: string, len?: number) {
     }
     if (str.length > length) {
         console.log('started string truncation');
-        var new_str = str + " ";
+        let new_str = str + ' ';
         new_str = str.substr(0, length);
-        new_str = str.substr(0, new_str.lastIndexOf(" "));
+        new_str = str.substr(0, new_str.lastIndexOf(' '));
         new_str = (new_str.length > 0) ? new_str : str.substr(0, length);
-
-        //return new handlebars.SafeString(new_str + '...');
+        
         return new_str + '...';
     }
     return str;

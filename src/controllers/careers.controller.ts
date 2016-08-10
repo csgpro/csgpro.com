@@ -5,7 +5,7 @@ import * as boom from 'boom';
 import { getPost, getPostsByCategory, getTopics } from '../commands/post.commands';
 
 index.sitemap = true;
-index.route = '/careers/{page?}'
+index.route = '/careers/{page?}';
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
     let promises: Promise<any>[] = [];

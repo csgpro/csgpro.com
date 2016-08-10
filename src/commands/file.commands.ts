@@ -33,7 +33,7 @@ blobService.createContainerIfNotExists(CONTAINER, {
 
 export function uploadFile(file: NodeJS.ReadableStream, filename: string) {
 
-    let contentType = contentTypes[filename.slice(filename.lastIndexOf('.')+1)];
+    let contentType = contentTypes[filename.slice(filename.lastIndexOf('.') + 1)];
     // Prevent duplicate filename
     let accessConditions = azure.AccessCondition.generateIfNoneMatchCondition('*');
 
@@ -100,7 +100,7 @@ export function getBlobProperties(filename, callback: (err: any, result: azure.B
 function _incrementFilename(filename: string) {
 
     let name = filename.slice(0, filename.lastIndexOf('.'));
-    let ext = filename.slice(filename.lastIndexOf('.')+1);
+    let ext = filename.slice(filename.lastIndexOf('.') + 1);
     let num = 1;
 
     if (/-\d+$/.test(name)) {
