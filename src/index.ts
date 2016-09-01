@@ -96,7 +96,7 @@ server.ext('onPreResponse', function (request, reply) {
         let response: hapi.IBoom = <any>request.response;
         let code = response.output.statusCode;
         if (code === 404 || code === 500) {
-            let template: any = code;
+            let template: any = code.toString();
             let title = response.output.payload.error;
             let message = response.stack;
             return reply.view(template, { title: title, message: message, statusCode: code, sitemap: sitemap.getPages() }).code(code);
