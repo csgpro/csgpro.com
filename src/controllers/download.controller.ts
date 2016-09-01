@@ -15,7 +15,8 @@ export function download(request: hapi.Request, reply: hapi.IReply) {
     getDownloadRequest(token)
         .then((file) => {
             let filename = path.basename(file);
-            reply.file(file, { mode: 'attachment', filename, lookupCompressed: false });
+            let options: any = { mode: 'attachment', filename, lookupCompressed: false, confine: false };
+            reply.file(file, options);
         })
         .catch((err: Error) => {
             if (err.name === 'SequelizeConnectionError') {

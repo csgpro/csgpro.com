@@ -64,7 +64,10 @@ export function getDownloadRequest(token: string) {
     })
     .then(dr => {
         // Return the file
-        let file = __dirname + '/..' + dr.getDataValue('filePath');
+        let filePath: string[] = ('..' + dr.getDataValue('filePath')).split('/');
+
+        let file = path.join(__dirname, ...filePath);
+
         return file;
     });
 }
