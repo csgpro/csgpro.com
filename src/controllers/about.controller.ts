@@ -22,12 +22,31 @@ to build something amazing for you today, as we have for many since 1993.
 
 index.sitemap = true;
 export function index(request: hapi.Request, reply: hapi.IReply) {
+    let headerImage = getSeasonalHeader();
     reply.view(pageView('about'),
     {
         title: 'About CSG Pro',
         description: '',
-        header: pageHeader('portland'),
+        header: pageHeader(headerImage),
         pageContent
     },
     { layout: 'hero-layout' });
+}
+
+function getSeasonalHeader() {
+    const month = new Date().getMonth() + 1;
+
+    if (month <= 2 || month === 12) {
+        // Winter!
+        return 'portland-winter';
+    } else if (month >= 3 && month <= 6) {
+        // Spring!
+        return 'portland-spring';
+    } else if (month >= 7 && month <= 8) {
+        // Summer!
+        return 'portland-summer';
+    } else {
+        // Fall!
+        return 'portland-fall';
+    }
 }

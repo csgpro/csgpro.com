@@ -13,7 +13,7 @@ export function pageView(page: string) {
     return base;
 }
 
-export function pageHeader(image: 'lights' | 'marina' | 'portland') {
+export function pageHeader(image: string) {
     let imagesPath = __dirname + '/../public/images/site';
     let imagesUrlPath = '/resources/images/site';
     let base = 'header';
@@ -26,7 +26,10 @@ export function pageHeader(image: 'lights' | 'marina' | 'portland') {
         }
     });
     
-    if (!responsiveParts.length) return;
+    if (!responsiveParts.length) {
+        console.log(`Header Not Found: ${image}`);
+        return;
+    }
     
     let images = responsiveParts.map(image => {
         return `[${image.path}, ${image.size}]`;
