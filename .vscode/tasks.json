@@ -24,6 +24,11 @@
             "taskName": "browser-js",
             "isTestCommand": true,
             "showOutput": "always"
+        },
+        {
+            "taskName": "lib-js",
+            "isTestCommand": true,
+            "showOutput": "always"
         }
     ]
 }
