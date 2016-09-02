@@ -4,8 +4,8 @@
   "description": "Corporate Website",
   "main": "index.js",
   "engines": {
-    "node": "4.2.4",
-    "npm": "3.5.3"
+    "node": "6.3.0",
+    "npm": "3.10.3"
   },
   "scripts": {
     "start": "node index.js",
