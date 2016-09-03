@@ -16,9 +16,9 @@ const mainConfig = {
     context: helpers.root('src/browser-scripts'),
     devtool: "#source-map",
     entry: {
-        scripts: './main.ts',
-        vendor: './vendor.ts',
-        polyfills: './polyfills.ts'
+        scripts: 'main.ts',
+        vendor: 'vendor.ts',
+        polyfills: 'polyfills.ts'
     },
     output: {
         path: helpers.root('dist/public/scripts'),
@@ -174,9 +174,9 @@ const adminConfig = {
     metadata: METADATA,
     context: helpers.root('src/admin'),
     entry: {
-        scripts: './main.ts',
-        vendor: './vendor.ts',
-        polyfills: './polyfills.ts'
+        scripts: 'main.ts',
+        vendor: 'vendor.ts',
+        polyfills: 'polyfills.ts'
     },
     output: {
         path: helpers.root('dist/public/admin'),

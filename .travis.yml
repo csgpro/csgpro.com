@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-- '6'
-- '5'
 - '4'
 cache:
   directories:
@@ -11,7 +9,10 @@ deploy:
     site: csgprod-staging
     on:
       tags: true
-      node: '6'
+      node: '4'
 notifications:
   slack:
     secure: BEFSJPctdC7YZTZZVUgTzzS3WUzPjZRIzyQCjW2wCV1uF3Vz6vNMfqMetbCXZj8IAD3wtud4yBEMqQHWI9BDpzxytB+1R0o9HPShXKMCrOmyoqSR4ikfvugFZLR2ar7oZBzkWfs160bWKt5vrpsVTiveUN7VjHypZpyZvyQk4b/FWiBJqBvqamoKb6xHYzLBdC2IusTQSWdcW0ItK8FnTsKzxma1JUh0+cHBybt5984kFD3Qi6SK+lLLABX+4QmnpyAcs9tnb6OO3YIf/iCxA7tl8ECJ9/+sMpJ0TVLC/hen2ueqZBPnSd4Apdb+EoF+5CarZAqEvDAF3ev/99gAtspLpFFc+5fW+4lfVSwnunJ19q6jckykvQrwNS0uNjHeAf2ZqezhVTYU6OYj7WAeYSWpX9N+k2QWgxBlGHmfmMyv9XdgTECTQAK7/hh0FrN2ze0Pl1jAX3dC2uGZ/AuhONg3E6nbXrB0FjAu35fStY0sSiVfA6j3rhdpe7JcqbL0waiqn9Ytve8Odix5EtY3XQRlaI/5znQLiB54cO+3GbnckKzwkGCc/cE0Y2kFcE9qdyM5Kgx6X5NbuuQj9oVHFYLs9+L/XCZZKUTtsJDnjRSqT/UCUqq9RBxYEOTs+efZ7wAW+CbQ3yvG22zPdfydCr4KaSOAJ8S9uHb5gS9g5BI=
+branches:
+  only: 
+    - master
