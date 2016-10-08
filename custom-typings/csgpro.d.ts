@@ -20,3 +20,11 @@ interface Function {
      */
     auth?: any;
 }
+
+interface UUIDOPTIONS {
+
+}
+
+interface UUID {
+
+}

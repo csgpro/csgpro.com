@@ -29,7 +29,7 @@ interface Credentials {
  * @returns {string}
  */
 export function authenticateUser({ email, password }: Credentials) {
-    return User.scope('defaultScope', 'private').findOne({
+    return User.scope(['defaultScope', 'private']).findOne({
         where: { email },
      }).then(user => {
         if (!user) {
@@ -81,7 +81,7 @@ function generateJWT(userId: number, userRoleId: number) {
  */
 export function resetPassword(token: string, password: string) {
     if (!token) throw new Error('Token Can\'t Be Null!');
-    return User.scope('defaultScope', 'private').findOne({
+    return User.scope(['defaultScope', 'private']).findOne({
         where: { resetPasswordToken: token, resetPasswordTokenExpires: { $gt: new Date() } },
     }).then(user => {
         if (!user) {
@@ -104,7 +104,7 @@ export function resetPassword(token: string, password: string) {
  */
 export function requestResetPasswordToken(email: string, host: string) {
     let promise = new Promise((resolve, reject) => {
-        User.scope('defaultScope', 'private').findOne({
+        User.scope(['defaultScope', 'private']).findOne({
             where: { email }
         }).then(user => {
             if (!user) {

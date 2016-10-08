@@ -11,7 +11,7 @@ export function index(request: hapi.Request, reply: hapi.IReply) {
 export function show(request: hapi.Request, reply: hapi.IReply) {
     let topicSlug: string = request.params['slug'];
     
-    let promises: Promise<any>[] = [];
+    let promises: any[] = [];
     
     promises.push(getTopics());
     promises.push(getTopic(topicSlug));

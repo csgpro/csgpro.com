@@ -39,7 +39,8 @@ export function getTopics(where: Sequelize.WhereOptions = { active: true }, orde
     });
 }
 
-export function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): Promise<any> {
+// TODO: Fix type definitions
+export function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): any {
     let where: any = {};
     if (typeof topic === 'string') {
         where = { slug: topic };
@@ -49,7 +50,8 @@ export function getTopic(topic: string|number, includePosts = true, sortOrder: '
 
     if (includePosts) {
         return Topic.findOne({ where }).then(topic => {
-            return topic.getPosts({ order: [[ 'publishedAt', sortOrder ]], scope: <any>{ method: ['list'] } }).then(posts => [topic, posts]);
+            // TODO: Fix the type definitions
+            topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: <any>{ method: ['list'] } }).then(posts => [topic, posts]);
         });
     } else {
         return Topic.findOne({ where });
@@ -85,7 +87,8 @@ export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'D
         let queue = [];
         
         topics.forEach(topic => {
-            queue.push(topic.getPosts({
+            // TODO: Fix type definitions
+            queue.push(topic.getPosts(<any>{
                 include: [{ model: PostCategory, as: 'category' }],
                 where: { publishedAt: { $gt: new Date('1993-01-01') } },
                 order: [[ 'publishedAt', sortOrder ]]

@@ -35,7 +35,7 @@ export function uploadFile(file: NodeJS.ReadableStream, filename: string) {
 
     let contentType = contentTypes[filename.slice(filename.lastIndexOf('.') + 1)];
     // Prevent duplicate filename
-    let accessConditions = azure.AccessCondition.generateIfNoneMatchCondition('*');
+    let accessConditions = azure['AccessCondition'].generateIfNoneMatchCondition('*');
 
     function upload(file, filename, cb: (error, result?) => any) {
 
@@ -93,7 +93,7 @@ export function doesBlobExist(filename: string, callback: (err: any, result: azu
     return blobService.doesBlobExist(CONTAINER, filename, callback);
 }
 
-export function getBlobProperties(filename, callback: (err: any, result: azure.BlobService.BlobResult, response: azure.StorageServiceClient.ServiceResponse) => void) {
+export function getBlobProperties(filename, callback: (err: any, result: azure.BlobService.BlobResult, response: any) => void) {
     return blobService.getBlobProperties(CONTAINER, filename, callback);
 }
 

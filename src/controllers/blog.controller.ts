@@ -10,7 +10,7 @@ index.sitemap = true;
 index.route = '/blog/{page?}';
 export function index(request: hapi.Request, reply: hapi.IReply) {
     
-    let promises: Promise<any>[] = [];
+    let promises: any[] = [];
     let page = (!isNaN(Number(request.params['page']))) ? Number(request.params['page']) : 1;
     let limit = 10;
     let offset = page <= 1 ? 0 : (page * limit) - limit;

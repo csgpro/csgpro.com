@@ -2,6 +2,7 @@
 
 import * as conf from 'nconf';
 import { mailer, frankSignature } from '../modules/mailer';
+import * as nodemailer from 'nodemailer';
 
 let striptags = require('striptags');
 

@@ -57,7 +57,7 @@ database.authenticate()
         server.log('error', err);
     });
 
-export function columnExists(table: string, column: string): Promise<boolean> {
+export function columnExists(table: string, column: string) {
     let query = `SELECT column_name 
                  FROM information_schema.columns 
                  WHERE table_name='${table}' and column_name='${column}'`;
