@@ -1,16 +1,15 @@
 'use strict';
 
 import * as nodemailer from 'nodemailer';
-import * as conf from 'nconf';
 
 let sendgridTransport = require('nodemailer-sendgrid-transport');
 
-const CSGBOT_URL = conf.get('CSGBOT_URL');
-const CSGBOT_IMG_URL = conf.get('CSGBOT_IMG_URL');
+const CSGBOT_URL = process.env.CSGBOT_URL;
+const CSGBOT_IMG_URL = process.env.CSGBOT_IMG_URL;
 
 const options = {
     auth: {
-        api_key: conf.get('SENDGRID_APIKEY')
+        api_key: process.env.SENDGRID_APIKEY
     }
 };
 

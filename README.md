@@ -19,7 +19,7 @@ Then open your browser to `http://localhost:3000`
 | "start" | "node index.js" |
 | "postinstall" | "npm run build" |
 | "prepare-build" | "npm run clean" |
-| "build" "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run downloads" |
+| "build" | "npm run prepare-build && npm run lib-js && npm run browser-js && npm run sass && npm run public && npm run views && npm run downloads" |
 | "clean" | "rimraf ./dist/* !./dist/.gitkeep" |
 | "clean-deep" | "rimraf ./src/**/*.js ./test/**/*.js ./utils/**/*.js, ./dist/* !./dist/.gitkeep !./src/public/scripts/*.js" |
 | "lib-js" | "tsc" |

@@ -3,7 +3,6 @@
 // libs
 import * as Sequelize from 'sequelize';
 import * as JWT from 'jsonwebtoken';
-import * as conf from 'nconf';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 const striptags = require('striptags');
@@ -13,7 +12,7 @@ import { User } from '../models/user.model';
 import { mailer, frankSignature } from '../modules/mailer';
 import { getProtocolByHost } from '../modules/utility';
 
-const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
+const AUTH_TOKEN_SECRET: string = process.env.AUTH_TOKEN_SECRET;
 const TOKEN_LIFE = 30; // Tokens can only live for 30 days.
 
 interface Credentials {

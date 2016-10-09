@@ -1,8 +1,9 @@
 'use strict';
 
 // load environment variables
-import * as conf from 'nconf';
-conf.env().file({ file: __dirname + '/../settings.json' });
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config(); // Load environment variables
+}
 
 // libs
 import * as hapi from 'hapi';
@@ -16,8 +17,8 @@ import * as sitemap from './modules/sitemap';
 import { initializeDB } from './database';
 import * as hapiSitemap from './modules/hapi-sitemap';
 
-const AUTH_TOKEN_SECRET: string = conf.get('AUTH_TOKEN_SECRET');
-const GTM_KEY: string = conf.get('GOOGLE_TAG_MANAGER_KEY');
+const AUTH_TOKEN_SECRET: string = process.env.AUTH_TOKEN_SECRET;
+const GTM_KEY: string = process.env.GOOGLE_TAG_MANAGER_KEY;
 
 handlebars.registerHelper('paginate', paginate);
 

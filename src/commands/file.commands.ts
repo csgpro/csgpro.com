@@ -2,13 +2,12 @@
 
 // libs
 import * as azure from 'azure-storage';
-import * as conf from 'nconf';
 
 // app
 import { contentTypes } from '../modules/content-types';
 
-const AZURE_STORAGE_ACCOUNT = conf.get('AZURE_STORAGE_ACCOUNT');
-const AZURE_STORAGE_ACCESS_KEY = conf.get('AZURE_STORAGE_ACCESS_KEY');
+const AZURE_STORAGE_ACCOUNT = process.env.AZURE_STORAGE_ACCOUNT;
+const AZURE_STORAGE_ACCESS_KEY = process.env.AZURE_STORAGE_ACCESS_KEY;
 export const MAX_FILE_SIZE = 4 * 1024 * 1024; // ~4MB
 const CONTAINER = 'uploads';
 

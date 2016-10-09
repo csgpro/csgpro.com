@@ -1,6 +1,5 @@
 'use strict';
 
-import * as conf from 'nconf';
 import { mailer, frankSignature } from '../modules/mailer';
 import * as nodemailer from 'nodemailer';
 
@@ -23,7 +22,7 @@ export function sendContactFormEmail(formData: IContactFormData, subject = 'Cont
     let promise = new Promise<nodemailer.SentMessageInfo>((resolve, reject) => {
     
         const from = 'CSG Notification <noreply@csgpro.com>';
-        const to = conf.get('CONTACT_FORM_EMAIL');
+        const to = process.env.CONTACT_FORM_EMAIL;
         
         let html = `
             ${formData.name} submitted the contact form from csgpro.com.<br>

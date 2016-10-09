@@ -2,7 +2,6 @@
 
 import * as hapi from 'hapi';
 import * as Sequelize from 'sequelize';
-import * as conf from 'nconf';
 import m from './migrate';
 import s from './seed';
 import { Webhook, IWebhookInstance } from '../models/webhook.model';
@@ -13,12 +12,12 @@ export function initializeDB(s: hapi.Server) {
     server = s;
 }
 
-const DB_DIALECT    = conf.get('DB_DIALECT'),
-      DB_HOST       = conf.get('DB_HOST'),
-      DB_PORT       = conf.get('DB_PORT'),
-      DB_DATABASE   = conf.get('DB_DATABASE'),
-      DB_USER       = conf.get('DB_USER'),
-      DB_PASSWORD   = conf.get('DB_PASSWORD');
+const DB_DIALECT    = process.env.DB_DIALECT,
+      DB_HOST       = process.env.DB_HOST,
+      DB_PORT       = process.env.DB_PORT,
+      DB_DATABASE   = process.env.DB_DATABASE,
+      DB_USER       = process.env.DB_USER,
+      DB_PASSWORD   = process.env.DB_PASSWORD;
       
 export const NOW = (DB_DIALECT === 'mssql') ? Sequelize.fn('GETDATE') : Sequelize.fn('NOW');
 export const RESTRICT = (DB_DIALECT === 'mssql') ? 'NO ACTION' : 'RESTRICT';

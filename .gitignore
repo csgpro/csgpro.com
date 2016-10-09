@@ -20,3 +20,4 @@ dist
 settings.json
 settings.*.json
 !settings.sample.json
+.env
