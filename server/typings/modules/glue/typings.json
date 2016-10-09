@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/jnath/typed-glue/ed6987d571482b35961a99b5db40dd10958a483a/typings.json",
+    "raw": "registry:npm/glue#3.3.0+20160618213616",
+    "main": "lib/index.d.ts",
+    "version": "3.3.0",
+    "name": "glue",
+    "type": "typings"
+  }
+}

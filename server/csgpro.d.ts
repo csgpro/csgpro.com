@@ -1,0 +1,2 @@
+interface UUIDOPTIONS {}
+interface UUID {}

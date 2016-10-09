@@ -9,24 +9,10 @@
         {
             "taskName": "build",
             "isBuildCommand": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "watch",
-            "isWatching": true
+            "showOutput": "never"
         },
         {
             "taskName": "test",
-            "isTestCommand": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "browser-js",
-            "isTestCommand": true,
-            "showOutput": "always"
-        },
-        {
-            "taskName": "lib-js",
             "isTestCommand": true,
             "showOutput": "always"
         }

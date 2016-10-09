@@ -1,0 +1,11 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/warrenseymour/typed-hapi-auth-jwt2/b80e4178e2ba0ef42219a5e13c39b270aeaf9ed2/typings.json",
+    "raw": "registry:npm/hapi-auth-jwt2#7.0.0+20160719164101",
+    "main": "index.d.ts",
+    "version": "",
+    "name": "hapi-auth-jwt2",
+    "type": "typings"
+  }
+}

@@ -9,15 +9,10 @@ logs
 .vscode
 
 node_modules
-src/**/*.js*
-!src/**/*.json
-test/**/*.js*
-bin/**/*.js*
-public/scripts/*.bundle.js
-dist
 
-# exclude settings.json
-settings.json
-settings.*.json
-!settings.sample.json
+**/*.js*
+!*.json
+!./index.js
+!webpack.config.js
 .env
+public/styles/main.css
