@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "glue": "registry:npm/glue#3.3.0+20160618213616",
+    "hapi-auth-jwt2": "registry:npm/hapi-auth-jwt2#7.0.0+20160719164101"
+  }
+}
