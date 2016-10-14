@@ -8,6 +8,7 @@ deploy:
   - provider: azure_web_apps
     site: csgprod-staging
     on:
+      all_branches: true
       tags: true
       node: '6'
 notifications:
