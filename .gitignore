@@ -16,3 +16,4 @@ node_modules
 !webpack.config.js
 .env
 public/styles/main.css
+coverage
