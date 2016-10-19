@@ -5,7 +5,6 @@ import { controller, get, route, config, Controller } from 'hapi-decorators';
 
 // app
 import { getPost, getPostsByCategory, getTopics, getPostByPostId } from '../commands/post.commands';
-import { pageHeader } from '../shared/view-matcher';
 import { getProtocolByHost } from '../shared/utility';
 
 @controller('/blog')
