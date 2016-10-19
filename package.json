@@ -115,6 +115,7 @@
     "@types/nodemailer-smtp-transport": "^1.0.29",
     "@types/request": "0.0.31",
     "@types/sequelize": "^4.0.38",
+    "@types/sinon": "^1.16.31",
     "@types/umzug": "^1.8.29",
     "@types/webpack": "^1.12.35",
     "chai": "^3.5.0",
