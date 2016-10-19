@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, config, Controller } from 'hapi-decorators';
 
 // app
-import { pageView, pageHeader } from '../shared/view-matcher';
+import { pageView } from '../shared/view-matcher';
 
 type Season = 'portland-winter' | 'portland-spring' | 'portland-summer' | 'portland-fall';
 
@@ -37,7 +37,7 @@ to build something amazing for you today, as we have for many since 1993.
         {
             title: 'About CSG Pro',
             description: '',
-            header: pageHeader(headerImage),
+            header: headerImage,
             pageContent: this.pageContent
         },
         { layout: 'hero-layout' });

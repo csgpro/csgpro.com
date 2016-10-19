@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, config, Controller } from 'hapi-decorators';
 
 // app
-import { pageView, pageHeader } from '../shared/view-matcher';
+import { pageView } from '../shared/view-matcher';
 import { getPostsByTopic } from '../commands/post.commands';
 
 @controller('/custom-software')
