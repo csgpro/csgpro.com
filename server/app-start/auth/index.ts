@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import * as jwt from 'hapi-auth-jwt2';
 
 // app
-import { Role } from '../shared/roles';
+import { Role } from '../../shared/roles';
 
 export const register: any = function register(server: Server, options, next) {
     server.register(jwt);

@@ -1,9 +1,19 @@
-'use strict';
+// libs
+import { existsSync } from 'fs';
+import { join } from 'path';
 
-export function getProtocolByHost(host: string) {
-    let protocol = 'http';
-    if (/^www|csgpro|csgnext/.test(host)) {
-        protocol = 'https';
+const root = join(__dirname, '..', '..');
+
+export function pageView(page: string): string {
+    let template = 'page';
+    let templatePath = join(root, 'server', 'views', `${template}-${page}.html`);
+    if (existsSync(templatePath)) {
+        template = `${template}-${page}`;
     }
-    return protocol;
+    return template;
+}
+
+export function getProtocolByHost(host: string): 'http'|'https' {
+    if (/^(www|csgpro)/.test(host)) return 'https';
+    return 'http';
 }
