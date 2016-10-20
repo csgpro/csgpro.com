@@ -4,7 +4,7 @@ import * as sinon from 'sinon';
 import * as hapi from 'hapi';
 
 // app
-import { register } from './error-handler';
+import { register } from './';
 
 let server: hapi.Server;
 

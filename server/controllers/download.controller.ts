@@ -7,7 +7,7 @@ import { controller, get, post, Controller } from 'hapi-decorators';
 // app
 import { addDownloadRequest, getDownloadRequest } from '../commands/contact.commands';
 import { sendDownloadEmail } from '../commands/mail.commands';
-import { pageView } from '../shared/view-matcher';
+import { pageView } from '../shared/utility';
 import { getProtocolByHost } from '../shared/utility';
 
 @controller('/download')

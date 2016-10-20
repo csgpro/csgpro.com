@@ -45,20 +45,20 @@ manifest = {
         },
         {
             plugin: {
-                register: './shared/hapi-sitemap',
+                register: './app-start/hapi-sitemap',
                 options: config.get('/sitemap')
             }
         },
         {
             plugin: {
-                register: './shared/error-handler'
+                register: './app-start/error-handler'
             }
         },
 
         // Authentication
         {
             plugin: {
-                register: './auth'
+                register: './app-start/auth'
             }
         },
 

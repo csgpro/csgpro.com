@@ -6,7 +6,7 @@ import { controller, get, post, config, Controller } from 'hapi-decorators';
 // app
 import { addContactRequest } from '../commands/contact.commands';
 import { sendContactFormEmail } from '../commands/mail.commands';
-import { pageView } from '../shared/view-matcher';
+import { pageView } from '../shared/utility';
 
 @controller('/contact')
 class ContactController implements Controller {
