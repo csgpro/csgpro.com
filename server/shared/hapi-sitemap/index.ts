@@ -1,10 +1,8 @@
-'use strict';
-
 import * as hapi from 'hapi';
 import * as fs from 'fs';
 const handlebars = require('handlebars');
 
-export function getPaths(server, baseUri, filter) {
+function getPaths(server, baseUri, filter) {
     let routeTable: hapi.IConnectionTable[] = server.table();
     let sitemap = [];
 
@@ -19,7 +17,7 @@ export function getPaths(server, baseUri, filter) {
     });
 
     return sitemap;
-};
+}
 
 function trimPathParams(path: string) {
     let pathLength = path.length;
