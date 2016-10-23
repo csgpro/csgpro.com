@@ -1,7 +1,7 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { Contact, IContactInstance } from './contact.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
@@ -34,7 +34,14 @@ let ContactRequestSchemaOptions: Sequelize.DefineOptions<IContactRequestInstance
     }
 };
 
-export let ContactRequest = database.define<IContactRequestInstance, IContactRequestAttributes>('contactRequest', ContactRequestSchema, ContactRequestSchemaOptions);
+export let ContactRequest: Sequelize.Model<IContactRequestInstance, IContactRequestAttributes>;
 
-ContactRequest.belongsTo(Contact);
-Contact.hasMany(ContactRequest);
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    ContactRequest = sequelize.define<IContactRequestInstance, IContactRequestAttributes>('contactRequest', ContactRequestSchema, ContactRequestSchemaOptions);
+
+    ContactRequest['associate'] = function (db) {
+        ContactRequest.belongsTo(db.contact);
+    };
+
+    return ContactRequest;
+}

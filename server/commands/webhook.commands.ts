@@ -3,16 +3,12 @@ import * as request from 'request';
 import * as events from 'events';
 
 // app
-import { database } from '../database';
+import database from '../database';
 import { Webhook, IWebhookInstance } from '../models/webhook.model';
 import { WebhookEvent } from '../models/webhook-event.model';
 
 let _webhooks: { [event: string]: string[] } = {};
 let _eventEmitter = new events.EventEmitter();
-
-setTimeout(() => {
-    syncWebhooks();
-}, 5000);
 
 export function getWebhooks() {
     return Webhook.findAndCountAll().then(data => {

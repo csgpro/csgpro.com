@@ -1,13 +1,11 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { Topic, ITopicInstance, ITopicAttributes } from './topic.model';
 import { PostCategory, IPostCategoryInstance, IPostCategoryAttributes } from './post-category.model';
 import { User, IUserInstance, IUserAttributes } from './user.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
-
-export let PostTopic = database.define('postTopic', {}, { timestamps: false });
 
 export interface IPostAttributes {
     id: number;
@@ -115,10 +113,16 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
     }
 };
 
-export let Post = database.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);
+export let Post: Sequelize.Model<IPostInstance, IPostAttributes>;
 
-Post.belongsToMany(Topic, { through: PostTopic });
-Topic.belongsToMany(Post, { through: PostTopic });
-Post.belongsTo(User, { as: 'author', foreignKey: 'authorId' });
-Post.belongsTo(PostCategory, { as: 'category', foreignKey: 'categoryId' });
-PostCategory.hasMany(Post, { as: 'posts', foreignKey: 'categoryId' });
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    Post = sequelize.define<IPostInstance, IPostAttributes>('post', PostSchema, PostSchemaOptions);
+
+    Post['associate'] = function (db) {
+        Post.belongsToMany(db.topic, { through: db.postTopic });
+        Post.belongsTo(db.user, { as: 'author', foreignKey: 'authorId' });
+        Post.belongsTo(db.postCategory, { as: 'category', foreignKey: 'categoryId' });
+    };
+
+    return Post;
+}

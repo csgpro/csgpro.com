@@ -1,7 +1,5 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
 
 export interface IContactAttributes {
     id?: number;
@@ -49,4 +47,15 @@ let ContactSchemaOptions: Sequelize.DefineOptions<IContactInstance> = {
     },
 };
 
-export let Contact = database.define<IContactInstance, IContactAttributes>('contact', ContactSchema, ContactSchemaOptions);
+export let Contact: Sequelize.Model<IContactInstance, IContactAttributes>;
+
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    Contact = sequelize.define<IContactInstance, IContactAttributes>('contact', ContactSchema, ContactSchemaOptions);
+
+    Contact['associate'] = function (db) {
+        Contact.hasMany(db.contactRequest);
+        Contact.hasMany(db.downloadRequest);
+    };
+
+    return Contact;
+}

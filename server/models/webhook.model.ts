@@ -1,7 +1,7 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { syncWebhooks } from '../commands/webhook.commands';
 import { WebhookEvent, IWebhookEventInstance } from './webhook-event.model';
 
@@ -49,9 +49,14 @@ let WebhookSchemaOptions: Sequelize.DefineOptions<IWebhookInstance> = {
     timestamps: false
 };
 
-export let Webhook = database.define<IWebhookInstance, IWebhookAttributes>('webhook', WebhookSchema, WebhookSchemaOptions);
+export let Webhook: Sequelize.Model<IWebhookInstance, IWebhookAttributes>;
 
-export let WebhookToEvent = database.define('webhookToEvent', {}, { timestamps: false });
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    Webhook = sequelize.define<IWebhookInstance, IWebhookAttributes>('webhook', WebhookSchema, WebhookSchemaOptions);
 
-WebhookEvent.belongsToMany(Webhook, { through: WebhookToEvent });
-Webhook.belongsToMany(WebhookEvent, { through: WebhookToEvent });
+    Webhook['associate'] = function (db) {
+        Webhook.belongsToMany(db.webhookEvent, { through: db.webhookToEvent });
+    };
+
+    return Webhook;
+}

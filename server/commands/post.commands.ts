@@ -1,12 +1,12 @@
 // libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+import database from '../database';
 import * as _ from 'lodash';
 
 // app
 import { User } from '../models/user.model';
 import { Topic, ITopicInstance } from '../models/topic.model';
-import { Post, IPostInstance, IPostAttributes, PostTopic } from '../models/post.model';
+import { Post, IPostInstance, IPostAttributes } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
 import { triggerWebhooks, WebhookEvents } from './webhook.commands';
 

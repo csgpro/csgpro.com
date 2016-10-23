@@ -1,7 +1,7 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IStoryAttributes {
@@ -72,4 +72,8 @@ let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
     }
 };
 
-export let Story = database.define<IStoryInstance, IStoryAttributes>('story', StorySchema, StorySchemaOptions);
+export let Story: Sequelize.Model<IStoryInstance, IStoryAttributes>;
+
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    return Story = sequelize.define<IStoryInstance, IStoryAttributes>('story', StorySchema, StorySchemaOptions);
+}

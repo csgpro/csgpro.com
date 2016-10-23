@@ -1,7 +1,7 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { User } from './user.model';
 import { Post, IPostInstance } from './post.model';
 import { Topic } from './topic.model';
@@ -42,4 +42,14 @@ let PostCategorySchemaOptions: Sequelize.DefineOptions<IPostCategoryInstance> = 
     }
 };
 
-export let PostCategory = database.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);
+export let PostCategory: Sequelize.Model<IPostCategoryInstance, IPostCategoryAttributes>;
+
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    PostCategory = sequelize.define<IPostCategoryInstance, IPostCategoryAttributes>('postCategory', PostCategorySchema, PostCategorySchemaOptions);
+
+    PostCategory['associate'] = function (db) {
+        PostCategory.hasMany(db.post, { as: 'posts', foreignKey: 'categoryId' });
+    };
+
+    return PostCategory;
+}

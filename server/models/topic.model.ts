@@ -1,5 +1,7 @@
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
+
+// app
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 export interface ITopicAttributes {
@@ -39,4 +41,14 @@ let TopicSchemaOptions: Sequelize.DefineOptions<ITopicInstance> = {
     }
 };
 
-export let Topic = database.define<ITopicInstance, ITopicAttributes> ('topic', TopicSchema, TopicSchemaOptions);
+export let Topic: Sequelize.Model<ITopicInstance, ITopicAttributes>;
+
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    Topic = sequelize.define<ITopicInstance, ITopicAttributes>('topic', TopicSchema, TopicSchemaOptions);
+
+    Topic['associate'] = function (db) {
+        Topic.belongsToMany(db.post, { through: db.postTopic });
+    };
+
+    return Topic;
+}

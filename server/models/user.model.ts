@@ -1,9 +1,9 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
 import * as bcrypt from 'bcrypt-nodejs';
 import * as crypto from 'crypto';
-import { database } from '../database';
+
+// app
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
@@ -162,4 +162,14 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
     }
 };
 
-export let User = database.define<IUserInstance, IUserAttributes>('user', UserSchema, UserSchemaOptions);
+export let User: Sequelize.Model<IUserInstance, IUserAttributes>;
+
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    User = sequelize.define<IUserInstance, IUserAttributes>('user', UserSchema, UserSchemaOptions);
+
+    User['associate'] = function (db) {
+        User.hasMany(db.post, { as: 'author', foreignKey: 'authorId' });
+    };
+
+    return User;
+}

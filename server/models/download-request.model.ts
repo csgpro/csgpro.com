@@ -1,8 +1,8 @@
-'use strict';
-
+// libs
 import * as Sequelize from 'sequelize';
-import { database } from '../database';
 import * as crypto from 'crypto';
+
+// app
 import { Contact, IContactInstance } from './contact.model';
 import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
@@ -44,7 +44,14 @@ let DownloadRequestSchemaOptions: Sequelize.DefineOptions<IDownloadRequestInstan
     }
 };
 
-export let DownloadRequest = database.define<IDownloadRequestInstance, IDownloadRequestAttributes>('downloadRequest', DownloadRequestSchema, DownloadRequestSchemaOptions);
+export let DownloadRequest: Sequelize.Model<IDownloadRequestInstance, IDownloadRequestAttributes>;
 
-DownloadRequest.belongsTo(Contact);
-Contact.hasMany(DownloadRequest);
+export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes) {
+    DownloadRequest = sequelize.define<IDownloadRequestInstance, IDownloadRequestAttributes>('downloadRequest', DownloadRequestSchema, DownloadRequestSchemaOptions);
+
+    DownloadRequest['associate'] = function (db) {
+        DownloadRequest.belongsTo(db.contact);
+    };
+
+    return DownloadRequest;
+}

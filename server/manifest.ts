@@ -45,6 +45,11 @@ manifest = {
         },
         {
             plugin: {
+                register: './app-start/hapi-sequelize'
+            }
+        },
+        {
+            plugin: {
                 register: './app-start/hapi-sitemap',
                 options: config.get('/sitemap')
             }
