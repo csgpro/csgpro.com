@@ -7,12 +7,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
-  },
-  "exclude": [
-      "node_modules"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
   }
 }
