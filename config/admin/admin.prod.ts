@@ -14,7 +14,7 @@ export default webpackMerge(commonConfig, {
 
   output: {
     path: helpers.root('dist'),
-    publicPath: '/',
+    publicPath: '/admin',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js'
   },
