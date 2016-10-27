@@ -1,3 +1,3 @@
-import config from './admin/admin.dev';
+import config from './admin/admin.prod';
 
 export default config;

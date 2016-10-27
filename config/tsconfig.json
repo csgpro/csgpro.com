@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2015"
+        "target": "es2015",
+        "types": [
+            "webpack",
+            "node"
+        ]
     }
 }

@@ -1,19 +1,16 @@
 // angular
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {ROUTER_DIRECTIVES, ActivatedRoute, Router} from '@angular/router';
+import { Component, ViewContainerRef }  from '@angular/core';
+import { Title }                        from '@angular/platform-browser';
+import { ActivatedRoute, Router }       from '@angular/router';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 // app
-import {ErrorSummary} from '../../components/error-summary/error-summary.component';
-import {SuccessSummary} from '../../components/success-summary/success-summary.component';
-import {AuthenticationService} from '../../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-    moduleId: 'ResetPasswordComponent',
-    templateUrl: 'reset-password.html',
-    directives: [ErrorSummary, SuccessSummary]
+    templateUrl: 'reset-password.html'
 })
-export class ResetPasswordComponent implements OnInit, OnDestroy {
+export class ResetPasswordComponent {
     title = 'Reset Password';
 
     resetToken: string;
@@ -21,22 +18,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     email: string;
     password: string;
     confirmPassword: string;
-    
-    successMessage: string;
 
     private _paramSubscription: any;
 
-    get errors() {
-        if (this._errors.size) {
-            return Array.from(this._errors);
-        }
-    }
-
-    constructor(private _title: Title, private _route: ActivatedRoute, private _router: Router, private _auth: AuthenticationService) {
+    constructor(private _title: Title, private _route: ActivatedRoute, private _router: Router, private _auth: AuthenticationService, private _snackBar: MdSnackBar, private _viewContainer: ViewContainerRef) {
         this._title.setTitle(this.title);
     }
-
-    private _errors = new Set();
 
     onSubmit() {
         if (this.resetToken) {
@@ -47,38 +34,27 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
 
     requestReset() {
-        this._errors.clear();
-        if (!this.email) {
-            this._errors.add({ message: 'Email Address is required.' });
-            return;
-        }
+        let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
+        snackBarConfig.politeness = 'assertive';
         this._auth.requestPasswordReset(this.email)
         .then(() => {
-            this.successMessage = 'Thank you. Please check your email shortly to reset your password.';
+            let message = 'Check your email';
+            this._snackBar.open(message, 'OK', snackBarConfig);
         })
-        .catch((e: Error) => {
-            this._errors.add(e);
+        .catch((error: Error) => {
+            this._snackBar.open(error.message, 'OK', snackBarConfig);
         });
     }
 
     resetPassword() {
-        this._errors.clear();
-        if (!this.password) {
-            this._errors.add({ message: 'New Password is required.' });
-        }
-        if (this.password && (this.confirmPassword !== this.password)) {
-            this._errors.add({ message: 'Passwords do not match.' });
-        }
-        if (!this.resetToken) {
-            this._errors.add({ message: 'Missing reset password token.' });
-        }
-        if (this._errors.size) return;
+        let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
+        snackBarConfig.politeness = 'assertive';
         this._auth.resetPassword(this.password, this.resetToken)
         .then((a) => {
             this._router.navigate(['/login']);
         })
-        .catch((e: Error) => {
-            this._errors.add(e);
+        .catch((error: Error) => {
+            this._snackBar.open(error.message, 'OK', snackBarConfig);
         });
     }
 

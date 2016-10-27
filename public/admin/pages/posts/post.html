@@ -1,79 +1,56 @@
 <div id="post-edit">
-    <h3>Post <loading-indicator></loading-indicator></h3>
+    <h3>Post</h3>
 
-    <div>
-        <form #postForm="ngForm" (ngSubmit)="onSubmit()" class="large-6 columns">
-            <div class="row">
-                <div class="columns">
-                    <button class="button primary float-right">Save</button>
-                    <button type="button" class="button secondary float-right" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
-                    <button type="button" class="button secondary float-right" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label class="requied">
-                        Title
-                        <input placeholder="My Blog Post Title" type="text" name="title" [(ngModel)]="post.title" (keyup)="slugify($event, post.title)" required />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label class="required">
-                        Slug
-                        <input name="slug" placeholder="my-blog-post-slug" type="text" [(ngModel)]="post.slug" (keyup)="slugify($event)" required />
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-6 medium-4 columns">
-                    <label>
-                        Author
-                        <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
-                            <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="small-6 medium-4 columns end">
-                    <label>
-                        Category
-                        <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
-                            <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="columns">
-                    <label>Topics</label>
-                    <label class="label" *ngFor="let topic of topics" [ngClass]="topic.selected ? '' : 'secondary'">
+    <div layout="row" class="md-inline-form">
+        <form #postForm="ngForm" (ngSubmit)="onSubmit()" flex>
+            <md-content>
+                <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                    <button md-raised-button class="md-raised">Save</button>
+                    <button md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
+                    <button md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <md-input placeholder="Post Title" type="text" name="title" [(ngModel)]="post.title" (keyup)="slugify($event, post.title)" required></md-input>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <md-input name="slug" placeholder="Slug" type="text" [(ngModel)]="post.slug" (keyup)="slugify($event)" required></md-input>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <table style="width: 100%" cellspacing="0">
+                        <tr>
+                            <td>
+                                <label>Author</label>
+                                <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
+                                    <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label>Category</label>
+                                <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
+                                    <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+                    <label class="md-label">Topics</label>
+                    <label class="tag md-button md-raised" md-raised-button *ngFor="let topic of topics" [ngClass]="topic.selected ? 'selected' : ''">
                         <input type="checkbox" name="topics" (change)="topic.selected = !topic.selected" /> {{topic.topic}}
                     </label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label>Excerpt</label>
-                    <textarea name="excerpt" [(ngModel)]="post.excerpt" maxlength="400" rows="3" required></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <div class="float-right"><button type="button" (click)="openImageUploadModal()"><span class="fi-photo"></span></button></div>
-                    <modal [title]='"Upload Image"' [showClose]='true' (onClose)="closeImageUploadModal()" #editModal>{{ bindModal(editModal) }}
-                        <form name="imageUploadForm" id="imageUploadForm">
-                            <input type="file" id="imageUpload" (change)="setFile($event)">
-                        </form>
-                        <mfoot><button class='button secondary' (click)="closeImageUploadModal()">Close</button><button class='button primary' (click)="uploadImage()">Upload Image</button></mfoot>
-                    </modal>
-                    <label>Post Body</label>
-                    <textarea name="post" [(ngModel)]="post.post" rows="20" required id="post"></textarea>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <label class="md-label">Excerpt</label>
+                    <textarea class="md-textarea" name="excerpt" [(ngModel)]="post.excerpt" maxlength="400" rows="3" required></textarea>
+                </section>
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <label class="md-label">Post Body</label>
+                    <textarea class="md-textarea" name="post" [(ngModel)]="post.post" rows="20" required id="post"></textarea>
                     <p class="help-text"><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheat Sheet</a></p>
-                </div>
-            </div>
+                </section>
+            </md-content>
         </form>
-        <div class="large-6 columns">
+        <div flex="50" layout-padding>
             <label>Preview</label>
             <div class="callout">
                 <h4>{{post.title}}</h4>

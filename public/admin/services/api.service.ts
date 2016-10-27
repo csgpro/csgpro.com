@@ -21,7 +21,7 @@ export class ApiService {
 
         options = this._applyDefaultOptions(options);
 
-        const request: Promise<T> = this._http.get(`${this.baseUrl}${route}`, options).toPromise();
+        const request = this._http.get(`${this.baseUrl}${route}`, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
@@ -30,7 +30,7 @@ export class ApiService {
 
         options = this._applyDefaultOptions(options);
         
-        const request: Promise<T> = this._http.post(`${this.baseUrl}${route}`, body, options).toPromise();
+        const request = this._http.post(`${this.baseUrl}${route}`, body, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
@@ -39,14 +39,14 @@ export class ApiService {
 
         options = this._applyDefaultOptions(options);
 
-        const request: Promise<T> = this._http.put(`${this.baseUrl}${route}`, body, options).toPromise();
+        const request = this._http.put(`${this.baseUrl}${route}`, body, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
 
     delete<T>(route: string, options?: RequestOptionsArgs): Promise<T> {
 
-        const request: Promise<T> = this._http.delete(`${this.baseUrl}${route}`, options).toPromise();
+        const request = this._http.delete(`${this.baseUrl}${route}`, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);
     }
@@ -103,7 +103,7 @@ export class ApiService {
         return Promise.reject(error);
     }
 
-    private _applyDefaultOptions(options) {
+    private _applyDefaultOptions(options: any) {
         let opts = { headers: this.headers };
         Object.assign(opts, options);
         return opts;

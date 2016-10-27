@@ -5,15 +5,12 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/http';
 import '@angular/router';
+import '@angular/material';
+import 'core-js';
+import 'ng2-material';
 import 'moment';
+import 'hammerjs';
+import 'angular2-jwt';
 
 // rxjs
 import 'rxjs';
-
-/**
- * Some 3rd party libaries aren't compatible with module loaders.
- * http://stackoverflow.com/a/34320472/3732163
- */
-require('!!script!jquery/dist/jquery.min.js');
-require('!!script!foundation-sites/dist/foundation.min.js');
-require('!!script!motion-ui/dist/motion-ui.min.js');

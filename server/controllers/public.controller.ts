@@ -17,7 +17,7 @@ class PublicController implements Controller {
 
     @get('/admin/{param*}')
     admin(request: hapi.Request, reply: hapi.IReply) {
-        reply.file(path.join(__dirname, '..', '..', 'public', 'admin', 'index.html'));
+        reply.file(path.join(__dirname, '..', '..', 'public', 'admin', 'dist', 'index.html'));
     }
 
     @get('/robots.txt')

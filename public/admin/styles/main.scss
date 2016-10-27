@@ -1,0 +1,65 @@
+// material styles
+// deeppurple-amber, indigo-pink, pink-bluegrey, purple-green
+@import "../../../node_modules/@angular/material/core/theming/prebuilt/indigo-pink.scss";
+@import "../../../node_modules/ng2-material/ng2-material.css";
+@import "variables";
+
+.label {
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+    input[type="checkbox"] {
+        display: none;
+    }
+}
+
+fieldset.radio {
+    label {
+        display: inline-block;
+        margin-right: 1rem;
+    }
+}
+
+h3 {
+    padding: 15px;
+}
+
+section {
+  background: #f7f7f7;
+  border-radius: 3px;
+  margin: 1em;
+  position: relative !important;
+  padding: 10px;
+  [md-button], [md-raised-button], [md-fab] {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+md-content {
+  margin-right: 7px;
+}
+
+md-input, .md-textarea, .md-label {
+    width: 100%;
+}
+
+.md-textarea {
+  padding: 10px;
+}
+
+[md-raised-button] {
+    margin: 6px 8px!important;
+}
+
+md-nav-list {
+    min-width: 250px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.md-list-item {
+    width: 100%;
+}

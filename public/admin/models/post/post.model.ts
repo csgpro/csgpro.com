@@ -1,7 +1,7 @@
 // app
-import {User} from '../user';
-import {Topic} from '../topic';
-import {Category} from '../category';
+import { User }     from '../user';
+import { Topic }    from '../topic';
+import { Category } from '../category';
 
 export class Post {
     id: number;

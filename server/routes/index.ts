@@ -42,6 +42,17 @@ export const register: any = function register(server: Server, options, next) {
             }
         }
     });
+    server.route({
+        method: 'GET',
+        path: '/admin/resources/{param*}',
+        handler: {
+            directory: {
+                path: './admin/dist',
+                redirectToSlash: true,
+                listing: true
+            }
+        }
+    });
     server.route(PublicController.routes());
     server.route(MainController.routes());
     server.route(AboutController.routes());

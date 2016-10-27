@@ -1,10 +1,10 @@
 // angular
-import {Injectable} from '@angular/core';
-import {RequestOptionsArgs} from '@angular/http';
+import { Injectable }         from '@angular/core';
+import { RequestOptionsArgs } from '@angular/http';
 
 // app
-import {ApiService} from '../../services/api.service';
-import {User} from './user.model';
+import { ApiService } from '../../services/api.service';
+import { User }       from './user.model';
 
 @Injectable()
 export class UserService {

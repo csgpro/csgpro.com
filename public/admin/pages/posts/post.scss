@@ -1,0 +1,10 @@
+label.tag {
+    margin: 0 6px; 
+    &.selected {
+      background-color: #5533ff;
+      color: #fff;
+    }
+    input[type="checkbox"] {
+        display: none;
+    }
+}

@@ -1,28 +1,25 @@
 // angular
-import {Component, OnInit, OnDestroy, Inject} from '@angular/core';
-import {Location} from '@angular/common';
-import {Title} from '@angular/platform-browser';
-import {ActivatedRoute} from '@angular/router';
-import {DOCUMENT} from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy, Inject, ViewContainerRef } from '@angular/core';
+import { Location }                             from '@angular/common';
+import { ActivatedRoute }                       from '@angular/router';
+import { DOCUMENT, Title }                      from '@angular/platform-browser';
+import { MdSnackBar, MdSnackBarConfig }         from '@angular/material';
+import { FileUploader }                         from 'ng2-file-upload';
 
 // libs
 import * as _ from 'lodash';
 
 // app
-import {PostService, Post} from '../../models/post';
-import {CategoryService, Category} from '../../models/category';
-import {TopicService, Topic} from '../../models/topic';
-import {UserService, User} from '../../models/user';
-import {LoadingService} from '../../services/loading.service';
-import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
-import {MarkdownService} from '../../services/markdown.service';
-import {Modal} from '../../components/modal/modal.component';
-import {ApiService} from '../../services/api.service';
+import { PostService, Post }         from '../../models/post';
+import { CategoryService, Category } from '../../models/category';
+import { TopicService, Topic }       from '../../models/topic';
+import { UserService, User }         from '../../models/user';
+import { MarkdownService }           from '../../services/markdown.service';
+import { ApiService }                from '../../services/api.service';
 
 @Component({
-    moduleId: 'PostComponent',
     templateUrl: 'post.html',
-    directives: [LoadingIndicatorComponent, Modal]
+    styleUrls: ['post.scss']
 })
 export class PostComponent implements OnInit, OnDestroy {
 
@@ -34,7 +31,7 @@ export class PostComponent implements OnInit, OnDestroy {
     topics: Topic[] = [];
 
     // File Upload
-    private _imageToUpload = null;
+    private _imageToUpload: any = null;
 
     setFile({ target: { files } } = <any>{}) {
         let [file] = files;
@@ -42,40 +39,17 @@ export class PostComponent implements OnInit, OnDestroy {
     }
 
     uploadImage() {
-        if (this._imageToUpload) {
-            this._api.file('file', this._imageToUpload)
-                .then(data => {
-                    let imageMarkdown = `![${data.filename}](${data.url})`;
-                    this._insertTextAtLastPos('post', imageMarkdown);
-                    this.closeImageUploadModal();
-                })
-                .catch(error => {
-                    console.error(error);
-                    alert('Unable to upload image.');
-                });
+        // TODO: Add ability to drag-and-drop images
+        try {
+            throw new Error('Not Implemented');
+        } catch (exception) {
+            console.error(exception && exception.stack ? exception.stack : exception);
         }
-    }
-
-    // File Upload Modal
-    private _modal: Modal = null;
-
-    bindModal(modal) {
-        this._modal = modal;
-    }
-
-    openImageUploadModal() {
-        this._modal.open();
-    }
-
-    closeImageUploadModal() {
-        const imageForm: HTMLFormElement = <any>this._document.getElementById('imageUploadForm');
-        imageForm.reset();
-        this._modal.close();
     }
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, public loadingService: LoadingService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _api: ApiService, @Inject(DOCUMENT) private _document: Document) {}
+    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _api: ApiService, @Inject(DOCUMENT) private _document: Document, private _snackBar: MdSnackBar, private _viewContainer: ViewContainerRef) {}
 
     onSubmit() {
         let request: Promise<any>;
@@ -93,12 +67,16 @@ export class PostComponent implements OnInit, OnDestroy {
         } else {
             request = this._postService.post(post);
         }
+        
+        let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
 
         request.then(() => {
-            // TODO: Add Confirmation
-            alert('Saved Post');
+            let config = snackBarConfig;
+            this._snackBar.open('Post saved', 'OK', config);
         }).catch(() => {
-            alert('Trouble Saving Post');
+            let config = snackBarConfig;
+            config.politeness = 'assertive';
+            this._snackBar.open(`Unable to save post`, 'OK', config);
         });
 
     }
@@ -120,7 +98,6 @@ export class PostComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // Get post
-        this.loadingService.on();
         this._paramsSubscription = this._route.params.subscribe(params => {
             let postId = +params['id'];
 
@@ -167,13 +144,6 @@ export class PostComponent implements OnInit, OnDestroy {
                         this.topics[topicIndex]['selected'] = true;
                     }
                 });
-            })
-            .then(() => {
-                // done
-                this.loadingService.off();
-            }).catch(() => {
-                // done
-                this.loadingService.off();
             });
         });
     }

@@ -1,18 +1,20 @@
 // angular
-import {Component, ViewEncapsulation} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 // app
-import {HeaderComponent} from './components/header/header.component';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
-  selector: 'app',
-  template: `
-    <header></header>
-    <router-outlet></router-outlet>
-  `,
-  styleUrls: ['global.scss'],
-  encapsulation: ViewEncapsulation.None,
-  directives: [ROUTER_DIRECTIVES, HeaderComponent]
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: [],
+    encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {}
+export class AppComponent {
+
+    constructor(private _auth: AuthenticationService) {}
+
+    logout() {
+        this._auth.logout();
+    }
+}

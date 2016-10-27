@@ -1,50 +1,29 @@
 // angular
-import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {Title} from '@angular/platform-browser';
+import { Component, ViewContainerRef }  from '@angular/core';
+import { Title }                        from '@angular/platform-browser';
+import { MdSnackBar, MdSnackBarConfig } from '@angular/material';
 
 // app
-import {AuthenticationService} from '../../services/authentication.service';
-import {ErrorSummary} from '../../components/error-summary/error-summary.component';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-    moduleId: 'LoginComponent',
-    templateUrl: 'login.html',
-    directives: [ROUTER_DIRECTIVES, ErrorSummary]
+    templateUrl: 'login.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
     title = 'Login';
 
     email: string;
     password: string;
 
-    get errors() {
-        if (this._errors.size) {
-            return Array.from(this._errors);
-        }
-    }
-
-    constructor(private _title: Title, private _auth: AuthenticationService) {
+    constructor(private _title: Title, private _auth: AuthenticationService, private _snackBar: MdSnackBar, private _viewContainer: ViewContainerRef) {
         this._title.setTitle(this.title);
     }
 
-    private _errors = new Set();
-
     onSubmit() {
-        this._errors.clear();
-        if (!this.email) {
-            this._errors.add({ message: 'Email Address is required.' });
-        }
-        if (!this.password) {
-            this._errors.add({ message: 'Password is required.' });
-        }
-        if (this._errors.size) return;
-        this._auth.login({ email: this.email, password: this.password }).catch((e: Error) => {
-            this._errors.add(e);
+        this._auth.login({ email: this.email, password: this.password }).catch((error) => {
+            let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
+            snackBarConfig.politeness = 'assertive';
+            this._snackBar.open(error.message, 'OK', snackBarConfig);
         });
-    }
-    
-    ngOnInit() {
-        console.log(this.title);
     }
 }

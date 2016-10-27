@@ -1,21 +1,17 @@
 // angular
-import {OnInit, Component} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {Router} from '@angular/router';
-import {URLSearchParams} from '@angular/http';
+import { OnInit, Component } from '@angular/core';
+import { Title }             from '@angular/platform-browser';
+import { Router }            from '@angular/router';
+import { URLSearchParams }   from '@angular/http';
 
 // libs
 import * as moment from 'moment';
 
 // app
-import {ContactService, Contact} from '../../models/contact';
-import {LoadingIndicatorComponent} from '../../components/loading-indicator/loading-indicator.component';
-import {LoadingService} from '../../services/loading.service';
+import { ContactService, Contact } from '../../models';
 
 @Component({
-    moduleId: module.id,
-    templateUrl: 'contacts.html',
-    directives: [LoadingIndicatorComponent]
+    templateUrl: 'contacts.html'
 })
 export class ContactsComponent implements OnInit {
 
@@ -28,22 +24,15 @@ export class ContactsComponent implements OnInit {
         return moment(dateStr).format(format);
     }
 
-    constructor(private _title: Title, private _contactService: ContactService, private _router: Router, private _loadingService: LoadingService) {}
+    constructor(private _title: Title, private _contactService: ContactService, private _router: Router) {}
 
     ngOnInit() {
         this._title.setTitle('Contacts');
         this.search.set('sort', 'DESC');
         // Get contacts
-        this._loadingService.on();
         this._contactService.get({ search: this.search })
         .then(contacts => {
             this.contacts = contacts;
-        })
-        .then(() => {
-            this._loadingService.off();
-        })
-        .catch(e => {
-            this._loadingService.off();
         });
     }
 }

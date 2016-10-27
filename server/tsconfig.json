@@ -3,6 +3,10 @@
         "module": "commonjs",
         "target": "es2015",
         "inlineSourceMap": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "types": [
+            "node",
+            "mocha"
+        ]
     }
 }

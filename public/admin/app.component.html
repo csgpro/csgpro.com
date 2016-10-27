@@ -1,0 +1,23 @@
+<div class="app-container">
+	<md-sidenav-layout>
+		<md-sidenav #sidenav>
+            <md-nav-list>
+                <md-list-item routerLink="dashboard" (click)="sidenav.close()"> Dashboard </md-list-item>
+                <md-list-item routerLink="posts" (click)="sidenav.close()"> Posts </md-list-item>
+                <md-list-item routerLink="contacts" (click)="sidenav.close()"> Contacts </md-list-item>
+                <md-list-item (click)="logout()" (click)="sidenav.close()"> Logout </md-list-item>
+            </md-nav-list>
+		</md-sidenav>
+		<md-toolbar color="primary" layout="row">      
+            <button md-icon-button (click)="sidenav.open()">
+                <md-icon>menu</md-icon>
+            </button>
+            
+            <span>
+                CSG Pro Admin
+            </span>
+        </md-toolbar>
+        <router-outlet></router-outlet>
+
+	</md-sidenav-layout>
+</div>

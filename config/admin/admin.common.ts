@@ -3,6 +3,8 @@ import * as webpack from 'webpack';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const extractCSS = new ExtractTextPlugin('[name].css');
+
 // app
 import * as helpers from '../helpers';
 
@@ -36,6 +38,7 @@ const commonConfig = {
             },
             {
                 test: /\.scss$/,
+                exclude: helpers.root('public/admin/styles'),
                 loaders: ['raw-loader', 'sass-loader']
             },
             {
@@ -47,6 +50,11 @@ const commonConfig = {
                 test: /\.css$/,
                 include: helpers.root('public/admin'),
                 loader: 'raw'
+            },
+            {
+                test: /\.scss$/,
+                include: helpers.root('public/admin/styles'),
+                loader: extractCSS.extract(['css', 'sass'])
             }
         ]
     },
@@ -58,7 +66,9 @@ const commonConfig = {
 
         new HtmlWebpackPlugin({
             template: 'index.html'
-        })
+        }),
+
+        extractCSS
     ]
 };
 
