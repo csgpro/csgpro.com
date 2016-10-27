@@ -13,7 +13,7 @@ export default webpackMerge(commonConfig, {
   devtool: 'cheap-module-eval-source-map',
 
   output: {
-    path: helpers.root('dist'),
+    path: helpers.root('public/admin'),
     publicPath: 'http://localhost:8080/admin',
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'

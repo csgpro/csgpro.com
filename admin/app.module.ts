@@ -6,7 +6,7 @@ import { HttpModule }        from '@angular/http';
 import { MaterialModule }    from '@angular/material';
 import { Ng2MaterialModule } from 'ng2-material';
 import { AUTH_PROVIDERS }    from 'angular2-jwt';
-import { FileUploadModule }      from 'ng2-file-upload';
+import { FileUploadModule }  from 'ng2-file-upload';
 
 // app
 import { AppComponent }      from './app.component';

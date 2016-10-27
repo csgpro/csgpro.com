@@ -8,7 +8,7 @@ const extractCSS = new ExtractTextPlugin('[name].css');
 // app
 import * as helpers from '../helpers';
 
-const context = helpers.root('public/admin');
+const context = helpers.root('admin');
 
 const commonConfig = {
     context,
@@ -26,7 +26,7 @@ const commonConfig = {
         loaders: [
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader?tsconfig=' + helpers.root('public/admin/tsconfig.json'), 'angular2-template-loader']
+                loaders: ['awesome-typescript-loader?tsconfig=' + helpers.root('admin/tsconfig.json'), 'angular2-template-loader']
             },
             {
                 test: /\.html$/,
@@ -38,22 +38,22 @@ const commonConfig = {
             },
             {
                 test: /\.scss$/,
-                exclude: helpers.root('public/admin/styles'),
+                exclude: helpers.root('admin/styles'),
                 loaders: ['raw-loader', 'sass-loader']
             },
             {
                 test: /\.css$/,
-                exclude: helpers.root('public/admin'),
+                exclude: helpers.root('admin'),
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
             },
             {
                 test: /\.css$/,
-                include: helpers.root('public/admin'),
+                include: helpers.root('admin'),
                 loader: 'raw'
             },
             {
                 test: /\.scss$/,
-                include: helpers.root('public/admin/styles'),
+                include: helpers.root('admin/styles'),
                 loader: extractCSS.extract(['css', 'sass'])
             }
         ]

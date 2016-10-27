@@ -47,7 +47,7 @@ export const register: any = function register(server: Server, options, next) {
         path: '/admin/resources/{param*}',
         handler: {
             directory: {
-                path: './admin/dist',
+                path: './admin',
                 redirectToSlash: true,
                 listing: true
             }

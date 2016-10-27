@@ -13,7 +13,7 @@ export default webpackMerge(commonConfig, {
   devtool: 'source-map',
 
   output: {
-    path: helpers.root('/public/admin/dist'),
+    path: helpers.root('/public/admin'),
     publicPath: '/admin/resources',
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js'

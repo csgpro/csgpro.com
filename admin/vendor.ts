@@ -11,6 +11,7 @@ import 'ng2-material';
 import 'moment';
 import 'hammerjs';
 import 'angular2-jwt';
+import 'ng2-file-upload';
 
 // rxjs
 import 'rxjs';
