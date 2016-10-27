@@ -7,7 +7,6 @@
                 <section layout="row" layout-align="center center" layout-wrap>
                     <md-input type="email" placeholder="Email Address" name="email" [(ngModel)]="email" required></md-input>
                     <md-input type="password" placeholder="Password" name="password" [(ngModel)]="password" required></md-input>
-                    <error-summary [errors]="errors"></error-summary>
                     <button md-raised-button class="md-raised"> Login </button>
                     <p layout="row">
                         <a [routerLink]="['/reset-password']">Forgot Password?</a>
