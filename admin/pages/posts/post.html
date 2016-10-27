@@ -43,8 +43,8 @@
                     <label class="md-label">Excerpt</label>
                     <textarea class="md-textarea" name="excerpt" [(ngModel)]="post.excerpt" maxlength="400" rows="3" required></textarea>
                 </section>
-                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                    <label class="md-label">Post Body</label>
+                <section ng2FileDrop [uploader]="uploader" layout="row" [ngClass]="{'nv-file-over': hasBaseDropZoneOver, 'nv-file-uploading': uploader.isUploading}" (fileOver)="fileOverBase($event)" layout-sm="column" layout-align="center center" layout-wrap>
+                    <label class="md-label">Post Body <em>(drop images to upload)</em></label>
                     <textarea class="md-textarea" name="post" [(ngModel)]="post.post" rows="20" required id="post"></textarea>
                     <p class="help-text"><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheat Sheet</a></p>
                 </section>

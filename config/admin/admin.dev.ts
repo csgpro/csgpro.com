@@ -36,6 +36,12 @@ export default webpackMerge(commonConfig, {
     proxy: {
       '/api/*': {
         target: 'http://localhost:3000'
+      },
+      '/file/*': {
+        target: 'http://localhost:3000'
+      },
+      '/resources/*': {
+        target: 'http://localhost:3000'
       }
     }
   }

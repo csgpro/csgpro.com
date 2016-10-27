@@ -16,6 +16,7 @@ import { TopicService, Topic }       from '../../models/topic';
 import { UserService, User }         from '../../models/user';
 import { MarkdownService }           from '../../services/markdown.service';
 import { ApiService }                from '../../services/api.service';
+import { StoreService }              from '../../services/store.service';
 
 @Component({
     templateUrl: 'post.html',
@@ -29,27 +30,29 @@ export class PostComponent implements OnInit, OnDestroy {
     authors: User[] = [];
     categories: Category[] = [];
     topics: Topic[] = [];
+    
+    uploader = new FileUploader({ url: '/api/file', authToken: `Bearer ${this._store.getString('authtoken')}`, autoUpload: true });
+    hasBaseDropZoneOver = false;
 
-    // File Upload
-    private _imageToUpload: any = null;
-
-    setFile({ target: { files } } = <any>{}) {
-        let [file] = files;
-        this._imageToUpload = file;
-    }
-
-    uploadImage() {
-        // TODO: Add ability to drag-and-drop images
-        try {
-            throw new Error('Not Implemented');
-        } catch (exception) {
-            console.error(exception && exception.stack ? exception.stack : exception);
-        }
+    fileOverBase(state: boolean) {
+        this.hasBaseDropZoneOver = state; // true = file is over zone, false = nope
     }
 
     private _paramsSubscription: any;
 
-    constructor(private _postService: PostService, private _userService: UserService, private _categoryService: CategoryService, private _topicService: TopicService, private _route: ActivatedRoute, private _location: Location, public markdown: MarkdownService, private _api: ApiService, @Inject(DOCUMENT) private _document: Document, private _snackBar: MdSnackBar, private _viewContainer: ViewContainerRef) {}
+    constructor(
+        private _postService: PostService,
+        private _userService: UserService,
+        private _categoryService: CategoryService,
+        private _topicService: TopicService,
+        private _route: ActivatedRoute,
+        private _location: Location,
+        public markdown: MarkdownService,
+        private _api: ApiService,
+        @Inject(DOCUMENT) private _document: Document,
+        private _snackBar: MdSnackBar,
+        private _viewContainer: ViewContainerRef,
+        private _store: StoreService) {}
 
     onSubmit() {
         let request: Promise<any>;
@@ -146,10 +149,18 @@ export class PostComponent implements OnInit, OnDestroy {
                 });
             });
         });
+
+        this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: any) => {
+            this._insertUploadedImage(JSON.parse(response).data);
+        };
     }
 
     ngOnDestroy() {
         this._paramsSubscription.unsubscribe();
+    }
+    private _insertUploadedImage(data: { filename: string; url: string; }) {
+        let imageMarkdown = `![${data.filename}](${data.url})`;
+        this._insertTextAtLastPos('post', imageMarkdown);
     }
 
     // http://bitly.com/1r7k9PX

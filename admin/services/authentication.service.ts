@@ -1,13 +1,13 @@
 // angular
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router }     from '@angular/router';
 
 // libs
 import { tokenNotExpired } from 'angular2-jwt';
 
 // app
-import {ApiService} from './api.service';
-import {StoreService} from './store.service';
+import { ApiService }   from './api.service';
+import { StoreService } from './store.service';
 
 @Injectable()
 export class AuthenticationService {

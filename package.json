@@ -16,7 +16,7 @@
     "start": "node index.js",
     "test": "mocha \"server/**/*.spec.js\"",
     "watch": "webpack -w",
-    "dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080"
+    "admin-dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080"
   },
   "repository": {
     "type": "git",
