@@ -15,7 +15,8 @@
     "scss": "node-sass public/styles/scss/main.scss public/styles/main.css",
     "start": "node index.js",
     "test": "mocha \"server/**/*.spec.js\"",
-    "watch": "webpack -w"
+    "watch": "webpack -w",
+    "watch-server": "tsc -p server -w"
   },
   "repository": {
     "type": "git",
@@ -96,6 +97,7 @@
     "@types/bluebird": "^3.0.35",
     "@types/boom": "0.0.32",
     "@types/chai": "^3.4.34",
+    "@types/chai-as-promised": "0.0.29",
     "@types/confidence": "^1.4.30",
     "@types/crypto-js": "^3.1.32",
     "@types/foundation": "^5.5.28",
@@ -135,6 +137,7 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "testdouble": "^1.9.0",
     "ts-loader": "^0.8.2",
     "typescript": "^2.0.3",
     "uglify": "^0.1.5",
