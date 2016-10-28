@@ -17,24 +17,20 @@ class TopicController implements Controller {
     }
 
     @get('/{topic}')
-    topic(request: hapi.Request, reply: hapi.IReply) {
+    async topic(request: hapi.Request, reply: hapi.IReply) {
         let topicSlug: string = request.params['topic'];
-        
-        let promises: any[] = [];
-        
-        promises.push(getTopics());
-        promises.push(getTopic(topicSlug));
-        
-        Promise.all(promises).then(data => {
-            let [topic, posts] = data[1];
-            reply.view('category', { title: topic.topic, description: '', posts, topics: data[0] });
-        }).catch((err: Error) => {
+
+        try {
+            let topics = await getTopics();
+            let [topic, posts] = await getTopic(topicSlug);
+            reply.view('category', { title: topic.topic, description: '', posts, topics });
+        } catch (err) {
             if (err.name === 'SequelizeConnectionError') {
                 reply(boom.create(500, 'Bad Connection'));
             } else {
                 reply(boom.create(500, err.message));
             }
-        });
+        }
     }
 
     @get('/{topic}/feed/rss')
