@@ -52,7 +52,7 @@ export function getTopic(topic: string|number, includePosts = true, sortOrder: '
     if (includePosts) {
         return Topic.findOne({ where }).then(topic => {
             // TODO: Fix the type definitions
-            topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: <any>{ method: ['list'] } }).then(posts => [topic, posts]);
+            return topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } }).then(posts => [topic, posts]);
         });
     } else {
         return Topic.findOne({ where });
