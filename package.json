@@ -1,6 +1,6 @@
 {
   "name": "csgpro.com",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Corporate Website",
   "main": "index.js",
   "engines": {
@@ -16,7 +16,8 @@
     "start": "node index.js",
     "test": "mocha \"server/**/*.spec.js\"",
     "watch": "webpack -w",
-    "admin-dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080"
+    "admin-dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080",
+    "watch-server": "tsc -p server -w"
   },
   "repository": {
     "type": "git",
@@ -87,6 +88,7 @@
     "@types/bluebird": "^3.0.35",
     "@types/boom": "0.0.32",
     "@types/chai": "^3.4.34",
+    "@types/chai-as-promised": "0.0.29",
     "@types/confidence": "^1.4.30",
     "@types/core-js": "^0.9.34",
     "@types/foundation": "^5.5.28",
@@ -137,6 +139,7 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "to-string-loader": "^1.1.5",
+    "testdouble": "^1.9.0",
     "ts-loader": "^0.8.2",
     "tslint-loader": "^2.1.5",
     "typescript": "^2.0.3",

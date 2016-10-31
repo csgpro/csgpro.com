@@ -9,5 +9,6 @@
         "**/*.js": { "when": "$(basename).ts" },
         "**/*.js.map": true,
         "**/*.bundle.js": true
-    }
+    },
+    "mocha.files.glob": "server/**/*.spec.js"
 }

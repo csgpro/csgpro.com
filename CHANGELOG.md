@@ -1,3 +1,13 @@
+<a name="3.0.2"></a>
+## [3.0.2](https://github.com/csgpro/csgpro.com/compare/v3.0.1...v3.0.2) (2016-10-28)
+
+
+### Bug Fixes
+
+* **Topics:** return promise from getTopic call ([a5383f4](https://github.com/csgpro/csgpro.com/commit/a5383f4)), closes [#166](https://github.com/csgpro/csgpro.com/issues/166)
+
+
+
 <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/csgpro/csgpro.com/compare/v3.0.0...v3.0.1) (2016-10-23)
 
