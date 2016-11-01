@@ -1,8 +1,6 @@
 // libs
 import * as webpack from 'webpack';
 import * as _ from 'lodash';
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // app
 import * as helpers from './helpers';

@@ -1,0 +1,39 @@
+<div id="posts-list">
+    <h3>Posts</h3>
+
+    <section layout="row" layout-fill>
+        <section flex>
+            <label>Category</label>
+            <label class="tag md-button md-raised" md-raised-button [ngClass]="!selectedCategory ? 'selected' : ''">
+                <input type="radio" name="category" (click)="onCategoryChange()" /> All
+            </label>
+            <label class="tag md-button md-raised" md-raised-button *ngFor="let category of categories" [ngClass]="selectedCategory === category.slug ? 'selected' : ''">
+                <input type="radio" name="category" (click)="onCategoryChange(category.slug)" /> {{category.category}}
+            </label>
+        </section>
+        <div layout="column" layout-align="center end" flex>
+            <button md-raised-button class="md-raised" [routerLink]="['/post', 'new']">New</button>
+        </div>
+    </section>
+
+    <md-data-table layout-fill>
+    <thead>
+        <tr>
+            <th class="md-text-cell" width="20%">Author</th>
+            <th class="md-text-cell">Post Title</th>
+            <th width="15%">Topics</th>
+            <th width="15%">Publish Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template ngFor let-item [ngForOf]="posts" let-i="index">
+        <tr (click)="editPost(item.id)">
+            <td class="md-text-cell">{{item.author.fullName}}</td>
+            <td class="md-text-cell">{{item.title}}</td>
+            <td>List of topics...</td>
+            <td>{{formatDate(item.publishedAt)}}</td>
+        </tr>
+        </template>
+    </tbody>
+    </md-data-table>
+</div>

@@ -1,0 +1,28 @@
+<div id="contacts-list">
+    <h3>Contacts</h3>
+
+    <md-data-table layout-fill>
+        <thead>
+            <tr>
+                <th class="md-text-cell" width="20%">Name</th>
+                <th class="md-text-cell" width="30%">Company</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <template ngFor let-item [ngForOf]="contacts" let-i="index">
+            <tr>
+                <td class="md-text-cell">{{item.fullName}}</td>
+                <td class="md-text-cell">{{item.company}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.email}}</td>
+                <td>{{formatDate(item.createdAt)}}</td>
+                <td>{{formatDate(item.updatedAt)}}</td>
+            </tr>
+            </template>
+        </tbody>
+    </md-data-table>
+</div>

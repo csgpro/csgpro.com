@@ -1,0 +1,18 @@
+label.tag {
+    margin: 0 6px; 
+    &.selected {
+      background-color: #5533ff;
+      color: #fff;
+    }
+    input[type="checkbox"] {
+        display: none;
+    }
+}
+
+.nv-file-over {
+    background-color: #ff00f1;
+}
+
+.nv-file-uploading {
+    background-color: #ffaaff;
+}
