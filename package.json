@@ -14,7 +14,7 @@
     "prepare-build": "tsc -p config",
     "scss": "node-sass public/styles/scss/main.scss public/styles/main.css",
     "start": "node index.js",
-    "test": "mocha \"server/**/*.spec.js\"",
+    "test": "mocha --compilers ts:ts-node/register \"server/**/*.spec.ts\"",
     "watch": "webpack -w",
     "admin-dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080",
     "watch-server": "tsc -p server -w"
@@ -143,6 +143,7 @@
     "testdouble": "^1.9.0",
     "to-string-loader": "^1.1.5",
     "ts-loader": "^0.8.2",
+    "ts-node": "^1.6.1",
     "tslint-loader": "^2.1.5",
     "typescript": "^2.0.3",
     "uglify": "^0.1.5",
