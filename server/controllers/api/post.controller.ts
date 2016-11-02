@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, post, put, config, route, Controller } from 'hapi-decorators';
 
 // app
-import { getPostsByCategory, getPostByPostId, updatePost, createPost } from '../../commands/post.commands';
+import { getPostsByCategory, getPostByPostId, updatePost, createPost, savePost } from '../../commands/post.commands';
 
 @controller('/api/post')
 class PostController implements Controller {
@@ -56,7 +56,7 @@ class PostController implements Controller {
     })
     createPostApi(request: hapi.Request, reply: hapi.IReply) {
         let post = request.payload;
-        createPost(post).then(data => {
+        savePost(post).then(data => {
             reply({ message: 'saved', data });
         }).catch((err: Error) => {
             if (err.name === 'SequelizeConnectionError') {
@@ -73,7 +73,7 @@ class PostController implements Controller {
     })
     updatePostApi(request: hapi.Request, reply: hapi.IReply) {
         let post = request.payload;
-        updatePost(post).then(data => {
+        savePost(post).then(data => {
             reply({ message: 'saved', data });
         }).catch((err: Error) => {
             if (err.name === 'SequelizeConnectionError') {

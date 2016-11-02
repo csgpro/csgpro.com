@@ -2,13 +2,16 @@
 import * as Sequelize from 'sequelize';
 import database from '../database';
 import * as _ from 'lodash';
+import * as Joi from 'joi';
 
 // app
 import { User } from '../models/user.model';
-import { Topic, ITopicInstance } from '../models/topic.model';
+import { Topic, ITopicInstance, ITopicAttributes, Schema } from '../models/topic.model';
 import { Post, IPostInstance, IPostAttributes } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
 import { triggerWebhooks, WebhookEvents } from './webhook.commands';
+
+const topicSchema = Schema;
 
 export function getPost(postSlug: string, categorySlug: string) {
     return Post.findOne({
@@ -167,8 +170,13 @@ export function updatePost(post: any) {
                 // Update topics
                 if (topics && topics.length) {
                     let queue = [];
-                    topics.forEach(topic => {
-                        queue.push(Topic.findById(topic.id, { transaction: t }));
+                    topics.forEach((topic: any) => {
+                        Joi.validate(topic, topicSchema, { stripUnknown: true }, function (err, tBody) {
+                            if (err) {
+                                throw new Error('Invalid Topic');
+                            }
+                            queue.push(Topic.findOrCreate({ where: tBody }));
+                        });
                     });
 
                     return Promise.all(queue).then(topicsArray => {
@@ -190,4 +198,27 @@ export function updatePost(post: any) {
         console.error(err.stack || err);
         throw new Error('Unable to update post');
     });
+}
+
+export async function savePost(post: IPostAttributes): Promise<IPostInstance> {
+    let transaction = await database.transaction();
+
+    try {
+        let postInstance = await ((post.id) ? Post.findById(post.id, { transaction }).then(p => p.update(post, { transaction })) : Post.create(post, { transaction }));
+        
+        let topics: ITopicAttributes[] = <any>post.topics;
+
+        let topicInstances = await Promise.all(topics.map((t) => {
+            return ((t.id) ? Topic.findById(t.id, { transaction }) : Topic.create(t, { transaction }));
+        }));
+
+        await postInstance.setTopics(<any>topicInstances, { transaction });
+
+        transaction.commit();
+
+        return postInstance;
+    } catch (exc) {
+        console.error(exc.stack || exc);
+        transaction.rollback();
+    }
 }

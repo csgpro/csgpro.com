@@ -6,8 +6,8 @@
             <md-content>
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                     <button md-raised-button class="md-raised">Save</button>
-                    <button md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
-                    <button md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                    <button type="button" md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
+                    <button type="button" md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
                 </section>
                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                     <md-input placeholder="Post Title" type="text" name="title" [(ngModel)]="post.title" (keyup)="slugify($event, post.title)" required></md-input>
@@ -38,6 +38,15 @@
                     <label class="tag md-button md-raised" md-raised-button *ngFor="let topic of topics" [ngClass]="topic.selected ? 'selected' : ''">
                         <input type="checkbox" name="topics" (change)="topic.selected = !topic.selected" /> {{topic.topic}}
                     </label>
+                    
+                    <button type="button" md-mini-fab (click)="newTopic = true">
+                        <md-icon class="md-24">add</md-icon>
+                    </button>
+                </section>
+                <section *ngIf="newTopic" layout="row">
+                    <md-input name="topic" placeholder="Topic" type="text" #topic></md-input>
+                    
+                    <button type="button" md-raised-button class="md-raised" (click)="addTopic(topic)">Add Topic</button>
                 </section>
                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                     <label class="md-label">Excerpt</label>

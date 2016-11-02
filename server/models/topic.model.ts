@@ -1,8 +1,12 @@
 // libs
 import * as Sequelize from 'sequelize';
+import * as Joi from 'joi';
 
 // app
 import { Post, IPostInstance, IPostAttributes } from './post.model';
+
+// shared
+import * as helpers from '../../shared/helpers';
 
 export interface ITopicAttributes {
     id: number;
@@ -30,6 +34,13 @@ let TopicSchema: Sequelize.DefineAttributes = {
     active: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true }
 };
 
+export const Schema = Joi.object().keys({
+    id: Joi.number(),
+    topic: Joi.string().required(),
+    slug: Joi.string(),
+    active: Joi.boolean().default(true)
+});
+
 let TopicSchemaOptions: Sequelize.DefineOptions<ITopicInstance> = {
     timestamps: false,
     getterMethods: {
@@ -49,6 +60,10 @@ export default function defineModel(sequelize: Sequelize.Sequelize, DataTypes: S
     Topic['associate'] = function (db) {
         Topic.belongsToMany(db.post, { through: db.postTopic });
     };
+
+    Topic.beforeValidate('createSlug', function (topic, options) {
+        topic.setDataValue('slug', helpers.slugify(topic.getDataValue('topic')));
+    });
 
     return Topic;
 }

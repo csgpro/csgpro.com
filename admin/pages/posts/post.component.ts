@@ -18,6 +18,9 @@ import { MarkdownService }           from '../../services/markdown.service';
 import { ApiService }                from '../../services/api.service';
 import { StoreService }              from '../../services/store.service';
 
+// shared
+import * as helpers                  from '../../../shared/helpers';
+
 @Component({
     templateUrl: 'post.html',
     styleUrls: ['post.scss']
@@ -30,6 +33,8 @@ export class PostComponent implements OnInit, OnDestroy {
     authors: User[] = [];
     categories: Category[] = [];
     topics: Topic[] = [];
+
+    newTopic = false;
     
     uploader = new FileUploader({ url: '/api/file', authToken: `Bearer ${this._store.getString('authtoken')}`, autoUpload: true });
     hasBaseDropZoneOver = false;
@@ -96,7 +101,14 @@ export class PostComponent implements OnInit, OnDestroy {
 
     slugify(e: KeyboardEvent, title?: string) {
         let source = title || this.post.slug;
-        this.post.slug = source.trim().replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+        this.post.slug = helpers.slugify(source);
+    }
+
+    addTopic(topic: HTMLInputElement) {
+        let t = new Topic({ topic: topic.value, selected: true });
+        this.topics.push(t);
+        topic.value = null;
+        this.newTopic = false;
     }
 
     ngOnInit() {
