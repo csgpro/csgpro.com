@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, post, put, config, route, Controller } from 'hapi-decorators';
 
 // app
-import { getPostsByCategory, getPostByPostId, updatePost, createPost, savePost } from '../../commands/post.commands';
+import { getPostsByCategory, getPostByPostId, savePost } from '../../commands/post.commands';
 
 @controller('/api/post')
 class PostController implements Controller {
