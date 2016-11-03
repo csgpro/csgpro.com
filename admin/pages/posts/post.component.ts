@@ -19,7 +19,7 @@ import { ApiService }                from '../../services/api.service';
 import { StoreService }              from '../../services/store.service';
 
 // shared
-import * as helpers                  from '../../../shared/helpers';
+import * as helpers                  from '../../../server/helpers';
 
 @Component({
     templateUrl: 'post.html',

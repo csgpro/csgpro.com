@@ -6,7 +6,7 @@ import * as Joi from 'joi';
 import { Post, IPostInstance, IPostAttributes } from './post.model';
 
 // shared
-import * as helpers from '../../shared/helpers';
+import * as helpers from '../helpers';
 
 export interface ITopicAttributes {
     id: number;
