@@ -43,22 +43,16 @@ export function getTopics(where: Sequelize.WhereOptions = { active: true }, orde
     });
 }
 
-// TODO: Fix type definitions
-export function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): any {
-    let where: any = {};
-    if (typeof topic === 'string') {
-        where = { slug: topic };
-    } else {
-        where = { id: topic };
-    }
+export async function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): Promise<any> {
+    let where: any = (typeof topic === 'string') ? { slug: topic } : { id: topic };
 
     if (includePosts) {
-        return Topic.findOne({ where }).then(topic => {
-            // TODO: Fix the type definitions
-            return topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } }).then(posts => [topic, posts]);
-        });
+        let topic = await Topic.findOne({ where });
+        let posts = await topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } });
+
+        return [topic, posts];
     } else {
-        return Topic.findOne({ where });
+        return await Topic.findOne({ where });
     }
 }
 
@@ -122,13 +116,13 @@ export function getPostCategory(categoryId: number) {
     return PostCategory.findOne({ where: { id: categoryId } });
 }
 
-export async function savePost(post: IPostAttributes): Promise<IPostInstance> {
+export async function savePost(postData: IPostAttributes): Promise<IPostInstance> {
     let transaction = await database.transaction();
 
     try {
-        let postInstance = await ((post.id) ? Post.findById(post.id, { transaction }).then(p => p.update(post, { transaction })) : Post.create(post, { transaction }));
+        let postInstance = await ((postData.id) ? Post.findById(postData.id, { transaction }).then(p => p.update(postData, { transaction })) : Post.create(postData, { transaction }));
         
-        let topics: ITopicAttributes[] = <any>post.topics;
+        let topics: ITopicAttributes[] = <any>postData.topics || [];
 
         let topicInstances = await Promise.all(topics.map((t) => {
             return ((t.id) ? Topic.findById(t.id, { transaction }) : Topic.create(t, { transaction }));
@@ -136,7 +130,7 @@ export async function savePost(post: IPostAttributes): Promise<IPostInstance> {
 
         await postInstance.setTopics(<any>topicInstances, { transaction });
 
-        transaction.commit();
+        await transaction.commit();
 
         return postInstance;
     } catch (exc) {
