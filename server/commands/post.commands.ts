@@ -120,8 +120,8 @@ export async function savePost(postData: IPostAttributes & IPostInstance): Promi
     let transaction = await database.transaction();
 
     try {
-        postData.authorId = postData.author.id; // Extract the authorId
-        postData.categoryId = postData.category.id; // Extract the categoryId
+        postData.authorId = (postData.author) ? postData.author.id : null; // Extract the authorId
+        postData.categoryId = (postData.category) ? postData.category.id : null; // Extract the categoryId
         let postInstance = await ((postData.id) ? Post.findById(postData.id, { transaction }).then(p => p.update(postData, { transaction })) : Post.create(postData, { transaction }));
         
         let topics: ITopicAttributes[] = <any>postData.topics || [];

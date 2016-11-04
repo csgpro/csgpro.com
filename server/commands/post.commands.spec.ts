@@ -45,7 +45,7 @@ describe('savePost', () => {
     it('should resolve to a new post w/o topics', () => {
         return expect(savePost(<any>{})).to.eventually.be.equal(helpers.postInstance)
         .then(() => {
-            return td.verify(helpers.postModule.Post.create({}), { times: 1, ignoreExtraArgs: true });
+            return td.verify(helpers.postModule.Post.create({ authorId: null, categoryId: null }), { times: 1, ignoreExtraArgs: true });
         })
         .then(() => {
             return td.verify(helpers.postInstance.setTopics([]), { times: 1, ignoreExtraArgs: true });
