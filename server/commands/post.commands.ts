@@ -136,7 +136,7 @@ export async function savePost(postData: IPostAttributes & IPostInstance): Promi
 
         return await getPostByPostId(postInstance.getDataValue('id'));
     } catch (exc) {
-        console.error(exc.stack || exc);
-        transaction.rollback();
+        await transaction.rollback();
+        return await Promise.reject(exc);
     }
 }
