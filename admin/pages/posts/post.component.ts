@@ -78,7 +78,8 @@ export class PostComponent implements OnInit, OnDestroy {
         
         let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
 
-        request.then(() => {
+        request.then((postData) => {
+            this.post.id = postData.id;
             let config = snackBarConfig;
             this._snackBar.open('Post saved', 'OK', config);
         }).catch(() => {
