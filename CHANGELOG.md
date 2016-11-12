@@ -1,3 +1,18 @@
+<a name="3.1.1"></a>
+## [3.1.1](https://github.com/csgpro/csgpro.com/compare/v3.1.0...v3.1.1) (2016-11-12)
+
+
+### Bug Fixes
+
+* **Slugify:** Fix slugs. Add tests. ([ecfafea](https://github.com/csgpro/csgpro.com/commit/ecfafea))
+
+
+### Features
+
+* **Topics:** Add new topic when composing post ([db81f51](https://github.com/csgpro/csgpro.com/commit/db81f51))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/csgpro/csgpro.com/compare/v3.0.2...v3.1.0) (2016-11-01)
 

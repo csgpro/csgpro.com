@@ -1,6 +1,6 @@
 {
   "name": "csgpro.com",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Corporate Website",
   "main": "index.js",
   "engines": {
@@ -17,7 +17,8 @@
     "test": "mocha --compilers ts:ts-node/register \"server/**/*.spec.ts\"",
     "watch": "webpack -w",
     "admin-dev": "webpack-dev-server --config config/admin/admin.dev.js --inline --progress --port 8080",
-    "watch-server": "tsc -p server -w"
+    "watch-server": "tsc -p server -w",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "repository": {
     "type": "git",
