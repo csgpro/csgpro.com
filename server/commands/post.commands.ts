@@ -2,13 +2,16 @@
 import * as Sequelize from 'sequelize';
 import database from '../database';
 import * as _ from 'lodash';
+import * as Joi from 'joi';
 
 // app
 import { User } from '../models/user.model';
-import { Topic, ITopicInstance } from '../models/topic.model';
+import { Topic, ITopicInstance, ITopicAttributes, Schema } from '../models/topic.model';
 import { Post, IPostInstance, IPostAttributes } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
 import { triggerWebhooks, WebhookEvents } from './webhook.commands';
+
+const topicSchema = Schema;
 
 export function getPost(postSlug: string, categorySlug: string) {
     return Post.findOne({
@@ -40,22 +43,16 @@ export function getTopics(where: Sequelize.WhereOptions = { active: true }, orde
     });
 }
 
-// TODO: Fix type definitions
-export function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): any {
-    let where: any = {};
-    if (typeof topic === 'string') {
-        where = { slug: topic };
-    } else {
-        where = { id: topic };
-    }
+export async function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): Promise<any> {
+    let where: any = (typeof topic === 'string') ? { slug: topic } : { id: topic };
 
     if (includePosts) {
-        return Topic.findOne({ where }).then(topic => {
-            // TODO: Fix the type definitions
-            return topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } }).then(posts => [topic, posts]);
-        });
+        let topic = await Topic.findOne({ where });
+        let posts = await topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } });
+
+        return [topic, posts];
     } else {
-        return Topic.findOne({ where });
+        return await Topic.findOne({ where });
     }
 }
 
@@ -119,75 +116,27 @@ export function getPostCategory(categoryId: number) {
     return PostCategory.findOne({ where: { id: categoryId } });
 }
 
-export function createPost(post: any) {
-    post.authorId = post.author.id;
-    post.categoryId = post.category.id;
-    let topics: any[] = post.topics;
-    return database.transaction(function(t) {
-        return Post.create(post, { transaction: t }).then(p => {
-            // Update topics
-            if (topics && topics.length) {
-                let queue = [];
-                topics.forEach(topic => {
-                    queue.push(Topic.findById(topic.id, { transaction: t }));
-                });
+export async function savePost(postData: IPostAttributes & IPostInstance): Promise<IPostInstance> {
+    let transaction = await database.transaction();
 
-                return Promise.all(queue).then(topicsArray => {
-                    return p.setTopics(topicsArray, { transaction: t }).then(() => p);
-                });
-            } else {
-                return p.setTopics([], { transaction: t }).then(() => p);
-            }
-        });
-    }).then(post => {
-        let postJson: IPostAttributes = post.toJSON();
-        if (postJson.publishedAt) {
-            triggerWebhooks(WebhookEvents.PublishPost, post.toJSON());
-        } else {
-            triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
-        }
-        return post;
-    }).catch((err) => {
-        console.error(err.stack || err);
-        throw new Error('Unable to create post');
-    });
-}
+    try {
+        postData.authorId = (postData.author) ? postData.author.id : null; // Extract the authorId
+        postData.categoryId = (postData.category) ? postData.category.id : null; // Extract the categoryId
+        let postInstance = await ((postData.id) ? Post.findById(postData.id, { transaction }).then(p => p.update(postData, { transaction })) : Post.create(postData, { transaction }));
+        
+        let topics: ITopicAttributes[] = <any>postData.topics || [];
 
-export function updatePost(post: any) {
-    post.authorId = post.author.id;
-    post.categoryId = post.category.id;
-    let topics: any[] = post.topics;
-    let published = false;
-    return database.transaction(function(t) {
-        return Post.findById(post.id, { transaction: t }).then(p => {
-            if (!p.getDataValue('publishedAt') && post.publishedAt) {
-                published = true;
-            }
-            return p.update(post, { transaction: t }).then(() => {
-                // Update topics
-                if (topics && topics.length) {
-                    let queue = [];
-                    topics.forEach(topic => {
-                        queue.push(Topic.findById(topic.id, { transaction: t }));
-                    });
+        let topicInstances = await Promise.all(topics.map((t) => {
+            return ((t.id) ? Topic.findById(t.id, { transaction }) : Topic.create(t, { transaction }));
+        }));
 
-                    return Promise.all(queue).then(topicsArray => {
-                        return p.setTopics(topicsArray, { transaction: t }).then(() => p);
-                    });
-                } else {
-                    return p.setTopics([], { transaction: t }).then(() => p);
-                }
-            });
-        });
-    }).then(post => {
-        if (published) {
-            triggerWebhooks(WebhookEvents.PublishPost, post.toJSON());
-        } else {
-            triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
-        }
-        return post;
-    }).catch((err) => {
-        console.error(err.stack || err);
-        throw new Error('Unable to update post');
-    });
+        await postInstance.setTopics(<any>topicInstances, { transaction });
+
+        await transaction.commit();
+
+        return await getPostByPostId(postInstance.getDataValue('id'));
+    } catch (exc) {
+        await transaction.rollback();
+        return await Promise.reject(exc);
+    }
 }

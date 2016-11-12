@@ -18,6 +18,9 @@ import { MarkdownService }           from '../../services/markdown.service';
 import { ApiService }                from '../../services/api.service';
 import { StoreService }              from '../../services/store.service';
 
+// shared
+import * as helpers                  from '../../../server/helpers';
+
 @Component({
     templateUrl: 'post.html',
     styleUrls: ['post.scss']
@@ -30,6 +33,8 @@ export class PostComponent implements OnInit, OnDestroy {
     authors: User[] = [];
     categories: Category[] = [];
     topics: Topic[] = [];
+
+    newTopic = false;
     
     uploader = new FileUploader({ url: '/api/file', authToken: `Bearer ${this._store.getString('authtoken')}`, autoUpload: true });
     hasBaseDropZoneOver = false;
@@ -73,7 +78,10 @@ export class PostComponent implements OnInit, OnDestroy {
         
         let snackBarConfig = new MdSnackBarConfig(this._viewContainer);
 
-        request.then(() => {
+        request.then((postData) => {
+            this.post.id = this.post.id || postData.id;
+            this.post.topics = postData.topics;
+            this._loadTopics();
             let config = snackBarConfig;
             this._snackBar.open('Post saved', 'OK', config);
         }).catch(() => {
@@ -96,7 +104,14 @@ export class PostComponent implements OnInit, OnDestroy {
 
     slugify(e: KeyboardEvent, title?: string) {
         let source = title || this.post.slug;
-        this.post.slug = source.trim().replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+        this.post.slug = helpers.slugify(source);
+    }
+
+    addTopic(topic: HTMLInputElement) {
+        let t = new Topic({ topic: topic.value, selected: true });
+        this.topics.push(t);
+        topic.value = null;
+        this.newTopic = false;
     }
 
     ngOnInit() {
@@ -117,17 +132,15 @@ export class PostComponent implements OnInit, OnDestroy {
             }
 
             queue.push(this._categoryService.get());
-            queue.push(this._topicService.get());
             queue.push(this._userService.get());
 
             Promise.all(queue).then(response => {
-                const [post, categories, topics, users] = response;
+                const [post, categories, users] = response;
 
                 if (post) {
                     this.post = post;
                 }
                 this.categories = categories;
-                this.topics = topics;
                 this.authors = users;
             })
             .then(() => {
@@ -141,12 +154,7 @@ export class PostComponent implements OnInit, OnDestroy {
                 }
 
                 // Set selected topics
-                this.post.topics.forEach(topic => {
-                    let topicIndex = _.findIndex(this.topics, { id: topic.id });
-                    if (topicIndex > -1) {
-                        this.topics[topicIndex]['selected'] = true;
-                    }
-                });
+                this._loadTopics();
             });
         });
 
@@ -158,6 +166,20 @@ export class PostComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this._paramsSubscription.unsubscribe();
     }
+
+    private _loadTopics() {
+        this._topicService.get().then(t => {
+            this.topics = <any>t;
+        }).then(() => {
+            this.post.topics.forEach(topic => {
+                let topicIndex = _.findIndex(this.topics, { id: topic.id });
+                if (topicIndex > -1) {
+                    this.topics[topicIndex]['selected'] = true;
+                }
+            });
+        });
+    }
+
     private _insertUploadedImage(data: { filename: string; url: string; }) {
         let imageMarkdown = `![${data.filename}](${data.url})`;
         this._insertTextAtLastPos('post', imageMarkdown);

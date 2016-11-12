@@ -14,9 +14,11 @@ export interface IPostAttributes {
     excerpt: string;
     slug: string;
     publishedAt: Date;
-    author?: IUserInstance;
+    authorId: number;
+    author?: IUserInstance & IUserAttributes;
     topics?: ITopicInstance[];
-    category?: IPostCategoryInstance;
+    categoryId: number;
+    category?: IPostCategoryInstance & IPostCategoryAttributes;
     permalink: string;
 }
 
