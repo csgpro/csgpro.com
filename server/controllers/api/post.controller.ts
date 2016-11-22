@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, post, put, config, route, Controller } from 'hapi-decorators';
 
 // app
-import { getPostsByCategory, getPostByPostId, savePost } from '../../commands/post.commands';
+import { getPostsByCategory, getPostByPostId, savePost, deletePost } from '../../commands/post.commands';
 
 @controller('/api/post')
 class PostController implements Controller {
@@ -88,8 +88,18 @@ class PostController implements Controller {
     @config({
         auth: 'jwt'
     })
-    deletePostApi(request: hapi.Request, reply: hapi.IReply) {
-        reply(boom.notImplemented());
+    async deletePostApi(request: hapi.Request, reply: hapi.IReply) {
+        let postId = Number(request.params['id']);
+        try {
+            await deletePost(postId);
+            reply({ message: 'Post Deleted' });
+        } catch (exc) {
+            if (exc.name === 'SequelizeConnectionError') {
+                reply(boom.create(503, 'Bad Connection'));
+            } else {
+                reply(boom.create(503, exc.message));
+            }
+        }
     }
 }
 

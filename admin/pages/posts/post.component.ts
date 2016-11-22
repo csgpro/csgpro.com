@@ -1,7 +1,7 @@
 // angular
 import { Component, OnInit, OnDestroy, Inject, ViewContainerRef } from '@angular/core';
 import { Location }                             from '@angular/common';
-import { ActivatedRoute }                       from '@angular/router';
+import { ActivatedRoute, Router }                       from '@angular/router';
 import { DOCUMENT, Title }                      from '@angular/platform-browser';
 import { MdSnackBar, MdSnackBarConfig }         from '@angular/material';
 import { FileUploader }                         from 'ng2-file-upload';
@@ -52,6 +52,7 @@ export class PostComponent implements OnInit, OnDestroy {
         private _categoryService: CategoryService,
         private _topicService: TopicService,
         private _route: ActivatedRoute,
+        private _router: Router,
         private _location: Location,
         public markdown: MarkdownService,
         private _api: ApiService,
@@ -101,6 +102,12 @@ export class PostComponent implements OnInit, OnDestroy {
     unPublish() {
         this.post.publishedAt = null;
         this.onSubmit();
+    }
+
+    onDelete() {
+        this._postService.delete(this.post).then(() => {
+            this._router.navigate(['posts']);
+        });
     }
 
     slugify(e: KeyboardEvent, title?: string) {

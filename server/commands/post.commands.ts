@@ -140,3 +140,14 @@ export async function savePost(postData: IPostAttributes & IPostInstance): Promi
         return await Promise.reject(exc);
     }
 }
+
+export async function deletePost(postId: number) {
+    try {
+        let post = await Post.findById(postId);
+        await post.setTopics([]);
+        await post.destroy();
+        return;
+    } catch (exc) {
+        return await Promise.reject(exc);
+    }
+}

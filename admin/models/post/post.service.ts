@@ -26,4 +26,8 @@ export class PostService {
     put(post: Post) {
         return this._apiService.put<Post>(`post/${post.id}`, post);
     }
+
+    delete(post: Post) {
+        return this._apiService.delete(`post/${post.id}`);
+    }
 }

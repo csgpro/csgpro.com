@@ -46,6 +46,8 @@ export class ApiService {
 
     delete<T>(route: string, options?: RequestOptionsArgs): Promise<T> {
 
+        options = this._applyDefaultOptions(options);
+
         const request = this._http.delete(`${this.baseUrl}${route}`, options).toPromise();
 
         return request.then(d => this._prepareResponse(d)).catch(this._handleErrors);

@@ -9,6 +9,9 @@
                     <div *ngIf="currentUser?.isRole('ADMIN')">
                         <button type="button" md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
                         <button type="button" md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                        <button type="button" md-mini-fab class="danger" (click)="onDelete()" *ngIf="post.id">
+                            <md-icon class="md-24">delete</md-icon>
+                        </button>
                     </div>
                 </section>
                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
