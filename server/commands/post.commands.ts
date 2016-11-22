@@ -60,7 +60,7 @@ export function getPostsByCategory(category: string, published = true, sortOrder
     limit = (isNaN(limit)) ? undefined : +limit;
     offset = (isNaN(offset)) ? undefined : +offset;
     let options: any = {
-        order: [[ 'publishedAt', sortOrder ]]
+        order: [[ 'id', sortOrder ]]
     };
     if (limit) {
         options.limit = limit;

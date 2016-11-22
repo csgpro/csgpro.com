@@ -56,7 +56,7 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
         list: function (published = true, categorySlug?: string, sortOrder = 'DESC'): any {
             let options: any = {
                 attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ],
-                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }],
+                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }, { model: Topic, as: 'topics', through: 'postTopic' }],
                 order: [[ 'publishedAt', sortOrder ]]
             };
             if (published) {
