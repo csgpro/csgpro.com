@@ -8,7 +8,7 @@ import { JwtHelper } from 'angular2-jwt';
 // app
 import { ApiService } from '../../services/api.service';
 import { User }       from './user.model';
-import { StoreService }      from './../../services/store.service';
+import { StoreService } from './../../services/store.service';
 
 let jwtHelper = new JwtHelper();
 
@@ -21,11 +21,11 @@ export class UserService {
 
     get(userId?: number): Promise<User>;
     get(search?: RequestOptionsArgs): Promise<User[]>;
-    get(search?: number|RequestOptionsArgs) {
+    get(search?: number|RequestOptionsArgs): any {
         if (typeof search === 'number') {
-            return this._apiService.get<User>(`user/${search}`);
+            return this._apiService.get<User>(`user/${search}`).then(u => new User(u));
         }
-        return this._apiService.get<User>('user', search);
+        return this._apiService.get<User>('user', search).then((users: User[]) => users.map(user => new User(user)));
     }
 
     get currentUser() {
