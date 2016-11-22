@@ -10,10 +10,10 @@ export class Post {
     excerpt: string;
     slug: string;
     publishedAt: Date;
-    author: User = new User();
+    author: User;
     topics: Topic[] = [];
     categoryId: number;
-    category: Category = new Category();
+    category: Category;
     permalink: string;
 
     constructor(data?: any) {

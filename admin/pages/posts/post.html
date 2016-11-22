@@ -21,13 +21,13 @@
                             <td>
                                 <label>Author</label>
                                 <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
-                                    <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
+                                    <option *ngFor="let author of authors" [ngValue]="author">{{author?.fullName}}</option>
                                 </select>
                             </td>
                             <td>
                                 <label>Category</label>
-                                <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
-                                    <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+                                <select name="category" [(ngModel)]="post.category" #category="ngModel" required>
+                                    <option *ngFor="let category of categories" [ngValue]="category">{{category?.category}}</option>
                                 </select>
                             </td>
                         </tr>
