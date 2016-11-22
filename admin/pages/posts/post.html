@@ -25,7 +25,7 @@
                         <tr>
                             <td>
                                 <label>Author</label>
-                                <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
+                                <select name="author" [(ngModel)]="post.author" #author="ngModel" [disabled]="!currentUser?.isRole('ADMIN')" required>
                                     <option *ngFor="let author of authors" [ngValue]="author">{{author?.fullName}}</option>
                                 </select>
                             </td>
