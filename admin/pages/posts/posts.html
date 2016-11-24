@@ -4,16 +4,31 @@
     <section layout="row" layout-fill>
         <section flex>
             <label>Category</label>
-            <label class="tag md-button md-raised" md-raised-button [ngClass]="!selectedCategory ? 'selected' : ''">
-                <input type="radio" name="category" (click)="onCategoryChange()" /> All
-            </label>
             <label class="tag md-button md-raised" md-raised-button *ngFor="let category of categories" [ngClass]="selectedCategory === category.slug ? 'selected' : ''">
-                <input type="radio" name="category" (click)="onCategoryChange(category.slug)" /> {{category.category}}
+                <input type="radio" name="category" (click)="onCategoryChange(category.slug)" (click)="selectedCategor = category.slug" /> {{category.category}}
+            </label>
+            <label class="tag md-button md-raised" md-raised-button [ngClass]="selectedCategory === 'all' ? 'selected' : ''">
+                <input type="radio" name="category" (click)="onCategoryChange()" (click)="selectedCategory = 'all'" /> Show All
             </label>
         </section>
         <div layout="column" layout-align="center end" flex>
             <button md-raised-button class="md-raised" [routerLink]="['/post', 'new']">New</button>
         </div>
+    </section>
+    
+    <section layout="row" layout-fill>
+        <section flex>
+            <label>Filter</label>
+            <label class="tag md-button md-raised" md-raised-button [ngClass]="selectedPostFilter === 'published' ? 'selected' : ''">
+                <input type="radio" name="published" (click)="onFilterPostsChange('published')" (click)="selectedPostFilter = 'published'" /> Published
+            </label>
+            <label class="tag md-button md-raised" md-raised-button [ngClass]="selectedPostFilter === 'unpublished' ? 'selected' : ''">
+                <input type="radio" name="published" (click)="onFilterPostsChange('unpublished')" (click)="selectedPostFilter = 'unpublished'" /> Un-Published
+            </label>
+            <label class="tag md-button md-raised" md-raised-button [ngClass]="selectedPostFilter === 'all' ? 'selected' : ''">
+                <input type="radio" name="published" (click)="onFilterPostsChange('all')" (click)="selectedPostFilter = 'all'" /> Show All
+            </label>
+        </section>
     </section>
 
     <md-data-table layout-fill>
@@ -26,11 +41,15 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-item [ngForOf]="posts" let-i="index">
+        <template ngFor let-item [ngForOf]="posts">
         <tr (click)="editPost(item.id)">
-            <td class="md-text-cell">{{item.author.fullName}}</td>
+            <td class="md-text-cell">{{item.author?.fullName}}</td>
             <td class="md-text-cell">{{item.title}}</td>
-            <td>List of topics...</td>
+            <td>
+                <template ngFor let-topic [ngForOf]="item.topics">
+                    <span>{{topic.topic}}</span>
+                </template>
+            </td>
             <td>{{formatDate(item.publishedAt)}}</td>
         </tr>
         </template>

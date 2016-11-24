@@ -1,10 +1,13 @@
 // libs
 import * as hapi from 'hapi';
 import * as boom from 'boom';
+import * as sequelize from 'sequelize';
 import { controller, get, post, put, config, route, Controller } from 'hapi-decorators';
 
 // app
 import { getPostsByCategory, getPostByPostId, savePost, deletePost } from '../../commands/post.commands';
+import { Post } from '../../models/post.model';
+import { PostCategory } from '../../models/post-category.model';
 
 @controller('/api/post')
 class PostController implements Controller {
@@ -15,18 +18,37 @@ class PostController implements Controller {
     @config({
         auth: 'jwt'
     })
-    getPostsApi(request: hapi.Request, reply: hapi.IReply) {
-        let {category, published, sort, offset, limit}  = request.query;
-        published = 'false' ? false : true;
-        getPostsByCategory(category, published, sort, offset, limit).then(posts => {
+    async getPostsApi(request: hapi.Request, reply: hapi.IReply) {
+        let {category, filter, sort, offset, limit}  = request.query;
+
+        limit = ((isNaN(limit)) ? undefined : +limit);
+
+        let where: sequelize.WhereOptions = {};
+
+        try {
+            if (category) {
+                let postCategory = await PostCategory.findOne({ where: { slug: category } });
+                where['categoryId'] = postCategory.getDataValue('id');
+            }
+
+            switch (filter) {
+                case 'published':
+                    where['publishedAt'] = { $gt: new Date('1993-01-01') };
+                    break;
+                case 'unpublished':
+                    where['publishedAt'] = null;
+                    break;
+            }
+
+            let posts = (await Post.findAndCountAll({ where, offset, limit, order: [[ 'id', sort || 'DESC' ]] })).rows;
             reply({ data: posts });
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
+        } catch (exc) {
+            if (exc.name === 'SequelizeConnectionError') {
                 reply(boom.create(503, 'Bad Connection'));
             } else {
-                reply(boom.create(503, err.message));
+                reply(boom.create(503, exc.message));
             }
-        });
+        }
     }
 
     @get('/{id}')
