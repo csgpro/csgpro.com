@@ -34,7 +34,8 @@ export function getPostByPostId(postId: number) {
 }
 
 export function getTopics(where: Sequelize.WhereOptions = { active: true }, order = 'topic', hasPublishedPosts = true) {
-    return Topic.findAll({ where, order, include: [{ model: Post, through: 'postTopic', where: { 'publishedAt': { $ne: null } } }] });
+    let include = (hasPublishedPosts) ? [{ model: Post, through: 'postTopic', where: { 'publishedAt': { $ne: null } } }] : undefined;
+    return Topic.findAll({ where, order, include });
 }
 
 export function getTopic(topic: string|number) {

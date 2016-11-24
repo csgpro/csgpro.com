@@ -16,7 +16,8 @@ class TopicController implements Controller {
         auth: 'jwt'
     })
     getTopicsApi(request: hapi.Request, reply: hapi.IReply) {
-        getTopics().then(topics => {
+        let hasPublishedPosts = (request.query['hasPublishedPosts'] && request.query['hasPublishedPosts'] === 'true') ? true : false;
+        getTopics(undefined, undefined, hasPublishedPosts).then(topics => {
             reply({ data: topics });
         }).catch((err: Error) => {
             if (err.name === 'SequelizeConnectionError') {
