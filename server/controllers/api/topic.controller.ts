@@ -31,22 +31,22 @@ class TopicController implements Controller {
     @config({
         auth: 'jwt'
     })
-    getTopicApi(request: hapi.Request, reply: hapi.IReply) {
-        let { id, includePosts } = request.params;
-        let topicId = +id; // It needs to be a number;
-        let posts = includePosts === 'false' ? false : true;
-        getTopic(topicId, posts).then(data => {
-            let topic;
-            let posts;
-            if (typeof data === 'object') {
-                [topic, posts] = data;
-                topic = topic.toJSON();
-                topic.posts = posts;
-            } else {
-                topic = data;
-            }
+    async getTopicApi(request: hapi.Request, reply: hapi.IReply) {
+        let { id } = request.params;
+        let topicId = Number(id);
+
+        try {
+            let topic = await getTopic(topicId);
             reply({ data: topic });
-        });
+        } catch (exc) {
+            let error = exc && exc.message ? exc.message : exc;
+            console.error(exc && exc.stack ? exc.stack : exc);
+            if (exc.name === 'SequelizeConnectionError') {
+                reply(boom.create(503, 'Bad Connection'));
+            } else {
+                reply(boom.create(503, error));
+            }
+        }
     }
 
     @post('/')

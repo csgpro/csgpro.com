@@ -13,12 +13,8 @@ const td = helpers.testdouble;
 import { getTopic, savePost } from './post.commands';
 
 describe('getTopic', () => {
-    it('should resolve to an array', () => {
-        return expect(getTopic('foo')).to.eventually.be.an.instanceOf(Array).and.have.lengthOf(2);
-    });
-
-    it('should resolve to a topic', () => {
-        return expect(getTopic('foo', false)).to.eventually.be.equal(helpers.topicInstance);
+    it('should resolve to topic instance', () => {
+        return expect(getTopic('foo')).to.eventually.haveOwnProperty('getPosts');
     });
 });
 

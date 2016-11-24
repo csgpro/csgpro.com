@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, config, Controller } from 'hapi-decorators';
 
 // app
-import { getPost, getPostsByCategory, getTopics } from '../commands/post.commands';
+import { getPost, getPostsByCategory } from '../commands/post.commands';
 
 @controller('/events')
 class EventsController implements Controller {

@@ -33,73 +33,58 @@ export function getPostByPostId(postId: number) {
     });
 }
 
-export function getTopics(where: Sequelize.WhereOptions = { active: true }, order = 'topic') {
-    return Topic.findAndCountAll({ where, order }).then(data => {
-        let topics = [...data.rows];
-        Object.defineProperty(topics, 'count', {
-            value: data.count
-        });
-        return topics;
-    });
+export function getTopics(where: Sequelize.WhereOptions = { active: true }, order = 'topic', hasPublishedPosts = true) {
+    return Topic.findAll({ where, order, include: [{ model: Post, through: 'postTopic', where: { 'publishedAt': { $ne: null } } }] });
 }
 
-export async function getTopic(topic: string|number, includePosts = true, sortOrder: 'ASC' | 'DESC' = 'DESC'): Promise<any> {
-    let where: any = (typeof topic === 'string') ? { slug: topic } : { id: topic };
-
-    if (includePosts) {
-        let topic = await Topic.findOne({ where });
-        let posts = await topic.getPosts(<any>{ order: [[ 'publishedAt', sortOrder ]], scope: { method: ['list'] } });
-
-        return [topic, posts];
-    } else {
-        return await Topic.findOne({ where });
-    }
+export function getTopic(topic: string|number) {
+    return (typeof topic === 'string') ? Topic.findOne({ where: { slug: topic } }) : Topic.findById(topic);
 }
 
-export function getPostsByCategory(category: string, published = true, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+export async function getPostsByCategory(category: string, published = true, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
     limit = (isNaN(limit)) ? undefined : +limit;
     offset = (isNaN(offset)) ? undefined : +offset;
-    let options: any = {
-        order: [[ 'id', sortOrder ]]
-    };
-    if (limit) {
-        options.limit = limit;
-    }
-    if (offset) {
-        options.offset = offset;
-    }
-    return Post.scope({ method: ['list', published, category] }).findAndCount(options).then(data => {
-        let posts = [...data.rows];
-        Object.defineProperty(posts, 'count', {
-            value: data.count
-        });
-        return posts;
+    let order = [[ 'publishedAt', sortOrder ]];
+    let where: Sequelize.WhereOptions = (published) ? { 'publishedAt': { $ne: null } } : {};
+
+    let postCategory = await PostCategory.findOne({ where: { slug: category } });
+
+    where['categoryId'] = postCategory.getDataValue('id');
+
+    let results = await Post.findAndCountAll({ where, limit, order, offset, include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }] });
+
+    let posts = [...results.rows];
+
+    Object.defineProperty(posts, 'count', {
+        value: results.count
     });
+
+    return posts;
 }
 
-export function getPostsByTopic(topics: string[], sortOrder: 'ASC' | 'DESC' = 'DESC', limit = 6) {
-    return Topic.findAll({
-        where: { slug: { $in: topics } },
-        include: [{ model: Post.scope({ method: ['list', undefined, undefined, sortOrder] }) }]
-    }).then((topics) => {
-        let queue = [];
-        
-        topics.forEach(topic => {
-            // TODO: Fix type definitions
-            queue.push(topic.getPosts(<any>{
-                include: [{ model: PostCategory, as: 'category' }],
-                where: { publishedAt: { $gt: new Date('1993-01-01') } },
-                order: [[ 'publishedAt', sortOrder ]]
-            }));
-        });
-        
-        return Promise.all<IPostInstance>(queue).then((data) => {
-            let posts = _.flatten(data);
-            let postsRaw = posts.map(post => post.toJSON());
-            
-            return _.take(_.uniqBy(postsRaw, 'id'), limit);
-        });
+export async function getPostsByTopic(topic: string, published = true, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+    limit = (isNaN(limit)) ? undefined : +limit;
+    offset = (isNaN(offset)) ? undefined : +offset;
+    let order = [[ 'publishedAt', sortOrder ]];
+    let where: Sequelize.WhereOptions = (published) ? { 'publishedAt': { $ne: null } } : {};
+
+    let postTopic = await Topic.findOne({ where: { slug: topic } });
+
+    let postsTotal = await postTopic.countPosts({ where: { 'publishedAt': { $ne: null } } });
+
+    let posts = await postTopic.getPosts(<any>{ 
+                include: [{ all: true }],
+                where: { 'publishedAt': { $ne: null } },
+                order: [[ 'publishedAt', sortOrder ]],
+                limit,
+                offset
+            });
+
+    Object.defineProperty(posts, 'count', {
+        value: postsTotal
     });
+
+    return posts;
 }
 
 export function getPostCategories() {

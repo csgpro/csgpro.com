@@ -4,7 +4,7 @@ import * as boom from 'boom';
 import { controller, get, Controller } from 'hapi-decorators';
 
 // app
-import { getTopic, getTopics } from '../commands/post.commands';
+import { getTopic, getTopics, getPostsByTopic } from '../commands/post.commands';
 
 @controller('/topic')
 class TopicController implements Controller {
@@ -16,14 +16,29 @@ class TopicController implements Controller {
         reply.redirect('/blog');
     }
 
-    @get('/{topic}')
+    @get('/{topic}/{page?}')
     async topic(request: hapi.Request, reply: hapi.IReply) {
         let topicSlug: string = request.params['topic'];
+        let page = (!isNaN(Number(request.params['page']))) ? Number(request.params['page']) : 1;
+        let limit = 10;
+        let offset = page <= 1 ? 0 : (page * limit) - limit;
 
         try {
             let topics = await getTopics();
-            let [topic, posts] = await getTopic(topicSlug);
-            reply.view('category', { title: topic.topic, description: '', posts, topics });
+            let topic = await getTopic(topicSlug);
+            let posts = await getPostsByTopic(topicSlug, true, 'DESC', offset, limit);
+            let totalPosts = posts['count'];
+            reply.view('category', {
+                title: topic.getDataValue('topic'),
+                description: '',
+                posts,
+                topics,
+                pagination: {
+                    basePath: `/topic/${topicSlug}`,
+                    pageCount: Math.ceil(totalPosts / limit),
+                    page
+                }
+            });
         } catch (err) {
             if (err.name === 'SequelizeConnectionError') {
                 reply(boom.create(500, 'Bad Connection'));
