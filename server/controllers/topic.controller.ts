@@ -49,22 +49,24 @@ class TopicController implements Controller {
     }
 
     @get('/{topic}/feed/rss')
-    rssTopic(request: hapi.Request, reply: hapi.IReply) {
+    async rssTopic(request: hapi.Request, reply: hapi.IReply) {
         let topicSlug: string = request.params['topic'];
         let host = request.headers['host'];
         let permalink = `/topic/${topicSlug}/feed/rss`;
-        getTopic(topicSlug).then(data => {
-            let [topic, posts] = data;
-            let title = `CSG Pro ${topic.topic} Posts`;
-            let description = `Lastest posts about "${topic.topic}"`;
+
+        try {
+            let topic = await getTopic(topicSlug);
+            let posts = await topic.getPosts({ where: { 'publishedAt': { $ne: null } } });
+            let title = `CSG Pro ${topic.getDataValue('topic')} Posts`;
+            let description = `Lastest posts about "${topic.getDataValue('topic')}"`;
             reply.view('rss', { posts, host, title, description, permalink }, { layout: 'blank' }).type('text/xml');
-        }).catch((err: Error) => {
+        } catch (err) {
             if (err.name === 'SequelizeConnectionError') {
                 reply(boom.create(500, 'Bad Connection'));
             } else {
                 reply(boom.create(500, err.message));
             }
-        });
+        }
     }
 
 }
