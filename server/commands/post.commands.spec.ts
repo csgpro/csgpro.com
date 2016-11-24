@@ -10,7 +10,13 @@ import * as helpers from '../test-helpers';
 
 const td = helpers.testdouble;
 
-import { getTopic, savePost } from './post.commands';
+import { getTopics, getTopic, savePost } from './post.commands';
+
+describe('getTopics', () => {
+    it('should resolve to array of topic instances', () => {
+        return expect(getTopics()).to.eventually.be.instanceof(Array);
+    });
+});
 
 describe('getTopic', () => {
     it('should resolve to topic instance', () => {
