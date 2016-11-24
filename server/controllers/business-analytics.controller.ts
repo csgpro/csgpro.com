@@ -32,7 +32,7 @@ class BusinessAnalyticsController implements Controller {
     @get('/')
     @config({ plugins: { sitemap: { include: true } } })
     index(request: hapi.Request, reply: hapi.IReply) {
-        getPostsByTopic(['business-analytics']).then(posts => {
+        getPostsByTopic('business-analytics').then(posts => {
             reply.view(pageView('business-analytics'), {
                 title: 'Business Analytics',
                 description: '',

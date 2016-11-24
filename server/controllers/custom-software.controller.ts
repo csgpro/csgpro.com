@@ -15,7 +15,7 @@ class CustomSoftwareController implements Controller {
     @get('/')
     @config({ plugins: { sitemap: { include: true } } })
     index(request: hapi.Request, reply: hapi.IReply) {
-        getPostsByTopic(['angularjs', 'application-development']).then((posts) => {
+        getPostsByTopic('application-development').then((posts) => {
             reply.view(pageView('custom-software'), {
                 title: 'Custom Software',
                 description: '',
