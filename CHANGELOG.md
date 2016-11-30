@@ -1,3 +1,18 @@
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/csgpro/csgpro.com/compare/v3.1.1...v3.2.0) (2016-11-30)
+
+
+### Features
+
+* **Post:** Add ability to delete posts (admin only) ([89345d2](https://github.com/csgpro/csgpro.com/commit/89345d2))
+* **Post:** Add ability to filter by published/unpublished in admin ([2d43436](https://github.com/csgpro/csgpro.com/commit/2d43436))
+* **Post:** Hide publish/un-publish/slug fields for non-admins ([8f1e0f9](https://github.com/csgpro/csgpro.com/commit/8f1e0f9))
+* **Post:** prevent non-admins from changing post author. ([1d868e9](https://github.com/csgpro/csgpro.com/commit/1d868e9))
+* **Post:** Set current user as author on new posts ([0a017df](https://github.com/csgpro/csgpro.com/commit/0a017df))
+* **Post:** Show topics in list. Sort by post id. ([c2bcfcc](https://github.com/csgpro/csgpro.com/commit/c2bcfcc))
+
+
+
 <a name="3.1.1"></a>
 ## [3.1.1](https://github.com/csgpro/csgpro.com/compare/v3.1.0...v3.1.1) (2016-11-12)
 
