@@ -10,15 +10,17 @@ import * as helpers from '../test-helpers';
 
 const td = helpers.testdouble;
 
-import { getTopic, savePost } from './post.commands';
+import { getTopics, getTopic, savePost } from './post.commands';
+
+describe('getTopics', () => {
+    it('should resolve to array of topic instances', () => {
+        return expect(getTopics()).to.eventually.be.instanceof(Array);
+    });
+});
 
 describe('getTopic', () => {
-    it('should resolve to an array', () => {
-        return expect(getTopic('foo')).to.eventually.be.an.instanceOf(Array).and.have.lengthOf(2);
-    });
-
-    it('should resolve to a topic', () => {
-        return expect(getTopic('foo', false)).to.eventually.be.equal(helpers.topicInstance);
+    it('should resolve to topic instance', () => {
+        return expect(getTopic('foo')).to.eventually.haveOwnProperty('getPosts');
     });
 });
 

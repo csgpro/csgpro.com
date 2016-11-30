@@ -52,23 +52,7 @@ let PostSchema: Sequelize.DefineAttributes = {
 };
 
 let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
-    scopes: {
-        list: function (published = true, categorySlug?: string, sortOrder = 'DESC'): any {
-            let options: any = {
-                attributes: ['id', 'title', 'slug', 'excerpt', 'publishedAt', 'authorId', 'categoryId' ],
-                include: [{ model: User, as: 'author' }, { model: PostCategory, as: 'category' }],
-                order: [[ 'publishedAt', sortOrder ]]
-            };
-            if (published) {
-                options.where = { publishedAt: { $gt: new Date('1993-01-01') } };
-            }
-            if (categorySlug) {
-                // Add 'where' clause to PostCategory include
-                options.include[1].where = { slug: categorySlug };
-            }
-            return options;
-        }
-    },
+    scopes: {},
     instanceMethods: {},
     getterMethods: {
         permalink: function (): string {

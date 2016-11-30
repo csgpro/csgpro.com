@@ -12,11 +12,11 @@ export class PostService {
 
     get(postId?: number): Promise<Post>;
     get(search?: RequestOptionsArgs): Promise<Post[]>;
-    get(search?: number|RequestOptionsArgs) {
+    get(search?: number|RequestOptionsArgs): any {
         if (typeof search === 'number') {
-            return this._apiService.get<Post>(`post/${search}`);
+            return this._apiService.get<Post>(`post/${search}`).then(p => new Post(p));
         }
-        return this._apiService.get<Post>('post', search);
+        return this._apiService.get<Post>('post', search).then((posts: Post[]) => posts.map(p => new Post(p)));
     }
 
     post(post: Post) {
@@ -25,5 +25,9 @@ export class PostService {
 
     put(post: Post) {
         return this._apiService.put<Post>(`post/${post.id}`, post);
+    }
+
+    delete(post: Post) {
+        return this._apiService.delete(`post/${post.id}`);
     }
 }

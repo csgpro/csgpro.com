@@ -1,7 +1,7 @@
 // angular
 import { Component, OnInit, OnDestroy, Inject, ViewContainerRef } from '@angular/core';
 import { Location }                             from '@angular/common';
-import { ActivatedRoute }                       from '@angular/router';
+import { ActivatedRoute, Router }                       from '@angular/router';
 import { DOCUMENT, Title }                      from '@angular/platform-browser';
 import { MdSnackBar, MdSnackBarConfig }         from '@angular/material';
 import { FileUploader }                         from 'ng2-file-upload';
@@ -28,6 +28,7 @@ import * as helpers                  from '../../../server/helpers';
 export class PostComponent implements OnInit, OnDestroy {
 
     post = new Post();
+    currentUser: User;
 
     // selects
     authors: User[] = [];
@@ -51,6 +52,7 @@ export class PostComponent implements OnInit, OnDestroy {
         private _categoryService: CategoryService,
         private _topicService: TopicService,
         private _route: ActivatedRoute,
+        private _router: Router,
         private _location: Location,
         public markdown: MarkdownService,
         private _api: ApiService,
@@ -102,6 +104,12 @@ export class PostComponent implements OnInit, OnDestroy {
         this.onSubmit();
     }
 
+    onDelete() {
+        this._postService.delete(this.post).then(() => {
+            this._router.navigate(['posts']);
+        });
+    }
+
     slugify(e: KeyboardEvent, title?: string) {
         let source = title || this.post.slug;
         this.post.slug = helpers.slugify(source);
@@ -144,17 +152,22 @@ export class PostComponent implements OnInit, OnDestroy {
                 this.authors = users;
             })
             .then(() => {
-                let currentAuthorIndex = _.findIndex(this.authors, { id: this.post.author.id });
-                let currentCategoryIndex = _.findIndex(this.categories, { id: this.post.category.id });
-                if (currentAuthorIndex > -1) {
-                    this.post.author = this.authors[currentAuthorIndex];
-                }
+                let currentCategoryIndex = (this.post.category) ? _.findIndex(this.categories, { id: this.post.category.id }) : 0;
                 if (currentCategoryIndex > -1) {
                     this.post.category = this.categories[currentCategoryIndex];
                 }
 
                 // Set selected topics
                 this._loadTopics();
+                
+                // Set current author
+                this._userService.currentUser
+                .then(u => this.currentUser = u)
+                .then(() => {
+                    let author = (!this.post.author) ? this.currentUser : this.post.author;
+                    let currentAuthorIndex = _.findIndex(this.authors, { id: author.id });
+                    this.post.author = this.authors[currentAuthorIndex];
+                });
             });
         });
 

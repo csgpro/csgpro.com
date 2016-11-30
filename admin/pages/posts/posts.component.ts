@@ -18,7 +18,8 @@ import { CategoryService, Category } from '../../models/category';
 })
 export class PostsComponent implements OnInit {
 
-    selectedCategory = '';
+    selectedCategory = 'all';
+    selectedPostFilter = 'all';
 
     posts: Post[];
     categories: Category[];
@@ -35,9 +36,20 @@ export class PostsComponent implements OnInit {
     }
 
     onCategoryChange(categorySlug: string) {
-        this.selectedCategory = categorySlug;
-        this.search.delete('category');
-        this.search.set('category', this.selectedCategory || '');
+        this.search.set('category', categorySlug);
+        this._getPosts();
+    }
+
+    onFilterPostsChange(filter: string) {
+        if (filter === 'all') {
+            this.search.delete('filter');
+        } else {
+            this.search.set('filter', filter);
+        }
+        this._getPosts();
+    }
+
+    private _getPosts() {
         this._postService.get({ search: this.search }).then(posts => this.posts = posts);
     }
 
@@ -45,7 +57,6 @@ export class PostsComponent implements OnInit {
 
     ngOnInit() {
         this._title.setTitle('Posts');
-        this.search.set('published', 'false');
         // Get posts
         this._postService.get({ search: this.search })
         .then(posts => {

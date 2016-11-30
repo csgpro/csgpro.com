@@ -6,13 +6,18 @@
             <md-content>
                 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
                     <button md-raised-button class="md-raised">Save</button>
-                    <button type="button" md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
-                    <button type="button" md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                    <div *ngIf="currentUser?.isRole('ADMIN')">
+                        <button type="button" md-raised-button class="md-raised" (click)="publish()" *ngIf="!post.publishedAt">Publish</button>
+                        <button type="button" md-raised-button class="md-raised" (click)="unPublish()" *ngIf="post.publishedAt">Un-Publish</button>
+                        <button type="button" md-mini-fab class="danger" (click)="onDelete()" *ngIf="post.id">
+                            <md-icon class="md-24">delete</md-icon>
+                        </button>
+                    </div>
                 </section>
                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                     <md-input placeholder="Post Title" type="text" name="title" [(ngModel)]="post.title" (keyup)="slugify($event, post.title)" required></md-input>
                 </section>
-                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <section *ngIf="currentUser?.isRole('ADMIN')" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                     <md-input name="slug" placeholder="Slug" type="text" [(ngModel)]="post.slug" (keyup)="slugify($event)" required></md-input>
                 </section>
                 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
@@ -20,14 +25,14 @@
                         <tr>
                             <td>
                                 <label>Author</label>
-                                <select name="author" [(ngModel)]="post.author" #author="ngModel" required>
-                                    <option *ngFor="let author of authors" [ngValue]="author">{{author.fullName}}</option>
+                                <select name="author" [(ngModel)]="post.author" #author="ngModel" [disabled]="!currentUser?.isRole('ADMIN')" required>
+                                    <option *ngFor="let author of authors" [ngValue]="author">{{author?.fullName}}</option>
                                 </select>
                             </td>
                             <td>
                                 <label>Category</label>
-                                <select name="category" [(ngModel)]="post.category" #author="ngModel" required>
-                                    <option *ngFor="let category of categories" [ngValue]="category">{{category.category}}</option>
+                                <select name="category" [(ngModel)]="post.category" #category="ngModel" required>
+                                    <option *ngFor="let category of categories" [ngValue]="category">{{category?.category}}</option>
                                 </select>
                             </td>
                         </tr>

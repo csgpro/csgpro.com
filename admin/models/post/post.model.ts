@@ -10,24 +10,22 @@ export class Post {
     excerpt: string;
     slug: string;
     publishedAt: Date;
-    author: User = new User();
+    author: User;
     topics: Topic[] = [];
     categoryId: number;
-    category: Category = new Category();
+    category: Category;
     permalink: string;
 
     constructor(data?: any) {
-        if (data && data.hasOwnProperty('id')) {
-            Object.assign(this, data);
-            if (this.author) {
-                this.author = new User(this.author);
-            }
-            if (this.topics) {
-                this.topics = this.topics.map(topic => new Topic(topic));
-            }
-            if (this.category) {
-                this.category = new Category(this.category);
-            }
+        Object.assign(this, data);
+        if (this.author) {
+            this.author = new User(this.author);
+        }
+        if (this.topics) {
+            this.topics = this.topics.map(topic => new Topic(topic));
+        }
+        if (this.category) {
+            this.category = new Category(this.category);
         }
     }
 }
