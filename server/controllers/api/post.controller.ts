@@ -40,7 +40,7 @@ class PostController implements Controller {
                     break;
             }
 
-            let posts = (await Post.findAndCountAll({ where, offset, limit, order: [[ 'id', sort || 'DESC' ]] })).rows;
+            let posts = (await Post.findAndCountAll({ where, offset, limit, order: [[ 'id', sort || 'DESC' ]], include: [{ all: true }] })).rows;
             reply({ data: posts });
         } catch (exc) {
             if (exc.name === 'SequelizeConnectionError') {
