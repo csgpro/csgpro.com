@@ -1,3 +1,15 @@
+<a name="3.2.1"></a>
+## [3.2.1](https://github.com/csgpro/csgpro.com/compare/v3.2.0...v3.2.1) (2016-12-14)
+
+
+### Bug Fixes
+
+* **Admin Posts:** Fix category toggle. ([7796e06](https://github.com/csgpro/csgpro.com/commit/7796e06))
+* **Post Api:** Include associations. ([6748593](https://github.com/csgpro/csgpro.com/commit/6748593))
+* **Webhook:** Remove webhook commands and associated hooks. ([bacb9a8](https://github.com/csgpro/csgpro.com/commit/bacb9a8))
+
+
+
 <a name="3.2.0"></a>
 # [3.2.0](https://github.com/csgpro/csgpro.com/compare/v3.1.1...v3.2.0) (2016-11-30)
 
