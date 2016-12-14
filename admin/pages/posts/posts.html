@@ -5,7 +5,7 @@
         <section flex>
             <label>Category</label>
             <label class="tag md-button md-raised" md-raised-button *ngFor="let category of categories" [ngClass]="selectedCategory === category.slug ? 'selected' : ''">
-                <input type="radio" name="category" (click)="onCategoryChange(category.slug)" (click)="selectedCategor = category.slug" /> {{category.category}}
+                <input type="radio" name="category" (click)="onCategoryChange(category.slug)" (click)="selectedCategory = category.slug" /> {{category.category}}
             </label>
             <label class="tag md-button md-raised" md-raised-button [ngClass]="selectedCategory === 'all' ? 'selected' : ''">
                 <input type="radio" name="category" (click)="onCategoryChange()" (click)="selectedCategory = 'all'" /> Show All
