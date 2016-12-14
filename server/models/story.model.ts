@@ -1,9 +1,6 @@
 // libs
 import * as Sequelize from 'sequelize';
 
-// app
-import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
-
 export interface IStoryAttributes {
     id: number;
     title: string;
@@ -51,23 +48,6 @@ let StorySchemaOptions: Sequelize.DefineOptions<IStoryInstance> = {
             permalink = `/stories/${slug}`;
             
             return permalink;
-        }
-    },
-    hooks: {
-        afterCreate: function (story, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.CreateStory, story.toJSON());
-            }
-        },
-        afterUpdate: function (story, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.UpdateStory, story.toJSON());
-            }
-        },
-        afterDelete: function (story, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.DeleteStory, story.toJSON());
-            }
         }
     }
 };

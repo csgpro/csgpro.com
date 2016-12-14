@@ -9,7 +9,6 @@ import { User } from '../models/user.model';
 import { Topic, ITopicInstance, ITopicAttributes, Schema } from '../models/topic.model';
 import { Post, IPostInstance, IPostAttributes } from '../models/post.model';
 import { PostCategory } from '../models/post-category.model';
-import { triggerWebhooks, WebhookEvents } from './webhook.commands';
 
 const topicSchema = Schema;
 

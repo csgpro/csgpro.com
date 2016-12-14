@@ -5,7 +5,6 @@ import * as Sequelize from 'sequelize';
 import { Topic, ITopicInstance, ITopicAttributes } from './topic.model';
 import { PostCategory, IPostCategoryInstance, IPostCategoryAttributes } from './post-category.model';
 import { User, IUserInstance, IUserAttributes } from './user.model';
-import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IPostAttributes {
     id: number;
@@ -78,23 +77,6 @@ let PostSchemaOptions: Sequelize.DefineOptions<IPostInstance> = {
             }
             
             return permalink;
-        }
-    },
-    hooks: {
-        afterCreate: function (post, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.CreatePost, post.toJSON());
-            }
-        },
-        afterUpdate: function (post, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.UpdatePost, post.toJSON());
-            }
-        },
-        afterDelete: function (post, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.DeletePost, post.toJSON());
-            }
         }
     }
 };

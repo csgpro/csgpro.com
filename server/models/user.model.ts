@@ -5,7 +5,6 @@ import * as crypto from 'crypto';
 
 // app
 import { Post, IPostInstance, IPostAttributes } from './post.model';
-import { triggerWebhooks, WebhookEvents } from '../commands/webhook.commands';
 
 export interface IUserAttributes {
     id: number;
@@ -142,23 +141,6 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
                 });
             });
             return promise;
-        }
-    },
-    hooks: {
-        afterCreate: function (user, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.CreateUser, user.toJSON());
-            }
-        },
-        afterUpdate: function (user, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.UpdateUser, user.toJSON());
-            }
-        },
-        afterDelete: function (user, options: any) {
-            if (!options.transaction) {
-                triggerWebhooks(WebhookEvents.DeleteUser, user.toJSON());
-            }
         }
     }
 };
