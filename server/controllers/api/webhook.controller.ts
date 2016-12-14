@@ -3,9 +3,6 @@ import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { controller, get, post, put, config, route, Controller } from 'hapi-decorators';
 
-// app
-import { getWebhooks, getWebhook, createWebhook, updateWebhook, deleteWebhook } from '../../commands/webhook.commands';
-
 @controller('/api/webhook')
 class WebhookController implements Controller {
     baseUrl: string;
@@ -16,15 +13,16 @@ class WebhookController implements Controller {
         auth: 'jwt'
     })
     getWebhooksApi(request: hapi.Request, reply: hapi.IReply) {
-        getWebhooks().then(categories => {
-            reply({ data: categories });
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
-                reply(boom.create(503, 'Bad Connection'));
-            } else {
-                reply(boom.create(503, err.message));
-            }
-        });
+        // getWebhooks().then(categories => {
+        //     reply({ data: categories });
+        // }).catch((err: Error) => {
+        //     if (err.name === 'SequelizeConnectionError') {
+        //         reply(boom.create(503, 'Bad Connection'));
+        //     } else {
+        //         reply(boom.create(503, err.message));
+        //     }
+        // });
+        reply(boom.notImplemented());
     }
 
     @get('/{id}')
@@ -32,16 +30,17 @@ class WebhookController implements Controller {
         auth: 'jwt'
     })
     getWebhookApi(request: hapi.Request, reply: hapi.IReply) {
-        let webhookId = Number(request.params['id']);
-        getWebhook(webhookId).then(webhook => {
-            reply({ data: webhook });
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
-                reply(boom.create(503, 'Bad Connection'));
-            } else {
-                reply(boom.create(503, err.message));
-            }
-        });
+        // let webhookId = Number(request.params['id']);
+        // getWebhook(webhookId).then(webhook => {
+        //     reply({ data: webhook });
+        // }).catch((err: Error) => {
+        //     if (err.name === 'SequelizeConnectionError') {
+        //         reply(boom.create(503, 'Bad Connection'));
+        //     } else {
+        //         reply(boom.create(503, err.message));
+        //     }
+        // });
+        reply(boom.notImplemented());
     }
 
     @post('/')
@@ -49,16 +48,17 @@ class WebhookController implements Controller {
         auth: 'jwt'
     })
     createWebhookApi(request: hapi.Request, reply: hapi.IReply) {
-        let webhook = request.payload;
-        createWebhook(webhook).then(data => {
-            reply({ message: 'saved', data });
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
-                reply(boom.create(503, 'Bad Connection'));
-            } else {
-                reply(boom.create(503, err.message));
-            }
-        });
+        // let webhook = request.payload;
+        // createWebhook(webhook).then(data => {
+        //     reply({ message: 'saved', data });
+        // }).catch((err: Error) => {
+        //     if (err.name === 'SequelizeConnectionError') {
+        //         reply(boom.create(503, 'Bad Connection'));
+        //     } else {
+        //         reply(boom.create(503, err.message));
+        //     }
+        // });
+        reply(boom.notImplemented());
     }
 
     @put('/{id}')
@@ -66,16 +66,17 @@ class WebhookController implements Controller {
         auth: 'jwt'
     })
     updateWebhookApi(request: hapi.Request, reply: hapi.IReply) {
-        let webhook = request.payload;
-        updateWebhook(webhook).then(data => {
-            reply({ message: 'saved', data });
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
-                reply(boom.create(503, 'Bad Connection'));
-            } else {
-                reply(boom.create(503, err.message));
-            }
-        });
+        // let webhook = request.payload;
+        // updateWebhook(webhook).then(data => {
+        //     reply({ message: 'saved', data });
+        // }).catch((err: Error) => {
+        //     if (err.name === 'SequelizeConnectionError') {
+        //         reply(boom.create(503, 'Bad Connection'));
+        //     } else {
+        //         reply(boom.create(503, err.message));
+        //     }
+        // });
+        reply(boom.notImplemented());
     }
 
     @route('delete', '/{id}')
@@ -83,20 +84,21 @@ class WebhookController implements Controller {
         auth: 'jwt'
     })
     deleteWebhookApi(request: hapi.Request, reply: hapi.IReply) {
-        let webhookId = Number(request.params['id']);
-        deleteWebhook(webhookId).then(count => {
-            if (count) {
-                reply({ message: 'deleted', });
-            } else {
-                reply({ message: 'zero affected rows' });
-            }
-        }).catch((err: Error) => {
-            if (err.name === 'SequelizeConnectionError') {
-                reply(boom.create(503, 'Bad Connection'));
-            } else {
-                reply(boom.create(503, err.message));
-            }
-        });
+        // let webhookId = Number(request.params['id']);
+        // deleteWebhook(webhookId).then(count => {
+        //     if (count) {
+        //         reply({ message: 'deleted', });
+        //     } else {
+        //         reply({ message: 'zero affected rows' });
+        //     }
+        // }).catch((err: Error) => {
+        //     if (err.name === 'SequelizeConnectionError') {
+        //         reply(boom.create(503, 'Bad Connection'));
+        //     } else {
+        //         reply(boom.create(503, err.message));
+        //     }
+        // });
+        reply(boom.notImplemented());
     }
 }
 

@@ -2,7 +2,6 @@
 import * as Sequelize from 'sequelize';
 
 // app
-import { syncWebhooks } from '../commands/webhook.commands';
 import { WebhookEvent, IWebhookEventInstance } from './webhook-event.model';
 
 export interface IWebhookAttributes {
@@ -34,18 +33,6 @@ let WebhookSchemaOptions: Sequelize.DefineOptions<IWebhookInstance> = {
     scopes: {},
     instanceMethods: {},
     getterMethods: {},
-    hooks: {
-        afterCreate: function (webhook, options: any) {
-            if (!options.transaction) {
-                syncWebhooks();
-            }
-        },
-        afterDelete: function (webhook, options: any) {
-            if (!options.transaction) {
-                syncWebhooks();
-            }
-        }
-    },
     timestamps: false
 };
 
