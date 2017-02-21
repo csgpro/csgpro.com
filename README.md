@@ -1,6 +1,7 @@
 ### CSG Pro Website
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Build Status](https://travis-ci.org/csgpro/csgpro.com.svg?branch=master)](https://travis-ci.org/csgpro/csgpro.com)
+[![NSP Status](https://nodesecurity.io/orgs/csg-pro/projects/fa8a9d6e-9137-4db1-8245-82547db77603/badge)](https://nodesecurity.io/orgs/csg-pro/projects/fa8a9d6e-9137-4db1-8245-82547db77603)
 
 ### Running Locally
 To run the application you need to have node `v6.7.0`.
