@@ -21,11 +21,11 @@ class BusinessAnalyticsController implements Controller {
             url: 'https://app.powerbi.com/view?r=eyJrIjoiZWIzNDQ2ZDctZjRmNi00NzlkLTgxNjEtODM2Nzk5ODgyMjU2IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9' 
         },
         {
-            title: 'Power BI Color Schemes',
+            title: 'Color Theme Browser',
             description: 'Choosing the right color scheme for your Power BI chart is difficult. We want to make it easier.',
-            previewImageUrl: '/resources/images/powerbi/color-schemes.png',
-            url: 'https://app.powerbi.com/view?r=eyJrIjoiYTA5MTQwYTgtMmE0ZC00NGExLWE2ZmEtYjZhNjhhMDE5OTM4IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9',
-            downloadFile: '/file/csg-pro-power-bi-color-schemes.xlsx'
+            previewImageUrl: '/resources/images/powerbi/color-theme-browser.png',
+            url: 'https://app.powerbi.com/view?r=eyJrIjoiYTM3MWQ4NDktMDMwZi00ZGU2LWFlNDItYTFiZDM1ODEyNDI1IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9',
+            downloadFile: '/file/Color Theme Browser.zip'
         }
     ];
 
