@@ -2,8 +2,7 @@ language: node_js
 node_js:
 - '6'
 cache:
-  directories:
-  - node_modules
+  yarn: true
 deploy:
   - provider: azure_web_apps
     site: csgprod
