@@ -83,7 +83,6 @@
     "visionary": "6.0.2",
     "winston": "^2.3.1",
     "winston-daily-rotate-file": "^1.4.6",
-    "winston-sequelize": "^1.0.0",
     "zone.js": "0.6.26"
   },
   "devDependencies": {

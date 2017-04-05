@@ -4734,27 +4734,6 @@ sequelize@3.24.3:
     validator "^5.2.0"
     wkx "0.2.0"
 
-sequelize@^3.30.2:
-  version "3.30.4"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-3.30.4.tgz#bda2df1e31854b099e4149a111e9fc0a5ca1d1a4"
-  dependencies:
-    bluebird "^3.3.4"
-    depd "^1.1.0"
-    dottie "^1.0.0"
-    generic-pool "2.4.2"
-    inflection "^1.6.0"
-    lodash "4.12.0"
-    moment "^2.13.0"
-    moment-timezone "^0.5.4"
-    retry-as-promised "^2.0.0"
-    semver "^5.0.1"
-    shimmer "1.1.0"
-    terraformer-wkt-parser "^1.1.0"
-    toposort-class "^1.0.1"
-    uuid "^3.0.0"
-    validator "^5.2.0"
-    wkx "0.2.0"
-
 serve-index@^1.7.2:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/serve-index/-/serve-index-1.8.0.tgz#7c5d96c13fb131101f93c1c5774f8516a1e78d3b"
@@ -5757,13 +5736,6 @@ window-size@^0.2.0:
 winston-daily-rotate-file@^1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/winston-daily-rotate-file/-/winston-daily-rotate-file-1.4.6.tgz#f204b6ada19a5386fdf52fe997d8e10e43ff7788"
-
-winston-sequelize@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/winston-sequelize/-/winston-sequelize-1.0.0.tgz#a700dfb50d66082ed2f3357dcac365a157579ace"
-  dependencies:
-    sequelize "^3.30.2"
-    winston "^2.3.1"
 
 winston@^2.3.1:
   version "2.3.1"

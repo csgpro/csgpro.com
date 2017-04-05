@@ -1,5 +1,4 @@
 import * as winston from 'winston';
-import * as wSql from 'winston-sequelize';
 import * as path from 'path';
 require('winston-daily-rotate-file');
 
