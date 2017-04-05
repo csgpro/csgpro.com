@@ -26,39 +26,6 @@ const config = {
         },
         labels: ['web']
     },
-    good: {
-        ops: {
-            interval: 1000
-        },
-        reporters: {
-            console: [
-                {
-                    module: 'good-squeeze',
-                    name: 'Squeeze',
-                    args: [
-                        {
-                            '$filter': 'log_level',
-                            minimal: {
-                                log: '*',
-                                response: '*',
-                                request: '*'
-                            },
-                            verbose: {
-                                log: '*',
-                                error: '*',
-                                response: '*',
-                                request: '*'
-                            }
-                        }
-                    ]
-                },
-                {
-                    module: 'good-console'
-                },
-                'stdout'
-            ]
-        }
-    },
     qs: {
         qsOptions: {
             depth: 10

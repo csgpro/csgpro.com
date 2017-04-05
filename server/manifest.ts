@@ -18,12 +18,6 @@ manifest = {
         // Third Party Plugins
         {
             plugin: {
-                register: 'good',
-                options: config.get('/good')
-            }
-        },
-        {
-            plugin: {
                 register: 'hapi-qs',
                 options: config.get('/qs')
             }
@@ -41,6 +35,11 @@ manifest = {
             plugin: {
                 register: 'visionary',
                 options: config.get('/visionary')
+            }
+        },
+        {
+            plugin: {
+                register: './app-start/hapi-logger'
             }
         },
         {
