@@ -55,6 +55,11 @@ if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
   npm install kudusync -g --silent
   exitWithMessageOnError "npm failed"
 
+  # Install yarn
+  echo Installing Yarn Package Manager
+  choco install yarn
+  exitWithMessageOnError "choco failed"
+
   if [[ ! -n "$KUDU_SERVICE" ]]; then
     # In case we are running locally this is the correct location of kuduSync
     KUDU_SYNC_CMD=kuduSync
@@ -89,7 +94,7 @@ selectNodeVersion () {
 
     NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
   else
-    NPM_CMD=npm
+    NPM_CMD=yarn
     NODE_EXE=node
   fi
 }
@@ -99,6 +104,7 @@ selectNodeVersion () {
 # ----------
 
 echo Handling node.js deployment.
+eval choco install yarn
 
 # 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
@@ -110,9 +116,10 @@ fi
 selectNodeVersion
 
 # 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+if [ -e "$DEPLOYMENT_TARGET/yarn.lock" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install
+  eval $NPM_CMD --frozen-lockfile
+  eval $NPM_CMD run build
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
