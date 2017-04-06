@@ -24,9 +24,9 @@ class PublicController implements Controller {
     robots(request: hapi.Request, reply: hapi.IReply) {
         const host = request.headers['host'];
         if (!/^www.csgpro.com$/.test(host)) {
-            reply.file(path.join('..', '..', 'public', 'block-robots.txt'));
+            reply.file(path.join('..', 'public', 'block-robots.txt'), <any>{ confine: false });
         } else {
-            reply.file(path.join('..', '..', 'public', 'robots.txt'));
+            reply.file(path.join('..', 'public', 'robots.txt'), <any>{ confine: false });
         }
     }
 }
