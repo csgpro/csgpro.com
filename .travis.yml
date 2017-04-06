@@ -10,6 +10,8 @@ deploy:
   - provider: azure_web_apps
     site: csgprod
     slot: csgprod-staging
+    on:
+      tags: true
   - provider: azure_web_apps
     site: csgprod
     slot: csgprod-develop
