@@ -1,3 +1,16 @@
+<a name="3.3.0"></a>
+# [3.3.0](https://github.com/csgpro/csgpro.com/compare/v3.2.1...v3.3.0) (2017-04-06)
+
+
+### Features
+
+* **Logger:** Add logger ([44d4fe6](https://github.com/csgpro/csgpro.com/commit/44d4fe6))
+* **Privacy Policy:** Adds privacy policy ([717be74](https://github.com/csgpro/csgpro.com/commit/717be74))
+
+### Content Updates
+
+* **Business Analytics:** Update Power BI Examples
+
 <a name="3.2.1"></a>
 ## [3.2.1](https://github.com/csgpro/csgpro.com/compare/v3.2.0...v3.2.1) (2016-12-14)
 
