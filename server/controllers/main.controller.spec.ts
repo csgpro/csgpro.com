@@ -18,6 +18,6 @@ describe('Main Controller', () => {
         let routeTable: hapi.IConnectionTable[] = <any>server.table();
         let [mainRoute] = routeTable;
         expect(routeTable.length).to.equal(1);
-        expect(mainRoute.table.length).to.equal(1);
+        expect(mainRoute.table.length).to.equal(2);
     });
 });
