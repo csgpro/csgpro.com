@@ -26,6 +26,12 @@ class BusinessAnalyticsController implements Controller {
             previewImageUrl: '/resources/images/powerbi/color-theme-browser.png',
             url: 'https://app.powerbi.com/view?r=eyJrIjoiYTM3MWQ4NDktMDMwZi00ZGU2LWFlNDItYTFiZDM1ODEyNDI1IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9',
             downloadFile: '/file/Color Theme Browser.zip'
+        },
+        {
+            title: 'Dashboard',
+            description: 'A collection of charts that showcase Power BI\'s abilities',
+            previewImageUrl: '/resources/images/powerbi/showcase-dashboard.jpg',
+            url: 'https://app.powerbi.com/view?r=eyJrIjoiZWNiODBhZWQtN2VmNS00MWYzLTk0NmYtN2MzNDUyM2IwMDE2IiwidCI6IjBhY2U5YjBiLWVmYWUtNDMwNC04MTBhLTE0MTdiYmQxZDBkNiIsImMiOjZ9'
         }
     ];
 
