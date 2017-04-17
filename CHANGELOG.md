@@ -1,3 +1,18 @@
+<a name="3.4.0"></a>
+# [3.4.0](https://github.com/csgpro/csgpro.com/compare/v3.3.0...v3.4.0) (2017-04-17)
+
+
+### Bug Fixes
+
+* **robots.txt:** disable security to expose robots.txt file ([7911ffc](https://github.com/csgpro/csgpro.com/commit/7911ffc)), closes [#185](https://github.com/csgpro/csgpro.com/issues/185)
+
+
+### Features
+
+* **Twitter Card:** Add twitter card meta info ([000fd1d](https://github.com/csgpro/csgpro.com/commit/000fd1d))
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/csgpro/csgpro.com/compare/v3.2.1...v3.3.0) (2017-04-06)
 
