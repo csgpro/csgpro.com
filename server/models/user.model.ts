@@ -63,7 +63,8 @@ let UserSchemaOptions: Sequelize.DefineOptions<IUserInstance> = {
             'firstName',
             'lastName',
             'profilePhotoUrl',
-            'roleId'
+            'roleId',
+            'twitterHandle'
         ]
     },
     scopes: {
