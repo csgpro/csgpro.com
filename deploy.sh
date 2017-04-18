@@ -30,7 +30,6 @@ SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
 SCRIPT_DIR="${SCRIPT_DIR%/*}"
 ARTIFACTS=$SCRIPT_DIR/../artifacts
 KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
-YARN_CMD=${YARN_CMD//\"}
 
 if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
   DEPLOYMENT_SOURCE=$SCRIPT_DIR
@@ -63,16 +62,6 @@ if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
     # In case we are running on kudu service this is the correct location of kuduSync
     KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
   fi
-fi
-
-if [[ ! -n "$YARN_CMD" ]]; then
-
-  # Install yarn
-  echo Installing Yarn Package Manager
-  choco install yarn
-  exitWithMessageOnError "choco failed"
-
-  YARN_CMD=yarn
 fi
 
 # Node Helpers
@@ -110,7 +99,6 @@ selectNodeVersion () {
 # ----------
 
 echo Handling node.js deployment.
-eval choco install yarn
 
 # 1. KuduSync
 if [[ "$IN_PLACE_DEPLOYMENT" -ne "1" ]]; then
@@ -122,10 +110,10 @@ fi
 selectNodeVersion
 
 # 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/yarn.lock" ]; then
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $YARN_CMD --frozen-lockfile
-  eval $YARN_CMD run build
+  eval $NPM_CMD install
+  eval $NPM_CMD run build
   exitWithMessageOnError "npm failed"
   cd - > /dev/null
 fi
