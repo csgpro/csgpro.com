@@ -1,3 +1,13 @@
+<a name="3.4.1"></a>
+## [3.4.1](https://github.com/csgpro/csgpro.com/compare/v3.4.0...v3.4.1) (2017-05-10)
+
+
+### Bug Fixes
+
+* legacy routes to properly redirect blog posts ([fe68baa](https://github.com/csgpro/csgpro.com/commit/fe68baa))
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/csgpro/csgpro.com/compare/v3.3.0...v3.4.0) (2017-04-17)
 
