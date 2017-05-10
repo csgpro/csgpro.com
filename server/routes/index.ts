@@ -1,5 +1,5 @@
 // libs
-import {Server} from 'hapi';
+import {Server, Request, IReply} from 'hapi';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -31,6 +31,7 @@ import ApiUserController from '../controllers/api/user.controller';
 import ApiWebhookController from '../controllers/api/webhook.controller';
 
 export const register: any = function register(server: Server, options, next) {
+
     server.route({
         method: 'GET',
         path: '/resources/{param*}',
@@ -42,6 +43,7 @@ export const register: any = function register(server: Server, options, next) {
             }
         }
     });
+
     server.route({
         method: 'GET',
         path: '/admin/resources/{param*}',
@@ -53,6 +55,16 @@ export const register: any = function register(server: Server, options, next) {
             }
         }
     });
+
+    // redirect legacy routes
+    server.route({
+        method: 'GET',
+        path: '/post/{postId}',
+        handler: function(request: Request, reply: IReply) {
+            reply.redirect('/blog' + request.path);
+        }
+    });
+
     server.route(PublicController.routes());
     server.route(MainController.routes());
     server.route(AboutController.routes());
