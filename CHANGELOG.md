@@ -1,5 +1,13 @@
+<a name="3.4.2"></a>
+# [3.4.1](https://github.com/csgpro/csgpro.com/compare/v3.4.1...v3.4.2) (2017-09-25)
+
+
+### Bug Fixes
+
+* Update Address
+
 <a name="3.4.1"></a>
-## [3.4.1](https://github.com/csgpro/csgpro.com/compare/v3.4.0...v3.4.1) (2017-05-10)
+# [3.4.1](https://github.com/csgpro/csgpro.com/compare/v3.4.0...v3.4.1) (2017-05-10)
 
 
 ### Bug Fixes
