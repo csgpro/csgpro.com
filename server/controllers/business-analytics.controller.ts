@@ -2,6 +2,7 @@
 import * as hapi from 'hapi';
 import * as boom from 'boom';
 import { controller, get, config, Controller } from 'hapi-decorators';
+import * as rq from 'request';
 
 // app
 import { pageView } from '../shared/utility';
@@ -32,15 +33,49 @@ class BusinessAnalyticsController implements Controller {
     @get('/')
     @config({ plugins: { sitemap: { include: true } } })
     index(request: hapi.Request, reply: hapi.IReply) {
-        getPostsByTopic(['business-analytics']).then(posts => {
-            reply.view(pageView('business-analytics'), {
-                title: 'Business Analytics',
-                description: '',
-                posts,
-                powerBISamples: this.powerBISamples
-            },
-            { layout: 'hero-layout' });
-        });
+        var embedToken = "";
+        var embedReportId = "";
+        var embedAppWorkspaceId = "";
+        
+        rq.get(
+            'https://csgembed.azurewebsites.net/api/EmbedTokenFunction',
+            function (error, response, body) {
+                if (!error && response.statusCode == 200) {                     
+                    var results = JSON.parse(body);                    
+                    var embedConfig = JSON.parse(results);
+
+                    embedToken = embedConfig.EmbedToken;
+                    embedReportId = embedConfig.ReportId;
+                    embedAppWorkspaceId =  embedConfig.AppWorkspaceId;                     
+                }
+            }
+        ).on('complete', function(data,response){
+            getPostsByTopic(['business-analytics']).then(posts => {
+                reply.view(pageView('business-analytics'), {
+                    title: 'Business Analytics',
+                    description: '',
+                    posts,
+                    token: embedToken,
+                    reportId: embedReportId,
+                    appWorkspaceId: embedAppWorkspaceId,
+                    powerBISamples: this.powerBISamples
+                },
+                { layout: 'hero-layout' });
+            });
+
+            // reply.view(pageView('data-warehousing'), {
+            //     title: 'Data Warehousing',
+            //     description: '',
+            //     posts
+            // },
+            // { layout: 'hero-layout'});
+        });  
+       
+       
+       
+       
+       
+      
     }
 }
 

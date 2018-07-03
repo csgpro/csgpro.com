@@ -18,6 +18,8 @@ import FileController from '../controllers/file.controller';
 import SitemapController from '../controllers/sitemap.controller';
 import StoriesController from '../controllers/stories.controller';
 import TopicController from '../controllers/topic.controller';
+import DataWarehousingController from '../controllers/data-warehousing.controller';
+import TrainingController from '../controllers/training.controller';
 
 // api
 import ApiAuthenticateController from '../controllers/api/authenticate.controller';
@@ -67,6 +69,8 @@ export const register: any = function register(server: Server, options, next) {
     server.route(SitemapController.routes());
     server.route(StoriesController.routes());
     server.route(TopicController.routes());
+    server.route(DataWarehousingController.routes());
+    server.route(TrainingController.routes());
 
     // api
     server.route(ApiAuthenticateController.routes());

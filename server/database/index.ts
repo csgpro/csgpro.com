@@ -6,6 +6,7 @@ export default new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, proce
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
-        encrypt: true
+        encrypt: true,
+        instanceName: 'SQLEXPRESS01'
     }
 });

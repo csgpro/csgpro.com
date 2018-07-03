@@ -4,6 +4,7 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 
 // app
 import * as helpers from './helpers';
+import config from './admin.config';
 
 export const preLoaders = [
     {
@@ -20,7 +21,7 @@ export const preLoaders = [
     },
     {
         test: /\.ts$/,
-        loader: 'tslint-loader'
+        rule: 'tslint-loader'
     }
 
 ];
@@ -35,14 +36,14 @@ export const plugins = [
     new ForkCheckerPlugin(),
 
     /*
-    * Plugin: OccurenceOrderPlugin
+    * Plugin: OccurrenceOrderPlugin
     * Description: Varies the distribution of the ids to get the smallest id length
     * for often used ids.
     *
     * See: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
     * See: https://github.com/webpack/docs/wiki/optimization#minimize
     */
-    new webpack.optimize.OccurenceOrderPlugin(true),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
 
     /*
     * Plugin: CommonsChunkPlugin
@@ -53,4 +54,5 @@ export const plugins = [
     * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
     */
     new webpack.optimize.CommonsChunkPlugin({ names: ['polyfills', 'vendor'].reverse(), filename: '[name].bundle.js' }),
+    //new config.optimization.slitchunks({ names: ['polyfills', 'vendor'].reverse(), filename: '[name].bundle.js' }),
 ];

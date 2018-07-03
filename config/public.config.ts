@@ -35,8 +35,8 @@ const configuration: webpack.Configuration = {
         motionUI: 'MotionUI'
     },
     resolve: {
-        root: context,
-        extensions: ['', '.ts', '.json', '.js']
+        //root: context,
+        extensions: ['.ts', '.json', '.js']
     }
 };
 

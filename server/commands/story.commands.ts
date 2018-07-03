@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 // app
 import { Story } from '../models/story.model';
 
-export function getStories(scope = 'active', search?: string | Sequelize.WhereOptions, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
+export async function getStories(scope = 'active', search?: string | Sequelize.WhereOptions, sortOrder: 'ASC' | 'DESC' = 'DESC', offset?: number, limit = 6) {
     let where: Sequelize.WhereOptions;
     if (search) {
         if (typeof search === 'string') {
@@ -28,7 +28,7 @@ export function getStories(scope = 'active', search?: string | Sequelize.WhereOp
             where = <Sequelize.WhereOptions>search;
         }
     }
-    return Story.scope(scope).findAndCount({
+    return await Story.scope(scope).findAndCount({
         where,
         order: [['createdAt', sortOrder]],
         offset,

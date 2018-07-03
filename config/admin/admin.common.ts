@@ -19,14 +19,14 @@ const commonConfig = {
     },
 
     resolve: {
-        extensions: ['', '.ts', '.js']
+        extensions: ['.ts', '.js']
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.ts$/,
-                loaders: ['awesome-typescript-loader?tsconfig=' + helpers.root('admin/tsconfig.json'), 'angular2-template-loader']
+                loader: ['awesome-typescript-loader?tsconfig=' + helpers.root('admin/tsconfig.json'), 'angular2-template-loader']
             },
             {
                 test: /\.html$/,

@@ -1,0 +1,28 @@
+<div id="embedDiv" style="width:800px; height:500px;"></div>
+<input type="hidden" id="embedToken" value="{{token}}" />
+<input type="hidden" id="appWorkspaceId" value="{{appWorkspaceId}}" />
+<input type="hidden" id="reportId" value="{{reportId}}" />
+
+<script src="https://cdn.jsdelivr.net/npm/powerbi-client@2.5.2/dist/powerbi.min.js"></script>
+<script>
+    var models = window['powerbi-client'].models;
+
+    var embedToken = document.getElementById('embedToken').value;
+    var reportId = document.getElementById('reportId').value;
+    var appWorkspaceId = document.getElementById('appWorkspaceId').value;
+    var embedUrl = 'https://app.powerbi.com/reportEmbed?reportId=' +reportId+'&groupId=' + appWorkspaceId + '';
+
+
+    var config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: embedToken,
+        embedUrl: embedUrl,
+        id: reportId,
+        settings: {
+            filterPaneEnabled: false,
+            navContentPaneEnabled: true
+        }
+    };
+    var report = powerbi.embed(embedDiv, config);
+</script>
